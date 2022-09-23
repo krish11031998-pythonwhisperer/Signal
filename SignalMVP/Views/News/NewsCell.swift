@@ -1,0 +1,104 @@
+//
+//  NewsCell.swift
+//  SignalMVP
+//
+//  Created by Krishna Venkatramani on 22/09/2022.
+//
+
+import Foundation
+import UIKit
+
+fileprivate extension NewsModel {
+	
+	var sentimentColor: UIColor {
+		sentiment == "Positive" ? .green : sentiment == "Neutral" ? .gray : .red
+	}
+	
+	var sentimentBlob: UIView {
+		let label: UILabel = sentiment.styled(font: .systemFont(ofSize: 12, weight: .medium), color: sentimentColor)
+			.generateLabel
+		return label.blobify(backgroundColor: sentimentColor.withAlphaComponent(0.15),
+							 borderColor: sentimentColor,
+							 borderWidth: 1,
+							 cornerRadius: 10)
+	}
+}
+
+class NewsCell: ConfigurableCell {
+
+//MARK: - Properties
+	private lazy var newsImage: UIImageView = { .init() }()
+	private lazy var timestamp: UILabel = { .init() }()
+	private lazy var title: UILabel = { .init() }()
+	private lazy var body: UILabel = { .init() }()
+	private lazy var tickersStack: UIStackView = { UIView.HStack(spacing: 8) }()
+	
+//MARK: - Constructors
+	
+	override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+		super.init(style: style, reuseIdentifier: reuseIdentifier)
+		setupCell()
+		styleCell()
+	}
+	
+	required init?(coder: NSCoder) {
+		super.init(coder: coder)
+		setupCell()
+		styleCell()
+	}
+	
+//MARK: - Protected Methods
+	
+	private func styleCell() {
+		selectedBackgroundView = UIView()
+		selectedBackgroundView?.backgroundColor = .clear
+		selectionStyle = .none
+		backgroundColor = .clear
+	}
+	
+	private func setupCell() {
+		let newsInfo = UIView.VStack(subViews: [timestamp, title, body, tickersStack], spacing: 8)
+		newsInfo.setCustomSpacing(12, after: body)
+		newsInfo.backgroundColor = .purple.withAlphaComponent(0.1)
+		let cellStack = UIView.HStack(subViews: [newsInfo, newsImage], spacing: 16, alignment: .center)
+		tickersStack.isHidden = true
+		cellStack.alignment = .center
+		
+		newsImage.setFrame(.init(squared: 84))
+		newsImage.cornerRadius = 10
+		newsImage.clipsToBounds = true
+		
+		contentView.addSubview(cellStack)
+		contentView.setFittingConstraints(childView: cellStack, insets: .init(vertical: 10, horizontal: 16))
+	}
+	
+//MARK: - Exposed Methods
+	
+	public func configure(with model: NewsModel) {
+		model.date.styled(font: .systemFont(ofSize: 10, weight: .regular), color: .gray).render(target: timestamp)
+		model.title.styled(font: .systemFont(ofSize: 20, weight: .semibold), color: .white).render(target: title)
+		title.numberOfLines = 0
+		model.sourceName.styled(font: .systemFont(ofSize: 14, weight: .regular), color: .gray).render(target: body)
+		body.numberOfLines = 1
+		
+		if !model.tickers.isEmpty {
+			tickersStack.removeChildViews()
+			
+			model.tickers.forEach { ticker in
+				let tickerLabel = UILabel()
+				ticker.styled(font: .systemFont(ofSize: 12, weight: .medium), color: .white).render(target: tickerLabel)
+				tickersStack.addArrangedSubview(tickerLabel.blobify(backgroundColor: .white.withAlphaComponent(0.15),
+																	borderColor: .white,
+																	borderWidth: 1,
+																	cornerRadius: 10))
+			}
+			tickersStack.addArrangedSubview(.spacer())
+			tickersStack.addArrangedSubview(model.sentimentBlob)
+			tickersStack.isHidden = false
+		}
+		
+		UIImage.loadImage(url: model.imageUrl, at: newsImage, path: \.image)
+		newsImage.contentMode = .scaleAspectFill
+	}
+	
+}
