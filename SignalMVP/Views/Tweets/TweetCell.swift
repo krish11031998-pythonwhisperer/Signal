@@ -26,7 +26,6 @@ class TweetCell: ConfigurableCell {
 	
 	private lazy var metricStack: UIStackView = {
 		let metricStack = UIView.HStack(spacing: 5)
-//		metricStack.backgroundColor =  .red
 		metricStack.distribution = .fill
 		return metricStack
 	}()
