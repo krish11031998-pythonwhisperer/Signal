@@ -30,17 +30,15 @@ class EventCell: ConfigurableCell {
 	}
 	
 	private func setupView() {
-		let stack = UIView.VStack(subViews: [title], spacing: 12, alignment: .leading)
-		let newsStack = UIView.VStack(subViews: [mainNews, otherNews], spacing: 8).embedInView(insets: .init(vertical: 8, horizontal: 8))
-//		newsStack.backgroundColor = .gray.withAlphaComponent(0.1)
-//		newsStack.addBlurView()
-//		newsStack.clipsToBounds = true
-//		newsStack.cornerRadius = 10
-		stack.addArrangedSubview(newsStack)
+		let stack = UIView.VStack(subViews: [title, mainNews, otherNews], spacing: 12, alignment: .leading)
+		stack.setCustomSpacing(12, after: title)
+		stack.setCustomSpacing(4, after: otherNews)
+		
 		let divider = UIView()
 		divider.backgroundColor = .gray
-		stack.addArrangedSubview(divider.embedInView(insets: .init(top: 10, left: 0, bottom: 0, right: 0)))
+		stack.addArrangedSubview(divider.embedInView(insets: .zero))
 		divider.setHeight(height: 0.5, priority: .required)
+		stack.setFittingConstraints(childView: divider, leading: 0, trailing: 0)
 	
 		addSubview(stack)
 		setFittingConstraints(childView: stack, insets: .init(vertical: 10, horizontal: 8))
@@ -103,10 +101,12 @@ class EventView: UIView  {
 	var height: CGFloat { largeCard ? (CGFloat.totalWidth - 32) * 0.7 : 140 }
 	
 	private func setupView() {
-		let stack = UIView.VStack(subViews: [imageView], spacing: 4)
+		let stack = UIView.VStack(subViews: [imageView], spacing: 8)
+		
 		let infoStack = UIView.VStack(subViews: [newsTitle, authorTitle, tickersView],spacing: 5)
-		infoStack.setCustomSpacing(8, after: authorTitle)
-		stack.addArrangedSubview(infoStack.embedInView(insets: .init(vertical: 8, horizontal: 4)))
+		infoStack.setCustomSpacing(10, after: authorTitle)
+		
+		stack.addArrangedSubview(infoStack.embedInView(insets: .init(vertical: 0, horizontal: 4)))
 		stack.alignment = .leading
 	
 		stack.setCustomSpacing(10, after: newsTitle)
@@ -127,7 +127,7 @@ class EventView: UIView  {
 		UIImage.loadImage(url: model.imageUrl, at: imageView, path: \.image)
 		
 		model.sourceName.styled(font: .systemFont(ofSize: 10, weight: .semibold), color: .gray).render(target: authorTitle)
-		model.title.styled(font: .systemFont(ofSize: 15, weight: .regular), color: .white).render(target: newsTitle)
+		model.title.styled(font: .systemFont(ofSize: 15, weight: .medium), color: .white).render(target: newsTitle)
 		
 		tickersView.isHidden = model.tickers.isEmpty
 		if !model.tickers.isEmpty {
