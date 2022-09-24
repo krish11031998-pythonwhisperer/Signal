@@ -52,6 +52,7 @@ class TweetCell: ConfigurableCell {
 
 		let bodyStack = UIView.VStack(subViews: [headerStack, bodyLabel, imgView, metricStack], spacing: 8)
 		bodyStack.setCustomSpacing(12, after: headerStack)
+		bodyStack.setCustomSpacing(12, after: bodyLabel)
 		
 		let constraint = imgView.heightAnchor.constraint(equalToConstant: 200)
 		constraint.priority = .defaultHigh
