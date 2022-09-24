@@ -57,19 +57,26 @@ class NewsCell: ConfigurableCell {
 	}
 	
 	private func setupCell() {
+		let mainStack = UIView.VStack(spacing: 10)
 		let newsInfo = UIView.VStack(subViews: [timestamp, title, body, tickersStack], spacing: 8)
 		newsInfo.setCustomSpacing(12, after: body)
 		newsInfo.backgroundColor = .purple.withAlphaComponent(0.1)
-		let cellStack = UIView.HStack(subViews: [newsInfo, newsImage], spacing: 16, alignment: .center)
+		let cellStack = UIView.HStack(subViews: [newsInfo, newsImage], spacing: 16, alignment: .top)
 		tickersStack.isHidden = true
-		cellStack.alignment = .center
+		
+		mainStack.addArrangedSubview(cellStack)
+		
+		let divider = UIView()
+		divider.backgroundColor = .gray
+		mainStack.addArrangedSubview(divider.embedInView(insets: .init(top: 10, left: 0, bottom: 0, right: 0)))
+		divider.setHeight(height: 0.5, priority: .required)
 		
 		newsImage.setFrame(.init(squared: 84))
 		newsImage.cornerRadius = 10
 		newsImage.clipsToBounds = true
 		
-		contentView.addSubview(cellStack)
-		contentView.setFittingConstraints(childView: cellStack, insets: .init(vertical: 10, horizontal: 16))
+		contentView.addSubview(mainStack)
+		contentView.setFittingConstraints(childView: mainStack, insets: .init(vertical: 10, horizontal: 16))
 	}
 	
 //MARK: - Exposed Methods

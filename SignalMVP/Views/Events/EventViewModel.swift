@@ -31,32 +31,19 @@ class EventViewModel {
 	}
 	
 	
-	private var EventsSingleSection: TableSection? {
-		guard let events = self.events else {
-			return nil
-		}
-
-		let label = UILabel()
-		"Events (with single news Img Only)".styled(font: .systemFont(ofSize: 25, weight: .bold), color: .red).render(target: label)
-		label.numberOfLines = 2
-		
-		
-		return .init(rows: Set(events).compactMap { TableRow<EventSingleCell>($0) }, customHeader: label.embedInView(insets: .init(vertical: 10, horizontal: 16)))
-	}
-	
 	private var EventsSection: TableSection? {
 		guard let events = self.events else {
 			return nil
 		}
 		
 		let label = UILabel()
-		"Events (with three news)".styled(font: .systemFont(ofSize: 25, weight: .bold), color: .red).render(target: label)
+		"Events (with three news)".styled(font: .systemFont(ofSize: 25, weight: .bold), color: .white).render(target: label)
 		
-		return .init(rows: Set(events).compactMap { TableRow<EventCell>($0) }, customHeader: label.embedInView(insets: .init(vertical: 10, horizontal: 16)))
+		return .init(rows: Set(events).compactMap { TableRow<EventCell>($0) })
 	}
 	
 	private func buildDataSource() -> TableViewDataSource {
-		.init(sections: [EventsSection, EventsSingleSection].compactMap { $0 } )
+		.init(sections: [EventsSection].compactMap { $0 } )
 	}
 	
 }

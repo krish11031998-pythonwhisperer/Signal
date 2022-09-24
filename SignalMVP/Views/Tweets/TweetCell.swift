@@ -26,7 +26,6 @@ class TweetCell: ConfigurableCell {
 	
 	private lazy var metricStack: UIStackView = {
 		let metricStack = UIView.HStack(spacing: 5)
-//		metricStack.backgroundColor =  .red
 		metricStack.distribution = .fill
 		return metricStack
 	}()
@@ -62,6 +61,13 @@ class TweetCell: ConfigurableCell {
 		
 		contentView.addSubview(mainStack)
 		contentView.setFittingConstraints(childView: mainStack, insets: .init(vertical: 10, horizontal: 16))
+		
+		let divider = UIView()
+		divider.backgroundColor = .gray.withAlphaComponent(0.5)
+		divider.setHeight(height: 0.5, priority: .required)
+		let dividerEmbed = divider.embedInView(insets: .init(vertical: 8, horizontal: 0))
+		contentView.addSubview(dividerEmbed)
+		contentView.setFittingConstraints(childView: dividerEmbed, leading: 16, trailing: 16, bottom: 0)
 		
 		styleCell()
 	}
