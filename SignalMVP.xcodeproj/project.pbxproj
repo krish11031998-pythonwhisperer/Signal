@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EF7D2F9428DED80B0003B8F3 /* NewsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7D2F9328DED80B0003B8F3 /* NewsStorage.swift */; };
+		EF7D2F9628DED9730003B8F3 /* NewsNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7D2F9528DED9730003B8F3 /* NewsNotification.swift */; };
+		EF7D2F9928DED9DF0003B8F3 /* NewsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7D2F9828DED9DF0003B8F3 /* NewsDetailViewController.swift */; };
+		EF7D2F9B28DEDC950003B8F3 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7D2F9A28DEDC950003B8F3 /* UIViewController.swift */; };
 		EF86381928DC1E9C00EF520C /* StubService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF86381828DC1E9C00EF520C /* StubService.swift */; };
 		EF86381B28DC1EBE00EF520C /* TweetServiceInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF86381A28DC1EBE00EF520C /* TweetServiceInterface.swift */; };
 		EF86381D28DC1F9100EF520C /* TweetsTest.json in Resources */ = {isa = PBXBuildFile; fileRef = EF86381C28DC1F9100EF520C /* TweetsTest.json */; };
@@ -19,7 +23,7 @@
 		EF86382C28DC561D00EF520C /* news.json in Resources */ = {isa = PBXBuildFile; fileRef = EF86382B28DC561D00EF520C /* news.json */; };
 		EF86382E28DC56D900EF520C /* NewsInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF86382D28DC56D900EF520C /* NewsInterface.swift */; };
 		EF86383028DC576200EF520C /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF86382F28DC576200EF520C /* Bundle.swift */; };
-		EF86383328DC5CAF00EF520C /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF86383228DC5CAF00EF520C /* NewsViewController.swift */; };
+		EF86383328DC5CAF00EF520C /* NewsFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF86383228DC5CAF00EF520C /* NewsFeed.swift */; };
 		EF86383528DC61F700EF520C /* NewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF86383428DC61F700EF520C /* NewsCell.swift */; };
 		EF86383728DC648000EF520C /* NewsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF86383628DC648000EF520C /* NewsViewModel.swift */; };
 		EF86383B28DC761900EF520C /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF86383A28DC761900EF520C /* MainTabView.swift */; };
@@ -105,6 +109,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		EF7D2F9328DED80B0003B8F3 /* NewsStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsStorage.swift; sourceTree = "<group>"; };
+		EF7D2F9528DED9730003B8F3 /* NewsNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsNotification.swift; sourceTree = "<group>"; };
+		EF7D2F9828DED9DF0003B8F3 /* NewsDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetailViewController.swift; sourceTree = "<group>"; };
+		EF7D2F9A28DEDC950003B8F3 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		EF86381828DC1E9C00EF520C /* StubService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubService.swift; sourceTree = "<group>"; };
 		EF86381A28DC1EBE00EF520C /* TweetServiceInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetServiceInterface.swift; sourceTree = "<group>"; };
 		EF86381C28DC1F9100EF520C /* TweetsTest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TweetsTest.json; sourceTree = "<group>"; };
@@ -117,7 +125,7 @@
 		EF86382B28DC561D00EF520C /* news.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = news.json; sourceTree = "<group>"; };
 		EF86382D28DC56D900EF520C /* NewsInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsInterface.swift; sourceTree = "<group>"; };
 		EF86382F28DC576200EF520C /* Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
-		EF86383228DC5CAF00EF520C /* NewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
+		EF86383228DC5CAF00EF520C /* NewsFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeed.swift; sourceTree = "<group>"; };
 		EF86383428DC61F700EF520C /* NewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCell.swift; sourceTree = "<group>"; };
 		EF86383628DC648000EF520C /* NewsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewModel.swift; sourceTree = "<group>"; };
 		EF86383A28DC761900EF520C /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
@@ -214,6 +222,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EF7D2F9728DED9D00003B8F3 /* NewsDetail */ = {
+			isa = PBXGroup;
+			children = (
+				EF7D2F9828DED9DF0003B8F3 /* NewsDetailViewController.swift */,
+			);
+			path = NewsDetail;
+			sourceTree = "<group>";
+		};
 		EF86381428DC1E7D00EF520C /* Service */ = {
 			isa = PBXGroup;
 			children = (
@@ -228,6 +244,8 @@
 		EF86381528DC1E8500EF520C /* Twitter */ = {
 			isa = PBXGroup;
 			children = (
+				EF96382D28DDD7DA00178C37 /* TweetNotification.swift */,
+				EF96382B28DDD72000178C37 /* TweetStorage.swift */,
 				EF96381728DD8C1E00178C37 /* TweetService.swift */,
 				EFB1C2D628DB69D300DD40A4 /* TweetEndpoints.swift */,
 				EFB1C2D228DB616600DD40A4 /* TweetModel.swift */,
@@ -245,6 +263,8 @@
 				EF86382728DC507E00EF520C /* NewsModel.swift */,
 				EF86382928DC519B00EF520C /* StubNewsService.swift */,
 				EF86382D28DC56D900EF520C /* NewsInterface.swift */,
+				EF7D2F9328DED80B0003B8F3 /* NewsStorage.swift */,
+				EF7D2F9528DED9730003B8F3 /* NewsNotification.swift */,
 			);
 			path = News;
 			sourceTree = "<group>";
@@ -252,7 +272,8 @@
 		EF86383128DC5C9400EF520C /* News */ = {
 			isa = PBXGroup;
 			children = (
-				EF86383228DC5CAF00EF520C /* NewsViewController.swift */,
+				EF7D2F9728DED9D00003B8F3 /* NewsDetail */,
+				EF86383228DC5CAF00EF520C /* NewsFeed.swift */,
 				EF86383428DC61F700EF520C /* NewsCell.swift */,
 				EF86383628DC648000EF520C /* NewsViewModel.swift */,
 			);
@@ -410,8 +431,6 @@
 				EFB1C26028DB3D3700DD40A4 /* TweetCell.swift */,
 				EFB1C2D028DB5E7D00DD40A4 /* TweetFeedViewModel.swift */,
 				EF86382228DC341400EF520C /* TweetMetricView.swift */,
-				EF96382B28DDD72000178C37 /* TweetStorage.swift */,
-				EF96382D28DDD7DA00178C37 /* TweetNotification.swift */,
 				EF96382F28DDE60700178C37 /* TweetMetrics.swift */,
 			);
 			path = Tweets;
@@ -444,6 +463,7 @@
 				EF86381E28DC283B00EF520C /* Array.swift */,
 				EF86382F28DC576200EF520C /* Bundle.swift */,
 				EF96381528DD7EBA00178C37 /* UILabel.swift */,
+				EF7D2F9A28DEDC950003B8F3 /* UIViewController.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -657,6 +677,7 @@
 				EFB1C2D328DB616600DD40A4 /* TweetModel.swift in Sources */,
 				EF96382E28DDD7DA00178C37 /* TweetNotification.swift in Sources */,
 				EF86381B28DC1EBE00EF520C /* TweetServiceInterface.swift in Sources */,
+				EF7D2F9428DED80B0003B8F3 /* NewsStorage.swift in Sources */,
 				EF86382528DC347000EF520C /* UIImageView.swift in Sources */,
 				EFB1C2D528DB64B300DD40A4 /* NetworkReqeust.swift in Sources */,
 				EFB1C2BC28DB3F3B00DD40A4 /* RenderableText.swift in Sources */,
@@ -666,6 +687,7 @@
 				EFB1C2A328DB3F1700DD40A4 /* ViewStyling.swift in Sources */,
 				EF86382128DC30A700EF520C /* Views.swift in Sources */,
 				EF96383A28DE1C1900178C37 /* GenericButtonWrapper.swift in Sources */,
+				EF7D2F9B28DEDC950003B8F3 /* UIViewController.swift in Sources */,
 				EFB1C2D928DB851F00DD40A4 /* UIImage.swift in Sources */,
 				EF86381F28DC283B00EF520C /* Array.swift in Sources */,
 				EFB1C2BD28DB3F3B00DD40A4 /* UIEdgeInsets.swift in Sources */,
@@ -676,6 +698,7 @@
 				EFB1C23228DB3B1800DD40A4 /* MainViewController.swift in Sources */,
 				EF86383B28DC761900EF520C /* MainTabView.swift in Sources */,
 				EF86382A28DC519B00EF520C /* StubNewsService.swift in Sources */,
+				EF7D2F9928DED9DF0003B8F3 /* NewsDetailViewController.swift in Sources */,
 				EFB1C2A128DB3F0200DD40A4 /* ViewHeirachy.swift in Sources */,
 				EFB1C22E28DB3B1800DD40A4 /* AppDelegate.swift in Sources */,
 				EF96382628DD90A400178C37 /* RedditViewModel.swift in Sources */,
@@ -700,7 +723,8 @@
 				EF96382828DD92E900178C37 /* RedditPostCard.swift in Sources */,
 				EFB1C2BB28DB3F3B00DD40A4 /* FontCatalogue.swift in Sources */,
 				EF86384B28DCA1A400EF520C /* EventCell.swift in Sources */,
-				EF86383328DC5CAF00EF520C /* NewsViewController.swift in Sources */,
+				EF86383328DC5CAF00EF520C /* NewsFeed.swift in Sources */,
+				EF7D2F9628DED9730003B8F3 /* NewsNotification.swift in Sources */,
 				EF86382E28DC56D900EF520C /* NewsInterface.swift in Sources */,
 				EFB1C23028DB3B1800DD40A4 /* SceneDelegate.swift in Sources */,
 				EF86383E28DC990500EF520C /* EventsFeed.swift in Sources */,
