@@ -78,7 +78,7 @@ class TweetMetricsView: UIView {
 						let layer = view.element.layer
 						let offset:CGFloat = -view.element.frame.height.half
 						let endOff = view.element.frame.minY + view.element.frame.height.half
-						layer.animate(animation: .slideInFromTop(from: offset, to: endOff, duration: 0.25))
+						layer.animate(animation: .slideInFromTop(from: offset, to: endOff, duration: 0.45))
 					}
 					self.progressBars.forEach { $0.animateProgress(progress: .random(in: 0.15...1)) }
 				}
@@ -86,8 +86,6 @@ class TweetMetricsView: UIView {
 		} else {
 			self.progressBars.forEach { $0.animateProgress(progress: .random(in: 0.15...1)) }
 		}
-		
-		
 	}
 	
 }
