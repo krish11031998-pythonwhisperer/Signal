@@ -31,6 +31,16 @@ extension CGFloat {
 	
 	func replaceWithMin(_ val: CGFloat) -> CGFloat { self > val ? self : val }
 	
+	func boundTo(lower: CGFloat = 0, higher: CGFloat = 1) -> CGFloat { self > higher ? higher : self < lower ? lower : self }
+}
+
+extension ClosedRange where Bound == CGFloat {
+	
+	func percent(_ val: CGFloat) -> CGFloat {
+		let min = lowerBound
+		let max = upperBound
+		return (val - min)/(max - min)
+	}
 }
 
 extension CGRect {

@@ -10,11 +10,11 @@ import UIKit
 
 extension UIView {
 	
-	func blobify(backgroundColor: UIColor,
+	func blobify(backgroundColor: UIColor = .white.withAlphaComponent(0.2),
 				 edgeInset: UIEdgeInsets = .init(vertical: 5, horizontal: 7.5),
-				 borderColor: UIColor,
-				 borderWidth: CGFloat,
-				 cornerRadius: CGFloat) -> UIView {
+				 borderColor: UIColor = .white,
+				 borderWidth: CGFloat = 1,
+				 cornerRadius: CGFloat = 12) -> UIView {
 		let view = embedInView(insets: edgeInset)
 		view.backgroundColor = backgroundColor
 		view.border(color: borderColor, borderWidth: borderWidth, cornerRadius: cornerRadius)

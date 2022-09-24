@@ -81,17 +81,17 @@ class NewsCell: ConfigurableCell {
 	
 //MARK: - Exposed Methods
 	
-	public func configure(with model: NewsModel) {
-		model.date.styled(font: .systemFont(ofSize: 10, weight: .regular), color: .gray).render(target: timestamp)
-		model.title.styled(font: .systemFont(ofSize: 20, weight: .semibold), color: .white).render(target: title)
+	public func configure(with model: NewsCellModel) {
+		model.model.date.styled(font: .systemFont(ofSize: 10, weight: .regular), color: .gray).render(target: timestamp)
+		model.model.title.styled(font: .systemFont(ofSize: 20, weight: .semibold), color: .white).render(target: title)
 		title.numberOfLines = 0
-		model.sourceName.styled(font: .systemFont(ofSize: 14, weight: .regular), color: .gray).render(target: body)
+		model.model.sourceName.styled(font: .systemFont(ofSize: 14, weight: .regular), color: .gray).render(target: body)
 		body.numberOfLines = 1
 		
-		if !model.tickers.isEmpty {
+		if !model.model.tickers.isEmpty {
 			tickersStack.removeChildViews()
 			
-			model.tickers.forEach { ticker in
+			model.model.tickers.limitTo(to: 3).forEach { ticker in
 				let tickerLabel = UILabel()
 				ticker.styled(font: .systemFont(ofSize: 12, weight: .medium), color: .white).render(target: tickerLabel)
 				tickersStack.addArrangedSubview(tickerLabel.blobify(backgroundColor: .white.withAlphaComponent(0.15),
@@ -100,11 +100,11 @@ class NewsCell: ConfigurableCell {
 																	cornerRadius: 10))
 			}
 			tickersStack.addArrangedSubview(.spacer())
-			tickersStack.addArrangedSubview(model.sentimentBlob)
+			tickersStack.addArrangedSubview(model.model.sentimentBlob)
 			tickersStack.isHidden = false
 		}
 		
-		UIImage.loadImage(url: model.imageUrl, at: newsImage, path: \.image)
+		UIImage.loadImage(url: model.model.imageUrl, at: newsImage, path: \.image)
 		newsImage.contentMode = .scaleAspectFill
 	}
 	

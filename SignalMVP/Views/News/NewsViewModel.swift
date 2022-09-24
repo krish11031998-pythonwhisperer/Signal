@@ -7,6 +7,10 @@
 
 import Foundation
 
+struct NewsCellModel: ActionProvider {
+	let model: NewsModel
+	var action: Callback?
+}
 
 class NewsViewModel {
 	
@@ -33,11 +37,15 @@ class NewsViewModel {
 	
 	var newsSection: TableSection? {
 		guard let validNews = news else { return nil }
-		let rows = validNews.compactMap { TableRow<NewsCell>($0) }
+		let rows = validNews.compactMap { news in
+			TableRow<NewsCell>(.init(model: news, action: {
+				NewsStorage.selectedNews = news
+			})) }
 		return .init(rows: rows)
 	}
 	
 	func buildTableViewSource() -> TableViewDataSource {
 		return .init(sections: [newsSection].compactMap { $0 })
 	}
+	
 }

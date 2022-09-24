@@ -36,6 +36,27 @@ extension UIView {
 		
 		return mainStack
 	}
+	
+	static func emptyViewWithColor(color: UIColor = .clear, width: CGFloat? = nil, height: CGFloat? = nil) ->  UIView {
+		let blankView = UIView()
+		blankView.backgroundColor = .clear
+		if let validHeight = height {
+			blankView.setHeight(height: validHeight, priority: .required)
+		}
+		
+		if let validWidth = width {
+			blankView.setWidth(width: validWidth, priority: .required)
+		}
+		
+		return blankView
+	}
+	
+	var snapshot: UIImage {
+		let renderer = UIGraphicsImageRenderer(bounds: bounds)
+		return renderer.image { context in
+			layer.render(in: context.cgContext)
+		}
+	}
 }
 
 extension Array where Element : UIView {

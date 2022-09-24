@@ -27,7 +27,7 @@ class MainViewController: UITabBarController {
 	private func tabBarViewController() -> [UINavigationController] {
 		let tweetNavView = UINavigationController(rootViewController: TweetFeedViewController())
 		tweetNavView.tabBarItem = .init(title: "Tweets", image: .init(systemName: "message"), tag: 1)
-		let newsNavView = UINavigationController(rootViewController: NewsViewController())
+		let newsNavView = UINavigationController(rootViewController: NewsFeed())
 		newsNavView.tabBarItem = .init(title: "News", image: .init(systemName: "newspaper"), tag: 2)
 		let eventNavView = UINavigationController(rootViewController: EventsFeedViewController())
 		eventNavView.tabBarItem = .init(title: "Events", image: .init(systemName: "wake"), tag: 3)

@@ -11,6 +11,8 @@ import UIKit
 
 class TweetFeedViewController: UIViewController {
 	
+	private var observer: NSKeyValueObservation?
+	private var yOff: CGFloat = .zero
 	private lazy var viewModel: TweetFeedViewModel = {
 		let model = TweetFeedViewModel()
 		model.view = self
@@ -45,21 +47,15 @@ class TweetFeedViewController: UIViewController {
 		tableView.backgroundColor = .clear
 		tableView.separatorStyle = .none
 		view.setFittingConstraints(childView: tableView, insets: .zero)
-		
+		observer = tableView.observe(\.contentOffset) { [weak self] tableView, _ in
+			self?.scrollViewUpdate(tableView)
+		}
 		scrollObserver = tableView.observe(\.contentOffset, changeHandler: { [weak self] table, _ in self?.onTableViewScroll(table) })
 	}
 	
 	private func setupNavbar() {
 		self.navigationItem.title = "Tweets"
-		
-		let navbarAppear: UINavigationBarAppearance = .init()
-		navbarAppear.configureWithTransparentBackground()
-		navbarAppear.backgroundImage = UIImage()
-		navbarAppear.backgroundColor = UIColor.blue
-		
-		self.navigationController?.navigationBar.standardAppearance = navbarAppear
-		self.navigationController?.navigationBar.compactAppearance = navbarAppear
-		self.navigationController?.navigationBar.scrollEdgeAppearance = navbarAppear
+		setupTransparentNavBar()
 	}
 	
 	private func onTableViewScroll(_ scrollView: UITableView) {
@@ -74,6 +70,19 @@ class TweetFeedViewController: UIViewController {
 	@objc
 	private func showTweet() {
 		navigationController?.pushViewController(TweetDetailView(), animated: true)
+	}
+	
+	private func scrollViewUpdate(_ scrollView: UIScrollView) {
+		let offset = scrollView.contentOffset
+		if self.yOff == .zero {
+			self.yOff = offset.y
+		}
+		guard offset.y != yOff, let navBar = navigationController?.navigationBar else { return }
+		let off = (self.yOff...0).percent(offset.y).boundTo()
+		let navbarHeight: CGFloat = navBar.frame.height + navBar.frame.minY
+		UIView.animate(withDuration: 0.25) {
+			navBar.transform = .init(translationX: 0, y: -CGFloat(off) * navbarHeight)
+		}
 	}
 }
 

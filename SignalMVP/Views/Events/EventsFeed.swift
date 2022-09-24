@@ -10,6 +10,9 @@ import UIKit
 
 class EventsFeedViewController: UIViewController {
 	
+	private var observer: NSKeyValueObservation?
+	private var yOff: CGFloat = .zero
+	
 	private lazy var tableView: UITableView = {
 		let table: UITableView = .init(frame: .zero, style: .grouped)
 		table.backgroundColor = .clear
@@ -30,6 +33,9 @@ class EventsFeedViewController: UIViewController {
 		setupView()
 		viewModel.fetchEvents()
 		setupNavBar()
+		observer = tableView.observe(\.contentOffset) { [weak self] tableView, _ in
+			self?.scrollViewUpdate(tableView)
+		}
 	}
 	
 	//MARK: - Protected Methods
@@ -41,15 +47,20 @@ class EventsFeedViewController: UIViewController {
 	
 	private func setupNavBar() {
 		self.navigationItem.title = "Events"
-		
-		let navbarAppear: UINavigationBarAppearance = .init()
-		navbarAppear.configureWithTransparentBackground()
-		navbarAppear.backgroundImage = UIImage()
-		navbarAppear.backgroundColor = UIColor.green
-		
-		self.navigationController?.navigationBar.standardAppearance = navbarAppear
-		self.navigationController?.navigationBar.compactAppearance = navbarAppear
-		self.navigationController?.navigationBar.scrollEdgeAppearance = navbarAppear
+		setupTransparentNavBar(color: .clear)
+	}
+	
+	private func scrollViewUpdate(_ scrollView: UIScrollView) {
+		let offset = scrollView.contentOffset
+		if self.yOff == .zero {
+			self.yOff = offset.y
+		}
+		guard offset.y != yOff, let navBar = navigationController?.navigationBar else { return }
+		let off = (self.yOff...0).percent(offset.y).boundTo()
+		let navbarHeight: CGFloat = navBar.frame.height + navBar.frame.minY
+		UIView.animate(withDuration: 0.25) {
+			navBar.transform = .init(translationX: 0, y: -CGFloat(off) * navbarHeight)
+		}
 	}
 }
 

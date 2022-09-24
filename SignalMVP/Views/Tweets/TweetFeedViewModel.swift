@@ -52,7 +52,6 @@ class TweetFeedViewModel {
 			
 			model.action = {
 				TweetStorage.selectedTweet = model
-				NotificationCenter.default.post(name: .showTweet, object: nil)
 			}
 			
 			return model

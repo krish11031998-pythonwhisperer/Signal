@@ -114,5 +114,8 @@ class TweetDetailView: UIViewController {
 		
 	}
 	
-	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(true)
+		navigationController?.navigationBar.transform = .init(translationX: 0, y: 0)
+	}
 }

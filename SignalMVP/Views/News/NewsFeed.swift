@@ -9,9 +9,11 @@ import Foundation
 import UIKit
 
 
-class NewsViewController: UIViewController {
+class NewsFeed: UIViewController {
 	
 	private lazy var tableView: UITableView = { .init(frame: .zero, style: .grouped) }()
+	private var observer: NSKeyValueObservation?
+	private var yOff: CGFloat = .zero
 	
 	private lazy var viewModel: NewsViewModel = {
 		let model = NewsViewModel()
@@ -33,6 +35,10 @@ class NewsViewController: UIViewController {
 		setupViews()
 		setupNavbar()
 		viewModel.fetchNews()
+		setupObservers()
+		observer = tableView.observe(\.contentOffset) { [weak self] tableView, _ in
+			self?.scrollViewUpdate(tableView)
+		}
 	}
 
 	//MARK: - ProtectedMethods
@@ -47,22 +53,36 @@ class NewsViewController: UIViewController {
 	
 	private func setupNavbar() {
 		self.navigationItem.title = "News"
-		
-		let navbarAppear: UINavigationBarAppearance = .init()
-		navbarAppear.configureWithTransparentBackground()
-		navbarAppear.backgroundImage = UIImage()
-		navbarAppear.backgroundColor = UIColor.red
-		
-		self.navigationController?.navigationBar.standardAppearance = navbarAppear
-		self.navigationController?.navigationBar.compactAppearance = navbarAppear
-		self.navigationController?.navigationBar.scrollEdgeAppearance = navbarAppear
+		setupTransparentNavBar()
+	}
+	
+	private func setupObservers() {
+		NotificationCenter.default.addObserver(self, selector: #selector(pushToNewsDetail), name: .showNews, object: nil)
+	}
+	
+	@objc
+	private func pushToNewsDetail() {
+		navigationController?.pushViewController(NewsDetailViewController(), animated: true)
+	}
+	
+	private func scrollViewUpdate(_ scrollView: UIScrollView) {
+		let offset = scrollView.contentOffset
+		if self.yOff == .zero {
+			self.yOff = offset.y
+		}
+		guard offset.y != yOff, let navBar = navigationController?.navigationBar else { return }
+		let off = (self.yOff...0).percent(offset.y).boundTo()
+		let navbarHeight: CGFloat = navBar.frame.height + navBar.frame.minY
+		UIView.animate(withDuration: 0.25) {
+			navBar.transform = .init(translationX: 0, y: -CGFloat(off) * navbarHeight)
+		}
 	}
 }
 
 
 //MARK: - AnyView
 
-extension NewsViewController: AnyTableView {
+extension NewsFeed: AnyTableView {
 	
 	func reloadTableWithDataSource(_ dataSource: TableViewDataSource) {
 		tableView.reloadData(dataSource)
