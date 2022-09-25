@@ -48,8 +48,7 @@ class VideoCell: ConfigurableCell {
 //		videoInfoStack.setHeight(height: 120, priority: .required)
 		
 		videoLabel.numberOfLines = 3
-		
-		img.setHeight(height: 142, priority: .required)
+		img.setHeight(height: 150, priority: .required)
 		mainStack.setHeight(height: 225, priority: .required)
 		mainStack.cornerRadius = 12
 		mainStack.addBlurView()

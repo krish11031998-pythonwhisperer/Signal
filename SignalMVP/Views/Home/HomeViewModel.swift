@@ -74,12 +74,12 @@ class HomeViewModel {
 	
 	private var videoSection: TableSection? {
 		guard let videoSection = videos else { return nil }
-		let sectionHeader = "Top Videos".styled(font: .systemFont(ofSize: 25, weight: .semibold)).generateLabel.embedInView(insets: .init(vertical: 10, horizontal: 10))
-		return .init(rows: videoSection.compactMap { TableRow<VideoCell>($0) }, customHeader: sectionHeader)
+		let sectionHeader = "Top Video News".styled(font: .systemFont(ofSize: 25, weight: .semibold)).generateLabel.embedInView(insets: .init(vertical: 10, horizontal: 10))
+		return .init(rows: videoSection.limitTo(to: 3).compactMap { TableRow<VideoCell>($0) }, customHeader: sectionHeader)
 	}
 	
 	private func buildDataSource() -> TableViewDataSource{
-		.init(sections: [trendingHeadlinesSection, topMentionedCoinsSection, videoSection].compactMap { $0 })
+		.init(sections: [trendingHeadlinesSection, videoSection, topMentionedCoinsSection].compactMap { $0 })
 	}
 	
 
