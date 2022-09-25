@@ -17,9 +17,10 @@ class EventSingleCell: ConfigurableCell {
 		imgView.contentMode = .scaleAspectFill
 		imgView.cornerRadius = 10
 		imgView.clipsToBounds = true
+		imgView.setFrame(.init(squared: 64))
 		return imgView
 	}()
-	
+	private lazy var newsArticleCount: UILabel = { .init() }()
 	private lazy var tickersView: UIStackView = { UIView.HStack(spacing: 8) }()
 	
 //MARK: - Overriden
@@ -38,18 +39,12 @@ class EventSingleCell: ConfigurableCell {
 //MARK: - Protected Methods
 	
 	private func setupViews() {
-		let titleStack: UIStackView = UIView.VStack(subViews: [.spacer(),eventTitle, tickersView] ,spacing: 12)
-		
-		let bgView: UIView = .init()
-		bgView.backgroundColor = .black.withAlphaComponent(0.35)
-		imgView.addSubview(bgView)
-		imgView.setFittingConstraints(childView: bgView, insets: .zero)
-		
-		contentView.addSubview(imgView)
-		contentView.setFittingConstraints(childView: imgView, insets: .init(vertical: 8, horizontal: 16))
-		imgView.setHeight(height: 200, priority: .required)
-		imgView.addSubview(titleStack)
-		imgView.setFittingConstraints(childView: titleStack, insets: .init(vertical: 8, horizontal: 8))
+		let infoStack: UIStackView = .VStack(subViews: [eventTitle, newsArticleCount, tickersView],spacing: 10)
+		let stack: UIStackView = .HStack(subViews: [imgView, infoStack], spacing: 16, alignment: .top)
+		let mainStack: UIStackView = .VStack(subViews: [stack, .divider(color: .white.withAlphaComponent(0.5)).embedInView(insets: .init(top: 10, left: 0, bottom: 0, right: 0))],
+											 spacing: 12)
+		contentView.addSubview(mainStack)
+		contentView.setFittingConstraints(childView: mainStack, insets: .init(vertical: 10, horizontal: 16))
 	}
 	
 	private func styleCell() {
@@ -59,20 +54,22 @@ class EventSingleCell: ConfigurableCell {
 	
 	
 //MARK: - Exposed Methods
-	func configure(with model: EventModel) {
+	func configure(with model: EventCellModel) {
 		
-		tickersView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+		tickersView.removeChildViews()
 		
-		model.eventName.styled(font: .systemFont(ofSize: 15, weight: .semibold), color: .white).render(target: eventTitle)
+		model.model.eventName.styled(font: .systemFont(ofSize: 15, weight: .semibold), color: .white).render(target: eventTitle)
 		eventTitle.numberOfLines = 2
 		
-		if let firstImgURL = model.news.first?.imageUrl {
+		if let firstImgURL = model.model.news.first?.imageUrl {
 			UIImage.loadImage(url: firstImgURL, at: imgView, path: \.image)
 		}
-	
-		tickersView.isHidden = model.tickers.isEmpty
-		if !model.tickers.isEmpty {
-			model.tickers.limitTo(to: 3).forEach {
+		
+		"\(model.model.news.count) News Articles".styled(font: .systemFont(ofSize: 13, weight: .regular), color: .gray).render(target: newsArticleCount)
+		
+		tickersView.isHidden = model.model.tickers.isEmpty
+		if !model.model.tickers.isEmpty {
+			model.model.tickers.limitTo(to: 3).forEach {
 				let label = UILabel()
 				$0.styled(font: .systemFont(ofSize: 13, weight: .regular), color: .white).render(target: label)
 				

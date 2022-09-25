@@ -8,6 +8,11 @@
 import Foundation
 import UIKit
 
+struct EventCellModel: ActionProvider {
+	let model: EventModel
+	var action: Callback?
+}
+
 class EventsFeedViewController: UIViewController {
 	
 	private var observer: NSKeyValueObservation?
@@ -36,6 +41,7 @@ class EventsFeedViewController: UIViewController {
 		observer = tableView.observe(\.contentOffset) { [weak self] tableView, _ in
 			self?.scrollViewUpdate(tableView)
 		}
+		setupObservers()
 	}
 	
 	//MARK: - Protected Methods
@@ -61,6 +67,15 @@ class EventsFeedViewController: UIViewController {
 		UIView.animate(withDuration: 0.25) {
 			navBar.transform = .init(translationX: 0, y: -CGFloat(off) * navbarHeight)
 		}
+	}
+	
+	private func setupObservers() {
+		NotificationCenter.default.addObserver(self, selector: #selector(showEventDetail), name: .showEvent, object: nil)
+	}
+	
+	@objc
+	private func showEventDetail() {
+		navigationController?.pushViewController(EventDetailView(), animated: true)
 	}
 }
 

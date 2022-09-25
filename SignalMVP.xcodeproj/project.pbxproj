@@ -31,6 +31,10 @@
 		EF7D2FC628E09E7E0003B8F3 /* VideoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7D2FC528E09E7E0003B8F3 /* VideoModel.swift */; };
 		EF7D2FC928E0A0E10003B8F3 /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7D2FC828E0A0E10003B8F3 /* VideoCell.swift */; };
 		EF7D2FCB28E0A1540003B8F3 /* videos.json in Resources */ = {isa = PBXBuildFile; fileRef = EF7D2FCA28E0A1540003B8F3 /* videos.json */; };
+		EF7D2FCE28E0F55A0003B8F3 /* EventDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7D2FCD28E0F55A0003B8F3 /* EventDetailView.swift */; };
+		EF7D2FD028E0F6540003B8F3 /* EventHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7D2FCF28E0F6540003B8F3 /* EventHeaderView.swift */; };
+		EF7D2FD228E0F7820003B8F3 /* EventStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7D2FD128E0F7820003B8F3 /* EventStorage.swift */; };
+		EF7D2FD428E0F7A00003B8F3 /* EventNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7D2FD328E0F7A00003B8F3 /* EventNotification.swift */; };
 		EF86381928DC1E9C00EF520C /* StubService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF86381828DC1E9C00EF520C /* StubService.swift */; };
 		EF86381B28DC1EBE00EF520C /* TweetServiceInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF86381A28DC1EBE00EF520C /* TweetServiceInterface.swift */; };
 		EF86381D28DC1F9100EF520C /* TweetsTest.json in Resources */ = {isa = PBXBuildFile; fileRef = EF86381C28DC1F9100EF520C /* TweetsTest.json */; };
@@ -153,6 +157,10 @@
 		EF7D2FC528E09E7E0003B8F3 /* VideoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoModel.swift; sourceTree = "<group>"; };
 		EF7D2FC828E0A0E10003B8F3 /* VideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
 		EF7D2FCA28E0A1540003B8F3 /* videos.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = videos.json; sourceTree = "<group>"; };
+		EF7D2FCD28E0F55A0003B8F3 /* EventDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailView.swift; sourceTree = "<group>"; };
+		EF7D2FCF28E0F6540003B8F3 /* EventHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventHeaderView.swift; sourceTree = "<group>"; };
+		EF7D2FD128E0F7820003B8F3 /* EventStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventStorage.swift; sourceTree = "<group>"; };
+		EF7D2FD328E0F7A00003B8F3 /* EventNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventNotification.swift; sourceTree = "<group>"; };
 		EF86381828DC1E9C00EF520C /* StubService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubService.swift; sourceTree = "<group>"; };
 		EF86381A28DC1EBE00EF520C /* TweetServiceInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetServiceInterface.swift; sourceTree = "<group>"; };
 		EF86381C28DC1F9100EF520C /* TweetsTest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TweetsTest.json; sourceTree = "<group>"; };
@@ -350,6 +358,15 @@
 			path = Videos;
 			sourceTree = "<group>";
 		};
+		EF7D2FCC28E0F53E0003B8F3 /* EventsDetailView */ = {
+			isa = PBXGroup;
+			children = (
+				EF7D2FCD28E0F55A0003B8F3 /* EventDetailView.swift */,
+				EF7D2FCF28E0F6540003B8F3 /* EventHeaderView.swift */,
+			);
+			path = EventsDetailView;
+			sourceTree = "<group>";
+		};
 		EF86381428DC1E7D00EF520C /* Service */ = {
 			isa = PBXGroup;
 			children = (
@@ -426,6 +443,7 @@
 		EF86383C28DC98F700EF520C /* Events */ = {
 			isa = PBXGroup;
 			children = (
+				EF7D2FCC28E0F53E0003B8F3 /* EventsDetailView */,
 				EF86383D28DC990500EF520C /* EventsFeed.swift */,
 				EF86384128DC9E0F00EF520C /* EventViewModel.swift */,
 				EF86384A28DCA1A400EF520C /* EventCell.swift */,
@@ -441,6 +459,8 @@
 				EF86384428DC9E5200EF520C /* StubEventsService.swift */,
 				EF86384628DC9E6A00EF520C /* EventModel.swift */,
 				EF86384828DC9F4600EF520C /* EventServiceInterface.swift */,
+				EF7D2FD128E0F7820003B8F3 /* EventStorage.swift */,
+				EF7D2FD328E0F7A00003B8F3 /* EventNotification.swift */,
 			);
 			path = Events;
 			sourceTree = "<group>";
@@ -803,7 +823,9 @@
 			files = (
 				EFB1C2CB28DB3FA200DD40A4 /* Configurable.swift in Sources */,
 				EF7D2FA028E02DB80003B8F3 /* HomeViewModel.swift in Sources */,
+				EF7D2FD028E0F6540003B8F3 /* EventHeaderView.swift in Sources */,
 				EF7D2FBD28E056F40003B8F3 /* TopMentionCell.swift in Sources */,
+				EF7D2FD228E0F7820003B8F3 /* EventStorage.swift in Sources */,
 				EF7D2FBF28E078300003B8F3 /* CircularProgressBar.swift in Sources */,
 				EFB1C2D328DB616600DD40A4 /* TweetModel.swift in Sources */,
 				EF96382E28DDD7DA00178C37 /* TweetNotification.swift in Sources */,
@@ -842,6 +864,7 @@
 				EF96382628DD90A400178C37 /* RedditViewModel.swift in Sources */,
 				EF86383728DC648000EF520C /* NewsViewModel.swift in Sources */,
 				EF86384528DC9E5200EF520C /* StubEventsService.swift in Sources */,
+				EF7D2FCE28E0F55A0003B8F3 /* EventDetailView.swift in Sources */,
 				EF86383028DC576200EF520C /* Bundle.swift in Sources */,
 				EF86381928DC1E9C00EF520C /* StubService.swift in Sources */,
 				EFB1C2B828DB3F3B00DD40A4 /* CGSize.swift in Sources */,
@@ -877,6 +900,7 @@
 				EF7D2FC428E09E3D0003B8F3 /* StubVideoService.swift in Sources */,
 				EFB1C2D128DB5E7D00DD40A4 /* TweetFeedViewModel.swift in Sources */,
 				EF86384728DC9E6A00EF520C /* EventModel.swift in Sources */,
+				EF7D2FD428E0F7A00003B8F3 /* EventNotification.swift in Sources */,
 				EFB1C25F28DB3CC600DD40A4 /* TweetsFeed.swift in Sources */,
 				EF96382C28DDD72000178C37 /* TweetStorage.swift in Sources */,
 				EF96383C28DE455F00178C37 /* Animation.swift in Sources */,

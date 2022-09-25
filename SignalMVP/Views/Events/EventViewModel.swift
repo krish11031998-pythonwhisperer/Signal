@@ -39,7 +39,9 @@ class EventViewModel {
 		let label = UILabel()
 		"Events (with three news)".styled(font: .systemFont(ofSize: 25, weight: .bold), color: .white).render(target: label)
 		
-		return .init(rows: Set(events).compactMap { TableRow<EventCell>($0) })
+		return .init(rows: Set(events).compactMap {model in  TableRow<EventSingleCell>(.init(model: model, action: {
+			EventStorage.selectedEvent = model
+		})) })
 	}
 	
 	private func buildDataSource() -> TableViewDataSource {

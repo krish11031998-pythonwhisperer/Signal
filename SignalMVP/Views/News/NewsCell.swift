@@ -11,11 +11,25 @@ import UIKit
 class NewsCell: ConfigurableCell {
 
 //MARK: - Properties
-	private lazy var newsImage: UIImageView = { .init() }()
+	private lazy var newsImage: UIImageView = {
+		let img = UIImageView()
+		img.setFrame(.init(squared: 84))
+		img.cornerRadius = 10
+		img.clipsToBounds = true
+		return img
+	}()
+	
 	private lazy var timestamp: UILabel = { .init() }()
 	private lazy var title: UILabel = { .init() }()
 	private lazy var body: UILabel = { .init() }()
 	private lazy var tickersStack: UIStackView = { UIView.HStack(spacing: 8) }()
+	private lazy var sentimentView: UIView = { .init() }()
+	
+	private lazy var newsInfoStack: UIStackView = {
+		let stack: UIStackView = .VStack(subViews: [timestamp, title, body, tickersStack],spacing: 8)
+		stack.setCustomSpacing(12, after: body)
+		return stack
+	}()
 	
 //MARK: - Constructors
 	
@@ -42,21 +56,14 @@ class NewsCell: ConfigurableCell {
 	
 	private func setupCell() {
 		let mainStack = UIView.VStack(spacing: 10)
-		let newsInfo = UIView.VStack(subViews: [timestamp, title, body, tickersStack], spacing: 8)
-		newsInfo.setCustomSpacing(12, after: body)
-		newsInfo.backgroundColor = .purple.withAlphaComponent(0.1)
-		let cellStack = UIView.HStack(subViews: [newsInfo, newsImage], spacing: 16, alignment: .top)
+		let cellStack = UIView.HStack(subViews: [newsInfoStack, newsImage], spacing: 16, alignment: .top)
 		tickersStack.isHidden = true
 		
 		mainStack.addArrangedSubview(cellStack)
 		
 		let divider = UIView.divider()
 		mainStack.addArrangedSubview(divider.embedInView(insets: .init(top: 10, left: 0, bottom: 0, right: 0)))
-		
-		newsImage.setFrame(.init(squared: 84))
-		newsImage.cornerRadius = 10
-		newsImage.clipsToBounds = true
-		
+
 		contentView.addSubview(mainStack)
 		contentView.setFittingConstraints(childView: mainStack, insets: .init(vertical: 10, horizontal: 16))
 	}
