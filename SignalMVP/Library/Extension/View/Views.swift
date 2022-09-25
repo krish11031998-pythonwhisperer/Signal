@@ -51,6 +51,7 @@ extension UIView {
 		return blankView
 	}
 	
+	
 	var snapshot: UIImage {
 		let renderer = UIGraphicsImageRenderer(bounds: bounds)
 		return renderer.image { context in

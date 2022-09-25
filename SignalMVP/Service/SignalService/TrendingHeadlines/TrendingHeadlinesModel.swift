@@ -1,42 +1,34 @@
 //
-//  NewsModel.swift
+//  TrendingHeadlinesModel.swift
 //  SignalMVP
 //
-//  Created by Krishna Venkatramani on 22/09/2022.
+//  Created by Krishna Venkatramani on 25/09/2022.
 //
 
 import Foundation
 import UIKit
-
-struct NewsFirebaseResult: Codable {
-	let data: [String: NewsModel]?
+struct TrendingHeadlinesResult: Codable {
+	let data: [TrendingHeadlinesModel]?
 }
 
-struct NewsModel: Codable {
-//	let createdAt: String
-	let date: String
-	let imageUrl: String
-	let newsUrl: String
-	let sentiment: String
-	let sourceName: String
+struct TrendingHeadlinesModel: Codable {
+	let id: Int
+	let headline: String
 	let text: String
+	let newsId: Int
+	let sentiment: String
+	let date: String
 	let tickers: [String]
-	let title: String
 	
 	enum CodingKeys: String, CodingKey {
-//		case createdAt
-		case date
-		case imageUrl = "image_url"
-		case newsUrl = "news_url"
-		case sentiment
-		case sourceName = "source_name"
-		case text
-		case tickers
-		case title
+		case id, headline, text
+		case newsId = "news_id"
+		case sentiment, date, tickers
 	}
 }
 
-extension NewsModel {
+
+extension TrendingHeadlinesModel {
 	
 	var sentimentColor: UIColor {
 		sentiment == "Positive" ? .green : sentiment == "Neutral" ? .gray : .red

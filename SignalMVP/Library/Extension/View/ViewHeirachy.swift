@@ -23,6 +23,13 @@ extension UIView {
 		return view
 	}
 	
+	static func divider(color: UIColor = .gray, height: CGFloat = 0.5) -> UIView {
+		let divider = UIView()
+		divider.backgroundColor = color
+		divider.setHeight(height: height, priority: .required)
+		return divider
+	}
+	
 	func setFittingConstraints(childView: UIView, insets: UIEdgeInsets) {
 		let items: [NSLayoutConstraint] = [
 			childView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: insets.left),

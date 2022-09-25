@@ -44,7 +44,7 @@ extension RenderableText {
 	
 	func styled(
 		font: UIFont,
-		color: UIColor = .black,
+		color: UIColor = .white,
 		lineSpacing: CGFloat? = nil,
 		alignment: NSTextAlignment? = nil
 	) -> NSAttributedString {

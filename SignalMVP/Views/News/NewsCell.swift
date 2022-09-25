@@ -8,22 +8,6 @@
 import Foundation
 import UIKit
 
-fileprivate extension NewsModel {
-	
-	var sentimentColor: UIColor {
-		sentiment == "Positive" ? .green : sentiment == "Neutral" ? .gray : .red
-	}
-	
-	var sentimentBlob: UIView {
-		let label: UILabel = sentiment.styled(font: .systemFont(ofSize: 12, weight: .medium), color: sentimentColor)
-			.generateLabel
-		return label.blobify(backgroundColor: sentimentColor.withAlphaComponent(0.15),
-							 borderColor: sentimentColor,
-							 borderWidth: 1,
-							 cornerRadius: 10)
-	}
-}
-
 class NewsCell: ConfigurableCell {
 
 //MARK: - Properties
@@ -66,10 +50,8 @@ class NewsCell: ConfigurableCell {
 		
 		mainStack.addArrangedSubview(cellStack)
 		
-		let divider = UIView()
-		divider.backgroundColor = .gray
+		let divider = UIView.divider()
 		mainStack.addArrangedSubview(divider.embedInView(insets: .init(top: 10, left: 0, bottom: 0, right: 0)))
-		divider.setHeight(height: 0.5, priority: .required)
 		
 		newsImage.setFrame(.init(squared: 84))
 		newsImage.cornerRadius = 10

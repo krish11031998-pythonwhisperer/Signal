@@ -1,0 +1,101 @@
+{
+	"data": [
+		{
+			"id": 1060,
+			"headline": "Governor Gavin Newsom vetoes California's 'BitLicense' bill",
+			"text": "California passed a bill to create a licensing regime and stablecoin conditions.",
+			"news_id": 199702,
+			"sentiment": "Neutral",
+			"date": "Fri, 23 Sep 2022 22:04:15 -0400",
+			"tickers": []
+		},
+		{
+			"id": 1059,
+			"headline": "Voyager's CFO leaves the company",
+			"text": "The chief financial officer of bankrupt crypto lender Voyager will soon leave the company according to a Friday announcement. Voyager filed for Chapter 11 bankruptcy protection and is selling off its assets in the process.",
+			"news_id": 199664,
+			"sentiment": "Negative",
+			"date": "Fri, 23 Sep 2022 17:18:44 -0400",
+			"tickers": []
+		},
+		{
+			"id": 1058,
+			"headline": "Polkadot has made it possible for USDT to be minted on its blockchain",
+			"text": "Tether, the company operating blockchain-enabled platform Tether.to that powers the largest stablecoin by market capitalization and the third largest cryptocurrency, announced today the launch of USDT on Polkadot. The launch would allow Tether to move in and out of the Polkadot network.",
+			"news_id": 199544,
+			"sentiment": "Positive",
+			"date": "Fri, 23 Sep 2022 11:39:00 -0400",
+			"tickers": [
+				"DOT",
+				"USDT"
+			]
+		},
+		{
+			"id": 1057,
+			"headline": "Binance plans to add an opt-in button for the 1.2% LUNC burn tax",
+			"text": "Binance CEO Changpeng Zhao (CZ) was asked if Binance was ever going to apply the 1.2% tax on Terra Luna Classic (LUNC) off-chain trades. The post Binance to add opt-in button for 1.2% LUNC burn tax on all trades appeared first on CryptoSlate.",
+			"news_id": 199655,
+			"sentiment": "Neutral",
+			"date": "Fri, 23 Sep 2022 16:34:20 -0400",
+			"tickers": [
+				"LUNC"
+			]
+		},
+		{
+			"id": 1056,
+			"headline": "New orders from the IRS asks for more action on cryptocurrency traders",
+			"text": "The United States has ordered the IRS to investigate crypto traders not paying taxes on their digital assets. The market has ballooned over the years, with more participants entering the sector across America.",
+			"news_id": 199625,
+			"sentiment": "Negative",
+			"date": "Fri, 23 Sep 2022 14:19:53 -0400",
+			"tickers": []
+		},
+		{
+			"id": 1055,
+			"headline": "The CFTC is suing a DAO",
+			"text": "The Commodity Futures Trading Commission filed a lawsuit against Ooki DAO, which may have a terrible impact on other decentralized financial services.",
+			"news_id": 199614,
+			"sentiment": "Negative",
+			"date": "Fri, 23 Sep 2022 13:52:49 -0400",
+			"tickers": []
+		},
+		{
+			"id": 1054,
+			"headline": "CoinSquared and CoinSmart have announced that they are merging to expand their reach",
+			"text": "Inditex will have more than $350 million in assets and approximately 1 million customers. Consolidation is happening as trading platforms and exchanges grapple with global competition as well as the ongoing market downturn. Recently in Canada, Kevin O'Leary-backed WonderFi rolled up crypto platforms Bitbuy and Coinberry.",
+			"news_id": 199581,
+			"sentiment": "Positive",
+			"date": "Fri, 23 Sep 2022 12:04:35 -0400",
+			"tickers": []
+		},
+		{
+			"id": 1053,
+			"headline": "Congress asked the Department of State for information on crypto businesses",
+			"text": "The bill mandates the Treasury and the State Departments to compile a report on how crypto impacts the effectiveness and enforcement of sanctions against Russia.",
+			"news_id": 199585,
+			"sentiment": "Neutral",
+			"date": "Fri, 23 Sep 2022 12:46:18 -0400",
+			"tickers": []
+		},
+		{
+			"id": 1052,
+			"headline": "UK retail investors have spent approximately 30 billion pounds on cryptocurrencies",
+			"text": "Although crypto prices remain volatile, the UK government has released new data showing that citizens are pumping money into the cryptocurrency space.",
+			"news_id": 199567,
+			"sentiment": "Positive",
+			"date": "Fri, 23 Sep 2022 12:03:44 -0400",
+			"tickers": []
+		},
+		{
+			"id": 1051,
+			"headline": "Celsius shareholders want a new legal representative",
+			"text": "Celsius's shareholders have requested an official legal representation in the bankruptcy proceedings. The request appeared first on CryptoSlate.",
+			"news_id": 199506,
+			"sentiment": "Negative",
+			"date": "Fri, 23 Sep 2022 10:16:17 -0400",
+			"tickers": [
+				"CEL"
+			]
+		}
+	]
+}

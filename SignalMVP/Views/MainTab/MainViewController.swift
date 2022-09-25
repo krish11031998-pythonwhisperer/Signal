@@ -25,6 +25,8 @@ class MainViewController: UITabBarController {
 
 	
 	private func tabBarViewController() -> [UINavigationController] {
+		let homeNavView = UINavigationController(rootViewController: HomeFeed())
+		homeNavView.tabBarItem = .init(title: "Home", image: .init(systemName: "house"), tag: 0)
 		let tweetNavView = UINavigationController(rootViewController: TweetFeedViewController())
 		tweetNavView.tabBarItem = .init(title: "Tweets", image: .init(systemName: "message"), tag: 1)
 		let newsNavView = UINavigationController(rootViewController: NewsFeed())
@@ -33,7 +35,7 @@ class MainViewController: UITabBarController {
 		eventNavView.tabBarItem = .init(title: "Events", image: .init(systemName: "wake"), tag: 3)
 		let redditNavView = UINavigationController(rootViewController: RedditFeedViewController())
 		redditNavView.tabBarItem = .init(title: "Reddit", image: nil, tag: 4)
-		return [tweetNavView, newsNavView, eventNavView, redditNavView]
+		return [homeNavView, tweetNavView, newsNavView, eventNavView, redditNavView]
 	}
 
 }
