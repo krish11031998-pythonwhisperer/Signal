@@ -29,7 +29,7 @@ class EventDetailView: UIViewController {
 	private func setupView() {
 		view.addSubview(tableView)
 		view.setFittingConstraints(childView: tableView, insets: .zero)
-		setupTableHeaderView()
+		//setupTableHeaderView()
 		tableView.reloadData(buildDataSource())
 	}
 	
