@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 
 class VideoCell: ConfigurableCell {
-	
 //MARK: - Properties
 	private lazy var img: UIImageView = {
 		let view = UIImageView()

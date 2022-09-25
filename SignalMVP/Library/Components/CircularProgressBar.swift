@@ -51,7 +51,7 @@ class CircularProgressbar: UIView {
 		circularChartAdded.toggle()
 	}
 	
-	public func animateValue(color: UIColor,_ val: CGFloat) {
+	public func configureChart(color: UIColor, _ val: CGFloat, visited: Bool) {
 		if let layer = layer.sublayers?.filter({ $0 === circularPathLayer }).first {
 			layer.removeFromSuperlayer()
 		}
@@ -61,7 +61,12 @@ class CircularProgressbar: UIView {
 		}
 		(String(format: "%.0f", val * 100) + "%").styled(font: .systemFont(ofSize: 12, weight: .regular)).render(target: innerText)
 		circularPathLayer?.strokeColor = color.cgColor
-		
+		if visited {
+			circularPathLayer?.strokeEnd = val
+		}
+	}
+	
+	public func animateValue(color: UIColor,_ val: CGFloat) {
 		circularPathLayer?.animate(animation: .circularProgress(to: val, duration: 0.75))
 	}
 }

@@ -19,7 +19,7 @@ fileprivate extension UIView {
 }
 
 class TopMentionCell: ConfigurableCell {
-	
+	private static var visited: [String: Bool] = [:]
 	private lazy var coinImage: UIImageView = {
 		let imageView: UIImageView = .init(circular: .init(origin: .zero, size: .init(squared: 32)), background: .gray)
 		imageView.contentMode = .scaleAspectFill
@@ -63,8 +63,12 @@ class TopMentionCell: ConfigurableCell {
 		
 		let percent: CGFloat = CGFloat(model.positiveMentions)/CGFloat(model.totalMentions - model.neutralMentions)
 		let color: UIColor = percent < 0.5 ? .red : .green
-		circularChart.animateValue(color: color, percent)
-		
+		let visited = isCellVisited(ticker: model.ticker)
+		circularChart.configureChart(color: color, percent, visited: visited)
+		if !visited {
+			circularChart.animateValue(color: color, percent)
+		}
+	
 		mentionDistribution.removeChildViews()
 		[generateMentionsBlob("Positive", model.positiveMentions), generateMentionsBlob("Negative", model.negativeMentions), generateMentionsBlob("Neutral", model.neutralMentions)]
 			.forEach(mentionDistribution.addArrangedSubview(_:))
@@ -72,4 +76,19 @@ class TopMentionCell: ConfigurableCell {
 		mentionDistribution.addArrangedSubview(.spacer())
 		mentionDistribution.isHidden = false
 	}
+}
+
+
+//MARK: - Visited Extension
+
+extension TopMentionCell {
+	
+	func isCellVisited(ticker: String) -> Bool {
+		guard let isVisited = Self.visited[ticker] else {
+			Self.visited[ticker] = true
+			return false
+		}
+		return isVisited
+	}
+	
 }
