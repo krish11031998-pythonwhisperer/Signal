@@ -12,11 +12,14 @@ class HomeViewModel {
 	
 	private var trendingHeadlines: [TrendingHeadlinesModel]?
 	private var mentions: [MentionModel]?
+	private var videos: [VideoModel]?
+	
 	public var view: AnyTableView?
 	
 	public func fetchHomePageData() {
 		fetchTrendingHeadlines()
 		fetchTopMentionedCoins()
+		fetchVideo()
 		view?.reloadTableWithDataSource(buildDataSource())
 	}
 	
@@ -44,6 +47,17 @@ class HomeViewModel {
 		}
 	}
 	
+	private func fetchVideo() {
+		StubVideoService.shared.fetchVideo { [weak self] result in
+			switch result {
+			case .success(let videos):
+				self?.videos = videos
+			case .failure(let err):
+				print("(DEBUG) err : ", err.localizedDescription)
+			}
+		}
+	}
+	
 //MARK: - Sections
 	private var trendingHeadlinesSection: TableSection? {
 		guard let validTrendingHeadlines = trendingHeadlines else { return nil }
@@ -55,12 +69,17 @@ class HomeViewModel {
 	private var topMentionedCoinsSection: TableSection? {
 		guard let validTopMentionedCoins = mentions else { return nil }
 		let sectionHeader = "Top Mentioned Coins".styled(font: .systemFont(ofSize: 25, weight: .semibold)).generateLabel.embedInView(insets: .init(vertical: 10, horizontal: 10))
-		return .init(rows: validTopMentionedCoins.limitTo(to: 10).compactMap { TableRow<TopMentionCell>($0) }, customHeader: sectionHeader)
+		return .init(rows: validTopMentionedCoins.limitTo(to: 5).compactMap { TableRow<TopMentionCell>($0) }, customHeader: sectionHeader)
 	}
 	
+	private var videoSection: TableSection? {
+		guard let videoSection = videos else { return nil }
+		let sectionHeader = "Top Videos".styled(font: .systemFont(ofSize: 25, weight: .semibold)).generateLabel.embedInView(insets: .init(vertical: 10, horizontal: 10))
+		return .init(rows: videoSection.compactMap { TableRow<VideoCell>($0) }, customHeader: sectionHeader)
+	}
 	
 	private func buildDataSource() -> TableViewDataSource{
-		.init(sections: [trendingHeadlinesSection, topMentionedCoinsSection].compactMap { $0 })
+		.init(sections: [trendingHeadlinesSection, topMentionedCoinsSection, videoSection].compactMap { $0 })
 	}
 	
 

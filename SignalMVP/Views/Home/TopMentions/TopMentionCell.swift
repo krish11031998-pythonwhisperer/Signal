@@ -25,10 +25,11 @@ class TopMentionCell: ConfigurableCell {
 		imageView.contentMode = .scaleAspectFill
 		return imageView
 	}()
-	private lazy var detailStack: UIStackView = { .HStack(spacing: 12) }()
+	private lazy var detailStack: UIStackView = { .HStack(spacing: 12, alignment: .center) }()
 	private lazy var coinName: UILabel = { .init() }()
 	private lazy var mainStack: UIStackView = { .VStack(spacing: 8) }()
-	private lazy var mentionDistribution: UIStackView = { .HStack(spacing: 12) }()
+	private lazy var mentionDistribution: UIStackView = { .HStack(spacing: 8) }()
+	private lazy var circularChart: CircularProgressbar = { .init(frame: .init(origin: .zero, size: .init(squared: 48))) }()
 	
 	override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
 		super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -42,10 +43,11 @@ class TopMentionCell: ConfigurableCell {
 
 	private func setupView() {
 		
-		[coinImage, coinName, .spacer()].forEach(detailStack.addArrangedSubview(_:))
+		[coinImage, coinName, .spacer(),circularChart].forEach(detailStack.addArrangedSubview(_:))
+		circularChart.setFrame(.init(squared: 48))
 		coinImage.setFrame(.init(squared: 32))
 		mainStack.addArrangedSubview(detailStack)
-		mainStack.addArrangedSubview("Mentions".styled(font: .systemFont(ofSize: 10, weight: .regular), color: .gray).generateLabel)
+		mainStack.addArrangedSubview("Sentiments".styled(font: .systemFont(ofSize: 10, weight: .regular), color: .gray).generateLabel)
 		mainStack.setCustomSpacing(16, after: detailStack)
 		mainStack.addArrangedSubview(mentionDistribution)
 		mentionDistribution.isHidden = true
@@ -59,13 +61,9 @@ class TopMentionCell: ConfigurableCell {
 		
 		model.ticker.styled(font: .systemFont(ofSize: 18, weight: .medium)).render(target: coinName)
 		
-
-		let color: UIColor = model.sentimentScore < 0 ? UIColor.red : UIColor.green
-		let scoreLabel = String(format: "%.2f", model.sentimentScore).styled(font: .systemFont(ofSize: 15, weight: .medium))
-						.generateLabel.blobify(backgroundColor: color.withAlphaComponent(0.2),
-											   borderColor: color,
-											   cornerRadius: 12)
-		detailStack.insertAndReplaceArrangedSubview(scoreLabel, at: 3)
+		let percent: CGFloat = CGFloat(model.positiveMentions)/CGFloat(model.totalMentions - model.neutralMentions)
+		let color: UIColor = percent < 0.5 ? .red : .green
+		circularChart.animateValue(color: color, percent)
 		
 		mentionDistribution.removeChildViews()
 		[generateMentionsBlob("Positive", model.positiveMentions), generateMentionsBlob("Negative", model.negativeMentions), generateMentionsBlob("Neutral", model.neutralMentions)]

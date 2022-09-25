@@ -10,6 +10,7 @@ import UIKit
 
 enum Animation {
 	case slideInFromTop(from: CGFloat, to:CGFloat = 0, duration: CFTimeInterval)
+	case circularProgress(from: CGFloat = 0, to: CGFloat, duration: CFTimeInterval)
 }
 
 extension Animation {
@@ -34,7 +35,15 @@ extension Animation {
 			group.duration = duration
 			
 			return group
+		case .circularProgress(let from, let to, let duration):
+			let animation = CABasicAnimation(keyPath: "strokeEnd")
+			animation.fromValue = from
+			animation.toValue = to
+			animation.duration = duration
+			animation.isRemovedOnCompletion = false
+			animation.fillMode = .forwards
 			
+			return animation
 		}
 		
 	}

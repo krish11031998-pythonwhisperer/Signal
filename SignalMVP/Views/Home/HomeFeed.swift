@@ -30,6 +30,7 @@ class HomeFeed: UIViewController {
 		super.viewDidLoad()
 		setupViews()
 		viewModel.fetchHomePageData()
+		setupTransparentNavBar()
 	}
 	
 //MARK: - ProtectedMethods
