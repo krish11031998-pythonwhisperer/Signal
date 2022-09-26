@@ -35,6 +35,10 @@
 		EF7D2FD028E0F6540003B8F3 /* EventHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7D2FCF28E0F6540003B8F3 /* EventHeaderView.swift */; };
 		EF7D2FD228E0F7820003B8F3 /* EventStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7D2FD128E0F7820003B8F3 /* EventStorage.swift */; };
 		EF7D2FD428E0F7A00003B8F3 /* EventNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7D2FD328E0F7A00003B8F3 /* EventNotification.swift */; };
+		EF7D2FE628E1A81A0003B8F3 /* TableViewFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7D2FE228E1A81A0003B8F3 /* TableViewFunction.swift */; };
+		EF7D2FE728E1A81A0003B8F3 /* TableRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7D2FE328E1A81A0003B8F3 /* TableRow.swift */; };
+		EF7D2FE828E1A81A0003B8F3 /* Configurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7D2FE428E1A81A0003B8F3 /* Configurable.swift */; };
+		EF7D2FE928E1A81A0003B8F3 /* TableSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7D2FE528E1A81A0003B8F3 /* TableSection.swift */; };
 		EF86381928DC1E9C00EF520C /* StubService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF86381828DC1E9C00EF520C /* StubService.swift */; };
 		EF86381B28DC1EBE00EF520C /* TweetServiceInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF86381A28DC1EBE00EF520C /* TweetServiceInterface.swift */; };
 		EF86381D28DC1F9100EF520C /* TweetsTest.json in Resources */ = {isa = PBXBuildFile; fileRef = EF86381C28DC1F9100EF520C /* TweetsTest.json */; };
@@ -104,10 +108,6 @@
 		EFB1C2C428DB3F3B00DD40A4 /* Montserrat-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EFB1C2B528DB3F3B00DD40A4 /* Montserrat-MediumItalic.ttf */; };
 		EFB1C2C528DB3F3B00DD40A4 /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EFB1C2B628DB3F3B00DD40A4 /* Montserrat-SemiBold.ttf */; };
 		EFB1C2C628DB3F3B00DD40A4 /* Montserrat-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EFB1C2B728DB3F3B00DD40A4 /* Montserrat-SemiBoldItalic.ttf */; };
-		EFB1C2C928DB3F8200DD40A4 /* TableRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB1C2C828DB3F8200DD40A4 /* TableRow.swift */; };
-		EFB1C2CB28DB3FA200DD40A4 /* Configurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB1C2CA28DB3FA200DD40A4 /* Configurable.swift */; };
-		EFB1C2CD28DB426700DD40A4 /* TableViewFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB1C2CC28DB426700DD40A4 /* TableViewFunction.swift */; };
-		EFB1C2CF28DB4D8B00DD40A4 /* TableSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB1C2CE28DB4D8B00DD40A4 /* TableSection.swift */; };
 		EFB1C2D128DB5E7D00DD40A4 /* TweetFeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB1C2D028DB5E7D00DD40A4 /* TweetFeedViewModel.swift */; };
 		EFB1C2D328DB616600DD40A4 /* TweetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB1C2D228DB616600DD40A4 /* TweetModel.swift */; };
 		EFB1C2D528DB64B300DD40A4 /* NetworkReqeust.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB1C2D428DB64B300DD40A4 /* NetworkReqeust.swift */; };
@@ -161,6 +161,10 @@
 		EF7D2FCF28E0F6540003B8F3 /* EventHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventHeaderView.swift; sourceTree = "<group>"; };
 		EF7D2FD128E0F7820003B8F3 /* EventStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventStorage.swift; sourceTree = "<group>"; };
 		EF7D2FD328E0F7A00003B8F3 /* EventNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventNotification.swift; sourceTree = "<group>"; };
+		EF7D2FE228E1A81A0003B8F3 /* TableViewFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewFunction.swift; sourceTree = "<group>"; };
+		EF7D2FE328E1A81A0003B8F3 /* TableRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableRow.swift; sourceTree = "<group>"; };
+		EF7D2FE428E1A81A0003B8F3 /* Configurable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configurable.swift; sourceTree = "<group>"; };
+		EF7D2FE528E1A81A0003B8F3 /* TableSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableSection.swift; sourceTree = "<group>"; };
 		EF86381828DC1E9C00EF520C /* StubService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubService.swift; sourceTree = "<group>"; };
 		EF86381A28DC1EBE00EF520C /* TweetServiceInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetServiceInterface.swift; sourceTree = "<group>"; };
 		EF86381C28DC1F9100EF520C /* TweetsTest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TweetsTest.json; sourceTree = "<group>"; };
@@ -234,10 +238,6 @@
 		EFB1C2B528DB3F3B00DD40A4 /* Montserrat-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-MediumItalic.ttf"; sourceTree = "<group>"; };
 		EFB1C2B628DB3F3B00DD40A4 /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
 		EFB1C2B728DB3F3B00DD40A4 /* Montserrat-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
-		EFB1C2C828DB3F8200DD40A4 /* TableRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableRow.swift; sourceTree = "<group>"; };
-		EFB1C2CA28DB3FA200DD40A4 /* Configurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configurable.swift; sourceTree = "<group>"; };
-		EFB1C2CC28DB426700DD40A4 /* TableViewFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewFunction.swift; sourceTree = "<group>"; };
-		EFB1C2CE28DB4D8B00DD40A4 /* TableSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableSection.swift; sourceTree = "<group>"; };
 		EFB1C2D028DB5E7D00DD40A4 /* TweetFeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetFeedViewModel.swift; sourceTree = "<group>"; };
 		EFB1C2D228DB616600DD40A4 /* TweetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetModel.swift; sourceTree = "<group>"; };
 		EFB1C2D428DB64B300DD40A4 /* NetworkReqeust.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkReqeust.swift; sourceTree = "<group>"; };
@@ -372,6 +372,17 @@
 			children = (
 			);
 			path = TestInterface;
+			sourceTree = "<group>";
+		};
+		EF7D2FE128E1A81A0003B8F3 /* TableViewDataSource */ = {
+			isa = PBXGroup;
+			children = (
+				EF7D2FE228E1A81A0003B8F3 /* TableViewFunction.swift */,
+				EF7D2FE328E1A81A0003B8F3 /* TableRow.swift */,
+				EF7D2FE428E1A81A0003B8F3 /* Configurable.swift */,
+				EF7D2FE528E1A81A0003B8F3 /* TableSection.swift */,
+			);
+			path = TableViewDataSource;
 			sourceTree = "<group>";
 		};
 		EF86381428DC1E7D00EF520C /* Service */ = {
@@ -590,9 +601,9 @@
 		EFB1C26228DB3DF100DD40A4 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				EF7D2FE128E1A81A0003B8F3 /* TableViewDataSource */,
 				EF96383D28DE456300178C37 /* Animation */,
 				EF96383428DDFFC900178C37 /* Components */,
-				EFB1C2C728DB3F7200DD40A4 /* TableViewDataSource */,
 				EFB1C26328DB3E1F00DD40A4 /* Extension */,
 			);
 			path = Library;
@@ -669,17 +680,6 @@
 				EFB1C2B728DB3F3B00DD40A4 /* Montserrat-SemiBoldItalic.ttf */,
 			);
 			path = Montserrat;
-			sourceTree = "<group>";
-		};
-		EFB1C2C728DB3F7200DD40A4 /* TableViewDataSource */ = {
-			isa = PBXGroup;
-			children = (
-				EFB1C2C828DB3F8200DD40A4 /* TableRow.swift */,
-				EFB1C2CA28DB3FA200DD40A4 /* Configurable.swift */,
-				EFB1C2CC28DB426700DD40A4 /* TableViewFunction.swift */,
-				EFB1C2CE28DB4D8B00DD40A4 /* TableSection.swift */,
-			);
-			path = TableViewDataSource;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -829,7 +829,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EFB1C2CB28DB3FA200DD40A4 /* Configurable.swift in Sources */,
 				EF7D2FA028E02DB80003B8F3 /* HomeViewModel.swift in Sources */,
 				EF7D2FD028E0F6540003B8F3 /* EventHeaderView.swift in Sources */,
 				EF7D2FBD28E056F40003B8F3 /* TopMentionCell.swift in Sources */,
@@ -839,9 +838,12 @@
 				EF96382E28DDD7DA00178C37 /* TweetNotification.swift in Sources */,
 				EF86381B28DC1EBE00EF520C /* TweetServiceInterface.swift in Sources */,
 				EF7D2F9428DED80B0003B8F3 /* NewsStorage.swift in Sources */,
+				EF7D2FE728E1A81A0003B8F3 /* TableRow.swift in Sources */,
+				EF7D2FE628E1A81A0003B8F3 /* TableViewFunction.swift in Sources */,
 				EF7D2FC228E09DB30003B8F3 /* VideoServiceInterface.swift in Sources */,
 				EF7D2FB228E050450003B8F3 /* MentionInterface.swift in Sources */,
 				EF86382528DC347000EF520C /* UIImageView.swift in Sources */,
+				EF7D2FE928E1A81A0003B8F3 /* TableSection.swift in Sources */,
 				EF7D2FB628E051940003B8F3 /* StubMentionService.swift in Sources */,
 				EFB1C2D528DB64B300DD40A4 /* NetworkReqeust.swift in Sources */,
 				EFB1C2BC28DB3F3B00DD40A4 /* RenderableText.swift in Sources */,
@@ -860,7 +862,6 @@
 				EF86384D28DCED0C00EF520C /* EventSingleCell.swift in Sources */,
 				EF96381628DD7EBA00178C37 /* UILabel.swift in Sources */,
 				EF86382328DC341400EF520C /* TweetMetricView.swift in Sources */,
-				EFB1C2CF28DB4D8B00DD40A4 /* TableSection.swift in Sources */,
 				EFB1C23228DB3B1800DD40A4 /* MainViewController.swift in Sources */,
 				EF86383B28DC761900EF520C /* MainTabView.swift in Sources */,
 				EF7D2FAA28E033E90003B8F3 /* TrendingHeadlineCell.swift in Sources */,
@@ -882,15 +883,14 @@
 				EF86383528DC61F700EF520C /* NewsCell.swift in Sources */,
 				EF96383828DE042D00178C37 /* ProgressBars.swift in Sources */,
 				EF96381D28DD8C8D00178C37 /* RedditPostModel.swift in Sources */,
-				EFB1C2C928DB3F8200DD40A4 /* TableRow.swift in Sources */,
 				EF96381B28DD8C6B00178C37 /* RedditServiceInterface.swift in Sources */,
 				EF7D2FAE28E03DD20003B8F3 /* UIStackView.swift in Sources */,
 				EF86384228DC9E0F00EF520C /* EventViewModel.swift in Sources */,
-				EFB1C2CD28DB426700DD40A4 /* TableViewFunction.swift in Sources */,
 				EF7D2FA728E0322A0003B8F3 /* TrendingHeadlinesService.swift in Sources */,
 				EF86382828DC507E00EF520C /* NewsModel.swift in Sources */,
 				EFB1C2BA28DB3F3B00DD40A4 /* Int.swift in Sources */,
 				EF96383328DDFEDF00178C37 /* TweetMetricsView.swift in Sources */,
+				EF7D2FE828E1A81A0003B8F3 /* Configurable.swift in Sources */,
 				EF7D2FC628E09E7E0003B8F3 /* VideoModel.swift in Sources */,
 				EF96382828DD92E900178C37 /* RedditPostCard.swift in Sources */,
 				EFB1C2BB28DB3F3B00DD40A4 /* FontCatalogue.swift in Sources */,
