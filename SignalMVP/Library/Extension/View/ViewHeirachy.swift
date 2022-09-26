@@ -51,7 +51,8 @@ extension UIView {
 							   width: CGFloat? = nil,
 							   height: CGFloat? = nil,
 							   centerX: CGFloat? = nil,
-							   centerY: CGFloat? = nil) {
+							   centerY: CGFloat? = nil,
+							   priority: UILayoutPriority = .required) {
 		var items: [NSLayoutConstraint] = []
 		
 		if let validLeading = leading { items.append(childView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: validLeading)) }
@@ -62,6 +63,10 @@ extension UIView {
 		if let validWidth = width { items.append(childView.widthAnchor.constraint(equalToConstant: validWidth)) }
 		if let validCenterX = centerX { items.append(childView.centerXAnchor.constraint(equalTo: centerXAnchor, constant: validCenterX)) }
 		if let validCenterY = centerY { items.append(childView.centerYAnchor.constraint(equalTo: centerYAnchor, constant: validCenterY)) }
+		
+		items.forEach {
+			$0.priority = priority
+		}
 		
 		childView.translatesAutoresizingMaskIntoConstraints = false
 		removeSimilarConstraints(items)

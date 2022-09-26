@@ -11,7 +11,7 @@ import UIKit
 class EventDetailViewHeader: UIView {
 	
 //MARK: - Properties
-	
+
 	private lazy var mainNews: EventView = { .init(largeCard: true) }()
 	private lazy var otherNews: UIStackView = { .init() }()
 	
@@ -24,18 +24,17 @@ class EventDetailViewHeader: UIView {
 	
 	required init?(coder: NSCoder) {
 		super.init(coder: coder)
-		setupView()
 	}
-	
 	
 //MARK: - Protected Methods
 	
 	private func setupView() {
-		let stack: UIStackView = .VStack(spacing: 12)
-		[mainNews, otherNews].forEach(stack.addArrangedSubview(_:))
-		
+		let stack: UIStackView = .VStack(subViews: [mainNews,otherNews],spacing: 10)
+		mainNews.setHeight(height: 245, priority: .required)
+		otherNews.setHeight(height: 245, priority: .required)
 		addSubview(stack)
-		setFittingConstraints(childView: stack, insets: .init(vertical: 10, horizontal: 16))
+		setFittingConstraints(childView: stack, top: 0, bottom: 0)
+		setFittingConstraints(childView: stack, leading: 16, trailing: 16, priority: .init(999))
 	}
 	
 //MARK: - Exposed Methods

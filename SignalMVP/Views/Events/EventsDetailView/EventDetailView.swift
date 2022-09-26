@@ -29,7 +29,7 @@ class EventDetailView: UIViewController {
 	private func setupView() {
 		view.addSubview(tableView)
 		view.setFittingConstraints(childView: tableView, insets: .zero)
-		//setupTableHeaderView()
+		setupTableHeaderView()
 		tableView.reloadData(buildDataSource())
 	}
 	
@@ -46,6 +46,8 @@ class EventDetailView: UIViewController {
 		guard let validEvent = EventStorage.selectedEvent else { return }
 		let headerView =  EventDetailViewHeader(frame: .init(origin: .zero, size: .init(width: .totalWidth, height: 500)))
 		headerView.configureHeader(validEvent)
+		//let headerView = UIView(frame: .init(origin: .zero, size: .init(width: .totalWidth, height: 500)))
+		//headerView.backgroundColor = .red
 //		headerView.setFrame(.init(width: .totalWidth, height: 500))
 		tableView.tableHeaderView = headerView
 	}

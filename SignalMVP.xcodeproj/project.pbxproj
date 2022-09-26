@@ -367,6 +367,13 @@
 			path = EventsDetailView;
 			sourceTree = "<group>";
 		};
+		EF7D2FD528E17AC20003B8F3 /* TestInterface */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = TestInterface;
+			sourceTree = "<group>";
+		};
 		EF86381428DC1E7D00EF520C /* Service */ = {
 			isa = PBXGroup;
 			children = (
@@ -537,6 +544,7 @@
 		EFB1C22C28DB3B1800DD40A4 /* SignalMVP */ = {
 			isa = PBXGroup;
 			children = (
+				EF7D2FD528E17AC20003B8F3 /* TestInterface */,
 				EF86383828DC75F200EF520C /* Views */,
 				EF86381428DC1E7D00EF520C /* Service */,
 				EFB1C26228DB3DF100DD40A4 /* Library */,
