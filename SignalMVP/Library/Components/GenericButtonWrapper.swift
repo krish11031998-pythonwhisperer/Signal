@@ -19,7 +19,7 @@ class GenericButtonWrapper: UIView {
 		self.innerView = innerView
 		self.handler = handler
 		setupView()
-		addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
+		addTapGesture()
 	}
 	
 	required init?(coder: NSCoder) {
@@ -30,6 +30,12 @@ class GenericButtonWrapper: UIView {
 		guard let innerView = innerView else { return }
 		addSubview(innerView)
 		setFittingConstraints(childView: innerView, insets: .zero)
+	}
+	
+	private func addTapGesture() {
+		let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+		tapGesture.cancelsTouchesInView = true
+		addGestureRecognizer(tapGesture)
 	}
 	
 	@objc

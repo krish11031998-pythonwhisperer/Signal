@@ -31,6 +31,7 @@ class EventDetailView: UIViewController {
 		view.setFittingConstraints(childView: tableView, insets: .zero)
 		setupTableHeaderView()
 		tableView.reloadData(buildDataSource())
+		setupObserver()
 	}
 	
 	private func buildDataSource() -> TableViewDataSource {
@@ -39,17 +40,25 @@ class EventDetailView: UIViewController {
 	
 	private var section: TableSection? {
 		guard let validEvent = EventStorage.selectedEvent else { return nil }
-		return .init(rows: (validEvent.news[0...]).compactMap { TableRow<NewsCell>(.init(model: $0)) })
+		return .init(rows: (validEvent.news[0...]).compactMap {news in TableRow<NewsCell>(.init(model: news, action: {
+			NewsStorage.selectedNews = news
+		})) })
 	}
 	
 	private func setupTableHeaderView() {
 		guard let validEvent = EventStorage.selectedEvent else { return }
 		let headerView =  EventDetailViewHeader(frame: .init(origin: .zero, size: .init(width: .totalWidth, height: 500)))
 		headerView.configureHeader(validEvent)
-		//let headerView = UIView(frame: .init(origin: .zero, size: .init(width: .totalWidth, height: 500)))
-		//headerView.backgroundColor = .red
-//		headerView.setFrame(.init(width: .totalWidth, height: 500))
 		tableView.tableHeaderView = headerView
+	}
+	
+	private func setupObserver() {
+		NotificationCenter.default.addObserver(self, selector: #selector(showNews), name: .showNews, object: nil)
+	}
+	
+	@objc
+	private func showNews() {
+		navigationController?.pushViewController(NewsDetailViewController(), animated: true)
 	}
 	
 	

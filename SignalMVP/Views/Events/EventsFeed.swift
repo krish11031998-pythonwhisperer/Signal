@@ -38,9 +38,9 @@ class EventsFeedViewController: UIViewController {
 		setupView()
 		viewModel.fetchEvents()
 		setupNavBar()
-		observer = tableView.observe(\.contentOffset) { [weak self] tableView, _ in
-			self?.scrollViewUpdate(tableView)
-		}
+//		observer = tableView.observe(\.contentOffset) { [weak self] tableView, _ in
+//			self?.scrollViewUpdate(tableView)
+//		}
 		setupObservers()
 	}
 	

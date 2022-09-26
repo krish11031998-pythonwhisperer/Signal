@@ -14,6 +14,7 @@ protocol TableCellProvider {
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
 	func tableView(_ tableView: UITableView, updateRowAt indexPath: IndexPath)
 	func didSelect(_ tableView: UITableView, indexPath: IndexPath)
+	func willDisplayCell(_ tableView: UITableView, cell: UITableViewCell, indexPath: IndexPath)
 }
 
 class TableRow<Cell: ConfigurableCell>: TableCellProvider {
@@ -40,5 +41,11 @@ class TableRow<Cell: ConfigurableCell>: TableCellProvider {
 			actionProvider.action?()
 		}
 	}
+	
+	func willDisplayCell(_ tableView: UITableView, cell: UITableViewCell, indexPath: IndexPath) {
+		guard let cell = cell as? Cell else { return }
+		cell.configure(with: model)
+	}
+	
 }
 

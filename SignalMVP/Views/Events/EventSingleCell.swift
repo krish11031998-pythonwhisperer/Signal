@@ -59,7 +59,6 @@ class EventSingleCell: ConfigurableCell {
 		
 		tickersView.removeChildViews()
 
-		print("(DEBUG) Configuring Cell!")
 		model.model.eventName.styled(font: .systemFont(ofSize: 15, weight: .semibold), color: .white).render(target: eventTitle)
 		eventTitle.numberOfLines = 2
 
