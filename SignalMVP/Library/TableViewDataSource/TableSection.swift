@@ -57,10 +57,6 @@ extension TableViewDataSource: UITableViewDelegate, UITableViewDataSource {
 		row.didSelect(tableView, indexPath: indexPath)
 	}
 	
-	public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-		sections[indexPath.section].rows[indexPath.row].willDisplayCell(tableView, cell: cell, indexPath: indexPath)
-	}
-	
 	public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? { sections[section].customHeader }
 	
 	public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
