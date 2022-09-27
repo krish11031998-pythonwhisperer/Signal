@@ -38,7 +38,9 @@ class VideoCell: ConfigurableCell {
 		let mainStack: UIStackView = .VStack(spacing: 0)
 
 		videoInfoStack.clipsToBounds = true
-		authorLabel.setHeight(height: authorLabel.compressedSize.height, priority: .required)
+
+		
+		
 		let infoView = videoInfoStack.embedInView(insets: .init(by: 12))
 		infoView.clipsToBounds = true
 		
@@ -64,6 +66,7 @@ class VideoCell: ConfigurableCell {
 		
 		model.title.styled(font: .systemFont(ofSize: 16, weight: .medium)).render(target: videoLabel)
 		model.sourceName.styled(font: .systemFont(ofSize: 10, weight: .regular), color: .gray).render(target: authorLabel)
+		authorLabel.setFrame(height: authorLabel.compressedSize.height)
 	}
 	
 }
