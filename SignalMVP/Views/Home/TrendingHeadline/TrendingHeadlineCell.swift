@@ -56,16 +56,18 @@ class TrendingHeadlineCell: ConfigurableCell {
 		model.text.styled(font: .systemFont(ofSize: 10, weight: .light)).render(target: desciptionLabel)
 		
 		sentimentStack.removeChildViews()
-		["Sentiment : ".styled(font: .systemFont(ofSize: 12, weight: .regular)).generateLabel,
-		 model.sentimentBlob, .spacer()].forEach(sentimentStack.addArrangedSubview(_:))
+		let sentimentBlob = SentimentTextLabel()
+		sentimentBlob.configureIndicator(label: model.sentiment.rawValue, color: model.sentiment.color)
+		sentimentStack.addArrangedSubview(sentimentBlob)
 
 		if !model.tickers.isEmpty {
 			tickers.isHidden = false
 			tickers.removeChildViews()
-			tickers.addArrangedSubview("Tickers : ".styled(font: .systemFont(ofSize: 12, weight: .regular)).generateLabel)
 			model.tickers.limitTo(to: 3).forEach { ticker in
-				let label = ticker.styled(font: .systemFont(ofSize: 10, weight: .semibold)).generateLabel
-				tickers.addArrangedSubview(label.blobify(cornerRadius: 10))
+				let img = SymbolImage()
+				img.configureView(symbol: "", label: ticker.styled(font: .systemFont(ofSize: 12, weight: .medium)))
+				tickers.addArrangedSubview(img)
+				img.setHeight(height: CGSize.smallestSquare.height, priority: .required)
 			}
 			tickers.addArrangedSubview(.spacer())
 		}

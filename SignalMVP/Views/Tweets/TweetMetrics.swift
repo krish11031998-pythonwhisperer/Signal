@@ -20,18 +20,18 @@ struct TweetSentimentMetricModel {
 	let name: String
 }
 
-fileprivate extension UIImage.Catalogue {
+fileprivate extension UIImage.SystemCatalogue {
 	
 	init?(metric: TweetSentimentMetric) {
 		switch metric {
 		case .bullish:
-			self.init(rawValue: UIImage.Catalogue.bullish.rawValue)
+			self.init(rawValue: UIImage.SystemCatalogue.bullish.rawValue)
 		case .bearish:
-			self.init(rawValue: UIImage.Catalogue.bearish.rawValue)
+			self.init(rawValue: UIImage.SystemCatalogue.bearish.rawValue)
 		case .true:
-			self.init(rawValue: UIImage.Catalogue.true.rawValue)
+			self.init(rawValue: UIImage.SystemCatalogue.true.rawValue)
 		case .false:
-			self.init(rawValue: UIImage.Catalogue.false.rawValue)
+			self.init(rawValue: UIImage.SystemCatalogue.false.rawValue)
 		}
 	}
 }
@@ -39,7 +39,7 @@ fileprivate extension UIImage.Catalogue {
 extension TweetSentimentMetric {
 	
 	var model: TweetSentimentMetricModel {
-		.init(img: UIImage.Catalogue.init(metric: self)?.image, name: rawValue)
+		.init(img: UIImage.SystemCatalogue.init(metric: self)?.image, name: rawValue)
 	}
 	
 	var view: UIView {

@@ -38,6 +38,8 @@ class HomeFeed: UIViewController {
 	private func setupViews() {
 		view.addSubview(tableView)
 		view.setFittingConstraints(childView: tableView, insets: .zero)
+		view.backgroundColor = .surfaceBackground
+		tableView.backgroundColor = .clear
 	}
 	
 }

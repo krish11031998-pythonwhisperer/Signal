@@ -41,7 +41,15 @@ extension UIView {
 		let size = compressedSize
 		setFrame(width: size.width, height: size.height)
 	}
-
+	
+	//MARK: - GraphicRenderer
+	var snapshot:UIImage {
+		let renderer = UIGraphicsImageRenderer(bounds: bounds)
+		let img =  renderer.image { context in
+			layer.render(in: context.cgContext)
+		}
+		return img
+	}
 	//MARK: - Circular
 	
 	var cornerFrame: CGRect {

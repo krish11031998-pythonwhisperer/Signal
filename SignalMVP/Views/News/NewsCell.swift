@@ -89,7 +89,7 @@ class NewsCell: ConfigurableCell {
 																	cornerRadius: 10))
 			}
 			tickersStack.addArrangedSubview(.spacer())
-			tickersStack.addArrangedSubview(model.model.sentimentBlob)
+			tickersStack.addArrangedSubview(model.model.sentiment.sentimentIndicator())
 			tickersStack.isHidden = false
 		}
 		

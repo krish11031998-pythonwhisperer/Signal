@@ -116,6 +116,11 @@
 		EFB1C2D928DB851F00DD40A4 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB1C2D828DB851F00DD40A4 /* UIImage.swift */; };
 		EFDC740628E2FFE800042452 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFDC740528E2FFE800042452 /* SearchViewController.swift */; };
 		EFDC740928E300DF00042452 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFDC740828E300DF00042452 /* SearchBar.swift */; };
+		EFDC740B28E32B2D00042452 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFDC740A28E32B2D00042452 /* UIColor.swift */; };
+		EFDC740E28E32B9800042452 /* ImageCatalogue.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFDC740D28E32B9800042452 /* ImageCatalogue.swift */; };
+		EFDC741228E32FE800042452 /* SentimentTextLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFDC741128E32FE800042452 /* SentimentTextLabel.swift */; };
+		EFDC741528E332D300042452 /* SymbolImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFDC741428E332D300042452 /* SymbolImage.swift */; };
+		EFDC741928E3373800042452 /* Sentiments.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFDC741828E3373800042452 /* Sentiments.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -249,6 +254,11 @@
 		EFB1C2D828DB851F00DD40A4 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		EFDC740528E2FFE800042452 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		EFDC740828E300DF00042452 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
+		EFDC740A28E32B2D00042452 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		EFDC740D28E32B9800042452 /* ImageCatalogue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCatalogue.swift; sourceTree = "<group>"; };
+		EFDC741128E32FE800042452 /* SentimentTextLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentimentTextLabel.swift; sourceTree = "<group>"; };
+		EFDC741428E332D300042452 /* SymbolImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolImage.swift; sourceTree = "<group>"; };
+		EFDC741828E3373800042452 /* Sentiments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sentiments.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -301,7 +311,6 @@
 			children = (
 				EF7D2FAB28E037530003B8F3 /* trendingHeadlines.json */,
 				EF7D2FA228E0314B0003B8F3 /* TrendingHeadlinesInterface.swift */,
-				EF7D2FA428E031920003B8F3 /* TrendingHeadlinesModel.swift */,
 				EF7D2FA628E0322A0003B8F3 /* TrendingHeadlinesService.swift */,
 			);
 			path = TrendingHeadlines;
@@ -321,7 +330,6 @@
 				EF7D2FB928E052740003B8F3 /* topMentionsMonth.json */,
 				EF7D2FB728E052690003B8F3 /* topMentionsWeek.json */,
 				EF7D2FB128E050450003B8F3 /* MentionInterface.swift */,
-				EF7D2FB328E050DE0003B8F3 /* MentionModel.swift */,
 				EF7D2FB528E051940003B8F3 /* StubMentionService.swift */,
 			);
 			path = Mentions;
@@ -351,7 +359,6 @@
 				EF7D2FCA28E0A1540003B8F3 /* videos.json */,
 				EF7D2FC128E09DB30003B8F3 /* VideoServiceInterface.swift */,
 				EF7D2FC328E09E3D0003B8F3 /* StubVideoService.swift */,
-				EF7D2FC528E09E7E0003B8F3 /* VideoModel.swift */,
 			);
 			path = Videos;
 			sourceTree = "<group>";
@@ -401,10 +408,8 @@
 			children = (
 				EF7D2FEA28E20E290003B8F3 /* tweets.json */,
 				EF96382D28DDD7DA00178C37 /* TweetNotification.swift */,
-				EF96382B28DDD72000178C37 /* TweetStorage.swift */,
 				EF96381728DD8C1E00178C37 /* TweetService.swift */,
 				EFB1C2D628DB69D300DD40A4 /* TweetEndpoints.swift */,
-				EFB1C2D228DB616600DD40A4 /* TweetModel.swift */,
 				EF86381828DC1E9C00EF520C /* StubService.swift */,
 				EF86381A28DC1EBE00EF520C /* TweetServiceInterface.swift */,
 			);
@@ -415,10 +420,8 @@
 			isa = PBXGroup;
 			children = (
 				EF86382B28DC561D00EF520C /* news.json */,
-				EF86382728DC507E00EF520C /* NewsModel.swift */,
 				EF86382928DC519B00EF520C /* StubNewsService.swift */,
 				EF86382D28DC56D900EF520C /* NewsInterface.swift */,
-				EF7D2F9328DED80B0003B8F3 /* NewsStorage.swift */,
 				EF7D2F9528DED9730003B8F3 /* NewsNotification.swift */,
 			);
 			path = News;
@@ -474,9 +477,7 @@
 			children = (
 				EF86383F28DC9DE700EF520C /* events.json */,
 				EF86384428DC9E5200EF520C /* StubEventsService.swift */,
-				EF86384628DC9E6A00EF520C /* EventModel.swift */,
 				EF86384828DC9F4600EF520C /* EventServiceInterface.swift */,
-				EF7D2FD128E0F7820003B8F3 /* EventStorage.swift */,
 				EF7D2FD328E0F7A00003B8F3 /* EventNotification.swift */,
 			);
 			path = Events;
@@ -487,7 +488,6 @@
 			children = (
 				EF96382028DD8F0A00178C37 /* reddit.json */,
 				EF96381A28DD8C6B00178C37 /* RedditServiceInterface.swift */,
-				EF96381C28DD8C8D00178C37 /* RedditPostModel.swift */,
 				EF96381E28DD8D1200178C37 /* StubRedditService.swift */,
 			);
 			path = Reddit;
@@ -515,6 +515,8 @@
 		EF96383428DDFFC900178C37 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				EFDC741328E332C000042452 /* ImageComponents */,
+				EFDC741028E32FC400042452 /* TextComponents */,
 				EFDC740728E300CC00042452 /* CustomSearchBarController */,
 				EF96383528DDFFF500178C37 /* ImageHeaderSubHeaderView.swift */,
 				EF96383728DE042D00178C37 /* ProgressBars.swift */,
@@ -555,6 +557,7 @@
 		EFB1C22C28DB3B1800DD40A4 /* SignalMVP */ = {
 			isa = PBXGroup;
 			children = (
+				EFDC741628E3372400042452 /* Models */,
 				EF86383828DC75F200EF520C /* Views */,
 				EF86381428DC1E7D00EF520C /* Service */,
 				EFB1C26228DB3DF100DD40A4 /* Library */,
@@ -611,21 +614,16 @@
 		EFB1C26328DB3E1F00DD40A4 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				EFB1C2A628DB3F3B00DD40A4 /* CGFloat.swift */,
-				EFB1C2A528DB3F3B00DD40A4 /* CGSize.swift */,
+				EFDC740F28E32C1000042452 /* Dimensions */,
+				EFDC740C28E32B8800042452 /* Image */,
 				EFB1C2AC28DB3F3B00DD40A4 /* Font */,
-				EFB1C2A728DB3F3B00DD40A4 /* Int.swift */,
 				EFB1C2A828DB3F3B00DD40A4 /* String */,
-				EFB1C2AB28DB3F3B00DD40A4 /* UIEdgeInsets.swift */,
 				EFB1C2A428DB3F2800DD40A4 /* View */,
 				EFB1C2D428DB64B300DD40A4 /* NetworkReqeust.swift */,
-				EFB1C2D828DB851F00DD40A4 /* UIImage.swift */,
-				EF86382428DC347000EF520C /* UIImageView.swift */,
 				EF86381E28DC283B00EF520C /* Array.swift */,
 				EF86382F28DC576200EF520C /* Bundle.swift */,
-				EF96381528DD7EBA00178C37 /* UILabel.swift */,
-				EF7D2F9A28DEDC950003B8F3 /* UIViewController.swift */,
 				EF7D2FEC28E2A65A0003B8F3 /* Response.swift */,
+				EFDC740A28E32B2D00042452 /* UIColor.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -633,6 +631,8 @@
 		EFB1C2A428DB3F2800DD40A4 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				EF7D2F9A28DEDC950003B8F3 /* UIViewController.swift */,
+				EF96381528DD7EBA00178C37 /* UILabel.swift */,
 				EFB1C2A028DB3F0200DD40A4 /* ViewHeirachy.swift */,
 				EFB1C2A228DB3F1700DD40A4 /* ViewStyling.swift */,
 				EF86382028DC30A700EF520C /* Views.swift */,
@@ -689,6 +689,125 @@
 				EFDC740828E300DF00042452 /* SearchBar.swift */,
 			);
 			path = CustomSearchBarController;
+			sourceTree = "<group>";
+		};
+		EFDC740C28E32B8800042452 /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				EFB1C2D828DB851F00DD40A4 /* UIImage.swift */,
+				EF86382428DC347000EF520C /* UIImageView.swift */,
+				EFDC740D28E32B9800042452 /* ImageCatalogue.swift */,
+			);
+			path = Image;
+			sourceTree = "<group>";
+		};
+		EFDC740F28E32C1000042452 /* Dimensions */ = {
+			isa = PBXGroup;
+			children = (
+				EFB1C2AB28DB3F3B00DD40A4 /* UIEdgeInsets.swift */,
+				EFB1C2A728DB3F3B00DD40A4 /* Int.swift */,
+				EFB1C2A628DB3F3B00DD40A4 /* CGFloat.swift */,
+				EFB1C2A528DB3F3B00DD40A4 /* CGSize.swift */,
+			);
+			path = Dimensions;
+			sourceTree = "<group>";
+		};
+		EFDC741028E32FC400042452 /* TextComponents */ = {
+			isa = PBXGroup;
+			children = (
+				EFDC741128E32FE800042452 /* SentimentTextLabel.swift */,
+			);
+			path = TextComponents;
+			sourceTree = "<group>";
+		};
+		EFDC741328E332C000042452 /* ImageComponents */ = {
+			isa = PBXGroup;
+			children = (
+				EFDC741428E332D300042452 /* SymbolImage.swift */,
+			);
+			path = ImageComponents;
+			sourceTree = "<group>";
+		};
+		EFDC741628E3372400042452 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				EFDC742128E3395400042452 /* SignalServiceModel */,
+				EFDC742028E3393400042452 /* Reddit */,
+				EFDC741E28E3390300042452 /* Events */,
+				EFDC741A28E338AE00042452 /* Twitter */,
+				EFDC741728E3372C00042452 /* Sentiments */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		EFDC741728E3372C00042452 /* Sentiments */ = {
+			isa = PBXGroup;
+			children = (
+				EFDC741828E3373800042452 /* Sentiments.swift */,
+			);
+			path = Sentiments;
+			sourceTree = "<group>";
+		};
+		EFDC741A28E338AE00042452 /* Twitter */ = {
+			isa = PBXGroup;
+			children = (
+				EFDC741D28E338F000042452 /* Storage */,
+				EFB1C2D228DB616600DD40A4 /* TweetModel.swift */,
+			);
+			path = Twitter;
+			sourceTree = "<group>";
+		};
+		EFDC741C28E338D700042452 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				EF7D2F9328DED80B0003B8F3 /* NewsStorage.swift */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
+		EFDC741D28E338F000042452 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				EF96382B28DDD72000178C37 /* TweetStorage.swift */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
+		EFDC741E28E3390300042452 /* Events */ = {
+			isa = PBXGroup;
+			children = (
+				EFDC741F28E3391700042452 /* Storage */,
+				EF86384628DC9E6A00EF520C /* EventModel.swift */,
+			);
+			path = Events;
+			sourceTree = "<group>";
+		};
+		EFDC741F28E3391700042452 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				EF7D2FD128E0F7820003B8F3 /* EventStorage.swift */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
+		EFDC742028E3393400042452 /* Reddit */ = {
+			isa = PBXGroup;
+			children = (
+				EF96381C28DD8C8D00178C37 /* RedditPostModel.swift */,
+			);
+			path = Reddit;
+			sourceTree = "<group>";
+		};
+		EFDC742128E3395400042452 /* SignalServiceModel */ = {
+			isa = PBXGroup;
+			children = (
+				EFDC741C28E338D700042452 /* Storage */,
+				EF86382728DC507E00EF520C /* NewsModel.swift */,
+				EF7D2FC528E09E7E0003B8F3 /* VideoModel.swift */,
+				EF7D2FB328E050DE0003B8F3 /* MentionModel.swift */,
+				EF7D2FA428E031920003B8F3 /* TrendingHeadlinesModel.swift */,
+			);
+			path = SignalServiceModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -867,6 +986,7 @@
 				EFB1C2D928DB851F00DD40A4 /* UIImage.swift in Sources */,
 				EF86381F28DC283B00EF520C /* Array.swift in Sources */,
 				EFB1C2BD28DB3F3B00DD40A4 /* UIEdgeInsets.swift in Sources */,
+				EFDC740B28E32B2D00042452 /* UIColor.swift in Sources */,
 				EF7D2FB428E050DE0003B8F3 /* MentionModel.swift in Sources */,
 				EF86384D28DCED0C00EF520C /* EventSingleCell.swift in Sources */,
 				EF96381628DD7EBA00178C37 /* UILabel.swift in Sources */,
@@ -874,6 +994,7 @@
 				EFB1C23228DB3B1800DD40A4 /* MainViewController.swift in Sources */,
 				EF86383B28DC761900EF520C /* MainTabView.swift in Sources */,
 				EF7D2FAA28E033E90003B8F3 /* TrendingHeadlineCell.swift in Sources */,
+				EFDC741228E32FE800042452 /* SentimentTextLabel.swift in Sources */,
 				EF86382A28DC519B00EF520C /* StubNewsService.swift in Sources */,
 				EF7D2F9928DED9DF0003B8F3 /* NewsDetailViewController.swift in Sources */,
 				EF7D2FA528E031920003B8F3 /* TrendingHeadlinesModel.swift in Sources */,
@@ -895,6 +1016,7 @@
 				EF96381D28DD8C8D00178C37 /* RedditPostModel.swift in Sources */,
 				EF7D2FED28E2A65A0003B8F3 /* Response.swift in Sources */,
 				EF96381B28DD8C6B00178C37 /* RedditServiceInterface.swift in Sources */,
+				EFDC740E28E32B9800042452 /* ImageCatalogue.swift in Sources */,
 				EF7D2FAE28E03DD20003B8F3 /* UIStackView.swift in Sources */,
 				EF86384228DC9E0F00EF520C /* EventViewModel.swift in Sources */,
 				EFDC740628E2FFE800042452 /* SearchViewController.swift in Sources */,
@@ -915,10 +1037,12 @@
 				EFB1C23028DB3B1800DD40A4 /* SceneDelegate.swift in Sources */,
 				EF86383E28DC990500EF520C /* EventsFeed.swift in Sources */,
 				EF96382428DD8FDC00178C37 /* RedditFeed.swift in Sources */,
+				EFDC741528E332D300042452 /* SymbolImage.swift in Sources */,
 				EF96383028DDE60700178C37 /* TweetMetrics.swift in Sources */,
 				EF96382A28DDD59F00178C37 /* TweetDetailView.swift in Sources */,
 				EF7D2FC428E09E3D0003B8F3 /* StubVideoService.swift in Sources */,
 				EFB1C2D128DB5E7D00DD40A4 /* TweetFeedViewModel.swift in Sources */,
+				EFDC741928E3373800042452 /* Sentiments.swift in Sources */,
 				EF86384728DC9E6A00EF520C /* EventModel.swift in Sources */,
 				EF7D2FD428E0F7A00003B8F3 /* EventNotification.swift in Sources */,
 				EFB1C25F28DB3CC600DD40A4 /* TweetsFeed.swift in Sources */,
