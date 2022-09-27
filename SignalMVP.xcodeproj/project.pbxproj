@@ -39,9 +39,10 @@
 		EF7D2FE728E1A81A0003B8F3 /* TableRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7D2FE328E1A81A0003B8F3 /* TableRow.swift */; };
 		EF7D2FE828E1A81A0003B8F3 /* Configurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7D2FE428E1A81A0003B8F3 /* Configurable.swift */; };
 		EF7D2FE928E1A81A0003B8F3 /* TableSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7D2FE528E1A81A0003B8F3 /* TableSection.swift */; };
+		EF7D2FEB28E20E290003B8F3 /* tweets.json in Resources */ = {isa = PBXBuildFile; fileRef = EF7D2FEA28E20E290003B8F3 /* tweets.json */; };
+		EF7D2FED28E2A65A0003B8F3 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7D2FEC28E2A65A0003B8F3 /* Response.swift */; };
 		EF86381928DC1E9C00EF520C /* StubService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF86381828DC1E9C00EF520C /* StubService.swift */; };
 		EF86381B28DC1EBE00EF520C /* TweetServiceInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF86381A28DC1EBE00EF520C /* TweetServiceInterface.swift */; };
-		EF86381D28DC1F9100EF520C /* TweetsTest.json in Resources */ = {isa = PBXBuildFile; fileRef = EF86381C28DC1F9100EF520C /* TweetsTest.json */; };
 		EF86381F28DC283B00EF520C /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF86381E28DC283B00EF520C /* Array.swift */; };
 		EF86382128DC30A700EF520C /* Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF86382028DC30A700EF520C /* Views.swift */; };
 		EF86382328DC341400EF520C /* TweetMetricView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF86382228DC341400EF520C /* TweetMetricView.swift */; };
@@ -165,9 +166,10 @@
 		EF7D2FE328E1A81A0003B8F3 /* TableRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableRow.swift; sourceTree = "<group>"; };
 		EF7D2FE428E1A81A0003B8F3 /* Configurable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configurable.swift; sourceTree = "<group>"; };
 		EF7D2FE528E1A81A0003B8F3 /* TableSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableSection.swift; sourceTree = "<group>"; };
+		EF7D2FEA28E20E290003B8F3 /* tweets.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tweets.json; sourceTree = "<group>"; };
+		EF7D2FEC28E2A65A0003B8F3 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		EF86381828DC1E9C00EF520C /* StubService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubService.swift; sourceTree = "<group>"; };
 		EF86381A28DC1EBE00EF520C /* TweetServiceInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetServiceInterface.swift; sourceTree = "<group>"; };
-		EF86381C28DC1F9100EF520C /* TweetsTest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TweetsTest.json; sourceTree = "<group>"; };
 		EF86381E28DC283B00EF520C /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		EF86382028DC30A700EF520C /* Views.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views.swift; sourceTree = "<group>"; };
 		EF86382228DC341400EF520C /* TweetMetricView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetMetricView.swift; sourceTree = "<group>"; };
@@ -367,13 +369,6 @@
 			path = EventsDetailView;
 			sourceTree = "<group>";
 		};
-		EF7D2FD528E17AC20003B8F3 /* TestInterface */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = TestInterface;
-			sourceTree = "<group>";
-		};
 		EF7D2FE128E1A81A0003B8F3 /* TableViewDataSource */ = {
 			isa = PBXGroup;
 			children = (
@@ -400,12 +395,12 @@
 		EF86381528DC1E8500EF520C /* Twitter */ = {
 			isa = PBXGroup;
 			children = (
+				EF7D2FEA28E20E290003B8F3 /* tweets.json */,
 				EF96382D28DDD7DA00178C37 /* TweetNotification.swift */,
 				EF96382B28DDD72000178C37 /* TweetStorage.swift */,
 				EF96381728DD8C1E00178C37 /* TweetService.swift */,
 				EFB1C2D628DB69D300DD40A4 /* TweetEndpoints.swift */,
 				EFB1C2D228DB616600DD40A4 /* TweetModel.swift */,
-				EF86381C28DC1F9100EF520C /* TweetsTest.json */,
 				EF86381828DC1E9C00EF520C /* StubService.swift */,
 				EF86381A28DC1EBE00EF520C /* TweetServiceInterface.swift */,
 			);
@@ -462,8 +457,8 @@
 			isa = PBXGroup;
 			children = (
 				EF7D2FCC28E0F53E0003B8F3 /* EventsDetailView */,
-				EF86383D28DC990500EF520C /* EventsFeed.swift */,
 				EF86384128DC9E0F00EF520C /* EventViewModel.swift */,
+				EF86383D28DC990500EF520C /* EventsFeed.swift */,
 				EF86384A28DCA1A400EF520C /* EventCell.swift */,
 				EF86384C28DCED0C00EF520C /* EventSingleCell.swift */,
 			);
@@ -555,7 +550,6 @@
 		EFB1C22C28DB3B1800DD40A4 /* SignalMVP */ = {
 			isa = PBXGroup;
 			children = (
-				EF7D2FD528E17AC20003B8F3 /* TestInterface */,
 				EF86383828DC75F200EF520C /* Views */,
 				EF86381428DC1E7D00EF520C /* Service */,
 				EFB1C26228DB3DF100DD40A4 /* Library */,
@@ -626,6 +620,7 @@
 				EF86382F28DC576200EF520C /* Bundle.swift */,
 				EF96381528DD7EBA00178C37 /* UILabel.swift */,
 				EF7D2F9A28DEDC950003B8F3 /* UIViewController.swift */,
+				EF7D2FEC28E2A65A0003B8F3 /* Response.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -797,7 +792,6 @@
 				EFB1C2C528DB3F3B00DD40A4 /* Montserrat-SemiBold.ttf in Resources */,
 				EFB1C2C428DB3F3B00DD40A4 /* Montserrat-MediumItalic.ttf in Resources */,
 				EF7D2FB828E052690003B8F3 /* topMentionsWeek.json in Resources */,
-				EF86381D28DC1F9100EF520C /* TweetsTest.json in Resources */,
 				EF7D2FCB28E0A1540003B8F3 /* videos.json in Resources */,
 				EFB1C2C328DB3F3B00DD40A4 /* Montserrat-Bold.ttf in Resources */,
 				EF7D2FBA28E052740003B8F3 /* topMentionsMonth.json in Resources */,
@@ -805,6 +799,7 @@
 				EFB1C2C028DB3F3B00DD40A4 /* Montserrat-LightItalic.ttf in Resources */,
 				EFB1C2C128DB3F3B00DD40A4 /* Montserrat-Medium.ttf in Resources */,
 				EFB1C23728DB3B1900DD40A4 /* Assets.xcassets in Resources */,
+				EF7D2FEB28E20E290003B8F3 /* tweets.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -883,6 +878,7 @@
 				EF86383528DC61F700EF520C /* NewsCell.swift in Sources */,
 				EF96383828DE042D00178C37 /* ProgressBars.swift in Sources */,
 				EF96381D28DD8C8D00178C37 /* RedditPostModel.swift in Sources */,
+				EF7D2FED28E2A65A0003B8F3 /* Response.swift in Sources */,
 				EF96381B28DD8C6B00178C37 /* RedditServiceInterface.swift in Sources */,
 				EF7D2FAE28E03DD20003B8F3 /* UIStackView.swift in Sources */,
 				EF86384228DC9E0F00EF520C /* EventViewModel.swift in Sources */,

@@ -43,33 +43,15 @@ extension EndPoint {
 }
 
 protocol CacheSubscript {
-	subscript(_ key: String) -> Data? { get set }
+	subscript(_ request: URLRequest) -> Data? { get }
 }
 
-struct DataCache {
-	private let cache: NSCache<NSString,NSData> = { .init() }()
 
-	public static var shared: DataCache = .init()
-}
-
-extension DataCache: CacheSubscript {
+extension URLCache: CacheSubscript {
 	
-	subscript(key: String) -> Data? {
+	subscript(request: URLRequest) -> Data? {
 		get {
-			let validKey = key as NSString
-			return cache.object(forKey: validKey) as? Data
-		}
-		
-		set {
-			let validKey = key as NSString
-			if let _ = cache.object(forKey: validKey) {
-				cache.removeObject(forKey: validKey)
-			}
-			
-			if let validData = newValue as? NSData {
-				cache.setObject(validData, forKey: validKey)
-			}
-			
+			return URLCache.shared.cachedResponse(for: request)?.data
 		}
 	}
 }
@@ -87,12 +69,7 @@ extension URLSession {
 
 	static func urlSessionRequest<T: Codable>(request: URLRequest, completion: @escaping (Result<T,Error>) -> Void) {
 		
-		guard let validUrlStr = request.url?.absoluteString else {
-			completion(.failure(URLSessionError.invalidUrl))
-			return
-		}
-		
-		if let cachedData = DataCache.shared[validUrlStr] {
+		if let cachedData = URLCache.shared[request] {
 			if let deceodedData = try? JSONDecoder().decode(T.self, from: cachedData) {
 				completion(.success(deceodedData))
 			} else {
@@ -100,7 +77,7 @@ extension URLSession {
 			}
 		} else {
 			let session = URLSession.shared.dataTask(with: request) { data, resp , err in
-				guard let validData = data else {
+				guard let validData = data, let validResponse = resp else {
 					completion(.failure(err ?? URLSessionError.noData))
 					return
 				}
@@ -110,9 +87,7 @@ extension URLSession {
 					return
 				}
 				
-				if let validURLString = request.url?.absoluteString {
-					DataCache.shared[validURLString] = validData
-				}
+				URLCache.shared.storeCachedResponse(.init(response: validResponse, data: validData), for: request)
 				
 				completion(.success(decodedData))
 			}

@@ -38,7 +38,7 @@ extension TweetEndpoint: EndPoint {
 	}
 	
 	var header: [String : String]? {
-		["Authorization" : "Bearer AAAAAAAAAAAAAAAAAAAAAJHAagEAAAAApX73ZCZyNl5HkLYcBoQ5LRM2bI0%3DoC55DQsTmFjR5guDHN6lBTlytyQ1bEJIRuEeAD3NoJapA9y0BG"]
+		["Authorization" : "Bearer AAAAAAAAAAAAAAAAAAAAAJHAagEAAAAAmFRvYKE8KtF%2BTvVxYsse0GC6faE%3DsuQdyHCBqKvhOjmoGGfUPNOCG41QZySz1BQWgJB5i0QIN7wbaE"]
 	}
 	
 	func fetch(completion: @escaping (Result<TweetSearchResult, Error>) -> Void) {

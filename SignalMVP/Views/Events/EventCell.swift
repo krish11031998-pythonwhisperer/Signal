@@ -11,8 +11,6 @@ import UIKit
 class EventCell: ConfigurableCell {
 
 //MARK: - Properties
-	
-	private lazy var title: UILabel = { .init() }()
 	private lazy var mainNews: EventView = { .init(largeCard: true) }()
 	private lazy var otherNews: UIStackView = { .init() }()
 	
@@ -30,15 +28,9 @@ class EventCell: ConfigurableCell {
 	}
 	
 	private func setupView() {
-		let stack = UIView.VStack(subViews: [title, mainNews, otherNews], spacing: 12, alignment: .leading)
-		stack.setCustomSpacing(12, after: title)
+		let stack = UIView.VStack(subViews: [mainNews, otherNews], spacing: 12, alignment: .leading)
 		stack.setCustomSpacing(4, after: otherNews)
-		
-		let divider = UIView()
-		divider.backgroundColor = .gray
-		stack.addArrangedSubview(divider.embedInView(insets: .zero))
-		divider.setHeight(height: 0.5, priority: .required)
-		stack.setFittingConstraints(childView: divider, leading: 0, trailing: 0)
+
 	
 		addSubview(stack)
 		setFittingConstraints(childView: stack, insets: .init(vertical: 10, horizontal: 8))
@@ -53,10 +45,6 @@ class EventCell: ConfigurableCell {
 	}
 	
 	func configure(with model: EventModel) {
-
-		model.eventName.styled(font: .systemFont(ofSize: 17.5, weight: .bold),color: .white).render(target: title)
-		title.numberOfLines = 2
-
 		if let firstNews = model.news.first {
 			mainNews.configureView(model: firstNews)
 			mainNews.isHidden = false
@@ -80,6 +68,7 @@ class EventCell: ConfigurableCell {
 
 class EventView: UIView  {
 	
+	private var news: NewsModel?
 	private lazy var imageView: UIImageView = { .init() }()
 	private lazy var authorTitle: UILabel = { .init() }()
 	private lazy var newsTitle: UILabel = { .init() }()
@@ -128,7 +117,10 @@ class EventView: UIView  {
 		cornerRadius = 16
 	}
 	
-	public func configureView(model: NewsModel) {
+	public func configureView(model: NewsModel, addTapGesture: Bool = true) {
+		
+		news = model
+		
 		UIImage.loadImage(url: model.imageUrl, at: imageView, path: \.image)
 		
 		model.sourceName.styled(font: .systemFont(ofSize: 10, weight: .semibold), color: .gray).render(target: authorTitle)
@@ -148,6 +140,21 @@ class EventView: UIView  {
 				tickersView.addArrangedSubview(imgView)
 			}
 		}
+		
+		if addTapGesture {
+			self.addTapGesture()
+		}
+	}
+	
+	private func addTapGesture() {
+		let tapGesture = UITapGestureRecognizer(target: self, action: #selector(addTapHandler))
+		tapGesture.cancelsTouchesInView = true
+		addGestureRecognizer(tapGesture)
+	}
+	
+	@objc
+	private func addTapHandler() {
+		NewsStorage.selectedNews = news
 	}
 }
 

@@ -10,7 +10,7 @@ import UIKit
 
 extension UIViewController {
 	
-	func setupTransparentNavBar(color: UIColor = .clear) {
+	func setupTransparentNavBar(color: UIColor = .clear, scrollColor: UIColor = .clear) {
 		let navbarAppear: UINavigationBarAppearance = .init()
 		navbarAppear.configureWithTransparentBackground()
 		navbarAppear.backgroundImage = UIImage()
@@ -19,6 +19,7 @@ extension UIViewController {
 		self.navigationController?.navigationBar.standardAppearance = navbarAppear
 		self.navigationController?.navigationBar.compactAppearance = navbarAppear
 		self.navigationController?.navigationBar.scrollEdgeAppearance = navbarAppear
+		self.navigationController?.navigationBar.scrollEdgeAppearance?.backgroundColor = scrollColor
 	}
 	
 	func showNavbar() {

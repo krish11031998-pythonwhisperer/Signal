@@ -29,7 +29,7 @@ extension UIView {
 
 extension Array {
 	
-	func limitTo(to: Int) -> Self {
-		count > to ? Array(self[0..<to]) : self
+	func limitTo(offset: Int = 0, to: Int, replaceVal: [Self.Element]? = nil) -> Self {
+		count >= to ? Array(self[offset..<to]) : replaceVal ?? self
 	}
 }

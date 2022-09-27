@@ -26,7 +26,7 @@ class TweetCell: ConfigurableCell {
 	
 	private lazy var metricStack: UIStackView = {
 		let metricStack = UIView.HStack(spacing: 5)
-		metricStack.distribution = .fill
+		metricStack.alignment = .leading
 		return metricStack
 	}()
 	
@@ -42,7 +42,7 @@ class TweetCell: ConfigurableCell {
 	private func styleCell() {
 		selectedBackgroundView = UIView()
 		selectedBackgroundView?.backgroundColor = .clear
-		backgroundColor = .clear
+		backgroundColor = .black
 	}
 	
 	private func setupCell() {
@@ -59,16 +59,19 @@ class TweetCell: ConfigurableCell {
 		constraint.isActive = true
 		
 		let mainStack = UIView.HStack(subViews: [authorImageView, bodyStack], spacing: 12, alignment: .top)
+		authorImageView.cornerFrame = .init(origin: .zero, size: .init(squared: 48))
+		authorImageView.setFrame(.init(squared: 48))
+		authorImageView.backgroundColor = .gray.withAlphaComponent(0.15)
+		authorImageView.contentMode = .scaleAspectFill
+		imgView.setHeight(height: 200, priority: .init(999))
 		
+	
 		contentView.addSubview(mainStack)
 		contentView.setFittingConstraints(childView: mainStack, insets: .init(vertical: 10, horizontal: 16))
-		
-		let divider = UIView()
-		divider.backgroundColor = .gray.withAlphaComponent(0.5)
-		divider.setHeight(height: 0.5, priority: .required)
-		let dividerEmbed = divider.embedInView(insets: .init(vertical: 8, horizontal: 0))
-		contentView.addSubview(dividerEmbed)
-		contentView.setFittingConstraints(childView: dividerEmbed, leading: 16, trailing: 16, bottom: 0)
+	
+		gestureRecognizers?.forEach { gesture in
+			print("(DEBUG) gesture : ",gesture)
+		}
 		
 		styleCell()
 	}
@@ -79,26 +82,21 @@ class TweetCell: ConfigurableCell {
 		bodyLabel.textAlignment = .left
 
 		model.user?.username.styled(font: .systemFont(ofSize: 14, weight: .medium), color: .white).render(target: authorLabel)
-	
-		authorImageView.cornerFrame = .init(origin: .zero, size: .init(squared: 48))
-		authorImageView.setFrame(.init(squared: 48))
-		authorImageView.backgroundColor = .gray.withAlphaComponent(0.15)
+
+
 		if let authorImage = model.user?.profileImageUrl {
 			UIImage.loadImage(url: authorImage, at: authorImageView, path: \.image, resized: .init(squared: 48))
 		}
-		
+
 		if let media = model.media?.first,
 		   let photoUrl = media.url ?? media.previewImageUrl {
 			UIImage.loadImage(url: photoUrl, at: imgView, path: \.image)
 			imgView.isHidden = false
-			let constraint = imgView.heightAnchor.constraint(lessThanOrEqualToConstant: 200)
-			constraint.priority = .defaultHigh
-			constraint.isActive = true
 		} else {
 			imgView.isHidden = true
 		}
 		
-		metricStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
+		metricStack.removeChildViews()
 
 		[TweetMetricModel(image: .bullish, value: Int.random(in: 0...50)),
 		 TweetMetricModel(image: .bearish, value: Int.random(in: 0...50)),

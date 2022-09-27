@@ -12,6 +12,18 @@ enum ImageError: Swift.Error {
 	case noImagefromData
 }
 
+
+fileprivate extension String {
+	
+	var request: URLRequest? {
+		if let validURL = URL(string: self) {
+			return .init(url: validURL)
+		} else {
+			return nil
+		}
+	}
+}
+
 //MARK: - Catalogue
 extension UIImage {
 	
@@ -37,21 +49,23 @@ extension UIImage {
 		return img
 	}
 	
-	static func download(urlStr: String, completion: @escaping (Result<UIImage,Error>) -> Void) {
+	static func download(urlStr: String? = nil, request: URLRequest? = nil, completion: @escaping (Result<UIImage,Error>) -> Void) {
 		
-		if let cachedData = DataCache.shared[urlStr] {
+		let request: URLRequest? =  urlStr?.request ?? request
+		
+		if let validRequest = request, let cachedData = URLCache.shared[validRequest] {
 			if let validImage = UIImage(data: cachedData) {
 				completion(.success(validImage))
 			} else {
 				completion(.failure(ImageError.noImagefromData))
 			}
 		} else {
-			guard let url = URL(string: urlStr) else {
+			guard let validRequest = request else {
 				completion(.failure(URLSessionError.invalidUrl))
 				return
 			}
-			let session = URLSession.shared.dataTask(with: url) { data, resp, err in
-				guard let validData = data else {
+			let session = URLSession.shared.dataTask(with: validRequest) { data, resp, err in
+				guard let validData = data, let validResp = resp else {
 					completion(.failure(err ?? URLSessionError.noData))
 					return
 				}
@@ -61,7 +75,7 @@ extension UIImage {
 					return
 				}
 				
-				DataCache.shared[urlStr] = validData
+				URLCache.shared.storeCachedResponse(.init(response: validResp, data: validData), for: validRequest)
 				completion(.success(validImage))
 			}
 			session.resume()

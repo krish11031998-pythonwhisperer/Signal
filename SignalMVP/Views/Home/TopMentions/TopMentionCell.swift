@@ -70,7 +70,9 @@ class TopMentionCell: ConfigurableCell {
 		}
 	
 		mentionDistribution.removeChildViews()
-		[generateMentionsBlob("Positive", model.positiveMentions), generateMentionsBlob("Negative", model.negativeMentions), generateMentionsBlob("Neutral", model.neutralMentions)]
+		[generateMentionsBlob("Positive", model.positiveMentions),
+		 generateMentionsBlob("Negative", model.negativeMentions),
+		 generateMentionsBlob("Neutral", model.neutralMentions)]
 			.forEach(mentionDistribution.addArrangedSubview(_:))
 		
 		mentionDistribution.addArrangedSubview(.spacer())

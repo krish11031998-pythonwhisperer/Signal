@@ -40,9 +40,7 @@ class EventViewModel {
 		"Events (with three news)".styled(font: .systemFont(ofSize: 25, weight: .bold), color: .white).render(target: label)
 		
 		return .init(rows: Set(events).compactMap {model in  TableRow<EventSingleCell>(.init(model: model, action: {
-			print("(DEBUG) Clicked on Event")
 			EventStorage.selectedEvent = model
-			NotificationCenter.default.post(name: .showEvent, object: nil)
 		})) })
 	}
 	

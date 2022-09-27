@@ -9,5 +9,11 @@ import Foundation
 import UIKit
 class EventStorage {
 	
-	public static var selectedEvent: EventModel? = nil
+	public static var selectedEvent: EventModel? = nil {
+		didSet {
+			if selectedEvent != nil {
+				NotificationCenter.default.post(name: .showEvent, object: nil)
+			}
+		}
+	}
 }

@@ -39,13 +39,21 @@ class EventSingleCell: ConfigurableCell {
 //MARK: - Protected Methods
 	
 	private func setupViews() {
-		let infoStack: UIStackView = .VStack(subViews: [eventTitle, newsArticleCount, tickersView],spacing: 10)
-		let stack: UIStackView = .HStack(subViews: [imgView, infoStack], spacing: 16, alignment: .top)
+		let infoStack: UIStackView = .VStack(subViews: [eventTitle, newsArticleCount],spacing: 10)
+		let stack: UIStackView = .HStack(subViews: [imgView, infoStack], spacing: 16, alignment: .center)
 		let divider: UIView =  .divider(color: .white.withAlphaComponent(0.5)).embedInView(insets: .zero)
-		let mainStack: UIStackView = .VStack(subViews: [stack, divider],
-											 spacing: 12)
+		let mainStack: UIStackView = .VStack(subViews: [stack], spacing: 12)
+		mainStack.setHeight(height: 84, priority: .required)
 		contentView.addSubview(mainStack)
 		contentView.setFittingConstraints(childView: mainStack, insets: .init(vertical: 10, horizontal: 16))
+		
+		let bgView = UIView()
+		bgView.addBlurView()
+		contentView.addSubview(bgView)
+		contentView.sendSubviewToBack(bgView)
+		contentView.setFittingConstraints(childView: bgView, insets: .init(vertical: 5, horizontal: 8))
+		bgView.cornerRadius = 12
+		bgView.clipsToBounds = true
 	}
 	
 	private func styleCell() {
@@ -56,8 +64,6 @@ class EventSingleCell: ConfigurableCell {
 	
 //MARK: - Exposed Methods
 	func configure(with model: EventCellModel) {
-		
-		tickersView.removeChildViews()
 
 		model.model.eventName.styled(font: .systemFont(ofSize: 15, weight: .semibold), color: .white).render(target: eventTitle)
 		eventTitle.numberOfLines = 2
@@ -67,19 +73,19 @@ class EventSingleCell: ConfigurableCell {
 		}
 
 		"\(model.model.news.count) News Articles".styled(font: .systemFont(ofSize: 13, weight: .regular), color: .gray).render(target: newsArticleCount)
-
-		tickersView.isHidden = model.model.tickers.isEmpty
-		if !model.model.tickers.isEmpty {
-			model.model.tickers.limitTo(to: 3).forEach {
-				let label = UILabel()
-				$0.styled(font: .systemFont(ofSize: 13, weight: .regular), color: .white).render(target: label)
-
-				tickersView.addArrangedSubview(label.blobify(backgroundColor: .white.withAlphaComponent(0.3),
-															 borderColor: .white,
-															 borderWidth: 1,
-															 cornerRadius: 10))
-			}
-			tickersView.addArrangedSubview(.spacer())
-		}
+		
+//		tickersView.isHidden = model.model.tickers.isEmpty
+//		if !model.model.tickers.isEmpty {
+//			model.model.tickers.limitTo(to: 3).forEach {
+//				let label = UILabel()
+//				$0.styled(font: .systemFont(ofSize: 13, weight: .regular), color: .white).render(target: label)
+//
+//				tickersView.addArrangedSubview(label.blobify(backgroundColor: .white.withAlphaComponent(0.3),
+//															 borderColor: .white,
+//															 borderWidth: 1,
+//															 cornerRadius: 10))
+//			}
+//			tickersView.addArrangedSubview(.spacer())
+//		}
 	}
 }

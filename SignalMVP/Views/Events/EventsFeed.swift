@@ -15,7 +15,6 @@ struct EventCellModel: ActionProvider {
 
 class EventsFeedViewController: UIViewController {
 	
-	private var observer: NSKeyValueObservation?
 	private var yOff: CGFloat = .zero
 	
 	private lazy var tableView: UITableView = {
@@ -38,9 +37,6 @@ class EventsFeedViewController: UIViewController {
 		setupView()
 		viewModel.fetchEvents()
 		setupNavBar()
-//		observer = tableView.observe(\.contentOffset) { [weak self] tableView, _ in
-//			self?.scrollViewUpdate(tableView)
-//		}
 		setupObservers()
 	}
 	

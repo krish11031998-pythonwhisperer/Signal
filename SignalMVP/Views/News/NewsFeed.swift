@@ -12,8 +12,8 @@ import UIKit
 class NewsFeed: UIViewController {
 	
 	private lazy var tableView: UITableView = { .init(frame: .zero, style: .grouped) }()
-	private var observer: NSKeyValueObservation?
-	private var yOff: CGFloat = .zero
+//	private var observer: NSKeyValueObservation?
+//	private var yOff: CGFloat = .zero
 	
 	private lazy var viewModel: NewsViewModel = {
 		let model = NewsViewModel()
@@ -36,9 +36,9 @@ class NewsFeed: UIViewController {
 		setupNavbar()
 		viewModel.fetchNews()
 		setupObservers()
-		observer = tableView.observe(\.contentOffset) { [weak self] tableView, _ in
-			self?.scrollViewUpdate(tableView)
-		}
+//		observer = tableView.observe(\.contentOffset) { [weak self] tableView, _ in
+//			self?.scrollViewUpdate(tableView)
+//		}
 	}
 
 	//MARK: - ProtectedMethods
@@ -65,18 +65,18 @@ class NewsFeed: UIViewController {
 		navigationController?.pushViewController(NewsDetailViewController(), animated: true)
 	}
 	
-	private func scrollViewUpdate(_ scrollView: UIScrollView) {
-		let offset = scrollView.contentOffset
-		if self.yOff == .zero {
-			self.yOff = offset.y
-		}
-		guard offset.y != yOff, let navBar = navigationController?.navigationBar else { return }
-		let off = (self.yOff...0).percent(offset.y).boundTo()
-		let navbarHeight: CGFloat = navBar.frame.height + navBar.frame.minY
-		UIView.animate(withDuration: 0.25) {
-			navBar.transform = .init(translationX: 0, y: -CGFloat(off) * navbarHeight)
-		}
-	}
+//	private func scrollViewUpdate(_ scrollView: UIScrollView) {
+//		let offset = scrollView.contentOffset
+//		if self.yOff == .zero {
+//			self.yOff = offset.y
+//		}
+//		guard offset.y != yOff, let navBar = navigationController?.navigationBar else { return }
+//		let off = (self.yOff...0).percent(offset.y).boundTo()
+//		let navbarHeight: CGFloat = navBar.frame.height + navBar.frame.minY
+//		UIView.animate(withDuration: 0.25) {
+//			navBar.transform = .init(translationX: 0, y: -CGFloat(off) * navbarHeight)
+//		}
+//	}
 }
 
 

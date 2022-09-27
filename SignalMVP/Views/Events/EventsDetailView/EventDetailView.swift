@@ -24,6 +24,11 @@ class EventDetailView: UIViewController {
 		setupView()
 	}
 	
+	override func viewWillDisappear(_ animated: Bool) {
+		super.viewWillDisappear(animated)
+		EventStorage.selectedEvent = nil
+	}
+	
 //MARK: - Protected Methods
 	
 	private func setupView() {
@@ -35,21 +40,29 @@ class EventDetailView: UIViewController {
 	}
 	
 	private func buildDataSource() -> TableViewDataSource {
-		.init(sections: [section].compactMap { $0 })
+		.init(sections: [heroSection, section].compactMap { $0 })
+	}
+	
+	private var heroSection: TableSection? {
+		guard let validEvent = EventStorage.selectedEvent else { return nil }
+		var mainEvent = EventModel(date: validEvent.date, eventId: validEvent.eventId, eventName: validEvent.eventName, news: validEvent.news.limitTo(to: 3), tickers: [])
+		return .init(rows: [TableRow<EventCell>(mainEvent)])
 	}
 	
 	private var section: TableSection? {
-		guard let validEvent = EventStorage.selectedEvent else { return nil }
-		return .init(rows: (validEvent.news[0...]).compactMap {news in TableRow<NewsCell>(.init(model: news, action: {
+		guard let validEvent = EventStorage.selectedEvent, validEvent.news.count > 3 else { return nil }
+		return .init(rows: (validEvent.news[3...]).compactMap {news in TableRow<NewsCell>(.init(model: news, action: {
 			NewsStorage.selectedNews = news
 		})) })
 	}
 	
 	private func setupTableHeaderView() {
 		guard let validEvent = EventStorage.selectedEvent else { return }
-		let headerView =  EventDetailViewHeader(frame: .init(origin: .zero, size: .init(width: .totalWidth, height: 500)))
+		let headerView =  EventDetailViewHeader()
 		headerView.configureHeader(validEvent)
+		headerView.setFrame(.init(width: .totalWidth, height: headerView.compressedSize.height))
 		tableView.tableHeaderView = headerView
+		tableView.tableHeaderView?.setFrame(.init(width: .totalWidth, height: headerView.compressedSize.height))
 	}
 	
 	private func setupObserver() {
