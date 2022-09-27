@@ -114,6 +114,8 @@
 		EFB1C2D528DB64B300DD40A4 /* NetworkReqeust.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB1C2D428DB64B300DD40A4 /* NetworkReqeust.swift */; };
 		EFB1C2D728DB69D400DD40A4 /* TweetEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB1C2D628DB69D300DD40A4 /* TweetEndpoints.swift */; };
 		EFB1C2D928DB851F00DD40A4 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB1C2D828DB851F00DD40A4 /* UIImage.swift */; };
+		EFDC740628E2FFE800042452 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFDC740528E2FFE800042452 /* SearchViewController.swift */; };
+		EFDC740928E300DF00042452 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFDC740828E300DF00042452 /* SearchBar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -245,6 +247,8 @@
 		EFB1C2D428DB64B300DD40A4 /* NetworkReqeust.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkReqeust.swift; sourceTree = "<group>"; };
 		EFB1C2D628DB69D300DD40A4 /* TweetEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetEndpoints.swift; sourceTree = "<group>"; };
 		EFB1C2D828DB851F00DD40A4 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
+		EFDC740528E2FFE800042452 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		EFDC740828E300DF00042452 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -511,6 +515,7 @@
 		EF96383428DDFFC900178C37 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				EFDC740728E300CC00042452 /* CustomSearchBarController */,
 				EF96383528DDFFF500178C37 /* ImageHeaderSubHeaderView.swift */,
 				EF96383728DE042D00178C37 /* ProgressBars.swift */,
 				EF96383928DE1C1900178C37 /* GenericButtonWrapper.swift */,
@@ -675,6 +680,15 @@
 				EFB1C2B728DB3F3B00DD40A4 /* Montserrat-SemiBoldItalic.ttf */,
 			);
 			path = Montserrat;
+			sourceTree = "<group>";
+		};
+		EFDC740728E300CC00042452 /* CustomSearchBarController */ = {
+			isa = PBXGroup;
+			children = (
+				EFDC740528E2FFE800042452 /* SearchViewController.swift */,
+				EFDC740828E300DF00042452 /* SearchBar.swift */,
+			);
+			path = CustomSearchBarController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -871,6 +885,7 @@
 				EF7D2FCE28E0F55A0003B8F3 /* EventDetailView.swift in Sources */,
 				EF86383028DC576200EF520C /* Bundle.swift in Sources */,
 				EF86381928DC1E9C00EF520C /* StubService.swift in Sources */,
+				EFDC740928E300DF00042452 /* SearchBar.swift in Sources */,
 				EFB1C2B828DB3F3B00DD40A4 /* CGSize.swift in Sources */,
 				EFB1C2D728DB69D400DD40A4 /* TweetEndpoints.swift in Sources */,
 				EFB1C26128DB3D3700DD40A4 /* TweetCell.swift in Sources */,
@@ -882,6 +897,7 @@
 				EF96381B28DD8C6B00178C37 /* RedditServiceInterface.swift in Sources */,
 				EF7D2FAE28E03DD20003B8F3 /* UIStackView.swift in Sources */,
 				EF86384228DC9E0F00EF520C /* EventViewModel.swift in Sources */,
+				EFDC740628E2FFE800042452 /* SearchViewController.swift in Sources */,
 				EF7D2FA728E0322A0003B8F3 /* TrendingHeadlinesService.swift in Sources */,
 				EF86382828DC507E00EF520C /* NewsModel.swift in Sources */,
 				EFB1C2BA28DB3F3B00DD40A4 /* Int.swift in Sources */,
