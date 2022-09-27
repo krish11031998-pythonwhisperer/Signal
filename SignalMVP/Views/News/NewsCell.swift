@@ -51,7 +51,7 @@ class NewsCell: ConfigurableCell {
 		selectedBackgroundView = UIView()
 		selectedBackgroundView?.backgroundColor = .clear
 		selectionStyle = .none
-		backgroundColor = .clear
+		backgroundColor = .black
 	}
 	
 	private func setupCell() {

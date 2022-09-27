@@ -88,7 +88,7 @@ class TweetCell: ConfigurableCell {
 
 		if let media = model.media?.first,
 		   let photoUrl = media.url ?? media.previewImageUrl {
-			imgView.setHeight(height: (CGFloat.totalWidth - 32) * CGFloat(media.height)/CGFloat(media.width), priority: .needed)
+			imgView.setHeight(height: (CGFloat.totalWidth - 32) * CGFloat(media.height)/CGFloat(media.width), priority: .defaultHigh)
 			UIImage.loadImage(url: photoUrl, at: imgView, path: \.image)
 			imgView.isHidden = false
 		} else {

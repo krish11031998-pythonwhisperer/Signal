@@ -34,13 +34,18 @@ class EventDetailView: UIViewController {
 	private func setupView() {
 		view.addSubview(tableView)
 		view.setFittingConstraints(childView: tableView, insets: .zero)
-		setupTableHeaderView()
+//		setupTableHeaderView()
 		tableView.reloadData(buildDataSource())
 		setupObserver()
 	}
 	
 	private func buildDataSource() -> TableViewDataSource {
-		.init(sections: [heroSection, section].compactMap { $0 })
+		.init(sections: [headerView, heroSection, section].compactMap { $0 })
+	}
+	
+	private var headerView: TableSection? {
+		guard let validEvent = EventStorage.selectedEvent else { return nil }
+		return .init(rows: [TableRow<EventDetailViewHeader>(validEvent)])
 	}
 	
 	private var heroSection: TableSection? {
@@ -56,14 +61,14 @@ class EventDetailView: UIViewController {
 		})) })
 	}
 	
-	private func setupTableHeaderView() {
-		guard let validEvent = EventStorage.selectedEvent else { return }
-		let headerView =  EventDetailViewHeader()
-		headerView.configureHeader(validEvent)
-		headerView.setFrame(.init(width: .totalWidth, height: headerView.compressedSize.height))
-		tableView.tableHeaderView = headerView
-		tableView.tableHeaderView?.setFrame(.init(width: .totalWidth, height: headerView.compressedSize.height))
-	}
+//	private func setupTableHeaderView() {
+//		guard let validEvent = EventStorage.selectedEvent else { return }
+//		let headerView =  EventDetailViewHeader()
+//		headerView.configureHeader(validEvent)
+//		headerView.setFrame(.init(width: .totalWidth, height: headerView.compressedSize.height))
+//		tableView.tableHeaderView = headerView
+//		tableView.tableHeaderView?.setFrame(.init(width: .totalWidth, height: headerView.compressedSize.height))
+//	}
 	
 	private func setupObserver() {
 		NotificationCenter.default.addObserver(self, selector: #selector(showNews), name: .showNews, object: nil)

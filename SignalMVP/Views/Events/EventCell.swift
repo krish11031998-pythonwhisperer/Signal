@@ -30,11 +30,8 @@ class EventCell: ConfigurableCell {
 	private func setupView() {
 		let stack = UIView.VStack(subViews: [mainNews, otherNews], spacing: 12, alignment: .leading)
 		stack.setCustomSpacing(4, after: otherNews)
-
-	
-		addSubview(stack)
-		setFittingConstraints(childView: stack, insets: .init(vertical: 10, horizontal: 8))
-		
+		contentView.addSubview(stack)
+		contentView.setFittingConstraints(childView: stack, insets: .init(vertical: 10, horizontal: 8))
 		mainNews.isHidden = true
 		otherNews.isHidden = true
 	}
@@ -102,7 +99,7 @@ class EventView: UIView  {
 	
 		stack.setCustomSpacing(10, after: newsTitle)
 		
-		imageView.setHeight(height: largeCard ? 150 : 140, priority: .required)
+		imageView.setHeight(height: largeCard ? 180 : 140, priority: .required)
 
 		imageView.clipsToBounds = true
 		imageView.contentMode = .scaleAspectFill
@@ -148,7 +145,7 @@ class EventView: UIView  {
 	
 	private func addTapGesture() {
 		let tapGesture = UITapGestureRecognizer(target: self, action: #selector(addTapHandler))
-		tapGesture.cancelsTouchesInView = true
+//		tapGesture.cancelsTouchesInView = true
 		addGestureRecognizer(tapGesture)
 	}
 	
