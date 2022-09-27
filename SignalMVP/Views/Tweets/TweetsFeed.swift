@@ -22,12 +22,10 @@ class TweetFeedViewController: UIViewController {
 	
 	private lazy var tableView: UITableView = {
 		let tableView: UITableView = .init(frame: .zero, style: .grouped)
-		tableView.dataSource = self
-		tableView.delegate = self
-		tableView.registerCell(cell: TweetCell.self, identifier: "TweetCell")
 		tableView.showsVerticalScrollIndicator = false
 		return tableView
 	}()
+	private var isScrolling: NSKeyValueObservation?
 	private var scrollObserver: NSKeyValueObservation?
 	
 //MARK: - Overriden Methods
@@ -49,6 +47,12 @@ class TweetFeedViewController: UIViewController {
 		
 	}
 	
+	
+	override func viewDidLayoutSubviews() {
+		super.viewDidLayoutSubviews()
+		print("(DEBUG) viewDidLayoutSubViews is called!")
+	}
+	
 //MARK: - Protected Methods
 
 	private func setupViews() {
@@ -56,6 +60,17 @@ class TweetFeedViewController: UIViewController {
 		tableView.backgroundColor = .clear
 		tableView.separatorStyle = .none
 		view.setFittingConstraints(childView: tableView, insets: .zero)
+		scrollObserver = tableView.observe(\.contentOffset){[weak self] scrollView, _ in
+//			print("(DEBUG) offset has changed!")
+			self?.setupScrollObserver(scrollView)
+		}
+	}
+	
+	private func setupScrollObserver(_ scrollView: UITableView) {
+		guard scrollView.contentSize.height > .totalHeight,
+			  scrollView.contentOffset.y >=  scrollView.contentSize.height - scrollView.frame.height,
+			  !viewModel.loading else { return }
+		self.viewModel.fetchNextPage()
 	}
 	
 	private func setupNavbar() {
@@ -86,43 +101,43 @@ class TweetFeedViewController: UIViewController {
 	}
 }
 
-extension TweetFeedViewController: UITableViewDataSource {
-	
-	func numberOfSections(in tableView: UITableView) -> Int { 1 }
-	
-	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		viewModel.tweets?.count ?? 0
-	}
-	
-	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		guard let cell = tableView.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath) as? TweetCell,
-			  let model = viewModel.tweets?[indexPath.row] else { return .init() }
-		cell.configure(with: model)
-		return cell
-	}
-	
-	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		guard let model = viewModel.tweets?[indexPath.row] else { return }
-		TweetStorage.selectedTweet = model
-	}
-
-}
-
-extension TweetFeedViewController: UITableViewDelegate {
-	
-	func scrollViewDidScroll(_ scrollView: UIScrollView) {
-		if scrollView.contentOffset.y >= scrollView.contentSize.height - 200 - scrollView.frame.height && !viewModel.loading {
-			self.viewModel.fetchNextPage()
-		}
-	}
-	
-}
+//extension TweetFeedViewController: UITableViewDataSource {
+//
+//	func numberOfSections(in tableView: UITableView) -> Int { 1 }
+//
+//	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//		viewModel.tweets?.count ?? 0
+//	}
+//
+//	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//		guard let cell = tableView.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath) as? TweetCell,
+//			  let model = viewModel.tweets?[indexPath.row] else { return .init() }
+//		cell.configure(with: model)
+//		return cell
+//	}
+//
+//	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//		guard let model = viewModel.tweets?[indexPath.row] else { return }
+//		TweetStorage.selectedTweet = model
+//	}
+//
+//}
+//
+//extension TweetFeedViewController: UITableViewDelegate {
+//
+//	func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//		if scrollView.contentOffset.y >= scrollView.contentSize.height - 200 - scrollView.frame.height && !viewModel.loading {
+//			self.viewModel.fetchNextPage()
+//		}
+//	}
+//
+//}
 
 
 extension TweetFeedViewController: AnyTableView {
 	
 	func reloadTableWithDataSource(_ dataSource: TableViewDataSource) {
-//		tableView.reloadData(dataSource)
-		tableView.reloadData()
+		tableView.reloadData(dataSource)
+//		tableView.reloadData()
 	}
 }

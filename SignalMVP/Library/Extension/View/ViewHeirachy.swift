@@ -105,12 +105,14 @@ extension UIView {
 	
 	func setWidth(width: CGFloat, priority: UILayoutPriority) {
 		let constraint = widthAnchor.constraint(equalToConstant: width)
+		removeSimilarConstraints([constraint])
 		constraint.priority = priority
 		constraint.isActive = true
 	}
 	
 	func setHeight(height: CGFloat, priority: UILayoutPriority) {
 		let constraint = heightAnchor.constraint(equalToConstant: height)
+		removeSimilarConstraints([constraint])
 		constraint.priority = priority
 		constraint.isActive = true
 	}
@@ -132,5 +134,8 @@ extension NSLayoutConstraint {
 		firstItem === constraint.firstItem &&
 		secondItem === constraint.secondItem
 	}
-	
+}
+
+extension UILayoutPriority {
+	static var needed: Self { .init(999) }
 }

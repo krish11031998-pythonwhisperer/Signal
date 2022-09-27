@@ -63,9 +63,7 @@ class TweetCell: ConfigurableCell {
 		authorImageView.setFrame(.init(squared: 48))
 		authorImageView.backgroundColor = .gray.withAlphaComponent(0.15)
 		authorImageView.contentMode = .scaleAspectFill
-		imgView.setHeight(height: 200, priority: .init(999))
 		
-	
 		contentView.addSubview(mainStack)
 		contentView.setFittingConstraints(childView: mainStack, insets: .init(vertical: 10, horizontal: 16))
 	
@@ -90,6 +88,7 @@ class TweetCell: ConfigurableCell {
 
 		if let media = model.media?.first,
 		   let photoUrl = media.url ?? media.previewImageUrl {
+			imgView.setHeight(height: (CGFloat.totalWidth - 32) * CGFloat(media.height)/CGFloat(media.width), priority: .needed)
 			UIImage.loadImage(url: photoUrl, at: imgView, path: \.image)
 			imgView.isHidden = false
 		} else {

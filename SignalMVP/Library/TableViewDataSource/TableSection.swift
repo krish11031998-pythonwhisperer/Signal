@@ -12,6 +12,7 @@ import UIKit
 public struct TableSection {
 	var rows:[TableCellProvider]
 	var customHeader: UIView?
+	var customFooter: UIView?
 }
 
 
