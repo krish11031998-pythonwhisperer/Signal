@@ -78,9 +78,9 @@ class TweetCell: ConfigurableCell {
 		model.model?.text.styled(font: .systemFont(ofSize: 14, weight: .regular), color: .gray).render(target: bodyLabel)
 		bodyLabel.numberOfLines = 0
 		bodyLabel.textAlignment = .left
-
+		
 		model.user?.username.styled(font: .systemFont(ofSize: 14, weight: .medium), color: .white).render(target: authorLabel)
-
+		authorLabel.setHeight(height: authorLabel.compressedSize.height, priority: .required)
 
 		if let authorImage = model.user?.profileImageUrl {
 			UIImage.loadImage(url: authorImage, at: authorImageView, path: \.image, resized: .init(squared: 48))

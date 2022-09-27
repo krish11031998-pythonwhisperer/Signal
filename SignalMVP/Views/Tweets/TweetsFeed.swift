@@ -47,7 +47,6 @@ class TweetFeedViewController: UIViewController {
 		
 	}
 	
-	
 	override func viewDidLayoutSubviews() {
 		super.viewDidLayoutSubviews()
 		print("(DEBUG) viewDidLayoutSubViews is called!")
@@ -61,7 +60,6 @@ class TweetFeedViewController: UIViewController {
 		tableView.separatorStyle = .none
 		view.setFittingConstraints(childView: tableView, insets: .zero)
 		scrollObserver = tableView.observe(\.contentOffset){[weak self] scrollView, _ in
-//			print("(DEBUG) offset has changed!")
 			self?.setupScrollObserver(scrollView)
 		}
 	}
