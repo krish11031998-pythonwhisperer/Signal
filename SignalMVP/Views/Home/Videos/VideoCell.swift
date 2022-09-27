@@ -38,17 +38,15 @@ class VideoCell: ConfigurableCell {
 		let mainStack: UIStackView = .VStack(spacing: 0)
 
 		videoInfoStack.clipsToBounds = true
-		
+		authorLabel.setHeight(height: authorLabel.compressedSize.height, priority: .required)
 		let infoView = videoInfoStack.embedInView(insets: .init(by: 12))
 		infoView.clipsToBounds = true
 		
 		[img, infoView].forEach(mainStack.addArrangedSubview(_:))
-		
-//		videoInfoStack.setHeight(height: 120, priority: .required)
-		
+
 		videoLabel.numberOfLines = 3
 		img.setHeight(height: 150, priority: .required)
-		mainStack.setHeight(height: 225, priority: .required)
+		mainStack.setHeight(height: 250, priority: .required)
 		mainStack.cornerRadius = 12
 		mainStack.addBlurView()
 		mainStack.clipsToBounds = true
@@ -64,7 +62,7 @@ class VideoCell: ConfigurableCell {
 	func configure(with model: VideoModel) {
 		UIImage.loadImage(url: model.imageUrl, at: img, path: \.image)
 		
-		model.title.styled(font: .systemFont(ofSize: 12, weight: .medium)).render(target: videoLabel)
+		model.title.styled(font: .systemFont(ofSize: 16, weight: .medium)).render(target: videoLabel)
 		model.sourceName.styled(font: .systemFont(ofSize: 10, weight: .regular), color: .gray).render(target: authorLabel)
 	}
 	

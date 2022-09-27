@@ -35,17 +35,11 @@ fileprivate extension MentionModel {
 
 class TopMentionCell: ConfigurableCell {
 	private static var visited: [String: Bool] = [:]
-//	private lazy var coinImage: UIImageView = {
-//		let imageView: UIImageView = .init(circular: .init(origin: .zero, size: .init(squared: 32)), background: .gray)
-//		imageView.contentMode = .scaleAspectFill
-//		return imageView
-//	}()
 	private lazy var symbolView: SymbolImage = {
 		let view = SymbolImage()
 		return view
 	}()
 	private lazy var detailStack: UIStackView = { .HStack(spacing: 12, alignment: .center) }()
-//	private lazy var coinName: UILabel = { .init() }()
 	private lazy var mainStack: UIStackView = { .VStack(spacing: 8) }()
 	private lazy var mentionDistribution: UIStackView = { .HStack(spacing: 8) }()
 	private lazy var circularChart: CircularProgressbar = { .init(frame: .init(origin: .zero, size: .init(squared: 48))) }()
@@ -64,7 +58,6 @@ class TopMentionCell: ConfigurableCell {
 		
 		[symbolView, .spacer(),circularChart].forEach(detailStack.addArrangedSubview(_:))
 		circularChart.setFrame(.init(squared: 48))
-//		coinImage.setFrame(.init(squared: 32))
 		mainStack.addArrangedSubview(detailStack)
 		mainStack.addArrangedSubview("Sentiments".styled(font: .systemFont(ofSize: 10, weight: .regular), color: .gray).generateLabel)
 		mainStack.setCustomSpacing(16, after: detailStack)
@@ -79,7 +72,6 @@ class TopMentionCell: ConfigurableCell {
 		backgroundColor = .clear
 		
 		symbolView.configureView(symbol: model.ticker, imgSize: .init(squared: 32), label: model.ticker.styled(font: .systemFont(ofSize: 18, weight: .medium)))
-		//		model.ticker.styled(font: .systemFont(ofSize: 18, weight: .medium)).render(target: coinName)
 		
 		let percent: CGFloat = CGFloat(model.positiveMentions)/CGFloat(model.totalMentions - model.neutralMentions)
 		let color: UIColor = percent < 0.5 ? .red : .green
