@@ -38,8 +38,6 @@ class VideoCell: ConfigurableCell {
 		let mainStack: UIStackView = .VStack(spacing: 0)
 
 		videoInfoStack.clipsToBounds = true
-
-		
 		
 		let infoView = videoInfoStack.embedInView(insets: .init(by: 12))
 		infoView.clipsToBounds = true
@@ -64,8 +62,8 @@ class VideoCell: ConfigurableCell {
 	func configure(with model: VideoModel) {
 		UIImage.loadImage(url: model.imageUrl, at: img, path: \.image)
 		
-		model.title.styled(font: .systemFont(ofSize: 16, weight: .medium)).render(target: videoLabel)
-		model.sourceName.styled(font: .systemFont(ofSize: 10, weight: .regular), color: .gray).render(target: authorLabel)
+		model.title.body1Medium().render(target: videoLabel)
+		model.sourceName.bodySmallRegular(color: .gray).render(target: authorLabel)
 		authorLabel.setFrame(height: authorLabel.compressedSize.height)
 	}
 	

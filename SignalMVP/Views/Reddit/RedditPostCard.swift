@@ -52,7 +52,7 @@ class RedditPostCard : ConfigurableCell {
 		divider.setHeight(height: 0.5, priority: .init(999))
 		
 		selectionStyle = .none
-		backgroundColor = .clear
+		backgroundColor = .surfaceBackground
 		contentView.addSubview(stack)
 		contentView.setFittingConstraints(childView: stack, insets: .init(vertical: 10, horizontal: 16))
 	}
@@ -66,17 +66,17 @@ class RedditPostCard : ConfigurableCell {
 	func configure(with model: RedditPostModel) {
 		resetCell()
 		
-		model.author.styled(font: .systemFont(ofSize: 13, weight: .regular), color: .white).render(target: authorLabel)
+		model.author.body2Regular().render(target: authorLabel)
 		authorLabel.numberOfLines = 1
 		
-		model.subredditNamePrefixed.styled(font: .systemFont(ofSize: 10, weight: .regular), color: .gray).render(target: subReddit)
+		model.subredditNamePrefixed.bodySmallRegular(color: .gray).render(target: subReddit)
 		subReddit.numberOfLines = 1
 		
-		model.title.styled(font: .systemFont(ofSize: 18, weight: .semibold), color: .white).render(target: postTitle)
+		model.title.heading4().render(target: postTitle)
 		postTitle.numberOfLines = 0
 		
 		if let text = model.selftext {
-			text.styled(font: .systemFont(ofSize: 13, weight: .regular), color: .white).render(target: postBody)
+			text.body3Regular().render(target: postBody)
 			postBody.isHidden = false
 			postBody.numberOfLines = 0
 		}

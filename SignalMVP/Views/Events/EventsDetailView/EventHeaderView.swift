@@ -40,8 +40,8 @@ class EventDetailViewHeader: ConfigurableCell {
 //MARK: - Exposed Methods
 	
 	public func configure(with model: EventModel) {
-		model.eventName.styled(font: .systemFont(ofSize: 30, weight: .semibold)).render(target: eventHeader)
-		"\(model.news.count) News Articles".styled(font: .systemFont(ofSize: 12, weight: .medium)).render(target: newArticleCountLabel)
+		model.eventName.heading1().render(target: eventHeader)
+		"\(model.news.count) News Articles".body3Regular().render(target: newArticleCountLabel)
 		tickerViews.removeChildViews()
 		model.tickers.forEach { ticker in
 			let url = "https://cryptoicons.org/api/icon/\(ticker.lowercased())/64"

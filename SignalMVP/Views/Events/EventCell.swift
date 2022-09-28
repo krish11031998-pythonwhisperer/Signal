@@ -120,8 +120,8 @@ class EventView: UIView  {
 		
 		UIImage.loadImage(url: model.imageUrl, at: imageView, path: \.image)
 		
-		model.sourceName.styled(font: .systemFont(ofSize: 10, weight: .semibold), color: .gray).render(target: authorTitle)
-		model.title.styled(font: .systemFont(ofSize: 15, weight: .medium), color: .white).render(target: newsTitle)
+		model.sourceName.bodySmallRegular(color: .gray).render(target: authorTitle)
+		model.title.body1Medium().render(target: newsTitle)
 		
 		tickersView.isHidden = model.tickers.isEmpty
 		if !model.tickers.isEmpty {

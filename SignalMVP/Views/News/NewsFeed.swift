@@ -36,17 +36,14 @@ class NewsFeed: UIViewController {
 		setupNavbar()
 		viewModel.fetchNews()
 		setupObservers()
-//		observer = tableView.observe(\.contentOffset) { [weak self] tableView, _ in
-//			self?.scrollViewUpdate(tableView)
-//		}
 	}
 
 	//MARK: - ProtectedMethods
 	
 	private func setupViews(){
-		view.backgroundColor = .clear
+		view.backgroundColor = .surfaceBackground
 		view.addSubview(tableView)
-		tableView.backgroundColor = .clear
+		tableView.backgroundColor = .surfaceBackground
 		tableView.separatorStyle = .none
 		view.setFittingConstraints(childView: tableView, insets: .zero)
 	}

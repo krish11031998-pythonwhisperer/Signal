@@ -81,7 +81,7 @@ class TweetDetailView: UIViewController {
 	
 	
 	private func setupViews() {
-		view.backgroundColor = .black
+		view.backgroundColor = .surfaceBackground
 		view.addSubview(scrollView)
 		view.setFittingConstraints(childView: scrollView, insets: .zero)
 

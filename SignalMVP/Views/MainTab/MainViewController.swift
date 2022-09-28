@@ -20,7 +20,7 @@ class MainViewController: UITabBarController {
 			return tabBar
 		}()
 		self.setValue(tabBar, forKey: "tabBar")
-		selectedIndex = 3
+		selectedIndex = 0
 	}
 
 	

@@ -42,7 +42,7 @@ class TweetCell: ConfigurableCell {
 	private func styleCell() {
 		selectedBackgroundView = UIView()
 		selectedBackgroundView?.backgroundColor = .clear
-		backgroundColor = .black
+		backgroundColor = .surfaceBackground
 	}
 	
 	private func setupCell() {
@@ -75,11 +75,11 @@ class TweetCell: ConfigurableCell {
 	}
 	
 	func configure(with model: TweetCellModel) {
-		model.model?.text.styled(font: .systemFont(ofSize: 14, weight: .regular), color: .gray).render(target: bodyLabel)
+		model.model?.text.body2Regular(color: .gray).render(target: bodyLabel)
 		bodyLabel.numberOfLines = 0
 		bodyLabel.textAlignment = .left
 		
-		model.user?.username.styled(font: .systemFont(ofSize: 14, weight: .medium), color: .white).render(target: authorLabel)
+		model.user?.username.body2Medium().render(target: authorLabel)
 		authorLabel.setHeight(height: authorLabel.compressedSize.height, priority: .required)
 
 		if let authorImage = model.user?.profileImageUrl {

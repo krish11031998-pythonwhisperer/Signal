@@ -51,7 +51,7 @@ class NewsCell: ConfigurableCell {
 		selectedBackgroundView = UIView()
 		selectedBackgroundView?.backgroundColor = .clear
 		selectionStyle = .none
-		backgroundColor = .black
+		backgroundColor = .surfaceBackground
 	}
 	
 	private func setupCell() {
@@ -71,10 +71,10 @@ class NewsCell: ConfigurableCell {
 //MARK: - Exposed Methods
 	
 	public func configure(with model: NewsCellModel) {
-		model.model.date.styled(font: .systemFont(ofSize: 10, weight: .regular), color: .gray).render(target: timestamp)
-		model.model.title.styled(font: .systemFont(ofSize: 20, weight: .semibold), color: .white).render(target: title)
+		model.model.date.bodySmallRegular(color: .gray).render(target: timestamp)
+		model.model.title.heading3().render(target: title)
 		title.numberOfLines = 0
-		model.model.sourceName.styled(font: .systemFont(ofSize: 14, weight: .regular), color: .gray).render(target: body)
+		model.model.sourceName.body2Regular(color: .gray).render(target: body)
 		body.numberOfLines = 1
 		
 		if !model.model.tickers.isEmpty {
@@ -82,7 +82,7 @@ class NewsCell: ConfigurableCell {
 			
 			model.model.tickers.limitTo(to: 3).forEach { ticker in
 				let tickerLabel = UILabel()
-				ticker.styled(font: .systemFont(ofSize: 12, weight: .medium), color: .white).render(target: tickerLabel)
+				ticker.body2Regular().render(target: tickerLabel)
 				tickersStack.addArrangedSubview(tickerLabel.blobify(backgroundColor: .white.withAlphaComponent(0.15),
 																	borderColor: .white,
 																	borderWidth: 1,

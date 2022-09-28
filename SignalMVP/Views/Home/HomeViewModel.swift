@@ -61,20 +61,20 @@ class HomeViewModel {
 //MARK: - Sections
 	private var trendingHeadlinesSection: TableSection? {
 		guard let validTrendingHeadlines = trendingHeadlines else { return nil }
-		let sectionHeader = "Trending Headlines".styled(font: .systemFont(ofSize: 25, weight: .semibold)).generateLabel.embedInView(insets: .init(vertical: 10, horizontal: 10))
+		let sectionHeader = "Trending Headlines".heading2().generateLabel.embedInView(insets: .init(vertical: 10, horizontal: 10))
 		return .init(rows: validTrendingHeadlines.limitTo(to: 3).compactMap { TableRow<TrendingHeadlineCell>($0) }, customHeader: sectionHeader)
 	}
 	
 	
 	private var topMentionedCoinsSection: TableSection? {
 		guard let validTopMentionedCoins = mentions else { return nil }
-		let sectionHeader = "Top Mentioned Coins".styled(font: .systemFont(ofSize: 25, weight: .semibold)).generateLabel.embedInView(insets: .init(vertical: 10, horizontal: 10))
+		let sectionHeader = "Top Mentioned Coins".heading2().generateLabel.embedInView(insets: .init(vertical: 10, horizontal: 10))
 		return .init(rows: validTopMentionedCoins.limitTo(to: 5).compactMap { TableRow<TopMentionCell>($0) }, customHeader: sectionHeader)
 	}
 	
 	private var videoSection: TableSection? {
 		guard let videoSection = videos else { return nil }
-		let sectionHeader = "Top Video News".styled(font: .systemFont(ofSize: 25, weight: .semibold)).generateLabel.embedInView(insets: .init(vertical: 10, horizontal: 10))
+		let sectionHeader = "Top Video News".heading2().generateLabel.embedInView(insets: .init(vertical: 10, horizontal: 10))
 		return .init(rows: videoSection.limitTo(to: 3).compactMap { TableRow<VideoCell>($0) }, customHeader: sectionHeader)
 	}
 	

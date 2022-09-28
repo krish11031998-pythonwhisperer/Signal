@@ -56,6 +56,7 @@ class TweetFeedViewController: UIViewController {
 
 	private func setupViews() {
 		view.addSubview(tableView)
+		view.backgroundColor = .surfaceBackground
 		tableView.backgroundColor = .clear
 		tableView.separatorStyle = .none
 		view.setFittingConstraints(childView: tableView, insets: .zero)

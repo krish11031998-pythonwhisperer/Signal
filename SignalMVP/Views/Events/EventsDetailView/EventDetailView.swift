@@ -33,6 +33,8 @@ class EventDetailView: UIViewController {
 	
 	private func setupView() {
 		view.addSubview(tableView)
+		tableView.backgroundColor = .surfaceBackground
+		view.backgroundColor = .surfaceBackground
 		view.setFittingConstraints(childView: tableView, insets: .zero)
 //		setupTableHeaderView()
 		tableView.reloadData(buildDataSource())

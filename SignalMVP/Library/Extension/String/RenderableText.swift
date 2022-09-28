@@ -51,6 +51,7 @@ extension RenderableText {
 		styled(.attributed(font: font, color: color, lineSpacing: lineSpacing, alignment: alignment))
 	}
 	
+	
 	var generateLabel: UILabel {
 		let label = UILabel()
 		render(target: label)
@@ -65,6 +66,15 @@ extension String: RenderableText {
 	
 	func styled(_ attributes: [NSAttributedString.Key : Any]) -> NSAttributedString {
 		NSAttributedString(string: self, attributes: attributes)
+	}
+	
+	func styled(font: CustomFonts, color: UIColor, size: CGFloat) -> NSAttributedString {
+		let attributes: [NSAttributedString.Key:Any] = [
+			.font: font.fontBuilder(size: size) ?? .systemFont(ofSize: size),
+			.foregroundColor: color,
+		]
+		
+		return .init(string: self, attributes: attributes)
 	}
 	
 	func render(target: Any?) {
@@ -91,6 +101,17 @@ extension NSAttributedString: RenderableText {
 		let copy = NSMutableAttributedString(attributedString: self)
 		copy.setAttributes(attributes, range: .init(location: 0, length: copy.length))
 		return .init(attributedString: copy)
+	}
+	
+	func styled(font: CustomFonts, color: UIColor, size: CGFloat) -> NSAttributedString {
+		let attributes: [NSAttributedString.Key:Any] = [
+			.font: font.fontBuilder(size: size) ?? .systemFont(ofSize: size),
+			.foregroundColor: color,
+		]
+	
+		let attributedString = NSMutableAttributedString(attributedString: self)
+		attributedString.addAttributes(attributes, range: .init(location: 0, length: attributedString.length))
+		return .init(attributedString: attributedString)
 	}
 	
 	func render(target: Any?) {

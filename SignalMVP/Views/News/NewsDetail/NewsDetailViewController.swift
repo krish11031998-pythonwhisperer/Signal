@@ -53,11 +53,12 @@ class NewsDetailViewController: UIViewController {
 //MARK: - Protected Methods
 	
 	private func setupViews() {
-		view.backgroundColor = .black
+		view.backgroundColor = .surfaceBackground
 		view.addSubview(imageView)
 		updateImage()
 		
 		view.addSubview(tableView)
+		tableView.backgroundColor = .surfaceBackground
 		view.setFittingConstraints(childView: tableView, insets: .init(top: 0, left: 0, bottom: 0, right: 0))
 		tableHeaderView()
 	}
@@ -66,10 +67,10 @@ class NewsDetailViewController: UIViewController {
 		guard let validNews = NewsStorage.selectedNews else { return }
 		let stack = UIView.VStack(spacing: 8)
 		
-		let titleLabel = validNews.title.styled(font: .systemFont(ofSize: 30, weight: .bold), color: .white).generateLabel
-		let authorLabel = validNews.sourceName.styled(font: .systemFont(ofSize: 20, weight: .medium), color: .gray).generateLabel
+		let titleLabel = validNews.title.heading1().generateLabel
+		let authorLabel = validNews.sourceName.body1Medium(color: .gray).generateLabel
 		let blankView = UIView.emptyViewWithColor(color: .clear, height: 300)
-		let bodyLabel = validNews.text.styled(font: .systemFont(ofSize: 15, weight: .light), color: .white).generateLabel
+		let bodyLabel = validNews.text.body1Regular(color: .white).generateLabel
 		let tickers = validNews.tickersBlob(width: .totalWidth - 32)
 		
 		bodyLabel.numberOfLines = 0

@@ -43,7 +43,7 @@ class RedditFeedViewController: UIViewController {
 	private func setupView() {
 		view.addSubview(tableView)
 		view.setFittingConstraints(childView: tableView, insets: .zero)
-		view.backgroundColor = .clear
+		view.backgroundColor = .surfaceBackground
 	}
 	
 	private func setupNavBar() {

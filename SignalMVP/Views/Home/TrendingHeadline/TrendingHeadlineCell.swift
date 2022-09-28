@@ -52,8 +52,8 @@ class TrendingHeadlineCell: ConfigurableCell {
 //MARK: - Exposed Methods
 	func configure(with model: TrendingHeadlinesModel) {
 		
-		model.headline.styled(font: .systemFont(ofSize: 15, weight: .medium)).render(target: headlineLabel)
-		model.text.styled(font: .systemFont(ofSize: 10, weight: .light)).render(target: desciptionLabel)
+		model.headline.body1Medium().render(target: headlineLabel)
+		model.text.body2Regular(color: .gray).render(target: desciptionLabel)
 		
 		sentimentStack.removeChildViews()
 		let sentimentBlob = SentimentTextLabel()
@@ -65,7 +65,7 @@ class TrendingHeadlineCell: ConfigurableCell {
 			tickers.removeChildViews()
 			model.tickers.limitTo(to: 3).forEach { ticker in
 				let img = SymbolImage()
-				img.configureView(symbol: "", label: ticker.styled(font: .systemFont(ofSize: 12, weight: .medium)))
+				img.configureView(symbol: "", label: ticker.body3Medium())
 				tickers.addArrangedSubview(img)
 				img.setHeight(height: CGSize.smallestSquare.height, priority: .required)
 			}

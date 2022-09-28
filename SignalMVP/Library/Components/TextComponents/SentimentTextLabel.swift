@@ -37,7 +37,7 @@ class SentimentTextLabel: UIView {
 	}
 	
 	public func configureIndicator(label: String, color: UIColor) {
-		label.styled(font: .systemFont(ofSize: 10, weight: .regular)).render(target: self.label)
+		label.bodySmallRegular().render(target: self.label)
 		indicator.backgroundColor = color
 	}
 	

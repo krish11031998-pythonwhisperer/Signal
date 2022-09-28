@@ -58,21 +58,21 @@ class EventSingleCell: ConfigurableCell {
 	
 	private func styleCell() {
 		selectionStyle = .none
-		backgroundColor = .clear
+		backgroundColor = .surfaceBackground
 	}
 	
 	
 //MARK: - Exposed Methods
 	func configure(with model: EventCellModel) {
 
-		model.model.eventName.styled(font: .systemFont(ofSize: 15, weight: .semibold), color: .white).render(target: eventTitle)
+		model.model.eventName.body1Bold().render(target: eventTitle)
 		eventTitle.numberOfLines = 2
 
 		if let firstImgURL = model.model.news.first?.imageUrl {
 			UIImage.loadImage(url: firstImgURL, at: imgView, path: \.image)
 		}
 
-		"\(model.model.news.count) News Articles".styled(font: .systemFont(ofSize: 13, weight: .regular), color: .gray).render(target: newsArticleCount)
+		"\(model.model.news.count) News Articles".body2Regular(color: .gray).render(target: newsArticleCount)
 		
 //		tickersView.isHidden = model.model.tickers.isEmpty
 //		if !model.model.tickers.isEmpty {

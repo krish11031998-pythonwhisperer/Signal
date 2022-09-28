@@ -44,6 +44,8 @@ class EventsFeedViewController: UIViewController {
 	
 	private func setupView() {
 		view.addSubview(tableView)
+		tableView.backgroundColor = .surfaceBackground
+		view.backgroundColor = .surfaceBackground
 		view.setFittingConstraints(childView: tableView, insets: .zero)
 	}
 	
