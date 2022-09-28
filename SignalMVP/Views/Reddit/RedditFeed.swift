@@ -33,9 +33,7 @@ class RedditFeedViewController: UIViewController {
 		setupNavBar()
 		setupView()
 		viewModel.fetchRedditPosts()
-		observer = tableView.observe(\.contentOffset) { [weak self] tableView, _ in
-			self?.scrollViewUpdate(tableView)
-		}
+		addObservers()
 	}
 
 //MARK: - Protected Methods
@@ -61,6 +59,20 @@ class RedditFeedViewController: UIViewController {
 		let navbarHeight: CGFloat = navBar.frame.height + navBar.frame.minY
 		UIView.animate(withDuration: 0.1) {
 			navBar.transform = .init(translationX: 0, y: -CGFloat(off) * navbarHeight)
+		}
+	}
+	
+	private func addObservers() {
+		observer = tableView.observe(\.contentOffset) { [weak self] tableView, _ in
+			self?.scrollViewUpdate(tableView)
+		}
+		NotificationCenter.default.addObserver(self, selector: #selector(updateTableView), name: .updateTableView, object: nil)
+	}
+	
+	@objc
+	private func updateTableView() {
+		UIView.animate(withDuration: 0.3) {
+			self.tableView.performBatchUpdates(nil)
 		}
 	}
 }

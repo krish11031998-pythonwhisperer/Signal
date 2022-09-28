@@ -8,6 +8,10 @@
 import Foundation
 import UIKit
 
+extension Notification.Name {
+	static let updateTableView: Self = .init("updateTableView")
+}
+
 class RedditPostCard : ConfigurableCell {
 	
 	private lazy var authorLabel: UILabel = { .init() }()
@@ -19,7 +23,10 @@ class RedditPostCard : ConfigurableCell {
 		imgView.contentMode = .scaleAspectFill
 		return imgView
 	}()
-	
+	private lazy var showMoreLabel: UIView = {
+		let label = "Show More".bodySmallRegular().generateLabel
+		return label.blobify()
+	}()
 	private lazy var postTitle: UILabel = { .init() }()
 	private lazy var postBody: UILabel = { .init() }()
 	
@@ -34,9 +41,8 @@ class RedditPostCard : ConfigurableCell {
 		setupView()
 	}
 	
-	
 	private func setupView() {
-		let stack = UIView.VStack(subViews: [authorLabel, subReddit, postImageView, postTitle, postBody], spacing: 10)
+		let stack = UIView.VStack(subViews: [authorLabel, subReddit, postImageView, postTitle, postBody, showMoreLabel], spacing: 10, alignment: .leading)
 		
 		stack.setCustomSpacing(5, after: authorLabel)
 		stack.setCustomSpacing(16, after: subReddit)
@@ -50,6 +56,9 @@ class RedditPostCard : ConfigurableCell {
 		divider.backgroundColor = .gray
 		stack.addArrangedSubview(divider.embedInView(insets: .init(top: 10, left: 0, bottom: 0, right: 0)))
 		divider.setHeight(height: 0.5, priority: .init(999))
+		stack.setFittingConstraints(childView: divider, leading: 0, trailing: 0)
+		
+		showMoreHandler()
 		
 		selectionStyle = .none
 		backgroundColor = .surfaceBackground
@@ -78,12 +87,24 @@ class RedditPostCard : ConfigurableCell {
 		if let text = model.selftext {
 			text.body3Regular().render(target: postBody)
 			postBody.isHidden = false
-			postBody.numberOfLines = 0
+			postBody.numberOfLines = 3
 		}
 		
 		if model.url.contains("png") {
 			UIImage.loadImage(url: model.url, at: postImageView, path: \.image)
 			postImageView.isHidden = false
 		}
+	}
+	
+	func showMoreHandler() {
+		let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+		tapGesture.cancelsTouchesInView = true
+		showMoreLabel.addGestureRecognizer(tapGesture)
+	}
+
+	@objc
+	func handleTap() {
+		postBody.numberOfLines = postBody.numberOfLines == 0 ? 3 : 0
+		NotificationCenter.default.post(name: .updateTableView, object: nil)
 	}
 }
