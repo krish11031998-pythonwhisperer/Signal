@@ -19,6 +19,7 @@
 		EF48D70C28E490C600BD2A1A /* Satoshi-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = EF48D70128E490C600BD2A1A /* Satoshi-Medium.otf */; };
 		EF48D70D28E490C600BD2A1A /* Satoshi-Variable.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EF48D70228E490C600BD2A1A /* Satoshi-Variable.ttf */; };
 		EF48D70F28E4911300BD2A1A /* StringFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF48D70E28E4911300BD2A1A /* StringFonts.swift */; };
+		EF48D71328E4CFCF00BD2A1A /* MainTabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF48D71228E4CFCF00BD2A1A /* MainTabModel.swift */; };
 		EF7D2F9428DED80B0003B8F3 /* NewsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7D2F9328DED80B0003B8F3 /* NewsStorage.swift */; };
 		EF7D2F9628DED9730003B8F3 /* NewsNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7D2F9528DED9730003B8F3 /* NewsNotification.swift */; };
 		EF7D2F9928DED9DF0003B8F3 /* NewsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7D2F9828DED9DF0003B8F3 /* NewsDetailViewController.swift */; };
@@ -165,6 +166,7 @@
 		EF48D70128E490C600BD2A1A /* Satoshi-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Satoshi-Medium.otf"; sourceTree = "<group>"; };
 		EF48D70228E490C600BD2A1A /* Satoshi-Variable.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Satoshi-Variable.ttf"; sourceTree = "<group>"; };
 		EF48D70E28E4911300BD2A1A /* StringFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringFonts.swift; sourceTree = "<group>"; };
+		EF48D71228E4CFCF00BD2A1A /* MainTabModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabModel.swift; sourceTree = "<group>"; };
 		EF7D2F9328DED80B0003B8F3 /* NewsStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsStorage.swift; sourceTree = "<group>"; };
 		EF7D2F9528DED9730003B8F3 /* NewsNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsNotification.swift; sourceTree = "<group>"; };
 		EF7D2F9828DED9DF0003B8F3 /* NewsDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetailViewController.swift; sourceTree = "<group>"; };
@@ -498,6 +500,7 @@
 			children = (
 				EFB1C23128DB3B1800DD40A4 /* MainViewController.swift */,
 				EF86383A28DC761900EF520C /* MainTabView.swift */,
+				EF48D71228E4CFCF00BD2A1A /* MainTabModel.swift */,
 			);
 			path = MainTab;
 			sourceTree = "<group>";
@@ -1012,6 +1015,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF48D71328E4CFCF00BD2A1A /* MainTabModel.swift in Sources */,
 				EF48D70F28E4911300BD2A1A /* StringFonts.swift in Sources */,
 				EF7D2FA028E02DB80003B8F3 /* HomeViewModel.swift in Sources */,
 				EF7D2FD028E0F6540003B8F3 /* EventHeaderView.swift in Sources */,

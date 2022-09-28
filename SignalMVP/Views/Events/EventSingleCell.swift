@@ -44,16 +44,10 @@ class EventSingleCell: ConfigurableCell {
 		let divider: UIView =  .divider(color: .white.withAlphaComponent(0.5)).embedInView(insets: .zero)
 		let mainStack: UIStackView = .VStack(subViews: [stack], spacing: 12)
 		mainStack.setHeight(height: 84, priority: .required)
+		
 		contentView.addSubview(mainStack)
 		contentView.setFittingConstraints(childView: mainStack, insets: .init(vertical: 10, horizontal: 16))
-		
-		let bgView = UIView()
-		bgView.addBlurView()
-		contentView.addSubview(bgView)
-		contentView.sendSubviewToBack(bgView)
-		contentView.setFittingConstraints(childView: bgView, insets: .init(vertical: 5, horizontal: 8))
-		bgView.cornerRadius = 12
-		bgView.clipsToBounds = true
+		contentView.addShadowBackground(inset: .init(vertical: 7.5, horizontal: 8), cornerRadius: 12)
 	}
 	
 	private func styleCell() {

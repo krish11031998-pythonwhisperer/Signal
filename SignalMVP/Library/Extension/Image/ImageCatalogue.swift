@@ -51,6 +51,7 @@ extension UIImage {
 		case share = "share"
 		case shieldCheck = "shield-check"
 		case switchHorizontal = "switch-horizontal"
+		case twitter = "twitter"
 		case trash = "trash"
 		case trendingUp = "trending-up"
 		case userOutline = "user-outline"

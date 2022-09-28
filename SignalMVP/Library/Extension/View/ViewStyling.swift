@@ -10,6 +10,8 @@ import UIKit
 
 extension UIView {
 	
+	var userInterface: UIUserInterfaceStyle { traitCollection.userInterfaceStyle }
+	
 	var cornerRadius: CGFloat {
 		get { layer.cornerRadius }
 		set { layer.cornerRadius = newValue }
@@ -24,7 +26,12 @@ extension UIView {
 		}
 	}
 	
-	func addBlurView(_ style: UIBlurEffect.Style = .dark) {
+	var defaultBlurStyle: UIBlurEffect.Style {
+		userInterface == .light ? .systemUltraThinMaterialDark : .extraLight
+	}
+	
+	func addBlurView(_ _style: UIBlurEffect.Style? = nil) {
+		let style = _style ?? defaultBlurStyle
 		let blur = UIBlurEffect(style: style)
 		let blurView = UIVisualEffectView(effect: blur)
 		addSubview(blurView)
@@ -32,6 +39,21 @@ extension UIView {
 		sendSubviewToBack(blurView)
 	}
 	
+	func addShadow(){
+		self.layer.shadowColor = UIColor.surfaceBackgroundInverse.cgColor
+		self.layer.shadowOpacity = 0.2
+		self.layer.shadowOffset = .zero
+		self.layer.shadowRadius = 2.5
+	}
+	
+	func addShadowBackground(inset: UIEdgeInsets = .zero, cornerRadius: CGFloat = 8) {
+		let view = UIView()
+		view.addShadow()
+		view.border(color: .clear, borderWidth: 1, cornerRadius: cornerRadius)
+		addSubview(view)
+		sendSubviewToBack(view)
+		setFittingConstraints(childView: view, insets: inset)
+	}
 	
 	var compressedSize: CGSize {
 		systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)

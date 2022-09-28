@@ -19,7 +19,7 @@ class MainTab: UITabBar {
 	private func addShape(_ rect: CGRect) {
 		let shape = CAShapeLayer()
 		shape.path = drawShape(rect)
-		shape.fillColor = UIColor.black.cgColor
+		shape.fillColor = UIColor.surfaceBackgroundInverse.cgColor
 		shape.strokeColor = UIColor.clear.cgColor
 		
 		if let oldShape = self.shapeLayer {

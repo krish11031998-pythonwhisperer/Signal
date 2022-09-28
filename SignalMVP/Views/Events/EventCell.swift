@@ -109,7 +109,7 @@ class EventView: UIView  {
 		
 		addSubview(stack)
 		setFittingConstraints(childView: stack, insets: .zero)
-		addBlurView(.regular)
+		addBlurView()
 		clipsToBounds = true
 		cornerRadius = 16
 	}
