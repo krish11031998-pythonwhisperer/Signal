@@ -11,7 +11,7 @@ import UIKit
 class MainTab: UITabBar {
 	
 	private var shapeLayer: CAShapeLayer?
-	
+
 	override func draw(_ rect: CGRect) {
 		addShape(rect)
 	}
@@ -31,7 +31,7 @@ class MainTab: UITabBar {
 	}
 	
 	private func drawShape(_ rect: CGRect) -> CGPath {
-		let path = UIBezierPath(roundedRect: rect, cornerRadius: 16)
+		let path = UIBezierPath(roundedRect: rect, cornerRadius: 8)
 		return path.cgPath
 		
 	}

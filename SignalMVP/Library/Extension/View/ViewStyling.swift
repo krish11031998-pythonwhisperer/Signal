@@ -27,7 +27,7 @@ extension UIView {
 	}
 	
 	var defaultBlurStyle: UIBlurEffect.Style {
-		userInterface == .light ? .systemUltraThinMaterialDark : .extraLight
+		userInterface == .light ? .systemUltraThinMaterialDark : .systemUltraThinMaterialLight
 	}
 	
 	func addBlurView(_ _style: UIBlurEffect.Style? = nil) {
