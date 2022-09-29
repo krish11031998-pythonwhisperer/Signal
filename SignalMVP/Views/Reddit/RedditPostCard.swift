@@ -49,7 +49,7 @@ class RedditPostCard : ConfigurableCell {
 		
 		postImageView.isHidden = true
 		postBody.isHidden = true
-		
+		showMoreLabel.isHidden = true
 		postImageView.setHeight(height: 200, priority: .init(999))
 		
 		let divider = UIView()
@@ -87,6 +87,7 @@ class RedditPostCard : ConfigurableCell {
 		if let text = model.selftext {
 			text.body3Regular().render(target: postBody)
 			postBody.isHidden = false
+			showMoreLabel.isHidden = false
 			postBody.numberOfLines = 3
 		}
 		
