@@ -30,8 +30,8 @@ class TweetService: TweetServiceInterface {
 	
 	public static var shared: TweetService = .init()
 	
-	public func fetchTweets(queries: [URLQueryItem] = .searchQuery, completion: @escaping (Result<TweetSearchResult, Error>) -> Void) {
-		TweetEndpoint.searchRecent(queries: .searchQuery).fetch(completion: completion)
+	public func fetchTweets(entity: String? = nil, before: String? = nil, after: String? = nil, limit: Int = 20, completion: @escaping (Result<TweetSearchResult, Error>) -> Void) {
+		SignalTwitterEndpoints.tweets(entity: entity, before: before, after: after, limit: limit).fetch(completion: completion)
 	}
 }
 

@@ -7,33 +7,49 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "4670E1D4-D1D2-4DF3-9D68-B8B7DDC002B0"
+            uuid = "1A6AE3D2-CD9D-4195-90B6-CA8A7190DAB2"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "SignalMVP/Service/Twitter/TweetEndpoints.swift"
+            filePath = "SignalMVP/Views/Tweets/TweetFeedViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "49"
-            endingLineNumber = "49"
-            landmarkName = "fetch(completion:)"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
+            landmarkName = "decodeToTweetCellModel(_:)"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "0C3D5EE7-9A4E-4C35-A246-CC051A1BAAB0"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SignalMVP/Views/Reddit/RedditPostCard.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "91"
-            endingLineNumber = "91"
-            landmarkName = "configure(with:)"
-            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "1A6AE3D2-CD9D-4195-90B6-CA8A7190DAB2 - 412bca5553d03ba3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SignalMVP.TweetFeedViewModel.decodeToTweetCellModel(SignalMVP.TweetSearchResult) -&gt; ()"
+                  moduleName = "SignalMVP"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/krish_venkat/Desktop/Signal/SignalMVP/SignalMVP/Views/Tweets/TweetFeedViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "66"
+                  endingLineNumber = "66"
+                  offsetFromSymbolStart = "332">
+               </Location>
+               <Location
+                  uuid = "1A6AE3D2-CD9D-4195-90B6-CA8A7190DAB2 - b02eb6b62aedede8"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (SignalMVP.TweetModel) -&gt; Swift.Optional&lt;SignalMVP.TweetCellModel&gt; in SignalMVP.TweetFeedViewModel.decodeToTweetCellModel(SignalMVP.TweetSearchResult) -&gt; ()"
+                  moduleName = "SignalMVP"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/krish_venkat/Desktop/Signal/SignalMVP/SignalMVP/Views/Tweets/TweetFeedViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "67"
+                  endingLineNumber = "67"
+                  offsetFromSymbolStart = "548">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

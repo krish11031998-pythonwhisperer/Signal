@@ -18,6 +18,15 @@ struct TweetModel:Codable {
 	let publicMetric : TweetMetric?
 	let authorId : String?
 	let attachments: TweetAttachment?
+	
+	//media
+	let media: [TweetMedia]?
+	let urls: [TweetURL]?
+	let user: TweetUser?
+	let cashTags: [TweetTags]?
+	let hashTags: [TweetTags]?
+	let opinions: TweetOpinion?
+	let reactions: TweetReaction?
 
 	enum CodingKeys: String, CodingKey {
 		case id
@@ -25,9 +34,11 @@ struct TweetModel:Codable {
 		case publicMetric = "public_metrics"
 		case authorId = "author_id"
 		case attachments
+		case media, urls, user, cashTags, hashTags, opinions, reactions
 	}
 }
 
+//MARK: - TweetAttachment
 struct TweetAttachment: Codable {
 	let mediaKeys: [String]
 	
@@ -36,6 +47,7 @@ struct TweetAttachment: Codable {
 	}
 }
 
+//MARK: - TweetMetric
 struct TweetMetric: Codable {
 	
 	let retweetCount: Int
@@ -52,7 +64,7 @@ struct TweetMetric: Codable {
 	
 }
 
-
+//MARK: - TweetMedia
 struct TweetMedia: Codable {
 	let type: String
 	let mediaKey: String
@@ -73,6 +85,7 @@ struct TweetMedia: Codable {
 	}
 }
 
+//MARK: - TweetMediaVariant
 struct TweetMediaVariant: Codable {
 	let contentType: String
 	let url: String?
@@ -83,6 +96,7 @@ struct TweetMediaVariant: Codable {
 	}
 }
 
+//MARK: - TweetUser
 struct TweetUser: Codable {
 	let username: String
 	let profileImageUrl: String
@@ -97,7 +111,66 @@ struct TweetUser: Codable {
 	}
 }
 
+//MARK: - TweetIncludeData
 struct TweetIncludeData: Codable {
 	let media: [TweetMedia]?
 	let users: [TweetUser]?
+}
+
+//MARK: - TweetUrl
+struct TweetURL: Codable {
+	let start: Int
+	let end: Int
+	let url: String
+	let expandedUrl: String?
+	let displayUrl: String?
+	let title: String?
+	let description: String?
+	let unwoundUrl: String?
+	let images: [TweetImage]?
+	
+	enum CodingKeys: String, CodingKey {
+		case start
+		case end
+		case url
+		case expandedUrl = "expanded_url"
+		case displayUrl = "display_url"
+		case title
+		case description
+		case unwoundUrl = "unwound_url"
+		case images
+	}
+}
+
+struct TweetImage: Codable {
+	let url: String
+}
+
+//MARK: - Tags
+struct TweetTags: Codable {
+	let tag: String
+}
+
+
+//MARK: - Twitter Opinion
+struct TweetOpinion: Codable {
+	let bullish: Int
+	let bearish: Int
+}
+
+//MARK: - Twitter Reactions
+struct TweetReaction: Codable {
+	let fakeNews: Int
+	let trustedNews: Int
+	let qualityAnalysis: Int
+	let badAnalysis: Int
+	let overReaction: Int
+	
+	enum CodingKeys: String, CodingKey {
+		case fakeNews = "fake_news"
+		case trustedNews = "trusted_news"
+		case qualityAnalysis = "quality_analysis"
+		case badAnalysis = "bad_analysis"
+		case overReaction = "overreaction"
+	}
 }

@@ -10,9 +10,12 @@ import Foundation
 
 struct TweetCellModel: ActionProvider {
 	let model: TweetModel?
-	let media: [TweetMedia]?
-	let user: TweetUser?
 	var action: Callback?
+}
+
+extension TweetCellModel {
+	var media: [TweetMedia]? { model?.media }
+	var user: TweetUser? { model?.user }
 }
 
 protocol AnyTableView {
@@ -25,12 +28,12 @@ class TweetFeedViewModel {
 	var loading: Bool = false
 	var view: AnyTableView?
 	
-	public func fetchTweets() {
+	public func fetchTweets(entity: String? = nil, before: String? = nil, after: String? = nil, limit: Int = 20) {
 		guard !loading else { return }
 		loading = true
-		StubTweetService
+		TweetService
 			.shared
-			.fetchTweets { [weak self] result in
+			.fetchTweets(entity: entity, before: before, after: after) { [weak self] result in
 				switch result {
 				case .success(let searchResult):
 					self?.decodeToTweetCellModel(.init(data: searchResult.data?.limitTo(to: 20), includes: searchResult.includes))
@@ -43,35 +46,14 @@ class TweetFeedViewModel {
 	
 	public func fetchNextPage() {
 		print("(DEBUG) fetching next page!")
-		guard !loading else { return }
-		loading = true
-		StubTweetService
-			.shared
-			.fetchTweets { [weak self] result in
-				switch result {
-				case .success(let searchResult):
-					let presentCount = self?.tweets?.count ?? 0
-					if let data = searchResult.data?.limitTo(offset: presentCount, to: presentCount + 20, replaceVal: []), !data.isEmpty {
-						self?.decodeToTweetCellModel(.init(data: data, includes: searchResult.includes))
-					}
-				case .failure(let err):
-					print("(DEBUG) err : ",err.localizedDescription)
-				}
-			}
+		fetchTweets(after: tweets?.last?.model?.id)
 	}
 	
 	private func decodeToTweetCellModel(_ data: TweetSearchResult) {
-		guard let tweets = data.data,
-			let allMedia = data.includes?.media,
-			let allUsers = data.includes?.users
-		else { return }
+		guard let tweets = data.data else { return }
 		
 		let fitleredTweet = tweets.compactMap { tweet in
-			let mediaKeys = tweet.attachments?.mediaKeys ?? []
-			
-			var model:TweetCellModel = .init(model: tweet,
-						 media: mediaKeys.compactMap { key in allMedia.first { $0.mediaKey == key } }.emptyOrNil,
-						 user: allUsers.first { $0.id == tweet.authorId })
+			var model:TweetCellModel = .init(model: tweet)
 			
 			model.action = {
 				TweetStorage.selectedTweet = model
