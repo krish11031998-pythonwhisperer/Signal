@@ -7,11 +7,11 @@
 
 import Foundation
 
-enum SignalEventService {
+enum SignalEventEndpoints {
 	case latestEvents(before: String?, after: String?, limit: Int)
 }
 
-extension SignalEventService: EndPoint {
+extension SignalEventEndpoints: EndPoint {
 	var scheme: String {
 		return "https"
 	}
@@ -55,7 +55,7 @@ class EventService: EventServiceInterface {
 	public static var shared: EventService = .init()
 	
 	public func fetchEvents(before: String? = nil, after: String? = nil, limit: Int = 20, completion: @escaping (Result<EventResult, Error>) -> Void) {
-		SignalEventService
+		SignalEventEndpoints
 			.latestEvents(before: before, after: after, limit: limit)
 			.fetch(completion: completion)
 	}

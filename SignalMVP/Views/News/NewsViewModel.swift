@@ -18,15 +18,17 @@ class NewsViewModel {
 	var news: [NewsModel]?
 	
 	func fetchNews() {
-		StubNewsService.shared.fetchNews(query: []) { [weak self] result in
+		NewsService
+			.shared
+			.fetchNews { [weak self] result in
 			switch result {
 			case .success(let news):
-				self?.news = news
-				guard let source = self?.buildTableViewSource() else {
-					return 
-				}
-				
+				self?.news = news.data
 				DispatchQueue.main.async {
+					guard let source = self?.buildTableViewSource() else {
+						return
+					}
+					
 					self?.view?.reloadTableWithDataSource(source)
 				}
 			case .failure(let err):

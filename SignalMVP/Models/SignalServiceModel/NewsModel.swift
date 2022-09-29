@@ -8,8 +8,8 @@
 import Foundation
 import UIKit
 
-struct NewsFirebaseResult: Codable {
-	let data: [String: NewsModel]?
+struct NewsResult: Codable {
+	let data: [NewsModel]?
 }
 
 struct NewsModel: Codable {
