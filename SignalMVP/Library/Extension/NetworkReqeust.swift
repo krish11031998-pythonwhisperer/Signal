@@ -68,7 +68,7 @@ enum URLSessionError: Error {
 extension URLSession {
 
 	static func urlSessionRequest<T: Codable>(request: URLRequest, completion: @escaping (Result<T,Error>) -> Void) {
-		
+		print("(DEBUG) Request: \(request.url?.absoluteString)")
 		if let cachedData = URLCache.shared[request] {
 			if let deceodedData = try? JSONDecoder().decode(T.self, from: cachedData) {
 				completion(.success(deceodedData))

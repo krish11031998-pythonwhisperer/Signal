@@ -58,6 +58,10 @@ class RedditPostCard : ConfigurableCell {
 		divider.setHeight(height: 0.5, priority: .init(999))
 		stack.setFittingConstraints(childView: divider, leading: 0, trailing: 0)
 		
+		stack.arrangedSubviews.forEach { view in
+			view.translatesAutoresizingMaskIntoConstraints = false
+		}
+		
 		showMoreHandler()
 		
 		selectionStyle = .none
