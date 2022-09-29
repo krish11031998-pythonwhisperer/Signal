@@ -22,6 +22,7 @@ struct NewsModel: Codable {
 	let text: String
 	let tickers: [String]
 	let title: String
+	let type: String
 	
 	enum CodingKeys: String, CodingKey {
 //		case createdAt
@@ -33,6 +34,7 @@ struct NewsModel: Codable {
 		case text
 		case tickers
 		case title
+		case type
 	}
 }
 

@@ -15,12 +15,14 @@ class EventViewModel {
 	
 	
 	public func fetchEvents() {
-		StubEventService.shared.fetchEvents(query: []) { [weak self] result in
+		EventService
+			.shared
+			.fetchEvents { [weak self] result in
 			switch result {
 			case .success(let events):
-				self?.events = Array(events.data.values)
-				if let validDataSource = self?.buildDataSource() {
-					DispatchQueue.main.async {
+				self?.events = Array(events.data)
+				DispatchQueue.main.async {
+					if let validDataSource = self?.buildDataSource() {
 						self?.view?.reloadTableWithDataSource(validDataSource)
 					}
 				}

@@ -9,7 +9,7 @@ import Foundation
 
 
 struct EventResult: Codable {
-	let data: [String: EventModel]
+	let data: [EventModel]
 }
 
 struct EventModel: Codable {

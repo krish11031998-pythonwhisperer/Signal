@@ -9,5 +9,5 @@ import Foundation
 
 protocol EventServiceInterface {
 	
-	func fetchEvents(query: [URLQueryItem], completion: @escaping (Result<EventResult,Error>) -> Void)
+	func fetchEvents(before: String?, after: String?, limit: Int, completion: @escaping (Result<EventResult,Error>) -> Void)
 }
