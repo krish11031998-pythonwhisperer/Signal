@@ -8,6 +8,22 @@
 import Foundation
 import UIKit
 
+fileprivate extension TweetOpinion {
+	var metricModels: [TweetMetricModel] {
+		[.init(image: .bullish, value: bullish),
+		 .init(image: .bearish, value: bearish)
+		]
+	}
+}
+
+fileprivate extension TweetReaction {
+	var metricModels: [TweetMetricModel] {
+		[.init(image: .true, value: trustedNews),
+		 .init(image: .false, value: fakeNews)
+		]
+	}
+}
+
 class TweetCell: ConfigurableCell {
 	
 	private lazy var authorLabel: UILabel = { .init() }()
@@ -55,9 +71,9 @@ class TweetCell: ConfigurableCell {
 		bodyStack.setCustomSpacing(12, after: bodyLabel)
 		bodyStack.setCustomSpacing(16, after: divider)
 		
-		let constraint = imgView.heightAnchor.constraint(equalToConstant: 200)
-		constraint.priority = .defaultHigh
-		constraint.isActive = true
+//		let constraint = imgView.heightAnchor.constraint(equalToConstant: 200)
+//		constraint.priority = .defaultHigh
+//		constraint.isActive = true
 		
 		let mainStack = UIView.HStack(subViews: [authorImageView, bodyStack], spacing: 12, alignment: .top)
 		authorImageView.cornerFrame = .init(origin: .zero, size: .init(squared: 48))
@@ -96,18 +112,19 @@ class TweetCell: ConfigurableCell {
 			imgView.isHidden = true
 		}
 		
-		metricStack.removeChildViews()
-
-		[TweetMetricModel(image: .bullish, value: Int.random(in: 0...50)),
-		 TweetMetricModel(image: .bearish, value: Int.random(in: 0...50)),
-		 TweetMetricModel(image: .true, value: Int.random(in: 0...50)),
-		 TweetMetricModel(image: .false, value: Int.random(in: 0...50))]
-			.forEach { model in
-				let view = TweetMetricView()
-				view.configureView(model: model)
-				metricStack.addArrangedSubview(view)
-			}
-		metricStack.addArrangedSubview(.spacer())
+		let metrics = (model.model?.opinions?.metricModels ?? []) + (model.model?.reactions?.metricModels ?? [])
+		if !metrics.isEmpty {
+			metricStack.removeChildViews()
+			metrics
+				.forEach { model in
+					let view = TweetMetricView()
+					view.configureView(model: model)
+					metricStack.addArrangedSubview(view)
+				}
+			metricStack.addArrangedSubview(.spacer())
+		}
+		
+		
 	}
 	
 	
