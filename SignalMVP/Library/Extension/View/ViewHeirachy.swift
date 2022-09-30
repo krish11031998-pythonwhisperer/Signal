@@ -12,8 +12,8 @@ extension UIView {
 	
 	static func divider() -> UIView {
 		let view = UIView()
-		view.setFrame(height: 2)
-		view.backgroundColor = .gray.withAlphaComponent(0.05)
+		view.setFrame(height: 0.75)
+		view.backgroundColor = .surfaceBackgroundInverse
 		return view
 	}
 	

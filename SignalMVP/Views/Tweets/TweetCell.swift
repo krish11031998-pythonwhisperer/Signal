@@ -49,10 +49,11 @@ class TweetCell: ConfigurableCell {
 		
 		let headerStack: UIStackView = .init(arrangedSubviews: [authorLabel, .spacer(), timestampLabel])
 		headerStack.spacing = 8
-
-		let bodyStack = UIView.VStack(subViews: [headerStack, bodyLabel, imgView, metricStack], spacing: 8)
+		let divider = UIView.divider()
+		let bodyStack = UIView.VStack(subViews: [headerStack, bodyLabel, imgView, metricStack, divider], spacing: 8)
 		bodyStack.setCustomSpacing(12, after: headerStack)
 		bodyStack.setCustomSpacing(12, after: bodyLabel)
+		bodyStack.setCustomSpacing(16, after: divider)
 		
 		let constraint = imgView.heightAnchor.constraint(equalToConstant: 200)
 		constraint.priority = .defaultHigh

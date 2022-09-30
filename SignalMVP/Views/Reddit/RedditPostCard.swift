@@ -13,7 +13,7 @@ extension Notification.Name {
 }
 
 class RedditPostCard : ConfigurableCell {
-	
+	private static var showMoreId: String = ""
 	private lazy var authorLabel: UILabel = { .init() }()
 	private lazy var subReddit: UILabel = { .init() }()
 	private lazy var postImageView: UIImageView = {
@@ -29,7 +29,7 @@ class RedditPostCard : ConfigurableCell {
 	}()
 	private lazy var postTitle: UILabel = { .init() }()
 	private lazy var postBody: UILabel = { .init() }()
-	
+	private var model: RedditPostModel? = nil
 	
 	override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
 		super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -58,16 +58,12 @@ class RedditPostCard : ConfigurableCell {
 		divider.setHeight(height: 0.5, priority: .init(999))
 		stack.setFittingConstraints(childView: divider, leading: 0, trailing: 0)
 		
-		stack.arrangedSubviews.forEach { view in
-			view.translatesAutoresizingMaskIntoConstraints = false
-		}
-		
 		showMoreHandler()
 		
 		selectionStyle = .none
 		backgroundColor = .surfaceBackground
 		contentView.addSubview(stack)
-		contentView.setFittingConstraints(childView: stack, insets: .init(vertical: 10, horizontal: 16))
+		contentView.setFittingConstraints(childView: stack, top: 10, leading: 16, trailing: 16, bottom: 10, priority: .needed)
 	}
 	
 	private func resetCell() {
@@ -78,7 +74,7 @@ class RedditPostCard : ConfigurableCell {
 	
 	func configure(with model: RedditPostModel) {
 		resetCell()
-		
+		self.model = model
 		model.author.body2Regular().render(target: authorLabel)
 		authorLabel.numberOfLines = 1
 		
@@ -88,11 +84,11 @@ class RedditPostCard : ConfigurableCell {
 		model.title.heading4().render(target: postTitle)
 		postTitle.numberOfLines = 0
 		
-		if let text = model.selftext {
+		if let text = model.selftext, !text.isEmpty {
 			text.body3Regular().render(target: postBody)
 			postBody.isHidden = false
 			showMoreLabel.isHidden = false
-			postBody.numberOfLines = 3
+			postBody.numberOfLines = selectedCard(model) ? 0 : 3
 		}
 		
 		if model.url.contains("png") {
@@ -109,7 +105,15 @@ class RedditPostCard : ConfigurableCell {
 
 	@objc
 	func handleTap() {
+		Self.showMoreId = model?.id ?? ""
 		postBody.numberOfLines = postBody.numberOfLines == 0 ? 3 : 0
 		NotificationCenter.default.post(name: .updateTableView, object: nil)
+	}
+}
+
+
+extension RedditPostCard {
+	private func selectedCard(_ reddit: RedditPostModel) -> Bool {
+		Self.showMoreId == reddit.id
 	}
 }
