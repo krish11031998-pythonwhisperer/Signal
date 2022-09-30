@@ -79,7 +79,7 @@ class HomeViewModel {
 	}
 	
 	private func buildDataSource() -> TableViewDataSource{
-		.init(sections: [trendingHeadlinesSection, videoSection, topMentionedCoinsSection].compactMap { $0 })
+		.init(sections: [trendingHeadlinesSection, topMentionedCoinsSection, videoSection].compactMap { $0 })
 	}
 	
 

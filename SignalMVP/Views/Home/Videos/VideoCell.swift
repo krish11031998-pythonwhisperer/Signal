@@ -12,6 +12,12 @@ class VideoCell: ConfigurableCell {
 //MARK: - Properties
 	private lazy var img: UIImageView = {
 		let view = UIImageView()
+		view.contentMode = .scaleAspectFit
+		view.clipsToBounds = true
+		return view
+	}()
+	private lazy var bgImg: UIImageView = {
+		let view = UIImageView()
 		view.contentMode = .scaleAspectFill
 		view.clipsToBounds = true
 		return view
@@ -42,10 +48,20 @@ class VideoCell: ConfigurableCell {
 		let infoView = videoInfoStack.embedInView(insets: .init(by: 12))
 		infoView.clipsToBounds = true
 		
-		[img, infoView].forEach(mainStack.addArrangedSubview(_:))
+		let videoimageView = UIView()
+		videoimageView.addSubview(bgImg)
+		bgImg.addBlurView()
+		videoimageView.addSubview(img)
+		
+		[bgImg, img].forEach {
+			videoimageView.addSubview($0)
+			videoimageView.setFittingConstraints(childView: $0, insets: .zero)
+		}
+		
+		[videoimageView, infoView].forEach(mainStack.addArrangedSubview(_:))
 
 		videoLabel.numberOfLines = 3
-		img.setHeight(height: 150, priority: .required)
+		videoimageView.setHeight(height: 150, priority: .required)
 		mainStack.setHeight(height: 250, priority: .required)
 		mainStack.cornerRadius = 12
 		mainStack.addBlurView()
@@ -61,7 +77,7 @@ class VideoCell: ConfigurableCell {
 	
 	func configure(with model: VideoModel) {
 		UIImage.loadImage(url: model.imageUrl, at: img, path: \.image)
-		
+		UIImage.loadImage(url: model.imageUrl, at: bgImg, path: \.image)
 		model.title.body1Medium().render(target: videoLabel)
 		model.sourceName.bodySmallRegular(color: .gray).render(target: authorLabel)
 		authorLabel.setFrame(height: authorLabel.compressedSize.height)
