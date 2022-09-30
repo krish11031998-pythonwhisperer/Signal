@@ -81,7 +81,7 @@ class TweetDetailView: UIViewController {
 	
 	
 	private func setupViews() {
-		view.backgroundColor = .black
+		view.backgroundColor = .surfaceBackground
 		view.addSubview(scrollView)
 		view.setFittingConstraints(childView: scrollView, insets: .zero)
 
@@ -114,5 +114,8 @@ class TweetDetailView: UIViewController {
 		
 	}
 	
-	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(true)
+		navigationController?.navigationBar.transform = .init(translationX: 0, y: 0)
+	}
 }

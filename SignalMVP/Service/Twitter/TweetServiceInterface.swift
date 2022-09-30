@@ -8,5 +8,5 @@
 import Foundation
 
 protocol TweetServiceInterface {
-	func fetchTweets(queries: [URLQueryItem], completion: @escaping (Result<TweetSearchResult,Error>) -> Void)
+	func fetchTweets(entity: String?, before: String?, after: String?, limit: Int, completion: @escaping (Result<TweetSearchResult,Error>) -> Void)
 }

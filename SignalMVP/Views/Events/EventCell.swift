@@ -11,8 +11,6 @@ import UIKit
 class EventCell: ConfigurableCell {
 
 //MARK: - Properties
-	
-	private lazy var title: UILabel = { .init() }()
 	private lazy var mainNews: EventView = { .init(largeCard: true) }()
 	private lazy var otherNews: UIStackView = { .init() }()
 	
@@ -30,19 +28,10 @@ class EventCell: ConfigurableCell {
 	}
 	
 	private func setupView() {
-		let stack = UIView.VStack(subViews: [title, mainNews, otherNews], spacing: 12, alignment: .leading)
-		stack.setCustomSpacing(12, after: title)
+		let stack = UIView.VStack(subViews: [mainNews, otherNews], spacing: 12, alignment: .leading)
 		stack.setCustomSpacing(4, after: otherNews)
-		
-		let divider = UIView()
-		divider.backgroundColor = .gray
-		stack.addArrangedSubview(divider.embedInView(insets: .zero))
-		divider.setHeight(height: 0.5, priority: .required)
-		stack.setFittingConstraints(childView: divider, leading: 0, trailing: 0)
-	
-		addSubview(stack)
-		setFittingConstraints(childView: stack, insets: .init(vertical: 10, horizontal: 8))
-		
+		contentView.addSubview(stack)
+		contentView.setFittingConstraints(childView: stack, insets: .init(vertical: 10, horizontal: 8))
 		mainNews.isHidden = true
 		otherNews.isHidden = true
 	}
@@ -53,10 +42,6 @@ class EventCell: ConfigurableCell {
 	}
 	
 	func configure(with model: EventModel) {
-
-		model.eventName.styled(font: .systemFont(ofSize: 17.5, weight: .bold),color: .white).render(target: title)
-		title.numberOfLines = 2
-
 		if let firstNews = model.news.first {
 			mainNews.configureView(model: firstNews)
 			mainNews.isHidden = false
@@ -80,10 +65,12 @@ class EventCell: ConfigurableCell {
 
 class EventView: UIView  {
 	
+	private var news: NewsModel?
 	private lazy var imageView: UIImageView = { .init() }()
 	private lazy var authorTitle: UILabel = { .init() }()
 	private lazy var newsTitle: UILabel = { .init() }()
-	private lazy var tickersView: UIStackView = { UIView.HStack(spacing: 8) }()
+	private lazy var tickersView: UIStackView = { UIView.HStack(spacing: 8, alignment: .center) }()
+	private lazy var bottomStack: UIStackView = { .init() }()
 	private let largeCard: Bool
 	
 	init(largeCard: Bool = false) {
@@ -103,46 +90,68 @@ class EventView: UIView  {
 	private func setupView() {
 		let stack = UIView.VStack(subViews: [imageView], spacing: 8)
 		
-		let infoStack = UIView.VStack(subViews: [newsTitle, authorTitle, tickersView],spacing: 5)
-		infoStack.setCustomSpacing(10, after: authorTitle)
+		let bottomStack: UIStackView = .HStack(subViews: [authorTitle, .spacer(), tickersView],spacing: 8)
 		
-		stack.addArrangedSubview(infoStack.embedInView(insets: .init(vertical: 0, horizontal: 4)))
-		stack.alignment = .leading
+		let infoStack = UIView.VStack(subViews: [newsTitle, bottomStack, .spacer()],spacing: 8)
+		
+		stack.addArrangedSubview(infoStack.embedInView(insets: .init(vertical: 0, horizontal: 8)))
+		//stack.alignment = .leading
 	
 		stack.setCustomSpacing(10, after: newsTitle)
 		
-		imageView.setHeight(height: largeCard ? 240 : 140, priority: .required)
-		imageView.cornerRadius = 10
+		imageView.setHeight(height: largeCard ? 180 : 140, priority: .required)
+
 		imageView.clipsToBounds = true
 		imageView.contentMode = .scaleAspectFill
 		tickersView.isHidden = true
 		authorTitle.numberOfLines = 1
-		newsTitle.numberOfLines = 2
+		newsTitle.numberOfLines = 3
 		
 		addSubview(stack)
-		setFittingConstraints(childView: stack, insets: .init(top: 0, left: 0, bottom: 8, right: 0))
+		setFittingConstraints(childView: stack, insets: .zero)
+		addBlurView()
+		clipsToBounds = true
+		cornerRadius = 16
 	}
 	
-	public func configureView(model: NewsModel) {
+	public func configureView(model: NewsModel, addTapGesture: Bool = true) {
+		
+		news = model
+		
 		UIImage.loadImage(url: model.imageUrl, at: imageView, path: \.image)
 		
-		model.sourceName.styled(font: .systemFont(ofSize: 10, weight: .semibold), color: .gray).render(target: authorTitle)
-		model.title.styled(font: .systemFont(ofSize: 15, weight: .medium), color: .white).render(target: newsTitle)
+		model.sourceName.bodySmallRegular(color: .gray).render(target: authorTitle)
+		model.title.body1Medium().render(target: newsTitle)
 		
 		tickersView.isHidden = model.tickers.isEmpty
 		if !model.tickers.isEmpty {
 			tickersView.removeChildViews()
-			model.tickers.limitTo(to: 3).forEach {
-				let label = UILabel()
-				$0.styled(font: .systemFont(ofSize: 13, weight: .regular), color: .white).render(target: label)
-				
-				tickersView.addArrangedSubview(label.blobify(backgroundColor: .white.withAlphaComponent(0.3),
-															 borderColor: .white,
-															 borderWidth: 1,
-															 cornerRadius: 8))
+		
+			model.tickers.limitTo(to: largeCard ? 3 : 1).forEach {
+				let url = "https://cryptoicons.org/api/icon/\($0.lowercased())/32"
+				print("(DEBUG) imgUrl : ",url)
+				let imgView = UIImageView(circular: .init(origin: .zero, size: .init(squared: 24)), background: .gray.withAlphaComponent(0.25))
+				imgView.contentMode = .scaleAspectFit
+				UIImage.loadImage(url: url, at: imgView, path: \.image)
+				imgView.setFrame(.init(squared: 24))
+				tickersView.addArrangedSubview(imgView)
 			}
-			tickersView.addArrangedSubview(.spacer())
 		}
+		
+		if addTapGesture {
+			self.addTapGesture()
+		}
+	}
+	
+	private func addTapGesture() {
+		let tapGesture = UITapGestureRecognizer(target: self, action: #selector(addTapHandler))
+//		tapGesture.cancelsTouchesInView = true
+		addGestureRecognizer(tapGesture)
+	}
+	
+	@objc
+	private func addTapHandler() {
+		NewsStorage.selectedNews = news
 	}
 }
 

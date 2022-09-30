@@ -1,0 +1,294 @@
+{
+	"data": [
+		{
+			"news_url": "https://www.youtube.com/watch?v=Ow52qg6slRM",
+			"image_url": "https://crypto.snapi.dev/images/v1/k/l/ether-falls-20-in-a-week-and-ripple-ceo-slams-sec-over-xrp-lawsuit-cnbc-crypto-world-199641.jpg",
+			"title": "Ether falls 20% in a week, and Ripple CEO slams SEC over XRP lawsuit: CNBC Crypto World",
+			"text": "CNBC Crypto World features the latest news and daily trading updates from the digital currency markets and provides viewers with a look at what's ahead with high-profile interviews, explainers, and unique stories from the ever-changing crypto industry. On today's show, Ripple CEO Brad Garlinghouse discusses the latest on the XRP lawsuit and his expansion ambitions.",
+			"source_name": "CNBC Television",
+			"date": "Fri, 23 Sep 2022 15:37:22 -0400",
+			"topics": [
+				"regulations"
+			],
+			"sentiment": "Neutral",
+			"type": "Video",
+			"tickers": [
+				"ETH",
+				"XRP"
+			]
+		},
+		{
+			"news_url": "https://www.youtube.com/watch?v=jV89NjNAMV0",
+			"image_url": "https://crypto.snapi.dev/images/v1/6/h/6hhtr2-199633.jpg",
+			"title": "Bitcoin Slips Lower Amid Stock Market Sell-Off",
+			"text": "It's been a choppy week of trading for bitcoin (BTC), as the Federal Reserve hiked interest rates again. \"All About Bitcoin's\" week-in-review panel looks at the news affecting bitcoin markets and the outlook for the biggest cryptocurrency by market cap.",
+			"source_name": "Coindesk",
+			"date": "Fri, 23 Sep 2022 14:51:58 -0400",
+			"topics": [],
+			"sentiment": "Negative",
+			"type": "Video",
+			"tickers": [
+				"BTC"
+			]
+		},
+		{
+			"news_url": "https://www.youtube.com/watch?v=zo1LgXp4PfQ",
+			"image_url": "https://crypto.snapi.dev/images/v1/m/v/celsius-wants-to-issue-i-o-u-crypto-to-customers-who-signed-up-for-specific-accounts-199571.jpg",
+			"title": "Celsius wants to issue 'I-O-U' crypto to customers who signed up for specific accounts",
+			"text": "CNBC's Kate Rooney reports on news from Celsius.",
+			"source_name": "CNBC Television",
+			"date": "Fri, 23 Sep 2022 12:27:51 -0400",
+			"topics": [],
+			"sentiment": "Neutral",
+			"type": "Video",
+			"tickers": [
+				"CEL"
+			]
+		},
+		{
+			"news_url": "https://www.youtube.com/watch?v=wmufDae2gqY",
+			"image_url": "https://crypto.snapi.dev/images/v1/3/g/bitcoin-tests-almost-2-year-lows-199166.jpg",
+			"title": "Bitcoin Tests Almost 2-Year Lows",
+			"text": "Bloomberg's Katie Greifeld joins Ed Ludlow to discuss why cryptocurrencies lingered near almost two-year lows as digital-asset investors sought a fresh catalyst with central bank rate increases depressing demand for riskier assets. -------- Like this video?",
+			"source_name": "Bloomberg Technology",
+			"date": "Thu, 22 Sep 2022 18:45:38 -0400",
+			"topics": [],
+			"sentiment": "Negative",
+			"type": "Video",
+			"tickers": [
+				"BTC"
+			]
+		},
+		{
+			"news_url": "https://www.youtube.com/watch?v=m_nHpjS1Tvo",
+			"image_url": "https://crypto.snapi.dev/images/v1/m/q/us-judge-ordered-tether-to-produce-financial-records-showing-backing-of-usdt-199127.jpg",
+			"title": "US Judge Ordered Tether to Produce Financial Records Showing Backing of USDT",
+			"text": "A New York judge ordered Tether to produce financial records on the backing of USDT as part of a lawsuit that alleges Tether conspired to issue USDT to inflate the price of bitcoin (BTC). CoinDesk Global Policy & Regulation Managing Editor Nikhilesh De breaks down the details.",
+			"source_name": "Coindesk",
+			"date": "Thu, 22 Sep 2022 16:30:05 -0400",
+			"topics": [
+				"stablecoins"
+			],
+			"sentiment": "Negative",
+			"type": "Video",
+			"tickers": [
+				"USDT"
+			]
+		},
+		{
+			"news_url": "https://www.youtube.com/watch?v=9Oc8FOFuiGo",
+			"image_url": "https://crypto.snapi.dev/images/v1/a/8/bitcoin-dips-below-19k-and-krakens-new-ceo-david-ripley-on-company-culture-cnbc-crypto-world-199109.jpg",
+			"title": "Bitcoin dips below $19K, and Kraken's new CEO David Ripley on company culture: CNBC Crypto World",
+			"text": "CNBC Crypto World features the latest news and daily trading updates from the digital currency markets and provides viewers with a look at what's ahead with high-profile interviews, explainers, and unique stories from the ever-changing crypto industry. On today's show, we speak with crypto exchange Kraken's incoming CEO Dave Ripley about his vision for the company.",
+			"source_name": "CNBC Television",
+			"date": "Thu, 22 Sep 2022 15:27:56 -0400",
+			"topics": [],
+			"sentiment": "Negative",
+			"type": "Video",
+			"tickers": [
+				"BTC"
+			]
+		},
+		{
+			"news_url": "https://www.youtube.com/watch?v=nlvJkU6Z9rw",
+			"image_url": "https://crypto.snapi.dev/images/v1/e/8/blocks-bitcoin-fixation-hurting-the-business-mizuho-says-199099.jpg",
+			"title": "Block's bitcoin fixation hurting the business, Mizuho says",
+			"text": "#bitcoin #crypto #yahoofinance Yahoo Finance Live's Brad Smith and Julie Hyman discuss the stock performance for Block after Mizuho downgrades its shares from Buy to Neutral. Don't Miss: Valley of Hype: The Culture That Built Elizabeth Holmes WATCH HERE: https://youtu.be/Sb179GLPNYE Subscribe to Yahoo Finance: https://yhoo.it/2fGu5Bb About Yahoo Finance: At Yahoo Finance, you get free stock quotes, up-to-date news, portfolio management resources, international market data, social interaction and mortgage rates that help you manage your financial life.",
+			"source_name": "Yahoo Finance",
+			"date": "Thu, 22 Sep 2022 14:58:35 -0400",
+			"topics": [],
+			"sentiment": "Negative",
+			"type": "Video",
+			"tickers": [
+				"BTC"
+			]
+		},
+		{
+			"news_url": "https://www.youtube.com/watch?v=8zdbb85AW3U",
+			"image_url": "https://crypto.snapi.dev/images/v1/m/q/cardanos-vasil-hard-fork-expected-to-go-live-this-week-199033.jpg",
+			"title": "Cardano's Vasil Hard Fork Expected to Go Live This Week",
+			"text": "The Cardano blockchain will carry out its much-anticipated Vasil hard fork, a backward-incompatible upgrade taking place on the main network. “The Hash” panel discusses how the fork is intended to enrich smart contract capabilities, increase the chain's throughput and reduce costs.",
+			"source_name": "Coindesk",
+			"date": "Thu, 22 Sep 2022 12:30:00 -0400",
+			"topics": [
+				"upgrade"
+			],
+			"sentiment": "Positive",
+			"type": "Video",
+			"tickers": [
+				"ADA"
+			]
+		},
+		{
+			"news_url": "https://www.youtube.com/watch?v=b7w_D-Z0yYk",
+			"image_url": "https://crypto.snapi.dev/images/v1/m/n/bitcoin-seesaws-following-fed-rate-hike-announcement-199019.jpg",
+			"title": "Bitcoin seesaws following Fed rate hike announcement",
+			"text": "#bitcoin #Fedratehike #yahoofinance Yahoo Finance's Ines Ferre joins the Live show to break down how cryptocurrencies reacted to the Fed policy decision. Don't Miss: Valley of Hype: The Culture That Built Elizabeth Holmes WATCH HERE: https://youtu.be/Sb179GLPNYE Subscribe to Yahoo Finance: https://yhoo.it/2fGu5Bb About Yahoo Finance: At Yahoo Finance, you get free stock quotes, up-to-date news, portfolio management resources, international market data, social interaction and mortgage rates that help you manage your financial life.",
+			"source_name": "Yahoo Finance",
+			"date": "Thu, 22 Sep 2022 12:06:42 -0400",
+			"topics": [],
+			"sentiment": "Negative",
+			"type": "Video",
+			"tickers": [
+				"BTC"
+			]
+		},
+		{
+			"news_url": "https://www.youtube.com/watch?v=snfKhp49ZIg",
+			"image_url": "https://crypto.snapi.dev/images/v1/x/e/jpmorgan-ceo-bitcoin-other-cryptos-are-decentralized-ponzi-schemes-198965.jpg",
+			"title": "JPMorgan CEO: Bitcoin, other cryptos are 'decentralized Ponzi schemes'",
+			"text": "#bitcoin #crypto #yahoofinance During his testimony to Congress on Wednesday, JPMorgan CEO Jamie Dimon criticized cryptocurrencies like bitcoin, comparing them to Ponzi schemes. Don't Miss: Valley of Hype: The Culture That Built Elizabeth Holmes WATCH HERE: https://youtu.be/Sb179GLPNYE Subscribe to Yahoo Finance: https://yhoo.it/2fGu5Bb About Yahoo Finance: At Yahoo Finance, you get free stock quotes, up-to-date news, portfolio management resources, international market data, social interaction and mortgage rates that help you manage your financial life.",
+			"source_name": "Yahoo Finance",
+			"date": "Thu, 22 Sep 2022 10:32:45 -0400",
+			"topics": [],
+			"sentiment": "Negative",
+			"type": "Video",
+			"tickers": [
+				"BTC"
+			]
+		},
+		{
+			"news_url": "https://www.youtube.com/watch?v=HfyFrtRnowA",
+			"image_url": "https://crypto.snapi.dev/images/v1/m/q/chart-of-the-day-bitcoin-bounces-back-after-feds-75-basis-point-rate-hike-198947.jpg",
+			"title": "Chart of The Day: Bitcoin Bounces Back After Fed's 75-Basis-Point Rate Hike",
+			"text": "Bitcoin (BTC) slipped below $19,000 briefly, but then reversed losses following the Federal Reserve's announcement of a third consecutive rate hike of 75 basis points. \"All About Bitcoin\" host Christine Lee breaks down the Chart of the Day.",
+			"source_name": "Coindesk",
+			"date": "Thu, 22 Sep 2022 10:00:09 -0400",
+			"topics": [],
+			"sentiment": "Positive",
+			"type": "Video",
+			"tickers": [
+				"BTC"
+			]
+		},
+		{
+			"news_url": "https://www.youtube.com/watch?v=jL5onwYoMiA",
+			"image_url": "https://crypto.snapi.dev/images/v1/g/l/tezos-co-founder-on-protocol-upgrade-198589.jpg",
+			"title": "Tezos Co-Founder on Protocol Upgrade",
+			"text": "Tezos Co-Founder Kathleen Breitman joins Emily Chang to discuss how the Tezos protocol, a proof-of-stake network widely considered a direct competitor of Ethereum, will undergo its 11th upgrade. -------- Like this video?",
+			"source_name": "Bloomberg Technology",
+			"date": "Wed, 21 Sep 2022 19:12:11 -0400",
+			"topics": [
+				"upgrade"
+			],
+			"sentiment": "Positive",
+			"type": "Video",
+			"tickers": [
+				"XTZ"
+			]
+		},
+		{
+			"news_url": "https://www.youtube.com/watch?v=6b2m12oukUM",
+			"image_url": "https://crypto.snapi.dev/images/v1/j/0/bitcoin-rises-as-fed-raises-rates-and-twitch-bans-crypto-gambling-after-backlash-cnbc-crypto-world-198516.jpg",
+			"title": "Bitcoin rises as Fed raises rates, and Twitch bans crypto gambling after backlash: CNBC Crypto World",
+			"text": "CNBC Crypto World features the latest news and daily trading updates from the digital currency markets and provides viewers with a look at what's ahead with high-profile interviews, explainers, and unique stories from the ever-changing crypto industry. On today's show, Anthony Georgiades, co-founder of Pastel Network, discusses the economic pressures facing the crypto industry.",
+			"source_name": "CNBC Television",
+			"date": "Wed, 21 Sep 2022 15:42:29 -0400",
+			"topics": [],
+			"sentiment": "Neutral",
+			"type": "Video",
+			"tickers": [
+				"BTC"
+			]
+		},
+		{
+			"news_url": "https://www.youtube.com/watch?v=wnpyRJn-wkc",
+			"image_url": "https://crypto.snapi.dev/images/v1/m/q/whats-next-for-ethereums-evolution-198460.jpg",
+			"title": "What's Next for Ethereum's Evolution?",
+			"text": "Celo co-founder Marek Olszewski joins “First Mover” a week after the Ethereum Merge to discuss the network's future development and obstacles in crypto's mainstream adoption. Plus, key takeaways from his conversation with Ethereum co-founder Vitalik Buterin on energy consumption.",
+			"source_name": "Coindesk",
+			"date": "Wed, 21 Sep 2022 13:10:28 -0400",
+			"topics": [],
+			"sentiment": "Neutral",
+			"type": "Video",
+			"tickers": [
+				"ETH"
+			]
+		},
+		{
+			"news_url": "https://www.youtube.com/watch?v=lLHV2YwmT24",
+			"image_url": "https://crypto.snapi.dev/images/v1/y/2/bitcoin-falls-below-19000-ahead-of-fed-decision-binance-and-ftx-bid-for-voyager-198370.jpg",
+			"title": "Bitcoin falls below $19,000 ahead of Fed decision, Binance and FTX bid for Voyager",
+			"text": "#bitcoin #FederalReserve #yahoofinance Yahoo Finance's David Hollerith joins the Live show to discuss bitcoin falling below $19,000 ahead of the Fed's rate hike decision, and Binance and FTX bidding for Voyager. Don't Miss: Valley of Hype: The Culture That Built Elizabeth Holmes WATCH HERE: https://youtu.be/Sb179GLPNYE Subscribe to Yahoo Finance: https://yhoo.it/2fGu5Bb About Yahoo Finance: At Yahoo Finance, you get free stock quotes, up-to-date news, portfolio management resources, international market data, social interaction and mortgage rates that help you manage your financial life.",
+			"source_name": "Yahoo Finance",
+			"date": "Wed, 21 Sep 2022 10:57:40 -0400",
+			"topics": [],
+			"sentiment": "Negative",
+			"type": "Video",
+			"tickers": [
+				"BTC"
+			]
+		},
+		{
+			"news_url": "https://www.youtube.com/watch?v=kl3jB2EqFWk",
+			"image_url": "https://crypto.snapi.dev/images/v1/m/q/bitcoin-and-ether-bounce-back-ahead-of-fomc-meeting-198310.jpg",
+			"title": "Bitcoin and Ether Bounce Back Ahead of FOMC Meeting",
+			"text": "Bitcoin (BTC) regains $19,000 and ether (ETH) bounces back after sinking 15% post-Merge. Bruno Ramos de Sousa, head of global expansion at Hashdex, shares his market outlook as institutional interests in crypto increase.",
+			"source_name": "Coindesk",
+			"date": "Wed, 21 Sep 2022 09:00:33 -0400",
+			"topics": [],
+			"sentiment": "Positive",
+			"type": "Video",
+			"tickers": [
+				"BTC",
+				"ETH"
+			]
+		},
+		{
+			"news_url": "https://www.youtube.com/watch?v=Q2ld4ojN7No",
+			"image_url": "https://crypto.snapi.dev/images/v1/9/y/solanas-rising-carbon-footprint-197969.jpg",
+			"title": "Solana's Rising Carbon Footprint",
+			"text": "Solana Labs Co-Founder Anatoly Yakovenko joins Emily Chang and Bloomberg's Sonali Basak to discuss the company's latest energy impact report showing the network's overall emissions rose roughly 26 percent during the past six months, and what can be done to reduce it. -------- Like this video?",
+			"source_name": "Bloomberg Technology",
+			"date": "Tue, 20 Sep 2022 19:15:27 -0400",
+			"topics": [],
+			"sentiment": "Neutral",
+			"type": "Video",
+			"tickers": [
+				"SOL"
+			]
+		},
+		{
+			"news_url": "https://www.youtube.com/watch?v=79Za15iEHmE",
+			"image_url": "https://crypto.snapi.dev/images/v1/9/r/nova-labs-crypto-powered-mobile-service-197970.jpg",
+			"title": "Nova Labs' Crypto-Powered Mobile Service",
+			"text": "Nova Labs CEO and Helium Founder Amir Haleem joins Emily Chang to discuss an exclusive five-year agreement with T-Mobile to launch their beta Helium Mobile commercial service in 1Q 2023. -------- Like this video?",
+			"source_name": "Bloomberg Technology",
+			"date": "Tue, 20 Sep 2022 19:15:00 -0400",
+			"topics": [],
+			"sentiment": "Positive",
+			"type": "Video",
+			"tickers": [
+				"NVA"
+			]
+		},
+		{
+			"news_url": "https://www.youtube.com/watch?v=ggHCsmdB4P8",
+			"image_url": "https://crypto.snapi.dev/images/v1/o/r/where-does-ether-go-after-the-merge-197908.jpg",
+			"title": "Where Does Ether Go After the 'Merge?'",
+			"text": "Now that the Ethereum \"Merge\" is over, where does the cryptocurrency go from here? Abigail Doolittle takes a look on \"Bloomberg Crypto.",
+			"source_name": "Bloomberg Markets and Finance",
+			"date": "Tue, 20 Sep 2022 15:44:38 -0400",
+			"topics": [],
+			"sentiment": "Neutral",
+			"type": "Video",
+			"tickers": [
+				"ETH"
+			]
+		},
+		{
+			"news_url": "https://www.youtube.com/watch?v=VL-5AVQOsC4",
+			"image_url": "https://crypto.snapi.dev/images/v1/m/i/another-volatile-day-for-bitcoin-and-nasdaq-prepares-to-offer-crypto-services-cnbc-crypto-world-197902.jpg",
+			"title": "Another volatile day for bitcoin, and Nasdaq prepares to offer crypto services: CNBC Crypto World",
+			"text": "CNBC Crypto World features the latest news and daily trading updates from the digital currency markets and provides viewers with a look at what's ahead with high-profile interviews, explainers, and unique stories from the ever-changing crypto industry. On today's show, Bruno Ramos de Sousa, head of Global Expansion at Hashdex, discusses macro pressures facing the crypto industry.",
+			"source_name": "CNBC Television",
+			"date": "Tue, 20 Sep 2022 15:38:35 -0400",
+			"topics": [],
+			"sentiment": "Negative",
+			"type": "Video",
+			"tickers": [
+				"BTC"
+			]
+		}
+	]
+}

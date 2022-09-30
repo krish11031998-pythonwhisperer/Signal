@@ -40,5 +40,6 @@ class TableRow<Cell: ConfigurableCell>: TableCellProvider {
 			actionProvider.action?()
 		}
 	}
+	
 }
 

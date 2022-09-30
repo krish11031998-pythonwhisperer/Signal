@@ -12,7 +12,7 @@ class StubEventService: EventServiceInterface {
 	
 	public static var shared: StubEventService = .init()
 	
-	func fetchEvents(query: [URLQueryItem], completion: @escaping (Result<EventResult, Error>) -> Void) {
+	func fetchEvents(before: String? = nil, after: String? = nil, limit: Int = 10, completion: @escaping (Result<EventResult, Error>) -> Void) {
 		let result: Result<EventResult, Error> = Bundle.main.loadDataFromBundle(name: "events", extensionStr: "json")
 		completion(result)
 	}

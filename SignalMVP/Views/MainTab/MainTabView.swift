@@ -11,7 +11,7 @@ import UIKit
 class MainTab: UITabBar {
 	
 	private var shapeLayer: CAShapeLayer?
-	
+
 	override func draw(_ rect: CGRect) {
 		addShape(rect)
 	}
@@ -19,7 +19,7 @@ class MainTab: UITabBar {
 	private func addShape(_ rect: CGRect) {
 		let shape = CAShapeLayer()
 		shape.path = drawShape(rect)
-		shape.fillColor = UIColor.black.cgColor
+		shape.fillColor = UIColor.surfaceBackgroundInverse.cgColor
 		shape.strokeColor = UIColor.clear.cgColor
 		
 		if let oldShape = self.shapeLayer {
@@ -31,7 +31,7 @@ class MainTab: UITabBar {
 	}
 	
 	private func drawShape(_ rect: CGRect) -> CGPath {
-		let path = UIBezierPath(roundedRect: rect, cornerRadius: 16)
+		let path = UIBezierPath(roundedRect: rect, cornerRadius: 8)
 		return path.cgPath
 		
 	}

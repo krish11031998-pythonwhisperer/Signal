@@ -12,16 +12,18 @@ class StubNewsService: NewsServiceInterface {
 
 	public static var shared: StubNewsService = .init()
 	
-	public func fetchNews(query: [URLQueryItem], completion: @escaping (Result<[NewsModel], Error>) -> Void) {
-		let result: Result<NewsFirebaseResult,Error> = Bundle.main.loadDataFromBundle(name: "news", extensionStr: "json")
+	public func fetchNews(tickers: String? = nil,
+						  items: String? = nil,
+						  source: String? = nil,
+						  after: String? = nil,
+						  before: String? = nil,
+						  limit: Int = 20,
+						  completion: @escaping (Result<NewsResult, Error>) -> Void) {
+		let result: Result<NewsResult,Error> = Bundle.main.loadDataFromBundle(name: "news", extensionStr: "json")
 		
 		switch result {
 		case .success(let newsResult):
-			if let news = newsResult.data?.values {
-				completion(.success(Array(news)))
-			} else {
-				completion(.failure(URLSessionError.noData))
-			}
+			completion(.success(newsResult))
 		case .failure(let err):
 			completion(.failure(err))
 		}

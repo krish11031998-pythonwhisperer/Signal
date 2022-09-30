@@ -1,0 +1,456 @@
+{
+	"data": {
+		"all": [
+			{
+				"total_mentions": 2440,
+				"positive_mentions": 750,
+				"negative_mentions": 918,
+				"neutral_mentions": 772,
+				"ticker": "BTC",
+				"name": "Bitcoin",
+				"sentiment_score": -0.103
+			},
+			{
+				"total_mentions": 2094,
+				"positive_mentions": 655,
+				"negative_mentions": 579,
+				"neutral_mentions": 860,
+				"ticker": "ETH",
+				"name": "Ethereum",
+				"sentiment_score": 0.054
+			},
+			{
+				"total_mentions": 572,
+				"positive_mentions": 318,
+				"negative_mentions": 62,
+				"neutral_mentions": 192,
+				"ticker": "ADA",
+				"name": "Cardano",
+				"sentiment_score": 0.671
+			},
+			{
+				"total_mentions": 521,
+				"positive_mentions": 227,
+				"negative_mentions": 110,
+				"neutral_mentions": 184,
+				"ticker": "XRP",
+				"name": "Ripple",
+				"sentiment_score": 0.337
+			},
+			{
+				"total_mentions": 343,
+				"positive_mentions": 173,
+				"negative_mentions": 50,
+				"neutral_mentions": 120,
+				"ticker": "SOL",
+				"name": "Solana",
+				"sentiment_score": 0.538
+			},
+			{
+				"total_mentions": 305,
+				"positive_mentions": 130,
+				"negative_mentions": 47,
+				"neutral_mentions": 128,
+				"ticker": "SHIB",
+				"name": "SHIBA INU",
+				"sentiment_score": 0.408
+			},
+			{
+				"total_mentions": 259,
+				"positive_mentions": 87,
+				"negative_mentions": 80,
+				"neutral_mentions": 92,
+				"ticker": "DOGE",
+				"name": "Dogecoin",
+				"sentiment_score": 0.041
+			},
+			{
+				"total_mentions": 217,
+				"positive_mentions": 102,
+				"negative_mentions": 38,
+				"neutral_mentions": 77,
+				"ticker": "LUNC",
+				"name": "Terra Classic",
+				"sentiment_score": 0.442
+			},
+			{
+				"total_mentions": 214,
+				"positive_mentions": 119,
+				"negative_mentions": 7,
+				"neutral_mentions": 88,
+				"ticker": "TAMA",
+				"name": "Tamadoge",
+				"sentiment_score": 0.785
+			},
+			{
+				"total_mentions": 189,
+				"positive_mentions": 112,
+				"negative_mentions": 12,
+				"neutral_mentions": 65,
+				"ticker": "MATIC",
+				"name": "Polygon",
+				"sentiment_score": 0.794
+			},
+			{
+				"total_mentions": 180,
+				"positive_mentions": 31,
+				"negative_mentions": 58,
+				"neutral_mentions": 91,
+				"ticker": "CEL",
+				"name": "Celsius",
+				"sentiment_score": -0.225
+			},
+			{
+				"total_mentions": 161,
+				"positive_mentions": 35,
+				"negative_mentions": 89,
+				"neutral_mentions": 37,
+				"ticker": "LUNA",
+				"name": "Terra",
+				"sentiment_score": -0.503
+			},
+			{
+				"total_mentions": 160,
+				"positive_mentions": 79,
+				"negative_mentions": 52,
+				"neutral_mentions": 29,
+				"ticker": "AVAX",
+				"name": "Avalanche",
+				"sentiment_score": 0.253
+			},
+			{
+				"total_mentions": 136,
+				"positive_mentions": 65,
+				"negative_mentions": 30,
+				"neutral_mentions": 41,
+				"ticker": "ETC",
+				"name": "Ethereum Classic",
+				"sentiment_score": 0.386
+			},
+			{
+				"total_mentions": 135,
+				"positive_mentions": 54,
+				"negative_mentions": 34,
+				"neutral_mentions": 47,
+				"ticker": "DOT",
+				"name": "Polkadot",
+				"sentiment_score": 0.222
+			},
+			{
+				"total_mentions": 128,
+				"positive_mentions": 65,
+				"negative_mentions": 13,
+				"neutral_mentions": 50,
+				"ticker": "BNB",
+				"name": "Binance Coin",
+				"sentiment_score": 0.609
+			},
+			{
+				"total_mentions": 120,
+				"positive_mentions": 27,
+				"negative_mentions": 35,
+				"neutral_mentions": 58,
+				"ticker": "USDT",
+				"name": "Tether",
+				"sentiment_score": -0.1
+			},
+			{
+				"total_mentions": 105,
+				"positive_mentions": 34,
+				"negative_mentions": 30,
+				"neutral_mentions": 41,
+				"ticker": "USDC",
+				"name": "USD Coin",
+				"sentiment_score": 0.057
+			},
+			{
+				"total_mentions": 100,
+				"positive_mentions": 65,
+				"negative_mentions": 14,
+				"neutral_mentions": 21,
+				"ticker": "ALGO",
+				"name": "Algorand",
+				"sentiment_score": 0.765
+			},
+			{
+				"total_mentions": 99,
+				"positive_mentions": 47,
+				"negative_mentions": 26,
+				"neutral_mentions": 26,
+				"ticker": "LINK",
+				"name": "Chainlink",
+				"sentiment_score": 0.318
+			},
+			{
+				"total_mentions": 96,
+				"positive_mentions": 53,
+				"negative_mentions": 8,
+				"neutral_mentions": 35,
+				"ticker": "ATOM",
+				"name": "Cosmos",
+				"sentiment_score": 0.703
+			},
+			{
+				"total_mentions": 95,
+				"positive_mentions": 58,
+				"negative_mentions": 2,
+				"neutral_mentions": 35,
+				"ticker": "LBLOCK",
+				"name": "Lucky Block",
+				"sentiment_score": 0.884
+			},
+			{
+				"total_mentions": 90,
+				"positive_mentions": 19,
+				"negative_mentions": 28,
+				"neutral_mentions": 43,
+				"ticker": "ETHW",
+				"name": "Ethereum PoW",
+				"sentiment_score": -0.15
+			},
+			{
+				"total_mentions": 90,
+				"positive_mentions": 60,
+				"negative_mentions": 2,
+				"neutral_mentions": 28,
+				"ticker": "FLSK",
+				"name": "Flasko",
+				"sentiment_score": 0.967
+			},
+			{
+				"total_mentions": 87,
+				"positive_mentions": 41,
+				"negative_mentions": 19,
+				"neutral_mentions": 27,
+				"ticker": "LTC",
+				"name": "Litecoin",
+				"sentiment_score": 0.379
+			},
+			{
+				"total_mentions": 86,
+				"positive_mentions": 46,
+				"negative_mentions": 9,
+				"neutral_mentions": 31,
+				"ticker": "SAND",
+				"name": "The Sandbox",
+				"sentiment_score": 0.645
+			},
+			{
+				"total_mentions": 86,
+				"positive_mentions": 53,
+				"negative_mentions": 13,
+				"neutral_mentions": 20,
+				"ticker": "APE",
+				"name": "APEcoin",
+				"sentiment_score": 0.698
+			},
+			{
+				"total_mentions": 83,
+				"positive_mentions": 1,
+				"negative_mentions": 51,
+				"neutral_mentions": 31,
+				"ticker": "TORN",
+				"name": "Tornado.Cash",
+				"sentiment_score": -0.904
+			},
+			{
+				"total_mentions": 78,
+				"positive_mentions": 40,
+				"negative_mentions": 0,
+				"neutral_mentions": 38,
+				"ticker": "GLO",
+				"name": "Uniglo",
+				"sentiment_score": 0.769
+			},
+			{
+				"total_mentions": 74,
+				"positive_mentions": 48,
+				"negative_mentions": 1,
+				"neutral_mentions": 25,
+				"ticker": "IBAT",
+				"name": "Battle Infinity",
+				"sentiment_score": 0.953
+			},
+			{
+				"total_mentions": 70,
+				"positive_mentions": 48,
+				"negative_mentions": 0,
+				"neutral_mentions": 22,
+				"ticker": "BIG",
+				"name": "Big Eyes",
+				"sentiment_score": 1.029
+			},
+			{
+				"total_mentions": 68,
+				"positive_mentions": 40,
+				"negative_mentions": 10,
+				"neutral_mentions": 18,
+				"ticker": "HNT",
+				"name": "Helium",
+				"sentiment_score": 0.662
+			},
+			{
+				"total_mentions": 67,
+				"positive_mentions": 45,
+				"negative_mentions": 7,
+				"neutral_mentions": 15,
+				"ticker": "NEAR",
+				"name": "NEAR Protocol",
+				"sentiment_score": 0.851
+			},
+			{
+				"total_mentions": 62,
+				"positive_mentions": 27,
+				"negative_mentions": 17,
+				"neutral_mentions": 18,
+				"ticker": "UNI",
+				"name": "Uniswap",
+				"sentiment_score": 0.242
+			},
+			{
+				"total_mentions": 60,
+				"positive_mentions": 39,
+				"negative_mentions": 5,
+				"neutral_mentions": 16,
+				"ticker": "CHZ",
+				"name": "Chiliz",
+				"sentiment_score": 0.85
+			},
+			{
+				"total_mentions": 52,
+				"positive_mentions": 17,
+				"negative_mentions": 11,
+				"neutral_mentions": 24,
+				"ticker": "AAVE",
+				"name": "Aave",
+				"sentiment_score": 0.173
+			},
+			{
+				"total_mentions": 52,
+				"positive_mentions": 26,
+				"negative_mentions": 5,
+				"neutral_mentions": 21,
+				"ticker": "RVN",
+				"name": "Ravencoin",
+				"sentiment_score": 0.606
+			},
+			{
+				"total_mentions": 44,
+				"positive_mentions": 19,
+				"negative_mentions": 8,
+				"neutral_mentions": 17,
+				"ticker": "TRX",
+				"name": "TRON",
+				"sentiment_score": 0.375
+			},
+			{
+				"total_mentions": 44,
+				"positive_mentions": 26,
+				"negative_mentions": 2,
+				"neutral_mentions": 16,
+				"ticker": "MANA",
+				"name": "Decentraland",
+				"sentiment_score": 0.818
+			},
+			{
+				"total_mentions": 44,
+				"positive_mentions": 13,
+				"negative_mentions": 13,
+				"neutral_mentions": 18,
+				"ticker": "AXS",
+				"name": "Axie Infinity",
+				"sentiment_score": 0
+			},
+			{
+				"total_mentions": 43,
+				"positive_mentions": 21,
+				"negative_mentions": 4,
+				"neutral_mentions": 18,
+				"ticker": "LDO",
+				"name": "Lido DAO",
+				"sentiment_score": 0.593
+			},
+			{
+				"total_mentions": 41,
+				"positive_mentions": 18,
+				"negative_mentions": 10,
+				"neutral_mentions": 13,
+				"ticker": "XLM",
+				"name": "Stellar Lumens",
+				"sentiment_score": 0.293
+			},
+			{
+				"total_mentions": 39,
+				"positive_mentions": 12,
+				"negative_mentions": 3,
+				"neutral_mentions": 24,
+				"ticker": "BUSD",
+				"name": "Binance USD",
+				"sentiment_score": 0.346
+			},
+			{
+				"total_mentions": 37,
+				"positive_mentions": 15,
+				"negative_mentions": 7,
+				"neutral_mentions": 15,
+				"ticker": "EOS",
+				"name": "EOS",
+				"sentiment_score": 0.324
+			},
+			{
+				"total_mentions": 37,
+				"positive_mentions": 24,
+				"negative_mentions": 1,
+				"neutral_mentions": 12,
+				"ticker": "HBAR",
+				"name": "Hedera Hashgraph",
+				"sentiment_score": 0.932
+			},
+			{
+				"total_mentions": 35,
+				"positive_mentions": 25,
+				"negative_mentions": 5,
+				"neutral_mentions": 5,
+				"ticker": "XTZ",
+				"name": "Tezos",
+				"sentiment_score": 0.857
+			},
+			{
+				"total_mentions": 32,
+				"positive_mentions": 10,
+				"negative_mentions": 4,
+				"neutral_mentions": 18,
+				"ticker": "FTM",
+				"name": "Fantom",
+				"sentiment_score": 0.281
+			},
+			{
+				"total_mentions": 32,
+				"positive_mentions": 9,
+				"negative_mentions": 13,
+				"neutral_mentions": 10,
+				"ticker": "XMR",
+				"name": "Monero",
+				"sentiment_score": -0.188
+			},
+			{
+				"total_mentions": 31,
+				"positive_mentions": 13,
+				"negative_mentions": 7,
+				"neutral_mentions": 11,
+				"ticker": "MKR",
+				"name": "MakerDAO",
+				"sentiment_score": 0.29
+			},
+			{
+				"total_mentions": 29,
+				"positive_mentions": 4,
+				"negative_mentions": 24,
+				"neutral_mentions": 1,
+				"ticker": "KNC",
+				"name": "Kyber Network",
+				"sentiment_score": -1.034
+			}
+		]
+	}
+}

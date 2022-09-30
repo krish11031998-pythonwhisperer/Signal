@@ -10,9 +10,12 @@ import Foundation
 
 struct TweetCellModel: ActionProvider {
 	let model: TweetModel?
-	let media: [TweetMedia]?
-	let user: TweetUser?
 	var action: Callback?
+}
+
+extension TweetCellModel {
+	var media: [TweetMedia]? { model?.media }
+	var user: TweetUser? { model?.user }
 }
 
 protocol AnyTableView {
@@ -22,15 +25,18 @@ protocol AnyTableView {
 class TweetFeedViewModel {
 
 	var tweets: [TweetCellModel]?
-	
+	var loading: Bool = false
 	var view: AnyTableView?
 	
-	public func fetchTweets() {
-		StubTweetService.shared
-			.fetchTweets { [weak self] result in
+	public func fetchTweets(entity: String? = nil, before: String? = nil, after: String? = nil, limit: Int = 20) {
+		guard !loading else { return }
+		loading = true
+		TweetService
+			.shared
+			.fetchTweets(entity: entity, before: before, after: after) { [weak self] result in
 				switch result {
 				case .success(let searchResult):
-					self?.decodeToTweetCellModel(searchResult)
+					self?.decodeToTweetCellModel(.init(data: searchResult.data?.limitTo(to: 20), includes: searchResult.includes))
 				case .failure(let err):
 					print("(DEBUG) err : ", err.localizedDescription)
 				}
@@ -38,26 +44,33 @@ class TweetFeedViewModel {
 	}
 	
 	
+	public func fetchNextPage() {
+		print("(DEBUG) fetching next page!")
+		fetchTweets(after: tweets?.last?.model?.id)
+	}
+	
 	private func decodeToTweetCellModel(_ data: TweetSearchResult) {
-		let tweets = data.data
-		let allMedia = data.includes?.media
-		let allUsers = data.includes?.users
+		guard let tweets = data.data else { return }
 		
-		self.tweets = tweets?.compactMap { tweet in
-			let mediaKeys = tweet.attachments?.mediaKeys ?? []
-			
-			var model:TweetCellModel = .init(model: tweet,
-						 media: mediaKeys.compactMap { key in allMedia?.first { $0.mediaKey == key } }.emptyOrNil,
-						 user: allUsers?.first { $0.id == tweet.authorId })
+		let fitleredTweet = tweets.compactMap { tweet in
+			var model:TweetCellModel = .init(model: tweet)
 			
 			model.action = {
 				TweetStorage.selectedTweet = model
-				NotificationCenter.default.post(name: .showTweet, object: nil)
 			}
 			
 			return model
-		} ?? []
+		}
 	
+		if self.tweets == nil {
+			self.tweets = fitleredTweet
+		} else {
+			print("(DEBUG) Adding newTweets")
+			self.tweets?.append(contentsOf: fitleredTweet)
+		}
+		
+		loading.toggle()
+		
 		DispatchQueue.main.async {
 			self.view?.reloadTableWithDataSource(self.buildDataSource())
 		}

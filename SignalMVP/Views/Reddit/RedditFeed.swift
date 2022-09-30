@@ -11,6 +11,9 @@ import UIKit
 class RedditFeedViewController: UIViewController {
 	
 //MARK: - Properties
+	private var observer: NSKeyValueObservation?
+	private var yOff: CGFloat = .zero
+	
 	private lazy var tableView: UITableView = {
 		let table = UITableView(frame: .zero, style: .grouped)
 		table.separatorStyle = .none
@@ -30,6 +33,7 @@ class RedditFeedViewController: UIViewController {
 		setupNavBar()
 		setupView()
 		viewModel.fetchRedditPosts()
+		addObservers()
 	}
 
 //MARK: - Protected Methods
@@ -37,20 +41,39 @@ class RedditFeedViewController: UIViewController {
 	private func setupView() {
 		view.addSubview(tableView)
 		view.setFittingConstraints(childView: tableView, insets: .zero)
-		view.backgroundColor = .clear
+		view.backgroundColor = .surfaceBackground
 	}
 	
 	private func setupNavBar() {
 		self.navigationItem.title = "Reddit"
-		
-		let navbarAppear: UINavigationBarAppearance = .init()
-		navbarAppear.configureWithTransparentBackground()
-		navbarAppear.backgroundImage = UIImage()
-		navbarAppear.backgroundColor = UIColor.orange
-		
-		self.navigationController?.navigationBar.standardAppearance = navbarAppear
-		self.navigationController?.navigationBar.compactAppearance = navbarAppear
-		self.navigationController?.navigationBar.scrollEdgeAppearance = navbarAppear
+		setupTransparentNavBar(color: .clear)
+	}
+	
+	private func scrollViewUpdate(_ scrollView: UIScrollView) {
+		let offset = scrollView.contentOffset
+		if self.yOff == .zero {
+			self.yOff = offset.y
+		}
+		guard offset.y != yOff, let navBar = navigationController?.navigationBar else { return }
+		let off = (self.yOff...0).percent(offset.y).boundTo()
+		let navbarHeight: CGFloat = navBar.frame.height + navBar.frame.minY
+		UIView.animate(withDuration: 0.1) {
+			navBar.transform = .init(translationX: 0, y: -CGFloat(off) * navbarHeight)
+		}
+	}
+	
+	private func addObservers() {
+		observer = tableView.observe(\.contentOffset) { [weak self] tableView, _ in
+			self?.scrollViewUpdate(tableView)
+		}
+		NotificationCenter.default.addObserver(self, selector: #selector(updateTableView), name: .updateTableView, object: nil)
+	}
+	
+	@objc
+	private func updateTableView() {
+		UIView.animate(withDuration: 0.3) {
+			self.tableView.performBatchUpdates(nil)
+		}
 	}
 }
 

@@ -12,8 +12,8 @@ extension UIView {
 	
 	static func divider() -> UIView {
 		let view = UIView()
-		view.setFrame(height: 2)
-		view.backgroundColor = .gray.withAlphaComponent(0.05)
+		view.setFrame(height: 0.75)
+		view.backgroundColor = .surfaceBackgroundInverse
 		return view
 	}
 	
@@ -21,6 +21,13 @@ extension UIView {
 		let view = UIView()
 		view.setFrame(width: width, height: height)
 		return view
+	}
+	
+	static func divider(color: UIColor = .gray, height: CGFloat = 0.5) -> UIView {
+		let divider = UIView()
+		divider.backgroundColor = color
+		divider.setHeight(height: height, priority: .required)
+		return divider
 	}
 	
 	func setFittingConstraints(childView: UIView, insets: UIEdgeInsets) {
@@ -44,7 +51,8 @@ extension UIView {
 							   width: CGFloat? = nil,
 							   height: CGFloat? = nil,
 							   centerX: CGFloat? = nil,
-							   centerY: CGFloat? = nil) {
+							   centerY: CGFloat? = nil,
+							   priority: UILayoutPriority = .required) {
 		var items: [NSLayoutConstraint] = []
 		
 		if let validLeading = leading { items.append(childView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: validLeading)) }
@@ -55,6 +63,10 @@ extension UIView {
 		if let validWidth = width { items.append(childView.widthAnchor.constraint(equalToConstant: validWidth)) }
 		if let validCenterX = centerX { items.append(childView.centerXAnchor.constraint(equalTo: centerXAnchor, constant: validCenterX)) }
 		if let validCenterY = centerY { items.append(childView.centerYAnchor.constraint(equalTo: centerYAnchor, constant: validCenterY)) }
+		
+		items.forEach {
+			$0.priority = priority
+		}
 		
 		childView.translatesAutoresizingMaskIntoConstraints = false
 		removeSimilarConstraints(items)
@@ -93,12 +105,14 @@ extension UIView {
 	
 	func setWidth(width: CGFloat, priority: UILayoutPriority) {
 		let constraint = widthAnchor.constraint(equalToConstant: width)
+		removeSimilarConstraints([constraint])
 		constraint.priority = priority
 		constraint.isActive = true
 	}
 	
 	func setHeight(height: CGFloat, priority: UILayoutPriority) {
 		let constraint = heightAnchor.constraint(equalToConstant: height)
+		removeSimilarConstraints([constraint])
 		constraint.priority = priority
 		constraint.isActive = true
 	}
@@ -120,5 +134,8 @@ extension NSLayoutConstraint {
 		firstItem === constraint.firstItem &&
 		secondItem === constraint.secondItem
 	}
-	
+}
+
+extension UILayoutPriority {
+	static var needed: Self { .init(999) }
 }

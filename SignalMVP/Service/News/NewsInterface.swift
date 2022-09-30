@@ -8,5 +8,11 @@
 import Foundation
 
 protocol NewsServiceInterface {
-	func fetchNews(query: [URLQueryItem], completion: @escaping (Result<[NewsModel],Error>) -> Void)
+	func fetchNews(tickers: String?,
+				   items: String?,
+				   source: String?,
+				   after: String?,
+				   before: String?,
+				   limit: Int,
+				   completion: @escaping (Result<NewsResult,Error>) -> Void)
 }

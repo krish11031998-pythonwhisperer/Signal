@@ -17,9 +17,10 @@ class EventSingleCell: ConfigurableCell {
 		imgView.contentMode = .scaleAspectFill
 		imgView.cornerRadius = 10
 		imgView.clipsToBounds = true
+		imgView.setFrame(.init(squared: 64))
 		return imgView
 	}()
-	
+	private lazy var newsArticleCount: UILabel = { .init() }()
 	private lazy var tickersView: UIStackView = { UIView.HStack(spacing: 8) }()
 	
 //MARK: - Overriden
@@ -38,50 +39,47 @@ class EventSingleCell: ConfigurableCell {
 //MARK: - Protected Methods
 	
 	private func setupViews() {
-		let titleStack: UIStackView = UIView.VStack(subViews: [.spacer(),eventTitle, tickersView] ,spacing: 12)
+		let infoStack: UIStackView = .VStack(subViews: [eventTitle, newsArticleCount],spacing: 10)
+		let stack: UIStackView = .HStack(subViews: [imgView, infoStack], spacing: 16, alignment: .center)
+		let divider: UIView =  .divider(color: .white.withAlphaComponent(0.5)).embedInView(insets: .zero)
+		let mainStack: UIStackView = .VStack(subViews: [stack], spacing: 12)
+		mainStack.setHeight(height: 84, priority: .required)
 		
-		let bgView: UIView = .init()
-		bgView.backgroundColor = .black.withAlphaComponent(0.35)
-		imgView.addSubview(bgView)
-		imgView.setFittingConstraints(childView: bgView, insets: .zero)
-		
-		contentView.addSubview(imgView)
-		contentView.setFittingConstraints(childView: imgView, insets: .init(vertical: 8, horizontal: 16))
-		imgView.setHeight(height: 200, priority: .required)
-		imgView.addSubview(titleStack)
-		imgView.setFittingConstraints(childView: titleStack, insets: .init(vertical: 8, horizontal: 8))
+		contentView.addSubview(mainStack)
+		contentView.setFittingConstraints(childView: mainStack, insets: .init(vertical: 10, horizontal: 16))
+		contentView.addShadowBackground(inset: .init(vertical: 7.5, horizontal: 8), cornerRadius: 12)
 	}
 	
 	private func styleCell() {
 		selectionStyle = .none
-		backgroundColor = .clear
+		backgroundColor = .surfaceBackground
 	}
 	
 	
 //MARK: - Exposed Methods
-	func configure(with model: EventModel) {
-		
-		tickersView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-		
-		model.eventName.styled(font: .systemFont(ofSize: 15, weight: .semibold), color: .white).render(target: eventTitle)
+	func configure(with model: EventCellModel) {
+
+		model.model.eventName.body1Bold().render(target: eventTitle)
 		eventTitle.numberOfLines = 2
-		
-		if let firstImgURL = model.news.first?.imageUrl {
+
+		if let firstImgURL = model.model.news.first?.imageUrl {
 			UIImage.loadImage(url: firstImgURL, at: imgView, path: \.image)
 		}
-	
-		tickersView.isHidden = model.tickers.isEmpty
-		if !model.tickers.isEmpty {
-			model.tickers.limitTo(to: 3).forEach {
-				let label = UILabel()
-				$0.styled(font: .systemFont(ofSize: 13, weight: .regular), color: .white).render(target: label)
-				
-				tickersView.addArrangedSubview(label.blobify(backgroundColor: .white.withAlphaComponent(0.3),
-															 borderColor: .white,
-															 borderWidth: 1,
-															 cornerRadius: 10))
-			}
-			tickersView.addArrangedSubview(.spacer())
-		}
+
+		"\(model.model.news.count) News Articles".body2Regular(color: .gray).render(target: newsArticleCount)
+		
+//		tickersView.isHidden = model.model.tickers.isEmpty
+//		if !model.model.tickers.isEmpty {
+//			model.model.tickers.limitTo(to: 3).forEach {
+//				let label = UILabel()
+//				$0.styled(font: .systemFont(ofSize: 13, weight: .regular), color: .white).render(target: label)
+//
+//				tickersView.addArrangedSubview(label.blobify(backgroundColor: .white.withAlphaComponent(0.3),
+//															 borderColor: .white,
+//															 borderWidth: 1,
+//															 cornerRadius: 10))
+//			}
+//			tickersView.addArrangedSubview(.spacer())
+//		}
 	}
 }

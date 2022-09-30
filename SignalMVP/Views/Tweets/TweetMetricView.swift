@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 struct TweetMetricModel {
-	let image: UIImage.Catalogue
+	let image: UIImage.SystemCatalogue
 	let value: Int
 }
 

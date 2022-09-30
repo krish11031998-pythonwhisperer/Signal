@@ -12,7 +12,7 @@ class StubTweetService: TweetServiceInterface {
 	
 	public static var shared: StubTweetService = .init()
 	
-	public func fetchTweets(queries: [URLQueryItem] = [], completion: @escaping (Result<TweetSearchResult, Error>) -> Void) {
-		completion(Bundle.main.loadDataFromBundle(name: "TweetsTest", extensionStr: "json"))
+	public func fetchTweets(entity: String? = nil, before: String? = nil, after: String? = nil, limit: Int = 20, completion: @escaping (Result<TweetSearchResult, Error>) -> Void) {
+		completion(Bundle.main.loadDataFromBundle(name: "tweets", extensionStr: "json"))
 	}
 }

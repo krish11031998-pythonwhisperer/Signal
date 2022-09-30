@@ -36,6 +36,21 @@ extension UIView {
 		
 		return mainStack
 	}
+	
+	static func emptyViewWithColor(color: UIColor = .clear, width: CGFloat? = nil, height: CGFloat? = nil) ->  UIView {
+		let blankView = UIView()
+		blankView.backgroundColor = .clear
+		if let validHeight = height {
+			blankView.setHeight(height: validHeight, priority: .required)
+		}
+		
+		if let validWidth = width {
+			blankView.setWidth(width: validWidth, priority: .required)
+		}
+		
+		return blankView
+	}
+
 }
 
 extension Array where Element : UIView {

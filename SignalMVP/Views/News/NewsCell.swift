@@ -8,30 +8,28 @@
 import Foundation
 import UIKit
 
-fileprivate extension NewsModel {
-	
-	var sentimentColor: UIColor {
-		sentiment == "Positive" ? .green : sentiment == "Neutral" ? .gray : .red
-	}
-	
-	var sentimentBlob: UIView {
-		let label: UILabel = sentiment.styled(font: .systemFont(ofSize: 12, weight: .medium), color: sentimentColor)
-			.generateLabel
-		return label.blobify(backgroundColor: sentimentColor.withAlphaComponent(0.15),
-							 borderColor: sentimentColor,
-							 borderWidth: 1,
-							 cornerRadius: 10)
-	}
-}
-
 class NewsCell: ConfigurableCell {
 
 //MARK: - Properties
-	private lazy var newsImage: UIImageView = { .init() }()
+	private lazy var newsImage: UIImageView = {
+		let img = UIImageView()
+		img.setFrame(.init(squared: 84))
+		img.cornerRadius = 10
+		img.clipsToBounds = true
+		return img
+	}()
+	
 	private lazy var timestamp: UILabel = { .init() }()
 	private lazy var title: UILabel = { .init() }()
 	private lazy var body: UILabel = { .init() }()
 	private lazy var tickersStack: UIStackView = { UIView.HStack(spacing: 8) }()
+	private lazy var sentimentView: UIView = { .init() }()
+	
+	private lazy var newsInfoStack: UIStackView = {
+		let stack: UIStackView = .VStack(subViews: [timestamp, title, body, tickersStack],spacing: 8)
+		stack.setCustomSpacing(12, after: body)
+		return stack
+	}()
 	
 //MARK: - Constructors
 	
@@ -53,58 +51,49 @@ class NewsCell: ConfigurableCell {
 		selectedBackgroundView = UIView()
 		selectedBackgroundView?.backgroundColor = .clear
 		selectionStyle = .none
-		backgroundColor = .clear
+		backgroundColor = .surfaceBackground
 	}
 	
 	private func setupCell() {
 		let mainStack = UIView.VStack(spacing: 10)
-		let newsInfo = UIView.VStack(subViews: [timestamp, title, body, tickersStack], spacing: 8)
-		newsInfo.setCustomSpacing(12, after: body)
-		newsInfo.backgroundColor = .purple.withAlphaComponent(0.1)
-		let cellStack = UIView.HStack(subViews: [newsInfo, newsImage], spacing: 16, alignment: .top)
+		let cellStack = UIView.HStack(subViews: [newsInfoStack, newsImage], spacing: 16, alignment: .top)
 		tickersStack.isHidden = true
 		
 		mainStack.addArrangedSubview(cellStack)
 		
-		let divider = UIView()
-		divider.backgroundColor = .gray
+		let divider = UIView.divider()
 		mainStack.addArrangedSubview(divider.embedInView(insets: .init(top: 10, left: 0, bottom: 0, right: 0)))
-		divider.setHeight(height: 0.5, priority: .required)
-		
-		newsImage.setFrame(.init(squared: 84))
-		newsImage.cornerRadius = 10
-		newsImage.clipsToBounds = true
-		
+
 		contentView.addSubview(mainStack)
 		contentView.setFittingConstraints(childView: mainStack, insets: .init(vertical: 10, horizontal: 16))
 	}
 	
 //MARK: - Exposed Methods
 	
-	public func configure(with model: NewsModel) {
-		model.date.styled(font: .systemFont(ofSize: 10, weight: .regular), color: .gray).render(target: timestamp)
-		model.title.styled(font: .systemFont(ofSize: 20, weight: .semibold), color: .white).render(target: title)
+	public func configure(with model: NewsCellModel) {
+		model.model.date.bodySmallRegular(color: .gray).render(target: timestamp)
+		model.model.title.heading3().render(target: title)
 		title.numberOfLines = 0
-		model.sourceName.styled(font: .systemFont(ofSize: 14, weight: .regular), color: .gray).render(target: body)
+		model.model.sourceName.body2Regular(color: .gray).render(target: body)
 		body.numberOfLines = 1
 		
-		if !model.tickers.isEmpty {
+		if !model.model.tickers.isEmpty {
 			tickersStack.removeChildViews()
 			
-			model.tickers.forEach { ticker in
+			model.model.tickers.limitTo(to: 3).forEach { ticker in
 				let tickerLabel = UILabel()
-				ticker.styled(font: .systemFont(ofSize: 12, weight: .medium), color: .white).render(target: tickerLabel)
+				ticker.body2Regular().render(target: tickerLabel)
 				tickersStack.addArrangedSubview(tickerLabel.blobify(backgroundColor: .white.withAlphaComponent(0.15),
 																	borderColor: .white,
 																	borderWidth: 1,
 																	cornerRadius: 10))
 			}
 			tickersStack.addArrangedSubview(.spacer())
-			tickersStack.addArrangedSubview(model.sentimentBlob)
+			tickersStack.addArrangedSubview(model.model.sentiment.sentimentIndicator())
 			tickersStack.isHidden = false
 		}
 		
-		UIImage.loadImage(url: model.imageUrl, at: newsImage, path: \.image)
+		UIImage.loadImage(url: model.model.imageUrl, at: newsImage, path: \.image)
 		newsImage.contentMode = .scaleAspectFill
 	}
 	
