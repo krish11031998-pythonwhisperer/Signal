@@ -5,7 +5,7 @@ Signal is a CryptoCurrency News Aggregator
 
 ## Features of the App
 
-The App aggreagates data from multiple sources and distributed as the following type
+The App aggreagates data from multiple sources and distributed as the following format
 
 - Tweets (Trending Tweets)
 - News (Trending News for repsective tickers with sentimental analysis)
