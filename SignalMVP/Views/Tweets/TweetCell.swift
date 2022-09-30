@@ -39,7 +39,11 @@ class TweetCell: ConfigurableCell {
 	}()
 	private lazy var authorImageView: UIImageView = { .init() }()
 	private var metrics: [UIView] = []
-	
+	private lazy var imageHeight: NSLayoutConstraint = {
+		let constraint = imgView.heightAnchor.constraint(equalToConstant: 200)
+		constraint.priority = .needed
+		return constraint
+	}()
 	private lazy var metricStack: UIStackView = {
 		let metricStack = UIView.HStack(spacing: 5)
 		metricStack.alignment = .leading
@@ -70,17 +74,13 @@ class TweetCell: ConfigurableCell {
 		bodyStack.setCustomSpacing(12, after: headerStack)
 		bodyStack.setCustomSpacing(12, after: bodyLabel)
 		bodyStack.setCustomSpacing(16, after: divider)
-		
-//		let constraint = imgView.heightAnchor.constraint(equalToConstant: 200)
-//		constraint.priority = .defaultHigh
-//		constraint.isActive = true
-		
+
 		let mainStack = UIView.HStack(subViews: [authorImageView, bodyStack], spacing: 12, alignment: .top)
 		authorImageView.cornerFrame = .init(origin: .zero, size: .init(squared: 48))
 		authorImageView.setFrame(.init(squared: 48))
 		authorImageView.backgroundColor = .gray.withAlphaComponent(0.15)
 		authorImageView.contentMode = .scaleAspectFill
-		
+		imageHeight.isActive = true
 		contentView.addSubview(mainStack)
 		contentView.setFittingConstraints(childView: mainStack, insets: .init(vertical: 10, horizontal: 16))
 	
@@ -105,7 +105,8 @@ class TweetCell: ConfigurableCell {
 
 		if let media = model.media?.first,
 		   let photoUrl = media.url ?? media.previewImageUrl {
-			imgView.setHeight(height: (CGFloat.totalWidth - 32) * CGFloat(media.height)/CGFloat(media.width), priority: .defaultHigh)
+			let height = (CGFloat.totalWidth - 32) * CGFloat(media.height)/CGFloat(media.width)
+			imageHeight.constant = height
 			UIImage.loadImage(url: photoUrl, at: imgView, path: \.image)
 			imgView.isHidden = false
 		} else {
