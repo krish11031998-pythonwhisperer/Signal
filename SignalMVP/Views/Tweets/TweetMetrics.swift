@@ -44,12 +44,11 @@ extension TweetSentimentMetric {
 	
 	var view: UIView {
 		let imgView = UIImageView()
-		imgView.image = model.img?.withTintColor(.white, renderingMode: .alwaysOriginal)
+		imgView.image = model.img?.withTintColor(.surfaceBackgroundInverse, renderingMode: .alwaysOriginal)
 		imgView.setFrame(.init(squared: 20))
 		imgView.clipsToBounds = true
 		
-		let label = model.name.capitalized.styled(font: .systemFont(ofSize: 12.5, weight: .regular)).generateLabel
-		label.textColor = .white
+		let label = model.name.capitalized.body2Regular().generateLabel
 		
 		let stack = UIView.HStack(subViews: [imgView, label],spacing: 4)
 		
