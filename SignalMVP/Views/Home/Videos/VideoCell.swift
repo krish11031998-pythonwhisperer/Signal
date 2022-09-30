@@ -60,12 +60,16 @@ class VideoCell: ConfigurableCell {
 		
 		[videoimageView, infoView].forEach(mainStack.addArrangedSubview(_:))
 
+		videoimageView.cornerRadius = 12
+		videoimageView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+		videoimageView.clipsToBounds = true
+		
 		videoLabel.numberOfLines = 3
 		videoimageView.setHeight(height: 150, priority: .required)
 		mainStack.setHeight(height: 250, priority: .required)
 		mainStack.cornerRadius = 12
-		mainStack.addBlurView()
-		mainStack.clipsToBounds = true
+		mainStack.backgroundColor = .surfaceBackground
+		mainStack.addShadow()
 		
 		contentView.addSubview(mainStack)
 		contentView.setFittingConstraints(childView: mainStack, insets: .init(vertical: 10, horizontal: 16))
