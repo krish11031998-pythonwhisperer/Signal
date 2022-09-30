@@ -38,7 +38,7 @@ class TrendingHeadlineCell: ConfigurableCell {
 		headlineLabel.numberOfLines = 0
 		desciptionLabel.numberOfLines = 2
 		
-		let divider = UIView.divider(color: .white)
+		let divider = UIView.divider()
 		mainStack.addArrangedSubview(divider.embedInView(insets: .init(top: 10, left: 0, bottom: 0, right: 0)))
 		
 		contentView.addSubview(mainStack)
