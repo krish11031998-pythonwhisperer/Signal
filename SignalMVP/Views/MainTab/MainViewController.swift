@@ -44,7 +44,7 @@ class MainViewController: UITabBarController {
 		eventNavView.tabBarItem = .init(model: .events, tag: 3)
 		let redditNavView = UINavigationController(rootViewController: RedditFeedViewController())
 		redditNavView.tabBarItem = .init(title: "Reddit", image: nil, tag: 4)
-		return [homeNavView, tweetNavView, newsNavView, eventNavView, redditNavView]
+		return [homeNavView, tweetNavView, newsNavView, eventNavView]
 	}
 
 }
