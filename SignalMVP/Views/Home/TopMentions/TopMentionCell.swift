@@ -76,7 +76,7 @@ class TopMentionCell: ConfigurableCell {
 		let percent: CGFloat = CGFloat(model.positiveMentions)/CGFloat(model.totalMentions - model.neutralMentions)
 		let color: UIColor = percent < 0.5 ? .red : .green
 		let visited = isCellVisited(ticker: model.ticker)
-		circularChart.configureChart(label: (String(format: "%.0f", percent * 10) + " / 10").styled(font: .systemFont(ofSize: 12, weight: .regular)),
+		circularChart.configureChart(label: (String(format: "%.0f", percent * 10) + " / 10").body3Regular(),
 									 color: color,
 									 percent,
 									 visited: visited)

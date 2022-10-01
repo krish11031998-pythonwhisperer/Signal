@@ -12,7 +12,6 @@ class CircularProgressbar: UIView {
 	
 	private lazy var innerText: UILabel = { .init() }()
 	private var circularPathLayer: CAShapeLayer?
-	private var circularChartAdded: Bool = false
 	
 	override init(frame: CGRect) {
 		super.init(frame: frame)
@@ -29,45 +28,41 @@ class CircularProgressbar: UIView {
 		setFittingConstraints(childView: innerText, centerX: 0, centerY: 0)
 		innerText.textAlignment = .center
 		clipsToBounds = true
+		setupProgressBar()
 	}
 	
 	private func setupProgressBar() {
-		circularPathLayer = CAShapeLayer()
+		let circularPathLayer = CAShapeLayer()
 		let radius = min(frame.width, frame.height).half - 1
 		let circularPath = UIBezierPath(arcCenter: frame.center, radius: radius,
 										startAngle: CGFloat(-90.0).toRadians(),
 										endAngle: CGFloat(270).toRadians(),
 										clockwise: true)
 		
-		circularPathLayer?.path = circularPath.cgPath
-		circularPathLayer?.fillColor = UIColor.gray.withAlphaComponent(0.2).cgColor
-		circularPathLayer?.borderColor = UIColor.clear.cgColor
-		circularPathLayer?.strokeStart = 0
-		circularPathLayer?.strokeEnd = 0
-		circularPathLayer?.lineWidth = 1
-		circularPathLayer?.strokeColor = UIColor.white.cgColor
+		circularPathLayer.path = circularPath.cgPath
+		circularPathLayer.fillColor = UIColor.surfaceBackgroundInverse.withAlphaComponent(0.2).cgColor
+		circularPathLayer.borderColor = UIColor.clear.cgColor
+		circularPathLayer.strokeStart = 0
+		circularPathLayer.strokeEnd = 0
+		circularPathLayer.lineWidth = 1
+		circularPathLayer.strokeColor = UIColor.white.cgColor
 		
-		layer.addSublayer(circularPathLayer ?? CAShapeLayer())
-		circularChartAdded.toggle()
+		layer.addSublayer(circularPathLayer)
+		self.circularPathLayer = circularPathLayer
 	}
 	
 	public func configureChart(label: RenderableText? = nil, color: UIColor, _ val: CGFloat, visited: Bool) {
-		if let layer = layer.sublayers?.filter({ $0 === circularPathLayer }).first {
-			layer.removeFromSuperlayer()
-		}
-		if !circularChartAdded {
-			setupProgressBar()
-			circularChartAdded.toggle()
-		}
 		if let validLabel = label {
 			validLabel.render(target: innerText)
 		} else {
-			(String(format: "%.0f", val * 100) + "%").styled(font: .systemFont(ofSize: 12, weight: .regular)).render(target: innerText)
+			(String(format: "%.0f", val * 100) + "%").body3Regular().render(target: innerText)
 		}
 		
 		circularPathLayer?.strokeColor = color.cgColor
 		if visited {
 			circularPathLayer?.strokeEnd = val
+		} else {
+			animateValue(color: color, val)
 		}
 	}
 	
