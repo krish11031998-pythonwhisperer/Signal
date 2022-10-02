@@ -131,6 +131,7 @@
 		EFB1C2D528DB64B300DD40A4 /* NetworkReqeust.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB1C2D428DB64B300DD40A4 /* NetworkReqeust.swift */; };
 		EFB1C2D728DB69D400DD40A4 /* TweetEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB1C2D628DB69D300DD40A4 /* TweetEndpoints.swift */; };
 		EFB1C2D928DB851F00DD40A4 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB1C2D828DB851F00DD40A4 /* UIImage.swift */; };
+		EFB3181628E97B93008FC27E /* TweetURLView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB3181528E97B93008FC27E /* TweetURLView.swift */; };
 		EFDC740628E2FFE800042452 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFDC740528E2FFE800042452 /* SearchViewController.swift */; };
 		EFDC740928E300DF00042452 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFDC740828E300DF00042452 /* SearchBar.swift */; };
 		EFDC740B28E32B2D00042452 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFDC740A28E32B2D00042452 /* UIColor.swift */; };
@@ -286,6 +287,7 @@
 		EFB1C2D428DB64B300DD40A4 /* NetworkReqeust.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkReqeust.swift; sourceTree = "<group>"; };
 		EFB1C2D628DB69D300DD40A4 /* TweetEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetEndpoints.swift; sourceTree = "<group>"; };
 		EFB1C2D828DB851F00DD40A4 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
+		EFB3181528E97B93008FC27E /* TweetURLView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetURLView.swift; sourceTree = "<group>"; };
 		EFDC740528E2FFE800042452 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		EFDC740828E300DF00042452 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		EFDC740A28E32B2D00042452 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
@@ -557,6 +559,7 @@
 			children = (
 				EF96382928DDD59F00178C37 /* TweetDetailView.swift */,
 				EF96383228DDFEDF00178C37 /* TweetMetricsView.swift */,
+				EFB3181528E97B93008FC27E /* TweetURLView.swift */,
 			);
 			path = TweetDetail;
 			sourceTree = "<group>";
@@ -1094,6 +1097,7 @@
 				EF7D2FE828E1A81A0003B8F3 /* Configurable.swift in Sources */,
 				EF7D2FC628E09E7E0003B8F3 /* VideoModel.swift in Sources */,
 				EF96382828DD92E900178C37 /* RedditPostCard.swift in Sources */,
+				EFB3181628E97B93008FC27E /* TweetURLView.swift in Sources */,
 				EFB1C2BB28DB3F3B00DD40A4 /* FontCatalogue.swift in Sources */,
 				EF48D71528E578A600BD2A1A /* SignalTwitterService.swift in Sources */,
 				EF86384B28DCA1A400EF520C /* EventCell.swift in Sources */,

@@ -70,7 +70,7 @@ class TweetDetailView: UIViewController {
 		return scrollView
 	}()
 	private var selectedMetric: TweetSentimentMetric?
-	
+	private lazy var tweetURLView: TweetURLView = { .init() }()
 	private lazy var metricStack: TweetMetricsView = { .init() }()
 	
 	override func viewDidLoad() {
@@ -85,15 +85,16 @@ class TweetDetailView: UIViewController {
 		view.addSubview(scrollView)
 		view.setFittingConstraints(childView: scrollView, insets: .zero)
 
-		let stack = UIView.VStack(subViews: [profileHeader, bodyLabel, imgView], spacing: 12, alignment: .fill)
+		let stack = UIView.VStack(subViews: [profileHeader, bodyLabel, imgView,tweetURLView], spacing: 12, alignment: .fill)
 		stack.setCustomSpacing(20, after: profileHeader)
+		stack.setCustomSpacing(20, after: imgView)
 		imgView.isHidden = true
-
+		tweetURLView.isHidden = true
 		scrollView.addSubview(stack)
 		scrollView.setFittingConstraints(childView: stack, insets: .init(vertical: 10, horizontal: 16))
 		stack.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: -32).isActive = true
 		
-		stack.addArrangedSubview(metricStack)
+//		stack.addArrangedSubview(metricStack)
 	}
 	
 	func configureViews() {
@@ -110,6 +111,12 @@ class TweetDetailView: UIViewController {
 			imgView.configureView(url: url , cornerRadius: 10)
 			imgView.setHeight(height: 350, priority: .required)
 			imgView.isHidden = false
+		}
+		
+		if let url = validTweet.model?.urls?.first {
+			print("(DEBUG) tweetId: ", validTweet.model?.id)
+			tweetURLView.configureView(url)
+			tweetURLView.isHidden = false
 		}
 		
 	}

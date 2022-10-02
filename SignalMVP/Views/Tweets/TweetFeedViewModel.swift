@@ -84,7 +84,7 @@ class TweetFeedViewModel {
 	
 	private var tweetSection: TableSection? {
 		guard let validTweets = tweets else { return nil }
-		let rows = validTweets.compactMap { TableRow<TweetCell>($0) }
+		let rows = validTweets.filter { $0.model?.urls != nil }.compactMap { TableRow<TweetCell>($0) }
 		return .init(rows: rows)
 	}
 }
