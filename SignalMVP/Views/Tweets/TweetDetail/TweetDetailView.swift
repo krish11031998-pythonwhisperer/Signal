@@ -72,11 +72,15 @@ class TweetDetailView: UIViewController {
 	private var selectedMetric: TweetSentimentMetric?
 	private lazy var tweetURLView: TweetURLView = { .init() }()
 	private lazy var metricStack: TweetMetricsView = { .init() }()
+	private var observer: NSKeyValueObservation?
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		setupViews()
 		configureViews()
+		observer = scrollView.observe(\.contentOffset, changeHandler: { [weak self] scrollView, _ in
+			self?.scrollObserver(scrollView)
+		})
 	}
 	
 	
@@ -84,7 +88,7 @@ class TweetDetailView: UIViewController {
 		view.backgroundColor = .surfaceBackground
 		view.addSubview(scrollView)
 		view.setFittingConstraints(childView: scrollView, insets: .zero)
-
+		standardNavBar()
 		let stack = UIView.VStack(subViews: [profileHeader, bodyLabel, imgView,tweetURLView], spacing: 12, alignment: .fill)
 		stack.setCustomSpacing(20, after: profileHeader)
 		stack.setCustomSpacing(20, after: imgView)
@@ -94,7 +98,6 @@ class TweetDetailView: UIViewController {
 		scrollView.setFittingConstraints(childView: stack, insets: .init(vertical: 10, horizontal: 16))
 		stack.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: -32).isActive = true
 		
-//		stack.addArrangedSubview(metricStack)
 	}
 	
 	func configureViews() {
@@ -119,6 +122,11 @@ class TweetDetailView: UIViewController {
 			tweetURLView.isHidden = false
 		}
 		
+	}
+	
+	private func scrollObserver(_ scrollView: UIScrollView) {
+		guard let leftNavbar = navigationItem.leftBarButtonItem else { return }
+		let factor: CGFloat = (0...20).percent(scrollView.contentOffset.y).boundTo()
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {

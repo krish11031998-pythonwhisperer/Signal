@@ -45,7 +45,7 @@ extension UIImage {
 
 	func resized(size newSize: CGSize) -> UIImage {
 		let renderer = UIGraphicsImageRenderer(size: newSize)
-		let img = renderer.image(actions: { _ in draw(in: .init(origin: .zero, size: size))})
+		let img = renderer.image(actions: { _ in draw(in: .init(origin: .zero, size: size))}).withRenderingMode(.alwaysOriginal)
 		return img
 	}
 	

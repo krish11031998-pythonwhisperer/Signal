@@ -36,4 +36,29 @@ extension UIViewController {
 		}
 	}
 	
+	static func backButton(_ target: UIViewController) -> UIBarButtonItem {
+		let buttonImg = UIImage.Catalogue.chevronLeft.image
+		let imgView = UIImageView(image: buttonImg)
+		imgView.cornerFrame = .init(origin: .zero, size: .init(squared: 32))
+		imgView.backgroundColor = .surfaceBackgroundInverse
+		imgView.contentMode = .center
+		let barItem: UIBarButtonItem = .init(image: imgView.snapshot.withRenderingMode(.alwaysOriginal),
+											 style: .plain,
+											 target: target,
+											 action: #selector(target.popViewController))
+		return barItem
+	}
+	
+	@objc
+	func popViewController() {
+		navigationController?.popViewController(animated: true)
+	}
+	
+	func standardNavBar(title: RenderableText? = nil, leftBarButton: UIBarButtonItem? = nil, rightBarButton: UIBarButtonItem? = nil) {
+		setupTransparentNavBar()
+		navigationItem.titleView = title?.generateLabel
+		navigationItem.leftBarButtonItem = leftBarButton ?? Self.backButton(self)
+		navigationItem.rightBarButtonItem = rightBarButton
+	}
+	
 }
