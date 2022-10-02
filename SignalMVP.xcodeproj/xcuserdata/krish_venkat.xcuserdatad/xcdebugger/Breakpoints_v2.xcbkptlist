@@ -14,8 +14,8 @@
             filePath = "SignalMVP/Library/Extension/NetworkReqeust.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "72"
-            endingLineNumber = "72"
+            startingLineNumber = "93"
+            endingLineNumber = "93"
             landmarkName = "urlSessionRequest(request:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -23,32 +23,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "61E69BC1-6059-4678-80F9-C929E67D6125"
+            uuid = "D22F5B03-5995-44B2-A581-1C4EAEB4705F"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "SignalMVP/Library/Components/CircularProgressBar.swift"
+            filePath = "SignalMVP/Library/Extension/NetworkReqeust.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "49"
-            endingLineNumber = "49"
-            landmarkName = "setupProgressBar()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "A2687A52-4C5E-4B74-BACC-EFDF6CDD9711"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SignalMVP/Library/Components/CircularProgressBar.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70"
-            landmarkName = "animateValue(color:_:)"
+            startingLineNumber = "94"
+            endingLineNumber = "94"
+            landmarkName = "urlSessionRequest(request:completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

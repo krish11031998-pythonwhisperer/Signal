@@ -49,7 +49,6 @@ class TweetFeedViewController: UIViewController {
 	
 	override func viewDidLayoutSubviews() {
 		super.viewDidLayoutSubviews()
-		print("(DEBUG) viewDidLayoutSubViews is called!")
 	}
 	
 //MARK: - Protected Methods

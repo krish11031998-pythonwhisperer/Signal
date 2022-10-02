@@ -56,6 +56,27 @@ extension URLCache: CacheSubscript {
 	}
 }
 
+struct DataCache {
+	static var shared: DataCache = .init()
+	
+	var cache: NSCache<NSURLRequest,NSData> = {
+		let cache = NSCache<NSURLRequest,NSData>()
+		return cache
+	}()
+}
+
+extension DataCache: CacheSubscript {
+	subscript(request: URLRequest) -> Data? {
+		get {
+			return cache.object(forKey: request as NSURLRequest) as? Data
+		}
+		
+		set {
+			guard let validData = newValue as? NSData else { return }
+			cache.setObject(validData, forKey: request as NSURLRequest)
+		}
+	}
+}
 
 
 enum URLSessionError: Error {
@@ -69,7 +90,7 @@ extension URLSession {
 
 	static func urlSessionRequest<T: Codable>(request: URLRequest, completion: @escaping (Result<T,Error>) -> Void) {
 		print("(DEBUG) Request: \(request.url?.absoluteString)")
-		if let cachedData = URLCache.shared[request] {
+		if let cachedData = DataCache.shared[request] {
 			if let deceodedData = try? JSONDecoder().decode(T.self, from: cachedData) {
 				completion(.success(deceodedData))
 			} else {
@@ -87,7 +108,7 @@ extension URLSession {
 					return
 				}
 				
-				URLCache.shared.storeCachedResponse(.init(response: validResponse, data: validData), for: request)
+				DataCache.shared[request] = validData
 				
 				completion(.success(decodedData))
 			}
