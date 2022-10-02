@@ -13,14 +13,20 @@ class HomeViewModel {
 	private var trendingHeadlines: [TrendingHeadlinesModel]?
 	private var mentions: [MentionModel]?
 	private var videos: [VideoModel]?
+	private var tweets: [TweetModel]?
 	
 	public var view: AnyTableView?
 	
 	public func fetchHomePageData() {
+		let group = DispatchGroup()
 		fetchTrendingHeadlines()
 		fetchTopMentionedCoins()
 		fetchVideo()
-		view?.reloadTableWithDataSource(buildDataSource())
+		fetchTweets(group)
+		group.notify(queue: .main) { [weak self] in
+			guard let validDatasource = self?.buildDataSource() else { return }
+			self?.view?.reloadTableWithDataSource(validDatasource)
+		}
 	}
 	
 	private func fetchTrendingHeadlines() {
@@ -58,6 +64,20 @@ class HomeViewModel {
 		}
 	}
 	
+	private func fetchTweets(_ group: DispatchGroup) {
+		group.enter()
+		TweetService.shared.fetchTweets { [weak self]  result in
+			switch result {
+			case .success(let tweetResult):
+				guard let tweets = tweetResult.data else { return }
+				self?.tweets = tweets
+			case .failure(let err):
+				print("(DEBUG) err : ", err.localizedDescription)
+			}
+			group.leave()
+		}
+	}
+	
 //MARK: - Sections
 	private var trendingHeadlinesSection: TableSection? {
 		guard let validTrendingHeadlines = trendingHeadlines else { return nil }
@@ -78,8 +98,14 @@ class HomeViewModel {
 		return .init(rows: videoSection.limitTo(to: 3).compactMap { TableRow<VideoCell>($0) }, customHeader: sectionHeader)
 	}
 	
+	private var tweetsSection: TableSection? {
+		guard let tweetsSection = tweets else { return nil }
+		let sectionHeader = "Top Tweets".heading2().generateLabel.embedInView(insets: .init(vertical: 10, horizontal: 10))
+		return .init(rows: tweetsSection.limitTo(to: 5).compactMap { TableRow<TweetCell>(.init(model: $0))}, customHeader: sectionHeader )
+	}
+	
 	private func buildDataSource() -> TableViewDataSource{
-		.init(sections: [trendingHeadlinesSection, topMentionedCoinsSection, videoSection].compactMap { $0 })
+		.init(sections: [trendingHeadlinesSection, topMentionedCoinsSection, tweetsSection, videoSection].compactMap { $0 })
 	}
 	
 
