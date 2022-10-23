@@ -11,13 +11,7 @@ import UIKit
 class NewsCell: ConfigurableCell {
 
 //MARK: - Properties
-	private lazy var newsImage: UIImageView = {
-		let img = UIImageView()
-		img.setFrame(.init(squared: 84))
-		img.cornerRadius = 10
-		img.clipsToBounds = true
-		return img
-	}()
+    private lazy var newsImage: UIImageView = { .init(size: .init(squared: 84), cornerRadius: 10) }()
 	
 	private lazy var timestamp: UILabel = { .init() }()
 	private lazy var title: UILabel = { .init() }()

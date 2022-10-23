@@ -19,7 +19,7 @@ class StubNewsService: NewsServiceInterface {
 						  before: String? = nil,
 						  limit: Int = 20,
 						  completion: @escaping (Result<NewsResult, Error>) -> Void) {
-		let result: Result<NewsResult,Error> = Bundle.main.loadDataFromBundle(name: "news", extensionStr: "json")
+		let result: Result<NewsResult,Error> = Bundle.main.loadDataFromBundle(name: "signalNews", extensionStr: "json")
 		
 		switch result {
 		case .success(let newsResult):

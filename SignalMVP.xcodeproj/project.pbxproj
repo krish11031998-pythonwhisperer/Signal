@@ -3,12 +3,17 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		EF00758D28E5CA8F00195433 /* NewsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF00758C28E5CA8F00195433 /* NewsService.swift */; };
 		EF00758F28E5CBA000195433 /* SignalNewsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF00758E28E5CBA000195433 /* SignalNewsService.swift */; };
+		EF16449D29054FBB00E9D997 /* signalTweets.json in Resources */ = {isa = PBXBuildFile; fileRef = EF16449C29054FBB00E9D997 /* signalTweets.json */; };
+		EF1644A0290550B300E9D997 /* ServiceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF16449F290550B300E9D997 /* ServiceHelper.swift */; };
+		EF1644A22905543C00E9D997 /* Fundamentals.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1644A12905543C00E9D997 /* Fundamentals.swift */; };
+		EF1644A42905573600E9D997 /* signalNews.json in Resources */ = {isa = PBXBuildFile; fileRef = EF1644A32905573600E9D997 /* signalNews.json */; };
+		EF1644A62905691A00E9D997 /* signalEvents.json in Resources */ = {isa = PBXBuildFile; fileRef = EF1644A52905691A00E9D997 /* signalEvents.json */; };
 		EF48D70328E490C600BD2A1A /* Satoshi-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = EF48D6F828E490C600BD2A1A /* Satoshi-Bold.otf */; };
 		EF48D70428E490C600BD2A1A /* Satoshi-Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = EF48D6F928E490C600BD2A1A /* Satoshi-Italic.otf */; };
 		EF48D70528E490C600BD2A1A /* Satoshi-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = EF48D6FA28E490C600BD2A1A /* Satoshi-Black.otf */; };
@@ -56,8 +61,6 @@
 		EF7D2FE728E1A81A0003B8F3 /* TableRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7D2FE328E1A81A0003B8F3 /* TableRow.swift */; };
 		EF7D2FE828E1A81A0003B8F3 /* Configurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7D2FE428E1A81A0003B8F3 /* Configurable.swift */; };
 		EF7D2FE928E1A81A0003B8F3 /* TableSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7D2FE528E1A81A0003B8F3 /* TableSection.swift */; };
-		EF7D2FEB28E20E290003B8F3 /* tweets.json in Resources */ = {isa = PBXBuildFile; fileRef = EF7D2FEA28E20E290003B8F3 /* tweets.json */; };
-		EF7D2FED28E2A65A0003B8F3 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7D2FEC28E2A65A0003B8F3 /* Response.swift */; };
 		EF86381928DC1E9C00EF520C /* StubService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF86381828DC1E9C00EF520C /* StubService.swift */; };
 		EF86381B28DC1EBE00EF520C /* TweetServiceInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF86381A28DC1EBE00EF520C /* TweetServiceInterface.swift */; };
 		EF86381F28DC283B00EF520C /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF86381E28DC283B00EF520C /* Array.swift */; };
@@ -66,7 +69,6 @@
 		EF86382528DC347000EF520C /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF86382428DC347000EF520C /* UIImageView.swift */; };
 		EF86382828DC507E00EF520C /* NewsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF86382728DC507E00EF520C /* NewsModel.swift */; };
 		EF86382A28DC519B00EF520C /* StubNewsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF86382928DC519B00EF520C /* StubNewsService.swift */; };
-		EF86382C28DC561D00EF520C /* news.json in Resources */ = {isa = PBXBuildFile; fileRef = EF86382B28DC561D00EF520C /* news.json */; };
 		EF86382E28DC56D900EF520C /* NewsInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF86382D28DC56D900EF520C /* NewsInterface.swift */; };
 		EF86383028DC576200EF520C /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF86382F28DC576200EF520C /* Bundle.swift */; };
 		EF86383328DC5CAF00EF520C /* NewsFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF86383228DC5CAF00EF520C /* NewsFeed.swift */; };
@@ -74,7 +76,6 @@
 		EF86383728DC648000EF520C /* NewsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF86383628DC648000EF520C /* NewsViewModel.swift */; };
 		EF86383B28DC761900EF520C /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF86383A28DC761900EF520C /* MainTabView.swift */; };
 		EF86383E28DC990500EF520C /* EventsFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF86383D28DC990500EF520C /* EventsFeed.swift */; };
-		EF86384028DC9DE700EF520C /* events.json in Resources */ = {isa = PBXBuildFile; fileRef = EF86383F28DC9DE700EF520C /* events.json */; };
 		EF86384228DC9E0F00EF520C /* EventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF86384128DC9E0F00EF520C /* EventViewModel.swift */; };
 		EF86384528DC9E5200EF520C /* StubEventsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF86384428DC9E5200EF520C /* StubEventsService.swift */; };
 		EF86384728DC9E6A00EF520C /* EventModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF86384628DC9E6A00EF520C /* EventModel.swift */; };
@@ -161,6 +162,11 @@
 /* Begin PBXFileReference section */
 		EF00758C28E5CA8F00195433 /* NewsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsService.swift; sourceTree = "<group>"; };
 		EF00758E28E5CBA000195433 /* SignalNewsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalNewsService.swift; sourceTree = "<group>"; };
+		EF16449C29054FBB00E9D997 /* signalTweets.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = signalTweets.json; sourceTree = "<group>"; };
+		EF16449F290550B300E9D997 /* ServiceHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceHelper.swift; sourceTree = "<group>"; };
+		EF1644A12905543C00E9D997 /* Fundamentals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fundamentals.swift; sourceTree = "<group>"; };
+		EF1644A32905573600E9D997 /* signalNews.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = signalNews.json; sourceTree = "<group>"; };
+		EF1644A52905691A00E9D997 /* signalEvents.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = signalEvents.json; sourceTree = "<group>"; };
 		EF48D6F828E490C600BD2A1A /* Satoshi-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Satoshi-Bold.otf"; sourceTree = "<group>"; };
 		EF48D6F928E490C600BD2A1A /* Satoshi-Italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Satoshi-Italic.otf"; sourceTree = "<group>"; };
 		EF48D6FA28E490C600BD2A1A /* Satoshi-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Satoshi-Black.otf"; sourceTree = "<group>"; };
@@ -208,8 +214,6 @@
 		EF7D2FE328E1A81A0003B8F3 /* TableRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableRow.swift; sourceTree = "<group>"; };
 		EF7D2FE428E1A81A0003B8F3 /* Configurable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configurable.swift; sourceTree = "<group>"; };
 		EF7D2FE528E1A81A0003B8F3 /* TableSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableSection.swift; sourceTree = "<group>"; };
-		EF7D2FEA28E20E290003B8F3 /* tweets.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tweets.json; sourceTree = "<group>"; };
-		EF7D2FEC28E2A65A0003B8F3 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		EF86381828DC1E9C00EF520C /* StubService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubService.swift; sourceTree = "<group>"; };
 		EF86381A28DC1EBE00EF520C /* TweetServiceInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetServiceInterface.swift; sourceTree = "<group>"; };
 		EF86381E28DC283B00EF520C /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
@@ -218,7 +222,6 @@
 		EF86382428DC347000EF520C /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 		EF86382728DC507E00EF520C /* NewsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsModel.swift; sourceTree = "<group>"; };
 		EF86382928DC519B00EF520C /* StubNewsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubNewsService.swift; sourceTree = "<group>"; };
-		EF86382B28DC561D00EF520C /* news.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = news.json; sourceTree = "<group>"; };
 		EF86382D28DC56D900EF520C /* NewsInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsInterface.swift; sourceTree = "<group>"; };
 		EF86382F28DC576200EF520C /* Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
 		EF86383228DC5CAF00EF520C /* NewsFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeed.swift; sourceTree = "<group>"; };
@@ -226,7 +229,6 @@
 		EF86383628DC648000EF520C /* NewsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewModel.swift; sourceTree = "<group>"; };
 		EF86383A28DC761900EF520C /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		EF86383D28DC990500EF520C /* EventsFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsFeed.swift; sourceTree = "<group>"; };
-		EF86383F28DC9DE700EF520C /* events.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = events.json; sourceTree = "<group>"; };
 		EF86384128DC9E0F00EF520C /* EventViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewModel.swift; sourceTree = "<group>"; };
 		EF86384428DC9E5200EF520C /* StubEventsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubEventsService.swift; sourceTree = "<group>"; };
 		EF86384628DC9E6A00EF520C /* EventModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventModel.swift; sourceTree = "<group>"; };
@@ -322,6 +324,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EF16449E2905509400E9D997 /* ServiceHelpers */ = {
+			isa = PBXGroup;
+			children = (
+				EF16449F290550B300E9D997 /* ServiceHelper.swift */,
+			);
+			path = ServiceHelpers;
+			sourceTree = "<group>";
+		};
 		EF48D6F728E490C600BD2A1A /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -438,6 +448,7 @@
 		EF86381428DC1E7D00EF520C /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				EF16449E2905509400E9D997 /* ServiceHelpers */,
 				EF7D2FC028E09D9B0003B8F3 /* Videos */,
 				EF7D2FAF28E0500A0003B8F3 /* Mentions */,
 				EF7D2FA128E031330003B8F3 /* TrendingHeadlines */,
@@ -452,7 +463,7 @@
 		EF86381528DC1E8500EF520C /* Twitter */ = {
 			isa = PBXGroup;
 			children = (
-				EF7D2FEA28E20E290003B8F3 /* tweets.json */,
+				EF16449C29054FBB00E9D997 /* signalTweets.json */,
 				EF96382D28DDD7DA00178C37 /* TweetNotification.swift */,
 				EF96381728DD8C1E00178C37 /* TweetService.swift */,
 				EFB1C2D628DB69D300DD40A4 /* TweetEndpoints.swift */,
@@ -466,7 +477,7 @@
 		EF86382628DC505200EF520C /* News */ = {
 			isa = PBXGroup;
 			children = (
-				EF86382B28DC561D00EF520C /* news.json */,
+				EF1644A32905573600E9D997 /* signalNews.json */,
 				EF86382928DC519B00EF520C /* StubNewsService.swift */,
 				EF86382D28DC56D900EF520C /* NewsInterface.swift */,
 				EF7D2F9528DED9730003B8F3 /* NewsNotification.swift */,
@@ -525,7 +536,7 @@
 		EF86384328DC9E3A00EF520C /* Events */ = {
 			isa = PBXGroup;
 			children = (
-				EF86383F28DC9DE700EF520C /* events.json */,
+				EF1644A52905691A00E9D997 /* signalEvents.json */,
 				EF86384428DC9E5200EF520C /* StubEventsService.swift */,
 				EF86384828DC9F4600EF520C /* EventServiceInterface.swift */,
 				EF7D2FD328E0F7A00003B8F3 /* EventNotification.swift */,
@@ -675,8 +686,8 @@
 				EFB1C2D428DB64B300DD40A4 /* NetworkReqeust.swift */,
 				EF86381E28DC283B00EF520C /* Array.swift */,
 				EF86382F28DC576200EF520C /* Bundle.swift */,
-				EF7D2FEC28E2A65A0003B8F3 /* Response.swift */,
 				EFDC740A28E32B2D00042452 /* UIColor.swift */,
+				EF1644A12905543C00E9D997 /* Fundamentals.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -944,7 +955,7 @@
 				};
 			};
 			buildConfigurationList = EFB1C22528DB3B1800DD40A4 /* Build configuration list for PBXProject "SignalMVP" */;
-			compatibilityVersion = "Xcode 14.0";
+			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -971,7 +982,6 @@
 				EFB1C2BE28DB3F3B00DD40A4 /* Code Pro Bold LC.otf in Resources */,
 				EF48D70A28E490C600BD2A1A /* Satoshi-BlackItalic.otf in Resources */,
 				EF7D2FAC28E037530003B8F3 /* trendingHeadlines.json in Resources */,
-				EF86382C28DC561D00EF520C /* news.json in Resources */,
 				EFB1C2C628DB3F3B00DD40A4 /* Montserrat-SemiBoldItalic.ttf in Resources */,
 				EFB1C2C228DB3F3B00DD40A4 /* Montserrat-BoldItalic.ttf in Resources */,
 				EF48D70528E490C600BD2A1A /* Satoshi-Black.otf in Resources */,
@@ -985,9 +995,10 @@
 				EF7D2FB828E052690003B8F3 /* topMentionsWeek.json in Resources */,
 				EF7D2FCB28E0A1540003B8F3 /* videos.json in Resources */,
 				EFB1C2C328DB3F3B00DD40A4 /* Montserrat-Bold.ttf in Resources */,
+				EF1644A42905573600E9D997 /* signalNews.json in Resources */,
 				EF7D2FBA28E052740003B8F3 /* topMentionsMonth.json in Resources */,
-				EF86384028DC9DE700EF520C /* events.json in Resources */,
 				EFB1C2C028DB3F3B00DD40A4 /* Montserrat-LightItalic.ttf in Resources */,
+				EF1644A62905691A00E9D997 /* signalEvents.json in Resources */,
 				EF48D70D28E490C600BD2A1A /* Satoshi-Variable.ttf in Resources */,
 				EF48D70C28E490C600BD2A1A /* Satoshi-Medium.otf in Resources */,
 				EF48D70428E490C600BD2A1A /* Satoshi-Italic.otf in Resources */,
@@ -996,8 +1007,8 @@
 				EF48D70728E490C600BD2A1A /* Satoshi-BoldItalic.otf in Resources */,
 				EF48D70928E490C600BD2A1A /* Satoshi-LightItalic.otf in Resources */,
 				EFB1C23728DB3B1900DD40A4 /* Assets.xcassets in Resources */,
-				EF7D2FEB28E20E290003B8F3 /* tweets.json in Resources */,
 				EF48D70628E490C600BD2A1A /* Satoshi-Regular.otf in Resources */,
+				EF16449D29054FBB00E9D997 /* signalTweets.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1037,6 +1048,7 @@
 				EF7D2FE628E1A81A0003B8F3 /* TableViewFunction.swift in Sources */,
 				EF7D2FC228E09DB30003B8F3 /* VideoServiceInterface.swift in Sources */,
 				EF7D2FB228E050450003B8F3 /* MentionInterface.swift in Sources */,
+				EF1644A0290550B300E9D997 /* ServiceHelper.swift in Sources */,
 				EF86382528DC347000EF520C /* UIImageView.swift in Sources */,
 				EF7D2FE928E1A81A0003B8F3 /* TableSection.swift in Sources */,
 				EF7D2FB628E051940003B8F3 /* StubMentionService.swift in Sources */,
@@ -1082,7 +1094,6 @@
 				EF86383528DC61F700EF520C /* NewsCell.swift in Sources */,
 				EF96383828DE042D00178C37 /* ProgressBars.swift in Sources */,
 				EF96381D28DD8C8D00178C37 /* RedditPostModel.swift in Sources */,
-				EF7D2FED28E2A65A0003B8F3 /* Response.swift in Sources */,
 				EF96381B28DD8C6B00178C37 /* RedditServiceInterface.swift in Sources */,
 				EFDC740E28E32B9800042452 /* ImageCatalogue.swift in Sources */,
 				EF00758D28E5CA8F00195433 /* NewsService.swift in Sources */,
@@ -1093,6 +1104,7 @@
 				EF86382828DC507E00EF520C /* NewsModel.swift in Sources */,
 				EFB1C2BA28DB3F3B00DD40A4 /* Int.swift in Sources */,
 				EF48D71728E5918300BD2A1A /* SignalEventService.swift in Sources */,
+				EF1644A22905543C00E9D997 /* Fundamentals.swift in Sources */,
 				EF96383328DDFEDF00178C37 /* TweetMetricsView.swift in Sources */,
 				EF7D2FE828E1A81A0003B8F3 /* Configurable.swift in Sources */,
 				EF7D2FC628E09E7E0003B8F3 /* VideoModel.swift in Sources */,
@@ -1296,6 +1308,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1323,6 +1336,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -12,7 +12,7 @@ class CustomSearchViewController: UISearchController {
 	
 	override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
 		super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-		let searchBar = {
+		let searchBar = { () -> CustomSearchBar in
 			let searchBar = CustomSearchBar()
 			searchBar.delegate = self
 			return searchBar

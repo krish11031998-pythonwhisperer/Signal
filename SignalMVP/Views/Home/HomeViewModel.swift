@@ -66,16 +66,18 @@ class HomeViewModel {
 	
 	private func fetchTweets(_ group: DispatchGroup) {
 		group.enter()
-		TweetService.shared.fetchTweets { [weak self]  result in
-			switch result {
-			case .success(let tweetResult):
-				guard let tweets = tweetResult.data else { return }
-				self?.tweets = tweets
-			case .failure(let err):
-				print("(DEBUG) err : ", err.localizedDescription)
-			}
-			group.leave()
-		}
+        TweetService.shared.fetchTweets { [weak self] result in
+            if let tweets = result.data?.data {
+                self?.tweets = tweets
+            } else {
+                StubTweetService.shared.fetchTweets { result in
+                    if let data = result.data?.data {
+                        self?.tweets = data
+                    }
+                }
+            }
+            group.leave()
+        }
 	}
 	
 //MARK: - Sections

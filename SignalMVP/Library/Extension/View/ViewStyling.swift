@@ -16,6 +16,14 @@ extension UIView {
 		get { layer.cornerRadius }
 		set { layer.cornerRadius = newValue }
 	}
+    
+    var clippedCornerRadius: CGFloat {
+        get { cornerRadius }
+        set {
+            clipsToBounds = true
+            cornerRadius = newValue
+        }
+    }
 	
 	func border(color: UIColor, borderWidth: CGFloat, cornerRadius: CGFloat? = nil) {
 		layer.borderColor = color.cgColor

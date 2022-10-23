@@ -34,12 +34,15 @@ class TweetFeedViewModel {
 		TweetService
 			.shared
 			.fetchTweets(entity: entity, before: before, after: after) { [weak self] result in
-				switch result {
-				case .success(let searchResult):
-					self?.decodeToTweetCellModel(.init(data: searchResult.data?.limitTo(to: 20), includes: searchResult.includes))
-				case .failure(let err):
-					print("(DEBUG) err : ", err.localizedDescription)
-				}
+                if let result = result.data {
+                    self?.decodeToTweetCellModel(result)
+                } else {
+                    StubTweetService.shared.fetchTweets {
+                        if let tweets = $0.data {
+                            self?.decodeToTweetCellModel(tweets)
+                        }
+                    }
+                }
 			}
 	}
 	
@@ -52,7 +55,7 @@ class TweetFeedViewModel {
 	private func decodeToTweetCellModel(_ data: TweetSearchResult) {
 		guard let tweets = data.data else { return }
 		
-		let fitleredTweet = tweets.compactMap { tweet in
+        let fitleredTweet: [TweetCellModel] = tweets.compactMap { tweet in
 			var model:TweetCellModel = .init(model: tweet)
 			
 			model.action = {

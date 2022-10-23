@@ -15,20 +15,16 @@ class EventViewModel {
 	
 	
 	public func fetchEvents() {
-		EventService
+        StubEventService
 			.shared
 			.fetchEvents { [weak self] result in
-			switch result {
-			case .success(let events):
-				self?.events = Array(events.data)
-				DispatchQueue.main.async {
-					if let validDataSource = self?.buildDataSource() {
-						self?.view?.reloadTableWithDataSource(validDataSource)
-					}
-				}
-			case .failure(let err):
-				print("(Error) err : ", err.localizedDescription)
-			}
+                if let events = result.data?.data {
+                    self?.events = events
+                    asyncMain {
+                        guard let validDataSource = self?.buildDataSource() else { return }
+                        self?.view?.reloadTableWithDataSource(validDataSource)
+                    }
+                }
 		}
 	}
 	

@@ -12,14 +12,7 @@ class EventSingleCell: ConfigurableCell {
 	
 //MARK: - Properties
 	private lazy var eventTitle: UILabel = { .init() }()
-	private lazy var imgView: UIImageView = {
-		let imgView = UIImageView()
-		imgView.contentMode = .scaleAspectFill
-		imgView.cornerRadius = 10
-		imgView.clipsToBounds = true
-		imgView.setFrame(.init(squared: 64))
-		return imgView
-	}()
+    private lazy var imgView: UIImageView = { .init(size: .init(squared: 64), cornerRadius: 10) }()
 	private lazy var newsArticleCount: UILabel = { .init() }()
 	private lazy var tickersView: UIStackView = { UIView.HStack(spacing: 8) }()
 	
