@@ -39,7 +39,7 @@ class NewsDetailViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		setupViews()
-		setupNavBar()
+		standardNavBar()
 		addObservers()
 	}
 	
@@ -91,19 +91,6 @@ class NewsDetailViewController: UIViewController {
 		tableView.contentInsetAdjustmentBehavior = .never
 	}
 	
-	private func setupNavBar() {
-		let img = UIImage(systemName: "chevron.left", withConfiguration: UIImage.SymbolConfiguration(pointSize: 10, weight: .medium))?
-				.withTintColor(.white, renderingMode: .alwaysOriginal)
-		let imgView = UIImageView(image: img?.resized(size: .init(squared: 10)))
-		imgView.backgroundColor = .black
-		imgView.contentMode = .center
-		imgView.cornerFrame = .init(origin: .zero, size: .init(squared: 32))
-		navigationItem.leftBarButtonItem = .init(title: nil,
-												 image: imgView.snapshot.withRenderingMode(.alwaysOriginal),
-												 target: self,
-												 action: #selector(popVC))
-	}
-	
 	
 	private func updateImage() {
 		guard let img = NewsStorage.selectedNews?.imageUrl else { return }
@@ -116,11 +103,6 @@ class NewsDetailViewController: UIViewController {
 		}
 	}
 
-	@objc
-	private func popVC() {
-		navigationController?.popViewController(animated: true)
-	}
-	
 	@objc
 	private func updateOnScroll(_ scrollView: UIScrollView) {
 		let offset = scrollView.contentOffset

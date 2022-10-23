@@ -11,9 +11,9 @@ import UIKit
 fileprivate extension UIView {
 	
 	func blobify() -> UIView {
-		blobify(backgroundColor: .white.withAlphaComponent(0.1),
+		blobify(backgroundColor: .surfaceBackgroundInverse.withAlphaComponent(0.1),
 				edgeInset: .init(vertical: 7.5, horizontal:7.5),
-				borderColor: .white,
+				borderColor: .surfaceBackgroundInverse,
 				borderWidth: 1,
 				cornerRadius: 10)
 	}
@@ -59,7 +59,6 @@ class TweetMetricsView: UIView {
 			let progressBar = ProgressBar()
 			let stack = UIView.VStack(subViews: [metric.rawValue.capitalized.styled(font: .systemFont(ofSize: 16, weight: .medium), color: .white).generateLabel, progressBar],
 									  spacing: stackSpacing, alignment: .fill)
-//			progressBar.layer.opacity = 0
 			stack.layer.opacity = 0
 			progressBar.setHeight(height: 20, priority: .required)
 			progressBars.append(progressBar)

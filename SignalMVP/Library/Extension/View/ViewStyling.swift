@@ -27,7 +27,7 @@ extension UIView {
 	}
 	
 	var defaultBlurStyle: UIBlurEffect.Style {
-		userInterface == .light ? .systemUltraThinMaterialDark : .systemUltraThinMaterialLight
+		userInterface == .light ? .systemThinMaterialLight : .systemUltraThinMaterialDark
 	}
 	
 	func addBlurView(_ _style: UIBlurEffect.Style? = nil) {
@@ -41,9 +41,9 @@ extension UIView {
 	
 	func addShadow(){
 		self.layer.shadowColor = UIColor.surfaceBackgroundInverse.cgColor
-		self.layer.shadowOpacity = 0.2
+		self.layer.shadowOpacity = 0.1
 		self.layer.shadowOffset = .zero
-		self.layer.shadowRadius = 2.5
+		self.layer.shadowRadius = 2
 	}
 	
 	func addShadowBackground(inset: UIEdgeInsets = .zero, cornerRadius: CGFloat = 8) {
