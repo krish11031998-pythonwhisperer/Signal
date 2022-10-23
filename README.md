@@ -5,7 +5,7 @@ Signal is a CryptoCurrency News Aggregator
 
 ## Features of the App
 
-The App aggreagates data from multiple sources and distributed as the following type
+The App aggreagates data from multiple sources and distributed as the following format
 
 - Tweets (Trending Tweets)
 - News (Trending News for repsective tickers with sentimental analysis)
@@ -15,6 +15,18 @@ The App aggreagates data from multiple sources and distributed as the following 
 	- Important cryptocurrency videos from youtube.
 
 App available on TestFlight Soon
+
+### Headlines
+![Headlines Page](https://github.com/krish11031998-pythonwhisperer/Signal/blob/main/Screenshot/Headlines.png?raw=true)
+
+### Tweets
+![Tweets Page](https://github.com/krish11031998-pythonwhisperer/Signal/blob/main/Screenshot/Tweets.png?raw=true)
+
+### News
+![News Page](https://github.com/krish11031998-pythonwhisperer/Signal/blob/main/Screenshot/News.png?raw=true)
+
+### Events
+![Events Page](https://github.com/krish11031998-pythonwhisperer/Signal/blob/main/Screenshot/Events.png?raw=true)
 
 ## Data
 
