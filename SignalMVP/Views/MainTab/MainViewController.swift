@@ -10,7 +10,8 @@ import UIKit
 extension UITabBarItem {
 	
 	convenience init(model: MainTabModel, tag: Int) {
-		self.init(title: model.name, image: model.tabImage, tag: tag)
+//		self.init(title: model.name, image: model.tabImage, tag: tag)
+        self.init(title: model.name, image: model.tabImage, selectedImage: model.tabImage)
 	}
 	
 }
@@ -28,7 +29,7 @@ class MainViewController: UITabBarController {
 			return tabBar
 		}()
 		self.setValue(tabBar, forKey: "tabBar")
-		selectedIndex = 0
+//		selectedIndex = 0
 		tabBar.tintColor = .purple
 	}
 

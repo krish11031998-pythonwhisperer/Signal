@@ -14,6 +14,7 @@
 		EF1644A22905543C00E9D997 /* Fundamentals.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1644A12905543C00E9D997 /* Fundamentals.swift */; };
 		EF1644A42905573600E9D997 /* signalNews.json in Resources */ = {isa = PBXBuildFile; fileRef = EF1644A32905573600E9D997 /* signalNews.json */; };
 		EF1644A62905691A00E9D997 /* signalEvents.json in Resources */ = {isa = PBXBuildFile; fileRef = EF1644A52905691A00E9D997 /* signalEvents.json */; };
+		EF1644A9290589B500E9D997 /* CustomCuratedEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1644A8290589B500E9D997 /* CustomCuratedEvents.swift */; };
 		EF48D70328E490C600BD2A1A /* Satoshi-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = EF48D6F828E490C600BD2A1A /* Satoshi-Bold.otf */; };
 		EF48D70428E490C600BD2A1A /* Satoshi-Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = EF48D6F928E490C600BD2A1A /* Satoshi-Italic.otf */; };
 		EF48D70528E490C600BD2A1A /* Satoshi-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = EF48D6FA28E490C600BD2A1A /* Satoshi-Black.otf */; };
@@ -167,6 +168,7 @@
 		EF1644A12905543C00E9D997 /* Fundamentals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fundamentals.swift; sourceTree = "<group>"; };
 		EF1644A32905573600E9D997 /* signalNews.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = signalNews.json; sourceTree = "<group>"; };
 		EF1644A52905691A00E9D997 /* signalEvents.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = signalEvents.json; sourceTree = "<group>"; };
+		EF1644A8290589B500E9D997 /* CustomCuratedEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCuratedEvents.swift; sourceTree = "<group>"; };
 		EF48D6F828E490C600BD2A1A /* Satoshi-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Satoshi-Bold.otf"; sourceTree = "<group>"; };
 		EF48D6F928E490C600BD2A1A /* Satoshi-Italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Satoshi-Italic.otf"; sourceTree = "<group>"; };
 		EF48D6FA28E490C600BD2A1A /* Satoshi-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Satoshi-Black.otf"; sourceTree = "<group>"; };
@@ -332,6 +334,14 @@
 			path = ServiceHelpers;
 			sourceTree = "<group>";
 		};
+		EF1644A72905899500E9D997 /* CustomCuratedList */ = {
+			isa = PBXGroup;
+			children = (
+				EF1644A8290589B500E9D997 /* CustomCuratedEvents.swift */,
+			);
+			path = CustomCuratedList;
+			sourceTree = "<group>";
+		};
 		EF48D6F728E490C600BD2A1A /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -361,6 +371,7 @@
 		EF7D2F9C28E02CE50003B8F3 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				EF1644A72905899500E9D997 /* CustomCuratedList */,
 				EF7D2FC728E0A0D40003B8F3 /* Videos */,
 				EF7D2FBB28E056E60003B8F3 /* TopMentions */,
 				EF7D2FA828E033D40003B8F3 /* TrendingHeadline */,
@@ -1116,6 +1127,7 @@
 				EF86383328DC5CAF00EF520C /* NewsFeed.swift in Sources */,
 				EF7D2F9628DED9730003B8F3 /* NewsNotification.swift in Sources */,
 				EF7D2FC928E0A0E10003B8F3 /* VideoCell.swift in Sources */,
+				EF1644A9290589B500E9D997 /* CustomCuratedEvents.swift in Sources */,
 				EF86382E28DC56D900EF520C /* NewsInterface.swift in Sources */,
 				EF7D2FA328E0314B0003B8F3 /* TrendingHeadlinesInterface.swift in Sources */,
 				EFB1C23028DB3B1800DD40A4 /* SceneDelegate.swift in Sources */,

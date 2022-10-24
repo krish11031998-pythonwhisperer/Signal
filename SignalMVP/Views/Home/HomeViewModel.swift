@@ -31,36 +31,25 @@ class HomeViewModel {
 	
 	private func fetchTrendingHeadlines() {
 		StubTrendingHeadlines.shared.fetchHeadlines { [weak self] result in
-			switch result {
-			case .success(let trendingResult):
-				guard let validData = trendingResult.data else { return }
-				self?.trendingHeadlines = validData
-			case .failure(let err):
-				print("(DEBUG) err : ",err.localizedDescription)
-			}
+            if let headlines = result.data?.data {
+                self?.trendingHeadlines = headlines
+            }
 		}
 	}
 	
 	private func fetchTopMentionedCoins() {
 		StubMentionService.shared.fetchMentions(period: .weekly) { [weak self] result in
-			switch result {
-			case .success(let result):
-				guard let mentions = result.data?.all  else { return }
-				self?.mentions = mentions
-			case .failure(let err):
-				print("(DEBUG) err : ",err.localizedDescription)
-			}
+            if let mentions = result.data?.data?.all {
+                self?.mentions = mentions
+            }
 		}
 	}
 	
 	private func fetchVideo() {
 		StubVideoService.shared.fetchVideo { [weak self] result in
-			switch result {
-			case .success(let videos):
-				self?.videos = videos
-			case .failure(let err):
-				print("(DEBUG) err : ", err.localizedDescription)
-			}
+            if let videos = result.data {
+                self?.videos = videos
+            }
 		}
 	}
 	
@@ -106,8 +95,12 @@ class HomeViewModel {
 		return .init(rows: tweetsSection.limitTo(to: 5).compactMap { TableRow<TweetCell>(.init(model: $0))}, customHeader: sectionHeader )
 	}
 	
+    private var headerSection: TableSection? {
+        return .init(rows: [TableRow<CustomCuratedEvents>(.init())])
+    }
+    
 	private func buildDataSource() -> TableViewDataSource{
-		.init(sections: [trendingHeadlinesSection, topMentionedCoinsSection, tweetsSection, videoSection].compactMap { $0 })
+		.init(sections: [headerSection, trendingHeadlinesSection, topMentionedCoinsSection, tweetsSection, videoSection].compactMap { $0 })
 	}
 	
 

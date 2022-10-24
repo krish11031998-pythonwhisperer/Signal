@@ -38,6 +38,7 @@ extension UIColor {
 		case surfaceBackgroundInverse
 		case subtitleColor
 		case textColor
+        case textColorInverse
 		case appIndigo
 		case appIndigoFade
 		case appIndigoFadeLight
@@ -75,6 +76,7 @@ extension UIColor {
 	static var surfaceBackgroundInverse : UIColor { Catalogue.surfaceBackgroundInverse.color }
 	static var subtitleColor : UIColor { Catalogue.subtitleColor.color }
 	static var textColor : UIColor { Catalogue.textColor.color }
+    static var textColorInverse: UIColor { Catalogue.textColorInverse.color }
 	static var appIndigo : UIColor { Catalogue.appIndigo.color }
 	static var appIndigoFade : UIColor { Catalogue.appIndigoFade.color }
 	static var appIndigoFadeLight : UIColor { Catalogue.appIndigoFadeLight.color }
