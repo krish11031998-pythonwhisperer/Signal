@@ -21,6 +21,8 @@ extension CGSize {
 	}
 	
 	var frame: CGRect { .init(origin: .zero, size: self) }
+    
+    var smallDim: CGFloat { min(width,height) }
 	
 	static var smallestSquare: CGSize  { .init(squared: 32) }
 	

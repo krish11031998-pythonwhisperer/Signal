@@ -78,15 +78,14 @@ extension UIView {
 	}
 	
 	func setFrame(width: CGFloat? = nil, height: CGFloat? = nil) {
-		let items: [NSLayoutConstraint] = [
-			widthAnchor.constraint(equalToConstant: width ?? 0),
-			heightAnchor.constraint(equalToConstant: height ?? 0)
-		]
-		
-		translatesAutoresizingMaskIntoConstraints = false
-		let validConstraints = zip(items, [width, height]).compactMap { $1 != nil ? $0 : nil }
-		removeSimilarConstraints(validConstraints)
-		addConstraints(validConstraints)
+        translatesAutoresizingMaskIntoConstraints = false
+        if let validWidth = width {
+            setWidth(width: validWidth, priority: .required)
+        }
+        if let validHeight = height {
+            setHeight(height: validHeight, priority: .required)
+        }
+        
 	}
 	
 	func removeSimilarConstraints(_ list: [NSLayoutConstraint]) {
@@ -108,6 +107,7 @@ extension UIView {
 		removeSimilarConstraints([constraint])
 		constraint.priority = priority
 		constraint.isActive = true
+        frame.size.width = width
 	}
 	
 	func setHeight(height: CGFloat, priority: UILayoutPriority) {
@@ -115,6 +115,7 @@ extension UIView {
 		removeSimilarConstraints([constraint])
 		constraint.priority = priority
 		constraint.isActive = true
+        frame.size.height = height
 	}
 	
 	func removeChildViews() {

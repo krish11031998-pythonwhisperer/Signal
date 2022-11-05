@@ -7,6 +7,10 @@
 
 import Foundation
 
+public extension Notification.Name {
+    static let showMention: Notification.Name = .init("showMention")
+}
+
 struct MentionsResult: Codable {
 	let data: MentionResultSection?
 }
@@ -34,6 +38,10 @@ struct MentionModel: Codable {
 	}
 }
 
+struct MentionCellModel: ActionProvider {
+    let model: MentionModel
+    var action: Callback?
+}
 
 enum MentionPeriod {
 	case weekly

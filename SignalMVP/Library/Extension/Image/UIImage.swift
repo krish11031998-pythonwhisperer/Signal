@@ -44,9 +44,10 @@ extension UIImage.SystemCatalogue {
 extension UIImage {
 
 	func resized(size newSize: CGSize) -> UIImage {
-		let renderer = UIGraphicsImageRenderer(size: newSize)
-		let img = renderer.image(actions: { _ in draw(in: .init(origin: .zero, size: size))}).withRenderingMode(.alwaysOriginal)
-		return img
+        let renderer = UIGraphicsImageRenderer(size: newSize)
+        let image = renderer.image { _ in self.draw(in: CGRect(origin: .zero, size: newSize)) }
+        let newImage = image.withRenderingMode(renderingMode)
+        return newImage
 	}
 	
 	static func download(urlStr: String? = nil, request: URLRequest? = nil, completion: @escaping (Result<UIImage,Error>) -> Void) {

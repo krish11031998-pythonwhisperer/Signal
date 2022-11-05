@@ -58,19 +58,19 @@ class TopMentionCell: ConfigurableCell {
 		
 		[symbolView, .spacer(),circularChart].forEach(detailStack.addArrangedSubview(_:))
 		circularChart.setFrame(.init(squared: 48))
-		mainStack.addArrangedSubview(detailStack)
-		mainStack.addArrangedSubview("Sentiments".bodySmallRegular(color: .gray).generateLabel)
+        [detailStack, "Sentiments".bodySmallRegular(color: .gray).generateLabel, mentionDistribution].forEach(mainStack.addArrangedSubview(_:))
 		mainStack.setCustomSpacing(16, after: detailStack)
-		mainStack.addArrangedSubview(mentionDistribution)
 		mentionDistribution.isHidden = true
 		contentView.addSubview(mainStack)
 		contentView.setFittingConstraints(childView: mainStack, insets: .init(vertical: 10, horizontal: 16))
 	}
 	
-	func configure(with model: MentionModel) {
+	func configure(with model: MentionCellModel) {
 		selectionStyle = .none
 		backgroundColor = .clear
 		
+        let model = model.model
+        
 		symbolView.configureView(symbol: model.ticker, imgSize: .init(squared: 32), label: model.ticker.body1Medium())
 		
 		let percent: CGFloat = CGFloat(model.positiveMentions)/CGFloat(model.totalMentions - model.neutralMentions)

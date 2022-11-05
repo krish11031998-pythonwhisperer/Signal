@@ -21,7 +21,6 @@ class MainViewController: UITabBarController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		view.backgroundColor = .clear
-		// Do any additional setup after loading the view.
 		setViewControllers(tabBarViewController(), animated: true)
 		let tabBar = { () -> MainTab in
 			let tabBar = MainTab()
@@ -29,7 +28,6 @@ class MainViewController: UITabBarController {
 			return tabBar
 		}()
 		self.setValue(tabBar, forKey: "tabBar")
-//		selectedIndex = 0
 		tabBar.tintColor = .purple
 	}
 

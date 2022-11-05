@@ -71,9 +71,6 @@ class TrendingHeadlineCell: ConfigurableCell {
 			}
 			tickers.addArrangedSubview(.spacer())
 		}
-		
-		
-		
 	}
 	
 }

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 enum SignalNewsEndpoints {
 	case tickerNews(tickers: String? = nil,
 					items: String? = nil,

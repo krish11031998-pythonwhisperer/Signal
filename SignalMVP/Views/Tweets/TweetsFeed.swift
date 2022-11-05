@@ -8,7 +8,6 @@
 import Foundation
 import UIKit
 
-
 class TweetFeedViewController: UIViewController {
 	
 //	private var observer: NSKeyValueObservation?

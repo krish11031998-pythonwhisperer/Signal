@@ -102,8 +102,8 @@ class TweetDetailView: UIViewController {
 	
 	func configureViews() {
 		guard let validTweet = TweetStorage.selectedTweet else { return }
-	
-		validTweet.model?.text.styled(font: .light, color: .textColor, size: 25).render(target: bodyLabel)
+        
+        validTweet.model?.text.styled(font: .light, color: .textColor, size: 25).render(target: bodyLabel)
 		bodyLabel.numberOfLines = 0
 		
 		profileHeader.configure(config: .init(title: validTweet.user?.username,

@@ -37,7 +37,7 @@ extension UIViewController {
 	}
 	
 	static func backButton(_ target: UIViewController) -> UIBarButtonItem {
-		let buttonImg = UIImage.Catalogue.chevronLeft.image
+        let buttonImg = UIImage.Catalogue.chevronLeft.image.resized(size: .init(squared: 16))
 		let imgView = UIImageView(image: buttonImg)
 		imgView.cornerFrame = .init(origin: .zero, size: .init(squared: 32))
 		imgView.backgroundColor = .surfaceBackgroundInverse

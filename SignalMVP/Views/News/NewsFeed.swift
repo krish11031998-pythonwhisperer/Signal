@@ -8,7 +8,6 @@
 import Foundation
 import UIKit
 
-
 class NewsFeed: UIViewController {
 	
 	private lazy var tableView: UITableView = { .init(frame: .zero, style: .grouped) }()

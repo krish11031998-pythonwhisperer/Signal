@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 class HomeViewModel {
 	
 	private var trendingHeadlines: [TrendingHeadlinesModel]?
@@ -73,26 +72,31 @@ class HomeViewModel {
 	private var trendingHeadlinesSection: TableSection? {
 		guard let validTrendingHeadlines = trendingHeadlines else { return nil }
 		let sectionHeader = "Trending Headlines".heading2().generateLabel.embedInView(insets: .init(vertical: 10, horizontal: 10))
-		return .init(rows: validTrendingHeadlines.limitTo(to: 3).compactMap { TableRow<TrendingHeadlineCell>($0) }, customHeader: sectionHeader)
+		return .init(rows: validTrendingHeadlines.limitTo(to: 3).compactMap { TableRow<TrendingHeadlineCell>($0) }, title: "Trending Headlines")
 	}
 	
 	
 	private var topMentionedCoinsSection: TableSection? {
 		guard let validTopMentionedCoins = mentions else { return nil }
-		let sectionHeader = "Top Mentioned Coins".heading2().generateLabel.embedInView(insets: .init(vertical: 10, horizontal: 10))
-		return .init(rows: validTopMentionedCoins.limitTo(to: 5).compactMap { TableRow<TopMentionCell>($0) }, customHeader: sectionHeader)
+        let topMentionedCoinsCellModel: [MentionCellModel] = validTopMentionedCoins.compactMap { mention in
+                .init(model: mention) {
+                    print("(DEBUG) Clicked : ", mention)
+                    MentionStorage.selectedMention = mention
+                }
+        }
+        return .init(rows: topMentionedCoinsCellModel.limitTo(to: 5).compactMap { TableRow<TopMentionCell>($0) }, title: "Top Mentioned Coins")
 	}
 	
 	private var videoSection: TableSection? {
 		guard let videoSection = videos else { return nil }
 		let sectionHeader = "Top Video News".heading2().generateLabel.embedInView(insets: .init(vertical: 10, horizontal: 10))
-		return .init(rows: videoSection.limitTo(to: 3).compactMap { TableRow<VideoCell>($0) }, customHeader: sectionHeader)
+		return .init(rows: videoSection.limitTo(to: 3).compactMap { TableRow<VideoCell>($0) }, title: "Top Video News")
 	}
 	
 	private var tweetsSection: TableSection? {
 		guard let tweetsSection = tweets else { return nil }
 		let sectionHeader = "Top Tweets".heading2().generateLabel.embedInView(insets: .init(vertical: 10, horizontal: 10))
-		return .init(rows: tweetsSection.limitTo(to: 5).compactMap { TableRow<TweetCell>(.init(model: $0))}, customHeader: sectionHeader )
+		return .init(rows: tweetsSection.limitTo(to: 5).compactMap { TableRow<TweetCell>(.init(model: $0))}, title: "Top Tweets" )
 	}
 	
     private var headerSection: TableSection? {

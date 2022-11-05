@@ -50,7 +50,7 @@ extension UIView {
 		
 		return blankView
 	}
-
+    
 }
 
 extension Array where Element : UIView {
@@ -82,5 +82,14 @@ extension Array where Element : UIView {
 		
 		return result
 	}
+    
+    func addToView(_ main: UIView) {
+        if let stack = main as? UIStackView {
+            forEach(stack.addArrangedSubview(_:))
+        } else {
+            forEach(main.addSubview(_:))
+        }
+    }
+    
 	
 }

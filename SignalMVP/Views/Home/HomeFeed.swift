@@ -31,6 +31,7 @@ class HomeFeed: UIViewController {
 		setupViews()
 		viewModel.fetchHomePageData()
 		setupTransparentNavBar()
+        addObservers()
 	}
 	
 //MARK: - ProtectedMethods
@@ -41,6 +42,17 @@ class HomeFeed: UIViewController {
 		view.backgroundColor = .surfaceBackground
 		tableView.backgroundColor = .clear
 	}
+
+//MARK: - Notification
+    
+    private func addObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(showMention), name: .showMention, object: nil)
+    }
+    
+    @objc
+    private func showMention() {
+        navigationController?.pushViewController(TopMentionDetailView(), animated: true)
+    }
 	
 }
 

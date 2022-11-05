@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 class StubVideoService: VideoServiceInterface {
 	
 	public static let shared: StubVideoService = .init()
