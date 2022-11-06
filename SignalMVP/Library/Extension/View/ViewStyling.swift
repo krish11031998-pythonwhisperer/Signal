@@ -82,7 +82,7 @@ extension UIView {
 	}
 	//MARK: - Circular
 	
-	var cornerFrame: CGRect {
+	var circleFrame: CGRect {
 		get { bounds }
 		set {
 			frame = newValue
@@ -93,7 +93,7 @@ extension UIView {
 	
 	convenience init(circular: CGRect, background: UIColor) {
 		self.init()
-		cornerFrame = circular
+		circleFrame = circular
 		backgroundColor = background
 		clipsToBounds = true
 	}

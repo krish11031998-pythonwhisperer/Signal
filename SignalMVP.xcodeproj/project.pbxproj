@@ -145,6 +145,7 @@
 		EF987B682916A70B0000E233 /* MutlipleStrokeCircularProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987B622916A70A0000E233 /* MutlipleStrokeCircularProgressBar.swift */; };
 		EF987B692916A70B0000E233 /* ProgressBars.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987B632916A70A0000E233 /* ProgressBars.swift */; };
 		EF987B6B2916A9930000E233 /* CircularProgressShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987B6A2916A9930000E233 /* CircularProgressShape.swift */; };
+		EF987B6E2916FC700000E233 /* CirclePresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987B6D2916FC700000E233 /* CirclePresentation.swift */; };
 		EFB1C22E28DB3B1800DD40A4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB1C22D28DB3B1800DD40A4 /* AppDelegate.swift */; };
 		EFB1C23028DB3B1800DD40A4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB1C22F28DB3B1800DD40A4 /* SceneDelegate.swift */; };
 		EFB1C23228DB3B1800DD40A4 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB1C23128DB3B1800DD40A4 /* MainViewController.swift */; };
@@ -331,6 +332,7 @@
 		EF987B622916A70A0000E233 /* MutlipleStrokeCircularProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MutlipleStrokeCircularProgressBar.swift; sourceTree = "<group>"; };
 		EF987B632916A70A0000E233 /* ProgressBars.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressBars.swift; sourceTree = "<group>"; };
 		EF987B6A2916A9930000E233 /* CircularProgressShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularProgressShape.swift; sourceTree = "<group>"; };
+		EF987B6D2916FC700000E233 /* CirclePresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CirclePresentation.swift; sourceTree = "<group>"; };
 		EFB1C22A28DB3B1800DD40A4 /* SignalMVP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SignalMVP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFB1C22D28DB3B1800DD40A4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EFB1C22F28DB3B1800DD40A4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -396,6 +398,7 @@
 		EF7CBF8F291641E900F9D611 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				EF987B6C2916FC5C0000E233 /* Presentation */,
 				EF7CC0172916816E00F9D611 /* CollectionViewDataSource */,
 				EF7CBF90291641E900F9D611 /* Extension */,
 				EF7CBFB9291641EA00F9D611 /* Animation */,
@@ -863,6 +866,14 @@
 			path = Bars;
 			sourceTree = "<group>";
 		};
+		EF987B6C2916FC5C0000E233 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				EF987B6D2916FC700000E233 /* CirclePresentation.swift */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
 		EFB1C22128DB3B1800DD40A4 = {
 			isa = PBXGroup;
 			children = (
@@ -1288,6 +1299,7 @@
 				EF7CBFE6291641EA00F9D611 /* FontCatalogue.swift in Sources */,
 				EF7CBFE0291641EA00F9D611 /* UITableView.swift in Sources */,
 				EF7CBFF3291641EA00F9D611 /* Int.swift in Sources */,
+				EF987B6E2916FC700000E233 /* CirclePresentation.swift in Sources */,
 				EF96382C28DDD72000178C37 /* TweetStorage.swift in Sources */,
 				EF7CBFFA291641EA00F9D611 /* TableRow.swift in Sources */,
 				EF96381828DD8C1E00178C37 /* TweetService.swift in Sources */,

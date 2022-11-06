@@ -15,7 +15,7 @@ class SentimentTextLabel: UIView {
 	private lazy var indicator: UIView = {
 		let view = UIView()
 		view.setFrame(.init(squared: 10))
-		view.cornerFrame = .init(origin: .zero, size: .init(squared: 10))
+		view.circleFrame = .init(origin: .zero, size: .init(squared: 10))
 		view.backgroundColor = .gray
 		return view
 	}()

@@ -6,6 +6,11 @@
 //
 
 import Foundation
+import UIKit
+
+protocol PresentDelegate {
+    func presentView(origin: CGRect)
+}
 
 class HomeViewModel {
 	
@@ -13,9 +18,10 @@ class HomeViewModel {
 	private var mentions: [MentionModel]?
 	private var videos: [VideoModel]?
 	private var tweets: [TweetModel]?
-	
+
 	public var view: AnyTableView?
-	
+    public var viewTransitioner: PresentDelegate?
+    
 	public func fetchHomePageData() {
 		let group = DispatchGroup()
 		fetchTrendingHeadlines()
@@ -99,12 +105,31 @@ class HomeViewModel {
 		return .init(rows: tweetsSection.limitTo(to: 5).compactMap { TableRow<TweetCell>(.init(model: $0))}, title: "Top Tweets" )
 	}
 	
+    private var storiesSection: TableSection {
+        let collectionCells = Array(repeating: 0, count: 10).map { _ in
+            let view = UIView(circular: .init(origin: .zero, size: .init(squared: 64)), background: .appRed)
+            return view
+        }.map { cellView in
+            CollectionItem<CustomCollectionCell>(.init(view: cellView, inset: .zero) {
+                self.handleTap(origin: .init(origin: .init(x: .totalWidth.half, y: .totalHeight.half), size: .init(squared: 64)))
+            })
+        }
+        
+        return .init(rows: [TableRow<CollectionTableCell>(.init(cells: collectionCells, inset: .init(vertical: 0, horizontal: 10), cellSize: .init(squared: 64)))])
+        
+    }
+    
+    private func handleTap(origin: CGRect) {
+        print("(DEBUG) handleTap!")
+        viewTransitioner?.presentView(origin: origin)
+    }
+    
     private var headerSection: TableSection? {
         return .init(rows: [TableRow<CustomCuratedEvents>(.init())])
     }
     
 	private func buildDataSource() -> TableViewDataSource{
-		.init(sections: [headerSection, trendingHeadlinesSection, topMentionedCoinsSection, tweetsSection, videoSection].compactMap { $0 })
+		.init(sections: [storiesSection, headerSection, trendingHeadlinesSection, topMentionedCoinsSection, tweetsSection, videoSection].compactMap { $0 })
 	}
 	
 

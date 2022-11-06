@@ -21,6 +21,7 @@ class HomeFeed: UIViewController {
 	private lazy var viewModel: HomeViewModel = {
 		let model = HomeViewModel()
 		model.view = self
+        model.viewTransitioner = self
 		return model
 	}()
 	
@@ -63,4 +64,19 @@ extension HomeFeed: AnyTableView {
 	func reloadTableWithDataSource(_ dataSource: TableViewDataSource) {
 		tableView.reloadData(dataSource)
 	}
+}
+
+
+//MARK: - Present Delegate
+
+extension HomeFeed: PresentDelegate {
+    
+    func presentView(origin: CGRect) {
+        let view = TopMentionDetailView().withNavigationController()
+        let presenter = CirclePresentation(presentedViewController: view, presentingViewController: self, onDismiss: nil, originFrame: origin)
+        view.transitioningDelegate = presenter
+        view.modalPresentationStyle = .custom
+        present(view, animated: true)
+    }
+    
 }

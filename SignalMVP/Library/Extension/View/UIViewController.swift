@@ -39,7 +39,7 @@ extension UIViewController {
 	static func backButton(_ target: UIViewController) -> UIBarButtonItem {
         let buttonImg = UIImage.Catalogue.chevronLeft.image.resized(size: .init(squared: 16))
 		let imgView = UIImageView(image: buttonImg)
-		imgView.cornerFrame = .init(origin: .zero, size: .init(squared: 32))
+		imgView.circleFrame = .init(origin: .zero, size: .init(squared: 32))
 		imgView.backgroundColor = .surfaceBackgroundInverse
 		imgView.contentMode = .center
 		let barItem: UIBarButtonItem = .init(image: imgView.snapshot.withRenderingMode(.alwaysOriginal),
@@ -61,4 +61,8 @@ extension UIViewController {
 		navigationItem.rightBarButtonItem = rightBarButton
 	}
 	
+    func withNavigationController() -> UINavigationController {
+        guard let navVC = self as? UINavigationController else { return .init(rootViewController: self) }
+        return navVC
+    }
 }

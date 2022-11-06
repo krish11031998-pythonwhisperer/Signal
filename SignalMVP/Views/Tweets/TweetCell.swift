@@ -76,7 +76,7 @@ class TweetCell: ConfigurableCell {
 		bodyStack.setCustomSpacing(16, after: divider)
 
 		let mainStack = UIView.HStack(subViews: [authorImageView, bodyStack], spacing: 12, alignment: .top)
-		authorImageView.cornerFrame = .init(origin: .zero, size: .init(squared: 48))
+		authorImageView.circleFrame = .init(origin: .zero, size: .init(squared: 48))
 		authorImageView.setFrame(.init(squared: 48))
 		authorImageView.backgroundColor = .gray.withAlphaComponent(0.15)
 		authorImageView.contentMode = .scaleAspectFill

@@ -20,7 +20,7 @@ fileprivate extension MentionModel {
         case "Negative":
             return .init(color: .appRed, nameText: sentiment, val: Float(negativeMentions)/Float(total))
         case "Neutral":
-            return .init(color: .appBlue, nameText: sentiment, val: Float(neutralMentions)/Float(total))
+            return .init(color: .appOrange, nameText: sentiment, val: Float(neutralMentions)/Float(total))
         default:
             return nil
         }
@@ -76,11 +76,19 @@ class TopMentionDetailViewModel {
             mention.chartModel(for: "Negative"),
             mention.chartModel(for: "Neutral")].compactMap { $0 }
         
-        let chart = MultipleStrokeProgressBarAlt(frame: .init(origin: .zero, size: .init(width: .totalWidth - 40, height: 16)))
-        
+        let chart = MultipleStrokeProgressBarAlt(frame: .init(origin: .zero, size: .init(width: .totalWidth - 20, height: 16)))
         chart.configureProgressBar(ratios: accountRatios)
         
-        return .init(rows: [TableRow<CustomTableCell>(.init(view: chart, inset: .init(vertical: 10, horizontal: 20)))], title: "Sentiment")
+        let legend: UIStackView = .HStack(subViews: accountRatios.compactMap {
+            let indicator: UIView = .init(circular: .init(origin: .zero, size: .init(squared: 8)), background: $0.color)
+            indicator.setFrame(.init(squared: 8))
+            let stack: UIStackView = .HStack(subViews: [indicator, $0.name.generateLabel], spacing: 5, alignment: .center)
+            return stack
+        }, spacing: 10)
+        legend.addArrangedSubview(.spacer())
+        let mainStack: UIStackView = .VStack(subViews: [legend, chart] , spacing: 10)
+        
+        return .init(rows: [TableRow<CustomTableCell>(.init(view: mainStack, inset: .init(vertical: 10, horizontal: 10)))], title: "Sentiment")
         
     }
     
