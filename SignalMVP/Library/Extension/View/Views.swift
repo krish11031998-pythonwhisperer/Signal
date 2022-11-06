@@ -51,6 +51,11 @@ extension UIView {
 		return blankView
 	}
     
+    static func solidColorView(frame: CGRect, backgroundColor: UIColor) -> UIView {
+        let view = UIView(frame: frame)
+        view.backgroundColor = backgroundColor
+        return view
+    }
 }
 
 extension Array where Element : UIView {

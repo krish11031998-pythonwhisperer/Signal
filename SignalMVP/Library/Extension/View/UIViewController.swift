@@ -49,9 +49,17 @@ extension UIViewController {
 		return barItem
 	}
 	
+    var isPresented: Bool {
+        navigationController?.modalPresentationStyle == .custom || modalPresentationStyle == .custom
+    }
+    
 	@objc
 	func popViewController() {
-		navigationController?.popViewController(animated: true)
+        if isPresented {
+            dismiss(animated: true)
+        } else {
+            navigationController?.popViewController(animated: true)
+        }
 	}
 	
 	func standardNavBar(title: RenderableText? = nil, leftBarButton: UIBarButtonItem? = nil, rightBarButton: UIBarButtonItem? = nil) {

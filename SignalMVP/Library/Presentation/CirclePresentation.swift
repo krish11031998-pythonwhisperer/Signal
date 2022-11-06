@@ -85,6 +85,9 @@ extension CirclePresentation: UIViewControllerAnimatedTransitioning {
         
         if isPresented {
             transitionContext.containerView.addSubview(vc.view)
+        } else {
+            vc.view.removeChildViews()
+            vc.view.addSubview(.solidColorView(frame: frameOfPresentedViewInContainerView, backgroundColor: .surfaceBackground))
         }
         
         let presentedFrame = transitionContext.finalFrame(for: vc)
@@ -93,14 +96,13 @@ extension CirclePresentation: UIViewControllerAnimatedTransitioning {
         let initialFrame = isPresented ? dismissedFrame : presentedFrame
         let finalFrame = isPresented ? presentedFrame : dismissedFrame
         
-        let initialCornerRadius = isPresented ? originFrame.minDim.half : 8
-        let finalCornerRadius = isPresented ? 8 : originFrame.minDim.half
+        let initialCornerRadius = isPresented ? originFrame.minDim.half : 0
+        let finalCornerRadius = isPresented ? 0 : originFrame.minDim.half
         
         let duration = transitionDuration(using: transitionContext)
         
         vc.view.frame = initialFrame
         vc.view.clippedCornerRadius = initialCornerRadius
-        
         UIView.animate(withDuration: duration, delay: 0) {
             vc.view.frame = finalFrame
             vc.view.clippedCornerRadius = finalCornerRadius
