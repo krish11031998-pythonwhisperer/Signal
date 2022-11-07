@@ -146,6 +146,7 @@
 		EF987B692916A70B0000E233 /* ProgressBars.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987B632916A70A0000E233 /* ProgressBars.swift */; };
 		EF987B6B2916A9930000E233 /* CircularProgressShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987B6A2916A9930000E233 /* CircularProgressShape.swift */; };
 		EF987B6E2916FC700000E233 /* CirclePresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987B6D2916FC700000E233 /* CirclePresentation.swift */; };
+		EF987B712917A1F80000E233 /* TopMentionStoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987B702917A1F80000E233 /* TopMentionStoryCell.swift */; };
 		EFB1C22E28DB3B1800DD40A4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB1C22D28DB3B1800DD40A4 /* AppDelegate.swift */; };
 		EFB1C23028DB3B1800DD40A4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB1C22F28DB3B1800DD40A4 /* SceneDelegate.swift */; };
 		EFB1C23228DB3B1800DD40A4 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB1C23128DB3B1800DD40A4 /* MainViewController.swift */; };
@@ -333,6 +334,7 @@
 		EF987B632916A70A0000E233 /* ProgressBars.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressBars.swift; sourceTree = "<group>"; };
 		EF987B6A2916A9930000E233 /* CircularProgressShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularProgressShape.swift; sourceTree = "<group>"; };
 		EF987B6D2916FC700000E233 /* CirclePresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CirclePresentation.swift; sourceTree = "<group>"; };
+		EF987B702917A1F80000E233 /* TopMentionStoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopMentionStoryCell.swift; sourceTree = "<group>"; };
 		EFB1C22A28DB3B1800DD40A4 /* SignalMVP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SignalMVP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFB1C22D28DB3B1800DD40A4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EFB1C22F28DB3B1800DD40A4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -691,6 +693,7 @@
 		EF7D2FBB28E056E60003B8F3 /* TopMentions */ = {
 			isa = PBXGroup;
 			children = (
+				EF987B6F2917A1D50000E233 /* TopMentionMisc */,
 				EF7CC02829169FD700F9D611 /* TopMentionDetailView */,
 				EF7D2FBC28E056F40003B8F3 /* TopMentionCell.swift */,
 			);
@@ -872,6 +875,14 @@
 				EF987B6D2916FC700000E233 /* CirclePresentation.swift */,
 			);
 			path = Presentation;
+			sourceTree = "<group>";
+		};
+		EF987B6F2917A1D50000E233 /* TopMentionMisc */ = {
+			isa = PBXGroup;
+			children = (
+				EF987B702917A1F80000E233 /* TopMentionStoryCell.swift */,
+			);
+			path = TopMentionMisc;
 			sourceTree = "<group>";
 		};
 		EFB1C22128DB3B1800DD40A4 = {
@@ -1282,6 +1293,7 @@
 				EF7CC0202916816E00F9D611 /* CollectionViewFunctions.swift in Sources */,
 				EF96382428DD8FDC00178C37 /* RedditFeed.swift in Sources */,
 				EF7CBFDA291641EA00F9D611 /* ShapeLayer.swift in Sources */,
+				EF987B712917A1F80000E233 /* TopMentionStoryCell.swift in Sources */,
 				EF7CBFFF291641EA00F9D611 /* SearchBar.swift in Sources */,
 				EF96383028DDE60700178C37 /* TweetMetrics.swift in Sources */,
 				EF96382A28DDD59F00178C37 /* TweetDetailView.swift in Sources */,

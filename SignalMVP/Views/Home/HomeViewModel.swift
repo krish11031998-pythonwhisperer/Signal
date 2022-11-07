@@ -77,7 +77,6 @@ class HomeViewModel {
 //MARK: - Sections
 	private var trendingHeadlinesSection: TableSection? {
 		guard let validTrendingHeadlines = trendingHeadlines else { return nil }
-		let sectionHeader = "Trending Headlines".heading2().generateLabel.embedInView(insets: .init(vertical: 10, horizontal: 10))
 		return .init(rows: validTrendingHeadlines.limitTo(to: 3).compactMap { TableRow<TrendingHeadlineCell>($0) }, title: "Trending Headlines")
 	}
 	
@@ -95,32 +94,31 @@ class HomeViewModel {
 	
 	private var videoSection: TableSection? {
 		guard let videoSection = videos else { return nil }
-		let sectionHeader = "Top Video News".heading2().generateLabel.embedInView(insets: .init(vertical: 10, horizontal: 10))
 		return .init(rows: videoSection.limitTo(to: 3).compactMap { TableRow<VideoCell>($0) }, title: "Top Video News")
 	}
 	
 	private var tweetsSection: TableSection? {
 		guard let tweetsSection = tweets else { return nil }
-		let sectionHeader = "Top Tweets".heading2().generateLabel.embedInView(insets: .init(vertical: 10, horizontal: 10))
 		return .init(rows: tweetsSection.limitTo(to: 5).compactMap { TableRow<TweetCell>(.init(model: $0))}, title: "Top Tweets" )
 	}
 	
-    private var storiesSection: TableSection {
-        let collectionCells = Array(repeating: 0, count: 10).map { _ in
-            let view = UIView(circular: .init(origin: .zero, size: .init(squared: 64)), background: .appRed)
-            return view
-        }.map { cellView in
-            CollectionItem<CustomCollectionCell>(.init(view: cellView, inset: .zero) {
-                self.handleTap(origin: .init(origin: .init(x: .totalWidth.half, y: .totalHeight.half), size: .init(squared: 64)))
-            })
+    private var storiesSection: TableSection? {
+        guard let validMention = mentions else { return nil }
+        let collectionCells = validMention.map { mention in
+            let origin: CGRect = .init(origin: .init(x: .totalWidth.half, y: .totalHeight.half), size: .init(squared: 64))
+            let model: MentionCellModel = .init(model: mention) {
+                self.handleTap(origin: origin, model: mention)
+            }
+            return CollectionItem<TopMentionStoryCell>(model)
         }
-        
         return .init(rows: [TableRow<CollectionTableCell>(.init(cells: collectionCells, inset: .init(vertical: 0, horizontal: 10), cellSize: .init(squared: 64)))])
         
     }
     
-    private func handleTap(origin: CGRect) {
-        print("(DEBUG) handleTap!")
+    private func handleTap(origin: CGRect, model: MentionModel) {
+        print("(DEBUG) handleTap! : ", origin)
+        MentionStorage.selectedMention = model
+        TopMentionStoryCell.visitedCells.insert(model)
         viewTransitioner?.presentView(origin: origin)
     }
     

@@ -11,7 +11,7 @@ class MentionStorage {
     
     public static var selectedMention: MentionModel? = nil {
         didSet {
-            NotificationCenter.default.post(name: .showMention, object: nil)
+            //NotificationCenter.default.post(name: .showMention, object: nil)
         }
     }
     

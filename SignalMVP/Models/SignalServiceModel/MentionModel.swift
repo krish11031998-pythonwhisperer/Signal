@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+import UIKit
 public extension Notification.Name {
     static let showMention: Notification.Name = .init("showMention")
 }
@@ -36,6 +36,35 @@ struct MentionModel: Codable {
 		case neutralMentions = "neutral_mentions"
 		case sentimentScore = "sentiment_score"
 	}
+}
+
+//MARK: - Hashable
+extension MentionModel: Hashable {
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(ticker)
+    }
+}
+
+//MARK: - MentionModel
+
+extension MentionModel {
+    
+    var ratio: CGFloat {
+        CGFloat(positiveMentions) / CGFloat(positiveMentions + neutralMentions)
+    }
+    
+    var color: UIColor {
+        switch ratio {
+        case 0..<0.5:
+            return .appRed
+        case 0.5..<0.75:
+            return .appOrange
+        case 0.75...1:
+            return .appGreen
+        default:
+            return .clear
+        }
+    }
 }
 
 struct MentionCellModel: ActionProvider {

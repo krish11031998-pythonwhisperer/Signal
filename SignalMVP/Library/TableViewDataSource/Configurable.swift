@@ -17,4 +17,11 @@ protocol Configurable {
 
 protocol ActionProvider {
 	var action: Callback? { get }
+    var actionWithIndex: ((UICollectionViewCell) -> Void)? { get }
+}
+
+extension ActionProvider {
+    var actionWithIndex: ((UICollectionViewCell) -> Void)? {
+        return { print("(DEBUG) clicked on index: ", $0) }
+    }
 }
