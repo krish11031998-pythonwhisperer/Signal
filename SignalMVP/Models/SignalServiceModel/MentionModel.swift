@@ -70,6 +70,7 @@ extension MentionModel {
 struct MentionCellModel: ActionProvider {
     let model: MentionModel
     var action: Callback?
+    var actionWithFrame: ((CGRect) -> Void)?
 }
 
 enum MentionPeriod {

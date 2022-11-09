@@ -105,9 +105,9 @@ class HomeViewModel {
     private var storiesSection: TableSection? {
         guard let validMention = mentions else { return nil }
         let collectionCells = validMention.map { mention in
-            let origin: CGRect = .init(origin: .init(x: .totalWidth.half, y: .totalHeight.half), size: .init(squared: 64))
-            let model: MentionCellModel = .init(model: mention) {
-                self.handleTap(origin: origin, model: mention)
+//            let origin: CGRect = .init(origin: .init(x: .totalWidth.half, y: .totalHeight.half), size: .init(squared: 64))
+            let model: MentionCellModel = .init(model: mention, action: nil) { frame in
+                self.handleTap(origin: frame, model: mention)
             }
             return CollectionItem<TopMentionStoryCell>(model)
         }

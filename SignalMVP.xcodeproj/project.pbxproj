@@ -76,11 +76,6 @@
 		EF7CC0112916491A00F9D611 /* CALayer+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CC0102916491A00F9D611 /* CALayer+Animation.swift */; };
 		EF7CC0132916640B00F9D611 /* RatingChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CC0122916640B00F9D611 /* RatingChart.swift */; };
 		EF7CC01629166E6F00F9D611 /* RatingChartCandle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CC01529166E6F00F9D611 /* RatingChartCandle.swift */; };
-		EF7CC01E2916816E00F9D611 /* CollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CC0182916816E00F9D611 /* CollectionDataSource.swift */; };
-		EF7CC01F2916816E00F9D611 /* CollectionSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CC0192916816E00F9D611 /* CollectionSection.swift */; };
-		EF7CC0202916816E00F9D611 /* CollectionViewFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CC01A2916816E00F9D611 /* CollectionViewFunctions.swift */; };
-		EF7CC0212916816E00F9D611 /* CustomCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CC01C2916816E00F9D611 /* CustomCollectionCell.swift */; };
-		EF7CC0222916816E00F9D611 /* CollectionColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CC01D2916816E00F9D611 /* CollectionColumn.swift */; };
 		EF7CC026291682F400F9D611 /* CustomCollectionTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CC024291682F400F9D611 /* CustomCollectionTableCell.swift */; };
 		EF7CC027291682F400F9D611 /* CustomTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CC025291682F400F9D611 /* CustomTableCell.swift */; };
 		EF7CC02A29169FEE00F9D611 /* TopMentionDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CC02929169FEE00F9D611 /* TopMentionDetailViewModel.swift */; };
@@ -139,14 +134,19 @@
 		EF96382E28DDD7DA00178C37 /* TweetNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF96382D28DDD7DA00178C37 /* TweetNotification.swift */; };
 		EF96383028DDE60700178C37 /* TweetMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF96382F28DDE60700178C37 /* TweetMetrics.swift */; };
 		EF96383328DDFEDF00178C37 /* TweetMetricsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF96383228DDFEDF00178C37 /* TweetMetricsView.swift */; };
-		EF987B652916A70B0000E233 /* MultipleStrokeProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987B5F2916A70A0000E233 /* MultipleStrokeProgressBar.swift */; };
-		EF987B662916A70B0000E233 /* CircularProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987B602916A70A0000E233 /* CircularProgressBar.swift */; };
-		EF987B672916A70B0000E233 /* SphericalProgressBars.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987B612916A70A0000E233 /* SphericalProgressBars.swift */; };
-		EF987B682916A70B0000E233 /* MutlipleStrokeCircularProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987B622916A70A0000E233 /* MutlipleStrokeCircularProgressBar.swift */; };
-		EF987B692916A70B0000E233 /* ProgressBars.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987B632916A70A0000E233 /* ProgressBars.swift */; };
 		EF987B6B2916A9930000E233 /* CircularProgressShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987B6A2916A9930000E233 /* CircularProgressShape.swift */; };
 		EF987B6E2916FC700000E233 /* CirclePresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987B6D2916FC700000E233 /* CirclePresentation.swift */; };
 		EF987B712917A1F80000E233 /* TopMentionStoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987B702917A1F80000E233 /* TopMentionStoryCell.swift */; };
+		EF987B792919A6E10000E233 /* CollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987B732919A6E10000E233 /* CollectionDataSource.swift */; };
+		EF987B7A2919A6E10000E233 /* CollectionSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987B742919A6E10000E233 /* CollectionSection.swift */; };
+		EF987B7B2919A6E10000E233 /* CollectionViewFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987B752919A6E10000E233 /* CollectionViewFunctions.swift */; };
+		EF987B7C2919A6E10000E233 /* CustomCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987B772919A6E10000E233 /* CustomCollectionCell.swift */; };
+		EF987B7D2919A6E10000E233 /* CollectionColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987B782919A6E10000E233 /* CollectionColumn.swift */; };
+		EF987B862919A7010000E233 /* MultipleStrokeProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987B802919A7010000E233 /* MultipleStrokeProgressBar.swift */; };
+		EF987B872919A7010000E233 /* CircularProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987B812919A7010000E233 /* CircularProgressBar.swift */; };
+		EF987B882919A7010000E233 /* SphericalProgressBars.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987B822919A7010000E233 /* SphericalProgressBars.swift */; };
+		EF987B892919A7010000E233 /* MutlipleStrokeCircularProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987B832919A7010000E233 /* MutlipleStrokeCircularProgressBar.swift */; };
+		EF987B8A2919A7010000E233 /* ProgressBars.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987B842919A7010000E233 /* ProgressBars.swift */; };
 		EFB1C22E28DB3B1800DD40A4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB1C22D28DB3B1800DD40A4 /* AppDelegate.swift */; };
 		EFB1C23028DB3B1800DD40A4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB1C22F28DB3B1800DD40A4 /* SceneDelegate.swift */; };
 		EFB1C23228DB3B1800DD40A4 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB1C23128DB3B1800DD40A4 /* MainViewController.swift */; };
@@ -264,11 +264,6 @@
 		EF7CC0102916491A00F9D611 /* CALayer+Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Animation.swift"; sourceTree = "<group>"; };
 		EF7CC0122916640B00F9D611 /* RatingChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingChart.swift; sourceTree = "<group>"; };
 		EF7CC01529166E6F00F9D611 /* RatingChartCandle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingChartCandle.swift; sourceTree = "<group>"; };
-		EF7CC0182916816E00F9D611 /* CollectionDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionDataSource.swift; sourceTree = "<group>"; };
-		EF7CC0192916816E00F9D611 /* CollectionSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionSection.swift; sourceTree = "<group>"; };
-		EF7CC01A2916816E00F9D611 /* CollectionViewFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewFunctions.swift; sourceTree = "<group>"; };
-		EF7CC01C2916816E00F9D611 /* CustomCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCollectionCell.swift; sourceTree = "<group>"; };
-		EF7CC01D2916816E00F9D611 /* CollectionColumn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionColumn.swift; sourceTree = "<group>"; };
 		EF7CC024291682F400F9D611 /* CustomCollectionTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCollectionTableCell.swift; sourceTree = "<group>"; };
 		EF7CC025291682F400F9D611 /* CustomTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTableCell.swift; sourceTree = "<group>"; };
 		EF7CC02929169FEE00F9D611 /* TopMentionDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopMentionDetailViewModel.swift; sourceTree = "<group>"; };
@@ -327,14 +322,19 @@
 		EF96382D28DDD7DA00178C37 /* TweetNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetNotification.swift; sourceTree = "<group>"; };
 		EF96382F28DDE60700178C37 /* TweetMetrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetMetrics.swift; sourceTree = "<group>"; };
 		EF96383228DDFEDF00178C37 /* TweetMetricsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetMetricsView.swift; sourceTree = "<group>"; };
-		EF987B5F2916A70A0000E233 /* MultipleStrokeProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipleStrokeProgressBar.swift; sourceTree = "<group>"; };
-		EF987B602916A70A0000E233 /* CircularProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularProgressBar.swift; sourceTree = "<group>"; };
-		EF987B612916A70A0000E233 /* SphericalProgressBars.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SphericalProgressBars.swift; sourceTree = "<group>"; };
-		EF987B622916A70A0000E233 /* MutlipleStrokeCircularProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MutlipleStrokeCircularProgressBar.swift; sourceTree = "<group>"; };
-		EF987B632916A70A0000E233 /* ProgressBars.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressBars.swift; sourceTree = "<group>"; };
 		EF987B6A2916A9930000E233 /* CircularProgressShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularProgressShape.swift; sourceTree = "<group>"; };
 		EF987B6D2916FC700000E233 /* CirclePresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CirclePresentation.swift; sourceTree = "<group>"; };
 		EF987B702917A1F80000E233 /* TopMentionStoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopMentionStoryCell.swift; sourceTree = "<group>"; };
+		EF987B732919A6E10000E233 /* CollectionDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionDataSource.swift; sourceTree = "<group>"; };
+		EF987B742919A6E10000E233 /* CollectionSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionSection.swift; sourceTree = "<group>"; };
+		EF987B752919A6E10000E233 /* CollectionViewFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewFunctions.swift; sourceTree = "<group>"; };
+		EF987B772919A6E10000E233 /* CustomCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCollectionCell.swift; sourceTree = "<group>"; };
+		EF987B782919A6E10000E233 /* CollectionColumn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionColumn.swift; sourceTree = "<group>"; };
+		EF987B802919A7010000E233 /* MultipleStrokeProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipleStrokeProgressBar.swift; sourceTree = "<group>"; };
+		EF987B812919A7010000E233 /* CircularProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularProgressBar.swift; sourceTree = "<group>"; };
+		EF987B822919A7010000E233 /* SphericalProgressBars.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SphericalProgressBars.swift; sourceTree = "<group>"; };
+		EF987B832919A7010000E233 /* MutlipleStrokeCircularProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MutlipleStrokeCircularProgressBar.swift; sourceTree = "<group>"; };
+		EF987B842919A7010000E233 /* ProgressBars.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressBars.swift; sourceTree = "<group>"; };
 		EFB1C22A28DB3B1800DD40A4 /* SignalMVP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SignalMVP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFB1C22D28DB3B1800DD40A4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EFB1C22F28DB3B1800DD40A4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -400,8 +400,8 @@
 		EF7CBF8F291641E900F9D611 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				EF987B722919A6E10000E233 /* CollectionViewDataSource */,
 				EF987B6C2916FC5C0000E233 /* Presentation */,
-				EF7CC0172916816E00F9D611 /* CollectionViewDataSource */,
 				EF7CBF90291641E900F9D611 /* Extension */,
 				EF7CBFB9291641EA00F9D611 /* Animation */,
 				EF7CBFBB291641EA00F9D611 /* TableViewDataSource */,
@@ -539,7 +539,7 @@
 		EF7CBFC0291641EA00F9D611 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				EF987B5D2916A70A0000E233 /* Bars */,
+				EF987B7E2919A7010000E233 /* Bars */,
 				EF7CC01429166E6000F9D611 /* RatingChart */,
 				EF7CBFC2291641EA00F9D611 /* CustomSearchBarController */,
 				EF7CBFC5291641EA00F9D611 /* TextComponents */,
@@ -600,26 +600,6 @@
 				EF7CC01529166E6F00F9D611 /* RatingChartCandle.swift */,
 			);
 			path = RatingChart;
-			sourceTree = "<group>";
-		};
-		EF7CC0172916816E00F9D611 /* CollectionViewDataSource */ = {
-			isa = PBXGroup;
-			children = (
-				EF7CC0182916816E00F9D611 /* CollectionDataSource.swift */,
-				EF7CC0192916816E00F9D611 /* CollectionSection.swift */,
-				EF7CC01A2916816E00F9D611 /* CollectionViewFunctions.swift */,
-				EF7CC01B2916816E00F9D611 /* CommonCollectionItemView */,
-				EF7CC01D2916816E00F9D611 /* CollectionColumn.swift */,
-			);
-			path = CollectionViewDataSource;
-			sourceTree = "<group>";
-		};
-		EF7CC01B2916816E00F9D611 /* CommonCollectionItemView */ = {
-			isa = PBXGroup;
-			children = (
-				EF7CC01C2916816E00F9D611 /* CustomCollectionCell.swift */,
-			);
-			path = CommonCollectionItemView;
 			sourceTree = "<group>";
 		};
 		EF7CC023291682F400F9D611 /* CommonTableRowView */ = {
@@ -857,18 +837,6 @@
 			path = TweetDetail;
 			sourceTree = "<group>";
 		};
-		EF987B5D2916A70A0000E233 /* Bars */ = {
-			isa = PBXGroup;
-			children = (
-				EF987B5F2916A70A0000E233 /* MultipleStrokeProgressBar.swift */,
-				EF987B602916A70A0000E233 /* CircularProgressBar.swift */,
-				EF987B612916A70A0000E233 /* SphericalProgressBars.swift */,
-				EF987B622916A70A0000E233 /* MutlipleStrokeCircularProgressBar.swift */,
-				EF987B632916A70A0000E233 /* ProgressBars.swift */,
-			);
-			path = Bars;
-			sourceTree = "<group>";
-		};
 		EF987B6C2916FC5C0000E233 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
@@ -883,6 +851,38 @@
 				EF987B702917A1F80000E233 /* TopMentionStoryCell.swift */,
 			);
 			path = TopMentionMisc;
+			sourceTree = "<group>";
+		};
+		EF987B722919A6E10000E233 /* CollectionViewDataSource */ = {
+			isa = PBXGroup;
+			children = (
+				EF987B732919A6E10000E233 /* CollectionDataSource.swift */,
+				EF987B742919A6E10000E233 /* CollectionSection.swift */,
+				EF987B752919A6E10000E233 /* CollectionViewFunctions.swift */,
+				EF987B762919A6E10000E233 /* CommonCollectionItemView */,
+				EF987B782919A6E10000E233 /* CollectionColumn.swift */,
+			);
+			path = CollectionViewDataSource;
+			sourceTree = "<group>";
+		};
+		EF987B762919A6E10000E233 /* CommonCollectionItemView */ = {
+			isa = PBXGroup;
+			children = (
+				EF987B772919A6E10000E233 /* CustomCollectionCell.swift */,
+			);
+			path = CommonCollectionItemView;
+			sourceTree = "<group>";
+		};
+		EF987B7E2919A7010000E233 /* Bars */ = {
+			isa = PBXGroup;
+			children = (
+				EF987B802919A7010000E233 /* MultipleStrokeProgressBar.swift */,
+				EF987B812919A7010000E233 /* CircularProgressBar.swift */,
+				EF987B822919A7010000E233 /* SphericalProgressBars.swift */,
+				EF987B832919A7010000E233 /* MutlipleStrokeCircularProgressBar.swift */,
+				EF987B842919A7010000E233 /* ProgressBars.swift */,
+			);
+			path = Bars;
 			sourceTree = "<group>";
 		};
 		EFB1C22128DB3B1800DD40A4 = {
@@ -1196,10 +1196,8 @@
 				EF7CBFE8291641EA00F9D611 /* RenderableText.swift in Sources */,
 				EF7CBFE5291641EA00F9D611 /* UILabel.swift in Sources */,
 				EF48D71328E4CFCF00BD2A1A /* MainTabModel.swift in Sources */,
-				EF7CC01E2916816E00F9D611 /* CollectionDataSource.swift in Sources */,
 				EF7D2FA028E02DB80003B8F3 /* HomeViewModel.swift in Sources */,
 				EF7CBFF6291641EA00F9D611 /* Bundle.swift in Sources */,
-				EF987B692916A70B0000E233 /* ProgressBars.swift in Sources */,
 				EF7D2FD028E0F6540003B8F3 /* EventHeaderView.swift in Sources */,
 				EF7D2FBD28E056F40003B8F3 /* TopMentionCell.swift in Sources */,
 				EF7CBFF5291641EA00F9D611 /* UIEdgeInsets.swift in Sources */,
@@ -1224,8 +1222,8 @@
 				EF7D2FB428E050DE0003B8F3 /* MentionModel.swift in Sources */,
 				EF86384D28DCED0C00EF520C /* EventSingleCell.swift in Sources */,
 				EF86382328DC341400EF520C /* TweetMetricView.swift in Sources */,
-				EF987B672916A70B0000E233 /* SphericalProgressBars.swift in Sources */,
 				EF7CBFF9291641EA00F9D611 /* TableViewFunction.swift in Sources */,
+				EF987B862919A7010000E233 /* MultipleStrokeProgressBar.swift in Sources */,
 				EFB1C23228DB3B1800DD40A4 /* MainViewController.swift in Sources */,
 				EF86383B28DC761900EF520C /* MainTabView.swift in Sources */,
 				EF7CC0132916640B00F9D611 /* RatingChart.swift in Sources */,
@@ -1242,7 +1240,6 @@
 				EF7CBFF7291641EA00F9D611 /* NetworkReqeust.swift in Sources */,
 				EF00758F28E5CBA000195433 /* SignalNewsService.swift in Sources */,
 				EF86383728DC648000EF520C /* NewsViewModel.swift in Sources */,
-				EF987B662916A70B0000E233 /* CircularProgressBar.swift in Sources */,
 				EF86384528DC9E5200EF520C /* StubEventsService.swift in Sources */,
 				EF7D2FCE28E0F55A0003B8F3 /* EventDetailView.swift in Sources */,
 				EF86381928DC1E9C00EF520C /* StubService.swift in Sources */,
@@ -1250,35 +1247,35 @@
 				EF7CC026291682F400F9D611 /* CustomCollectionTableCell.swift in Sources */,
 				EFB1C2D728DB69D400DD40A4 /* TweetEndpoints.swift in Sources */,
 				EFB1C26128DB3D3700DD40A4 /* TweetCell.swift in Sources */,
+				EF987B8A2919A7010000E233 /* ProgressBars.swift in Sources */,
 				EF96381F28DD8D1200178C37 /* StubRedditService.swift in Sources */,
 				EF86383528DC61F700EF520C /* NewsCell.swift in Sources */,
 				EF7CBFF2291641EA00F9D611 /* CGSize.swift in Sources */,
 				EF96381D28DD8C8D00178C37 /* RedditPostModel.swift in Sources */,
 				EF96381B28DD8C6B00178C37 /* RedditServiceInterface.swift in Sources */,
+				EF987B872919A7010000E233 /* CircularProgressBar.swift in Sources */,
 				EF00758D28E5CA8F00195433 /* NewsService.swift in Sources */,
 				EF7CBFE3291641EA00F9D611 /* UIViewController.swift in Sources */,
-				EF987B652916A70B0000E233 /* MultipleStrokeProgressBar.swift in Sources */,
 				EF86384228DC9E0F00EF520C /* EventViewModel.swift in Sources */,
 				EF7D2FA728E0322A0003B8F3 /* TrendingHeadlinesService.swift in Sources */,
 				EF7CC02A29169FEE00F9D611 /* TopMentionDetailViewModel.swift in Sources */,
 				EF7CBFFC291641EA00F9D611 /* TableSection.swift in Sources */,
 				EF86382828DC507E00EF520C /* NewsModel.swift in Sources */,
+				EF987B892919A7010000E233 /* MutlipleStrokeCircularProgressBar.swift in Sources */,
+				EF987B882919A7010000E233 /* SphericalProgressBars.swift in Sources */,
 				EF48D71728E5918300BD2A1A /* SignalEventService.swift in Sources */,
 				EF7CBFD8291641EA00F9D611 /* Array.swift in Sources */,
-				EF7CC01F2916816E00F9D611 /* CollectionSection.swift in Sources */,
 				EF96383328DDFEDF00178C37 /* TweetMetricsView.swift in Sources */,
 				EF7D2FC628E09E7E0003B8F3 /* VideoModel.swift in Sources */,
 				EF7CBFE7291641EA00F9D611 /* StringFonts.swift in Sources */,
 				EF7CC002291641EA00F9D611 /* SymbolImage.swift in Sources */,
 				EF7CC01629166E6F00F9D611 /* RatingChartCandle.swift in Sources */,
-				EF987B682916A70B0000E233 /* MutlipleStrokeCircularProgressBar.swift in Sources */,
 				EF96382828DD92E900178C37 /* RedditPostCard.swift in Sources */,
 				EFB3181628E97B93008FC27E /* TweetURLView.swift in Sources */,
+				EF987B7D2919A6E10000E233 /* CollectionColumn.swift in Sources */,
 				EF7CBFFB291641EA00F9D611 /* Configurable.swift in Sources */,
 				EF7CBFFE291641EA00F9D611 /* SearchViewController.swift in Sources */,
 				EF7CBFE2291641EA00F9D611 /* ViewStyling.swift in Sources */,
-				EF7CC0222916816E00F9D611 /* CollectionColumn.swift in Sources */,
-				EF7CC0212916816E00F9D611 /* CustomCollectionCell.swift in Sources */,
 				EF48D71528E578A600BD2A1A /* SignalTwitterService.swift in Sources */,
 				EF86384B28DCA1A400EF520C /* EventCell.swift in Sources */,
 				EF7CC0112916491A00F9D611 /* CALayer+Animation.swift in Sources */,
@@ -1288,9 +1285,9 @@
 				EF1644A9290589B500E9D997 /* CustomCuratedEvents.swift in Sources */,
 				EF86382E28DC56D900EF520C /* NewsInterface.swift in Sources */,
 				EF7D2FA328E0314B0003B8F3 /* TrendingHeadlinesInterface.swift in Sources */,
+				EF987B7C2919A6E10000E233 /* CustomCollectionCell.swift in Sources */,
 				EFB1C23028DB3B1800DD40A4 /* SceneDelegate.swift in Sources */,
 				EF86383E28DC990500EF520C /* EventsFeed.swift in Sources */,
-				EF7CC0202916816E00F9D611 /* CollectionViewFunctions.swift in Sources */,
 				EF96382428DD8FDC00178C37 /* RedditFeed.swift in Sources */,
 				EF7CBFDA291641EA00F9D611 /* ShapeLayer.swift in Sources */,
 				EF987B712917A1F80000E233 /* TopMentionStoryCell.swift in Sources */,
@@ -1310,9 +1307,12 @@
 				EF7CBFE4291641EA00F9D611 /* Views.swift in Sources */,
 				EF7CBFE6291641EA00F9D611 /* FontCatalogue.swift in Sources */,
 				EF7CBFE0291641EA00F9D611 /* UITableView.swift in Sources */,
+				EF987B7B2919A6E10000E233 /* CollectionViewFunctions.swift in Sources */,
 				EF7CBFF3291641EA00F9D611 /* Int.swift in Sources */,
 				EF987B6E2916FC700000E233 /* CirclePresentation.swift in Sources */,
+				EF987B792919A6E10000E233 /* CollectionDataSource.swift in Sources */,
 				EF96382C28DDD72000178C37 /* TweetStorage.swift in Sources */,
+				EF987B7A2919A6E10000E233 /* CollectionSection.swift in Sources */,
 				EF7CBFFA291641EA00F9D611 /* TableRow.swift in Sources */,
 				EF96381828DD8C1E00178C37 /* TweetService.swift in Sources */,
 			);
