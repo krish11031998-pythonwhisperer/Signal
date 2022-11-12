@@ -122,7 +122,8 @@ class HomeViewModel {
     }
     
     private var headerSection: TableSection? {
-        return .init(rows: [TableRow<CustomCuratedEvents>(.init())])
+        guard let validTrendingHeadlines = trendingHeadlines else { return nil }
+        return .init(rows: [TableRow<CustomCuratedEvents>(validTrendingHeadlines)])
     }
     
 	private func buildDataSource() -> TableViewDataSource{

@@ -26,6 +26,8 @@ class CustomCuratedEvents: ConfigurableCell {
     }()
     private lazy var collection: UICollectionView = { .init(frame: .zero, collectionViewLayout: layout) }()
     private lazy var viewStack: UIStackView = { .VStack(subViews:[label, collection] ,spacing: 10) }()
+    private var contentOffsetObserver: NSKeyValueObservation?
+    private var headlines: [TrendingHeadlinesModel] = []
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -39,57 +41,53 @@ class CustomCuratedEvents: ConfigurableCell {
     private func setupView() {
        
         setupCollection()
+        contentView.addSubview(viewStack)
+        contentView.setFittingConstraints(childView: viewStack, insets: .init(vertical: 5, horizontal: 10))
         
-        let card = viewStack.embedInView(insets: .init(vertical: 12.5, horizontal: 10))
-        card.backgroundColor = .surfaceBackgroundInverse
-        card.clippedCornerRadius = 12
-        contentView.addSubview(card)
-        contentView.setFittingConstraints(childView: card, insets: .init(vertical: 5, horizontal: 10))
-        
-        "Your Radar Letter".heading3(color: .textColorInverse).render(target: label)
+        "Your Radar Letter".heading3(color: .textColor).render(target: label)
         contentView.backgroundColor = .surfaceBackground
     }
     
     private func setupCollection() {
         collection.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
         collection.setHeight(height: layout.itemSize.height, priority: .required)
-        collection.backgroundColor = .surfaceBackgroundInverse
+        collection.backgroundColor = .surfaceBackground
         collection.showsHorizontalScrollIndicator = false
-        collection.dataSource = self
+    }
+    
+    private func reloadCollection() {
+        collection.reloadData(buildDataSource())
         collection.delegate = self
     }
     
-    func configure(with model: EmptyModel) {
-        
+    private var headlineSection: CollectionSection {
+        .init(cell: headlines.compactMap { CollectionItem<CustomCuratedCell>($0) })
     }
-}
-
-//MARK: - CustomCuratedEvents: UICollectionDataSource
-
-extension CustomCuratedEvents: UICollectionViewDataSource {
     
-    func numberOfSections(in collectionView: UICollectionView) -> Int { 1 }
+    private func buildDataSource() -> CollectionDataSource {
+        .init(sections: [headlineSection])
+    }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int { numberOfItems }
+    private func scrollUpdate(scrollView: UIScrollView) {
+        guard scrollView.contentOffset != .zero else { return }
+        let cellIdx = (scrollView.contentOffset.x/itemSize.width).rounded(.up)
+        print("(DEBUG) cellIdx : ", cellIdx)
+        guard cellIdx > 0 , Int(cellIdx) < numberOfItems - 1 else { return }
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut) {
+            scrollView.contentOffset.x = (cellIdx - 1) * self.itemSize.width + (cellIdx - 1) * self.layout.minimumInteritemSpacing
+        }
+    }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collection.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
-        cell.backgroundColor = .surfaceBackground.withAlphaComponent(0.25)
-        cell.clippedCornerRadius = 12
-        cell.contentView.removeChildViews()
-        let label = "\(indexPath.row + 1)".body1Medium().generateLabel
-        cell.contentView.addSubview(label)
-        label.textAlignment = .center
-        cell.contentView.setFittingConstraints(childView: label, insets: .zero)
-        
-        return cell
+    func configure(with model: [TrendingHeadlinesModel]) {
+        headlines = model
+        reloadCollection()
     }
 }
 
 //MARK: - CustomCuratedEvents: UICollectionDelegate
 
 extension CustomCuratedEvents: UICollectionViewDelegate {
-        
+
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let cellIdx = (scrollView.contentOffset.x/itemSize.width).rounded(.up)
         print("(DEBUG) cellIdx : ", cellIdx)
@@ -97,7 +95,10 @@ extension CustomCuratedEvents: UICollectionViewDelegate {
         UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut) {
             scrollView.contentOffset.x = (cellIdx - 1) * self.itemSize.width + (cellIdx - 1) * self.layout.minimumInteritemSpacing
         }
-
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.source?.collectionView(collectionView, didSelectItemAt: indexPath)
+    }
+
 }

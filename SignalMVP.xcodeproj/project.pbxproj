@@ -148,6 +148,8 @@
 		EF987B892919A7010000E233 /* MutlipleStrokeCircularProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987B832919A7010000E233 /* MutlipleStrokeCircularProgressBar.swift */; };
 		EF987B8A2919A7010000E233 /* ProgressBars.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987B842919A7010000E233 /* ProgressBars.swift */; };
 		EF987B8C291F83620000E233 /* CGRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987B8B291F83620000E233 /* CGRect.swift */; };
+		EF987B8E291F97AC0000E233 /* CuratedEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987B8D291F97AC0000E233 /* CuratedEventCell.swift */; };
+		EF987B90291FA3C50000E233 /* String+URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987B8F291FA3C50000E233 /* String+URL.swift */; };
 		EFB1C22E28DB3B1800DD40A4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB1C22D28DB3B1800DD40A4 /* AppDelegate.swift */; };
 		EFB1C23028DB3B1800DD40A4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB1C22F28DB3B1800DD40A4 /* SceneDelegate.swift */; };
 		EFB1C23228DB3B1800DD40A4 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB1C23128DB3B1800DD40A4 /* MainViewController.swift */; };
@@ -337,6 +339,8 @@
 		EF987B832919A7010000E233 /* MutlipleStrokeCircularProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MutlipleStrokeCircularProgressBar.swift; sourceTree = "<group>"; };
 		EF987B842919A7010000E233 /* ProgressBars.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressBars.swift; sourceTree = "<group>"; };
 		EF987B8B291F83620000E233 /* CGRect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGRect.swift; sourceTree = "<group>"; };
+		EF987B8D291F97AC0000E233 /* CuratedEventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuratedEventCell.swift; sourceTree = "<group>"; };
+		EF987B8F291FA3C50000E233 /* String+URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+URL.swift"; sourceTree = "<group>"; };
 		EFB1C22A28DB3B1800DD40A4 /* SignalMVP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SignalMVP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFB1C22D28DB3B1800DD40A4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EFB1C22F28DB3B1800DD40A4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -395,6 +399,7 @@
 			isa = PBXGroup;
 			children = (
 				EF1644A8290589B500E9D997 /* CustomCuratedEvents.swift */,
+				EF987B8D291F97AC0000E233 /* CuratedEventCell.swift */,
 			);
 			path = CustomCuratedList;
 			sourceTree = "<group>";
@@ -470,6 +475,7 @@
 				EF7CBFA3291641E900F9D611 /* FontCatalogue.swift */,
 				EF7CBFA4291641E900F9D611 /* StringFonts.swift */,
 				EF7CBFA5291641E900F9D611 /* RenderableText.swift */,
+				EF987B8F291FA3C50000E233 /* String+URL.swift */,
 			);
 			path = String;
 			sourceTree = "<group>";
@@ -1263,6 +1269,7 @@
 				EF7D2FA728E0322A0003B8F3 /* TrendingHeadlinesService.swift in Sources */,
 				EF7CC02A29169FEE00F9D611 /* TopMentionDetailViewModel.swift in Sources */,
 				EF7CBFFC291641EA00F9D611 /* TableSection.swift in Sources */,
+				EF987B8E291F97AC0000E233 /* CuratedEventCell.swift in Sources */,
 				EF86382828DC507E00EF520C /* NewsModel.swift in Sources */,
 				EF987B892919A7010000E233 /* MutlipleStrokeCircularProgressBar.swift in Sources */,
 				EF987B882919A7010000E233 /* SphericalProgressBars.swift in Sources */,
@@ -1300,6 +1307,7 @@
 				EF96382A28DDD59F00178C37 /* TweetDetailView.swift in Sources */,
 				EF7D2FC428E09E3D0003B8F3 /* StubVideoService.swift in Sources */,
 				EF7CC000291641EA00F9D611 /* SentimentTextLabel.swift in Sources */,
+				EF987B90291FA3C50000E233 /* String+URL.swift in Sources */,
 				EF7CBFE1291641EA00F9D611 /* ViewHeirachy.swift in Sources */,
 				EFB1C2D128DB5E7D00DD40A4 /* TweetFeedViewModel.swift in Sources */,
 				EFDC741928E3373800042452 /* Sentiments.swift in Sources */,
