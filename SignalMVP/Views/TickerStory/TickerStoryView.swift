@@ -45,20 +45,29 @@ class TicketStoryView: UIViewController {
     }
     private lazy var mainImageView: UIImageView = { .init() }()
     private lazy var mainLabel: UILabel = { .init() }()
+    private lazy var mainDescriptionLabel: UILabel = { .init() }()
     private lazy var timerStack: UIStackView = { .HStack(spacing: 6) }()
     private lazy var tickerInfo: UIStackView = { .HStack(spacing: 10, alignment: .center) }()
     private lazy var headerStack: UIStackView = { .VStack(subViews: [timerStack, tickerInfo], spacing: 32) }()
     private lazy var tickers: UIView = { .init() }()
     private lazy var stack: UIStackView = {
-        let headerView = self.headerStack.embedInView(insets: .init(vertical: 0, horizontal: 20))
-        let description = self.mainLabel.embedInView(insets: .init(vertical: 0, horizontal: 20))
-        let tickersView = tickers.embedInView(insets: .init(vertical: 0, horizontal: 20))
-        return .VStack(subViews:[.spacer(height: 24), headerView, .spacer(), description, tickersView, .spacer(height: 24)],spacing: 10)
+        let headerView = headerStack
+        let title = self.mainLabel
+        let description = mainDescriptionLabel
+        let tickersView = tickers
+        
+        let stack: UIStackView = .VStack(subViews:[headerView, .spacer(), title, description, tickersView],spacing: 10)
+        
+        stack.isLayoutMarginsRelativeArrangement = true
+        
+        stack.layoutMargins = .init(vertical: 24, horizontal: 20)
+        
+        return stack
     }()
     
     private lazy var dimmingView: UIView = {
         let view = UIView()
-        view.backgroundColor = .black.withAlphaComponent(0.25)
+        view.backgroundColor = .black.withAlphaComponent(0.5)
         return view
     }()
     
@@ -77,7 +86,7 @@ class TicketStoryView: UIViewController {
     private func setupView() {
         let container = UIView()
         view.addSubview(container)
-        view.setFittingConstraints(childView: container, insets: .init(top: .safeAreaInsets.top, left: 0, bottom: .safeAreaInsets.bottom, right: 0))
+        view.setFittingConstraints(childView: container, insets: CGFloat.safeAreaInsets)
         
         [mainImageView, dimmingView, stack].addToView(container)
         container.setFittingConstraints(childView: mainImageView, insets: .zero)
@@ -85,8 +94,9 @@ class TicketStoryView: UIViewController {
         container.setFittingConstraints(childView: dimmingView, insets: .zero)
         
         mainImageView.backgroundColor = .gray
-        container.clippedCornerRadius = 32
+        container.clippedCornerRadius = 24
         mainLabel.numberOfLines = 3
+        mainDescriptionLabel.numberOfLines = 2
         
         setupTickerInfo()
     }
@@ -163,6 +173,7 @@ class TicketStoryView: UIViewController {
         setupTimer()
         timerStack.arrangedSubviews.enumerated().forEach { $0.element.backgroundColor = $0.offset <= idx ? .white : .black.withAlphaComponent(0.5) }
         news.title.heading2().render(target: mainLabel)
+        news.text.body2Regular().render(target: mainDescriptionLabel)
         configTickers(model: news)
     }
 }
