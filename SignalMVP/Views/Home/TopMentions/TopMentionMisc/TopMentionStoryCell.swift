@@ -15,8 +15,6 @@ fileprivate extension MentionModel {
         let url = "https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@1a63530be6e374711a8554f31b17e4cb92c25fa5/128/color/\(ticker.lowercased()).png"
         return url
     }
-    
-    
 }
 
 //MARK: - TopMentionStoryCell
@@ -25,7 +23,7 @@ class TopMentionStoryCell: ConfigurableCollectionCell {
 
     static var visitedCells: Set<MentionModel> = []
 
-    private lazy var imageView: UIImageView =  { .init(size: .init(squared: 62), cornerRadius: 31, contentMode: .scaleAspectFit) }()
+    private lazy var imageView: UIImageView =  { .init(size: .init(squared: 62), cornerRadius: 31, contentMode: .center) }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -43,8 +41,9 @@ class TopMentionStoryCell: ConfigurableCollectionCell {
     
     func configure(with model: MentionCellModel) {
         imageView.image = nil
-        UIImage.loadImage(url: model.model.tickerImage, at: imageView, path: \.image)
-        imageView.border(color: !Self.visitedCells.contains(model.model) ? model.model.color : .clear, borderWidth: 2)
+        UIImage.loadImage(url: model.model.tickerImage, at: imageView, path: \.image, resized: .init(squared: 50))
+        let border = Shapes.circle(color: model.model.color, width: 2).shapeLayer(at: imageView.layer)
+        border?.animate(.circularProgress(to: 1))
     }
     
 }

@@ -73,4 +73,8 @@ extension UIViewController {
         guard let navVC = self as? UINavigationController else { return .init(rootViewController: self) }
         return navVC
     }
+    
+    var navBarHeight: CGFloat {
+        (navigationController?.navigationBar.frame.height ?? 0) + (navigationController?.additionalSafeAreaInsets.top ?? 0)
+    }
 }

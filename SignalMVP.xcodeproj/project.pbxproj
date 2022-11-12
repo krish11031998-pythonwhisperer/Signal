@@ -147,6 +147,7 @@
 		EF987B882919A7010000E233 /* SphericalProgressBars.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987B822919A7010000E233 /* SphericalProgressBars.swift */; };
 		EF987B892919A7010000E233 /* MutlipleStrokeCircularProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987B832919A7010000E233 /* MutlipleStrokeCircularProgressBar.swift */; };
 		EF987B8A2919A7010000E233 /* ProgressBars.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987B842919A7010000E233 /* ProgressBars.swift */; };
+		EF987B8C291F83620000E233 /* CGRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987B8B291F83620000E233 /* CGRect.swift */; };
 		EFB1C22E28DB3B1800DD40A4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB1C22D28DB3B1800DD40A4 /* AppDelegate.swift */; };
 		EFB1C23028DB3B1800DD40A4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB1C22F28DB3B1800DD40A4 /* SceneDelegate.swift */; };
 		EFB1C23228DB3B1800DD40A4 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB1C23128DB3B1800DD40A4 /* MainViewController.swift */; };
@@ -335,6 +336,7 @@
 		EF987B822919A7010000E233 /* SphericalProgressBars.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SphericalProgressBars.swift; sourceTree = "<group>"; };
 		EF987B832919A7010000E233 /* MutlipleStrokeCircularProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MutlipleStrokeCircularProgressBar.swift; sourceTree = "<group>"; };
 		EF987B842919A7010000E233 /* ProgressBars.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressBars.swift; sourceTree = "<group>"; };
+		EF987B8B291F83620000E233 /* CGRect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGRect.swift; sourceTree = "<group>"; };
 		EFB1C22A28DB3B1800DD40A4 /* SignalMVP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SignalMVP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFB1C22D28DB3B1800DD40A4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EFB1C22F28DB3B1800DD40A4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -511,6 +513,7 @@
 				EF7CBFB4291641EA00F9D611 /* Int.swift */,
 				EF7CBFB5291641EA00F9D611 /* CGFloat.swift */,
 				EF7CBFB6291641EA00F9D611 /* UIEdgeInsets.swift */,
+				EF987B8B291F83620000E233 /* CGRect.swift */,
 			);
 			path = Dimensions;
 			sourceTree = "<group>";
@@ -1278,6 +1281,7 @@
 				EF7CBFE2291641EA00F9D611 /* ViewStyling.swift in Sources */,
 				EF48D71528E578A600BD2A1A /* SignalTwitterService.swift in Sources */,
 				EF86384B28DCA1A400EF520C /* EventCell.swift in Sources */,
+				EF987B8C291F83620000E233 /* CGRect.swift in Sources */,
 				EF7CC0112916491A00F9D611 /* CALayer+Animation.swift in Sources */,
 				EF86383328DC5CAF00EF520C /* NewsFeed.swift in Sources */,
 				EF7D2F9628DED9730003B8F3 /* NewsNotification.swift in Sources */,

@@ -36,11 +36,15 @@ class SymbolImage: UIView {
 		symbolName.isHidden = true
 	}
 	
+    func imgURL(ticker: String) -> String {
+        "https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@1a63530be6e374711a8554f31b17e4cb92c25fa5/128/color/\(ticker.lowercased()).png"
+    }
 	
 	public func configureView(symbol: String, imgSize: CGSize = .smallestSquare, label: RenderableText? = nil) {
 		
 		image.setFrame(imgSize)
 		image.cornerRadius = min(imgSize.width, imgSize.height).half
+        UIImage.loadImage(url: imgURL(ticker: symbol), at: image, path: \.image)
 
 		if let validLabel = label {
 			validLabel.render(target: symbolName)

@@ -74,9 +74,10 @@ class TopMentionCell: ConfigurableCell {
 		symbolView.configureView(symbol: model.ticker, imgSize: .init(squared: 32), label: model.ticker.body1Medium())
 		
 		let percent: CGFloat = CGFloat(model.positiveMentions)/CGFloat(model.totalMentions - model.neutralMentions)
-		let color: UIColor = percent < 0.5 ? .red : .green
+        let color: UIColor = percent > 0.7 ? .appGreen : percent <= 0.4 ? .appRed : .appOrange
+        let label: String = percent > 0.7 ? "🚀" : percent <= 0.4 ? "🚨" : "😐"
 		let visited = isCellVisited(ticker: model.ticker)
-		circularChart.configureChart(label: (String(format: "%.0f", percent * 10) + " / 10").body3Regular(),
+        circularChart.configureChart(label: label.body3Regular(),
 									 color: color,
 									 percent,
 									 visited: visited)

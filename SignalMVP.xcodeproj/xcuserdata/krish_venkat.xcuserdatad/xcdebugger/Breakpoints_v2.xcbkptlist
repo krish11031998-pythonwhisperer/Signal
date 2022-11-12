@@ -39,16 +39,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "EDDE525A-C8FF-4B27-A979-143EB664F6DA"
+            uuid = "C002019F-929A-45B0-AF90-9D13057E7B20"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "SignalMVP/Library/Components/Bars/MultipleStrokeProgressBar.swift"
+            filePath = "SignalMVP/Views/Home/HomeFeed.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "101"
-            endingLineNumber = "101"
-            landmarkName = "buildLayer(_:_:)"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
+            landmarkName = "presentView(origin:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

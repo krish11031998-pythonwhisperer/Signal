@@ -74,7 +74,7 @@ extension CirclePresentation: UIViewControllerTransitioningDelegate {
 //MARK: - CirclePresentation UIViewControllerAnimatedTransitioning
 
 extension CirclePresentation: UIViewControllerAnimatedTransitioning {
-    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval { 0.15 }
+    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval { 0.75 }
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         
@@ -99,13 +99,18 @@ extension CirclePresentation: UIViewControllerAnimatedTransitioning {
         let initialCornerRadius = isPresented ? originFrame.minDim.half : 0
         let finalCornerRadius = isPresented ? 0 : originFrame.minDim.half
         
+        let initialScale = isPresented ? 0.9 : 1
+        let finalScale = isPresented ? 1 : 0.9
+        
         let duration = transitionDuration(using: transitionContext)
         
         vc.view.frame = initialFrame
         vc.view.clippedCornerRadius = initialCornerRadius
+        vc.view.transform = .init(scaleX: initialScale, y: initialScale)
         UIView.animate(withDuration: duration, delay: 0) {
             vc.view.frame = finalFrame
             vc.view.clippedCornerRadius = finalCornerRadius
+            vc.view.transform = .init(scaleX: finalScale, y: finalScale)
         } completion: { isFinished in
             if !isPresented {
                 vc.view.removeFromSuperview()
