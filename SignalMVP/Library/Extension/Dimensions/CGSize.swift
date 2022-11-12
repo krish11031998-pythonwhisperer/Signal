@@ -25,5 +25,7 @@ extension CGSize {
     var smallDim: CGFloat { min(width,height) }
 	
 	static var smallestSquare: CGSize  { .init(squared: 32) }
+    
+    func limitSizeTo(min: CGSize) -> CGSize { smallDim < min.smallDim ? min : self }
 	
 }

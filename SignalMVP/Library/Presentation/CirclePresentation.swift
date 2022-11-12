@@ -74,7 +74,7 @@ extension CirclePresentation: UIViewControllerTransitioningDelegate {
 //MARK: - CirclePresentation UIViewControllerAnimatedTransitioning
 
 extension CirclePresentation: UIViewControllerAnimatedTransitioning {
-    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval { 0.75 }
+    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval { 0.2 }
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         

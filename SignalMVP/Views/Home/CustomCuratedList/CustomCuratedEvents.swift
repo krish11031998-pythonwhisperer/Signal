@@ -14,7 +14,6 @@ struct EmptyModel {}
 
 class CustomCuratedEvents: ConfigurableCell {
     
-    private lazy var label: UILabel = { .init() }()
     private let itemSize: CGSize = { .init(width: 250, height: 300) }()
     private let numberOfItems: Int = 10
     private lazy var layout: UICollectionViewFlowLayout = {
@@ -25,7 +24,6 @@ class CustomCuratedEvents: ConfigurableCell {
         return layout
     }()
     private lazy var collection: UICollectionView = { .init(frame: .zero, collectionViewLayout: layout) }()
-    private lazy var viewStack: UIStackView = { .VStack(subViews:[label, collection] ,spacing: 10) }()
     private var contentOffsetObserver: NSKeyValueObservation?
     private var headlines: [TrendingHeadlinesModel] = []
     
@@ -39,12 +37,9 @@ class CustomCuratedEvents: ConfigurableCell {
     }
     
     private func setupView() {
-       
         setupCollection()
-        contentView.addSubview(viewStack)
-        contentView.setFittingConstraints(childView: viewStack, insets: .init(vertical: 5, horizontal: 10))
-        
-        "Your Radar Letter".heading3(color: .textColor).render(target: label)
+        contentView.addSubview(collection)
+        contentView.setFittingConstraints(childView: collection, insets: .init(vertical: 5, horizontal: 10))
         contentView.backgroundColor = .surfaceBackground
     }
     
@@ -88,14 +83,7 @@ class CustomCuratedEvents: ConfigurableCell {
 
 extension CustomCuratedEvents: UICollectionViewDelegate {
 
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        let cellIdx = (scrollView.contentOffset.x/itemSize.width).rounded(.up)
-        print("(DEBUG) cellIdx : ", cellIdx)
-        guard cellIdx > 0 , Int(cellIdx) < numberOfItems - 1 else { return }
-        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut) {
-            scrollView.contentOffset.x = (cellIdx - 1) * self.itemSize.width + (cellIdx - 1) * self.layout.minimumInteritemSpacing
-        }
-    }
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) { scrollUpdate(scrollView: scrollView) }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.source?.collectionView(collectionView, didSelectItemAt: indexPath)

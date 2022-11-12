@@ -49,6 +49,29 @@ extension UIImage {
         let newImage = image.withRenderingMode(renderingMode)
         return newImage
 	}
+    
+    func resized(to: CGSize) -> UIImage {
+        let renderer = UIGraphicsImageRenderer(size: to)
+        let newSize = resolveWithAspectRatio(newSize: to)
+        let newOrigin: CGPoint = .init(x: (to.width - newSize.width).half , y: (to.height - newSize.height).half)
+        let img = renderer.image { _ in self.draw(in: .init(origin: newOrigin, size: newSize))}
+        return img
+    }
+    
+    func resolveWithAspectRatio(newSize: CGSize) -> CGSize {
+        
+        let ratio = size.width/size.height
+        
+        if size.width < size.height {
+            let newHeight = min(size.height, newSize.height)
+            return .init(width: newHeight * ratio, height: newHeight)
+            
+        } else {
+            let newWidth = min(size.width, newSize.width)
+            return .init(width: newWidth, height: newWidth/ratio)
+        }
+        
+    }
 	
 	static func download(urlStr: String? = nil, request: URLRequest? = nil, completion: @escaping (Result<UIImage,Error>) -> Void) {
 		
@@ -99,13 +122,18 @@ extension UIImage {
 	}
 	
 	
-	static func loadImage<T:AnyObject>(url urlString: String, at object: T, path: ReferenceWritableKeyPath<T,UIImage?>, resized: CGSize? = nil) {
+    static func loadImage<T:AnyObject>(url urlString: String, at object: T, path: ReferenceWritableKeyPath<T,UIImage?>, resized: CGSize? = nil, resolveWithAspectRatio: Bool = false) {
 		download(urlStr: urlString) { result in
 			switch result {
 			case .success(let img):
 				DispatchQueue.main.async {
 					if let size = resized {
-						object[keyPath: path] = img.resized(size: size)
+                        if resolveWithAspectRatio {
+                            object[keyPath: path] = img.resized(to: size)
+                        } else {
+                            object[keyPath: path] = img.resized(size: size)
+                        }
+						
 					} else {
 						object[keyPath: path] = img
 					}
