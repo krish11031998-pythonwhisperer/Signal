@@ -23,7 +23,7 @@ extension Sentiment {
 		case .negative:
 			return .appRed
 		case .neutral:
-			return .greyscale500
+			return .appOrange
 		}
 	}
 	

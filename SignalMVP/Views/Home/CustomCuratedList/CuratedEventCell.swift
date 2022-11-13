@@ -10,7 +10,7 @@ import UIKit
 
 class CustomCuratedCell: ConfigurableCollectionCell {
     
-    private lazy var imageView: UIImageView = { .init() }()
+    @StandardImageView(dimmingForeground: true) private var imageView
     private lazy var headlineLabel: UILabel = { .init() }()
     private lazy var tickers: UIView = { .init() }()
     
@@ -39,21 +39,23 @@ class CustomCuratedCell: ConfigurableCollectionCell {
         
     }
     
-    private func configTickers(model: TrendingHeadlinesModel) {
+    private func configTickers(model: EventModel) {
         guard !model.tickers.isEmpty else { return }
         tickers.removeChildViews()
         model.tickers.enumerated().forEach {
-            let imgView = UIImageView(size: .init(squared: 16), cornerRadius: 8, contentMode: .scaleAspectFit)
+            
+            @TickerImageView(size: .init(squared: 24)) var imgView;
             UIImage.loadImage(url: $0.element.logoURL, at: imgView, path: \.image)
             tickers.addSubview(imgView)
-            tickers.setFittingConstraints(childView: imgView, top: 0, leading: CGFloat($0.offset * 8), bottom: 0,width: 16, height: 16)
+            tickers.setFittingConstraints(childView: imgView, top: 0, leading: CGFloat($0.offset * 16), bottom: 0)
         }
         tickers.isHidden = false
     }
     
-    func configure(with model: TrendingHeadlinesModel) {
-        imageView.backgroundColor = .gray.withAlphaComponent(0.3)
-        model.headline.body1Bold().render(target: headlineLabel)
+    func configure(with model: EventModel) {
+        imageView.image = nil
+        UIImage.loadImage(url: model.news.first?.imageUrl, at: imageView, path: \.image)
+        model.eventName.body1Bold().render(target: headlineLabel)
         configTickers(model: model)
     }
 }

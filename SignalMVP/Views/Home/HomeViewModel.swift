@@ -18,43 +18,51 @@ class HomeViewModel {
 	private var mentions: [MentionModel]?
 	private var videos: [VideoModel]?
 	private var tweets: [TweetModel]?
-
+    private var events: [EventModel]?
+    
 	public var view: AnyTableView?
     public var viewTransitioner: PresentDelegate?
     
 	public func fetchHomePageData() {
 		let group = DispatchGroup()
-		fetchTrendingHeadlines()
-		fetchTopMentionedCoins()
-		fetchVideo()
+		fetchTrendingHeadlines(group)
+		fetchTopMentionedCoins(group)
+		fetchVideo(group)
 		fetchTweets(group)
+        fetchEvents(group)
 		group.notify(queue: .main) { [weak self] in
 			guard let validDatasource = self?.buildDataSource() else { return }
 			self?.view?.reloadTableWithDataSource(validDatasource)
 		}
 	}
 	
-	private func fetchTrendingHeadlines() {
+	private func fetchTrendingHeadlines(_ group: DispatchGroup) {
+        group.enter()
 		StubTrendingHeadlines.shared.fetchHeadlines { [weak self] result in
             if let headlines = result.data?.data {
                 self?.trendingHeadlines = headlines
             }
+            group.leave()
 		}
 	}
 	
-	private func fetchTopMentionedCoins() {
+	private func fetchTopMentionedCoins(_ group: DispatchGroup) {
+        group.enter()
 		StubMentionService.shared.fetchMentions(period: .weekly) { [weak self] result in
             if let mentions = result.data?.data?.all {
                 self?.mentions = mentions
             }
+            group.leave()
 		}
 	}
 	
-	private func fetchVideo() {
+	private func fetchVideo(_ group: DispatchGroup) {
+        group.enter()
 		StubVideoService.shared.fetchVideo { [weak self] result in
             if let videos = result.data {
                 self?.videos = videos
             }
+            group.leave()
 		}
 	}
 	
@@ -73,6 +81,21 @@ class HomeViewModel {
             group.leave()
         }
 	}
+    
+    private func fetchEvents(_ group: DispatchGroup) {
+        group.enter()
+        EventService.shared.fetchEvents { [weak self] result in
+            if let events = result.data?.data {
+                self?.events = events
+            } else {
+                StubEventService.shared.fetchEvents { result in
+                    guard let events = result.data?.data else { return }
+                    self?.events = events
+                }
+            }
+            group.leave()
+        }
+    }
 	
 //MARK: - Sections
 	private var trendingHeadlinesSection: TableSection? {
@@ -122,12 +145,12 @@ class HomeViewModel {
     }
     
     private var headerSection: TableSection? {
-        guard let validTrendingHeadlines = trendingHeadlines else { return nil }
-        return .init(rows: [TableRow<CustomCuratedEvents>(validTrendingHeadlines)], title: "Headlines")
+        guard let validEvents = events else { return nil }
+        return .init(rows: [TableRow<CustomCuratedEvents>(validEvents)], title: "Events")
     }
     
 	private func buildDataSource() -> TableViewDataSource{
-		.init(sections: [storiesSection, headerSection, topMentionedCoinsSection, tweetsSection, videoSection].compactMap { $0 })
+		.init(sections: [storiesSection, headerSection, trendingHeadlinesSection, topMentionedCoinsSection, tweetsSection, videoSection].compactMap { $0 })
 	}
 	
 

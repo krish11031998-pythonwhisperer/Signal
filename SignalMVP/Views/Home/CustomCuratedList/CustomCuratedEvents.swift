@@ -25,7 +25,7 @@ class CustomCuratedEvents: ConfigurableCell {
     }()
     private lazy var collection: UICollectionView = { .init(frame: .zero, collectionViewLayout: layout) }()
     private var contentOffsetObserver: NSKeyValueObservation?
-    private var headlines: [TrendingHeadlinesModel] = []
+    private var events: [EventModel] = []
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -56,7 +56,7 @@ class CustomCuratedEvents: ConfigurableCell {
     }
     
     private var headlineSection: CollectionSection {
-        .init(cell: headlines.compactMap { CollectionItem<CustomCuratedCell>($0) })
+        .init(cell: events.compactMap { CollectionItem<CustomCuratedCell>($0) })
     }
     
     private func buildDataSource() -> CollectionDataSource {
@@ -73,8 +73,8 @@ class CustomCuratedEvents: ConfigurableCell {
         }
     }
     
-    func configure(with model: [TrendingHeadlinesModel]) {
-        headlines = model
+    func configure(with model: [EventModel]) {
+        events = Array(Set.init(model))
         reloadCollection()
     }
 }

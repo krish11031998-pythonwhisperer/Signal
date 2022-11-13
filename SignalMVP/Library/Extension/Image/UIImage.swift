@@ -50,12 +50,23 @@ extension UIImage {
         return newImage
 	}
     
-    func resized(to: CGSize) -> UIImage {
+    func resized(withAspect to: CGSize) -> UIImage {
         let renderer = UIGraphicsImageRenderer(size: to)
         let newSize = resolveWithAspectRatio(newSize: to)
         let newOrigin: CGPoint = .init(x: (to.width - newSize.width).half , y: (to.height - newSize.height).half)
         let img = renderer.image { _ in self.draw(in: .init(origin: newOrigin, size: newSize))}
         return img
+    }
+    
+    func scaleImageToNewSize(newSize: CGSize) -> UIImage {
+        let ratio = size.width/size.height
+        var scaledSize: CGSize = .zero
+        if size.height < size.width {
+            scaledSize = .init(width: ratio * newSize.height, height: newSize.height)
+        } else {
+            scaledSize = .init(width: newSize.width, height: newSize.width/ratio)
+        }
+        return resized(size: scaledSize)
     }
     
     func resolveWithAspectRatio(newSize: CGSize) -> CGSize {
@@ -70,7 +81,6 @@ extension UIImage {
             let newWidth = min(size.width, newSize.width)
             return .init(width: newWidth, height: newWidth/ratio)
         }
-        
     }
 	
 	static func download(urlStr: String? = nil, request: URLRequest? = nil, completion: @escaping (Result<UIImage,Error>) -> Void) {
@@ -122,15 +132,17 @@ extension UIImage {
 	}
 	
 	
-    static func loadImage<T:AnyObject>(url urlString: String, at object: T, path: ReferenceWritableKeyPath<T,UIImage?>, resized: CGSize? = nil, resolveWithAspectRatio: Bool = false) {
+    static func loadImage<T:AnyObject>(url urlString: String?, at object: T, path: ReferenceWritableKeyPath<T,UIImage?>, resized: CGSize? = nil, resolveWithAspectRatio: Bool = false, scaledAt: Bool = false) {
 		download(urlStr: urlString) { result in
 			switch result {
 			case .success(let img):
 				DispatchQueue.main.async {
 					if let size = resized {
                         if resolveWithAspectRatio {
-                            object[keyPath: path] = img.resized(to: size)
-                        } else {
+                            object[keyPath: path] = img.resized(withAspect: size)
+                        } else if scaledAt {
+                            object[keyPath: path] = img.scaleImageToNewSize(newSize: size)
+                        }else {
                             object[keyPath: path] = img.resized(size: size)
                         }
 						

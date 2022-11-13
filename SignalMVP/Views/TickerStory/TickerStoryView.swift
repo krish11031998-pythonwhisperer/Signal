@@ -21,7 +21,7 @@ fileprivate extension CGPoint {
     
     var maxMagnitude: CGFloat { max(abs(x), abs(y)) }
 
-    static func minDimDiff(_ a: CGPoint, _ b: CGPoint) -> Direction {
+    static func swipeDirection(_ a: CGPoint, _ b: CGPoint) -> Direction {
         let diff = a - b
         switch diff.maxMagnitude {
         case abs(diff.x):
@@ -35,6 +35,12 @@ fileprivate extension CGPoint {
     
 }
 
+fileprivate extension CGFloat {
+    
+    var magnitude: CGFloat {
+        abs(self)
+    }
+}
 
 class TicketStoryView: UIViewController {
     
@@ -134,7 +140,7 @@ class TicketStoryView: UIViewController {
         
         let tickerName = mention.ticker.body1Bold().generateLabel
         
-        let buttonImg = UIImage(systemName: "xmark")?.resized(to: .init(squared: 16))
+        let buttonImg = UIImage(systemName: "xmark")?.resized(size: .init(squared: 16))
         let imgView = UIImageView(image: buttonImg)
         imgView.circleFrame = .init(origin: .zero, size: .init(squared: 32))
         imgView.backgroundColor = .surfaceBackgroundInverse
@@ -193,9 +199,9 @@ extension TicketStoryView {
         guard let latestTouch = touches.first else { return }
         let point = latestTouch.location(in: view)
         print("(DEBUG) touchesEnded : ", point)
-        if point.x < .totalWidth * 0.35 {
+        if point.x < .totalWidth * 0.45 {
             idx -= 1
-        } else if point.x > .totalWidth * 0.65 {
+        } else if point.x > .totalWidth * 0.55 {
             idx += 1
         }
     }
@@ -203,9 +209,15 @@ extension TicketStoryView {
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let latestTouch = touches.first else { return }
         let point = latestTouch.location(in: view)
-        direction =  CGPoint.minDimDiff(point, panVerticalPoint)
+        guard panVerticalPoint != .zero else {
+            panVerticalPoint = point
+            return
+        }
+        
+        guard (point.y.magnitude - panVerticalPoint.y.magnitude).magnitude > 20  else { return }
+        direction =  CGPoint.swipeDirection(point, panVerticalPoint)
         print("(DEBUG) direction : ", direction.rawValue)
-        panVerticalPoint = point
+//        panVerticalPoint = point
     }
         
 }

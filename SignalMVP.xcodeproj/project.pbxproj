@@ -151,6 +151,8 @@
 		EF987B8E291F97AC0000E233 /* CuratedEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987B8D291F97AC0000E233 /* CuratedEventCell.swift */; };
 		EF987B90291FA3C50000E233 /* String+URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987B8F291FA3C50000E233 /* String+URL.swift */; };
 		EF987B93291FAAEF0000E233 /* TickerStoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987B92291FAAEF0000E233 /* TickerStoryView.swift */; };
+		EF987B952920D7A00000E233 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987B942920D7A00000E233 /* ImageView.swift */; };
+		EF987B972920E9FA0000E233 /* CommonWrappers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987B962920E9FA0000E233 /* CommonWrappers.swift */; };
 		EFB1C22E28DB3B1800DD40A4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB1C22D28DB3B1800DD40A4 /* AppDelegate.swift */; };
 		EFB1C23028DB3B1800DD40A4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB1C22F28DB3B1800DD40A4 /* SceneDelegate.swift */; };
 		EFB1C23228DB3B1800DD40A4 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB1C23128DB3B1800DD40A4 /* MainViewController.swift */; };
@@ -343,6 +345,8 @@
 		EF987B8D291F97AC0000E233 /* CuratedEventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuratedEventCell.swift; sourceTree = "<group>"; };
 		EF987B8F291FA3C50000E233 /* String+URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+URL.swift"; sourceTree = "<group>"; };
 		EF987B92291FAAEF0000E233 /* TickerStoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerStoryView.swift; sourceTree = "<group>"; };
+		EF987B942920D7A00000E233 /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
+		EF987B962920E9FA0000E233 /* CommonWrappers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonWrappers.swift; sourceTree = "<group>"; };
 		EFB1C22A28DB3B1800DD40A4 /* SignalMVP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SignalMVP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFB1C22D28DB3B1800DD40A4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EFB1C22F28DB3B1800DD40A4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -434,6 +438,7 @@
 				EF7CBFB2291641EA00F9D611 /* Dimensions */,
 				EF7CBFB7291641EA00F9D611 /* Bundle.swift */,
 				EF7CBFB8291641EA00F9D611 /* NetworkReqeust.swift */,
+				EF987B962920E9FA0000E233 /* CommonWrappers.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -453,6 +458,7 @@
 				EF7CBF96291641E900F9D611 /* ImageCatalogue.swift */,
 				EF7CBF97291641E900F9D611 /* UIImage.swift */,
 				EF7CBF98291641E900F9D611 /* UIImageView.swift */,
+				EF987B942920D7A00000E233 /* ImageView.swift */,
 			);
 			path = Image;
 			sourceTree = "<group>";
@@ -1253,9 +1259,11 @@
 				EF7D2F9928DED9DF0003B8F3 /* NewsDetailViewController.swift in Sources */,
 				EF7D2FA528E031920003B8F3 /* TrendingHeadlinesModel.swift in Sources */,
 				EF987B6B2916A9930000E233 /* CircularProgressShape.swift in Sources */,
+				EF987B952920D7A00000E233 /* ImageView.swift in Sources */,
 				EF7CBFF8291641EA00F9D611 /* Animation.swift in Sources */,
 				EFB1C22E28DB3B1800DD40A4 /* AppDelegate.swift in Sources */,
 				EF96382628DD90A400178C37 /* RedditViewModel.swift in Sources */,
+				EF987B972920E9FA0000E233 /* CommonWrappers.swift in Sources */,
 				EF7CBFDE291641EA00F9D611 /* Fundamentals.swift in Sources */,
 				EF7CBFF7291641EA00F9D611 /* NetworkReqeust.swift in Sources */,
 				EF00758F28E5CBA000195433 /* SignalNewsService.swift in Sources */,
