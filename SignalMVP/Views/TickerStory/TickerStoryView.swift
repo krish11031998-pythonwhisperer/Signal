@@ -9,46 +9,12 @@ import Foundation
 import UIKit
 
 //MARK: - Defination
-fileprivate extension CGPoint {
-    
-    enum Direction: String {
-        case left, right, top, bottom, none
-    }
-    
-    static func - (lhs: CGPoint, rhs: CGPoint) -> CGPoint {
-        .init(x: lhs.x - rhs.x, y: lhs.y - rhs.y)
-    }
-    
-    var maxMagnitude: CGFloat { max(abs(x), abs(y)) }
-
-    static func swipeDirection(_ a: CGPoint, _ b: CGPoint) -> Direction {
-        let diff = a - b
-        switch diff.maxMagnitude {
-        case abs(diff.x):
-            return diff.x < 0 ? .right : .left
-        case abs(diff.y):
-            return diff.y < 0 ? .top : .bottom
-        default:
-            return .none
-        }
-    }
-    
-}
-
-fileprivate extension CGFloat {
-    
-    var magnitude: CGFloat {
-        abs(self)
-    }
-}
 
 class TicketStoryView: UIViewController {
     
     //MARK: - Properties
     private var newsForTicker: [NewsModel] = []
-    private var idx: Int = -1 {
-        didSet { loadWithNews() }
-    }
+    private var idx: Int = -1 { didSet { loadWithNews() } }
     private lazy var mainImageView: UIImageView = { .init() }()
     private lazy var mainLabel: UILabel = { .init() }()
     private lazy var mainDescriptionLabel: UILabel = { .init() }()
@@ -57,17 +23,9 @@ class TicketStoryView: UIViewController {
     private lazy var headerStack: UIStackView = { .VStack(subViews: [timerStack, tickerInfo], spacing: 32) }()
     private lazy var tickers: UIView = { .init() }()
     private lazy var stack: UIStackView = {
-        let headerView = headerStack
-        let title = self.mainLabel
-        let description = mainDescriptionLabel
-        let tickersView = tickers
-        
-        let stack: UIStackView = .VStack(subViews:[headerView, .spacer(), title, description, tickersView],spacing: 10)
-        
+        let stack: UIStackView = .VStack(subViews:[headerStack, .spacer(), mainLabel, mainDescriptionLabel, tickers],spacing: 10)
         stack.isLayoutMarginsRelativeArrangement = true
-        
         stack.layoutMargins = .init(vertical: 24, horizontal: 20)
-        
         return stack
     }()
     
@@ -80,6 +38,7 @@ class TicketStoryView: UIViewController {
     private var panVerticalPoint: CGPoint = .zero
     private var onDismiss: Bool = false
     private var direction: CGPoint.Direction = .none
+    
     //MARK: - Overriden Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -95,9 +54,10 @@ class TicketStoryView: UIViewController {
         view.setFittingConstraints(childView: container, insets: CGFloat.safeAreaInsets)
         
         [mainImageView, dimmingView, stack].addToView(container)
-        container.setFittingConstraints(childView: mainImageView, insets: .zero)
-        container.setFittingConstraints(childView: stack, insets: .zero)
-        container.setFittingConstraints(childView: dimmingView, insets: .zero)
+        
+        container.subviews.forEach {
+            container.setFittingConstraints(childView: $0, insets: .zero)
+        }
         
         mainImageView.backgroundColor = .gray
         container.clippedCornerRadius = 24
@@ -182,6 +142,13 @@ class TicketStoryView: UIViewController {
         news.text.body2Regular().render(target: mainDescriptionLabel)
         configTickers(model: news)
     }
+    
+    private func showNews() {
+        let target = TickerStoryDetailView(news: newsForTicker[idx]).withNavigationController()
+        presentView(style: .sheet(size: .init(width: .totalWidth, height: .totalHeight), edge: .init(top: 0, left: 0, bottom: .safeAreaInsets.bottom, right: 0)), addDimmingView: false, target: target) {
+            self.direction = .none
+        }
+    }
 }
 
 
@@ -190,9 +157,10 @@ extension TicketStoryView {
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard direction == .none else {
-            direction = .none
-            panVerticalPoint = .zero
-            print("(DEBUG) resetting")
+//            direction = .none
+//            panVerticalPoint = .zero
+//            print("(DEBUG) resetting")
+            showNews()
             return
         }
 
@@ -214,10 +182,11 @@ extension TicketStoryView {
             return
         }
         
-        guard (point.y.magnitude - panVerticalPoint.y.magnitude).magnitude > 20  else { return }
+        guard
+            (point.y.magnitude - panVerticalPoint.y.magnitude).magnitude > 20,
+            direction == .none
+        else { return }
         direction =  CGPoint.swipeDirection(point, panVerticalPoint)
         print("(DEBUG) direction : ", direction.rawValue)
-//        panVerticalPoint = point
     }
-        
 }

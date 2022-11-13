@@ -78,3 +78,23 @@ extension UIViewController {
         (navigationController?.navigationBar.frame.height ?? 0) + (navigationController?.additionalSafeAreaInsets.top ?? 0)
     }
 }
+
+//MARK: - UIViewController Presentation
+extension UIViewController {
+    
+    func presentView(style: PresentationStyle, addDimmingView: Bool = true, target: UIViewController, onDimissal: Callback?) {
+        let presenter = PresentationController(style: style, addDimmingView: addDimmingView, presentedViewController: target, presentingViewController: self, onDismiss: onDimissal)
+        target.transitioningDelegate = presenter
+        target.modalPresentationStyle = .custom
+        present(target, animated: true)
+    }
+    
+}
+
+
+//MARK: - UIViewController Touches
+
+protocol SwipeListener {
+    var panVerticalPoint: CGPoint { get set }
+    var direction: CGPoint.Direction { get set }
+}

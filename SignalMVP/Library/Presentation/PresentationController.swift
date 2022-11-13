@@ -8,14 +8,13 @@
 import Foundation
 import UIKit
 
-fileprivate extension CGRect {
-    var minDim: CGFloat { min(width, height) }
-}
-
-class CirclePresentation: UIPresentationController {
+//MARK: - PresentationController
+class PresentationController: UIPresentationController {
     
     private var onDismiss: Callback?
-    private var originFrame: CGRect
+    public var style: PresentationStyle
+    private let addDimmingView: Bool
+
     private lazy var dimmingView: UIView =  {
         let view = UIView()
         view.addBlurView()
@@ -23,16 +22,16 @@ class CirclePresentation: UIPresentationController {
         return view
     }()
     
-    init(presentedViewController: UIViewController, presentingViewController: UIViewController?, onDismiss: Callback?, originFrame: CGRect) {
+    init(style: PresentationStyle, addDimmingView: Bool = true, presentedViewController: UIViewController, presentingViewController: UIViewController?, onDismiss: Callback?) {
+        self.addDimmingView = addDimmingView
+        self.style = style
         self.onDismiss = onDismiss
-        self.originFrame = originFrame
         super.init(presentedViewController: presentedViewController, presenting: presentingViewController)
+        dimmingView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(closeOnTap)))
     }
     
     
-    override var frameOfPresentedViewInContainerView: CGRect {
-        .init(origin: .zero, size: .init(width: .totalWidth, height: .totalHeight))
-    }
+    override var frameOfPresentedViewInContainerView: CGRect { style.frameOfPresentedView }
     
     
     override func containerViewWillLayoutSubviews() {
@@ -40,6 +39,7 @@ class CirclePresentation: UIPresentationController {
     }
     
     override func presentationTransitionWillBegin() {
+        guard addDimmingView else { return }
         containerView?.insertSubview(dimmingView, at: 0)
         containerView?.setFittingConstraints(childView: dimmingView, insets: .zero)
         dimmingView.layer.opacity = 0
@@ -48,15 +48,21 @@ class CirclePresentation: UIPresentationController {
     
     
     override func dismissalTransitionWillBegin() {
+        guard addDimmingView else { return }
         dimmingView.animate(.fadeOut(to: 0)) {
             self.dimmingView.removeFromSuperview()
         }
+    }
+    
+    @objc
+    private func closeOnTap() {
+        presentedViewController.dismiss(animated: true)
     }
 }
 
 //MARK: - CirclePresentation UIViewControllerTransitioningDelegate
 
-extension CirclePresentation: UIViewControllerTransitioningDelegate {
+extension PresentationController: UIViewControllerTransitioningDelegate {
     
     func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
         self
@@ -73,8 +79,8 @@ extension CirclePresentation: UIViewControllerTransitioningDelegate {
 
 //MARK: - CirclePresentation UIViewControllerAnimatedTransitioning
 
-extension CirclePresentation: UIViewControllerAnimatedTransitioning {
-    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval { 0.2 }
+extension PresentationController: UIViewControllerAnimatedTransitioning {
+    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval { style.transitionDuration }
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         
@@ -86,21 +92,23 @@ extension CirclePresentation: UIViewControllerAnimatedTransitioning {
         if isPresented {
             transitionContext.containerView.addSubview(vc.view)
         } else {
-            vc.view.removeChildViews()
-            vc.view.addSubview(.solidColorView(frame: frameOfPresentedViewInContainerView, backgroundColor: .surfaceBackground))
+            if style.removeView {
+                vc.view.removeChildViews()
+                vc.view.addSubview(.solidColorView(frame: frameOfPresentedViewInContainerView, backgroundColor: .surfaceBackground))
+            }
         }
         
         let presentedFrame = transitionContext.finalFrame(for: vc)
-        let dismissedFrame = originFrame
+        let dismissedFrame = style.originalFrame
         
         let initialFrame = isPresented ? dismissedFrame : presentedFrame
         let finalFrame = isPresented ? presentedFrame : dismissedFrame
         
-        let initialCornerRadius = isPresented ? originFrame.minDim.half : 0
-        let finalCornerRadius = isPresented ? 0 : originFrame.minDim.half
+        let initialCornerRadius = isPresented ? style.cornerRadius : 0
+        let finalCornerRadius = isPresented ? 0 : style.cornerRadius
         
-        let initialScale = isPresented ? 0.9 : 1
-        let finalScale = isPresented ? 1 : 0.9
+        let initialScale = isPresented ? style.initScale : 1
+        let finalScale = isPresented ? 1 : style.initScale
         
         let duration = transitionDuration(using: transitionContext)
         

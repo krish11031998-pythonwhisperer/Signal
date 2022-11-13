@@ -97,4 +97,16 @@ extension Array where Element : UIView {
     }
     
 	
+    func embedInVStack(alignment: UIStackView.Alignment = .fill, spacing: CGFloat = 0, distribution: UIStackView.Distribution = .fill) -> UIStackView {
+        let stack = UIStackView.VStack(subViews: self, spacing: spacing, alignment: alignment)
+        stack.distribution = distribution
+        return stack
+    }
+    
+    
+    func embedInHStack(alignment: UIStackView.Alignment = .fill, spacing: CGFloat = 0, distribution: UIStackView.Distribution = .fill) -> UIStackView {
+        let stack = UIStackView.HStack(subViews: self, spacing: spacing, alignment: alignment)
+        stack.distribution = distribution
+        return stack
+    }
 }
