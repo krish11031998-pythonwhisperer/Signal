@@ -157,6 +157,7 @@
 		EF987B9B292122FA0000E233 /* TickerStoryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987B9A292122FA0000E233 /* TickerStoryDetailView.swift */; };
 		EF987B9D2921309C0000E233 /* TickerSymbolsVoew.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987B9C2921309C0000E233 /* TickerSymbolsVoew.swift */; };
 		EF987B9F29213CCA0000E233 /* PresentationStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987B9E29213CCA0000E233 /* PresentationStyle.swift */; };
+		EF987BA329217A330000E233 /* WebPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987BA229217A330000E233 /* WebPage.swift */; };
 		EFB1C22E28DB3B1800DD40A4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB1C22D28DB3B1800DD40A4 /* AppDelegate.swift */; };
 		EFB1C23028DB3B1800DD40A4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB1C22F28DB3B1800DD40A4 /* SceneDelegate.swift */; };
 		EFB1C23228DB3B1800DD40A4 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB1C23128DB3B1800DD40A4 /* MainViewController.swift */; };
@@ -355,6 +356,7 @@
 		EF987B9A292122FA0000E233 /* TickerStoryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerStoryDetailView.swift; sourceTree = "<group>"; };
 		EF987B9C2921309C0000E233 /* TickerSymbolsVoew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerSymbolsVoew.swift; sourceTree = "<group>"; };
 		EF987B9E29213CCA0000E233 /* PresentationStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationStyle.swift; sourceTree = "<group>"; };
+		EF987BA229217A330000E233 /* WebPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebPage.swift; sourceTree = "<group>"; };
 		EFB1C22A28DB3B1800DD40A4 /* SignalMVP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SignalMVP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFB1C22D28DB3B1800DD40A4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EFB1C22F28DB3B1800DD40A4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -421,6 +423,7 @@
 		EF7CBF8F291641E900F9D611 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				EF987BA129217A0D0000E233 /* WebPage */,
 				EF987B722919A6E10000E233 /* CollectionViewDataSource */,
 				EF987B6C2916FC5C0000E233 /* Presentation */,
 				EF7CBF90291641E900F9D611 /* Extension */,
@@ -923,6 +926,14 @@
 			path = TickerStory;
 			sourceTree = "<group>";
 		};
+		EF987BA129217A0D0000E233 /* WebPage */ = {
+			isa = PBXGroup;
+			children = (
+				EF987BA229217A330000E233 /* WebPage.swift */,
+			);
+			path = WebPage;
+			sourceTree = "<group>";
+		};
 		EFB1C22128DB3B1800DD40A4 = {
 			isa = PBXGroup;
 			children = (
@@ -1272,6 +1283,7 @@
 				EF7CC001291641EA00F9D611 /* GenericButtonWrapper.swift in Sources */,
 				EF86382A28DC519B00EF520C /* StubNewsService.swift in Sources */,
 				EF7D2F9928DED9DF0003B8F3 /* NewsDetailViewController.swift in Sources */,
+				EF987BA329217A330000E233 /* WebPage.swift in Sources */,
 				EF7D2FA528E031920003B8F3 /* TrendingHeadlinesModel.swift in Sources */,
 				EF987B6B2916A9930000E233 /* CircularProgressShape.swift in Sources */,
 				EF987B952920D7A00000E233 /* ImageView.swift in Sources */,

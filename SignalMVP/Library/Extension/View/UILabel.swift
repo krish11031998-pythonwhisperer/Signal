@@ -20,10 +20,6 @@ extension UIView {
 		view.border(color: borderColor, borderWidth: borderWidth, cornerRadius: cornerRadius)
 		return view
 	}
-	
-	func buttonify(handler: Callback?) -> UIView {
-		return GenericButtonWrapper(innerView: self, handler: handler)
-	}
 }
 
 

@@ -48,6 +48,19 @@ extension UIViewController {
 											 action: #selector(target.popViewController))
 		return barItem
 	}
+    
+    static func closeButton(_ target: UIViewController) -> UIBarButtonItem {
+        let buttonImg = UIImage(systemName: "xmark")?.resized(size: .init(squared: 16))
+        let imgView = UIImageView(image: buttonImg)
+        imgView.circleFrame = .init(origin: .zero, size: .init(squared: 32))
+        imgView.backgroundColor = .surfaceBackgroundInverse
+        imgView.contentMode = .center
+        let barItem: UIBarButtonItem = .init(image: imgView.snapshot.withRenderingMode(.alwaysOriginal),
+                                             style: .plain,
+                                             target: target,
+                                             action: #selector(target.popViewController))
+        return barItem
+    }
 	
     var isPresented: Bool {
         navigationController?.modalPresentationStyle == .custom || modalPresentationStyle == .custom
@@ -62,8 +75,8 @@ extension UIViewController {
         }
 	}
 	
-	func standardNavBar(title: RenderableText? = nil, leftBarButton: UIBarButtonItem? = nil, rightBarButton: UIBarButtonItem? = nil) {
-		setupTransparentNavBar()
+    func standardNavBar(title: RenderableText? = nil, leftBarButton: UIBarButtonItem? = nil, rightBarButton: UIBarButtonItem? = nil, color: UIColor = .clear, scrollColor: UIColor = .clear) {
+		setupTransparentNavBar(color: color, scrollColor: scrollColor)
 		navigationItem.titleView = title?.generateLabel
 		navigationItem.leftBarButtonItem = leftBarButton ?? Self.backButton(self)
 		navigationItem.rightBarButtonItem = rightBarButton

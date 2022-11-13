@@ -22,7 +22,7 @@ class TickerStoryDetailView: UIViewController {
         button.titleLabel?.textAlignment = .center
         button.cornerRadius = 8
         button.setHeight(height: 50, priority: .required)
-        button.addTarget(self, action: #selector(dismissView), for: .touchUpInside)
+        button.addTarget(self, action: #selector(showWebpage), for: .touchUpInside)
         return button
     }()
     
@@ -60,7 +60,7 @@ class TickerStoryDetailView: UIViewController {
     }
     
     private func setupNav() {
-        standardNavBar(rightBarButton: .init(image: .init(systemName: "xmark")?.withTintColor(.black, renderingMode: .alwaysOriginal), style: .plain, target: self, action: #selector(dismissView)))
+        standardNavBar(rightBarButton: Self.closeButton(self))
         navigationItem.leftBarButtonItem = nil
         navigationController?.additionalSafeAreaInsets = .init(top: 12, left: 0, bottom: 0, right: 0)
     }
@@ -97,6 +97,12 @@ class TickerStoryDetailView: UIViewController {
     @objc
     private func dismissView() {
         dismiss(animated: true)
+    }
+    
+    @objc
+    private func showWebpage() {
+        let webPage = WebPageView(url: news.newsUrl, title: news.title).withNavigationController()
+        presentView(style: .sheet(), target: webPage, onDimissal: nil)
     }
 }
 

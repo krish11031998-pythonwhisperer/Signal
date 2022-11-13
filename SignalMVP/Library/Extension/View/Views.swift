@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+//MARK: - UIView
 extension UIView {
 	
 	static func HStack(subViews: [UIView] = [], spacing: CGFloat, alignment: UIStackView.Alignment = .fill) -> UIStackView {
@@ -58,6 +59,7 @@ extension UIView {
     }
 }
 
+//MARK: - UIView + Array<UIView>
 extension Array where Element : UIView {
 	
 	func sizeFittingStack(for width: CGFloat, with spacing: CGFloat = .zero) -> [[UIView]] {
@@ -108,5 +110,13 @@ extension Array where Element : UIView {
         let stack = UIStackView.HStack(subViews: self, spacing: spacing, alignment: alignment)
         stack.distribution = distribution
         return stack
+    }
+}
+
+
+//MARK: - UIView Modifiers
+extension UIView {
+    func buttonify(handler: Callback?) -> UIView {
+        return GenericButtonWrapper(innerView: self, handler: handler)
     }
 }

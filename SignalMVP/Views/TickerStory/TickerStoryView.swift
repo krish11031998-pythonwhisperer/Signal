@@ -134,6 +134,7 @@ class TicketStoryView: UIViewController {
     private func loadWithNews() {
         guard idx >= 0, idx < newsForTicker.count else { return }
         let news = newsForTicker[idx]
+        mainImageView.image = nil
         UIImage.loadImage(url: news.imageUrl, at: mainImageView, path: \.image)
         mainImageView.contentMode = .scaleAspectFill
         setupTimer()
@@ -145,8 +146,9 @@ class TicketStoryView: UIViewController {
     
     private func showNews() {
         let target = TickerStoryDetailView(news: newsForTicker[idx]).withNavigationController()
-        presentView(style: .sheet(size: .init(width: .totalWidth, height: .totalHeight), edge: .init(top: 0, left: 0, bottom: .safeAreaInsets.bottom, right: 0)), addDimmingView: false, target: target) {
+        presentView(style: .sheet(size: .init(width: .totalWidth, height: .totalHeight)), addDimmingView: false, target: target) {
             self.direction = .none
+            self.panVerticalPoint = .zero
         }
     }
 }
@@ -157,9 +159,6 @@ extension TicketStoryView {
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard direction == .none else {
-//            direction = .none
-//            panVerticalPoint = .zero
-//            print("(DEBUG) resetting")
             showNews()
             return
         }

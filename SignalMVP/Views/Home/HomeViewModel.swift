@@ -138,7 +138,6 @@ class HomeViewModel {
     }
     
     private func handleTap(origin: CGRect, model: MentionModel) {
-        print("(DEBUG) handleTap! : ", origin)
         MentionStorage.selectedMention = model
         TopMentionStoryCell.visitedCells.insert(model)
         viewTransitioner?.presentView(origin: origin)

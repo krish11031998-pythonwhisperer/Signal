@@ -116,8 +116,8 @@ extension UIImage {
 		}
 	}
 	
-	func imageView(size: CGSize = .smallestSquare, cornerRadius: CGFloat = .zero) -> UIImageView {
-		let view = UIImageView(frame: size.frame)
+	func imageView(size: CGSize? = nil, cornerRadius: CGFloat = .zero) -> UIImageView {
+        let view = UIImageView(frame: (size ?? self.size).frame)
 		view.image = self
 		view.contentMode = .scaleAspectFit
 		view.clipsToBounds = true
