@@ -16,6 +16,7 @@ enum AnimationDirection {
 }
 
 enum Animation {
+    case bouncy
 	case slideInFromTop(from: CGFloat, to:CGFloat = 0, duration: CFTimeInterval = 0.3)
     case slideIn(_ direction: AnimationDirection, duration: CFTimeInterval = 0.3)
 	case circularProgress(from: CGFloat = 0, to: CGFloat, duration: CFTimeInterval = 0.3)
@@ -29,6 +30,11 @@ extension Animation {
 	func animationData(at layer: CALayer) -> CAAnimation {
 		
 		switch self {
+        case .bouncy:
+            let animation = CAKeyframeAnimation(keyPath: "scale")
+            animation.keyTimes = [0, 0.33, 0.66, 1]
+            animation.values = [1, 0.975, 0.975, 1]
+            return animation
 		case .slideInFromTop(let from, let to, let duration):
 			let animation = CABasicAnimation(keyPath: "position.y")
 			animation.fromValue = from

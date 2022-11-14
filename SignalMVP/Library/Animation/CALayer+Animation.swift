@@ -21,7 +21,7 @@ extension CALayer {
         }
         
         let animationData = animation.animationData(at: self)
-        animationData.isRemovedOnCompletion = false
+        animationData.isRemovedOnCompletion = removeAfterCompletion
         animationData.fillMode = .forwards
         add(animationData, forKey: nil)
         
