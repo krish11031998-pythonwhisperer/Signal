@@ -14,6 +14,11 @@
 		EF1644A42905573600E9D997 /* signalNews.json in Resources */ = {isa = PBXBuildFile; fileRef = EF1644A32905573600E9D997 /* signalNews.json */; };
 		EF1644A62905691A00E9D997 /* signalEvents.json in Resources */ = {isa = PBXBuildFile; fileRef = EF1644A52905691A00E9D997 /* signalEvents.json */; };
 		EF1644A9290589B500E9D997 /* CustomCuratedEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1644A8290589B500E9D997 /* CustomCuratedEvents.swift */; };
+		EF1D7E592922CCFD0041ADEC /* CollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1D7E532922CCFD0041ADEC /* CollectionDataSource.swift */; };
+		EF1D7E5A2922CCFD0041ADEC /* CollectionSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1D7E542922CCFD0041ADEC /* CollectionSection.swift */; };
+		EF1D7E5B2922CCFD0041ADEC /* CollectionViewFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1D7E552922CCFD0041ADEC /* CollectionViewFunctions.swift */; };
+		EF1D7E5C2922CCFD0041ADEC /* CustomCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1D7E572922CCFD0041ADEC /* CustomCollectionCell.swift */; };
+		EF1D7E5D2922CCFD0041ADEC /* CollectionColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1D7E582922CCFD0041ADEC /* CollectionColumn.swift */; };
 		EF48D71328E4CFCF00BD2A1A /* MainTabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF48D71228E4CFCF00BD2A1A /* MainTabModel.swift */; };
 		EF48D71528E578A600BD2A1A /* SignalTwitterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF48D71428E578A600BD2A1A /* SignalTwitterService.swift */; };
 		EF48D71728E5918300BD2A1A /* SignalEventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF48D71628E5918300BD2A1A /* SignalEventService.swift */; };
@@ -153,11 +158,6 @@
 		EF987B9D2921309C0000E233 /* TickerSymbolsVoew.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987B9C2921309C0000E233 /* TickerSymbolsVoew.swift */; };
 		EF987B9F29213CCA0000E233 /* PresentationStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987B9E29213CCA0000E233 /* PresentationStyle.swift */; };
 		EF987BA329217A330000E233 /* WebPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987BA229217A330000E233 /* WebPage.swift */; };
-		EF987BAB2922C9E70000E233 /* CollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987BA52922C9E70000E233 /* CollectionDataSource.swift */; };
-		EF987BAC2922C9E70000E233 /* CollectionSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987BA62922C9E70000E233 /* CollectionSection.swift */; };
-		EF987BAD2922C9E70000E233 /* CollectionViewFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987BA72922C9E70000E233 /* CollectionViewFunctions.swift */; };
-		EF987BAE2922C9E70000E233 /* CustomCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987BA92922C9E70000E233 /* CustomCollectionCell.swift */; };
-		EF987BAF2922C9E70000E233 /* CollectionColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987BAA2922C9E70000E233 /* CollectionColumn.swift */; };
 		EFB1C22E28DB3B1800DD40A4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB1C22D28DB3B1800DD40A4 /* AppDelegate.swift */; };
 		EFB1C23028DB3B1800DD40A4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB1C22F28DB3B1800DD40A4 /* SceneDelegate.swift */; };
 		EFB1C23228DB3B1800DD40A4 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB1C23128DB3B1800DD40A4 /* MainViewController.swift */; };
@@ -213,6 +213,11 @@
 		EF1644A32905573600E9D997 /* signalNews.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = signalNews.json; sourceTree = "<group>"; };
 		EF1644A52905691A00E9D997 /* signalEvents.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = signalEvents.json; sourceTree = "<group>"; };
 		EF1644A8290589B500E9D997 /* CustomCuratedEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCuratedEvents.swift; sourceTree = "<group>"; };
+		EF1D7E532922CCFD0041ADEC /* CollectionDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionDataSource.swift; sourceTree = "<group>"; };
+		EF1D7E542922CCFD0041ADEC /* CollectionSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionSection.swift; sourceTree = "<group>"; };
+		EF1D7E552922CCFD0041ADEC /* CollectionViewFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewFunctions.swift; sourceTree = "<group>"; };
+		EF1D7E572922CCFD0041ADEC /* CustomCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCollectionCell.swift; sourceTree = "<group>"; };
+		EF1D7E582922CCFD0041ADEC /* CollectionColumn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionColumn.swift; sourceTree = "<group>"; };
 		EF48D71228E4CFCF00BD2A1A /* MainTabModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabModel.swift; sourceTree = "<group>"; };
 		EF48D71428E578A600BD2A1A /* SignalTwitterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalTwitterService.swift; sourceTree = "<group>"; };
 		EF48D71628E5918300BD2A1A /* SignalEventService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalEventService.swift; sourceTree = "<group>"; };
@@ -352,11 +357,6 @@
 		EF987B9C2921309C0000E233 /* TickerSymbolsVoew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerSymbolsVoew.swift; sourceTree = "<group>"; };
 		EF987B9E29213CCA0000E233 /* PresentationStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationStyle.swift; sourceTree = "<group>"; };
 		EF987BA229217A330000E233 /* WebPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebPage.swift; sourceTree = "<group>"; };
-		EF987BA52922C9E70000E233 /* CollectionDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionDataSource.swift; sourceTree = "<group>"; };
-		EF987BA62922C9E70000E233 /* CollectionSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionSection.swift; sourceTree = "<group>"; };
-		EF987BA72922C9E70000E233 /* CollectionViewFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewFunctions.swift; sourceTree = "<group>"; };
-		EF987BA92922C9E70000E233 /* CustomCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCollectionCell.swift; sourceTree = "<group>"; };
-		EF987BAA2922C9E70000E233 /* CollectionColumn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionColumn.swift; sourceTree = "<group>"; };
 		EFB1C22A28DB3B1800DD40A4 /* SignalMVP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SignalMVP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFB1C22D28DB3B1800DD40A4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EFB1C22F28DB3B1800DD40A4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -420,10 +420,30 @@
 			path = CustomCuratedList;
 			sourceTree = "<group>";
 		};
+		EF1D7E522922CCFD0041ADEC /* CollectionViewDataSource */ = {
+			isa = PBXGroup;
+			children = (
+				EF1D7E532922CCFD0041ADEC /* CollectionDataSource.swift */,
+				EF1D7E542922CCFD0041ADEC /* CollectionSection.swift */,
+				EF1D7E552922CCFD0041ADEC /* CollectionViewFunctions.swift */,
+				EF1D7E562922CCFD0041ADEC /* CommonCollectionItemView */,
+				EF1D7E582922CCFD0041ADEC /* CollectionColumn.swift */,
+			);
+			path = CollectionViewDataSource;
+			sourceTree = "<group>";
+		};
+		EF1D7E562922CCFD0041ADEC /* CommonCollectionItemView */ = {
+			isa = PBXGroup;
+			children = (
+				EF1D7E572922CCFD0041ADEC /* CustomCollectionCell.swift */,
+			);
+			path = CommonCollectionItemView;
+			sourceTree = "<group>";
+		};
 		EF7CBF8F291641E900F9D611 /* Library */ = {
 			isa = PBXGroup;
 			children = (
-				EF987BA42922C9E70000E233 /* CollectionViewDataSource */,
+				EF1D7E522922CCFD0041ADEC /* CollectionViewDataSource */,
 				EF987BA129217A0D0000E233 /* WebPage */,
 				EF987B6C2916FC5C0000E233 /* Presentation */,
 				EF7CBF90291641E900F9D611 /* Extension */,
@@ -914,26 +934,6 @@
 			path = WebPage;
 			sourceTree = "<group>";
 		};
-		EF987BA42922C9E70000E233 /* CollectionViewDataSource */ = {
-			isa = PBXGroup;
-			children = (
-				EF987BA52922C9E70000E233 /* CollectionDataSource.swift */,
-				EF987BA62922C9E70000E233 /* CollectionSection.swift */,
-				EF987BA72922C9E70000E233 /* CollectionViewFunctions.swift */,
-				EF987BA82922C9E70000E233 /* CommonCollectionItemView */,
-				EF987BAA2922C9E70000E233 /* CollectionColumn.swift */,
-			);
-			path = CollectionViewDataSource;
-			sourceTree = "<group>";
-		};
-		EF987BA82922C9E70000E233 /* CommonCollectionItemView */ = {
-			isa = PBXGroup;
-			children = (
-				EF987BA92922C9E70000E233 /* CustomCollectionCell.swift */,
-			);
-			path = CommonCollectionItemView;
-			sourceTree = "<group>";
-		};
 		EFB1C22128DB3B1800DD40A4 = {
 			isa = PBXGroup;
 			children = (
@@ -1269,7 +1269,7 @@
 				EF7D2FB628E051940003B8F3 /* StubMentionService.swift in Sources */,
 				EF7D2F9E28E02CFF0003B8F3 /* HomeFeed.swift in Sources */,
 				EF7CBFDB291641EA00F9D611 /* ImageCatalogue.swift in Sources */,
-				EF987BAD2922C9E70000E233 /* CollectionViewFunctions.swift in Sources */,
+				EF1D7E5B2922CCFD0041ADEC /* CollectionViewFunctions.swift in Sources */,
 				EF7CBFDF291641EA00F9D611 /* UIStackView.swift in Sources */,
 				EF86384928DC9F4600EF520C /* EventServiceInterface.swift in Sources */,
 				EF7D2FB428E050DE0003B8F3 /* MentionModel.swift in Sources */,
@@ -1288,13 +1288,13 @@
 				EF7D2FA528E031920003B8F3 /* TrendingHeadlinesModel.swift in Sources */,
 				EF987B6B2916A9930000E233 /* CircularProgressShape.swift in Sources */,
 				EF987B952920D7A00000E233 /* ImageView.swift in Sources */,
-				EF987BAC2922C9E70000E233 /* CollectionSection.swift in Sources */,
+				EF1D7E5A2922CCFD0041ADEC /* CollectionSection.swift in Sources */,
 				EF7CBFF8291641EA00F9D611 /* Animation.swift in Sources */,
 				EFB1C22E28DB3B1800DD40A4 /* AppDelegate.swift in Sources */,
 				EF96382628DD90A400178C37 /* RedditViewModel.swift in Sources */,
 				EF987B972920E9FA0000E233 /* CommonWrappers.swift in Sources */,
 				EF7CBFDE291641EA00F9D611 /* Fundamentals.swift in Sources */,
-				EF987BAF2922C9E70000E233 /* CollectionColumn.swift in Sources */,
+				EF1D7E5D2922CCFD0041ADEC /* CollectionColumn.swift in Sources */,
 				EF7CBFF7291641EA00F9D611 /* NetworkReqeust.swift in Sources */,
 				EF00758F28E5CBA000195433 /* SignalNewsService.swift in Sources */,
 				EF86383728DC648000EF520C /* NewsViewModel.swift in Sources */,
@@ -1323,7 +1323,7 @@
 				EF987B892919A7010000E233 /* MutlipleStrokeCircularProgressBar.swift in Sources */,
 				EF987B882919A7010000E233 /* SphericalProgressBars.swift in Sources */,
 				EF48D71728E5918300BD2A1A /* SignalEventService.swift in Sources */,
-				EF987BAE2922C9E70000E233 /* CustomCollectionCell.swift in Sources */,
+				EF1D7E5C2922CCFD0041ADEC /* CustomCollectionCell.swift in Sources */,
 				EF7CBFD8291641EA00F9D611 /* Array.swift in Sources */,
 				EF96383328DDFEDF00178C37 /* TweetMetricsView.swift in Sources */,
 				EF7D2FC628E09E7E0003B8F3 /* VideoModel.swift in Sources */,
@@ -1362,7 +1362,7 @@
 				EFB1C2D128DB5E7D00DD40A4 /* TweetFeedViewModel.swift in Sources */,
 				EFDC741928E3373800042452 /* Sentiments.swift in Sources */,
 				EF86384728DC9E6A00EF520C /* EventModel.swift in Sources */,
-				EF987BAB2922C9E70000E233 /* CollectionDataSource.swift in Sources */,
+				EF1D7E592922CCFD0041ADEC /* CollectionDataSource.swift in Sources */,
 				EF7D2FD428E0F7A00003B8F3 /* EventNotification.swift in Sources */,
 				EF7CBFDD291641EA00F9D611 /* UIImageView.swift in Sources */,
 				EFB1C25F28DB3CC600DD40A4 /* TweetsFeed.swift in Sources */,
