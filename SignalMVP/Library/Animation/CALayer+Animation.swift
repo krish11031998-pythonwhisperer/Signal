@@ -14,9 +14,6 @@ extension CALayer {
         CATransaction.begin()
         
         CATransaction.setCompletionBlock {
-//            if !removeAfterCompletion {
-//                self.finalizePosition(animation: animation)
-//            }
             completion?()
         }
         
@@ -32,9 +29,6 @@ extension CALayer {
         CATransaction.begin()
         
         CATransaction.setCompletionBlock {
-//            if !removeAfterCompletion {
-//                animation.forEach(self.finalizePosition(animation:))
-//            }
             completion?()
         }
         

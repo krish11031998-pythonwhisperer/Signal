@@ -39,11 +39,11 @@ class PresentationController: UIPresentationController {
     }
     
     override func presentationTransitionWillBegin() {
-        guard addDimmingView else { return }
+        guard addDimmingView && style.addDimmingView else { return }
         containerView?.insertSubview(dimmingView, at: 0)
         containerView?.setFittingConstraints(childView: dimmingView, insets: .zero)
         dimmingView.layer.opacity = 0
-        dimmingView.layer.animate(.fadeIn)
+        dimmingView.layer.animate(.fadeIn())
     }
     
     
@@ -80,7 +80,8 @@ extension PresentationController: UIViewControllerTransitioningDelegate {
 //MARK: - CirclePresentation UIViewControllerAnimatedTransitioning
 
 extension PresentationController: UIViewControllerAnimatedTransitioning {
-    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval { style.transitionDuration }
+    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
+        style.transitionDuration }
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         
@@ -115,7 +116,8 @@ extension PresentationController: UIViewControllerAnimatedTransitioning {
         vc.view.frame = initialFrame
         vc.view.clippedCornerRadius = initialCornerRadius
         vc.view.transform = .init(scaleX: initialScale, y: initialScale)
-        UIView.animate(withDuration: duration, delay: 0) {
+        UIView.animate(withDuration: duration, delay: 0, options: [.curveEaseInOut,
+                                                                   .layoutSubviews, .overrideInheritedCurve]) {
             vc.view.frame = finalFrame
             vc.view.clippedCornerRadius = finalCornerRadius
             vc.view.transform = .init(scaleX: finalScale, y: finalScale)

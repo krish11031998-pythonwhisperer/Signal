@@ -63,6 +63,6 @@ class RatingChartCandle: UIView {
         factorView.layer.addSublayer(shape)
         
         shape.animate(.lineProgress(frame: .init(origin: .zero, size: size)))
-        layer.animate(.fadeIn)
+        layer.animate(.fadeIn())
     }
 }

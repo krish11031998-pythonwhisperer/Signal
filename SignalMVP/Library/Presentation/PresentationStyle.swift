@@ -56,7 +56,7 @@ extension PresentationStyle {
         case .circlar(_):
             return 0.2
         case .sheet(_, _):
-            return 0.4
+            return 0.25
         }
     }
     
@@ -66,6 +66,15 @@ extension PresentationStyle {
             return true
         case .sheet(_, _):
             return false
+        }
+    }
+    
+    var addDimmingView: Bool {
+        switch self {
+        case .circlar(_):
+            return false
+        default:
+            return true
         }
     }
 }

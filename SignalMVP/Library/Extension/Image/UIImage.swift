@@ -133,6 +133,7 @@ extension UIImage {
 	
 	
     static func loadImage<T:AnyObject>(url urlString: String?, at object: T, path: ReferenceWritableKeyPath<T,UIImage?>, resized: CGSize? = nil, resolveWithAspectRatio: Bool = false, scaledAt: Bool = false) {
+        object[keyPath: path] = nil
 		download(urlStr: urlString) { result in
 			switch result {
 			case .success(let img):

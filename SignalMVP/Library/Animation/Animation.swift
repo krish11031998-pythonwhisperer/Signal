@@ -21,8 +21,8 @@ enum Animation {
     case slideIn(_ direction: AnimationDirection, duration: CFTimeInterval = 0.3)
 	case circularProgress(from: CGFloat = 0, to: CGFloat, duration: CFTimeInterval = 0.3)
     case lineProgress(frame: CGRect, duration: CFTimeInterval = 0.3)
-    case fadeIn
-    case fadeOut(to: CGFloat = 0)
+    case fadeIn(duration: CFTimeInterval = 0.3)
+    case fadeOut(to: CGFloat = 0, duration: CFTimeInterval = 0.3)
 }
 
 extension Animation {
@@ -84,15 +84,15 @@ extension Animation {
             animation.toValue = UIBezierPath(roundedRect: frame, cornerRadius: frame.size.smallDim.half).cgPath
             animation.duration = duration
             return animation
-        case .fadeIn:
+        case .fadeIn(let duration):
             let animation = CABasicAnimation(keyPath: "opacity")
             animation.toValue = 1
-            animation.duration = 0.3
+            animation.duration = duration
             return animation
-        case .fadeOut(let to):
+        case .fadeOut(let to, let duration):
             let animation = CABasicAnimation(keyPath: "opacity")
             animation.toValue = to
-            animation.duration = 0.3
+            animation.duration = duration
             return animation
 		}
 		

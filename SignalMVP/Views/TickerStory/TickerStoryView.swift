@@ -29,10 +29,32 @@ class TicketStoryView: UIViewController {
         return stack
     }()
     
-    private lazy var dimmingView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .black.withAlphaComponent(0.5)
-        return view
+    private lazy var dimmingLayer: CALayer = {
+        let gradient: CAGradientLayer = .init()
+        gradient.colors = [UIColor.clear, UIColor.black.withAlphaComponent(0.75), UIColor.black].compactMap { $0.cgColor }
+        view.layer.addSublayer(gradient)
+        gradient.frame = self.view.bounds
+        return gradient
+    }()
+    
+    private lazy var leftTapDimmingView: CALayer = {
+        let bounds = self.view.bounds
+        let gradient: CAGradientLayer = .init()
+        gradient.colors = [UIColor.black.withAlphaComponent(0.5), UIColor.clear].compactMap { $0.cgColor }
+        gradient.frame = self.view.bounds
+        gradient.startPoint = .zero
+        gradient.endPoint = .init(x: 1, y: 0)
+        return gradient
+    }()
+    
+    private lazy var rightTapDimmingView: CALayer = {
+        let bounds = self.view.bounds
+        let gradient: CAGradientLayer = .init()
+        gradient.colors = [UIColor.black.withAlphaComponent(0.5), UIColor.clear].compactMap { $0.cgColor }
+        gradient.frame = bounds
+        gradient.endPoint = .zero
+        gradient.startPoint = .init(x: 1, y: 0)
+        return gradient
     }()
     
     private var panVerticalPoint: CGPoint = .zero
@@ -50,16 +72,20 @@ class TicketStoryView: UIViewController {
     //MARK: - Protected Methods
     private func setupView() {
         let container = UIView()
+        view.backgroundColor = .black
         view.addSubview(container)
         view.setFittingConstraints(childView: container, insets: CGFloat.safeAreaInsets)
         
-        [mainImageView, dimmingView, stack].addToView(container)
+        [mainImageView, stack].addToView(container)
         
         container.subviews.forEach {
             container.setFittingConstraints(childView: $0, insets: .zero)
         }
         
-        mainImageView.backgroundColor = .gray
+        [dimmingLayer, leftTapDimmingView, rightTapDimmingView].forEach(mainImageView.layer.addSublayer(_:))
+        leftTapDimmingView.opacity = 0
+        rightTapDimmingView.opacity = 0
+        
         container.clippedCornerRadius = 24
         mainLabel.numberOfLines = 3
         mainDescriptionLabel.numberOfLines = 2
@@ -134,7 +160,6 @@ class TicketStoryView: UIViewController {
     private func loadWithNews() {
         guard idx >= 0, idx < newsForTicker.count else { return }
         let news = newsForTicker[idx]
-        mainImageView.image = nil
         UIImage.loadImage(url: news.imageUrl, at: mainImageView, path: \.image)
         mainImageView.contentMode = .scaleAspectFill
         setupTimer()
@@ -159,16 +184,26 @@ extension TicketStoryView {
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard direction == .none else {
-            showNews()
+            if direction == .top {
+                showNews()
+            } else {
+                direction = .none
+                panVerticalPoint = .zero
+            }
             return
         }
 
         guard let latestTouch = touches.first else { return }
         let point = latestTouch.location(in: view)
-        print("(DEBUG) touchesEnded : ", point)
         if point.x < .totalWidth * 0.45 {
+            leftTapDimmingView.animate(.fadeIn(duration: 0.1)) {
+                self.leftTapDimmingView.animate(.fadeOut(to: 0, duration: 0.05))
+            }
             idx -= 1
         } else if point.x > .totalWidth * 0.55 {
+            rightTapDimmingView.animate(.fadeIn(duration: 0.05)) {
+                self.rightTapDimmingView.animate(.fadeOut(to: 0, duration: 0.05))
+            }
             idx += 1
         }
     }
@@ -186,6 +221,5 @@ extension TicketStoryView {
             direction == .none
         else { return }
         direction =  CGPoint.swipeDirection(point, panVerticalPoint)
-        print("(DEBUG) direction : ", direction.rawValue)
     }
 }
