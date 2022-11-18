@@ -126,6 +126,8 @@
 		EF86384928DC9F4600EF520C /* EventServiceInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF86384828DC9F4600EF520C /* EventServiceInterface.swift */; };
 		EF86384B28DCA1A400EF520C /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF86384A28DCA1A400EF520C /* EventCell.swift */; };
 		EF86384D28DCED0C00EF520C /* EventSingleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF86384C28DCED0C00EF520C /* EventSingleCell.swift */; };
+		EF92FD7F292832280004F547 /* NSAttributedString+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF92FD7E292832280004F547 /* NSAttributedString+Utils.swift */; };
+		EF92FD81292840850004F547 /* StackScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF92FD80292840850004F547 /* StackScrollView.swift */; };
 		EF96381828DD8C1E00178C37 /* TweetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF96381728DD8C1E00178C37 /* TweetService.swift */; };
 		EF96381B28DD8C6B00178C37 /* RedditServiceInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF96381A28DD8C6B00178C37 /* RedditServiceInterface.swift */; };
 		EF96381D28DD8C8D00178C37 /* RedditPostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF96381C28DD8C8D00178C37 /* RedditPostModel.swift */; };
@@ -325,6 +327,8 @@
 		EF86384828DC9F4600EF520C /* EventServiceInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventServiceInterface.swift; sourceTree = "<group>"; };
 		EF86384A28DCA1A400EF520C /* EventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
 		EF86384C28DCED0C00EF520C /* EventSingleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventSingleCell.swift; sourceTree = "<group>"; };
+		EF92FD7E292832280004F547 /* NSAttributedString+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Utils.swift"; sourceTree = "<group>"; };
+		EF92FD80292840850004F547 /* StackScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackScrollView.swift; sourceTree = "<group>"; };
 		EF96381728DD8C1E00178C37 /* TweetService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetService.swift; sourceTree = "<group>"; };
 		EF96381A28DD8C6B00178C37 /* RedditServiceInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditServiceInterface.swift; sourceTree = "<group>"; };
 		EF96381C28DD8C8D00178C37 /* RedditPostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditPostModel.swift; sourceTree = "<group>"; };
@@ -511,6 +515,7 @@
 		EF7CBFA2291641E900F9D611 /* String */ = {
 			isa = PBXGroup;
 			children = (
+				EF92FD7E292832280004F547 /* NSAttributedString+Utils.swift */,
 				EF7CBFA3291641E900F9D611 /* FontCatalogue.swift */,
 				EF7CBFA4291641E900F9D611 /* StringFonts.swift */,
 				EF7CBFA5291641E900F9D611 /* RenderableText.swift */,
@@ -595,6 +600,7 @@
 				EF7CBFC7291641EA00F9D611 /* GenericButtonWrapper.swift */,
 				EF7CBFC8291641EA00F9D611 /* ImageComponents */,
 				EF7CBFCA291641EA00F9D611 /* ImageHeaderSubHeaderView.swift */,
+				EF92FD80292840850004F547 /* StackScrollView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1278,6 +1284,7 @@
 				EF7CBFF9291641EA00F9D611 /* TableViewFunction.swift in Sources */,
 				EF987B862919A7010000E233 /* MultipleStrokeProgressBar.swift in Sources */,
 				EFB1C23228DB3B1800DD40A4 /* MainViewController.swift in Sources */,
+				EF92FD81292840850004F547 /* StackScrollView.swift in Sources */,
 				EF86383B28DC761900EF520C /* MainTabView.swift in Sources */,
 				EF7CC0132916640B00F9D611 /* RatingChart.swift in Sources */,
 				EF7D2FAA28E033E90003B8F3 /* TrendingHeadlineCell.swift in Sources */,
@@ -1331,6 +1338,7 @@
 				EF7CC002291641EA00F9D611 /* SymbolImage.swift in Sources */,
 				EF7CC01629166E6F00F9D611 /* RatingChartCandle.swift in Sources */,
 				EF987B9F29213CCA0000E233 /* PresentationStyle.swift in Sources */,
+				EF92FD7F292832280004F547 /* NSAttributedString+Utils.swift in Sources */,
 				EF96382828DD92E900178C37 /* RedditPostCard.swift in Sources */,
 				EFB3181628E97B93008FC27E /* TweetURLView.swift in Sources */,
 				EF7CBFFB291641EA00F9D611 /* Configurable.swift in Sources */,

@@ -118,7 +118,12 @@ extension UIImage {
 	
 	func imageView(size: CGSize? = nil, cornerRadius: CGFloat = .zero) -> UIImageView {
         let view = UIImageView(frame: (size ?? self.size).frame)
-		view.image = self
+        if let size = size {
+            view.image = self.resized(size: size)
+        } else {
+            view.image = self
+        }
+		
 		view.contentMode = .scaleAspectFit
 		view.clipsToBounds = true
 		view.cornerRadius = cornerRadius
@@ -131,6 +136,14 @@ extension UIImage {
 		return view.snapshot
 	}
 	
+    
+    static func solid(color: UIColor, circleFrame frame: CGSize = .smallestSquare) -> UIImage {
+        let view = UIView(frame: .init(origin: .zero, size: frame))
+        view.clippedCornerRadius = frame.smallDim.half
+        view.backgroundColor = color
+        return view.snapshot
+    }
+    
 	
     static func loadImage<T:AnyObject>(url urlString: String?, at object: T, path: ReferenceWritableKeyPath<T,UIImage?>, resized: CGSize? = nil, resolveWithAspectRatio: Bool = false, scaledAt: Bool = false) {
         object[keyPath: path] = nil

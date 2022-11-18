@@ -14,6 +14,7 @@ class TrendingHeadlineCell: ConfigurableCell {
 	private lazy var headlineLabel: UILabel = { .init() }()
 	private lazy var desciptionLabel: UILabel = { .init() }()
 	private lazy var sentimentStack: UIStackView = { .HStack(spacing: 8) }()
+    private lazy var sentimentLabel: UILabel = { .init() }()
 	private lazy var tickers: UIStackView = { .HStack(spacing: 8) }()
 	private lazy var mainStack: UIStackView = { .VStack(spacing: 8) }()
 
@@ -31,7 +32,7 @@ class TrendingHeadlineCell: ConfigurableCell {
 //MARK: - Protected Methods
 	
 	private func setupView() {
-		[headlineLabel, desciptionLabel, sentimentStack, tickers].forEach(mainStack.addArrangedSubview(_:))
+		[headlineLabel, desciptionLabel, sentimentLabel, tickers].forEach(mainStack.addArrangedSubview(_:))
 		mainStack.setCustomSpacing(12, after: sentimentStack)
 		
 		tickers.isHidden = true
@@ -55,10 +56,10 @@ class TrendingHeadlineCell: ConfigurableCell {
 		model.headline.body1Medium().render(target: headlineLabel)
 		model.text.body2Regular(color: .gray).render(target: desciptionLabel)
 		
-		sentimentStack.removeChildViews()
-		let sentimentBlob = SentimentTextLabel()
-		sentimentBlob.configureIndicator(label: model.sentiment.rawValue, color: model.sentiment.color)
-		sentimentStack.addArrangedSubview(sentimentBlob)
+        let sentimentBlob = model.sentimentBlob.toText(fontHeight: CustomFonts.regular.fontBuilder(size: 11)?.capHeight ?? 0)
+        let sentimentText = sentimentBlob.appending("  ").appending(model.sentiment.rawValue.bodySmallRegular())
+        
+        sentimentText.render(target: sentimentLabel)
 
 		if !model.tickers.isEmpty {
 			tickers.isHidden = false

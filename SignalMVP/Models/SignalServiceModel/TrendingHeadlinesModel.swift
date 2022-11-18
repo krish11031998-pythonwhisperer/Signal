@@ -27,7 +27,13 @@ struct TrendingHeadlinesModel: Codable {
 	}
 }
 
-
+extension TrendingHeadlinesModel {
+    
+    var sentimentBlob: UIImage {
+        UIImage.solid(color: sentiment.color, circleFrame: .init(squared: 10))
+    }
+    
+}
 //extension TrendingHeadlinesModel {
 //	
 //	var sentimentColor: UIColor {

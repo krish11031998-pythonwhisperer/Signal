@@ -18,8 +18,9 @@ extension CALayer {
         }
         
         let animationData = animation.animationData(at: self)
-        animationData.isRemovedOnCompletion = removeAfterCompletion
+        
         animationData.fillMode = .forwards
+        finalizePosition(animation: animationData, remove: removeAfterCompletion)
         add(animationData, forKey: nil)
         
         CATransaction.commit()
@@ -33,7 +34,7 @@ extension CALayer {
         }
         
         let animationData = animation.combine(at: self, removeAfterCompletion: removeAfterCompletion)
-        animationData.isRemovedOnCompletion = false
+        animationData.isRemovedOnCompletion = removeAfterCompletion
         animationData.fillMode = .forwards
         add(animationData, forKey: nil)
         
@@ -45,14 +46,14 @@ extension CALayer {
         finalizePosition(animation: animation.animationData(at: self))
     }
     
-    func finalizePosition(animation: CAAnimation) {
+    func finalizePosition(animation: CAAnimation, remove: Bool = false) {
         switch animation {
         case let basic as CABasicAnimation:
-            guard let keyPath = basic.keyPath else { return }
-            setValue(basic.toValue, forKeyPath: keyPath)
-            print("(DEBUG) updating @ \(keyPath) - \(value(forKeyPath: keyPath))")
+            basic.isRemovedOnCompletion = remove
+        case let keyFrame as CAKeyframeAnimation:
+            break
         case let group as CAAnimationGroup:
-            group.animations?.forEach(finalizePosition(animation:))
+            group.animations?.forEach { finalizePosition(animation: $0, remove: remove) }
         default: break
         }
     }

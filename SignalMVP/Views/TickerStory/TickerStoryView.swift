@@ -22,8 +22,15 @@ class TicketStoryView: UIViewController {
     private lazy var tickerInfo: UIStackView = { .HStack(spacing: 10, alignment: .center) }()
     private lazy var headerStack: UIStackView = { .VStack(subViews: [timerStack, tickerInfo], spacing: 32) }()
     private lazy var tickers: UIView = { .init() }()
+    private lazy var swipeUp: UIView = {
+        let chevronImage = UIImage.Catalogue.arrowUp.image.withTintColor(.textColor, renderingMode: .alwaysOriginal).imageView(size: .init(squared: 16), cornerRadius: 0)
+        chevronImage.animate(.slideUpDown(duration: 1))
+        let viewMore = "View More".bodySmallRegular().generateLabel
+        let view: UIStackView = .VStack(subViews: [chevronImage, viewMore], spacing: 5, alignment: .center)
+        return view
+    }()
     private lazy var stack: UIStackView = {
-        let stack: UIStackView = .VStack(subViews:[headerStack, .spacer(), mainLabel, mainDescriptionLabel, tickers],spacing: 10)
+        let stack: UIStackView = .VStack(subViews:[headerStack, .spacer(), mainLabel, mainDescriptionLabel, tickers, swipeUp],spacing: 10)
         stack.isLayoutMarginsRelativeArrangement = true
         stack.layoutMargins = .init(vertical: 24, horizontal: 20)
         return stack

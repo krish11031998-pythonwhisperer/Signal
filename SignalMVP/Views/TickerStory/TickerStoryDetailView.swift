@@ -14,6 +14,7 @@ class TickerStoryDetailView: UIViewController {
     private lazy var titleLabel: UILabel = { .init() }()
     private lazy var descriptionLabel: UILabel = { .init() }()
     private lazy var viewNews: UIView = { .init() }()
+    private lazy var scrollView: ScrollView = { .init(ignoreSafeArea: true) }()
     
     private lazy var viewMoreButton: UIButton = {
         let button = UIButton()
@@ -49,8 +50,8 @@ class TickerStoryDetailView: UIViewController {
         view.backgroundColor = .surfaceBackground
         view.clippedCornerRadius = 24
         
-        titleLabel.numberOfLines = 3
-        descriptionLabel.numberOfLines = 4
+        titleLabel.numberOfLines = 0
+        descriptionLabel.numberOfLines = 0
         
         news.title.heading2().render(target: titleLabel)
         news.text.body2Medium().render(target: descriptionLabel)
@@ -78,19 +79,20 @@ class TickerStoryDetailView: UIViewController {
     
     private func setupMainStack() {
         let descriptionStack = setupDescriptionStack()
-        let mainStack = [imageView, descriptionStack].embedInVStack(alignment: .center, spacing: 10)
-        mainStack.setCustomSpacing(32, after: imageView)
-        mainStack.setFittingConstraints(childView: imageView, leading: 0, trailing: 0, height: .totalHeight.half)
-
-        view.addSubview(mainStack)
-        view.setFittingConstraints(childView: mainStack, insets: .zero)
+        scrollView.addArrangedView(view: imageView, additionalSpacing: 32)
+        scrollView.addArrangedView(view: descriptionStack)
+        view.addSubview(scrollView)
+        view.setFittingConstraints(childView: scrollView, insets: .zero)
+        
+        view.addSubview(viewMoreButton)
+        view.setFittingConstraints(childView: viewMoreButton, leading: 20, trailing: 20, bottom: .safeAreaInsets.bottom)
     }
     
     private func setupDescriptionStack() -> UIView {
-        let stack = [titleLabel, descriptionLabel, tickers, .spacer(), viewMoreButton, .spacer(height: 24)].embedInVStack(alignment: .leading, spacing: 10)
+        let stack = [titleLabel, descriptionLabel, tickers, .spacer(height: 24)].embedInVStack(alignment: .leading, spacing: 10)
+        stack.setCustomSpacing(16, after: descriptionLabel)
         stack.isLayoutMarginsRelativeArrangement = true
         stack.layoutMargins = .init(vertical: 0, horizontal: 20)
-        stack.setFittingConstraints(childView: viewMoreButton, leading: 20, trailing: 20)
         return stack
     }
     
