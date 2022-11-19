@@ -35,3 +35,12 @@ extension CollectionDataSource: UICollectionViewDelegate {
 		sections[indexPath.section].cell[indexPath.row].collectionView(collectionView, didSelectItemAt: indexPath)
 	}
 }
+
+extension CollectionDataSource: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let cell = collectionView.cellForItem(at: indexPath)
+        let size = (collectionViewLayout as? UICollectionViewFlowLayout)?.itemSize ?? cell?.compressedSize ?? .zero
+        return size
+        
+    }
+}

@@ -95,10 +95,10 @@ extension UIView {
 		}
 	}
 	
-	func embedInView(insets: UIEdgeInsets) -> UIView {
+    func embedInView(insets: UIEdgeInsets, priority: UILayoutPriority = .required) -> UIView {
 		let view = UIView()
 		view.addSubview(self)
-		view.setFittingConstraints(childView: self, insets: insets)
+		view.setFittingConstraints(childView: self, top: insets.top, leading: insets.left, trailing: insets.right, bottom: insets.bottom, priority: priority)
 		return view
 	}
 	

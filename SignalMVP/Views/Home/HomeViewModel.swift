@@ -110,6 +110,7 @@ class HomeViewModel {
                 .init(model: mention) {
                     print("(DEBUG) Clicked : ", mention)
                     MentionStorage.selectedMention = mention
+                    NotificationCenter.default.post(name: .showMention, object: nil)
                 }
         }
         return .init(rows: topMentionedCoinsCellModel.limitTo(to: 5).compactMap { TableRow<TopMentionCell>($0) }, title: "Top Mentioned Coins")

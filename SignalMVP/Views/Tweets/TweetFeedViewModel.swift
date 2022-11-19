@@ -19,6 +19,11 @@ extension TweetCellModel {
 
 protocol AnyTableView {
 	func reloadTableWithDataSource(_ dataSource: TableViewDataSource)
+    func reloadSection(_ section: TableSection, at sectionIdx: Int?)
+}
+
+extension AnyTableView {
+    func reloadSection(_ section: TableSection, at sectionIdx: Int? = nil) {}
 }
 
 class TweetFeedViewModel {

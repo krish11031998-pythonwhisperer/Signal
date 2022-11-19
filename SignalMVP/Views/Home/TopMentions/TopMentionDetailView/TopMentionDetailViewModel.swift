@@ -28,10 +28,23 @@ fileprivate extension MentionModel {
     
 }
 
+fileprivate extension UIView {
+    func segmentBlob(isSelected: Bool) -> UIView {
+        let bg: UIColor = isSelected ? .surfaceBackgroundInverse : .clear
+        let inset: UIEdgeInsets = .init(by: 10)
+        let container = blobify(backgroundColor: bg, edgeInset: inset, borderColor: .textColor, borderWidth: 1, cornerRadius: 0)
+        container.cornerRadius = container.compressedSize.height.half
+        return container
+    }
+}
+
 class TopMentionDetailViewModel {
     
     public var tableView: AnyTableView?
-    private(set) var tweets:[TweetModel] = []
+    private var tweets:[TweetModel] = []
+    private var news: [NewsModel] = []
+    private var events: [EventModel] = []
+    private var selectedTab: String = "Twitter"
     var group: DispatchGroup
     
     init() {
@@ -42,30 +55,115 @@ class TopMentionDetailViewModel {
         MentionStorage.selectedMention?.ticker ?? ""
     }
     
-    
     public func fetchData() {
         fetchTweets()
-        group.notify(queue: .main) { [weak self] in
-            guard let strongSelf = self else { return }
-            strongSelf.tableView?.reloadTableWithDataSource(strongSelf.buildDataSource())
-        }
+        tableView?.reloadTableWithDataSource(buildDataSource())
     }
     
-    private func fetchTweets() {
-        group.enter()
+    private func fetchTweets(completion: Callback? = nil) {
         StubTweetService.shared.fetchTweets(entity: ticker) { [weak self] in
             guard let tweets = $0.data?.data else {
-                self?.group.leave()
+                completion?()
                 return
             }
             self?.tweets = tweets
-            self?.group.leave()
+            completion?()
         }
     }
     
-    private var tweetSection: TableSection? {
-        guard !tweets.isEmpty else { return nil }
-        return .init(rows: tweets.map { TableRow<TweetCell>(.init(model: $0)) }, title: "Media")
+    private func fetchNews(completion: Callback?) {
+        StubNewsService.shared.fetchNews(tickers: ticker) { [weak self] in
+            guard let news = $0.data?.data else {
+                completion?()
+                return
+            }
+            self?.news = news
+            completion?()
+        }
+    }
+    
+    private func fetchEvents(completion: Callback?) {
+        StubEventService.shared.fetchEvents { [weak self] in
+            guard let events = $0.data?.data else {
+                completion?()
+                return
+            }
+            self?.events = events
+            completion?()
+        }
+    }
+    
+    private func header(_ tab: String) {
+        
+        switch tab {
+        case "Twitter":
+            selectedTab = "Twitter"
+            guard let mediaSecion = mediaSecion else { return }
+            tableView?.reloadSection(mediaSecion, at: 1)
+        case "News":
+            selectedTab = "News"
+            fetchNews { [weak self] in
+                guard let mediaSecion = self?.mediaSecion else { return }
+                self?.tableView?.reloadSection(mediaSecion, at: 1)
+            }
+        case "Events":
+            selectedTab = "Events"
+            fetchEvents { [weak self] in
+                guard let mediaSecion = self?.mediaSecion else { return }
+                self?.tableView?.reloadSection(mediaSecion, at: 1)
+            }
+        default:
+            break
+        }
+    }
+    
+    private var mediaHeaderView: UIView {
+        let customHeader = "Media".heading2().generateLabel
+        let customSelector = ["Twitter", "News", "Events"].compactMap { tab in
+            let textColor: UIColor = selectedTab == tab ? .textColorInverse : .textColor
+            let blob = tab.body2Medium(color: textColor).generateLabel.segmentBlob(isSelected: selectedTab == tab)
+            return blob.buttonify { self.header(tab) }
+        }.embedInHStack(alignment: .center, spacing: 5)
+        customSelector.addArrangedSubview(.spacer())
+        let stack = UIStackView.VStack(subViews: [customHeader, customSelector], spacing: 10)
+       //stack.addInsets(insets: .init(by: 10))
+        return stack.embedInView(insets: .init(by: 10), priority: .needed)
+    }
+    
+    private var mediaSectionHeader: TableSection {
+        let collectionCell = ["Twitter", "News", "Events"].compactMap { tab in
+            let textColor: UIColor = selectedTab == tab ? .textColorInverse : .textColor
+            let bg: UIColor = selectedTab == tab ? .surfaceBackgroundInverse : .clear
+            let inset: UIEdgeInsets = .init(vertical: 7.5, horizontal: 10)
+            let blob = tab.body2Medium(color: textColor).generateLabel.blobify(backgroundColor: bg,
+                                                                               edgeInset: inset,
+                                                                               borderColor:  .textColor,
+                                                                               borderWidth: 1,
+                                                                               cornerRadius: 14)
+            return CollectionItem<CustomCollectionCell>(.init(view: blob, inset: .zero){
+                self.header(tab)
+            })
+        }
+        
+        return .init(rows: [TableRow<CollectionTableCell>(.init(cells: collectionCell, size: .init(width: .totalWidth, height: 50), inset: .init(by: 10), cellSize: .init(squared: 50), automaticDimension: true, interspacing: 5))])
+    }
+    
+    private var mediaSecion: TableSection? {
+        var rows: [TableCellProvider] = []
+
+        switch selectedTab {
+        case "Twitter":
+            rows = tweets.limitTo(to: 2).map { TableRow<TweetCell>(.init(model: $0)) }
+        case "News":
+            rows = news.limitTo(to: 2).map { TableRow<NewsCell>(.init(model: $0)) }
+        case "Events":
+            rows = events.limitTo(to: 2).map { TableRow<EventSingleCell>(.init(model: $0)) }
+        default:
+            break
+        }
+        
+        return .init(rows: rows, customHeader: mediaHeaderView)
+        
     }
     
     private var sentimentSplitView: TableSection? {
@@ -93,6 +191,6 @@ class TopMentionDetailViewModel {
     }
     
     private func buildDataSource() -> TableViewDataSource {
-        .init(sections: [sentimentSplitView, tweetSection].compactMap { $0 })
+        .init(sections: [sentimentSplitView, mediaSecion].compactMap { $0 })
     }
 }

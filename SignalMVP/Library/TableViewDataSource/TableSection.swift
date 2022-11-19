@@ -16,6 +16,11 @@ public struct TableSection {
 	var customFooter: UIView?
 }
 
+extension TableSection: Equatable {
+    public static func == (lhs: TableSection, rhs: TableSection) -> Bool {
+        lhs.title == rhs.title
+    }
+}
 
 public class TableViewDataSource: NSObject {
 	

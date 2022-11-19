@@ -50,7 +50,7 @@ extension CALayer {
         switch animation {
         case let basic as CABasicAnimation:
             basic.isRemovedOnCompletion = remove
-        case let keyFrame as CAKeyframeAnimation:
+        case let _ as CAKeyframeAnimation:
             break
         case let group as CAAnimationGroup:
             group.animations?.forEach { finalizePosition(animation: $0, remove: remove) }

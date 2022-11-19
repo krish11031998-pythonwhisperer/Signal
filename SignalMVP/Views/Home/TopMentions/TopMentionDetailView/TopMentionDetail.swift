@@ -85,4 +85,7 @@ extension TopMentionDetailView: AnyTableView {
         tableView.reloadData(dataSource)
     }
     
+    func reloadSection(_ section: TableSection, at sectionIdx: Int?) {
+        tableView.reloadSection(section, at: sectionIdx)
+    }
 }

@@ -13,6 +13,14 @@ extension NSObject {
 	static var name: String { "\(self)" }
 }
 
+fileprivate extension Array where Self.Element : Equatable {
+    
+    func findIdx(_ el: Self.Element) -> Int? {
+        guard let first = self.enumerated().filter({ $0.element == el }).first else { return nil }
+        return first.offset
+    }
+}
+
 extension UITableView {
 	
 	private static var propertyKey: UInt8 = 1
@@ -53,4 +61,14 @@ extension UITableView {
 		}
 	}
 	
+    func reloadSection(_ section: TableSection, at sectionIdx: Int? = nil) {
+        var sections = self.source?.sections ?? []
+        guard let idx = sectionIdx ?? sections.findIdx(section) else { return }
+        sections[idx] = section
+        self.source = .init(sections: sections)
+        self.dataSource = source
+        self.delegate = source
+        reloadSections(.init(integer: idx), with: .automatic)
+    }
+    
 }

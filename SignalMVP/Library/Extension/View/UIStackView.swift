@@ -19,4 +19,9 @@ extension UIStackView {
 			insertArrangedSubview(view, at: index)
 		}
 	}
+    
+    func addInsets(insets: UIEdgeInsets) {
+        isLayoutMarginsRelativeArrangement = true
+        directionalLayoutMargins = .init(top: insets.top, leading: insets.left, bottom: insets.bottom, trailing: insets.right)
+    }
 }

@@ -15,7 +15,7 @@ extension UIView {
 				 borderColor: UIColor = .white,
 				 borderWidth: CGFloat = 1,
 				 cornerRadius: CGFloat = 12) -> UIView {
-		let view = embedInView(insets: edgeInset)
+        let view = embedInView(insets: edgeInset, priority: .needed)
 		view.backgroundColor = backgroundColor
 		view.border(color: borderColor, borderWidth: borderWidth, cornerRadius: cornerRadius)
 		return view

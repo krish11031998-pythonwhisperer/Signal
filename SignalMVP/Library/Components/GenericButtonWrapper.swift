@@ -40,7 +40,9 @@ class GenericButtonWrapper: UIView {
 	
 	@objc
 	private func handleTap() {
-		handler?()
+        animate(.bouncy) {
+            self.handler?()
+        }
 	}
 	
 }
