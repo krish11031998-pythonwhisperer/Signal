@@ -27,6 +27,11 @@
 		EF59F10B292A331A002877DE /* UITabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF59F10A292A331A002877DE /* UITabbar.swift */; };
 		EF59F10F292A9602002877DE /* CustomCollectionTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF59F10D292A9602002877DE /* CustomCollectionTableCell.swift */; };
 		EF59F110292A9602002877DE /* CustomTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF59F10E292A9602002877DE /* CustomTableCell.swift */; };
+		EF59F117292A969A002877DE /* MultipleStrokeProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF59F112292A969A002877DE /* MultipleStrokeProgressBar.swift */; };
+		EF59F118292A969A002877DE /* CircularProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF59F113292A969A002877DE /* CircularProgressBar.swift */; };
+		EF59F119292A969A002877DE /* SphericalProgressBars.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF59F114292A969A002877DE /* SphericalProgressBars.swift */; };
+		EF59F11A292A969A002877DE /* MutlipleStrokeCircularProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF59F115292A969A002877DE /* MutlipleStrokeCircularProgressBar.swift */; };
+		EF59F11B292A969A002877DE /* ProgressBars.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF59F116292A969A002877DE /* ProgressBars.swift */; };
 		EF7CBED22911BB8400F9D611 /* TopMentionDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CBED12911BB8400F9D611 /* TopMentionDetail.swift */; };
 		EF7CBEDA291577D500F9D611 /* CoinStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CBED9291577D500F9D611 /* CoinStorage.swift */; };
 		EF7CBFD8291641EA00F9D611 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CBF91291641E900F9D611 /* Array.swift */; };
@@ -146,11 +151,6 @@
 		EF987B6B2916A9930000E233 /* CircularProgressShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987B6A2916A9930000E233 /* CircularProgressShape.swift */; };
 		EF987B6E2916FC700000E233 /* PresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987B6D2916FC700000E233 /* PresentationController.swift */; };
 		EF987B712917A1F80000E233 /* TopMentionStoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987B702917A1F80000E233 /* TopMentionStoryCell.swift */; };
-		EF987B862919A7010000E233 /* MultipleStrokeProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987B802919A7010000E233 /* MultipleStrokeProgressBar.swift */; };
-		EF987B872919A7010000E233 /* CircularProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987B812919A7010000E233 /* CircularProgressBar.swift */; };
-		EF987B882919A7010000E233 /* SphericalProgressBars.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987B822919A7010000E233 /* SphericalProgressBars.swift */; };
-		EF987B892919A7010000E233 /* MutlipleStrokeCircularProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987B832919A7010000E233 /* MutlipleStrokeCircularProgressBar.swift */; };
-		EF987B8A2919A7010000E233 /* ProgressBars.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987B842919A7010000E233 /* ProgressBars.swift */; };
 		EF987B8C291F83620000E233 /* CGRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987B8B291F83620000E233 /* CGRect.swift */; };
 		EF987B8E291F97AC0000E233 /* CuratedEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987B8D291F97AC0000E233 /* CuratedEventCell.swift */; };
 		EF987B90291FA3C50000E233 /* String+URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987B8F291FA3C50000E233 /* String+URL.swift */; };
@@ -230,6 +230,11 @@
 		EF59F10A292A331A002877DE /* UITabbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITabbar.swift; sourceTree = "<group>"; };
 		EF59F10D292A9602002877DE /* CustomCollectionTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCollectionTableCell.swift; sourceTree = "<group>"; };
 		EF59F10E292A9602002877DE /* CustomTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTableCell.swift; sourceTree = "<group>"; };
+		EF59F112292A969A002877DE /* MultipleStrokeProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipleStrokeProgressBar.swift; sourceTree = "<group>"; };
+		EF59F113292A969A002877DE /* CircularProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularProgressBar.swift; sourceTree = "<group>"; };
+		EF59F114292A969A002877DE /* SphericalProgressBars.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SphericalProgressBars.swift; sourceTree = "<group>"; };
+		EF59F115292A969A002877DE /* MutlipleStrokeCircularProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MutlipleStrokeCircularProgressBar.swift; sourceTree = "<group>"; };
+		EF59F116292A969A002877DE /* ProgressBars.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressBars.swift; sourceTree = "<group>"; };
 		EF7CBED12911BB8400F9D611 /* TopMentionDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopMentionDetail.swift; sourceTree = "<group>"; };
 		EF7CBED9291577D500F9D611 /* CoinStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinStorage.swift; sourceTree = "<group>"; };
 		EF7CBF91291641E900F9D611 /* Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
@@ -349,11 +354,6 @@
 		EF987B6A2916A9930000E233 /* CircularProgressShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularProgressShape.swift; sourceTree = "<group>"; };
 		EF987B6D2916FC700000E233 /* PresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationController.swift; sourceTree = "<group>"; };
 		EF987B702917A1F80000E233 /* TopMentionStoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopMentionStoryCell.swift; sourceTree = "<group>"; };
-		EF987B802919A7010000E233 /* MultipleStrokeProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipleStrokeProgressBar.swift; sourceTree = "<group>"; };
-		EF987B812919A7010000E233 /* CircularProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularProgressBar.swift; sourceTree = "<group>"; };
-		EF987B822919A7010000E233 /* SphericalProgressBars.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SphericalProgressBars.swift; sourceTree = "<group>"; };
-		EF987B832919A7010000E233 /* MutlipleStrokeCircularProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MutlipleStrokeCircularProgressBar.swift; sourceTree = "<group>"; };
-		EF987B842919A7010000E233 /* ProgressBars.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressBars.swift; sourceTree = "<group>"; };
 		EF987B8B291F83620000E233 /* CGRect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGRect.swift; sourceTree = "<group>"; };
 		EF987B8D291F97AC0000E233 /* CuratedEventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuratedEventCell.swift; sourceTree = "<group>"; };
 		EF987B8F291FA3C50000E233 /* String+URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+URL.swift"; sourceTree = "<group>"; };
@@ -463,6 +463,18 @@
 				EF59F10E292A9602002877DE /* CustomTableCell.swift */,
 			);
 			path = CommonTableRowView;
+			sourceTree = "<group>";
+		};
+		EF59F111292A969A002877DE /* Bars */ = {
+			isa = PBXGroup;
+			children = (
+				EF59F112292A969A002877DE /* MultipleStrokeProgressBar.swift */,
+				EF59F113292A969A002877DE /* CircularProgressBar.swift */,
+				EF59F114292A969A002877DE /* SphericalProgressBars.swift */,
+				EF59F115292A969A002877DE /* MutlipleStrokeCircularProgressBar.swift */,
+				EF59F116292A969A002877DE /* ProgressBars.swift */,
+			);
+			path = Bars;
 			sourceTree = "<group>";
 		};
 		EF7CBF8F291641E900F9D611 /* Library */ = {
@@ -615,7 +627,7 @@
 		EF7CBFC0291641EA00F9D611 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				EF987B7E2919A7010000E233 /* Bars */,
+				EF59F111292A969A002877DE /* Bars */,
 				EF7CC01429166E6000F9D611 /* RatingChart */,
 				EF7CBFC2291641EA00F9D611 /* CustomSearchBarController */,
 				EF7CBFC5291641EA00F9D611 /* TextComponents */,
@@ -922,18 +934,6 @@
 				EF987B702917A1F80000E233 /* TopMentionStoryCell.swift */,
 			);
 			path = TopMentionMisc;
-			sourceTree = "<group>";
-		};
-		EF987B7E2919A7010000E233 /* Bars */ = {
-			isa = PBXGroup;
-			children = (
-				EF987B802919A7010000E233 /* MultipleStrokeProgressBar.swift */,
-				EF987B812919A7010000E233 /* CircularProgressBar.swift */,
-				EF987B822919A7010000E233 /* SphericalProgressBars.swift */,
-				EF987B832919A7010000E233 /* MutlipleStrokeCircularProgressBar.swift */,
-				EF987B842919A7010000E233 /* ProgressBars.swift */,
-			);
-			path = Bars;
 			sourceTree = "<group>";
 		};
 		EF987B91291FAAD70000E233 /* TickerStory */ = {
@@ -1279,6 +1279,7 @@
 				EF86381B28DC1EBE00EF520C /* TweetServiceInterface.swift in Sources */,
 				EF7D2F9428DED80B0003B8F3 /* NewsStorage.swift in Sources */,
 				EF7CBED22911BB8400F9D611 /* TopMentionDetail.swift in Sources */,
+				EF59F118292A969A002877DE /* CircularProgressBar.swift in Sources */,
 				EF987B9B292122FA0000E233 /* NewsDetailView.swift in Sources */,
 				EF7D2FC228E09DB30003B8F3 /* VideoServiceInterface.swift in Sources */,
 				EF7D2FB228E050450003B8F3 /* MentionInterface.swift in Sources */,
@@ -1291,11 +1292,11 @@
 				EF1D7E5B2922CCFD0041ADEC /* CollectionViewFunctions.swift in Sources */,
 				EF7CBFDF291641EA00F9D611 /* UIStackView.swift in Sources */,
 				EF86384928DC9F4600EF520C /* EventServiceInterface.swift in Sources */,
+				EF59F119292A969A002877DE /* SphericalProgressBars.swift in Sources */,
 				EF7D2FB428E050DE0003B8F3 /* MentionModel.swift in Sources */,
 				EF86384D28DCED0C00EF520C /* EventSingleCell.swift in Sources */,
 				EF86382328DC341400EF520C /* TweetMetricView.swift in Sources */,
 				EF7CBFF9291641EA00F9D611 /* TableViewFunction.swift in Sources */,
-				EF987B862919A7010000E233 /* MultipleStrokeProgressBar.swift in Sources */,
 				EFB1C23228DB3B1800DD40A4 /* MainViewController.swift in Sources */,
 				EF59F106292961BA002877DE /* RecentTweetCard.swift in Sources */,
 				EF92FD81292840850004F547 /* StackScrollView.swift in Sources */,
@@ -1325,13 +1326,11 @@
 				EF7CBFD9291641EA00F9D611 /* UIColor.swift in Sources */,
 				EFB1C2D728DB69D400DD40A4 /* TweetEndpoints.swift in Sources */,
 				EFB1C26128DB3D3700DD40A4 /* TweetCell.swift in Sources */,
-				EF987B8A2919A7010000E233 /* ProgressBars.swift in Sources */,
 				EF96381F28DD8D1200178C37 /* StubRedditService.swift in Sources */,
 				EF86383528DC61F700EF520C /* NewsCell.swift in Sources */,
 				EF7CBFF2291641EA00F9D611 /* CGSize.swift in Sources */,
 				EF96381D28DD8C8D00178C37 /* RedditPostModel.swift in Sources */,
 				EF96381B28DD8C6B00178C37 /* RedditServiceInterface.swift in Sources */,
-				EF987B872919A7010000E233 /* CircularProgressBar.swift in Sources */,
 				EF00758D28E5CA8F00195433 /* NewsService.swift in Sources */,
 				EF7CBFE3291641EA00F9D611 /* UIViewController.swift in Sources */,
 				EF86384228DC9E0F00EF520C /* EventViewModel.swift in Sources */,
@@ -1340,8 +1339,6 @@
 				EF7CBFFC291641EA00F9D611 /* TableSection.swift in Sources */,
 				EF987B8E291F97AC0000E233 /* CuratedEventCell.swift in Sources */,
 				EF86382828DC507E00EF520C /* NewsModel.swift in Sources */,
-				EF987B892919A7010000E233 /* MutlipleStrokeCircularProgressBar.swift in Sources */,
-				EF987B882919A7010000E233 /* SphericalProgressBars.swift in Sources */,
 				EF48D71728E5918300BD2A1A /* SignalEventService.swift in Sources */,
 				EF1D7E5C2922CCFD0041ADEC /* CustomCollectionCell.swift in Sources */,
 				EF7CBFD8291641EA00F9D611 /* Array.swift in Sources */,
@@ -1358,6 +1355,7 @@
 				EFB3181628E97B93008FC27E /* TweetURLView.swift in Sources */,
 				EF7CBFFB291641EA00F9D611 /* Configurable.swift in Sources */,
 				EF7CBFFE291641EA00F9D611 /* SearchViewController.swift in Sources */,
+				EF59F11A292A969A002877DE /* MutlipleStrokeCircularProgressBar.swift in Sources */,
 				EF7CBFE2291641EA00F9D611 /* ViewStyling.swift in Sources */,
 				EF48D71528E578A600BD2A1A /* SignalTwitterService.swift in Sources */,
 				EF86384B28DCA1A400EF520C /* EventCell.swift in Sources */,
@@ -1381,6 +1379,7 @@
 				EF7D2FC428E09E3D0003B8F3 /* StubVideoService.swift in Sources */,
 				EF7CC000291641EA00F9D611 /* SentimentTextLabel.swift in Sources */,
 				EF987B90291FA3C50000E233 /* String+URL.swift in Sources */,
+				EF59F117292A969A002877DE /* MultipleStrokeProgressBar.swift in Sources */,
 				EF7CBFE1291641EA00F9D611 /* ViewHeirachy.swift in Sources */,
 				EFB1C2D128DB5E7D00DD40A4 /* TweetFeedViewModel.swift in Sources */,
 				EFDC741928E3373800042452 /* Sentiments.swift in Sources */,
@@ -1395,6 +1394,7 @@
 				EF59F10B292A331A002877DE /* UITabbar.swift in Sources */,
 				EF7CBFE0291641EA00F9D611 /* UITableView.swift in Sources */,
 				EF7CBFF3291641EA00F9D611 /* Int.swift in Sources */,
+				EF59F11B292A969A002877DE /* ProgressBars.swift in Sources */,
 				EF987B6E2916FC700000E233 /* PresentationController.swift in Sources */,
 				EF96382C28DDD72000178C37 /* TweetStorage.swift in Sources */,
 				EF7CBFFA291641EA00F9D611 /* TableRow.swift in Sources */,
