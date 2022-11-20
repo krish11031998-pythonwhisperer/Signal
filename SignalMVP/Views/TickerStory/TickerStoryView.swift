@@ -177,7 +177,7 @@ class TicketStoryView: UIViewController {
     }
     
     private func showNews() {
-        let target = TickerStoryDetailView(news: newsForTicker[idx]).withNavigationController()
+        let target = NewsDetailView(news: newsForTicker[idx]).withNavigationController()
         presentView(style: .sheet(size: .init(width: .totalWidth, height: .totalHeight)), addDimmingView: false, target: target) {
             self.direction = .none
             self.panVerticalPoint = .zero

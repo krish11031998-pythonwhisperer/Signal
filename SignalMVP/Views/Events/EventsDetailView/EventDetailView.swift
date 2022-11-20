@@ -63,14 +63,6 @@ class EventDetailView: UIViewController {
 		})) })
 	}
 	
-//	private func setupTableHeaderView() {
-//		guard let validEvent = EventStorage.selectedEvent else { return }
-//		let headerView =  EventDetailViewHeader()
-//		headerView.configureHeader(validEvent)
-//		headerView.setFrame(.init(width: .totalWidth, height: headerView.compressedSize.height))
-//		tableView.tableHeaderView = headerView
-//		tableView.tableHeaderView?.setFrame(.init(width: .totalWidth, height: headerView.compressedSize.height))
-//	}
 	
 	private func setupObserver() {
 		NotificationCenter.default.addObserver(self, selector: #selector(showNews), name: .showNews, object: nil)
@@ -78,7 +70,8 @@ class EventDetailView: UIViewController {
 	
 	@objc
 	private func showNews() {
-		navigationController?.pushViewController(NewsDetailViewController(), animated: true)
+        guard let news = NewsStorage.selectedNews else { return }
+		navigationController?.pushViewController(NewsDetailView(news: news), animated: true)
 	}
 	
 	

@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class TickerStoryDetailView: UIViewController {
+class NewsDetailView: UIViewController {
     
     @StandardImageView private var imageView
     private lazy var titleLabel: UILabel = { .init() }()

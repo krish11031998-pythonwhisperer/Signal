@@ -89,7 +89,6 @@
 		EF7CC02A29169FEE00F9D611 /* TopMentionDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CC02929169FEE00F9D611 /* TopMentionDetailViewModel.swift */; };
 		EF7D2F9428DED80B0003B8F3 /* NewsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7D2F9328DED80B0003B8F3 /* NewsStorage.swift */; };
 		EF7D2F9628DED9730003B8F3 /* NewsNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7D2F9528DED9730003B8F3 /* NewsNotification.swift */; };
-		EF7D2F9928DED9DF0003B8F3 /* NewsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7D2F9828DED9DF0003B8F3 /* NewsDetailViewController.swift */; };
 		EF7D2F9E28E02CFF0003B8F3 /* HomeFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7D2F9D28E02CFF0003B8F3 /* HomeFeed.swift */; };
 		EF7D2FA028E02DB80003B8F3 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7D2F9F28E02DB80003B8F3 /* HomeViewModel.swift */; };
 		EF7D2FA328E0314B0003B8F3 /* TrendingHeadlinesInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7D2FA228E0314B0003B8F3 /* TrendingHeadlinesInterface.swift */; };
@@ -159,7 +158,7 @@
 		EF987B952920D7A00000E233 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987B942920D7A00000E233 /* ImageView.swift */; };
 		EF987B972920E9FA0000E233 /* CommonWrappers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987B962920E9FA0000E233 /* CommonWrappers.swift */; };
 		EF987B992920F1A80000E233 /* CGPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987B982920F1A80000E233 /* CGPoint.swift */; };
-		EF987B9B292122FA0000E233 /* TickerStoryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987B9A292122FA0000E233 /* TickerStoryDetailView.swift */; };
+		EF987B9B292122FA0000E233 /* NewsDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987B9A292122FA0000E233 /* NewsDetailView.swift */; };
 		EF987B9D2921309C0000E233 /* TickerSymbolsVoew.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987B9C2921309C0000E233 /* TickerSymbolsVoew.swift */; };
 		EF987B9F29213CCA0000E233 /* PresentationStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987B9E29213CCA0000E233 /* PresentationStyle.swift */; };
 		EF987BA329217A330000E233 /* WebPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987BA229217A330000E233 /* WebPage.swift */; };
@@ -293,7 +292,6 @@
 		EF7CC02929169FEE00F9D611 /* TopMentionDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopMentionDetailViewModel.swift; sourceTree = "<group>"; };
 		EF7D2F9328DED80B0003B8F3 /* NewsStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsStorage.swift; sourceTree = "<group>"; };
 		EF7D2F9528DED9730003B8F3 /* NewsNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsNotification.swift; sourceTree = "<group>"; };
-		EF7D2F9828DED9DF0003B8F3 /* NewsDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetailViewController.swift; sourceTree = "<group>"; };
 		EF7D2F9D28E02CFF0003B8F3 /* HomeFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeed.swift; sourceTree = "<group>"; };
 		EF7D2F9F28E02DB80003B8F3 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		EF7D2FA228E0314B0003B8F3 /* TrendingHeadlinesInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingHeadlinesInterface.swift; sourceTree = "<group>"; };
@@ -363,7 +361,7 @@
 		EF987B942920D7A00000E233 /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		EF987B962920E9FA0000E233 /* CommonWrappers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonWrappers.swift; sourceTree = "<group>"; };
 		EF987B982920F1A80000E233 /* CGPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPoint.swift; sourceTree = "<group>"; };
-		EF987B9A292122FA0000E233 /* TickerStoryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerStoryDetailView.swift; sourceTree = "<group>"; };
+		EF987B9A292122FA0000E233 /* NewsDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetailView.swift; sourceTree = "<group>"; };
 		EF987B9C2921309C0000E233 /* TickerSymbolsVoew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerSymbolsVoew.swift; sourceTree = "<group>"; };
 		EF987B9E29213CCA0000E233 /* PresentationStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationStyle.swift; sourceTree = "<group>"; };
 		EF987BA229217A330000E233 /* WebPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebPage.swift; sourceTree = "<group>"; };
@@ -694,7 +692,7 @@
 		EF7D2F9728DED9D00003B8F3 /* NewsDetail */ = {
 			isa = PBXGroup;
 			children = (
-				EF7D2F9828DED9DF0003B8F3 /* NewsDetailViewController.swift */,
+				EF987B9A292122FA0000E233 /* NewsDetailView.swift */,
 			);
 			path = NewsDetail;
 			sourceTree = "<group>";
@@ -942,7 +940,6 @@
 			isa = PBXGroup;
 			children = (
 				EF987B92291FAAEF0000E233 /* TickerStoryView.swift */,
-				EF987B9A292122FA0000E233 /* TickerStoryDetailView.swift */,
 				EF987B9C2921309C0000E233 /* TickerSymbolsVoew.swift */,
 			);
 			path = TickerStory;
@@ -1283,7 +1280,7 @@
 				EF7D2F9428DED80B0003B8F3 /* NewsStorage.swift in Sources */,
 				EF7CC027291682F400F9D611 /* CustomTableCell.swift in Sources */,
 				EF7CBED22911BB8400F9D611 /* TopMentionDetail.swift in Sources */,
-				EF987B9B292122FA0000E233 /* TickerStoryDetailView.swift in Sources */,
+				EF987B9B292122FA0000E233 /* NewsDetailView.swift in Sources */,
 				EF7D2FC228E09DB30003B8F3 /* VideoServiceInterface.swift in Sources */,
 				EF7D2FB228E050450003B8F3 /* MentionInterface.swift in Sources */,
 				EF987B992920F1A80000E233 /* CGPoint.swift in Sources */,
@@ -1308,7 +1305,6 @@
 				EF7D2FAA28E033E90003B8F3 /* TrendingHeadlineCell.swift in Sources */,
 				EF7CC001291641EA00F9D611 /* GenericButtonWrapper.swift in Sources */,
 				EF86382A28DC519B00EF520C /* StubNewsService.swift in Sources */,
-				EF7D2F9928DED9DF0003B8F3 /* NewsDetailViewController.swift in Sources */,
 				EF987BA329217A330000E233 /* WebPage.swift in Sources */,
 				EF7D2FA528E031920003B8F3 /* TrendingHeadlinesModel.swift in Sources */,
 				EF987B6B2916A9930000E233 /* CircularProgressShape.swift in Sources */,
