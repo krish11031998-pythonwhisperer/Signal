@@ -17,7 +17,7 @@ extension CALayer {
             completion?()
         }
         
-        var animationData = animation.animationData(at: self)
+        let animationData = animation.animationData(at: self)
         finalizePosition(animation: animationData, remove: removeAfterCompletion)
         add(animationData, forKey: nil)
         

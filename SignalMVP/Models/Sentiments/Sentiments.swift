@@ -27,10 +27,14 @@ extension Sentiment {
 		}
 	}
 
-    func sentimentIndicator(_ count: Int? = nil) -> UIView {
+    func sentimentIndicatorText(_ count: Int? = nil) -> RenderableText {
         let blob = UIImage.solid(color: color, circleFrame: .init(squared: 12)).toText(fontHeight: CustomFonts.regular.fontBuilder(size: 11)?.capHeight ?? .zero)
-        let text = count != nil ? "Neutral : \(count!)".bodySmallRegular() : "Neutral"
-        return blob.appending(" ").appending(text).generateLabel
+        let text = (count != nil ? "\(rawValue) : \(count!)" : "\(rawValue)").bodySmallRegular()
+        return blob.appending(" ").appending(text)
+    }
+    
+    func sentimentIndicator(_ count: Int? = nil) -> UIView {
+        sentimentIndicatorText(count).generateLabel
     }
 	
 }

@@ -16,9 +16,10 @@ class NewsCell: ConfigurableCell {
 	private lazy var timestamp: UILabel = { .init() }()
 	private lazy var title: UILabel = { .init() }()
 	private lazy var body: UILabel = { .init() }()
-	private lazy var tickersStack: UIStackView = { UIView.HStack(spacing: 8) }()
-	private lazy var sentimentView: UIView = { .init() }()
-	
+	private lazy var sentimentView: UILabel = { .init() }()
+    @TickerSymbolView var tickerView
+    private lazy var tickersStack: UIStackView = { .HStack(subViews: [tickerView, .spacer(), sentimentView], spacing: 8) }()
+    
 	private lazy var newsInfoStack: UIStackView = {
 		let stack: UIStackView = .VStack(subViews: [timestamp, title, body, tickersStack],spacing: 8)
 		stack.setCustomSpacing(12, after: body)
@@ -72,19 +73,9 @@ class NewsCell: ConfigurableCell {
 		body.numberOfLines = 1
 		
 		if !model.model.tickers.isEmpty {
-			tickersStack.removeChildViews()
-			
-			model.model.tickers.limitTo(to: 3).forEach { ticker in
-				let tickerLabel = UILabel()
-				ticker.body2Regular().render(target: tickerLabel)
-				tickersStack.addArrangedSubview(tickerLabel.blobify(backgroundColor: .white.withAlphaComponent(0.15),
-																	borderColor: .white,
-																	borderWidth: 1,
-																	cornerRadius: 10))
-			}
-			tickersStack.addArrangedSubview(.spacer())
-			tickersStack.addArrangedSubview(model.model.sentiment.sentimentIndicator())
 			tickersStack.isHidden = false
+            _tickerView.configTickers(news: model.model)
+            model.model.sentiment.sentimentIndicatorText().render(target: sentimentView)
 		}
 		
 		UIImage.loadImage(url: model.model.imageUrl, at: newsImage, path: \.image)
