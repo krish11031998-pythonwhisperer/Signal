@@ -71,80 +71,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "2E6F9DFF-DEFD-437D-9294-0144B21D4E9D"
-            shouldBeEnabled = "Yes"
+            uuid = "A28147AC-8020-4146-AF93-752A041056D8"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "SignalMVP/Views/Home/TopMentions/TopMentionDetailView/TopMentionDetailViewModel.swift"
+            filePath = "SignalMVP/Library/Animation/CALayer+Animation.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "88"
-            endingLineNumber = "88"
-            landmarkName = "fetchEvents(completion:)"
+            startingLineNumber = "22"
+            endingLineNumber = "22"
+            landmarkName = "animate(_:removeAfterCompletion:completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "C339B227-0274-42E3-B3D3-A830907A1942"
-            shouldBeEnabled = "Yes"
+            uuid = "29FFFE3E-5A26-401E-8A54-2A8598437F84"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "SignalMVP/Views/Home/TopMentions/TopMentionDetailView/TopMentionDetailViewModel.swift"
+            filePath = "SignalMVP/Library/Animation/Animation.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "98"
-            endingLineNumber = "98"
-            landmarkName = "header(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "659C7AE5-0323-49CC-97B0-9DD6BA15A20A"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SignalMVP/Views/Home/TopMentions/TopMentionDetailView/TopMentionDetailViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "92"
-            endingLineNumber = "92"
-            landmarkName = "fetchEvents(completion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "F1FE6ED1-DF16-430F-A0CB-62B0C9A67B85"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SignalMVP/Views/Home/TopMentions/TopMentionDetailView/TopMentionDetailViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "112"
-            endingLineNumber = "112"
-            landmarkName = "header(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "058B6B94-41B6-4FCE-BD42-D838FD1B3E0E"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SignalMVP/Views/Home/TopMentions/TopMentionDetailView/TopMentionDetailViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "113"
-            endingLineNumber = "113"
-            landmarkName = "header(_:)"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
+            landmarkName = "animationData(at:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

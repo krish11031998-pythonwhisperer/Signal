@@ -50,7 +50,7 @@ extension MentionModel: Hashable {
 extension MentionModel {
     
     var ratio: CGFloat {
-        CGFloat(positiveMentions) / CGFloat(positiveMentions + neutralMentions)
+        CGFloat(positiveMentions) / CGFloat(positiveMentions + neutralMentions + negativeMentions)
     }
     
     var color: UIColor {

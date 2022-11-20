@@ -69,8 +69,7 @@ class TopMentionDetailView: UIViewController {
             let blob = view.blobify(backgroundColor: .clear, edgeInset: .init(by: 7.5), borderColor: .surfaceBackgroundInverse, borderWidth: 2, cornerRadius: 8)
             return CollectionItem<CustomCollectionCell>(.init(view: blob))
         }
-
-    
+        
         return TableRow<CollectionTableCell>(.init(cells: tableSectionNames, size: .init(width: .totalWidth, height: 70), inset: .init(by: 10), cellSize: .zero, automaticDimension: true, interspacing: 0))
     }
     

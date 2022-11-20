@@ -68,7 +68,11 @@ extension UITableView {
         self.source = .init(sections: sections)
         self.dataSource = source
         self.delegate = source
-        reloadSections(.init(integer: idx), with: .automatic)
+        beginUpdates()
+        reloadSections([idx], with: .automatic)
+//        deleteSections([idx], with: .fade)
+//        insertSections([idx], with: .fade)
+        endUpdates()
     }
     
 }

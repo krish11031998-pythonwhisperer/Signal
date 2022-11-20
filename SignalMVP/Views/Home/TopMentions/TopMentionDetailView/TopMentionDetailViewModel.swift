@@ -88,7 +88,7 @@ class TopMentionDetailViewModel {
                 completion?()
                 return
             }
-            self?.events = events
+            self?.events = Array(Set(events))
             completion?()
         }
     }
@@ -126,26 +126,7 @@ class TopMentionDetailViewModel {
         }.embedInHStack(alignment: .center, spacing: 5)
         customSelector.addArrangedSubview(.spacer())
         let stack = UIStackView.VStack(subViews: [customHeader, customSelector], spacing: 10)
-       //stack.addInsets(insets: .init(by: 10))
         return stack.embedInView(insets: .init(by: 10), priority: .needed)
-    }
-    
-    private var mediaSectionHeader: TableSection {
-        let collectionCell = ["Twitter", "News", "Events"].compactMap { tab in
-            let textColor: UIColor = selectedTab == tab ? .textColorInverse : .textColor
-            let bg: UIColor = selectedTab == tab ? .surfaceBackgroundInverse : .clear
-            let inset: UIEdgeInsets = .init(vertical: 7.5, horizontal: 10)
-            let blob = tab.body2Medium(color: textColor).generateLabel.blobify(backgroundColor: bg,
-                                                                               edgeInset: inset,
-                                                                               borderColor:  .textColor,
-                                                                               borderWidth: 1,
-                                                                               cornerRadius: 14)
-            return CollectionItem<CustomCollectionCell>(.init(view: blob, inset: .zero){
-                self.header(tab)
-            })
-        }
-        
-        return .init(rows: [TableRow<CollectionTableCell>(.init(cells: collectionCell, size: .init(width: .totalWidth, height: 50), inset: .init(by: 10), cellSize: .init(squared: 50), automaticDimension: true, interspacing: 5))])
     }
     
     private var mediaSecion: TableSection? {
@@ -186,7 +167,7 @@ class TopMentionDetailViewModel {
         legend.addArrangedSubview(.spacer())
         let mainStack: UIStackView = .VStack(subViews: [legend, chart] , spacing: 10)
         
-        return .init(rows: [TableRow<CustomTableCell>(.init(view: mainStack, inset: .init(vertical: 10, horizontal: 10)))], title: "Sentiment")
+        return .init(rows: [TableRow<SentimentCell>(.init())], title: "Sentiment")
         
     }
     

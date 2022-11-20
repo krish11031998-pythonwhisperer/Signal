@@ -86,7 +86,7 @@ class TopMentionCell: ConfigurableCell {
 		}
 	
 		mentionDistribution.removeChildViews()
-		Sentiment.allCases.forEach { mentionDistribution.addArrangedSubview($0.sentimentIndicator(" : \(model.count($0))")) }
+		Sentiment.allCases.forEach { mentionDistribution.addArrangedSubview($0.sentimentIndicator(model.count($0))) }
 		
 		mentionDistribution.addArrangedSubview(.spacer())
 		mentionDistribution.isHidden = false

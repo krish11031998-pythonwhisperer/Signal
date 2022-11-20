@@ -90,7 +90,10 @@ extension Array where Element : UIView {
 		return result
 	}
     
-    func addToView(_ main: UIView) {
+    func addToView(_ main: UIView, removeChildren: Bool = false) {
+        if removeChildren {
+            main.removeChildViews()
+        }
         if let stack = main as? UIStackView {
             forEach(stack.addArrangedSubview(_:))
         } else {

@@ -58,7 +58,8 @@ class NewsFeed: UIViewController {
 	
 	@objc
 	private func pushToNewsDetail() {
-		navigationController?.pushViewController(NewsDetailViewController(), animated: true)
+        guard let news = NewsStorage.selectedNews else { return }
+        navigationController?.pushViewController(TickerStoryDetailView(news: news), animated: true)
 	}
     
 }

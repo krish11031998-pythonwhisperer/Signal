@@ -17,9 +17,7 @@ extension CALayer {
             completion?()
         }
         
-        let animationData = animation.animationData(at: self)
-        
-        animationData.fillMode = .forwards
+        var animationData = animation.animationData(at: self)
         finalizePosition(animation: animationData, remove: removeAfterCompletion)
         add(animationData, forKey: nil)
         
@@ -50,10 +48,13 @@ extension CALayer {
         switch animation {
         case let basic as CABasicAnimation:
             basic.isRemovedOnCompletion = remove
+            basic.fillMode = .forwards
         case let _ as CAKeyframeAnimation:
             break
         case let group as CAAnimationGroup:
-            group.animations?.forEach { finalizePosition(animation: $0, remove: remove) }
+            //group.animations?.forEach { finalizePosition(animation: $0, remove: remove) }
+            group.isRemovedOnCompletion = remove
+            group.fillMode = .forwards
         default: break
         }
     }

@@ -44,8 +44,13 @@ class TickerStoryDetailView: UIViewController {
         setupNav()
         setupView()
         _tickers.configTickers(news: news)
+        hideTabBarIfRequired()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        showTabBarIfRequired()
+    }
     private func setupView() {
         view.backgroundColor = .surfaceBackground
         view.clippedCornerRadius = 24
@@ -61,9 +66,24 @@ class TickerStoryDetailView: UIViewController {
     }
     
     private func setupNav() {
-        standardNavBar(rightBarButton: Self.closeButton(self))
-        navigationItem.leftBarButtonItem = nil
+        if navigationController?.modalPresentationStyle == .custom {
+            standardNavBar(rightBarButton: Self.closeButton(self))
+            navigationItem.leftBarButtonItem = nil
+        } else {
+            standardNavBar()
+        }
+        
         navigationController?.additionalSafeAreaInsets = .init(top: 12, left: 0, bottom: 0, right: 0)
+    }
+    
+    private func hideTabBarIfRequired() {
+        guard navigationController?.modalPresentationStyle != .custom else { return }
+        navigationController?.tabBarController?.tabBar.hide = true
+    }
+    
+    private func showTabBarIfRequired() {
+        guard navigationController?.modalPresentationStyle != .custom else { return }
+        navigationController?.tabBarController?.tabBar.hide = false
     }
     
     private func setupButton() -> UIButton {

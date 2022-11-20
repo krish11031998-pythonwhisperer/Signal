@@ -23,14 +23,14 @@ extension Sentiment {
 		case .negative:
 			return .appRed
 		case .neutral:
-			return .appOrange
+			return .appIndigo
 		}
 	}
-	
-	func sentimentIndicator(_ appending: String? = nil) -> UIView {
-		let view = SentimentTextLabel()
-		view.configureIndicator(label: rawValue + (appending ?? ""), color: color)
-		return view
-	}
+
+    func sentimentIndicator(_ count: Int? = nil) -> UIView {
+        let blob = UIImage.solid(color: color, circleFrame: .init(squared: 12)).toText(fontHeight: CustomFonts.regular.fontBuilder(size: 11)?.capHeight ?? .zero)
+        let text = count != nil ? "Neutral : \(count!)".bodySmallRegular() : "Neutral"
+        return blob.appending(" ").appending(text).generateLabel
+    }
 	
 }

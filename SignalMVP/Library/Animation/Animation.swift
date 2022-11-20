@@ -15,10 +15,15 @@ enum AnimationDirection {
     case right
 }
 
+enum AnimationState {
+    case `in`
+    case out
+}
+
 enum Animation {
     case bouncy
 	case slideInFromTop(from: CGFloat, to:CGFloat = 0, duration: CFTimeInterval = 0.3)
-    case slideIn(_ direction: AnimationDirection, duration: CFTimeInterval = 0.3)
+    case slide(_ direction: AnimationDirection, state: AnimationState = .in, duration: CFTimeInterval = 0.3)
 	case circularProgress(from: CGFloat = 0, to: CGFloat, duration: CFTimeInterval = 0.3)
     case lineProgress(frame: CGRect, duration: CFTimeInterval = 0.3)
     case fadeIn(duration: CFTimeInterval = 0.3)
@@ -50,23 +55,22 @@ extension Animation {
 			group.duration = duration
 			
 			return group
-        case .slideIn(let direction, let  duration):
+        case .slide(let direction, let state, let  duration):
             let animation = CABasicAnimation(keyPath: "position.y")
 
             switch direction {
                 case .up:
-                    animation.fromValue = -layer.frame.height
-                    animation.toValue = 0
+                animation.fromValue = state == .in ? -layer.frame.height : layer.frame.height
+                animation.toValue = state == .in ? layer.frame.height : -layer.frame.height
                 case .down:
-                    animation.fromValue = .totalHeight + layer.frame.height
-                    animation.toValue = 0
+                animation.fromValue = .totalHeight + layer.frame.height.half * (state == .in ? 1 : -1)
+                animation.toValue = .totalHeight + layer.frame.height.half * (state == .in ? -1 : 1)
                 default: break;
             }
             
             let opacity = CABasicAnimation(keyPath: "opacity")
-            opacity.fromValue = 0
+            opacity.fromValue = 1
             opacity.toValue = 1
-
             
             let group = CAAnimationGroup()
             group.animations = [animation, opacity]
