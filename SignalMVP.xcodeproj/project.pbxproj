@@ -25,6 +25,8 @@
 		EF59F106292961BA002877DE /* RecentTweetCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF59F105292961BA002877DE /* RecentTweetCard.swift */; };
 		EF59F108292A0955002877DE /* SentimentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF59F107292A0955002877DE /* SentimentCell.swift */; };
 		EF59F10B292A331A002877DE /* UITabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF59F10A292A331A002877DE /* UITabbar.swift */; };
+		EF59F10F292A9602002877DE /* CustomCollectionTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF59F10D292A9602002877DE /* CustomCollectionTableCell.swift */; };
+		EF59F110292A9602002877DE /* CustomTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF59F10E292A9602002877DE /* CustomTableCell.swift */; };
 		EF7CBED22911BB8400F9D611 /* TopMentionDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CBED12911BB8400F9D611 /* TopMentionDetail.swift */; };
 		EF7CBEDA291577D500F9D611 /* CoinStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CBED9291577D500F9D611 /* CoinStorage.swift */; };
 		EF7CBFD8291641EA00F9D611 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CBF91291641E900F9D611 /* Array.swift */; };
@@ -84,8 +86,6 @@
 		EF7CC0112916491A00F9D611 /* CALayer+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CC0102916491A00F9D611 /* CALayer+Animation.swift */; };
 		EF7CC0132916640B00F9D611 /* RatingChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CC0122916640B00F9D611 /* RatingChart.swift */; };
 		EF7CC01629166E6F00F9D611 /* RatingChartCandle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CC01529166E6F00F9D611 /* RatingChartCandle.swift */; };
-		EF7CC026291682F400F9D611 /* CustomCollectionTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CC024291682F400F9D611 /* CustomCollectionTableCell.swift */; };
-		EF7CC027291682F400F9D611 /* CustomTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CC025291682F400F9D611 /* CustomTableCell.swift */; };
 		EF7CC02A29169FEE00F9D611 /* TopMentionDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CC02929169FEE00F9D611 /* TopMentionDetailViewModel.swift */; };
 		EF7D2F9428DED80B0003B8F3 /* NewsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7D2F9328DED80B0003B8F3 /* NewsStorage.swift */; };
 		EF7D2F9628DED9730003B8F3 /* NewsNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7D2F9528DED9730003B8F3 /* NewsNotification.swift */; };
@@ -228,6 +228,8 @@
 		EF59F105292961BA002877DE /* RecentTweetCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentTweetCard.swift; sourceTree = "<group>"; };
 		EF59F107292A0955002877DE /* SentimentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentimentCell.swift; sourceTree = "<group>"; };
 		EF59F10A292A331A002877DE /* UITabbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITabbar.swift; sourceTree = "<group>"; };
+		EF59F10D292A9602002877DE /* CustomCollectionTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCollectionTableCell.swift; sourceTree = "<group>"; };
+		EF59F10E292A9602002877DE /* CustomTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTableCell.swift; sourceTree = "<group>"; };
 		EF7CBED12911BB8400F9D611 /* TopMentionDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopMentionDetail.swift; sourceTree = "<group>"; };
 		EF7CBED9291577D500F9D611 /* CoinStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinStorage.swift; sourceTree = "<group>"; };
 		EF7CBF91291641E900F9D611 /* Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
@@ -287,8 +289,6 @@
 		EF7CC0102916491A00F9D611 /* CALayer+Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Animation.swift"; sourceTree = "<group>"; };
 		EF7CC0122916640B00F9D611 /* RatingChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingChart.swift; sourceTree = "<group>"; };
 		EF7CC01529166E6F00F9D611 /* RatingChartCandle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingChartCandle.swift; sourceTree = "<group>"; };
-		EF7CC024291682F400F9D611 /* CustomCollectionTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCollectionTableCell.swift; sourceTree = "<group>"; };
-		EF7CC025291682F400F9D611 /* CustomTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTableCell.swift; sourceTree = "<group>"; };
 		EF7CC02929169FEE00F9D611 /* TopMentionDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopMentionDetailViewModel.swift; sourceTree = "<group>"; };
 		EF7D2F9328DED80B0003B8F3 /* NewsStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsStorage.swift; sourceTree = "<group>"; };
 		EF7D2F9528DED9730003B8F3 /* NewsNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsNotification.swift; sourceTree = "<group>"; };
@@ -456,6 +456,15 @@
 			path = TabBar;
 			sourceTree = "<group>";
 		};
+		EF59F10C292A9602002877DE /* CommonTableRowView */ = {
+			isa = PBXGroup;
+			children = (
+				EF59F10D292A9602002877DE /* CustomCollectionTableCell.swift */,
+				EF59F10E292A9602002877DE /* CustomTableCell.swift */,
+			);
+			path = CommonTableRowView;
+			sourceTree = "<group>";
+		};
 		EF7CBF8F291641E900F9D611 /* Library */ = {
 			isa = PBXGroup;
 			children = (
@@ -594,7 +603,7 @@
 		EF7CBFBB291641EA00F9D611 /* TableViewDataSource */ = {
 			isa = PBXGroup;
 			children = (
-				EF7CC023291682F400F9D611 /* CommonTableRowView */,
+				EF59F10C292A9602002877DE /* CommonTableRowView */,
 				EF7CBFBC291641EA00F9D611 /* TableViewFunction.swift */,
 				EF7CBFBD291641EA00F9D611 /* TableRow.swift */,
 				EF7CBFBE291641EA00F9D611 /* Configurable.swift */,
@@ -668,15 +677,6 @@
 				EF7CC01529166E6F00F9D611 /* RatingChartCandle.swift */,
 			);
 			path = RatingChart;
-			sourceTree = "<group>";
-		};
-		EF7CC023291682F400F9D611 /* CommonTableRowView */ = {
-			isa = PBXGroup;
-			children = (
-				EF7CC024291682F400F9D611 /* CustomCollectionTableCell.swift */,
-				EF7CC025291682F400F9D611 /* CustomTableCell.swift */,
-			);
-			path = CommonTableRowView;
 			sourceTree = "<group>";
 		};
 		EF7CC02829169FD700F9D611 /* TopMentionDetailView */ = {
@@ -1278,7 +1278,6 @@
 				EF7CBFF4291641EA00F9D611 /* CGFloat.swift in Sources */,
 				EF86381B28DC1EBE00EF520C /* TweetServiceInterface.swift in Sources */,
 				EF7D2F9428DED80B0003B8F3 /* NewsStorage.swift in Sources */,
-				EF7CC027291682F400F9D611 /* CustomTableCell.swift in Sources */,
 				EF7CBED22911BB8400F9D611 /* TopMentionDetail.swift in Sources */,
 				EF987B9B292122FA0000E233 /* NewsDetailView.swift in Sources */,
 				EF7D2FC228E09DB30003B8F3 /* VideoServiceInterface.swift in Sources */,
@@ -1320,10 +1319,10 @@
 				EF00758F28E5CBA000195433 /* SignalNewsService.swift in Sources */,
 				EF86383728DC648000EF520C /* NewsViewModel.swift in Sources */,
 				EF86384528DC9E5200EF520C /* StubEventsService.swift in Sources */,
+				EF59F10F292A9602002877DE /* CustomCollectionTableCell.swift in Sources */,
 				EF7D2FCE28E0F55A0003B8F3 /* EventDetailView.swift in Sources */,
 				EF86381928DC1E9C00EF520C /* StubService.swift in Sources */,
 				EF7CBFD9291641EA00F9D611 /* UIColor.swift in Sources */,
-				EF7CC026291682F400F9D611 /* CustomCollectionTableCell.swift in Sources */,
 				EFB1C2D728DB69D400DD40A4 /* TweetEndpoints.swift in Sources */,
 				EFB1C26128DB3D3700DD40A4 /* TweetCell.swift in Sources */,
 				EF987B8A2919A7010000E233 /* ProgressBars.swift in Sources */,
@@ -1354,6 +1353,7 @@
 				EF987B9F29213CCA0000E233 /* PresentationStyle.swift in Sources */,
 				EF92FD7F292832280004F547 /* NSAttributedString+Utils.swift in Sources */,
 				EF96382828DD92E900178C37 /* RedditPostCard.swift in Sources */,
+				EF59F110292A9602002877DE /* CustomTableCell.swift in Sources */,
 				EF59F108292A0955002877DE /* SentimentCell.swift in Sources */,
 				EFB3181628E97B93008FC27E /* TweetURLView.swift in Sources */,
 				EF7CBFFB291641EA00F9D611 /* Configurable.swift in Sources */,
