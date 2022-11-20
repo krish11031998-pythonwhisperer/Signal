@@ -55,6 +55,6 @@ class RecentTweetCard: ConfigurableCollectionCell {
     func configure(with model: TweetCellModel) {
         UIImage.loadImage(url: model.user?.profileImageUrl, at: userImage, path: \.image, resized: .init(squared: 24), resolveWithAspectRatio: true)
         model.user?.name.body3Medium(color: .textColorInverse).render(target: userName)
-        model.model?.text.body2Medium(color: .textColorInverse).render(target: tweet)
+        model.model?.text.body3Regular(color: .textColorInverse).render(target: tweet)
     }
 }

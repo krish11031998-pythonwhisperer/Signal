@@ -125,9 +125,9 @@ class HomeViewModel {
 		guard let tweetsSection = tweets else { return nil }
         let collectionCells = tweetsSection.limitTo(to: 5).compactMap { CollectionItem<RecentTweetCard>(.init(model: $0)) }
         return .init(rows: [TableRow<CollectionTableCell>(.init(cells: collectionCells,
-                                                                size: .init(width: .totalWidth, height: 200),
+                                                                size: .init(width: .totalWidth, height: 320),
                                                                 inset: .init(vertical: 0, horizontal: 10),
-                                                                cellSize: .init(width: 300, height: 175), interspacing: 8))], title: "Top Tweets" )
+                                                                cellSize: .init(width: 225, height: 300), interspacing: 8))], title: "Top Tweets" )
 	}
 	
     private var storiesSection: TableSection? {
