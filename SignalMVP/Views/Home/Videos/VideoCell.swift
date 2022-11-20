@@ -24,7 +24,7 @@ class VideoCell: ConfigurableCell {
 	}()
 	private lazy var videoLabel: UILabel = { .init() }()
 	private lazy var authorLabel: UILabel = { .init() }()
-	private lazy var videoInfoStack: UIStackView = { .VStack(subViews: [videoLabel, .spacer(), authorLabel], spacing: 6) }()
+	private lazy var videoInfoStack: UIStackView = { .VStack(subViews: [videoLabel, authorLabel], spacing: 6) }()
 
 //MARK: - Overriden Methods
 	
@@ -50,13 +50,17 @@ class VideoCell: ConfigurableCell {
 		
 		let videoimageView = UIView()
 		videoimageView.addSubview(bgImg)
-		bgImg.addBlurView()
-		videoimageView.addSubview(img)
-		
-		[bgImg, img].forEach {
-			videoimageView.addSubview($0)
-			videoimageView.setFittingConstraints(childView: $0, insets: .zero)
-		}
+//		bgImg.addBlurView()
+//		videoimageView.addSubview(img)
+        
+//		[bgImg, img].forEach {
+//			videoimageView.addSubview($0)
+//			videoimageView.setFittingConstraints(childView: $0, insets: .zero)
+//		}
+        [bgImg].forEach {
+            videoimageView.addSubview($0)
+            videoimageView.setFittingConstraints(childView: $0, insets: .zero)
+        }
 		
 		[videoimageView, infoView].forEach(mainStack.addArrangedSubview(_:))
 
@@ -66,7 +70,8 @@ class VideoCell: ConfigurableCell {
 		
 		videoLabel.numberOfLines = 3
 		videoimageView.setHeight(height: 150, priority: .required)
-		mainStack.setHeight(height: 250, priority: .required)
+        infoView.setHeight(height: 75, priority: .required)
+		mainStack.setHeight(height: 225, priority: .required)
 		mainStack.cornerRadius = 12
 		mainStack.backgroundColor = .surfaceBackground
 		mainStack.addShadow()
@@ -81,7 +86,7 @@ class VideoCell: ConfigurableCell {
 	
 	func configure(with model: VideoModel) {
 		UIImage.loadImage(url: model.imageUrl, at: img, path: \.image)
-		UIImage.loadImage(url: model.imageUrl, at: bgImg, path: \.image)
+        UIImage.loadImage(url: model.imageUrl, at: bgImg, path: \.image, resized: .init(width: .totalWidth - 32, height: 150), resolveWithAspectRatio: true)
 		model.title.body1Medium().render(target: videoLabel)
 		model.sourceName.bodySmallRegular(color: .gray).render(target: authorLabel)
 		authorLabel.setFrame(height: authorLabel.compressedSize.height)

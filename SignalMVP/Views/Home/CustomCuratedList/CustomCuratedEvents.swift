@@ -66,7 +66,6 @@ class CustomCuratedEvents: ConfigurableCell {
     private func scrollUpdate(scrollView: UIScrollView) {
         guard scrollView.contentOffset != .zero else { return }
         let cellIdx = (scrollView.contentOffset.x/itemSize.width).rounded(.up)
-        print("(DEBUG) cellIdx : ", cellIdx)
         guard cellIdx > 0 , Int(cellIdx) < numberOfItems - 1 else { return }
         UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut) {
             scrollView.contentOffset.x = (cellIdx - 1) * self.itemSize.width + (cellIdx - 1) * self.layout.minimumInteritemSpacing

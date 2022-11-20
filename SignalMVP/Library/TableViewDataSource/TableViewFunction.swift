@@ -34,7 +34,7 @@ extension UITableView {
 		register(cell, forCellReuseIdentifier: identifier)
 	}
 	
-	func dequeueCell<T: UITableViewCell>(cellIdentifier: String = T.name) -> T {
+    func dequeueCell<T: ConfigurableCell>(cellIdentifier: String = T.cellName ?? T.name) -> T {
 		guard let cell = dequeueReusableCell(withIdentifier: cellIdentifier) as? T else {
 			registerCell(cell: T.self, identifier: cellIdentifier)
 			return dequeueReusableCell(withIdentifier: cellIdentifier) as? T ?? T()
