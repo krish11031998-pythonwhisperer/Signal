@@ -154,7 +154,7 @@ class HomeViewModel {
     }
     
 	private func buildDataSource() -> TableViewDataSource{
-		.init(sections: [storiesSection, headerSection, trendingHeadlinesSection, topMentionedCoinsSection, tweetsSection, videoSection].compactMap { $0 })
+		.init(sections: [storiesSection, headerSection, trendingHeadlinesSection, topMentionedCoinsSection, tweetsSection].compactMap { $0 })
 	}
 	
 
