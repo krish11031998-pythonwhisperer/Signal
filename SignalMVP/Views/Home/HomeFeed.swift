@@ -72,7 +72,7 @@ extension HomeFeed: AnyTableView {
 extension HomeFeed: PresentDelegate {
     
     func presentView(origin: CGRect) {
-        let view = TicketStoryView().withNavigationController()
+        let view = TickerStoryView().withNavigationController()
         let presenter = PresentationController(style: .circlar(frame: origin),presentedViewController: view, presentingViewController: self, onDismiss: nil)
         view.transitioningDelegate = presenter
         view.modalPresentationStyle = .custom

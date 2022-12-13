@@ -55,7 +55,7 @@ class CustomCuratedCell: ConfigurableCollectionCell {
     func configure(with model: EventModel) {
         imageView.image = nil
         UIImage.loadImage(url: model.news.first?.imageUrl, at: imageView, path: \.image)
-        model.eventName.body1Bold().render(target: headlineLabel)
+        model.eventName.body1Bold(color: .white).render(target: headlineLabel)
         configTickers(model: model)
     }
 }

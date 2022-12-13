@@ -24,10 +24,14 @@ struct MainTabModel: Equatable {
 
 
 extension MainTabModel {
-	var tabImage: UIImage {
+    var tabImage: UIImage {
         let imgView = UIImageView(image: iconName.image)
         imgView.frame = .init(origin: .zero, size: .init(squared: 24))
         imgView.contentMode = .scaleAspectFit
         return imgView.snapshot
-	}
+    }
+
+    var tabBarItem: UITabBarItem {
+        return .init(title: name, image: tabImage, selectedImage: tabImage)
+    }
 }

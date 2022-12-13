@@ -111,3 +111,12 @@ protocol SwipeListener {
     var panVerticalPoint: CGPoint { get set }
     var direction: CGPoint.Direction { get set }
 }
+
+//MARK: - UINavigation View Controller
+
+extension UINavigationController {
+    func tabBarItem(_ model: MainTabModel) -> Self {
+        tabBarItem = model.tabBarItem
+        return self
+    }
+}

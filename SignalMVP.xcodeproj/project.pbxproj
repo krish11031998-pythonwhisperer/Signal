@@ -19,6 +19,7 @@
 		EF1D7E5B2922CCFD0041ADEC /* CollectionViewFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1D7E552922CCFD0041ADEC /* CollectionViewFunctions.swift */; };
 		EF1D7E5C2922CCFD0041ADEC /* CustomCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1D7E572922CCFD0041ADEC /* CustomCollectionCell.swift */; };
 		EF1D7E5D2922CCFD0041ADEC /* CollectionColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1D7E582922CCFD0041ADEC /* CollectionColumn.swift */; };
+		EF2BB215292BF4E40006C00F /* VideoScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2BB214292BF4E40006C00F /* VideoScreen.swift */; };
 		EF48D71328E4CFCF00BD2A1A /* MainTabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF48D71228E4CFCF00BD2A1A /* MainTabModel.swift */; };
 		EF48D71528E578A600BD2A1A /* SignalTwitterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF48D71428E578A600BD2A1A /* SignalTwitterService.swift */; };
 		EF48D71728E5918300BD2A1A /* SignalEventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF48D71628E5918300BD2A1A /* SignalEventService.swift */; };
@@ -177,6 +178,7 @@
 		EFB1C2D728DB69D400DD40A4 /* TweetEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB1C2D628DB69D300DD40A4 /* TweetEndpoints.swift */; };
 		EFB3181628E97B93008FC27E /* TweetURLView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB3181528E97B93008FC27E /* TweetURLView.swift */; };
 		EFDC741928E3373800042452 /* Sentiments.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFDC741828E3373800042452 /* Sentiments.swift */; };
+		EFFFE4702948357E0045686E /* Tickers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFFE46F2948357E0045686E /* Tickers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -222,6 +224,7 @@
 		EF1D7E552922CCFD0041ADEC /* CollectionViewFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewFunctions.swift; sourceTree = "<group>"; };
 		EF1D7E572922CCFD0041ADEC /* CustomCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCollectionCell.swift; sourceTree = "<group>"; };
 		EF1D7E582922CCFD0041ADEC /* CollectionColumn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionColumn.swift; sourceTree = "<group>"; };
+		EF2BB214292BF4E40006C00F /* VideoScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoScreen.swift; sourceTree = "<group>"; };
 		EF48D71228E4CFCF00BD2A1A /* MainTabModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabModel.swift; sourceTree = "<group>"; };
 		EF48D71428E578A600BD2A1A /* SignalTwitterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalTwitterService.swift; sourceTree = "<group>"; };
 		EF48D71628E5918300BD2A1A /* SignalEventService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalEventService.swift; sourceTree = "<group>"; };
@@ -384,6 +387,7 @@
 		EFB1C2D628DB69D300DD40A4 /* TweetEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetEndpoints.swift; sourceTree = "<group>"; };
 		EFB3181528E97B93008FC27E /* TweetURLView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetURLView.swift; sourceTree = "<group>"; };
 		EFDC741828E3373800042452 /* Sentiments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sentiments.swift; sourceTree = "<group>"; };
+		EFFFE46F2948357E0045686E /* Tickers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tickers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -446,6 +450,14 @@
 				EF1D7E572922CCFD0041ADEC /* CustomCollectionCell.swift */,
 			);
 			path = CommonCollectionItemView;
+			sourceTree = "<group>";
+		};
+		EF2BB213292BF4B60006C00F /* Videos */ = {
+			isa = PBXGroup;
+			children = (
+				EF2BB214292BF4E40006C00F /* VideoScreen.swift */,
+			);
+			path = Videos;
 			sourceTree = "<group>";
 		};
 		EF59F109292A3308002877DE /* TabBar */ = {
@@ -844,6 +856,7 @@
 		EF86383828DC75F200EF520C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				EF2BB213292BF4B60006C00F /* Videos */,
 				EF987B91291FAAD70000E233 /* TickerStory */,
 				EF7D2F9C28E02CE50003B8F3 /* Home */,
 				EF96382228DD8FD000178C37 /* Reddit */,
@@ -1023,6 +1036,7 @@
 		EFDC741628E3372400042452 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				EFFFE46E294835650045686E /* DataProtocols */,
 				EFDC742128E3395400042452 /* SignalServiceModel */,
 				EFDC742028E3393400042452 /* Reddit */,
 				EFDC741E28E3390300042452 /* Events */,
@@ -1101,6 +1115,14 @@
 				EF7D2FA428E031920003B8F3 /* TrendingHeadlinesModel.swift */,
 			);
 			path = SignalServiceModel;
+			sourceTree = "<group>";
+		};
+		EFFFE46E294835650045686E /* DataProtocols */ = {
+			isa = PBXGroup;
+			children = (
+				EFFFE46F2948357E0045686E /* Tickers.swift */,
+			);
+			path = DataProtocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1304,6 +1326,7 @@
 				EF7CC0132916640B00F9D611 /* RatingChart.swift in Sources */,
 				EF7D2FAA28E033E90003B8F3 /* TrendingHeadlineCell.swift in Sources */,
 				EF7CC001291641EA00F9D611 /* GenericButtonWrapper.swift in Sources */,
+				EFFFE4702948357E0045686E /* Tickers.swift in Sources */,
 				EF86382A28DC519B00EF520C /* StubNewsService.swift in Sources */,
 				EF987BA329217A330000E233 /* WebPage.swift in Sources */,
 				EF7D2FA528E031920003B8F3 /* TrendingHeadlinesModel.swift in Sources */,
@@ -1319,6 +1342,7 @@
 				EF7CBFF7291641EA00F9D611 /* NetworkReqeust.swift in Sources */,
 				EF00758F28E5CBA000195433 /* SignalNewsService.swift in Sources */,
 				EF86383728DC648000EF520C /* NewsViewModel.swift in Sources */,
+				EF2BB215292BF4E40006C00F /* VideoScreen.swift in Sources */,
 				EF86384528DC9E5200EF520C /* StubEventsService.swift in Sources */,
 				EF59F10F292A9602002877DE /* CustomCollectionTableCell.swift in Sources */,
 				EF7D2FCE28E0F55A0003B8F3 /* EventDetailView.swift in Sources */,

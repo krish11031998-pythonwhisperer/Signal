@@ -17,7 +17,7 @@ struct TickerSymbolView {
         self.wrappedValue = .init()
     }
     
-    public func configTickers(news: NewsModel) {
+    public func configTickers(news: Tickers) {
         guard !news.tickers.isEmpty else {
             if !wrappedValue.isHidden {
                 wrappedValue.isHidden = true

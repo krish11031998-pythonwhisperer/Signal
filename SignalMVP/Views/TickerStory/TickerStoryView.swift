@@ -10,7 +10,7 @@ import UIKit
 
 //MARK: - Defination
 
-class TicketStoryView: UIViewController {
+class TickerStoryView: UIViewController {
     
     //MARK: - Properties
     private var newsForTicker: [NewsModel] = []
@@ -78,6 +78,7 @@ class TicketStoryView: UIViewController {
     
     //MARK: - Protected Methods
     private func setupView() {
+        view.overrideUserInterfaceStyle = .dark
         let container = UIView()
         view.backgroundColor = .black
         view.addSubview(container)
@@ -187,7 +188,7 @@ class TicketStoryView: UIViewController {
 
 
 // MARK: - StoryInteraction
-extension TicketStoryView {
+extension TickerStoryView {
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard direction == .none else {

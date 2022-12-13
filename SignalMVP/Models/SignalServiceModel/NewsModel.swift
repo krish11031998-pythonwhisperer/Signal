@@ -12,20 +12,19 @@ struct NewsResult: Codable {
 	let data: [NewsModel]?
 }
 
-struct NewsModel: Codable {
-//	let createdAt: String
+struct NewsModel: Tickers, Codable  {
+   
 	let date: String
 	let imageUrl: String
 	let newsUrl: String
 	let sentiment: Sentiment
 	let sourceName: String
 	let text: String
-	let tickers: [String]
 	let title: String
 	let type: String
-	
+    var tickers: [String]
+    
 	enum CodingKeys: String, CodingKey {
-//		case createdAt
 		case date
 		case imageUrl = "image_url"
 		case newsUrl = "news_url"
