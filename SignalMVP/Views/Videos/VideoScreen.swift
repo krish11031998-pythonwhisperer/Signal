@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import youtube_ios_player_helper
 
 class VideoViewController: UIViewController {
     
@@ -72,11 +73,16 @@ class VideoTikTokCell: ConfigurableCollectionCell {
         view.contentMode = .scaleAspectFill
         return view
     }()
-    @TickerSymbolView var symbolView
+    private lazy var symbolView: TickerSymbolView = { .init() }()
     private lazy var videoContentView: UIStackView = { .VStack(spacing: 10, alignment: .leading) }()
     private lazy var videolabel: UILabel = { .init() }()
     private lazy var videoDescription: UILabel = { .init() }()
     private lazy var channelLabel: UILabel = { .init() }()
+    private lazy var videoPlayer: YTPlayerView = {
+        let player: YTPlayerView = .init()
+        player.delegate = self
+        return player
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -90,11 +96,15 @@ class VideoTikTokCell: ConfigurableCollectionCell {
     private func setupView() {
         contentView.addBlurView()
         contentView.addSubview(imageView)
+        [imageView, videoPlayer].addToView(contentView)
+        videoPlayer.isHidden = true
         contentView.setFittingConstraints(childView: imageView, insets: .zero)
+        contentView.setFittingConstraints(childView: videoPlayer, insets: .zero)
         
         let videoDescriptionButton = videoDescription.buttonify { [weak self] in
             self?.updateView()
         }
+        
         
         [.spacer(), channelLabel, videolabel, videoDescriptionButton, symbolView, .spacer(height: .safeAreaInsets.bottom + 50)].addToView(videoContentView)
         contentView.addSubview(videoContentView)
@@ -118,8 +128,38 @@ class VideoTikTokCell: ConfigurableCollectionCell {
         model.title.body1Medium().render(target: videolabel)
         model.sourceName.body3Regular(color: .lightGray).render(target: channelLabel)
         model.text.body3Regular().render(target: videoDescription)
-        _symbolView.configTickers(news: model)
+        symbolView.configTickers(news: model)
+        videoPlayer.loadVideo(byURL: model.newsUrl, startSeconds: 0)
+        videoPlayer.isHidden = false
+        videoPlayer.playVideo()
+    }
+}
+
+
+//MARK: - VideoTikTokCell-YTPlayerDelegate
+extension VideoTikTokCell: YTPlayerViewDelegate {
+    func playerView(_ playerView: YTPlayerView, didChangeTo state: YTPlayerState) {
+        switch state {
+        case .unstarted:
+            print("(DEBUG) unstarted")
+        case .ended:
+            print("(DEBUG) ended")
+        case .playing:
+            print("(DEBUG) playing")
+        case .paused:
+            print("(DEBUG) paused")
+        case .buffering:
+            print("(DEBUG) buffering")
+        case .cued:
+            print("(DEBUG) cued")
+        case .unknown:
+            print("(DEBUG) unknown")
+        @unknown default:
+            fatalError()
+        }
     }
     
-    
+    func playerViewDidBecomeReady(_ playerView: YTPlayerView) {
+        playerView.isHidden = false
+    }
 }

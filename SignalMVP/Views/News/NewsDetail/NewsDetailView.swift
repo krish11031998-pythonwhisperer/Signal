@@ -10,7 +10,7 @@ import UIKit
 
 class NewsDetailView: UIViewController {
     
-    @StandardImageView private var imageView
+    private var imageView: UIImageView = { .standardImageView() }()
     private lazy var titleLabel: UILabel = { .init() }()
     private lazy var descriptionLabel: UILabel = { .init() }()
     private lazy var viewNews: UIView = { .init() }()
@@ -28,7 +28,7 @@ class NewsDetailView: UIViewController {
     }()
     
     private let news: NewsModel
-    @TickerSymbolView var tickers
+    private lazy var tickersView: TickerSymbolView = { .init() }()
     
     init(news: NewsModel) {
         self.news = news
@@ -43,7 +43,7 @@ class NewsDetailView: UIViewController {
         super.viewDidLoad()
         setupNav()
         setupView()
-        _tickers.configTickers(news: news)
+        tickersView.configTickers(news: news)
         hideTabBarIfRequired()
     }
     
@@ -99,8 +99,9 @@ class NewsDetailView: UIViewController {
     
     private func setupMainStack() {
         let descriptionStack = setupDescriptionStack()
-        scrollView.addArrangedView(view: imageView, additionalSpacing: 32)
+        scrollView.addArrangedView(view: imageView, additionalSpacing: 24)
         scrollView.addArrangedView(view: descriptionStack)
+        scrollView.addArrangedView(view: .spacer(height: 75))
         view.addSubview(scrollView)
         view.setFittingConstraints(childView: scrollView, insets: .zero)
         
@@ -109,7 +110,7 @@ class NewsDetailView: UIViewController {
     }
     
     private func setupDescriptionStack() -> UIView {
-        let stack = [titleLabel, descriptionLabel, tickers, .spacer(height: 24)].embedInVStack(alignment: .leading, spacing: 10)
+        let stack = [titleLabel, descriptionLabel, tickersView, .spacer(height: 24)].embedInVStack(alignment: .leading, spacing: 10)
         stack.setCustomSpacing(16, after: descriptionLabel)
         stack.isLayoutMarginsRelativeArrangement = true
         stack.layoutMargins = .init(vertical: 0, horizontal: 20)

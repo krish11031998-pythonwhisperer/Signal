@@ -10,7 +10,7 @@ import UIKit
 
 class CustomCuratedCell: ConfigurableCollectionCell {
     
-    @StandardImageView(dimmingForeground: true) private var imageView
+    private var imageView: UIImageView = { .standardImageView(dimmingForeground: true) }()
     private lazy var headlineLabel: UILabel = { .init() }()
     private lazy var tickers: UIView = { .init() }()
     

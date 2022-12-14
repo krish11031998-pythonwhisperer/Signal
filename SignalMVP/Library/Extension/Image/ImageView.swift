@@ -8,13 +8,11 @@
 import Foundation
 import UIKit
 
-//MARK: - Standard ImageView
-@propertyWrapper
-struct StandardImageView {
-    var wrappedValue: UIImageView
+
+extension UIImageView {
     
-    init(_ imageView: UIImageView = .init(), dimmingForeground: Bool = false) {
-        wrappedValue = imageView
+    static func standardImageView(dimmingForeground: Bool = false) -> UIImageView {
+        let imageView = UIImageView()
         imageView.clipsToBounds = true
         imageView.contentMode = .scaleAspectFill
         imageView.backgroundColor = .gray.withAlphaComponent(0.25)
@@ -24,6 +22,7 @@ struct StandardImageView {
             imageView.addSubview(view)
             imageView.setFittingConstraints(childView: view, insets: .zero)
         }
+        return imageView
     }
 }
 
@@ -32,10 +31,6 @@ struct StandardImageView {
 struct TickerImageView {
     
     var wrappedValue: UIImageView
-    
-//    var image: UIImage? {
-//        wrappedValue.image
-//    }
     
     init(_ imageView: UIImageView = .init(), size: CGSize = .init(squared: 32)) {
         self.wrappedValue = imageView

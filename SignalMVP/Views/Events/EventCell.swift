@@ -69,8 +69,8 @@ class EventView: UIView  {
 	private lazy var imageView: UIImageView = { .init() }()
 	private lazy var authorTitle: UILabel = { .init() }()
 	private lazy var newsTitle: UILabel = { .init() }()
-	private lazy var tickersView: UIStackView = { UIView.HStack(spacing: 8, alignment: .center) }()
-	private lazy var bottomStack: UIStackView = { .init() }()
+    private var tickersView: TickerSymbolView = { .init() }()
+    
 	private let largeCard: Bool
 	
 	init(largeCard: Bool = false) {
@@ -88,28 +88,24 @@ class EventView: UIView  {
 	var height: CGFloat { largeCard ? (CGFloat.totalWidth - 32) * 0.7 : 140 }
 	
 	private func setupView() {
-		let stack = UIView.VStack(subViews: [imageView], spacing: 8)
-		
-		let bottomStack: UIStackView = .HStack(subViews: [authorTitle, .spacer(), tickersView],spacing: 8)
-		
-		let infoStack = UIView.VStack(subViews: [newsTitle, bottomStack, .spacer()],spacing: 8)
-		
-		stack.addArrangedSubview(infoStack.embedInView(insets: .init(vertical: 0, horizontal: 8)))
-		//stack.alignment = .leading
-	
-		stack.setCustomSpacing(10, after: newsTitle)
-		
-		imageView.setHeight(height: largeCard ? 180 : 140, priority: .required)
 
+        let bottomStack: UIStackView = .HStack(subViews: [authorTitle, .spacer(), tickersView], spacing: 8, alignment: .center)
+        let infoStack = UIView.VStack(subViews: [.spacer(), newsTitle, bottomStack],spacing: 8)
+        let bgView = UIView()
+        bgView.backgroundColor = .black.withAlphaComponent(0.3)
+        
 		imageView.clipsToBounds = true
 		imageView.contentMode = .scaleAspectFill
-		tickersView.isHidden = true
 		authorTitle.numberOfLines = 1
-		newsTitle.numberOfLines = 3
+        newsTitle.numberOfLines = largeCard ? 3 : 2
 		
-		addSubview(stack)
-		setFittingConstraints(childView: stack, insets: .zero)
-		addBlurView()
+        [imageView, bgView, infoStack].addToView(self)
+        
+        imageView.fillSuperview()
+        bgView.fillSuperview()
+        infoStack.fillSuperview(inset: .init(by: 10))
+        
+        setHeight(height: largeCard ? 250 : 200, priority: .needed)
 		clipsToBounds = true
 		cornerRadius = 16
 	}
@@ -120,23 +116,13 @@ class EventView: UIView  {
 		
 		UIImage.loadImage(url: model.imageUrl, at: imageView, path: \.image)
 		
-		model.sourceName.bodySmallRegular(color: .gray).render(target: authorTitle)
-		model.title.body1Medium().render(target: newsTitle)
+		model.sourceName.body2Medium(color: .gray).render(target: authorTitle)
+		model.title.body1Bold().render(target: newsTitle)
 		
 		tickersView.isHidden = model.tickers.isEmpty
-		if !model.tickers.isEmpty {
-			tickersView.removeChildViews()
-		
-			model.tickers.limitTo(to: largeCard ? 3 : 1).forEach {
-				let url = "https://cryptoicons.org/api/icon/\($0.lowercased())/32"
-				print("(DEBUG) imgUrl : ",url)
-				let imgView = UIImageView(circular: .init(origin: .zero, size: .init(squared: 24)), background: .gray.withAlphaComponent(0.25))
-				imgView.contentMode = .scaleAspectFit
-				UIImage.loadImage(url: url, at: imgView, path: \.image)
-				imgView.setFrame(.init(squared: 24))
-				tickersView.addArrangedSubview(imgView)
-			}
-		}
+		if let validNews = news, !model.tickers.isEmpty {
+            tickersView.configTickers(news: validNews)
+        }
 		
 		if addTapGesture {
 			self.addTapGesture()

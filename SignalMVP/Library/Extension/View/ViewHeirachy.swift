@@ -72,6 +72,11 @@ extension UIView {
 		removeSimilarConstraints(items)
 		addConstraints(items)
 	}
+    
+    func fillSuperview(inset: UIEdgeInsets = .zero) {
+        guard let validSuperView = superview else { return }
+        validSuperView.setFittingConstraints(childView: self, insets: inset)
+    }
 	
 	func setFrame(_ size: CGSize) {
 		setFrame(width: size.width, height: size.height)

@@ -17,8 +17,8 @@ class NewsCell: ConfigurableCell {
 	private lazy var title: UILabel = { .init() }()
 	private lazy var body: UILabel = { .init() }()
 	private lazy var sentimentView: UILabel = { .init() }()
-    @TickerSymbolView var tickerView
-    private lazy var tickersStack: UIStackView = { .HStack(subViews: [tickerView, .spacer(), sentimentView], spacing: 8) }()
+    private lazy var tickersView: TickerSymbolView = { .init() }()
+    private lazy var tickersStack: UIStackView = { .HStack(subViews: [tickersView, .spacer(), sentimentView], spacing: 8) }()
     
 	private lazy var newsInfoStack: UIStackView = {
 		let stack: UIStackView = .VStack(subViews: [timestamp, title, body, tickersStack],spacing: 8)
@@ -74,7 +74,7 @@ class NewsCell: ConfigurableCell {
 		
 		if !model.model.tickers.isEmpty {
 			tickersStack.isHidden = false
-            _tickerView.configTickers(news: model.model)
+            tickersView.configTickers(news: model.model)
             model.model.sentiment.sentimentIndicatorText().render(target: sentimentView)
 		}
 		

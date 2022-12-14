@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3EBB0683BEA41C9E7B051080 /* Pods_SignalMVPTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A0BD58CADAAA857396CD9BC /* Pods_SignalMVPTests.framework */; };
+		C9878BABBA44E9249BC02BEE /* Pods_SignalMVP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8AF130582704BE4274F3DAD /* Pods_SignalMVP.framework */; };
+		E74D9CAC91CAF3E6CDE88817 /* Pods_SignalMVP_SignalMVPUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35B4C5DE365A2C2AD5B3206A /* Pods_SignalMVP_SignalMVPUITests.framework */; };
 		EF00758D28E5CA8F00195433 /* NewsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF00758C28E5CA8F00195433 /* NewsService.swift */; };
 		EF00758F28E5CBA000195433 /* SignalNewsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF00758E28E5CBA000195433 /* SignalNewsService.swift */; };
 		EF16449D29054FBB00E9D997 /* signalTweets.json in Resources */ = {isa = PBXBuildFile; fileRef = EF16449C29054FBB00E9D997 /* signalTweets.json */; };
@@ -212,6 +215,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1E7507D56019759A4AB6F368 /* Pods-SignalMVPTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SignalMVPTests.release.xcconfig"; path = "Target Support Files/Pods-SignalMVPTests/Pods-SignalMVPTests.release.xcconfig"; sourceTree = "<group>"; };
+		35B4C5DE365A2C2AD5B3206A /* Pods_SignalMVP_SignalMVPUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SignalMVP_SignalMVPUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3900638E652EC3F2447E38D8 /* Pods-SignalMVP.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SignalMVP.debug.xcconfig"; path = "Target Support Files/Pods-SignalMVP/Pods-SignalMVP.debug.xcconfig"; sourceTree = "<group>"; };
+		7A0BD58CADAAA857396CD9BC /* Pods_SignalMVPTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SignalMVPTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7FB2F81A4438494D34BEB560 /* Pods-SignalMVP-SignalMVPUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SignalMVP-SignalMVPUITests.debug.xcconfig"; path = "Target Support Files/Pods-SignalMVP-SignalMVPUITests/Pods-SignalMVP-SignalMVPUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		9C8F0A94B077B3D44EABDB65 /* Pods-SignalMVPTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SignalMVPTests.debug.xcconfig"; path = "Target Support Files/Pods-SignalMVPTests/Pods-SignalMVPTests.debug.xcconfig"; sourceTree = "<group>"; };
+		A401CB02A4D6A9F0C13A8046 /* Pods-SignalMVP-SignalMVPUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SignalMVP-SignalMVPUITests.release.xcconfig"; path = "Target Support Files/Pods-SignalMVP-SignalMVPUITests/Pods-SignalMVP-SignalMVPUITests.release.xcconfig"; sourceTree = "<group>"; };
+		A66A4873BBF2EAC220E8B297 /* Pods-SignalMVP.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SignalMVP.release.xcconfig"; path = "Target Support Files/Pods-SignalMVP/Pods-SignalMVP.release.xcconfig"; sourceTree = "<group>"; };
+		B8AF130582704BE4274F3DAD /* Pods_SignalMVP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SignalMVP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF00758C28E5CA8F00195433 /* NewsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsService.swift; sourceTree = "<group>"; };
 		EF00758E28E5CBA000195433 /* SignalNewsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalNewsService.swift; sourceTree = "<group>"; };
 		EF16449C29054FBB00E9D997 /* signalTweets.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = signalTweets.json; sourceTree = "<group>"; };
@@ -395,6 +407,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C9878BABBA44E9249BC02BEE /* Pods_SignalMVP.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -402,6 +415,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3EBB0683BEA41C9E7B051080 /* Pods_SignalMVPTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -409,12 +423,36 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E74D9CAC91CAF3E6CDE88817 /* Pods_SignalMVP_SignalMVPUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8560FCD6290F08AF3FD0A46A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B8AF130582704BE4274F3DAD /* Pods_SignalMVP.framework */,
+				35B4C5DE365A2C2AD5B3206A /* Pods_SignalMVP_SignalMVPUITests.framework */,
+				7A0BD58CADAAA857396CD9BC /* Pods_SignalMVPTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D27324BE9A9932BDDF119A3C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3900638E652EC3F2447E38D8 /* Pods-SignalMVP.debug.xcconfig */,
+				A66A4873BBF2EAC220E8B297 /* Pods-SignalMVP.release.xcconfig */,
+				7FB2F81A4438494D34BEB560 /* Pods-SignalMVP-SignalMVPUITests.debug.xcconfig */,
+				A401CB02A4D6A9F0C13A8046 /* Pods-SignalMVP-SignalMVPUITests.release.xcconfig */,
+				9C8F0A94B077B3D44EABDB65 /* Pods-SignalMVPTests.debug.xcconfig */,
+				1E7507D56019759A4AB6F368 /* Pods-SignalMVPTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		EF16449E2905509400E9D997 /* ServiceHelpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -973,6 +1011,8 @@
 				EFB1C24328DB3B1900DD40A4 /* SignalMVPTests */,
 				EFB1C24D28DB3B1900DD40A4 /* SignalMVPUITests */,
 				EFB1C22B28DB3B1800DD40A4 /* Products */,
+				D27324BE9A9932BDDF119A3C /* Pods */,
+				8560FCD6290F08AF3FD0A46A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1132,10 +1172,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EFB1C25428DB3B1900DD40A4 /* Build configuration list for PBXNativeTarget "SignalMVP" */;
 			buildPhases = (
+				26CDCD97CDBD397A88095F87 /* [CP] Check Pods Manifest.lock */,
 				EFB1C22628DB3B1800DD40A4 /* Sources */,
 				EFB1C22728DB3B1800DD40A4 /* Frameworks */,
 				EFB1C22828DB3B1800DD40A4 /* Resources */,
 				EF7CBEED2915B73000F9D611 /* Embed Frameworks */,
+				84DEDFC5359D0D59AA487D12 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1150,6 +1192,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EFB1C25728DB3B1900DD40A4 /* Build configuration list for PBXNativeTarget "SignalMVPTests" */;
 			buildPhases = (
+				B54E016D1F52F00F0322EBCB /* [CP] Check Pods Manifest.lock */,
 				EFB1C23C28DB3B1900DD40A4 /* Sources */,
 				EFB1C23D28DB3B1900DD40A4 /* Frameworks */,
 				EFB1C23E28DB3B1900DD40A4 /* Resources */,
@@ -1168,9 +1211,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EFB1C25A28DB3B1900DD40A4 /* Build configuration list for PBXNativeTarget "SignalMVPUITests" */;
 			buildPhases = (
+				9ECE6A08FC86254F7B079551 /* [CP] Check Pods Manifest.lock */,
 				EFB1C24628DB3B1900DD40A4 /* Sources */,
 				EFB1C24728DB3B1900DD40A4 /* Frameworks */,
 				EFB1C24828DB3B1900DD40A4 /* Resources */,
+				41889954956DED866C989F21 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1278,6 +1323,109 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		26CDCD97CDBD397A88095F87 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SignalMVP-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		41889954956DED866C989F21 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SignalMVP-SignalMVPUITests/Pods-SignalMVP-SignalMVPUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SignalMVP-SignalMVPUITests/Pods-SignalMVP-SignalMVPUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SignalMVP-SignalMVPUITests/Pods-SignalMVP-SignalMVPUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		84DEDFC5359D0D59AA487D12 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SignalMVP/Pods-SignalMVP-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SignalMVP/Pods-SignalMVP-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SignalMVP/Pods-SignalMVP-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9ECE6A08FC86254F7B079551 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SignalMVP-SignalMVPUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B54E016D1F52F00F0322EBCB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SignalMVPTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		EFB1C22628DB3B1800DD40A4 /* Sources */ = {
@@ -1586,6 +1734,7 @@
 		};
 		EFB1C25528DB3B1900DD40A4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3900638E652EC3F2447E38D8 /* Pods-SignalMVP.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1599,7 +1748,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1615,6 +1764,7 @@
 		};
 		EFB1C25628DB3B1900DD40A4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A66A4873BBF2EAC220E8B297 /* Pods-SignalMVP.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1628,7 +1778,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1644,6 +1794,7 @@
 		};
 		EFB1C25828DB3B1900DD40A4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9C8F0A94B077B3D44EABDB65 /* Pods-SignalMVPTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1664,6 +1815,7 @@
 		};
 		EFB1C25928DB3B1900DD40A4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1E7507D56019759A4AB6F368 /* Pods-SignalMVPTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1684,6 +1836,7 @@
 		};
 		EFB1C25B28DB3B1900DD40A4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7FB2F81A4438494D34BEB560 /* Pods-SignalMVP-SignalMVPUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -1702,6 +1855,7 @@
 		};
 		EFB1C25C28DB3B1900DD40A4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A401CB02A4D6A9F0C13A8046 /* Pods-SignalMVP-SignalMVPUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
