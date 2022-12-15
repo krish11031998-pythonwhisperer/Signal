@@ -10,7 +10,10 @@ import UIKit
 import youtube_ios_player_helper
 
 fileprivate extension YTPlayerView {
-    static let videoParams: [AnyHashable: Any] = ["iv_load_policy": 3, "controls": 0, "playsinline": 1]
+    static let videoParams: [AnyHashable: Any] = ["iv_load_policy": 3,
+                                                  "controls": 0,
+                                                  "playsinline": 1,
+                                                  "modestbranding": 1, "autoplay": 1]
 }
 
 class VideoViewController: UIViewController {
@@ -67,6 +70,10 @@ class VideoViewController: UIViewController {
     }
 }
 
+//MARK: - SeekDirection
+enum SeekDirection {
+    case forward, backward, none
+}
 
 //MARK: - VideoCell
 
@@ -84,26 +91,17 @@ class VideoTikTokCell: ConfigurableCollectionCell {
     private lazy var channelLabel: UILabel = { .init() }()
     private lazy var videoPlayer: YTPlayerView = {
         let player: YTPlayerView = .init()
-        player.delegate = self
         return player
     }()
     
+    private var tapCount: Int = 0
+
+    private var seekDirection: SeekDirection = .none {
+        didSet { seekTo() }
+    }
+    
     private var videoPlayerState: YTPlayerState = .unknown {
-        didSet {
-            switch videoPlayerState {
-            case .cued, .unstarted, .paused:
-                self.videoPlayer.pauseVideo()
-                self.videoContentView.layer.animate(.fadeIn())
-            case .playing:
-                self.videoPlayer.isHidden = false
-                self.videoPlayer.playVideo()
-                self.videoContentView.layer.animate(.fadeOut(to: 0.1))
-            default:
-                self.videoPlayer.stopVideo()
-                self.videoPlayer.isHidden = true
-                self.videoContentView.layer.animate(.fadeIn())
-            }
-        }
+        didSet { updateVideoPlayerWithState() }
     }
     
     override init(frame: CGRect) {
@@ -159,6 +157,31 @@ class VideoTikTokCell: ConfigurableCollectionCell {
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first else { return }
+        
+        let location = touch.location(in: self)
+
+        guard  location.x <= .totalWidth * 0.3 || location.x >= .totalWidth * 0.66 else {
+            self.updateVideoState()
+            return
+        }
+        
+        if location.x <= .totalWidth * 0.3 {
+            self.tapCount += 1
+            self.seekDirection = .backward
+        }
+        
+        if location.x >= .totalWidth * 0.66 {
+            self.tapCount += 1
+            self.seekDirection = .forward
+        }
+    }
+}
+
+
+//MARK: - VideoTikTokCell - Video Player
+extension VideoTikTokCell {
+    private func updateVideoState() {
         videoPlayer.playerState {[weak self] state, err in
             guard let `self` = self, err == nil else { return }
             switch state {
@@ -171,12 +194,37 @@ class VideoTikTokCell: ConfigurableCollectionCell {
             }
         }
     }
-}
-
-
-//MARK: - VideoTikTokCell-YTPlayerDelegate
-extension VideoTikTokCell: YTPlayerViewDelegate {
-    func playerViewDidBecomeReady(_ playerView: YTPlayerView) {
-        playerView.isHidden = false
+    
+    private func updateVideoPlayerWithState() {
+        switch videoPlayerState {
+        case .cued, .unstarted, .paused:
+            self.videoPlayer.pauseVideo()
+            self.videoContentView.layer.animate(.fadeIn())
+        case .playing:
+            self.videoPlayer.isHidden = false
+            self.videoPlayer.playVideo()
+            self.videoContentView.layer.animate(.fadeOut(to: 0.1))
+        default:
+            self.videoPlayer.stopVideo()
+            self.videoPlayer.isHidden = true
+            self.videoContentView.layer.animate(.fadeIn())
+        }
+    }
+    
+    private func seekTo() {
+        guard tapCount >= 2 else { return }
+        videoPlayer.currentTime {[weak self] time, err in
+            guard let `self` = self, err == nil else { return }
+            switch self.seekDirection {
+            case .forward:
+                self.videoPlayer.seek(toSeconds: time + 10, allowSeekAhead: true)
+            case .backward:
+                self.videoPlayer.seek(toSeconds: time - 10, allowSeekAhead: true)
+            default:
+                break
+            }
+            self.tapCount = 0
+        }
     }
 }
+ 

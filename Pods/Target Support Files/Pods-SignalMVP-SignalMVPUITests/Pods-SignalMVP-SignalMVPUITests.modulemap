@@ -1,0 +1,6 @@
+framework module Pods_SignalMVP_SignalMVPUITests {
+  umbrella header "Pods-SignalMVP-SignalMVPUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
