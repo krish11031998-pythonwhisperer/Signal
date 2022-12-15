@@ -28,7 +28,7 @@ class VideoViewController: UIViewController {
         super.viewDidLoad()
         setupView()
         loadVideos()
-        standardNavBar(leftBarButton: .init(customView: "Video".heading2().generateLabel), rightBarButton: nil, color: .clear, scrollColor: .clear)
+        standardNavBar(leftBarButton: .init(customView: "Video".heading2().generateLabel))
         navigationController?.navigationItem.leftBarButtonItem = nil
     }
     

@@ -75,7 +75,11 @@ extension UIViewController {
         }
 	}
 	
-    func standardNavBar(title: RenderableText? = nil, leftBarButton: UIBarButtonItem? = nil, rightBarButton: UIBarButtonItem? = nil, color: UIColor = .clear, scrollColor: UIColor = .clear) {
+    func standardNavBar(title: RenderableText? = nil,
+                        leftBarButton: UIBarButtonItem? = nil,
+                        rightBarButton: UIBarButtonItem? = nil,
+                        color: UIColor = .surfaceBackground,
+                        scrollColor: UIColor = .surfaceBackground) {
 		setupTransparentNavBar(color: color, scrollColor: scrollColor)
 		navigationItem.titleView = title?.generateLabel
 		navigationItem.leftBarButtonItem = leftBarButton ?? Self.backButton(self)

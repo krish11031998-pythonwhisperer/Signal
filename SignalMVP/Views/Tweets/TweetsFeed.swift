@@ -71,8 +71,7 @@ class TweetFeedViewController: UIViewController {
 	}
 	
 	private func setupNavbar() {
-		self.navigationItem.title = "Tweets"
-		setupTransparentNavBar()
+        standardNavBar(leftBarButton: .init(customView: "Tweets".heading2().generateLabel))
 	}
 	
 	private func addObservers() {

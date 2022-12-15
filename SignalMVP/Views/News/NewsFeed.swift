@@ -45,11 +45,11 @@ class NewsFeed: UIViewController {
 		tableView.backgroundColor = .surfaceBackground
 		tableView.separatorStyle = .none
 		view.setFittingConstraints(childView: tableView, insets: .zero)
+        
 	}
 	
 	private func setupNavbar() {
-		self.navigationItem.title = "News"
-		setupTransparentNavBar()
+        standardNavBar(leftBarButton: .init(customView: "News".heading2().generateLabel))
 	}
 	
 	private func setupObservers() {
