@@ -9,6 +9,10 @@ import Foundation
 import UIKit
 import youtube_ios_player_helper
 
+fileprivate extension YTPlayerView {
+    static let videoParams: [AnyHashable: Any] = ["iv_load_policy": 3, "controls": 0, "playsinline": 1]
+}
+
 class VideoViewController: UIViewController {
     
     private var videos: [VideoModel] = []
@@ -84,6 +88,24 @@ class VideoTikTokCell: ConfigurableCollectionCell {
         return player
     }()
     
+    private var videoPlayerState: YTPlayerState = .unknown {
+        didSet {
+            switch videoPlayerState {
+            case .cued, .unstarted, .paused:
+                self.videoPlayer.pauseVideo()
+                self.videoContentView.layer.animate(.fadeIn())
+            case .playing:
+                self.videoPlayer.isHidden = false
+                self.videoPlayer.playVideo()
+                self.videoContentView.layer.animate(.fadeOut(to: 0.1))
+            default:
+                self.videoPlayer.stopVideo()
+                self.videoPlayer.isHidden = true
+                self.videoContentView.layer.animate(.fadeIn())
+            }
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -94,8 +116,6 @@ class VideoTikTokCell: ConfigurableCollectionCell {
     }
     
     private func setupView() {
-        contentView.addBlurView()
-        contentView.addSubview(imageView)
         [imageView, videoPlayer].addToView(contentView)
         videoPlayer.isHidden = true
         contentView.setFittingConstraints(childView: imageView, insets: .zero)
@@ -116,49 +136,46 @@ class VideoTikTokCell: ConfigurableCollectionCell {
     
     private func updateView() {
         videoDescription.numberOfLines = videoDescription.numberOfLines == 0 ? 1 : 0
-        UIView.animate(withDuration: 0.5) {
+        UIView.animate(withDuration: 0.15) {
             self.videoDescription.superview?.layoutIfNeeded()
         }
+    }
+    
+    private func loadVideo(videoUrl: String) {
+        let id = String(videoUrl.split(separator: "=").last ?? "")
+        videoPlayer.load(withVideoId: id, playerVars: YTPlayerView.videoParams)
     }
     
     func configure(with model: VideoModel) {
         imageView.image = nil
         videoDescription.numberOfLines = 1
+        videoPlayerState = .unknown
         UIImage.loadImage(url: model.imageUrl, at: imageView, path: \.image, resized: .init(width: .totalWidth, height: .totalHeight), resolveWithAspectRatio: true)
         model.title.body1Medium().render(target: videolabel)
         model.sourceName.body3Regular(color: .lightGray).render(target: channelLabel)
         model.text.body3Regular().render(target: videoDescription)
         symbolView.configTickers(news: model)
-        videoPlayer.loadVideo(byURL: model.newsUrl, startSeconds: 0)
-        videoPlayer.isHidden = false
-        videoPlayer.playVideo()
+        loadVideo(videoUrl: model.newsUrl)
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        videoPlayer.playerState {[weak self] state, err in
+            guard let `self` = self, err == nil else { return }
+            switch state {
+            case .cued, .unstarted, .paused:
+                self.videoPlayerState = .playing
+            case .playing:
+                self.videoPlayerState = .paused
+            default:
+                self.videoPlayerState = state
+            }
+        }
     }
 }
 
 
 //MARK: - VideoTikTokCell-YTPlayerDelegate
 extension VideoTikTokCell: YTPlayerViewDelegate {
-    func playerView(_ playerView: YTPlayerView, didChangeTo state: YTPlayerState) {
-        switch state {
-        case .unstarted:
-            print("(DEBUG) unstarted")
-        case .ended:
-            print("(DEBUG) ended")
-        case .playing:
-            print("(DEBUG) playing")
-        case .paused:
-            print("(DEBUG) paused")
-        case .buffering:
-            print("(DEBUG) buffering")
-        case .cued:
-            print("(DEBUG) cued")
-        case .unknown:
-            print("(DEBUG) unknown")
-        @unknown default:
-            fatalError()
-        }
-    }
-    
     func playerViewDidBecomeReady(_ playerView: YTPlayerView) {
         playerView.isHidden = false
     }

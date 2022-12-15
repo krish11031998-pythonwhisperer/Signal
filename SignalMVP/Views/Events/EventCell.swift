@@ -103,7 +103,7 @@ class EventView: UIView  {
         
         imageView.fillSuperview()
         bgView.fillSuperview()
-        infoStack.fillSuperview(inset: .init(by: 10))
+        infoStack.fillSuperview(inset: .init(by: 16))
         
         setHeight(height: largeCard ? 250 : 200, priority: .needed)
 		clipsToBounds = true
