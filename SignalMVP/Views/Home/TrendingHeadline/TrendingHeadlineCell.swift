@@ -15,8 +15,8 @@ class TrendingHeadlineCell: ConfigurableCell {
 	private lazy var desciptionLabel: UILabel = { .init() }()
 	private lazy var sentimentStack: UIStackView = { .HStack(spacing: 8) }()
     private lazy var sentimentLabel: UILabel = { .init() }()
-	private lazy var tickers: UIStackView = { .HStack(spacing: 8) }()
 	private lazy var mainStack: UIStackView = { .VStack(spacing: 8) }()
+    private lazy var tickers: TickerSymbolView = { .init() }()
 
 //MARK: - Constructors
 	override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -57,20 +57,12 @@ class TrendingHeadlineCell: ConfigurableCell {
 		model.text.body2Regular(color: .gray).render(target: desciptionLabel)
 		
         let sentimentBlob = model.sentimentBlob.toText(fontHeight: CustomFonts.regular.fontBuilder(size: 11)?.capHeight ?? 0)
-        let sentimentText = sentimentBlob.appending("  ").appending(model.sentiment.rawValue.bodySmallRegular())
+        let sentimentText = sentimentBlob.appending(" ").appending(model.sentiment.rawValue.bodySmallRegular())
         
         sentimentText.render(target: sentimentLabel)
 
 		if !model.tickers.isEmpty {
-			tickers.isHidden = false
-			tickers.removeChildViews()
-			model.tickers.limitTo(to: 3).forEach { ticker in
-				let img = SymbolImage()
-				img.configureView(symbol: "", label: ticker.body3Medium())
-				tickers.addArrangedSubview(img)
-				img.setHeight(height: CGSize.smallestSquare.height, priority: .required)
-			}
-			tickers.addArrangedSubview(.spacer())
+            tickers.configTickers(news: model)
 		}
 	}
 	

@@ -11,14 +11,14 @@ struct TrendingHeadlinesResult: Codable {
 	let data: [TrendingHeadlinesModel]?
 }
 
-struct TrendingHeadlinesModel: Codable {
+struct TrendingHeadlinesModel: Tickers, Codable {
 	let id: Int
 	let headline: String
 	let text: String
 	let newsId: Int
 	let sentiment: Sentiment
 	let date: String
-	let tickers: [String]
+    var tickers: [String]
 	
 	enum CodingKeys: String, CodingKey {
 		case id, headline, text
