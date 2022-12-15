@@ -15,7 +15,7 @@ class TrendingHeadlineCell: ConfigurableCell {
 	private lazy var desciptionLabel: UILabel = { .init() }()
 	private lazy var sentimentStack: UIStackView = { .HStack(spacing: 8) }()
     private lazy var sentimentLabel: UILabel = { .init() }()
-	private lazy var mainStack: UIStackView = { .VStack(spacing: 8) }()
+    private lazy var mainStack: UIStackView = { .VStack(spacing: 8, alignment: .leading) }()
     private lazy var tickers: TickerSymbolView = { .init() }()
 
 //MARK: - Constructors
@@ -39,8 +39,9 @@ class TrendingHeadlineCell: ConfigurableCell {
 		headlineLabel.numberOfLines = 0
 		desciptionLabel.numberOfLines = 2
 		
-		let divider = UIView.divider()
-		mainStack.addArrangedSubview(divider.embedInView(insets: .init(top: 10, left: 0, bottom: 0, right: 0)))
+		let divider = UIView.divider().embedInView(insets: .init(top: 10, left: 0, bottom: 0, right: 0))
+		mainStack.addArrangedSubview(divider)
+        mainStack.setFittingConstraints(childView: divider, leading: 0, trailing: 0)
 		
 		contentView.addSubview(mainStack)
 		contentView.setFittingConstraints(childView: mainStack, insets: .init(vertical: 10, horizontal: 16))
