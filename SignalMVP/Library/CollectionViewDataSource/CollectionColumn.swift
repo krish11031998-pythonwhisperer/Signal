@@ -8,15 +8,27 @@
 import Foundation
 import UIKit
 
+//MARK: - CollecitonCellDisplay
+protocol CollectionCellDisplay {
+    func willDisplay()
+    func endDisplay()
+}
+
+extension CollectionCellDisplay {
+    func willDisplay() {}
+    func endDisplay() {}
+}
 //MARK: - ConfigurableCollectionCell
 
-typealias ConfigurableCollectionCell = Configurable & UICollectionViewCell
+typealias ConfigurableCollectionCell = Configurable & UICollectionViewCell & CollectionCellDisplay
 
 //MARK: - CollectionCellProvider
 
 protocol CollectionCellProvider {
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath)
+    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath)
 }
 
 //MARK: - CollectionItem
@@ -42,6 +54,16 @@ class CollectionItem<Cell:ConfigurableCollectionCell>: CollectionCellProvider {
             action.actionWithFrame?(.init(origin: cellOrigin, size: cell.frame.size))
 		}
 	}
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        guard let validCell = cell as? CollectionCellDisplay else { return }
+        validCell.willDisplay()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        guard let validCell = cell as? CollectionCellDisplay else { return }
+        validCell.endDisplay()
+    }
 }
 
 

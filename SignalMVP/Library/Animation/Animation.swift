@@ -29,6 +29,7 @@ enum Animation {
     case fadeIn(duration: CFTimeInterval = 0.3)
     case fadeOut(to: CGFloat = 0, duration: CFTimeInterval = 0.3)
     case slideUpDown(duration: CGFloat = 0.3)
+    case fadeInOut(duration: CGFloat = 0.75)
 }
 
 extension Animation {
@@ -97,6 +98,12 @@ extension Animation {
         case .fadeOut(let to, let duration):
             let animation = CABasicAnimation(keyPath: "opacity")
             animation.toValue = to
+            animation.duration = duration
+            return animation
+        case .fadeInOut(let duration):
+            let animation = CAKeyframeAnimation(keyPath: "opacity")
+            animation.keyTimes = [0, 0.15, 0.5, 0.85, 1]
+            animation.values = [0, 0.75, 1, 0.75, 0]
             animation.duration = duration
             return animation
         case .slideUpDown(let duration):

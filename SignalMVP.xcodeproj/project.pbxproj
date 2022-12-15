@@ -182,6 +182,7 @@
 		EFB3181628E97B93008FC27E /* TweetURLView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB3181528E97B93008FC27E /* TweetURLView.swift */; };
 		EFDC741928E3373800042452 /* Sentiments.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFDC741828E3373800042452 /* Sentiments.swift */; };
 		EFFFE4702948357E0045686E /* Tickers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFFE46F2948357E0045686E /* Tickers.swift */; };
+		EFFFE472294B97750045686E /* VideoTikTokCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFFE471294B97750045686E /* VideoTikTokCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -400,6 +401,7 @@
 		EFB3181528E97B93008FC27E /* TweetURLView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetURLView.swift; sourceTree = "<group>"; };
 		EFDC741828E3373800042452 /* Sentiments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sentiments.swift; sourceTree = "<group>"; };
 		EFFFE46F2948357E0045686E /* Tickers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tickers.swift; sourceTree = "<group>"; };
+		EFFFE471294B97750045686E /* VideoTikTokCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTikTokCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -494,6 +496,7 @@
 			isa = PBXGroup;
 			children = (
 				EF2BB214292BF4E40006C00F /* VideoScreen.swift */,
+				EFFFE471294B97750045686E /* VideoTikTokCell.swift */,
 			);
 			path = Videos;
 			sourceTree = "<group>";
@@ -1533,6 +1536,7 @@
 				EF86384B28DCA1A400EF520C /* EventCell.swift in Sources */,
 				EF987B8C291F83620000E233 /* CGRect.swift in Sources */,
 				EF7CC0112916491A00F9D611 /* CALayer+Animation.swift in Sources */,
+				EFFFE472294B97750045686E /* VideoTikTokCell.swift in Sources */,
 				EF86383328DC5CAF00EF520C /* NewsFeed.swift in Sources */,
 				EF7D2F9628DED9730003B8F3 /* NewsNotification.swift in Sources */,
 				EF7D2FC928E0A0E10003B8F3 /* VideoCell.swift in Sources */,

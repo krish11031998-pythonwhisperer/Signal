@@ -34,6 +34,14 @@ extension CollectionDataSource: UICollectionViewDelegate {
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		sections[indexPath.section].cell[indexPath.row].collectionView(collectionView, didSelectItemAt: indexPath)
 	}
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        sections[indexPath.section].cell[indexPath.row].collectionView(collectionView, willDisplay: cell, forItemAt: indexPath)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        sections[indexPath.section].cell[indexPath.row].collectionView(collectionView, didEndDisplaying: cell, forItemAt: indexPath)
+    }
 }
 
 extension CollectionDataSource: UICollectionViewDelegateFlowLayout {
