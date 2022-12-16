@@ -50,7 +50,7 @@ class EventsFeedViewController: UIViewController {
 	}
 	
 	private func setupNavBar() {
-        standardNavBar(leftBarButton: .init(customView: "Events".heading2().generateLabel))
+        standardNavBar(leftBarButton: .init(customView: "Events".heading2().generateLabel), color: .surfaceBackground)
 	}
 	
 	private func scrollViewUpdate(_ scrollView: UIScrollView) {

@@ -20,6 +20,7 @@ struct MainTabModel: Equatable {
 	static let tweets: MainTabModel = .init(name: "Tweets", iconName: .twitter)
 	static let news: MainTabModel = .init(name: "News", iconName: .mail)
 	static let events: MainTabModel = .init(name: "Events", iconName: .switchHorizontal)
+    static let videos: MainTabModel = .init(name: "Video", iconName: .chartBar)
 }
 
 

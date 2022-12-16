@@ -27,6 +27,7 @@ class EventDetailView: UIViewController {
 	override func viewWillDisappear(_ animated: Bool) {
 		super.viewWillDisappear(animated)
 		EventStorage.selectedEvent = nil
+        setupTransparentNavBar(color: .surfaceBackground, scrollColor: .surfaceBackground)
 	}
 	
 //MARK: - Protected Methods
@@ -38,7 +39,7 @@ class EventDetailView: UIViewController {
 		view.setFittingConstraints(childView: tableView, insets: .zero)
 		tableView.reloadData(buildDataSource())
 		setupObserver()
-        standardNavBar()
+        standardNavBar(color: .clear, scrollColor: .clear)
 	}
 	
 	private func buildDataSource() -> TableViewDataSource {

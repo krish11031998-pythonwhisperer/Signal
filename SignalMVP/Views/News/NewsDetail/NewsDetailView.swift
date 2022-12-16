@@ -81,8 +81,6 @@ class NewsDetailView: UIViewController {
         } else {
             standardNavBar(color: .clear, scrollColor: .clear)
         }
-        
-        //navigationController?.additionalSafeAreaInsets = .init(top: 12, left: 0, bottom: 0, right: 0)
     }
     
     private func hideTabBarIfRequired() {

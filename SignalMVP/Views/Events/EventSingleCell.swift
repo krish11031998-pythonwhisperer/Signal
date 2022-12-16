@@ -34,7 +34,6 @@ class EventSingleCell: ConfigurableCell {
 	private func setupViews() {
 		let infoStack: UIStackView = .VStack(subViews: [eventTitle, newsArticleCount],spacing: 10)
 		let stack: UIStackView = .HStack(subViews: [imgView, infoStack], spacing: 16, alignment: .center)
-		let divider: UIView =  .divider(color: .white.withAlphaComponent(0.5)).embedInView(insets: .zero)
 		let mainStack: UIStackView = .VStack(subViews: [stack], spacing: 12)
 		mainStack.setHeight(height: 84, priority: .required)
 		
