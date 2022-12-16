@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 struct NewsCellModel: ActionProvider {
 	let model: NewsModel
@@ -16,6 +17,7 @@ class NewsViewModel {
 	
 	var view: AnyTableView?
 	var news: [NewsModel]?
+    var selectedNews: CurrentValueSubject<NewsModel?, Never> = .init(nil)
 	
 	func fetchNews() {
         StubNewsService
@@ -35,7 +37,8 @@ class NewsViewModel {
 		guard let validNews = news else { return nil }
 		let rows = validNews.compactMap { news in
 			TableRow<NewsCell>(.init(model: news, action: {
-				NewsStorage.selectedNews = news
+//				NewsStorage.selectedNews = news
+                self.selectedNews.value = news
 			})) }
 		return .init(rows: rows)
 	}

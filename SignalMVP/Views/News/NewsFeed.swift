@@ -7,10 +7,12 @@
 
 import Foundation
 import UIKit
+import Combine
 
 class NewsFeed: UIViewController {
 	
 	private lazy var tableView: UITableView = { .init(frame: .zero, style: .grouped) }()
+    private var cancellable: Set<AnyCancellable> = .init()
 //	private var observer: NSKeyValueObservation?
 //	private var yOff: CGFloat = .zero
 	
@@ -53,15 +55,14 @@ class NewsFeed: UIViewController {
 	}
 	
 	private func setupObservers() {
-		NotificationCenter.default.addObserver(self, selector: #selector(pushToNewsDetail), name: .showNews, object: nil)
+        viewModel.selectedNews
+            .compactMap { $0 }
+            .sink { [weak self] in
+                guard let nav = self?.navigationController else { return }
+                nav.pushViewController(NewsDetailView(news: $0), animated: true)
+            }
+            .store(in: &cancellable)
 	}
-	
-	@objc
-	private func pushToNewsDetail() {
-        guard let news = NewsStorage.selectedNews else { return }
-        navigationController?.pushViewController(NewsDetailView(news: news), animated: true)
-	}
-    
 }
 
 
