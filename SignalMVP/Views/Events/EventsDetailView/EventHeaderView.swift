@@ -14,7 +14,7 @@ class EventDetailViewHeader: ConfigurableCell {
 
 	private lazy var eventHeader: UILabel = { .init() }()
 	private lazy var newArticleCountLabel: UILabel = { .init() }()
-	private lazy var tickerViews: UIStackView = { .HStack(spacing: 8) }()
+    private lazy var tickerViews: TickerSymbolView = { .init() }()
 //MARK: - Constructors
 	override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
 		super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -28,7 +28,7 @@ class EventDetailViewHeader: ConfigurableCell {
 //MARK: - Protected Methods
 	
 	private func setupView() {
-		let mainStack: UIStackView = .VStack(subViews: [eventHeader, newArticleCountLabel, tickerViews], spacing: 12, alignment: .fill)
+		let mainStack: UIStackView = .VStack(subViews: [eventHeader, newArticleCountLabel, tickerViews], spacing: 12, alignment: .leading)
 		eventHeader.numberOfLines = 0
 		addSubview(mainStack)
 		setFittingConstraints(childView: mainStack, insets: .init(vertical: 10, horizontal: 16))
@@ -42,17 +42,18 @@ class EventDetailViewHeader: ConfigurableCell {
 	public func configure(with model: EventModel) {
 		model.eventName.heading1().render(target: eventHeader)
 		"\(model.news.count) News Articles".body3Regular().render(target: newArticleCountLabel)
-		tickerViews.removeChildViews()
-		model.tickers.forEach { ticker in
-			let url = "https://cryptoicons.org/api/icon/\(ticker.lowercased())/64"
-			print("(DEBUG) imgUrl : ",url)
-			let imgView = UIImageView(circular: .init(origin: .zero, size: .init(squared: 64)), background: .gray.withAlphaComponent(0.25))
-			imgView.contentMode = .scaleAspectFit
-			UIImage.loadImage(url: url, at: imgView, path: \.image)
-			imgView.setFrame(.init(squared: 64))
-			tickerViews.addArrangedSubview(imgView)
-		}
-		tickerViews.addArrangedSubview(.spacer())
-
+//		tickerViews.removeChildViews()
+//		model.tickers.forEach { ticker in
+//			let url = "https://cryptoicons.org/api/icon/\(ticker.lowercased())/64"
+//			print("(DEBUG) imgUrl : ",url)
+//			let imgView = UIImageView(circular: .init(origin: .zero, size: .init(squared: 64)), background: .gray.withAlphaComponent(0.25))
+//			imgView.contentMode = .scaleAspectFit
+//			UIImage.loadImage(url: url, at: imgView, path: \.image)
+//			imgView.setFrame(.init(squared: 64))
+//			tickerViews.addArrangedSubview(imgView)
+//		}
+//		tickerViews.addArrangedSubview(.spacer())
+        tickerViews.isHidden = model.tickers.isEmpty
+        tickerViews.configTickers(news: model)
 	}
 }

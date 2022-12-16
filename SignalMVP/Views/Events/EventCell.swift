@@ -88,16 +88,15 @@ class EventView: UIView  {
 	var height: CGFloat { largeCard ? (CGFloat.totalWidth - 32) * 0.7 : 140 }
 	
 	private func setupView() {
-
-        let bottomStack: UIStackView = .HStack(subViews: [authorTitle, .spacer(), tickersView], spacing: 8, alignment: .center)
-        let infoStack = UIView.VStack(subViews: [.spacer(), newsTitle, bottomStack],spacing: 8)
+        let blobLabel = authorTitle.blobify(backgroundColor: .surfaceBackground, edgeInset: .init(vertical: 8, horizontal: 12), borderColor: .clear, borderWidth: 0)
+        let infoStack = UIView.VStack(subViews: [newsTitle, .spacer(), blobLabel, tickersView],spacing: 8, alignment: .leading)
         let bgView = UIView()
         bgView.backgroundColor = .black.withAlphaComponent(0.3)
         
 		imageView.clipsToBounds = true
 		imageView.contentMode = .scaleAspectFill
 		authorTitle.numberOfLines = 1
-        newsTitle.numberOfLines = largeCard ? 3 : 2
+        newsTitle.numberOfLines = 4
 		
         [imageView, bgView, infoStack].addToView(self)
         
@@ -105,7 +104,7 @@ class EventView: UIView  {
         bgView.fillSuperview()
         infoStack.fillSuperview(inset: .init(by: 16))
         
-        setHeight(height: largeCard ? 250 : 200, priority: .needed)
+        setHeight(height: largeCard ? 375 : 275, priority: .needed)
 		clipsToBounds = true
 		cornerRadius = 16
 	}
@@ -116,7 +115,7 @@ class EventView: UIView  {
 		
 		UIImage.loadImage(url: model.imageUrl, at: imageView, path: \.image)
 		
-		model.sourceName.body2Medium(color: .gray).render(target: authorTitle)
+        model.sourceName.body3Medium(color: .gray).render(target: authorTitle)
 		model.title.body1Bold().render(target: newsTitle)
 		
 		tickersView.isHidden = model.tickers.isEmpty
@@ -131,7 +130,6 @@ class EventView: UIView  {
 	
 	private func addTapGesture() {
 		let tapGesture = UITapGestureRecognizer(target: self, action: #selector(addTapHandler))
-//		tapGesture.cancelsTouchesInView = true
 		addGestureRecognizer(tapGesture)
 	}
 	

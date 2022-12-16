@@ -47,10 +47,17 @@ class NewsDetailView: UIViewController {
         hideTabBarIfRequired()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupNav()
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         showTabBarIfRequired()
+        setupTransparentNavBar(color: .surfaceBackground, scrollColor: .surfaceBackground)
     }
+    
     private func setupView() {
         view.backgroundColor = .surfaceBackground
         view.clippedCornerRadius = 24
@@ -67,13 +74,15 @@ class NewsDetailView: UIViewController {
     
     private func setupNav() {
         if navigationController?.modalPresentationStyle == .custom {
-            standardNavBar(rightBarButton: Self.closeButton(self))
+            standardNavBar(rightBarButton: Self.closeButton(self),
+                           color: .clear,
+                           scrollColor: .clear)
             navigationItem.leftBarButtonItem = nil
         } else {
-            standardNavBar()
+            standardNavBar(color: .clear, scrollColor: .clear)
         }
         
-        navigationController?.additionalSafeAreaInsets = .init(top: 12, left: 0, bottom: 0, right: 0)
+        //navigationController?.additionalSafeAreaInsets = .init(top: 12, left: 0, bottom: 0, right: 0)
     }
     
     private func hideTabBarIfRequired() {

@@ -52,7 +52,7 @@ class EventDetailView: UIViewController {
 	
 	private var heroSection: TableSection? {
 		guard let validEvent = EventStorage.selectedEvent else { return nil }
-		var mainEvent = EventModel(date: validEvent.date, eventId: validEvent.eventId, eventName: validEvent.eventName, news: validEvent.news.limitTo(to: 3), tickers: [])
+		let mainEvent = EventModel(date: validEvent.date, eventId: validEvent.eventId, eventName: validEvent.eventName, news: validEvent.news.limitTo(to: 3), tickers: [])
 		return .init(rows: [TableRow<EventCell>(mainEvent)])
 	}
 	

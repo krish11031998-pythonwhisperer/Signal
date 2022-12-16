@@ -12,13 +12,13 @@ struct EventResult: Codable {
 	let data: [EventModel]
 }
 
-struct EventModel: Codable {
+struct EventModel: Tickers, Codable {
 	
 	let date: String
 	let eventId: String
 	let eventName: String
 	let news: [NewsModel]
-	let tickers: [String]
+	var tickers: [String]
 	
 	enum CodingKeys: String, CodingKey {
 		case date, news
