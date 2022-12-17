@@ -29,8 +29,9 @@ class MainViewController: UITabBarController {
         let newsNavView = NewsFeed().withNavigationController().tabBarItem(.news)
         let eventNavView = EventsFeedViewController().withNavigationController().tabBarItem(.events)
         let redditNavView = RedditFeedViewController().withNavigationController().tabBarItem(.init(name: "Reddit", iconName: .moon))
+        let todonavView = TodoViewController().withNavigationController().tabBarItem(.init(name: "Todo", iconName: .plus))
         let videoNavView = VideoViewController().withNavigationController().tabBarItem(.videos)
-		return [homeNavView, videoNavView, newsNavView, eventNavView]
+		return [homeNavView, videoNavView, newsNavView, eventNavView, tweetNavView] //todonavView]
 	}
 
 }

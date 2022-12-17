@@ -12,6 +12,9 @@
 		E74D9CAC91CAF3E6CDE88817 /* Pods_SignalMVP_SignalMVPUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35B4C5DE365A2C2AD5B3206A /* Pods_SignalMVP_SignalMVPUITests.framework */; };
 		EF00758D28E5CA8F00195433 /* NewsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF00758C28E5CA8F00195433 /* NewsService.swift */; };
 		EF00758F28E5CBA000195433 /* SignalNewsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF00758E28E5CBA000195433 /* SignalNewsService.swift */; };
+		EF04E33F294CF01C00E35815 /* TodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF04E33E294CF01C00E35815 /* TodoViewController.swift */; };
+		EF04E341294CF07A00E35815 /* TodoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF04E340294CF07A00E35815 /* TodoViewModel.swift */; };
+		EF04E343294CFCCF00E35815 /* AddTodoTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF04E342294CFCCF00E35815 /* AddTodoTaskViewController.swift */; };
 		EF16449D29054FBB00E9D997 /* signalTweets.json in Resources */ = {isa = PBXBuildFile; fileRef = EF16449C29054FBB00E9D997 /* signalTweets.json */; };
 		EF1644A0290550B300E9D997 /* ServiceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF16449F290550B300E9D997 /* ServiceHelper.swift */; };
 		EF1644A42905573600E9D997 /* signalNews.json in Resources */ = {isa = PBXBuildFile; fileRef = EF1644A32905573600E9D997 /* signalNews.json */; };
@@ -227,6 +230,9 @@
 		B8AF130582704BE4274F3DAD /* Pods_SignalMVP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SignalMVP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF00758C28E5CA8F00195433 /* NewsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsService.swift; sourceTree = "<group>"; };
 		EF00758E28E5CBA000195433 /* SignalNewsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalNewsService.swift; sourceTree = "<group>"; };
+		EF04E33E294CF01C00E35815 /* TodoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoViewController.swift; sourceTree = "<group>"; };
+		EF04E340294CF07A00E35815 /* TodoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoViewModel.swift; sourceTree = "<group>"; };
+		EF04E342294CFCCF00E35815 /* AddTodoTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoTaskViewController.swift; sourceTree = "<group>"; };
 		EF16449C29054FBB00E9D997 /* signalTweets.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = signalTweets.json; sourceTree = "<group>"; };
 		EF16449F290550B300E9D997 /* ServiceHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceHelper.swift; sourceTree = "<group>"; };
 		EF1644A32905573600E9D997 /* signalNews.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = signalNews.json; sourceTree = "<group>"; };
@@ -453,6 +459,16 @@
 				1E7507D56019759A4AB6F368 /* Pods-SignalMVPTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		EF04E33D294CF00500E35815 /* Todo */ = {
+			isa = PBXGroup;
+			children = (
+				EF04E33E294CF01C00E35815 /* TodoViewController.swift */,
+				EF04E340294CF07A00E35815 /* TodoViewModel.swift */,
+				EF04E342294CFCCF00E35815 /* AddTodoTaskViewController.swift */,
+			);
+			path = Todo;
 			sourceTree = "<group>";
 		};
 		EF16449E2905509400E9D997 /* ServiceHelpers */ = {
@@ -1079,6 +1095,7 @@
 		EFDC741628E3372400042452 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				EF04E33D294CF00500E35815 /* Todo */,
 				EFFFE46E294835650045686E /* DataProtocols */,
 				EFDC742128E3395400042452 /* SignalServiceModel */,
 				EFDC742028E3393400042452 /* Reddit */,
@@ -1474,6 +1491,7 @@
 				EF59F106292961BA002877DE /* RecentTweetCard.swift in Sources */,
 				EF92FD81292840850004F547 /* StackScrollView.swift in Sources */,
 				EF86383B28DC761900EF520C /* MainTabView.swift in Sources */,
+				EF04E343294CFCCF00E35815 /* AddTodoTaskViewController.swift in Sources */,
 				EF7CC0132916640B00F9D611 /* RatingChart.swift in Sources */,
 				EF7D2FAA28E033E90003B8F3 /* TrendingHeadlineCell.swift in Sources */,
 				EF7CC001291641EA00F9D611 /* GenericButtonWrapper.swift in Sources */,
@@ -1517,6 +1535,7 @@
 				EF48D71728E5918300BD2A1A /* SignalEventService.swift in Sources */,
 				EF1D7E5C2922CCFD0041ADEC /* CustomCollectionCell.swift in Sources */,
 				EF7CBFD8291641EA00F9D611 /* Array.swift in Sources */,
+				EF04E33F294CF01C00E35815 /* TodoViewController.swift in Sources */,
 				EF96383328DDFEDF00178C37 /* TweetMetricsView.swift in Sources */,
 				EF7D2FC628E09E7E0003B8F3 /* VideoModel.swift in Sources */,
 				EF7CBFE7291641EA00F9D611 /* StringFonts.swift in Sources */,
@@ -1548,6 +1567,7 @@
 				EF96382428DD8FDC00178C37 /* RedditFeed.swift in Sources */,
 				EF7CBFDA291641EA00F9D611 /* ShapeLayer.swift in Sources */,
 				EF987B712917A1F80000E233 /* TopMentionStoryCell.swift in Sources */,
+				EF04E341294CF07A00E35815 /* TodoViewModel.swift in Sources */,
 				EF7CBFFF291641EA00F9D611 /* SearchBar.swift in Sources */,
 				EF96383028DDE60700178C37 /* TweetMetrics.swift in Sources */,
 				EF987B93291FAAEF0000E233 /* TickerStoryView.swift in Sources */,
