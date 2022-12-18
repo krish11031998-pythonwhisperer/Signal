@@ -16,11 +16,7 @@ class NewsFeed: UIViewController {
 //	private var observer: NSKeyValueObservation?
 //	private var yOff: CGFloat = .zero
 	
-	private lazy var viewModel: NewsViewModel = {
-		let model = NewsViewModel()
-		model.view = self
-		return model
-	}()
+    private let viewModel: NewsViewModel = .init()
 	
 	//MARK: - Overriden Methods
 	override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -35,7 +31,6 @@ class NewsFeed: UIViewController {
 		super.viewDidLoad()
 		setupViews()
 		setupNavbar()
-		viewModel.fetchNews()
 		setupObservers()
 	}
 
@@ -60,6 +55,13 @@ class NewsFeed: UIViewController {
             .sink { [weak self] in
                 guard let nav = self?.navigationController else { return }
                 nav.pushViewController(NewsDetailView(news: $0), animated: true)
+            }
+            .store(in: &cancellable)
+        
+        viewModel.news
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] section in
+                self?.tableView.reloadData(.init(sections: [section]))
             }
             .store(in: &cancellable)
 	}

@@ -7,7 +7,7 @@
 
 import Foundation
 import UIKit
-
+import Combine
 
 fileprivate extension MentionModel {
     
@@ -46,7 +46,7 @@ class TopMentionDetailViewModel {
     private var events: [EventModel] = []
     private var selectedTab: String = "Twitter"
     var group: DispatchGroup
-    
+    private var bag: Set<AnyCancellable> = .init()
     init() {
         group = .init()
     }
@@ -61,36 +61,47 @@ class TopMentionDetailViewModel {
     }
     
     private func fetchTweets(completion: Callback? = nil) {
-        StubTweetService.shared.fetchTweets(entity: ticker) { [weak self] in
-            guard let tweets = $0.data?.data else {
+        StubTweetService.shared.fetchTweets(entity: nil, before: nil, after: nil, limit: 20)
+            .compactMap { $0.data }
+            .receive(on: DispatchQueue.main)
+            .sink { _ in
+                
+            } receiveValue: {[weak self] tweets in
+                self?.tweets = tweets
                 completion?()
-                return
             }
-            self?.tweets = tweets
-            completion?()
-        }
+            .store(in: &bag)
+
     }
     
     private func fetchNews(completion: Callback?) {
-        StubNewsService.shared.fetchNews(tickers: ticker) { [weak self] in
-            guard let news = $0.data?.data else {
+        StubNewsService.shared.fetchNews(tickers: ticker)
+            .receive(on: DispatchQueue.main)
+            .sink {
+                switch $0 {
+                case .failure(let err):
+                    print("(DEBUG) err : ", err)
+                default: break
+                }
+            } receiveValue: { [weak self] result in
+                self?.news = result.data ?? []
                 completion?()
-                return
             }
-            self?.news = news
-            completion?()
-        }
+            .store(in: &bag)
+
     }
     
     private func fetchEvents(completion: Callback?) {
-        StubEventService.shared.fetchEvents { [weak self] in
-            guard let events = $0.data?.data else {
+        StubEventService.shared.fetchEvents()
+            .compactMap { $0.data }
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { _ in
+                
+            }, receiveValue: { [weak self] events in
+                self?.events = events
                 completion?()
-                return
-            }
-            self?.events = Array(Set(events))
-            completion?()
-        }
+            })
+            .store(in: &bag)
     }
     
     private func header(_ tab: String) {

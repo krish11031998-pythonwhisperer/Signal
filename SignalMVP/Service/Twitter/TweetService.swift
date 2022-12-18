@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Combine
 
 fileprivate extension Array where Self.Element == URLQueryItem {
 	
@@ -29,9 +30,10 @@ fileprivate extension Array where Self.Element == URLQueryItem {
 class TweetService: TweetServiceInterface {
 	
 	public static var shared: TweetService = .init()
-	
-	public func fetchTweets(entity: String? = nil, before: String? = nil, after: String? = nil, limit: Int = 20, completion: @escaping (Result<TweetSearchResult, Error>) -> Void) {
-		SignalTwitterEndpoints.tweets(entity: entity, before: before, after: after, limit: limit).fetch(completion: completion)
-	}
+
+    public func fetchTweets(entity: String? = nil, before: String? = nil, after: String? = nil, limit: Int = 20) -> Future<TweetSearchResult, Error> {
+        SignalTwitterEndpoints.tweets(entity: entity, before: before, after: after, limit: limit)
+            .fetch()
+    }
 }
 

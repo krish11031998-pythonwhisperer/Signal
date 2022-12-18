@@ -15,36 +15,26 @@ struct NewsCellModel: ActionProvider {
 
 class NewsViewModel {
 	
-	var view: AnyTableView?
-	var news: [NewsModel]?
     var selectedNews: CurrentValueSubject<NewsModel?, Never> = .init(nil)
-	
-	func fetchNews() {
-        StubNewsService
-            .shared
-			.fetchNews { [weak self] result in
-                if let news = result.data?.data {
-                    self?.news = news
-                    asyncMain {
-                        guard let strongSelf = self else { return }
-                        strongSelf.view?.reloadTableWithDataSource(strongSelf.buildTableViewSource())
-                    }
+    private var bag: Set<AnyCancellable> = .init()
+    
+    var news: AnyPublisher<TableSection, Never> {
+        NewsService.shared
+            .fetchNews()
+            .catch { err in
+                print("(DEBUG) err : ", err)
+                return StubNewsService.shared.fetchNews()
+            }
+            .catch({ _ in
+                Just(NewsResult(data: []))
+            })
+            .compactMap { $0.data }
+            .map { allNews in
+                let rows = allNews.compactMap { news in
+                    TableRow<NewsCell>(.init(model: news, action: { self.selectedNews.send(news) }))
                 }
-		}
-	}
-	
-	var newsSection: TableSection? {
-		guard let validNews = news else { return nil }
-		let rows = validNews.compactMap { news in
-			TableRow<NewsCell>(.init(model: news, action: {
-//				NewsStorage.selectedNews = news
-                self.selectedNews.value = news
-			})) }
-		return .init(rows: rows)
-	}
-	
-	func buildTableViewSource() -> TableViewDataSource {
-		return .init(sections: [newsSection].compactMap { $0 })
-	}
-	
+                return TableSection(rows: rows)
+            }
+            .eraseToAnyPublisher()
+    }
 }

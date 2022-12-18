@@ -73,7 +73,7 @@ struct MentionCellModel: ActionProvider {
     var actionWithFrame: ((CGRect) -> Void)?
 }
 
-enum MentionPeriod {
-	case weekly
-	case monthly
+enum MentionPeriod: String {
+	case weekly = "topMentionsWeek"
+	case monthly = "topMentionsMonth"
 }

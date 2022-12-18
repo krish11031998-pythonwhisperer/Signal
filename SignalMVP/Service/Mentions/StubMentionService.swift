@@ -6,13 +6,14 @@
 //
 
 import Foundation
+import Combine
 
 class StubMentionService: MentionsServiceInterface {
 	
 	public static let shared: StubMentionService = .init()
-	
-	public func fetchMentions(period: MentionPeriod, completion: @escaping (Result<MentionsResult, Error>) -> Void) {
-		completion(Bundle.main.loadDataFromBundle(name: period == .weekly ? "topMentionsWeek" : "topMentionsMonth", extensionStr: "json"))
-	}
+
+    public func fetchMentions(period: MentionPeriod) -> Future<MentionsResult, Error> {
+        Bundle.main.loadDataFromBundle(name: period.rawValue, extensionStr: "json").future
+    }
 	
 }

@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+import Combine
 struct TweetCellModel: ActionProvider {
 	let model: TweetModel?
 	var action: Callback?
@@ -31,23 +31,27 @@ class TweetFeedViewModel {
 	var tweets: [TweetCellModel]?
 	var loading: Bool = false
 	var view: AnyTableView?
-	
+    private var bag: Set<AnyCancellable> = .init()
 	public func fetchTweets(entity: String? = nil, before: String? = nil, after: String? = nil, limit: Int = 20) {
 		guard !loading else { return }
 		loading = true
 		TweetService
 			.shared
-			.fetchTweets(entity: entity, before: before, after: after) { [weak self] result in
-                if let result = result.data {
-                    self?.decodeToTweetCellModel(result)
-                } else {
-                    StubTweetService.shared.fetchTweets {
-                        if let tweets = $0.data {
-                            self?.decodeToTweetCellModel(tweets)
-                        }
-                    }
+            .fetchTweets()
+            .catch { _ in
+                StubTweetService.shared.fetchTweets(entity: nil, before: nil, after: nil, limit: 0)
+            }
+            .sink { err in
+                switch err {
+                case .failure(let err):
+                    print("(DEBUG) err: ", err)
+                default: break
                 }
-			}
+            } receiveValue: { [weak self] tweets in
+                self?.decodeToTweetCellModel(tweets)
+            }
+            .store(in: &bag)
+
 	}
 	
 	

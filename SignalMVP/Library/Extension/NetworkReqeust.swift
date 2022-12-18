@@ -6,17 +6,17 @@
 //
 
 import Foundation
- 
+import Combine
 protocol EndPoint {
-	associatedtype CodableModel
 	var scheme: String { get }
 	var baseUrl: String { get }
 	var path: String { get }
 	var queryItems: [URLQueryItem] { get }
 	var request: URLRequest? { get }
 	var header: [String : String]? { get }
-	func fetch(completion: @escaping (Result<CodableModel,Error>) -> Void)
+    func fetch<CodableModel: Codable>() -> Future<CodableModel,Error>
 }
+
 
 extension EndPoint {
 	
@@ -39,6 +39,13 @@ extension EndPoint {
 		request.allHTTPHeaderFields = header
 		return request
 	}
+    
+    func fetch<CodableModel: Codable>() -> Future<CodableModel, Error> {
+        guard let validRequest = request else {
+            return Future { $0(.failure(URLSessionError.invalidUrl))}
+        }
+        return URLSession.urlSessionRequest(request: validRequest)
+    }
 	
 }
 
@@ -116,4 +123,34 @@ extension URLSession {
 		}
 	}
 	
+    
+    static func urlSessionRequest<T: Codable>(request: URLRequest) -> Future<T,Error> {
+        Future { promise in
+            print("(DEBUG) Request: \(request.url?.absoluteString)")
+            if let cachedData = DataCache.shared[request] {
+                if let deceodedData = try? JSONDecoder().decode(T.self, from: cachedData) {
+                    promise(.success(deceodedData))
+                } else {
+                    promise(.failure(URLSessionError.decodeErr))
+                }
+            } else {
+                let session = URLSession.shared.dataTask(with: request) { data, resp , err in
+                    guard let validData = data, let validResponse = resp else {
+                        promise(.failure(err ?? URLSessionError.noData))
+                        return
+                    }
+                    
+                    guard let decodedData = try? JSONDecoder().decode(T.self, from: validData) else {
+                        promise(.failure(URLSessionError.decodeErr))
+                        return
+                    }
+                    
+                    DataCache.shared[request] = validData
+                    
+                    promise(.success(decodedData))
+                }
+                session.resume()
+            }
+        }
+    }
 }
