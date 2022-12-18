@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Combine
 
 class NewsDetailView: UIViewController {
     
@@ -15,7 +16,7 @@ class NewsDetailView: UIViewController {
     private lazy var descriptionLabel: UILabel = { .init() }()
     private lazy var viewNews: UIView = { .init() }()
     private lazy var scrollView: ScrollView = { .init(ignoreSafeArea: true) }()
-    
+    private var bag: Set<AnyCancellable> = .init()
     private lazy var viewMoreButton: UIButton = {
         let button = UIButton()
         "View News".body1Medium().render(target: button)
@@ -23,7 +24,6 @@ class NewsDetailView: UIViewController {
         button.titleLabel?.textAlignment = .center
         button.cornerRadius = 8
         button.setHeight(height: 50, priority: .required)
-        button.addTarget(self, action: #selector(showWebpage), for: .touchUpInside)
         return button
     }()
     
@@ -45,6 +45,7 @@ class NewsDetailView: UIViewController {
         setupView()
         tickersView.configTickers(news: news)
         hideTabBarIfRequired()
+        setupObservers()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -93,17 +94,6 @@ class NewsDetailView: UIViewController {
         navigationController?.tabBarController?.tabBar.hide = false
     }
     
-    private func setupButton() -> UIButton {
-        let button = UIButton()
-        "View News".body1Medium().render(target: button)
-        button.backgroundColor = .appBlue
-        button.titleLabel?.textAlignment = .center
-        button.cornerRadius = 8
-        button.setHeight(height: 50, priority: .required)
-        button.addTarget(self, action: #selector(dismissView), for: .touchUpInside)
-        return button
-    }
-    
     private func setupMainStack() {
         let descriptionStack = setupDescriptionStack()
         scrollView.addArrangedView(view: imageView, additionalSpacing: 24)
@@ -127,6 +117,14 @@ class NewsDetailView: UIViewController {
     @objc
     private func dismissView() {
         dismiss(animated: true)
+    }
+    
+    private func setupObservers() {
+        viewMoreButton.publisher(for: .touchUpInside)
+            .sink { [weak self] _ in
+                self?.showWebpage()
+            }
+            .store(in: &bag)
     }
     
     @objc

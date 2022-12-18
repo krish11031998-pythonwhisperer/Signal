@@ -14,6 +14,7 @@
 		EF00758F28E5CBA000195433 /* SignalNewsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF00758E28E5CBA000195433 /* SignalNewsService.swift */; };
 		EF04E345294EFBE500E35815 /* Result+Future.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF04E344294EFBE500E35815 /* Result+Future.swift */; };
 		EF04E347294F10F000E35815 /* VideoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF04E346294F10F000E35815 /* VideoViewModel.swift */; };
+		EF04E34A294F203F00E35815 /* UIControl+Publishers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF04E349294F203F00E35815 /* UIControl+Publishers.swift */; };
 		EF16449D29054FBB00E9D997 /* signalTweets.json in Resources */ = {isa = PBXBuildFile; fileRef = EF16449C29054FBB00E9D997 /* signalTweets.json */; };
 		EF1644A0290550B300E9D997 /* ServiceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF16449F290550B300E9D997 /* ServiceHelper.swift */; };
 		EF1644A42905573600E9D997 /* signalNews.json in Resources */ = {isa = PBXBuildFile; fileRef = EF1644A32905573600E9D997 /* signalNews.json */; };
@@ -231,6 +232,7 @@
 		EF00758E28E5CBA000195433 /* SignalNewsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalNewsService.swift; sourceTree = "<group>"; };
 		EF04E344294EFBE500E35815 /* Result+Future.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Result+Future.swift"; sourceTree = "<group>"; };
 		EF04E346294F10F000E35815 /* VideoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewModel.swift; sourceTree = "<group>"; };
+		EF04E349294F203F00E35815 /* UIControl+Publishers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+Publishers.swift"; sourceTree = "<group>"; };
 		EF16449C29054FBB00E9D997 /* signalTweets.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = signalTweets.json; sourceTree = "<group>"; };
 		EF16449F290550B300E9D997 /* ServiceHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceHelper.swift; sourceTree = "<group>"; };
 		EF1644A32905573600E9D997 /* signalNews.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = signalNews.json; sourceTree = "<group>"; };
@@ -459,6 +461,14 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		EF04E348294F202E00E35815 /* PublisherHelpers */ = {
+			isa = PBXGroup;
+			children = (
+				EF04E349294F203F00E35815 /* UIControl+Publishers.swift */,
+			);
+			path = PublisherHelpers;
+			sourceTree = "<group>";
+		};
 		EF16449E2905509400E9D997 /* ServiceHelpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -553,6 +563,7 @@
 		EF7CBF90291641E900F9D611 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				EF04E348294F202E00E35815 /* PublisherHelpers */,
 				EF59F109292A3308002877DE /* TabBar */,
 				EF7CBF91291641E900F9D611 /* Array.swift */,
 				EF7CBF92291641E900F9D611 /* UIColor.swift */,
@@ -1573,6 +1584,7 @@
 				EF7CBFDD291641EA00F9D611 /* UIImageView.swift in Sources */,
 				EFB1C25F28DB3CC600DD40A4 /* TweetsFeed.swift in Sources */,
 				EF7CBFDC291641EA00F9D611 /* UIImage.swift in Sources */,
+				EF04E34A294F203F00E35815 /* UIControl+Publishers.swift in Sources */,
 				EF7CBFE4291641EA00F9D611 /* Views.swift in Sources */,
 				EF7CBFE6291641EA00F9D611 /* FontCatalogue.swift in Sources */,
 				EF59F10B292A331A002877DE /* UITabbar.swift in Sources */,
