@@ -12,9 +12,7 @@ enum TweetEndpoint {
 }
 
 extension TweetEndpoint: EndPoint {
-		
-	typealias CodableModel = TweetSearchResult
-	
+    
 	var scheme: String {
 		"https"
 	}
@@ -41,7 +39,7 @@ extension TweetEndpoint: EndPoint {
 		["Authorization" : "Bearer AAAAAAAAAAAAAAAAAAAAAJHAagEAAAAAmFRvYKE8KtF%2BTvVxYsse0GC6faE%3DsuQdyHCBqKvhOjmoGGfUPNOCG41QZySz1BQWgJB5i0QIN7wbaE"]
 	}
 	
-	func fetch(completion: @escaping (Result<TweetSearchResult, Error>) -> Void) {
+	func fetch<CodableModel>(completion: @escaping (Result<CodableModel, Error>) -> Void) where CodableModel : Decodable, CodableModel : Encodable  {
 		guard let validRequest = request else {
 			completion(.failure(URLSessionError.invalidUrl))
 			return

@@ -6,8 +6,8 @@
 //
 
 import Foundation
-
+import Combine
 
 protocol TrendingHeadlinesInterface {
-	func fetchHeadlines(completion: @escaping (Result<TrendingHeadlinesResult,Error>) -> Void)
+    func fetchHeadlines() -> Future<TrendingHeadlinesResult,Error>
 }

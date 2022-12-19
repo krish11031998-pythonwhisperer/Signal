@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 enum SignalTwitterEndpoints {
 	case tweets(entity: String?, before: String?, after: String?, limit: Int = 20)
@@ -48,5 +49,11 @@ extension SignalTwitterEndpoints: EndPoint {
 		URLSession.urlSessionRequest(request: validRequest, completion: completion)
 	}
 	
+    func fetch() -> Future<TweetSearchResult, Error> {
+        guard let validRequest = request else {
+            return Future { $0(.failure(URLSessionError.invalidUrl))}
+        }
+        return URLSession.urlSessionRequest(request: validRequest)
+    }
 	
 }

@@ -29,15 +29,8 @@ class TweetCell: ConfigurableCell {
 	private lazy var authorLabel: UILabel = { .init() }()
 	private lazy var timestampLabel: UILabel = { .init() }()
 	private lazy var bodyLabel: UILabel = { .init() }()
-	private var imgView: UIImageView = {
-		let imgView = UIImageView()
-		imgView.backgroundColor = .gray.withAlphaComponent(0.25)
-		imgView.cornerRadius = 10
-		imgView.clipsToBounds = true
-		imgView.contentMode = .scaleAspectFill
-		return imgView
-	}()
-	private lazy var authorImageView: UIImageView = { .init() }()
+    private var imgView: UIImageView = { return .standardImageView(dimmingForeground: false) }()
+    private lazy var authorImageView: UIImageView = { .standardImageView(frame: .init(origin: .zero, size: .init(squared: 48)), circleFrame: true) }()
 	private var metrics: [UIView] = []
 	private lazy var imageHeight: NSLayoutConstraint = {
 		let constraint = imgView.heightAnchor.constraint(equalToConstant: 200)
@@ -76,11 +69,8 @@ class TweetCell: ConfigurableCell {
 		bodyStack.setCustomSpacing(16, after: divider)
 
 		let mainStack = UIView.HStack(subViews: [authorImageView, bodyStack], spacing: 12, alignment: .top)
-		authorImageView.circleFrame = .init(origin: .zero, size: .init(squared: 48))
-		authorImageView.setFrame(.init(squared: 48))
-		authorImageView.backgroundColor = .gray.withAlphaComponent(0.15)
-		authorImageView.contentMode = .scaleAspectFill
 		imageHeight.isActive = true
+        imgView.clippedCornerRadius = 16
 		contentView.addSubview(mainStack)
 		contentView.setFittingConstraints(childView: mainStack, insets: .init(vertical: 10, horizontal: 16))
 	
@@ -107,7 +97,7 @@ class TweetCell: ConfigurableCell {
 		   let photoUrl = media.url ?? media.previewImageUrl {
 			let height = (CGFloat.totalWidth - 32) * CGFloat(media.height)/CGFloat(media.width)
 			imageHeight.constant = height
-			UIImage.loadImage(url: photoUrl, at: imgView, path: \.image)
+			UIImage.loadImage(url: photoUrl, at: imgView, path: \.image, resolveWithAspectRatio: true)
 			imgView.isHidden = false
 		} else {
 			imgView.isHidden = true

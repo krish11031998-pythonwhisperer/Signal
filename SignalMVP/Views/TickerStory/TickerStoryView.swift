@@ -7,7 +7,7 @@
 
 import Foundation
 import UIKit
-
+import Combine
 //MARK: - Defination
 
 class TickerStoryView: UIViewController {
@@ -15,6 +15,7 @@ class TickerStoryView: UIViewController {
     //MARK: - Properties
     private var newsForTicker: [NewsModel] = []
     private var idx: Int = -1 { didSet { loadWithNews() } }
+    private var bag: Set<AnyCancellable> = .init()
     private lazy var mainImageView: UIImageView = { .init() }()
     private lazy var mainLabel: UILabel = { .init() }()
     private lazy var mainDescriptionLabel: UILabel = { .init() }()
@@ -103,13 +104,22 @@ class TickerStoryView: UIViewController {
     
     private func fetchNews() {
         guard let ticker = MentionStorage.selectedMention?.ticker else { return }
-        StubNewsService.shared.fetchNews(tickers: ticker) { [weak self] result in
-            guard let news = result.data?.data else { return }
-            self?.newsForTicker = news
-            asyncMain {
-                self?.idx = news.isEmpty ? -1 : 0
+        StubNewsService.shared
+            .fetchNews(tickers: ticker)
+            .compactMap { $0.data }
+            .receive(on: DispatchQueue.main)
+            .sink {
+                switch $0 {
+                case .failure(let err):
+                    print("(DEBUG) err:", err)
+                default: break
+                }
+            } receiveValue: {[weak self] in
+                self?.newsForTicker = $0
+                self?.idx = $0.isEmpty ? -1 : 0
             }
-        }
+            .store(in: &bag)
+
     }
     
     private func setupTimer() {

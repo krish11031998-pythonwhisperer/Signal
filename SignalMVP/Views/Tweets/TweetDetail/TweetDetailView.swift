@@ -59,6 +59,9 @@ fileprivate class TweetDetailImage: UIView {
 //MARK: - TweetDetailView
 
 class TweetDetailView: UIViewController {
+    
+    private let tweet: TweetCellModel
+    
 	private lazy var profileHeader: ImageHeadSubHeaderView = { .init() }()
 	private lazy var bodyLabel: UILabel = { .init() }()
 	private lazy var imgView: TweetDetailImage = { .init() }()
@@ -74,6 +77,15 @@ class TweetDetailView: UIViewController {
 	private lazy var metricStack: TweetMetricsView = { .init() }()
 	private var observer: NSKeyValueObservation?
 	
+    init(tweet: TweetCellModel) {
+        self.tweet = tweet
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		setupViews()
@@ -101,23 +113,21 @@ class TweetDetailView: UIViewController {
 	}
 	
 	func configureViews() {
-		guard let validTweet = TweetStorage.selectedTweet else { return }
-        
-        validTweet.model?.text.styled(font: .light, color: .textColor, size: 25).render(target: bodyLabel)
+        tweet.model?.text.styled(font: .light, color: .textColor, size: 25).render(target: bodyLabel)
 		bodyLabel.numberOfLines = 0
 		
-		profileHeader.configure(config: .init(title: validTweet.user?.username,
-											  imgUrl: validTweet.user?.profileImageUrl,
+		profileHeader.configure(config: .init(title: tweet.user?.username,
+											  imgUrl: tweet.user?.profileImageUrl,
 											  imgSize: .init(squared: 48)), radius: 24)
 
-		if let url = validTweet.media?.first?.url ?? validTweet.media?.first?.previewImageUrl {
+		if let url = tweet.media?.first?.url ?? tweet.media?.first?.previewImageUrl {
 			imgView.configureView(url: url , cornerRadius: 10)
 			imgView.setHeight(height: 350, priority: .required)
 			imgView.isHidden = false
 		}
 		
-		if let url = validTweet.model?.urls?.first {
-			print("(DEBUG) tweetId: ", validTweet.model?.id)
+		if let url = tweet.model?.urls?.first {
+			print("(DEBUG) tweetId: ", tweet.model?.id)
 			tweetURLView.configureView(url)
 			tweetURLView.isHidden = false
 		}

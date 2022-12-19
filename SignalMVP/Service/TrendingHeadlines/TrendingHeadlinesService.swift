@@ -6,14 +6,14 @@
 //
 
 import Foundation
+import Combine
 
 class StubTrendingHeadlines: TrendingHeadlinesInterface {
 	
 	public static var shared: StubTrendingHeadlines = .init()
 	
-	public func fetchHeadlines(completion: @escaping (Result<TrendingHeadlinesResult,Error>) -> Void) {
-		let result: Result<TrendingHeadlinesResult,Error> = Bundle.main.loadDataFromBundle(name: "trendingHeadlines", extensionStr: "json")
-		completion(result)
-	}
+    public func fetchHeadlines() -> Future<TrendingHeadlinesResult,Error> {
+        Bundle.main.loadDataFromBundle(name: "trendingHeadlines", extensionStr: "json").future
+    }
 
 }

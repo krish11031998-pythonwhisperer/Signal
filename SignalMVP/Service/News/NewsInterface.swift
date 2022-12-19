@@ -6,13 +6,12 @@
 //
 
 import Foundation
-
+import Combine
 protocol NewsServiceInterface {
 	func fetchNews(tickers: String?,
 				   items: String?,
 				   source: String?,
 				   after: String?,
 				   before: String?,
-				   limit: Int,
-				   completion: @escaping (Result<NewsResult,Error>) -> Void)
+				   limit: Int) -> Future<NewsResult,Error>
 }

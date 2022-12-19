@@ -7,7 +7,7 @@
 
 import Foundation
 import UIKit
-
+import Combine
 struct EventCellModel: ActionProvider {
 	let model: EventModel
 	var action: Callback?
@@ -24,18 +24,13 @@ class EventsFeedViewController: UIViewController {
 		return table
 	}()
 	
-	private lazy var viewModel: EventViewModel = {
-		let model = EventViewModel()
-		model.view = self
-		return model
-	}()
-	
+    private var viewModel: EventViewModel = .init()
+    private var bag: Set<AnyCancellable> = .init()
 	//MARK: - Overriden Methods
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		setupView()
-		viewModel.fetchEvents()
 		setupNavBar()
 		setupObservers()
 	}
@@ -68,6 +63,13 @@ class EventsFeedViewController: UIViewController {
 	
 	private func setupObservers() {
 		NotificationCenter.default.addObserver(self, selector: #selector(showEventDetail), name: .showEvent, object: nil)
+        
+        viewModel.events
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] section in
+                self?.tableView.reloadData(.init(sections: [section]))
+            }
+            .store(in: &bag)
 	}
 	
 	@objc

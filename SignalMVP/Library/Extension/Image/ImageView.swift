@@ -11,8 +11,13 @@ import UIKit
 
 extension UIImageView {
     
-    static func standardImageView(dimmingForeground: Bool = false) -> UIImageView {
-        let imageView = UIImageView()
+    static func standardImageView(frame: CGRect = .zero, dimmingForeground: Bool = false, circleFrame: Bool = false) -> UIImageView {
+        var imageView: UIImageView
+        if circleFrame {
+            imageView = .init(circleFrame: frame)
+        } else {
+            imageView = .init(frame: frame)
+        }
         imageView.clipsToBounds = true
         imageView.contentMode = .scaleAspectFill
         imageView.backgroundColor = .gray.withAlphaComponent(0.25)

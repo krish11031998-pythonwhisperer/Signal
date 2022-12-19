@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 enum SignalNewsEndpoints {
 	case tickerNews(tickers: String? = nil,
@@ -50,16 +51,6 @@ extension SignalNewsEndpoints: EndPoint {
 			].filter { $0.value != nil }
 		}
 	}
-	
-	func fetch(completion: @escaping (Result<NewsResult, Error>) -> Void) {
-		guard let validRequest = request else {
-			completion(.failure(URLSessionError.invalidUrl))
-			return
-		}
-		URLSession.urlSessionRequest(request: validRequest, completion: completion)
-	}
-	
-	
 }
 
 class NewsService: NewsServiceInterface {
@@ -72,9 +63,10 @@ class NewsService: NewsServiceInterface {
 				   source: String? = nil,
 				   after: String? = nil,
 				   before: String? = nil,
-				   limit: Int = 20,
-				   completion: @escaping (Result<NewsResult, Error>) -> Void) {
-		SignalNewsEndpoints.tickerNews(tickers: tickers, items: items, source: source, after: after, before: before, limit: limit).fetch(completion: completion)
+				   limit: Int = 20) -> Future<NewsResult, Error> {
+		SignalNewsEndpoints
+            .tickerNews(tickers: tickers, items: items, source: source, after: after, before: before, limit: limit)
+            .fetch()
 	}
 	
 }

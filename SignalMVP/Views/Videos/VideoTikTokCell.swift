@@ -8,7 +8,12 @@
 import Foundation
 import UIKit
 import youtube_ios_player_helper
+import Combine
 
+enum YTPlayerError: String, Error {
+    case outOfMemory
+    case stateNotFound
+}
 
 fileprivate extension YTPlayerView {
     static let videoParams: [AnyHashable: Any] = ["iv_load_policy": 3,
@@ -16,32 +21,43 @@ fileprivate extension YTPlayerView {
                                                   "playsinline": 1,
                                                   "modestbranding": 1,
                                                   "autoplay": 1, "loop": 1]
-}
-
-fileprivate extension YTPlayerState {
-    func image(size: CGSize) -> UIImage? {
-        switch self {
-        case .playing:
-            return .init(systemName: "play.fill")?.resized(size: size).withTintColor(.white)
-        case .paused:
-            return .init(systemName: "pause.fill")?.resized(size: size).withTintColor(.white)
-        default:
-            return nil
-        }
+    
+    func fetchPlayerState() -> AnyPublisher<YTPlayerState, Error> {
+        Future { [weak self] promise in
+            guard let `self` = self else {
+                promise(.failure(YTPlayerError.outOfMemory))
+                return
+            }
+            self.playerState { state, err in
+                guard err == nil else {
+                    if let err = err {
+                        promise(.failure(err))
+                    }
+                    return
+                }
+                promise(.success(state))
+            }
+        }.eraseToAnyPublisher()
+        
     }
 }
 
+
 //MARK: - SeekDirection
-enum SeekDirection {
-    case forward, backward, none
+enum PlayerState {
+    case play, pause, seekForward, seekBackward, idle
 }
 
-extension SeekDirection {
+extension PlayerState {
     var image: UIImage? {
         switch self {
-        case .forward:
+        case .play:
+            return .init(systemName: "play.fill")
+        case .pause:
+            return .init(systemName: "pause.fill")
+        case .seekForward:
             return .init(systemName: "forward.fill")
-        case .backward:
+        case .seekBackward:
             return .init(systemName: "backward.fill")
         default:
             return nil
@@ -54,16 +70,14 @@ extension SeekDirection {
 class VideoTikTokCell: ConfigurableCollectionCell {
     
     private var model: VideoModel?
-    private lazy var imageView: UIImageView = {
-        let view = UIImageView.init()
-        view.contentMode = .scaleAspectFill
-        return view
-    }()
+    private lazy var imageView: UIImageView = { .standardImageView() }()
     private lazy var symbolView: TickerSymbolView = { .init() }()
     private lazy var videoContentView: UIStackView = { .VStack(spacing: 10, alignment: .leading) }()
     private lazy var videolabel: UILabel = { .init() }()
     private lazy var videoDescription: UILabel = { .init() }()
     private lazy var channelLabel: UILabel = { .init() }()
+    private var playerState: CurrentValueSubject<PlayerState, Error> = .init(.idle)
+    private var bag: Set<AnyCancellable> = .init()
     
     private lazy var videoPlayer: YTPlayerView = {
         let player: YTPlayerView = .init()
@@ -79,18 +93,19 @@ class VideoTikTokCell: ConfigurableCollectionCell {
     
     private var tapCount: Int = 0
 
-    private var seekDirection: SeekDirection = .none {
-        didSet { seekTo() }
-    }
+//    private var seekDirection: SeekDirection = .none {
+//        didSet { seekTo() }
+//    }
     
-    private var videoPlayerState: YTPlayerState = .unknown {
-        willSet { updateIndicator(old: videoPlayerState, new: newValue) }
-        didSet { updateVideoPlayerWithState() }
-    }
+//    private var videoPlayerState: YTPlayerState = .unknown {
+//        willSet { updateIndicator(old: videoPlayerState, new: newValue) }
+//        didSet { updateVideoPlayerWithState() }
+//    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
+        setObservers()
     }
     
     required init?(coder: NSCoder) {
@@ -131,7 +146,7 @@ class VideoTikTokCell: ConfigurableCollectionCell {
     
     func configure(with model: VideoModel) {
         videoDescription.numberOfLines = 1
-        videoPlayerState = .cued
+        playerState.send(.idle)
         UIImage.loadImage(url: model.imageUrl, at: imageView, path: \.image, resized: .init(width: .totalWidth, height: .totalHeight), resolveWithAspectRatio: true)
         model.title.body1Medium().render(target: videolabel)
         model.sourceName.body3Regular(color: .lightGray).render(target: channelLabel)
@@ -142,24 +157,48 @@ class VideoTikTokCell: ConfigurableCollectionCell {
         
     }
     
+    private func setObservers() {
+        playerState
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: {
+                print("(ERROR) err:", $0.err?.localizedDescription)
+            }, receiveValue: { [weak self] (newPlayState) in
+                guard let `self` = self else { return }
+                    switch newPlayState {
+                    case .idle:
+                        self.videoPlayer.isHidden = true
+                    case .play:
+                        self.updateIndicator(new: newPlayState)
+                        self.updateVideoPlayerWithState(state: newPlayState)
+                    case .pause:
+                        self.updateIndicator(new: newPlayState)
+                        self.updateVideoPlayerWithState(state: newPlayState)
+                    case .seekBackward, .seekForward:
+                        self.updateIndicator(new: newPlayState)
+                        self.seekTo()
+                }
+            })
+            .store(in: &bag)
+    }
+    
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
         
         let location = touch.location(in: self)
 
         guard  location.x <= .totalWidth * 0.3 || location.x >= .totalWidth * 0.66 else {
-            self.videoPlayerState = videoPlayerState == .playing ? .paused : .playing
+            self.playerState.send(playerState.value == .play ? .pause : .play)
             return
         }
         
         if location.x <= .totalWidth * 0.3 {
             self.tapCount += 1
-            self.seekDirection = .backward
+            self.playerState.send(.seekBackward)
         }
         
         if location.x >= .totalWidth * 0.66 {
             self.tapCount += 1
-            self.seekDirection = .forward
+            self.playerState.send(.seekForward)
         }
     }
 }
@@ -178,36 +217,29 @@ extension VideoTikTokCell {
 
 extension VideoTikTokCell {
     func willDisplay() {
-        videoPlayerState = .playing
+        playerState.send(.play)
     }
     
     func endDisplay() {
-        if videoPlayerState == .playing {
-            videoPlayerState = .paused
+        if playerState.value == .play {
+            playerState.send(.pause)
         }
     }
 }
 //MARK: - VideoTikTokCell - Video Player
 extension VideoTikTokCell {
     
-    private func updateIndicator(old: YTPlayerState, new: YTPlayerState) {
-        if old == .paused && new == .playing {
-            playerStateIndicator.image = new.image(size: playerStateIndicator.frame.size.half)
-            playerStateIndicator.animate(.fadeInOut())
-        }
-        
-        if old == .playing && new == .paused {
-            playerStateIndicator.image = new.image(size: playerStateIndicator.frame.size.half)
-            playerStateIndicator.animate(.fadeInOut())
-        }
+    private func updateIndicator(new: PlayerState) {
+        playerStateIndicator.image = new.image?.resized(size: playerStateIndicator.frame.size.half).withTintColor(.white)
+        playerStateIndicator.animate(.fadeInOut())
     }
     
-    private func updateVideoPlayerWithState() {
-        switch videoPlayerState {
-        case .paused:
+    private func updateVideoPlayerWithState(state: PlayerState) {
+        switch state {
+        case .pause:
             self.videoPlayer.pauseVideo()
             self.videoContentView.layer.animate(.fadeIn())
-        case .playing:
+        case .play:
             self.videoPlayer.isHidden = false
             self.videoPlayer.playVideo()
             DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
@@ -222,18 +254,15 @@ extension VideoTikTokCell {
         guard tapCount >= 2 else { return }
         videoPlayer.currentTime {[weak self] time, err in
             guard let `self` = self, err == nil else { return }
-            switch self.seekDirection {
-            case .forward:
+            switch self.playerState.value {
+            case .seekForward:
                 self.videoPlayer.seek(toSeconds: time + 10, allowSeekAhead: true)
-            case .backward:
+            case .seekBackward:
                 self.videoPlayer.seek(toSeconds: time - 10, allowSeekAhead: true)
             default:
                 break
             }
             self.tapCount = 0
-            self.playerStateIndicator.image = self.seekDirection.image?.resized(size: self.playerStateIndicator.frame.size.half).withTintColor(.white)
-            self.playerStateIndicator.animate(.fadeInOut())
-            
         }
     }
 }

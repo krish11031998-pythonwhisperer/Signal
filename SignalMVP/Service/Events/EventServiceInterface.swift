@@ -6,8 +6,9 @@
 //
 
 import Foundation
+import Combine
 
 protocol EventServiceInterface {
 	
-	func fetchEvents(before: String?, after: String?, limit: Int, completion: @escaping (Result<EventResult,Error>) -> Void)
+    func fetchEvents(before: String?, after: String?, limit: Int) -> Future<EventResult,Error>
 }

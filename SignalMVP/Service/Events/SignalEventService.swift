@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 enum SignalEventEndpoints {
 	case latestEvents(before: String?, after: String?, limit: Int)
@@ -46,6 +47,12 @@ extension SignalEventEndpoints: EndPoint {
 		URLSession.urlSessionRequest(request: validRequest, completion: completion)
 	}
 	
+    func fetch() -> Future<EventResult, Error> {
+        guard let validRequest = request else {
+            return Future { $0(.failure(URLSessionError.invalidUrl))}
+        }
+        return URLSession.urlSessionRequest(request: validRequest)
+    }
 	
 }
 
@@ -54,10 +61,10 @@ class EventService: EventServiceInterface {
 	
 	public static var shared: EventService = .init()
 	
-	public func fetchEvents(before: String? = nil, after: String? = nil, limit: Int = 20, completion: @escaping (Result<EventResult, Error>) -> Void) {
-		SignalEventEndpoints
-			.latestEvents(before: before, after: after, limit: limit)
-			.fetch(completion: completion)
-	}
+    public func fetchEvents(before: String? = nil, after: String? = nil, limit: Int = 20) -> Future<EventResult, Error> {
+        SignalEventEndpoints
+            .latestEvents(before: before, after: after, limit: limit)
+            .fetch()
+    }
 	
 }

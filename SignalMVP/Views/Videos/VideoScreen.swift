@@ -7,10 +7,23 @@
 
 import Foundation
 import UIKit
+import Combine
 
 class VideoViewController: UIViewController {
     
     private var videos: [VideoModel] = []
+    private var viewModel: VideoViewModel
+    private var bag: Set<AnyCancellable> = .init()
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        self.viewModel = .init()
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
+    
+    required init?(coder: NSCoder) {
+        self.viewModel = .init()
+        fatalError("init(coder:) has not been implemented")
+    }
     private lazy var collection: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = .init(width: .totalWidth, height: .totalHeight)
@@ -28,8 +41,17 @@ class VideoViewController: UIViewController {
         super.viewDidLoad()
         setupView()
         loadVideos()
-        standardNavBar(leftBarButton: .init(customView: "Video".heading2().generateLabel))
-        navigationController?.navigationItem.leftBarButtonItem = nil
+        standardNavBar(leftBarButton: .init(customView: "Video".heading2().generateLabel), color: .clear, scrollColor: .clear)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let image = UIImage.Catalogue.chartSquareBarOutline.image
+        let imageView = UIImageView(image: image)
+        imageView.frame = .init(origin: .zero, size: .init(squared: 50))
+
+        navigationController?.navigationItem.titleView = imageView
     }
     
     private func setupView() {
@@ -38,26 +60,12 @@ class VideoViewController: UIViewController {
         collection.contentInsetAdjustmentBehavior = .never
     }
     
-    
-    private func loadCollection() {
-        collection.reloadData(.init(sections: [videoSection].compactMap { $0 }))
-    }
-    
-    private var videoSection: CollectionSection? {
-        guard !videos.isEmpty else { return nil }
-        let collectionCells: [CollectionCellProvider] = videos.compactMap {
-            return CollectionItem<VideoTikTokCell>($0)
-        }
-        return .init(cell: collectionCells)
-    }
-    
     private func loadVideos() {
-        StubVideoService.shared.fetchVideo { [weak self] in
-            guard let videos = $0.data else { return }
-            self?.videos = videos
-            DispatchQueue.main.async {
-                self?.loadCollection()
+        self.viewModel.videos
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] collectionSection in
+                self?.collection.reloadData(.init(sections: [collectionSection]))
             }
-        }
+            .store(in: &bag)
     }
 }

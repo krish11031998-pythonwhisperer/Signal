@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Combine
 
 class NewsDetailView: UIViewController {
     
@@ -15,7 +16,7 @@ class NewsDetailView: UIViewController {
     private lazy var descriptionLabel: UILabel = { .init() }()
     private lazy var viewNews: UIView = { .init() }()
     private lazy var scrollView: ScrollView = { .init(ignoreSafeArea: true) }()
-    
+    private var bag: Set<AnyCancellable> = .init()
     private lazy var viewMoreButton: UIButton = {
         let button = UIButton()
         "View News".body1Medium().render(target: button)
@@ -23,7 +24,6 @@ class NewsDetailView: UIViewController {
         button.titleLabel?.textAlignment = .center
         button.cornerRadius = 8
         button.setHeight(height: 50, priority: .required)
-        button.addTarget(self, action: #selector(showWebpage), for: .touchUpInside)
         return button
     }()
     
@@ -45,6 +45,7 @@ class NewsDetailView: UIViewController {
         setupView()
         tickersView.configTickers(news: news)
         hideTabBarIfRequired()
+        setupObservers()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -93,17 +94,6 @@ class NewsDetailView: UIViewController {
         navigationController?.tabBarController?.tabBar.hide = false
     }
     
-    private func setupButton() -> UIButton {
-        let button = UIButton()
-        "View News".body1Medium().render(target: button)
-        button.backgroundColor = .appBlue
-        button.titleLabel?.textAlignment = .center
-        button.cornerRadius = 8
-        button.setHeight(height: 50, priority: .required)
-        button.addTarget(self, action: #selector(dismissView), for: .touchUpInside)
-        return button
-    }
-    
     private func setupMainStack() {
         let descriptionStack = setupDescriptionStack()
         scrollView.addArrangedView(view: imageView, additionalSpacing: 24)
@@ -111,7 +101,9 @@ class NewsDetailView: UIViewController {
         scrollView.addArrangedView(view: .spacer(height: 75))
         view.addSubview(scrollView)
         view.setFittingConstraints(childView: scrollView, insets: .zero)
-        
+        scrollView.backgroundColor = .red
+        imageView.backgroundColor = .blue
+        imageView.setHeight(height: .totalHeight * 0.35, priority: .required)
         view.addSubview(viewMoreButton)
         view.setFittingConstraints(childView: viewMoreButton, leading: 20, trailing: 20, bottom: .safeAreaInsets.bottom)
     }
@@ -129,10 +121,25 @@ class NewsDetailView: UIViewController {
         dismiss(animated: true)
     }
     
-    @objc
-    private func showWebpage() {
+    private func setupObservers() {
+        viewMoreButton.publisher(for: .touchUpInside)
+            .sink(receiveValue: showWebpage(_:))
+            .store(in: &bag)
+        
+        scrollView.contentOffset
+            .sink(receiveValue: didScroll(point:))
+            .store(in: &bag)
+    }
+    
+    private func showWebpage(_ publisher: UIControl.EventPublisher.Output) {
         let webPage = WebPageView(url: news.newsUrl, title: news.title).withNavigationController()
         presentView(style: .sheet(), target: webPage, onDimissal: nil)
+    }
+    
+    private func didScroll(point: CGPoint) {
+        if point.y < 0 {
+            scrollView.scrollOffset.send(.zero)
+        }
     }
 }
 

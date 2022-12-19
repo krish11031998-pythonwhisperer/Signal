@@ -6,7 +6,8 @@
 //
 
 import Foundation
+import Combine
 
 protocol VideoServiceInterface {
-	func fetchVideo(completion: @escaping (Result<[VideoModel],Error>) -> Void)
+    func fetchVideo() -> Future<VideoResult,Error>
 }
