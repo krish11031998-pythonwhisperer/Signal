@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Combine
 
 class TweetFeedViewController: UIViewController {
 	
@@ -24,9 +25,8 @@ class TweetFeedViewController: UIViewController {
 		tableView.showsVerticalScrollIndicator = false
 		return tableView
 	}()
-	private var isScrolling: NSKeyValueObservation?
-	private var scrollObserver: NSKeyValueObservation?
-	
+    private var bag: Set<AnyCancellable> = .init()
+    
 //MARK: - Overriden Methods
 	override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
 		super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -42,8 +42,7 @@ class TweetFeedViewController: UIViewController {
 		setupViews()
 		setupNavbar()
 		viewModel.fetchTweets()
-		addObservers()
-		
+        setupObservers()
 	}
 	
 	override func viewDidLayoutSubviews() {
@@ -58,77 +57,41 @@ class TweetFeedViewController: UIViewController {
 		tableView.backgroundColor = .clear
 		tableView.separatorStyle = .none
 		view.setFittingConstraints(childView: tableView, insets: .zero)
-		scrollObserver = tableView.observe(\.contentOffset){[weak self] scrollView, _ in
-			self?.setupScrollObserver(scrollView)
-		}
 	}
 	
+    private func setupObservers() {
+        tableView.publisher(for: \.contentOffset)
+            .sink { [weak self] _ in
+                guard let `self` = self else { return }
+                self.setupScrollObserver(self.tableView)
+            }
+            .store(in: &bag)
+        
+        viewModel.$selectedTweet
+            .compactMap { $0 }
+            .sink { [weak self] in
+                guard let `self` = self else { return }
+                self.navigationController?.pushViewController(TweetDetailView(tweet: $0), animated: true)
+            }
+            .store(in: &bag)
+    }
+    
 	private func setupScrollObserver(_ scrollView: UITableView) {
 		guard scrollView.contentSize.height > .totalHeight,
-			  scrollView.contentOffset.y >=  scrollView.contentSize.height - scrollView.frame.height,
-			  !viewModel.loading else { return }
+			  scrollView.contentOffset.y >=  scrollView.contentSize.height - scrollView.frame.height else { return }
 		self.viewModel.fetchNextPage()
 	}
 	
 	private func setupNavbar() {
         standardNavBar(leftBarButton: .init(customView: "Tweets".heading2().generateLabel))
 	}
-	
-	private func addObservers() {
-		NotificationCenter.default.addObserver(self, selector: #selector(showTweet), name: .showTweet, object: nil)
-	}
-	
-	@objc
-	private func showTweet() {
-		navigationController?.pushViewController(TweetDetailView(), animated: true)
-	}
-	
-	private func scrollViewUpdate(_ scrollView: UIScrollView) {
-		let offset = scrollView.contentOffset
-		if self.yOff == .zero {
-			self.yOff = offset.y
-		}
-		guard offset.y != yOff, let navBar = navigationController?.navigationBar else { return }
-		let off = (self.yOff...0).percent(offset.y).boundTo()
-		let navbarHeight: CGFloat = navBar.frame.height + navBar.frame.minY
-		UIView.animate(withDuration: 0.25) {
-			navBar.transform = .init(translationX: 0, y: -CGFloat(off) * navbarHeight)
-		}
-	}
+
+    private func loadMoreTweets(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y >= scrollView.contentSize.height - 200 - scrollView.frame.height && !viewModel.loading {
+            self.viewModel.fetchNextPage()
+        }
+    }
 }
-
-//extension TweetFeedViewController: UITableViewDataSource {
-//
-//	func numberOfSections(in tableView: UITableView) -> Int { 1 }
-//
-//	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//		viewModel.tweets?.count ?? 0
-//	}
-//
-//	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//		guard let cell = tableView.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath) as? TweetCell,
-//			  let model = viewModel.tweets?[indexPath.row] else { return .init() }
-//		cell.configure(with: model)
-//		return cell
-//	}
-//
-//	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//		guard let model = viewModel.tweets?[indexPath.row] else { return }
-//		TweetStorage.selectedTweet = model
-//	}
-//
-//}
-//
-//extension TweetFeedViewController: UITableViewDelegate {
-//
-//	func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//		if scrollView.contentOffset.y >= scrollView.contentSize.height - 200 - scrollView.frame.height && !viewModel.loading {
-//			self.viewModel.fetchNextPage()
-//		}
-//	}
-//
-//}
-
 
 extension TweetFeedViewController: AnyTableView {
 	

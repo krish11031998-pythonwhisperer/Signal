@@ -32,14 +32,17 @@ class TweetFeedViewModel {
 	var loading: Bool = false
 	var view: AnyTableView?
     private var bag: Set<AnyCancellable> = .init()
+    @Published var selectedTweet: TweetCellModel?
+    
 	public func fetchTweets(entity: String? = nil, before: String? = nil, after: String? = nil, limit: Int = 20) {
 		guard !loading else { return }
 		loading = true
 		TweetService
 			.shared
             .fetchTweets()
-            .catch { _ in
-                StubTweetService.shared.fetchTweets(entity: nil, before: nil, after: nil, limit: 0)
+            .catch { err in
+                print("(ERROR) TweetService : ", err.localizedDescription)
+                return StubTweetService.shared.fetchTweets(entity: nil, before: nil, after: nil, limit: 0)
             }
             .sink { err in
                 switch err {
@@ -57,6 +60,7 @@ class TweetFeedViewModel {
 	
 	public func fetchNextPage() {
 		print("(DEBUG) fetching next page!")
+        guard !loading else { return }
 		fetchTweets(after: tweets?.last?.model?.id)
 	}
 	
@@ -67,7 +71,7 @@ class TweetFeedViewModel {
 			var model:TweetCellModel = .init(model: tweet)
 			
 			model.action = {
-				TweetStorage.selectedTweet = model
+                self.selectedTweet = model
 			}
 			
 			return model

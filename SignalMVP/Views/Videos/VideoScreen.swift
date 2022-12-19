@@ -41,8 +41,17 @@ class VideoViewController: UIViewController {
         super.viewDidLoad()
         setupView()
         loadVideos()
-        standardNavBar(leftBarButton: .init(customView: "Video".heading2().generateLabel))
-        navigationController?.navigationItem.leftBarButtonItem = nil
+        standardNavBar(leftBarButton: .init(customView: "Video".heading2().generateLabel), color: .clear, scrollColor: .clear)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let image = UIImage.Catalogue.chartSquareBarOutline.image
+        let imageView = UIImageView(image: image)
+        imageView.frame = .init(origin: .zero, size: .init(squared: 50))
+
+        navigationController?.navigationItem.titleView = imageView
     }
     
     private func setupView() {
