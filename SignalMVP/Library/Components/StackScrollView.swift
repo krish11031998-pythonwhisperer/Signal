@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Combine
 
 class ScrollView: UIView {
     
@@ -16,12 +17,15 @@ class ScrollView: UIView {
         stack.axis = .vertical
         return stack
     }()
+    public var scrollOffset: PassthroughSubject<CGPoint,Never> = .init()
+    private var bag: Set<AnyCancellable> = .init()
     
     init(spacing: CGFloat = 8, ignoreSafeArea: Bool = false) {
         super.init(frame: .zero)
         stackView.spacing = spacing
         scroll.contentInsetAdjustmentBehavior = ignoreSafeArea ? .never : .always
         setupView()
+        setupObservers()
     }
     
     required init?(coder: NSCoder) {
@@ -41,4 +45,21 @@ class ScrollView: UIView {
             stackView.setCustomSpacing(spacing, after: view)
         }
     }
+    
+    func setupObservers() {
+        scrollOffset
+            .sink { [weak self] point in
+                self?.scroll.contentOffset = point
+            }
+            .store(in: &bag)
+    }
+}
+
+extension ScrollView {
+    
+    var contentOffset: AnyPublisher<CGPoint,Never> {
+        scroll.publisher(for: \.contentOffset)
+            .eraseToAnyPublisher()
+    }
+    
 }

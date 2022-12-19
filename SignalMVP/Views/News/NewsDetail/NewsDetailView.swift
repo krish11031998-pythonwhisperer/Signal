@@ -101,7 +101,9 @@ class NewsDetailView: UIViewController {
         scrollView.addArrangedView(view: .spacer(height: 75))
         view.addSubview(scrollView)
         view.setFittingConstraints(childView: scrollView, insets: .zero)
-        
+        scrollView.backgroundColor = .red
+        imageView.backgroundColor = .blue
+        imageView.setHeight(height: .totalHeight * 0.35, priority: .required)
         view.addSubview(viewMoreButton)
         view.setFittingConstraints(childView: viewMoreButton, leading: 20, trailing: 20, bottom: .safeAreaInsets.bottom)
     }
@@ -121,16 +123,23 @@ class NewsDetailView: UIViewController {
     
     private func setupObservers() {
         viewMoreButton.publisher(for: .touchUpInside)
-            .sink { [weak self] _ in
-                self?.showWebpage()
-            }
+            .sink(receiveValue: showWebpage(_:))
+            .store(in: &bag)
+        
+        scrollView.contentOffset
+            .sink(receiveValue: didScroll(point:))
             .store(in: &bag)
     }
     
-    @objc
-    private func showWebpage() {
+    private func showWebpage(_ publisher: UIControl.EventPublisher.Output) {
         let webPage = WebPageView(url: news.newsUrl, title: news.title).withNavigationController()
         presentView(style: .sheet(), target: webPage, onDimissal: nil)
+    }
+    
+    private func didScroll(point: CGPoint) {
+        if point.y < 0 {
+            scrollView.scrollOffset.send(.zero)
+        }
     }
 }
 
