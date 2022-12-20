@@ -101,8 +101,7 @@ class NewsDetailView: UIViewController {
         scrollView.addArrangedView(view: .spacer(height: 75))
         view.addSubview(scrollView)
         view.setFittingConstraints(childView: scrollView, insets: .zero)
-        scrollView.backgroundColor = .red
-        imageView.backgroundColor = .blue
+
         imageView.setHeight(height: .totalHeight * 0.35, priority: .required)
         view.addSubview(viewMoreButton)
         view.setFittingConstraints(childView: viewMoreButton, leading: 20, trailing: 20, bottom: .safeAreaInsets.bottom)

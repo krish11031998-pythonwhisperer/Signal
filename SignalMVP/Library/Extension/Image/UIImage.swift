@@ -166,7 +166,7 @@ extension UIImage {
 					
 				}
 			case .failure(let err):
-				print("(DEBUG) err while loading Image : ",err.localizedDescription)
+				print("(ERROR) err while loading Image : ",err.localizedDescription)
 			}
 		}
 	}

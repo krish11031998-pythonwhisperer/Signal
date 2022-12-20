@@ -86,7 +86,7 @@ extension DataCache: CacheSubscript {
 }
 
 
-enum URLSessionError: Error {
+enum URLSessionError: String, Error {
 	case noData
 	case invalidUrl
 	case decodeErr
@@ -96,7 +96,7 @@ enum URLSessionError: Error {
 extension URLSession {
 
 	static func urlSessionRequest<T: Codable>(request: URLRequest, completion: @escaping (Result<T,Error>) -> Void) {
-		print("(DEBUG) Request: \(request.url?.absoluteString)")
+		print("(REQUEST) Request: \(request.url?.absoluteString)")
 		if let cachedData = DataCache.shared[request] {
 			if let deceodedData = try? JSONDecoder().decode(T.self, from: cachedData) {
 				completion(.success(deceodedData))
@@ -123,12 +123,17 @@ extension URLSession {
 		}
 	}
 	
+    static var standardDecoder: JSONDecoder {
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        return decoder
+    }
     
     static func urlSessionRequest<T: Codable>(request: URLRequest) -> Future<T,Error> {
         Future { promise in
-            print("(DEBUG) Request: \(request.url?.absoluteString)")
+            print("(REQUEST w Future) Request: \(request.url?.absoluteString)")
             if let cachedData = DataCache.shared[request] {
-                if let deceodedData = try? JSONDecoder().decode(T.self, from: cachedData) {
+                if let deceodedData = try? standardDecoder.decode(T.self, from: cachedData) {
                     promise(.success(deceodedData))
                 } else {
                     promise(.failure(URLSessionError.decodeErr))
@@ -140,7 +145,7 @@ extension URLSession {
                         return
                     }
                     
-                    guard let decodedData = try? JSONDecoder().decode(T.self, from: validData) else {
+                    guard let decodedData = try? standardDecoder.decode(T.self, from: validData) else {
                         promise(.failure(URLSessionError.decodeErr))
                         return
                     }

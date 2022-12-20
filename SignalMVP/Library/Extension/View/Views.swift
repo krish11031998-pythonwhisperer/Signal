@@ -122,4 +122,14 @@ extension UIView {
     func buttonify(handler: Callback?) -> UIView {
         return GenericButtonWrapper(innerView: self, handler: handler)
     }
+    
+    func hideChildViews() {
+        var views: [UIView] = subviews
+        switch self {
+        case let stack as UIStackView:
+            views = stack.arrangedSubviews
+        default: break
+        }
+        views.forEach { $0.isHidden = true }
+    }
 }

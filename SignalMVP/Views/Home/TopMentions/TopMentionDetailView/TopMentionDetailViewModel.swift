@@ -80,7 +80,7 @@ class TopMentionDetailViewModel {
             .sink {
                 switch $0 {
                 case .failure(let err):
-                    print("(DEBUG) err : ", err)
+                    print("(ERROR) err : ", err)
                 default: break
                 }
             } receiveValue: { [weak self] result in

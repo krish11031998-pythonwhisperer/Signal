@@ -107,7 +107,7 @@ extension UIView {
 		return view
 	}
 	
-	func setWidth(width: CGFloat, priority: UILayoutPriority) {
+	func setWidth(width: CGFloat, priority: UILayoutPriority = .required) {
 		let constraint = widthAnchor.constraint(equalToConstant: width)
 		removeSimilarConstraints([constraint])
 		constraint.priority = priority
@@ -115,7 +115,7 @@ extension UIView {
         frame.size.width = width
 	}
 	
-	func setHeight(height: CGFloat, priority: UILayoutPriority) {
+    func setHeight(height: CGFloat, priority: UILayoutPriority = .required) {
 		let constraint = heightAnchor.constraint(equalToConstant: height)
 		removeSimilarConstraints([constraint])
 		constraint.priority = priority

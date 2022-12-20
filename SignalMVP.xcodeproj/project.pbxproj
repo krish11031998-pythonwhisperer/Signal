@@ -10,7 +10,6 @@
 		3EBB0683BEA41C9E7B051080 /* Pods_SignalMVPTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A0BD58CADAAA857396CD9BC /* Pods_SignalMVPTests.framework */; };
 		C9878BABBA44E9249BC02BEE /* Pods_SignalMVP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8AF130582704BE4274F3DAD /* Pods_SignalMVP.framework */; };
 		E74D9CAC91CAF3E6CDE88817 /* Pods_SignalMVP_SignalMVPUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35B4C5DE365A2C2AD5B3206A /* Pods_SignalMVP_SignalMVPUITests.framework */; };
-		EF00758D28E5CA8F00195433 /* NewsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF00758C28E5CA8F00195433 /* NewsService.swift */; };
 		EF00758F28E5CBA000195433 /* SignalNewsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF00758E28E5CBA000195433 /* SignalNewsService.swift */; };
 		EF04E345294EFBE500E35815 /* Result+Future.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF04E344294EFBE500E35815 /* Result+Future.swift */; };
 		EF04E347294F10F000E35815 /* VideoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF04E346294F10F000E35815 /* VideoViewModel.swift */; };
@@ -40,6 +39,17 @@
 		EF59F119292A969A002877DE /* SphericalProgressBars.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF59F114292A969A002877DE /* SphericalProgressBars.swift */; };
 		EF59F11A292A969A002877DE /* MutlipleStrokeCircularProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF59F115292A969A002877DE /* MutlipleStrokeCircularProgressBar.swift */; };
 		EF59F11B292A969A002877DE /* ProgressBars.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF59F116292A969A002877DE /* ProgressBars.swift */; };
+		EF5C4E9A2950ADEB00669355 /* NewsSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5C4E992950ADEB00669355 /* NewsSearchController.swift */; };
+		EF5C4E9C2950AE0400669355 /* NewsFeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5C4E9B2950AE0400669355 /* NewsFeedViewModel.swift */; };
+		EF5C4EA32951905900669355 /* RoundedCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5C4E9E2951905900669355 /* RoundedCardView.swift */; };
+		EF5C4EA42951905900669355 /* RoundedButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5C4EA02951905900669355 /* RoundedButtonCell.swift */; };
+		EF5C4EA52951905900669355 /* RoundedCardViewConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5C4EA12951905900669355 /* RoundedCardViewConfig.swift */; };
+		EF5C4EA62951905900669355 /* RoundedCardViewConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5C4EA22951905900669355 /* RoundedCardViewConfigurable.swift */; };
+		EF5C4EA92951920300669355 /* TickerSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5C4EA82951920300669355 /* TickerSearch.swift */; };
+		EF5C4EAD295192EC00669355 /* TickerEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5C4EAC295192EC00669355 /* TickerEndpoint.swift */; };
+		EF5C4EB0295193ED00669355 /* TickerServiceInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5C4EAF295193ED00669355 /* TickerServiceInterface.swift */; };
+		EF5C4EB22951943200669355 /* TickerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5C4EB12951943200669355 /* TickerService.swift */; };
+		EF5C4EB42951B26F00669355 /* RoundedCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5C4EB32951B26E00669355 /* RoundedCardCell.swift */; };
 		EF7CBED22911BB8400F9D611 /* TopMentionDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CBED12911BB8400F9D611 /* TopMentionDetail.swift */; };
 		EF7CBEDA291577D500F9D611 /* CoinStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CBED9291577D500F9D611 /* CoinStorage.swift */; };
 		EF7CBFD8291641EA00F9D611 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CBF91291641E900F9D611 /* Array.swift */; };
@@ -229,7 +239,6 @@
 		A401CB02A4D6A9F0C13A8046 /* Pods-SignalMVP-SignalMVPUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SignalMVP-SignalMVPUITests.release.xcconfig"; path = "Target Support Files/Pods-SignalMVP-SignalMVPUITests/Pods-SignalMVP-SignalMVPUITests.release.xcconfig"; sourceTree = "<group>"; };
 		A66A4873BBF2EAC220E8B297 /* Pods-SignalMVP.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SignalMVP.release.xcconfig"; path = "Target Support Files/Pods-SignalMVP/Pods-SignalMVP.release.xcconfig"; sourceTree = "<group>"; };
 		B8AF130582704BE4274F3DAD /* Pods_SignalMVP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SignalMVP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		EF00758C28E5CA8F00195433 /* NewsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsService.swift; sourceTree = "<group>"; };
 		EF00758E28E5CBA000195433 /* SignalNewsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalNewsService.swift; sourceTree = "<group>"; };
 		EF04E344294EFBE500E35815 /* Result+Future.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Result+Future.swift"; sourceTree = "<group>"; };
 		EF04E346294F10F000E35815 /* VideoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewModel.swift; sourceTree = "<group>"; };
@@ -259,6 +268,17 @@
 		EF59F114292A969A002877DE /* SphericalProgressBars.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SphericalProgressBars.swift; sourceTree = "<group>"; };
 		EF59F115292A969A002877DE /* MutlipleStrokeCircularProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MutlipleStrokeCircularProgressBar.swift; sourceTree = "<group>"; };
 		EF59F116292A969A002877DE /* ProgressBars.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressBars.swift; sourceTree = "<group>"; };
+		EF5C4E992950ADEB00669355 /* NewsSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsSearchController.swift; sourceTree = "<group>"; };
+		EF5C4E9B2950AE0400669355 /* NewsFeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedViewModel.swift; sourceTree = "<group>"; };
+		EF5C4E9E2951905900669355 /* RoundedCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedCardView.swift; sourceTree = "<group>"; };
+		EF5C4EA02951905900669355 /* RoundedButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedButtonCell.swift; sourceTree = "<group>"; };
+		EF5C4EA12951905900669355 /* RoundedCardViewConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedCardViewConfig.swift; sourceTree = "<group>"; };
+		EF5C4EA22951905900669355 /* RoundedCardViewConfigurable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedCardViewConfigurable.swift; sourceTree = "<group>"; };
+		EF5C4EA82951920300669355 /* TickerSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerSearch.swift; sourceTree = "<group>"; };
+		EF5C4EAC295192EC00669355 /* TickerEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerEndpoint.swift; sourceTree = "<group>"; };
+		EF5C4EAF295193ED00669355 /* TickerServiceInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerServiceInterface.swift; sourceTree = "<group>"; };
+		EF5C4EB12951943200669355 /* TickerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerService.swift; sourceTree = "<group>"; };
+		EF5C4EB32951B26E00669355 /* RoundedCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCardCell.swift; sourceTree = "<group>"; };
 		EF7CBED12911BB8400F9D611 /* TopMentionDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopMentionDetail.swift; sourceTree = "<group>"; };
 		EF7CBED9291577D500F9D611 /* CoinStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinStorage.swift; sourceTree = "<group>"; };
 		EF7CBF91291641E900F9D611 /* Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
@@ -555,6 +575,63 @@
 			path = Bars;
 			sourceTree = "<group>";
 		};
+		EF5C4E972950ADD000669355 /* NewsFeed */ = {
+			isa = PBXGroup;
+			children = (
+				EF86383228DC5CAF00EF520C /* NewsFeed.swift */,
+				EF86383428DC61F700EF520C /* NewsCell.swift */,
+				EF86383628DC648000EF520C /* NewsViewModel.swift */,
+			);
+			path = NewsFeed;
+			sourceTree = "<group>";
+		};
+		EF5C4E982950ADDA00669355 /* NewsSearch */ = {
+			isa = PBXGroup;
+			children = (
+				EF5C4E992950ADEB00669355 /* NewsSearchController.swift */,
+				EF5C4E9B2950AE0400669355 /* NewsFeedViewModel.swift */,
+			);
+			path = NewsSearch;
+			sourceTree = "<group>";
+		};
+		EF5C4E9D2951905900669355 /* RoundedCardView */ = {
+			isa = PBXGroup;
+			children = (
+				EF5C4E9E2951905900669355 /* RoundedCardView.swift */,
+				EF5C4E9F2951905900669355 /* TableCell */,
+				EF5C4EA12951905900669355 /* RoundedCardViewConfig.swift */,
+				EF5C4EA22951905900669355 /* RoundedCardViewConfigurable.swift */,
+			);
+			path = RoundedCardView;
+			sourceTree = "<group>";
+		};
+		EF5C4E9F2951905900669355 /* TableCell */ = {
+			isa = PBXGroup;
+			children = (
+				EF5C4EA02951905900669355 /* RoundedButtonCell.swift */,
+				EF5C4EB32951B26E00669355 /* RoundedCardCell.swift */,
+			);
+			path = TableCell;
+			sourceTree = "<group>";
+		};
+		EF5C4EA7295191F600669355 /* Tickers */ = {
+			isa = PBXGroup;
+			children = (
+				EF5C4EA82951920300669355 /* TickerSearch.swift */,
+			);
+			path = Tickers;
+			sourceTree = "<group>";
+		};
+		EF5C4EAA2951928F00669355 /* Ticker */ = {
+			isa = PBXGroup;
+			children = (
+				EF5C4EAC295192EC00669355 /* TickerEndpoint.swift */,
+				EF5C4EAF295193ED00669355 /* TickerServiceInterface.swift */,
+				EF5C4EB12951943200669355 /* TickerService.swift */,
+			);
+			path = Ticker;
+			sourceTree = "<group>";
+		};
 		EF7CBF8F291641E900F9D611 /* Library */ = {
 			isa = PBXGroup;
 			children = (
@@ -708,6 +785,7 @@
 		EF7CBFC0291641EA00F9D611 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				EF5C4E9D2951905900669355 /* RoundedCardView */,
 				EF59F111292A969A002877DE /* Bars */,
 				EF7CC01429166E6000F9D611 /* RatingChart */,
 				EF7CBFC2291641EA00F9D611 /* CustomSearchBarController */,
@@ -872,6 +950,7 @@
 		EF86381428DC1E7D00EF520C /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				EF5C4EAA2951928F00669355 /* Ticker */,
 				EF16449E2905509400E9D997 /* ServiceHelpers */,
 				EF7D2FC028E09D9B0003B8F3 /* Videos */,
 				EF7D2FAF28E0500A0003B8F3 /* Mentions */,
@@ -905,7 +984,6 @@
 				EF86382928DC519B00EF520C /* StubNewsService.swift */,
 				EF86382D28DC56D900EF520C /* NewsInterface.swift */,
 				EF7D2F9528DED9730003B8F3 /* NewsNotification.swift */,
-				EF00758C28E5CA8F00195433 /* NewsService.swift */,
 				EF00758E28E5CBA000195433 /* SignalNewsService.swift */,
 			);
 			path = News;
@@ -914,10 +992,9 @@
 		EF86383128DC5C9400EF520C /* News */ = {
 			isa = PBXGroup;
 			children = (
+				EF5C4E982950ADDA00669355 /* NewsSearch */,
+				EF5C4E972950ADD000669355 /* NewsFeed */,
 				EF7D2F9728DED9D00003B8F3 /* NewsDetail */,
-				EF86383228DC5CAF00EF520C /* NewsFeed.swift */,
-				EF86383428DC61F700EF520C /* NewsCell.swift */,
-				EF86383628DC648000EF520C /* NewsViewModel.swift */,
 			);
 			path = News;
 			sourceTree = "<group>";
@@ -1107,6 +1184,7 @@
 		EFDC741628E3372400042452 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				EF5C4EA7295191F600669355 /* Tickers */,
 				EFFFE46E294835650045686E /* DataProtocols */,
 				EFDC742128E3395400042452 /* SignalServiceModel */,
 				EFDC742028E3393400042452 /* Reddit */,
@@ -1490,19 +1568,24 @@
 				EF7CBEDA291577D500F9D611 /* CoinStorage.swift in Sources */,
 				EF7D2FB628E051940003B8F3 /* StubMentionService.swift in Sources */,
 				EF7D2F9E28E02CFF0003B8F3 /* HomeFeed.swift in Sources */,
+				EF5C4E9A2950ADEB00669355 /* NewsSearchController.swift in Sources */,
 				EF7CBFDB291641EA00F9D611 /* ImageCatalogue.swift in Sources */,
 				EF1D7E5B2922CCFD0041ADEC /* CollectionViewFunctions.swift in Sources */,
 				EF7CBFDF291641EA00F9D611 /* UIStackView.swift in Sources */,
+				EF5C4EB42951B26F00669355 /* RoundedCardCell.swift in Sources */,
 				EF86384928DC9F4600EF520C /* EventServiceInterface.swift in Sources */,
 				EF59F119292A969A002877DE /* SphericalProgressBars.swift in Sources */,
 				EF7D2FB428E050DE0003B8F3 /* MentionModel.swift in Sources */,
 				EF86384D28DCED0C00EF520C /* EventSingleCell.swift in Sources */,
 				EF86382328DC341400EF520C /* TweetMetricView.swift in Sources */,
 				EF7CBFF9291641EA00F9D611 /* TableViewFunction.swift in Sources */,
+				EF5C4EA52951905900669355 /* RoundedCardViewConfig.swift in Sources */,
 				EFB1C23228DB3B1800DD40A4 /* MainViewController.swift in Sources */,
 				EF59F106292961BA002877DE /* RecentTweetCard.swift in Sources */,
 				EF92FD81292840850004F547 /* StackScrollView.swift in Sources */,
+				EF5C4EA62951905900669355 /* RoundedCardViewConfigurable.swift in Sources */,
 				EF86383B28DC761900EF520C /* MainTabView.swift in Sources */,
+				EF5C4EB0295193ED00669355 /* TickerServiceInterface.swift in Sources */,
 				EF7CC0132916640B00F9D611 /* RatingChart.swift in Sources */,
 				EF04E34D29504E5600E35815 /* SubscriberHelpers.swift in Sources */,
 				EF7D2FAA28E033E90003B8F3 /* TrendingHeadlineCell.swift in Sources */,
@@ -1513,8 +1596,10 @@
 				EF7D2FA528E031920003B8F3 /* TrendingHeadlinesModel.swift in Sources */,
 				EF987B6B2916A9930000E233 /* CircularProgressShape.swift in Sources */,
 				EF987B952920D7A00000E233 /* ImageView.swift in Sources */,
+				EF5C4EA42951905900669355 /* RoundedButtonCell.swift in Sources */,
 				EF1D7E5A2922CCFD0041ADEC /* CollectionSection.swift in Sources */,
 				EF7CBFF8291641EA00F9D611 /* Animation.swift in Sources */,
+				EF5C4E9C2950AE0400669355 /* NewsFeedViewModel.swift in Sources */,
 				EFB1C22E28DB3B1800DD40A4 /* AppDelegate.swift in Sources */,
 				EF04E347294F10F000E35815 /* VideoViewModel.swift in Sources */,
 				EF96382628DD90A400178C37 /* RedditViewModel.swift in Sources */,
@@ -1525,6 +1610,7 @@
 				EF00758F28E5CBA000195433 /* SignalNewsService.swift in Sources */,
 				EF86383728DC648000EF520C /* NewsViewModel.swift in Sources */,
 				EF2BB215292BF4E40006C00F /* VideoScreen.swift in Sources */,
+				EF5C4EB22951943200669355 /* TickerService.swift in Sources */,
 				EF86384528DC9E5200EF520C /* StubEventsService.swift in Sources */,
 				EF59F10F292A9602002877DE /* CustomCollectionTableCell.swift in Sources */,
 				EF7D2FCE28E0F55A0003B8F3 /* EventDetailView.swift in Sources */,
@@ -1537,7 +1623,6 @@
 				EF7CBFF2291641EA00F9D611 /* CGSize.swift in Sources */,
 				EF96381D28DD8C8D00178C37 /* RedditPostModel.swift in Sources */,
 				EF96381B28DD8C6B00178C37 /* RedditServiceInterface.swift in Sources */,
-				EF00758D28E5CA8F00195433 /* NewsService.swift in Sources */,
 				EF7CBFE3291641EA00F9D611 /* UIViewController.swift in Sources */,
 				EF86384228DC9E0F00EF520C /* EventViewModel.swift in Sources */,
 				EF7D2FA728E0322A0003B8F3 /* TrendingHeadlinesService.swift in Sources */,
@@ -1572,6 +1657,8 @@
 				EF7D2F9628DED9730003B8F3 /* NewsNotification.swift in Sources */,
 				EF7D2FC928E0A0E10003B8F3 /* VideoCell.swift in Sources */,
 				EF1644A9290589B500E9D997 /* CustomCuratedEvents.swift in Sources */,
+				EF5C4EA92951920300669355 /* TickerSearch.swift in Sources */,
+				EF5C4EAD295192EC00669355 /* TickerEndpoint.swift in Sources */,
 				EF86382E28DC56D900EF520C /* NewsInterface.swift in Sources */,
 				EF7D2FA328E0314B0003B8F3 /* TrendingHeadlinesInterface.swift in Sources */,
 				EFB1C23028DB3B1800DD40A4 /* SceneDelegate.swift in Sources */,
@@ -1595,6 +1682,7 @@
 				EF7D2FD428E0F7A00003B8F3 /* EventNotification.swift in Sources */,
 				EF7CBFDD291641EA00F9D611 /* UIImageView.swift in Sources */,
 				EFB1C25F28DB3CC600DD40A4 /* TweetsFeed.swift in Sources */,
+				EF5C4EA32951905900669355 /* RoundedCardView.swift in Sources */,
 				EF7CBFDC291641EA00F9D611 /* UIImage.swift in Sources */,
 				EF04E34A294F203F00E35815 /* UIControl+Publishers.swift in Sources */,
 				EF7CBFE4291641EA00F9D611 /* Views.swift in Sources */,
@@ -1784,7 +1872,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1814,7 +1902,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

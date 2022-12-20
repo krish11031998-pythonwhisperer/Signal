@@ -22,7 +22,7 @@ class RedditViewModel {
 					self?.view?.reloadTableWithDataSource(dataSource)
 				}
 			case .failure(let err):
-				print("(DEBUG) err : ",err.localizedDescription)
+				print("(ERROR) err : ",err.localizedDescription)
 			}
 		}
 	}

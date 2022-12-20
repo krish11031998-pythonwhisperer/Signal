@@ -28,7 +28,7 @@ extension SignalNewsEndpoints: EndPoint {
 	
 	var path: String {
 		switch self {
-		case .tickerNews(_,_,_,_,_,_):
+		case .tickerNews:
 			return "/news/tickerNews"
 		}
 	}
