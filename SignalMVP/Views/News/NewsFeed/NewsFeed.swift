@@ -14,13 +14,14 @@ class NewsFeed: UIViewController {
 	private lazy var tableView: UITableView = { .init(frame: .zero, style: .grouped) }()
     private var cancellable: Set<AnyCancellable> = .init()
     private let viewModel: NewsViewModel = .init()
+    private let selectedCurrency: CurrentValueSubject<String,Never> = .init("")
     private lazy var dimmingView: UIView = {
         let view = UIView()
         view.backgroundColor = .surfaceBackground.withAlphaComponent(0.3)
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissSearch)))
         return view
     }()
-    private lazy var searchController: UISearchController = { .init(searchResultsController: NewsSearchResultController()) }()
+    private lazy var searchController: UISearchController = { .init(searchResultsController: NewsSearchResultController(viewModel: .init(selectedCurrency: selectedCurrency))) }()
 	//MARK: - Overriden Methods
 	override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
 		super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -35,7 +36,7 @@ class NewsFeed: UIViewController {
 		setupViews()
 		setupNavbar()
         setupSearchbarViewController()
-		setupObservers()
+		bind()
 	}
 
 	//MARK: - ProtectedMethods
@@ -68,7 +69,6 @@ class NewsFeed: UIViewController {
     }
     
     private func showDimmingView(addDimming: Bool) {
-        print("(DEBUG) addDimming: ", addDimming)
         if addDimming {
             view.addSubview(dimmingView)
             view.setFittingConstraints(childView: dimmingView, insets: .zero)
@@ -77,7 +77,7 @@ class NewsFeed: UIViewController {
         }
     }
     
-    private func setupObservers() {
+    private func bind () {
         viewModel.selectedNews
             .compactMap { $0 }
             .sink { [weak self] in
@@ -85,11 +85,32 @@ class NewsFeed: UIViewController {
                 nav.pushViewController(NewsDetailView(news: $0), animated: true)
             }
             .store(in: &cancellable)
+
         
-        viewModel.news
+        let output = viewModel.transform()
+        
+        output
+            .tableSection
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] section in
+            .sink(receiveCompletion: { completion in
+                print("(ERROR) err: ", completion.err?.localizedDescription)
+            }, receiveValue: { [weak self] section in
                 self?.tableView.reloadData(.init(sections: [section]))
+            })
+            .store(in: &cancellable)
+        
+        selectedCurrency
+            .receive(on: RunLoop.main)
+            .sink { [weak self] symb in
+                print("(DEBUG) symbol: ", symb)
+                self?.dismissSearch()
+                self?.viewModel.searchParam.send(symb)
+            }
+            .store(in: &cancellable)
+    
+        viewModel.searchParam
+            .sink {
+                print("(DEBUG) params: ", $0)
             }
             .store(in: &cancellable)
     }
@@ -110,7 +131,7 @@ extension NewsFeed: UISearchControllerDelegate, UISearchBarDelegate {
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        print("(DEBUG) searchBar.isFirstResponder: ", searchBar.searchTextField.isFirstResponder)
+        print("(DEBUG) searchBar.isEditing: ", searchBar.searchTextField.isEditing)
         self.showDimmingView(addDimming: searchBar.searchTextField.isFirstResponder)
     }
     

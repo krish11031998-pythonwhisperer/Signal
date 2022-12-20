@@ -22,10 +22,6 @@ extension SignalNewsEndpoints: EndPoint {
 		return "https"
 	}
 	
-	var baseUrl: String {
-		"crybseserver-production.up.railway.app"
-	}
-	
 	var path: String {
 		switch self {
 		case .tickerNews:

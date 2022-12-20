@@ -20,6 +20,10 @@ protocol EndPoint {
 
 extension EndPoint {
 	
+    var baseUrl: String {
+        return "signal.up.railway.app"
+    }
+    
 	var header: [String : String]? {
 		return nil
 	}
@@ -123,17 +127,17 @@ extension URLSession {
 		}
 	}
 	
-    static var standardDecoder: JSONDecoder {
-        let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
-        return decoder
-    }
+//    static var standardDecoder: JSONDecoder {
+//        let decoder = JSONDecoder()
+//        decoder.keyDecodingStrategy = .convertFromSnakeCase
+//        return decoder
+//    }
     
     static func urlSessionRequest<T: Codable>(request: URLRequest) -> Future<T,Error> {
         Future { promise in
             print("(REQUEST w Future) Request: \(request.url?.absoluteString)")
             if let cachedData = DataCache.shared[request] {
-                if let deceodedData = try? standardDecoder.decode(T.self, from: cachedData) {
+                if let deceodedData = try? JSONDecoder().decode(T.self, from: cachedData) {
                     promise(.success(deceodedData))
                 } else {
                     promise(.failure(URLSessionError.decodeErr))
@@ -145,7 +149,7 @@ extension URLSession {
                         return
                     }
                     
-                    guard let decodedData = try? standardDecoder.decode(T.self, from: validData) else {
+                    guard let decodedData = try? JSONDecoder().decode(T.self, from: validData) else {
                         promise(.failure(URLSessionError.decodeErr))
                         return
                     }

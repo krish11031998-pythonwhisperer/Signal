@@ -17,10 +17,6 @@ extension SignalEventEndpoints: EndPoint {
 		return "https"
 	}
 	
-	var baseUrl: String {
-		"crybseserver-production.up.railway.app"
-	}
-	
 	var path: String {
 		switch self {
 		case .latestEvents(_, _, _):

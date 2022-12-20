@@ -18,37 +18,27 @@ class NewsViewModel {
     var selectedNews: CurrentValueSubject<NewsModel?, Never> = .init(nil)
     private var bag: Set<AnyCancellable> = .init()
     var searchParam: CurrentValueSubject<String?, Never> = .init(nil)
+        
+    struct Output {
+        let tableSection: AnyPublisher<TableSection, Error>
+    }
     
-    var news: AnyPublisher<TableSection, Never> {
-        if #available(iOS 14.0, *) {
-            return searchParam
-                .removeDuplicates()
-                .map {
-                    print("(ERROR) searchParam: ", $0)
-                    return NewsService.shared.fetchNews(tickers: $0)
-                }
-                .switchToLatest()
-                .catch { err in
-                    print("(ERROR) err : ", err)
-                    return StubNewsService.shared.fetchNews()
-                }
-                .catch({ _ in Just(NewsResult(data: [])) })
-                .compactMap { $0.data }
-                .map(setupSection)
-                .eraseToAnyPublisher()
-        } else {
-            // Fallback on earlier versions
-            return NewsService.shared
-                .fetchNews()
-                .catch { err in
-                    print("(ERROR) err : ", err)
-                    return StubNewsService.shared.fetchNews()
-                }
-                .catch({ _ in Just(NewsResult(data: [])) })
-                .compactMap { $0.data }
-                .map(setupSection)
-                .eraseToAnyPublisher()
-        }
+    func transform() -> Output {
+        let news = searchParam
+            .map {
+                print("(DEBUG) symbol to search: ", $0)
+                return NewsService.shared.fetchNews(tickers: $0)
+            }
+            .switchToLatest()
+            .catch { err in
+                print("(ERROR) err : ", err)
+                return StubNewsService.shared.fetchNews()
+            }
+            .compactMap { $0.data }
+            .map(setupSection)
+            .eraseToAnyPublisher()
+    
+        return .init(tableSection: news)
     }
     
     func setupSection(_ allNews: [NewsModel]) -> TableSection {

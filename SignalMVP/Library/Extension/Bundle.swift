@@ -17,7 +17,7 @@ extension Bundle {
 			return .failure(URLSessionError.invalidUrl)
 		}
 		
-		guard let decodedData = try? JSONDecoder().decode(T.self, from: data) else {
+        guard let decodedData = try? JSONDecoder().decode(T.self, from: data) else {
 			return .failure(URLSessionError.decodeErr)
 		}
 		

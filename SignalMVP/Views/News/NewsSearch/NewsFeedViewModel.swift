@@ -13,6 +13,8 @@ fileprivate extension RoundedCardViewConfig {
     init(_ data: TickerInfo) {
         self.init(title: data.symbol?.body1Bold(),
                   subTitle: data.name?.body3Medium(color: .gray),
+                  caption: "Rank".body3Medium(),
+                  subCaption: "\(data.marketCapRank ?? -1)".body2Medium(),
                   leadingView: .image(url: data.thumb,
                                       size: .init(squared: 48),
                                       cornerRadius: 24,
@@ -24,6 +26,12 @@ fileprivate extension RoundedCardViewConfig {
 
 class NewsSearchViewModel {
     
+    let selectedCurrency: CurrentValueSubject<String, Never>
+    
+    init(selectedCurrency: CurrentValueSubject<String, Never>) {
+        self.selectedCurrency = selectedCurrency
+    }
+    
     var searchParam: CurrentValueSubject<String?, Never> = .init(nil)
  
     struct Output {
@@ -34,7 +42,7 @@ class NewsSearchViewModel {
         let searchResult = searchParam
             .compactMap { $0 }
             .filter { $0 != "" }
-            .debounce(for: .milliseconds(500), scheduler: RunLoop.main)
+            .debounce(for: .milliseconds(300), scheduler: RunLoop.main)
             .map { TickerService.shared.search(query: $0) }
             .switchToLatest()
             .map(setupSearchSection)
@@ -45,6 +53,17 @@ class NewsSearchViewModel {
     }
     
     private func setupSearchSection(_ result: TickerSearchResult) -> TableSection {
-        .init(rows: result.coins?.compactMap { TableRow<RoundedCardCell>(.init($0)) } ?? [])
+        guard let coins = result.coins else {
+            return .init(rows: [])
+        }
+        
+        return .init(rows: coins.compactMap { ticker in
+            let model = RoundedCardViewConfig(ticker)
+            let action: Callback? = {
+                self.selectedCurrency.send(ticker.symbol ?? "")
+            }
+            
+            return TableRow<RoundedCardCell>(.init(model: model, action: action))
+        })
     }
 }

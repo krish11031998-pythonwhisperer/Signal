@@ -8,6 +8,11 @@
 import Foundation
 import UIKit
 
+struct RoundedCardCellModel: ActionProvider {
+    var model: RoundedCardViewConfig
+    var action: Callback?
+}
+
 class RoundedCardCell: ConfigurableCell {
     
     private lazy var card: RoundedCardView = { .init() }()
@@ -26,11 +31,10 @@ class RoundedCardCell: ConfigurableCell {
         contentView.addSubview(card)
         contentView.setFittingConstraints(childView: card, insets: .init(vertical: 5, horizontal: 5))
         backgroundColor = .clear
-        card.backgroundColor = .surfaceBackground.withAlphaComponent(0.5)
-        
+        selectionStyle = .none
     }
     
-    func configure(with model: RoundedCardViewConfig) {
-        card.configureView(with: model)
+    func configure(with model: RoundedCardCellModel) {
+        card.configureView(with: model.model)
     }
 }

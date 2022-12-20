@@ -17,14 +17,10 @@ extension SignalTwitterEndpoints: EndPoint {
 	var scheme: String {
 		return "https"
 	}
-	
-	var baseUrl: String {
-		"crybseserver-production.up.railway.app"
-	}
-	
+    
 	var path: String {
 		switch self {
-		case .tweets(_,_,_,_):
+		case .tweets:
 			return "/twitter/tweets"
 		}
 	}
