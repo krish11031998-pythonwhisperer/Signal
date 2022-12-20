@@ -25,15 +25,13 @@ class NewsViewModel {
     
     func transform() -> Output {
         let news = searchParam
-            .map {
-                print("(DEBUG) symbol to search: ", $0)
+            .flatMap({
+                print("(DEBUG) search: ", $0)
                 return NewsService.shared.fetchNews(tickers: $0)
-            }
-            .switchToLatest()
-            .catch { err in
-                print("(ERROR) err : ", err)
+            })
+            .catch({ _ in
                 return StubNewsService.shared.fetchNews()
-            }
+            })
             .compactMap { $0.data }
             .map(setupSection)
             .eraseToAnyPublisher()
@@ -42,9 +40,21 @@ class NewsViewModel {
     }
     
     func setupSection(_ allNews: [NewsModel]) -> TableSection {
+        
+        var selectedCurrency: [TableCellProvider] = []
+        if let currency = searchParam.value, !currency.isEmpty {
+            let image: RoundedCardViewSideView = .image(url: currency.logoURL,
+                                                        size: .init(squared: 48),
+                                                        cornerRadius: 24,
+                                                        bordered: false)
+            selectedCurrency = [TableRow<RoundedCardCell>(.init(model: .init(title: "Selected Currency".body2Medium(color: .gray),
+                                                                             subTitle: currency.body1Bold(),
+                                                                             leadingView: image)))]
+        }
+        
         let rows = allNews.compactMap { news in
             TableRow<NewsCell>(.init(model: news, action: { self.selectedNews.send(news) }))
         }
-        return TableSection(rows: rows)
+        return TableSection(rows: selectedCurrency + rows)
     }
 }

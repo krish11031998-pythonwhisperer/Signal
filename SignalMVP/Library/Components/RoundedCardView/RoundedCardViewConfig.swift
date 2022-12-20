@@ -52,7 +52,7 @@ extension RoundedCardViewSideView {
                 imgView.border(color: borderColor, borderWidth: borderWidth)
             }
             if let validUrl = url {
-                UIImage.loadImage(url: validUrl, at: imgView, path: \.image)
+                UIImage.loadImage(url: validUrl, at: imgView, path: \.image, resized: size)
             }
             return imgView
         case .solidColor(let color, let size, let cornerRadius):

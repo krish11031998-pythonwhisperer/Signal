@@ -7,6 +7,13 @@
 
 import Foundation
 import Combine
+
+fileprivate extension Array where Element == TweetCellModel {
+    var lastID: String? {
+        last?.model?.id
+    }
+}
+
 struct TweetCellModel: ActionProvider {
 	let model: TweetModel?
 	var action: Callback?
@@ -39,10 +46,10 @@ class TweetFeedViewModel {
 		loading = true
 		TweetService
 			.shared
-            .fetchTweets()
+            .fetchTweets(after: after)
             .catch { err in
                 print("(ERROR) TweetService : ", err.localizedDescription)
-                return StubTweetService.shared.fetchTweets(entity: nil, before: nil, after: nil, limit: 0)
+                return StubTweetService.shared.fetchTweets()
             }
             .sink { err in
                 switch err {
@@ -59,9 +66,9 @@ class TweetFeedViewModel {
 	
 	
 	public func fetchNextPage() {
-		print("(DEBUG) fetching next page!")
-        guard !loading else { return }
-		fetchTweets(after: tweets?.last?.model?.id)
+        guard let id = tweets?.lastID, !loading else { return }
+        print("(DEBUG) fetching next page! : ", id)
+		fetchTweets(after: id)
 	}
 	
 	private func decodeToTweetCellModel(_ data: TweetSearchResult) {

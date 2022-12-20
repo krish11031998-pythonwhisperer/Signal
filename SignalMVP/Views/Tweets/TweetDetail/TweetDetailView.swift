@@ -75,6 +75,12 @@ class TweetDetailView: UIViewController {
 	private var selectedMetric: TweetSentimentMetric?
 	private lazy var tweetURLView: TweetURLView = { .init() }()
 	private lazy var metricStack: TweetMetricsView = { .init() }()
+    private lazy var mentionTickers: TickerSymbolView = { .init() }()
+    private lazy var mentionedTickers: UIView = {
+        return .VStack(subViews: ["Mentions".body2Medium(color: .gray).generateLabel,
+                                  mentionTickers], spacing: 8, alignment: .leading)
+    }()
+    
 	private var observer: NSKeyValueObservation?
 	
     init(tweet: TweetCellModel) {
@@ -101,7 +107,7 @@ class TweetDetailView: UIViewController {
 		view.addSubview(scrollView)
 		view.setFittingConstraints(childView: scrollView, insets: .zero)
 		standardNavBar()
-		let stack = UIView.VStack(subViews: [profileHeader, bodyLabel, imgView,tweetURLView], spacing: 12, alignment: .fill)
+		let stack = UIView.VStack(subViews: [profileHeader, bodyLabel, mentionedTickers, imgView, tweetURLView], spacing: 12, alignment: .fill)
 		stack.setCustomSpacing(20, after: profileHeader)
 		stack.setCustomSpacing(20, after: imgView)
 		imgView.isHidden = true
@@ -111,7 +117,7 @@ class TweetDetailView: UIViewController {
 		stack.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: -32).isActive = true
 		
 	}
-	
+    
 	func configureViews() {
         tweet.model?.text.styled(font: .light, color: .textColor, size: 25).render(target: bodyLabel)
 		bodyLabel.numberOfLines = 0
@@ -125,6 +131,13 @@ class TweetDetailView: UIViewController {
 			imgView.setHeight(height: 350, priority: .required)
 			imgView.isHidden = false
 		}
+        
+        if let tags = tweet.model?.tickers {
+            print("(DEBUG) tags :", tags)
+            mentionedTickers.isHidden = tags.isEmpty
+            mentionTickers.configTickers(tickers: tags)
+        }
+        
 		
 		if let url = tweet.model?.urls?.first {
 			print("(DEBUG) tweetId: ", tweet.model?.id)

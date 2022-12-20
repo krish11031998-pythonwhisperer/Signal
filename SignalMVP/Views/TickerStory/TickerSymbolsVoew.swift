@@ -10,7 +10,11 @@ import UIKit
 
 class TickerSymbolView: UIView {
     public func configTickers(news: Tickers) {
-        guard !news.tickers.isEmpty else {
+        configTickers(tickers: news.tickers)
+    }
+    
+    public func configTickers(tickers: [String]) {
+        guard !tickers.isEmpty else {
             if !isHidden {
                 isHidden = true
             }
@@ -18,11 +22,11 @@ class TickerSymbolView: UIView {
         }
         
         removeChildViews()
-        news.tickers.enumerated().forEach {
+        tickers.enumerated().forEach {
             let imgView = UIImageView(size: .init(squared: 32), cornerRadius: 16, contentMode: .scaleAspectFit)
             UIImage.loadImage(url: $0.element.logoURL, at: imgView, path: \.image)
             addSubview(imgView)
-            if $0.offset == news.tickers.count - 1 {
+            if $0.offset == tickers.count - 1 {
                 setFittingConstraints(childView: imgView, top: 0, leading: CGFloat($0.offset * 24), trailing: 0, bottom: 0,width: 32, height: 32)
             } else {
                 setFittingConstraints(childView: imgView, top: 0, leading: CGFloat($0.offset * 24), bottom: 0,width: 32, height: 32)

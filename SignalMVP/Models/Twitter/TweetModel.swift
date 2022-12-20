@@ -38,6 +38,15 @@ struct TweetModel:Codable {
 	}
 }
 
+extension TweetModel: Tickers {
+    var tickers: [String] {
+        get { hashTags?.compactMap { $0.tag} ?? [] }
+        set {}
+    }
+    
+    
+}
+
 //MARK: - TweetAttachment
 struct TweetAttachment: Codable {
 	let mediaKeys: [String]
