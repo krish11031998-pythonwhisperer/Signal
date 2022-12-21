@@ -62,7 +62,12 @@ class EventsFeedViewController: UIViewController {
 	}
 	
 	private func setupObservers() {
-		NotificationCenter.default.addObserver(self, selector: #selector(showEventDetail), name: .showEvent, object: nil)
+        
+        viewModel.selectedEvent
+            .sink { [weak self] in
+                self?.navigationController?.pushViewController(EventDetailView(eventModel: $0), animated: true)
+            }
+            .store(in: &bag)
         
         viewModel.events
             .receive(on: DispatchQueue.main)

@@ -7,9 +7,13 @@
 
 import Foundation
 import UIKit
+import Combine
 
 struct EmptyModel {}
-
+struct CuratedEventModel {
+    let events: [EventModel]
+    let selectedEvent: PassthroughSubject<EventModel?, Never>
+}
 //MARK: - CustomCuratedEvents
 
 class CustomCuratedEvents: ConfigurableCell {
@@ -25,7 +29,10 @@ class CustomCuratedEvents: ConfigurableCell {
     }()
     private lazy var collection: UICollectionView = { .init(frame: .zero, collectionViewLayout: layout) }()
     private var contentOffsetObserver: NSKeyValueObservation?
-    private var events: [EventModel] = []
+    private var eventsModel: CuratedEventModel?
+    private var endScroll: PassthroughSubject<Bool, Never> = .init()
+    private var currentContentOffset: CGFloat = -1
+    private var bag: Set<AnyCancellable> = .init()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -55,12 +62,19 @@ class CustomCuratedEvents: ConfigurableCell {
         collection.delegate = self
     }
     
-    private var headlineSection: CollectionSection {
-        .init(cell: events.compactMap { CollectionItem<CustomCuratedCell>($0) })
+    private var headlineSection: CollectionSection? {
+        guard let events = eventsModel?.events else { return nil }
+        return .init(cell: Set(events).compactMap { event in
+            var model = EventCellModel(model: event)
+            model.action = { [weak self] in
+                self?.eventsModel?.selectedEvent.send(event)
+            }
+            return CollectionItem<CustomCuratedCell>(model)
+        })
     }
     
     private func buildDataSource() -> CollectionDataSource {
-        .init(sections: [headlineSection])
+        .init(sections: [headlineSection].compactMap { $0 })
     }
     
     private func scrollUpdate(scrollView: UIScrollView) {
@@ -72,8 +86,8 @@ class CustomCuratedEvents: ConfigurableCell {
         }
     }
     
-    func configure(with model: [EventModel]) {
-        events = Array(Set.init(model))
+    func configure(with model: CuratedEventModel) {
+        eventsModel = model
         reloadCollection()
     }
 }

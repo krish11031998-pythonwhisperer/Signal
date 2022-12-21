@@ -14,7 +14,7 @@ class NewsFeed: UIViewController {
 	private lazy var tableView: UITableView = { .init(frame: .zero, style: .grouped) }()
     private var cancellable: Set<AnyCancellable> = .init()
     private let viewModel: NewsViewModel = .init()
-    private let selectedCurrency: CurrentValueSubject<String,Never> = .init("")
+    private let selectedCurrency: CurrentValueSubject<String? ,Never> = .init(nil)
     private lazy var dimmingView: UIView = {
         let view = UIView()
         view.backgroundColor = .surfaceBackground.withAlphaComponent(0.3)
@@ -62,7 +62,6 @@ class NewsFeed: UIViewController {
         searchController.searchBar.searchTextField.attributedPlaceholder = "Explore".body1Medium() as? NSAttributedString
         searchController.searchBar.searchTextField.backgroundColor = .surfaceBackgroundInverse.withAlphaComponent(0.25)
         searchController.searchBar.searchTextField.leftView = nil
-        searchController.searchBar.searchTextField.rightView = UIImage.Catalogue.search.generateView(size: .init(squared: 30))
         searchController.automaticallyShowsCancelButton = false
         searchController.delegate = self
         searchController.searchBar.delegate = self
@@ -87,7 +86,7 @@ class NewsFeed: UIViewController {
             .store(in: &cancellable)
 
         
-        let output = viewModel.transform()
+        let output = viewModel.transform(input: .init(searchParam: selectedCurrency))
         
         output
             .tableSection
@@ -99,27 +98,18 @@ class NewsFeed: UIViewController {
             })
             .store(in: &cancellable)
         
-        selectedCurrency
-            .receive(on: RunLoop.main)
-            .sink { [weak self] symb in
-                print("(DEBUG) symbol: ", symb)
+        output.dismissSearch
+            .sink { [weak self] _ in
                 self?.dismissSearch()
-                self?.viewModel.searchParam.send(symb)
             }
             .store(in: &cancellable)
     
-        viewModel.searchParam
-            .sink {
-                print("(DEBUG) params: ", $0)
-            }
-            .store(in: &cancellable)
     }
     
     @objc
     private func dismissSearch() {
         self.searchController.isActive = false
         showDimmingView(addDimming: self.searchController.searchBar.searchTextField.resignFirstResponder())
-        
     }
 }
 

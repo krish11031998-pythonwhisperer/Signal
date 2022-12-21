@@ -26,9 +26,9 @@ fileprivate extension RoundedCardViewConfig {
 
 class NewsSearchViewModel {
     
-    let selectedCurrency: CurrentValueSubject<String, Never>
+    let selectedCurrency: CurrentValueSubject<String?, Never>
     
-    init(selectedCurrency: CurrentValueSubject<String, Never>) {
+    init(selectedCurrency: CurrentValueSubject<String?, Never>) {
         self.selectedCurrency = selectedCurrency
     }
     

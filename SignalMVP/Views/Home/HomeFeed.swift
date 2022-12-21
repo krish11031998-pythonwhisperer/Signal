@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Combine
 
 class HomeFeed: UIViewController {
 	
@@ -24,6 +25,8 @@ class HomeFeed: UIViewController {
         model.viewTransitioner = self
 		return model
 	}()
+    
+    private var bag: Set<AnyCancellable> = .init()
 	
 //MARK: - Overriden Methods
 	
@@ -48,6 +51,12 @@ class HomeFeed: UIViewController {
     
     private func addObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(showMention), name: .showMention, object: nil)
+        viewModel.selectedEvent
+            .compactMap { $0 }
+            .sink { [weak self] in
+                self?.navigationController?.pushViewController(EventDetailView(eventModel: $0), animated: true)
+            }
+            .store(in: &bag)
     }
     
     @objc

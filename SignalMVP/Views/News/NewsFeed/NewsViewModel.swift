@@ -18,15 +18,19 @@ class NewsViewModel {
     var selectedNews: CurrentValueSubject<NewsModel?, Never> = .init(nil)
     private var bag: Set<AnyCancellable> = .init()
     var searchParam: CurrentValueSubject<String?, Never> = .init(nil)
-        
-    struct Output {
-        let tableSection: AnyPublisher<TableSection, Error>
+    
+    struct Input {
+        let searchParam: CurrentValueSubject<String?, Never>
     }
     
-    func transform() -> Output {
-        let news = searchParam
+    struct Output {
+        let tableSection: AnyPublisher<TableSection, Error>
+        let dismissSearch: AnyPublisher<Bool, Never>
+    }
+    
+    func transform(input: Input) -> Output {
+        let news = input.searchParam
             .flatMap({
-                print("(DEBUG) search: ", $0)
                 return NewsService.shared.fetchNews(tickers: $0)
             })
             .catch({ _ in
@@ -35,8 +39,12 @@ class NewsViewModel {
             .compactMap { $0.data }
             .map(setupSection)
             .eraseToAnyPublisher()
+        
+        let dismiss = input.searchParam
+            .compactMap { $0 == nil }
+            .eraseToAnyPublisher()
     
-        return .init(tableSection: news)
+        return .init(tableSection: news, dismissSearch: dismiss)
     }
     
     func setupSection(_ allNews: [NewsModel]) -> TableSection {

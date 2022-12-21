@@ -52,10 +52,11 @@ class CustomCuratedCell: ConfigurableCollectionCell {
         tickers.isHidden = false
     }
     
-    func configure(with model: EventModel) {
+    func configure(with model: EventCellModel) {
+        let event = model.model
         imageView.image = nil
-        UIImage.loadImage(url: model.news.first?.imageUrl, at: imageView, path: \.image)
-        model.eventName.body1Bold(color: .white).render(target: headlineLabel)
-        configTickers(model: model)
+        UIImage.loadImage(url: event.news.first?.imageUrl, at: imageView, path: \.image)
+        event.eventName.body1Bold(color: .white).render(target: headlineLabel)
+        configTickers(model: event)
     }
 }

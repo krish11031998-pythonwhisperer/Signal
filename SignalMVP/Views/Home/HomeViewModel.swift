@@ -24,6 +24,8 @@ class HomeViewModel {
     public var view: AnyTableView?
     public var viewTransitioner: PresentDelegate?
     private var bag: Set<AnyCancellable> = .init()
+    var selectedEvent: PassthroughSubject<EventModel?, Never> = .init()
+    
     public func fetchHomePageData() {
         let headlinesSection = fetchTrendingHeadlines()
         let mentionSection = fetchTopMentionedCoins()
@@ -90,7 +92,7 @@ class HomeViewModel {
             }
             .compactMap { $0.data }
             .map {
-                TableSection(rows: [TableRow<CustomCuratedEvents>($0)], title: "Events")
+                TableSection(rows: [TableRow<CustomCuratedEvents>(.init(events: $0, selectedEvent: self.selectedEvent))], title: "Events")
             }
             .eraseToAnyPublisher()
     }
