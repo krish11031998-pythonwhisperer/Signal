@@ -12,7 +12,7 @@ import Combine
 class NewsFeed: UIViewController {
 	
 	private lazy var tableView: UITableView = { .init(frame: .zero, style: .grouped) }()
-    private var cancellable: Set<AnyCancellable> = .init()
+    private var bag: Set<AnyCancellable> = .init()
     private let viewModel: NewsViewModel = .init()
     private let selectedCurrency: CurrentValueSubject<String? ,Never> = .init(nil)
     private lazy var dimmingView: UIView = {
@@ -58,13 +58,7 @@ class NewsFeed: UIViewController {
         navigationItem.searchController = searchController
         searchController.searchResultsUpdater = (searchController.searchResultsController as? NewsSearchResultController)
         
-        searchController.searchBar.searchTextField.font = CustomFonts.medium.fontBuilder(size: 16)
-        searchController.searchBar.searchTextField.attributedPlaceholder = "Explore".body1Medium() as? NSAttributedString
-        searchController.searchBar.searchTextField.backgroundColor = .surfaceBackgroundInverse.withAlphaComponent(0.25)
-        searchController.searchBar.searchTextField.leftView = nil
-        searchController.automaticallyShowsCancelButton = false
-        searchController.delegate = self
-        searchController.searchBar.delegate = self
+        searchController.standardStyling()
     }
     
     private func showDimmingView(addDimming: Bool) {
@@ -83,8 +77,16 @@ class NewsFeed: UIViewController {
                 guard let nav = self?.navigationController else { return }
                 nav.pushViewController(NewsDetailView(news: $0), animated: true)
             }
-            .store(in: &cancellable)
+            .store(in: &bag)
 
+        searchController
+            .searchBar
+            .searchTextField
+            .didStartEditing
+            .sink { [weak self] in
+                self?.showDimmingView(addDimming: $0)
+            }
+            .store(in: &bag)
         
         let output = viewModel.transform(input: .init(searchParam: selectedCurrency))
         
@@ -96,13 +98,13 @@ class NewsFeed: UIViewController {
             }, receiveValue: { [weak self] section in
                 self?.tableView.reloadData(.init(sections: [section]))
             })
-            .store(in: &cancellable)
+            .store(in: &bag)
         
         output.dismissSearch
             .sink { [weak self] _ in
                 self?.dismissSearch()
             }
-            .store(in: &cancellable)
+            .store(in: &bag)
     
     }
     
@@ -111,18 +113,4 @@ class NewsFeed: UIViewController {
         self.searchController.isActive = false
         showDimmingView(addDimming: self.searchController.searchBar.searchTextField.resignFirstResponder())
     }
-}
-
-//MARK: - NewsFeed - UISerachBarDelegate
-extension NewsFeed: UISearchControllerDelegate, UISearchBarDelegate {
-    
-    func willPresentSearchController(_ searchController: UISearchController) {
-        print("(DEBUG) isActive: ", searchController.isActive)
-    }
-    
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        print("(DEBUG) searchBar.isEditing: ", searchBar.searchTextField.isEditing)
-        self.showDimmingView(addDimming: searchBar.searchTextField.isFirstResponder)
-    }
-    
 }

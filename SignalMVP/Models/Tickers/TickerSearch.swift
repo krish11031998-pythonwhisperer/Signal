@@ -16,6 +16,12 @@ public struct TickerInfo: Codable {
     let marketCapRank: Int?
     let thumb: String?
     let large: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case id, name, symbol, thumb, large
+        case apiSymbol = "api_symbol"
+        case marketCapRank = "market_cap_rank"
+    }
 }
 
 

@@ -15,7 +15,7 @@ fileprivate extension RoundedCardViewConfig {
                   subTitle: data.name?.body3Medium(color: .gray),
                   caption: "Rank".body3Medium(),
                   subCaption: "\(data.marketCapRank ?? -1)".body2Medium(),
-                  leadingView: .image(url: data.thumb,
+                  leadingView: .image(url: data.large,
                                       size: .init(squared: 48),
                                       cornerRadius: 24,
                                       bordered: true)
