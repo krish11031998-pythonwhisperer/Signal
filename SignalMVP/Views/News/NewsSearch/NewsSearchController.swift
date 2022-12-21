@@ -10,25 +10,27 @@ import UIKit
 import Combine
 
 //MARK: - NewsSearchResultViewController
-class NewsSearchResultController: UIViewController {
+class NewsSearchResultController: SearchResultViewController {
     
     private var tableView: UITableView = { .standardTableView() }()
     private let viewModel: NewsSearchViewModel
     private var bag: Set<AnyCancellable> = .init()
-    
-    init(viewModel: NewsSearchViewModel) {
-        self.viewModel = viewModel
+
+    required init(result: CurrentValueSubject<String?, Never>) {
+        self.viewModel = .init(selectedCurrency: result)
         super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
         setupObservers()
+
     }
     
     private func setupView() {
@@ -59,7 +61,7 @@ class NewsSearchResultController: UIViewController {
 }
 
 //MARK: - NewsFeed
-extension NewsSearchResultController: UISearchResultsUpdating {
+extension NewsSearchResultController {
     func updateSearchResults(for searchController: UISearchController) {
         viewModel.searchParam.send(searchController.searchBar.text)
     }

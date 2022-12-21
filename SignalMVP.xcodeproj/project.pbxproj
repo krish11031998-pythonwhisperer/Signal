@@ -52,6 +52,7 @@
 		EF5C4EB42951B26F00669355 /* RoundedCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5C4EB32951B26E00669355 /* RoundedCardCell.swift */; };
 		EF5C4EB6295303C700669355 /* UITextField+Publishers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5C4EB5295303C700669355 /* UITextField+Publishers.swift */; };
 		EF5C4EBA2953073100669355 /* UISearchController+Styling.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5C4EB92953073000669355 /* UISearchController+Styling.swift */; };
+		EF5C4EBD29530C0700669355 /* SeachViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5C4EBC29530C0700669355 /* SeachViewController.swift */; };
 		EF7CBED22911BB8400F9D611 /* TopMentionDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CBED12911BB8400F9D611 /* TopMentionDetail.swift */; };
 		EF7CBEDA291577D500F9D611 /* CoinStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CBED9291577D500F9D611 /* CoinStorage.swift */; };
 		EF7CBFD8291641EA00F9D611 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CBF91291641E900F9D611 /* Array.swift */; };
@@ -283,6 +284,7 @@
 		EF5C4EB32951B26E00669355 /* RoundedCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCardCell.swift; sourceTree = "<group>"; };
 		EF5C4EB5295303C700669355 /* UITextField+Publishers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Publishers.swift"; sourceTree = "<group>"; };
 		EF5C4EB92953073000669355 /* UISearchController+Styling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISearchController+Styling.swift"; sourceTree = "<group>"; };
+		EF5C4EBC29530C0700669355 /* SeachViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeachViewController.swift; sourceTree = "<group>"; };
 		EF7CBED12911BB8400F9D611 /* TopMentionDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopMentionDetail.swift; sourceTree = "<group>"; };
 		EF7CBED9291577D500F9D611 /* CoinStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinStorage.swift; sourceTree = "<group>"; };
 		EF7CBF91291641E900F9D611 /* Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
@@ -655,6 +657,14 @@
 			path = UISearchViewController;
 			sourceTree = "<group>";
 		};
+		EF5C4EBB29530BFD00669355 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				EF5C4EBC29530C0700669355 /* SeachViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
 		EF7CBF8F291641E900F9D611 /* Library */ = {
 			isa = PBXGroup;
 			children = (
@@ -807,6 +817,7 @@
 		EF7CBFC0291641EA00F9D611 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				EF5C4EBB29530BFD00669355 /* ViewController */,
 				EF5C4E9D2951905900669355 /* RoundedCardView */,
 				EF59F111292A969A002877DE /* Bars */,
 				EF7CC01429166E6000F9D611 /* RatingChart */,
@@ -1681,6 +1692,7 @@
 				EF7D2F9628DED9730003B8F3 /* NewsNotification.swift in Sources */,
 				EF7D2FC928E0A0E10003B8F3 /* VideoCell.swift in Sources */,
 				EF1644A9290589B500E9D997 /* CustomCuratedEvents.swift in Sources */,
+				EF5C4EBD29530C0700669355 /* SeachViewController.swift in Sources */,
 				EF5C4EA92951920300669355 /* TickerSearch.swift in Sources */,
 				EF5C4EAD295192EC00669355 /* TickerEndpoint.swift in Sources */,
 				EF86382E28DC56D900EF520C /* NewsInterface.swift in Sources */,

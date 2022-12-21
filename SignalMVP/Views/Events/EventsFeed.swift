@@ -36,7 +36,7 @@ class EventsFeedViewController: UIViewController {
 	}
 	
 	//MARK: - Protected Methods
-	
+
 	private func setupView() {
 		view.addSubview(tableView)
 		tableView.backgroundColor = .surfaceBackground
