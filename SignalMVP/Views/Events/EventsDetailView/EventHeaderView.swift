@@ -42,17 +42,7 @@ class EventDetailViewHeader: ConfigurableCell {
 	public func configure(with model: EventModel) {
 		model.eventName.heading1().render(target: eventHeader)
 		"\(model.news.count) News Articles".body3Regular().render(target: newArticleCountLabel)
-//		tickerViews.removeChildViews()
-//		model.tickers.forEach { ticker in
-//			let url = "https://cryptoicons.org/api/icon/\(ticker.lowercased())/64"
-//			print("(DEBUG) imgUrl : ",url)
-//			let imgView = UIImageView(circular: .init(origin: .zero, size: .init(squared: 64)), background: .gray.withAlphaComponent(0.25))
-//			imgView.contentMode = .scaleAspectFit
-//			UIImage.loadImage(url: url, at: imgView, path: \.image)
-//			imgView.setFrame(.init(squared: 64))
-//			tickerViews.addArrangedSubview(imgView)
-//		}
-//		tickerViews.addArrangedSubview(.spacer())
+
         tickerViews.isHidden = model.tickers.isEmpty
         tickerViews.configTickers(news: model)
 	}

@@ -22,22 +22,29 @@ fileprivate extension YTPlayerView {
                                                   "modestbranding": 1,
                                                   "autoplay": 1, "loop": 1]
     
-    func fetchPlayerState() -> AnyPublisher<YTPlayerState, Error> {
+    func fetchPlayerState() -> Future<YTPlayerState, Error> {
         Future { [weak self] promise in
             guard let `self` = self else {
                 promise(.failure(YTPlayerError.outOfMemory))
                 return
             }
+            print("(DEBUG playerState Call!)")
             self.playerState { state, err in
+                print("(DEBUG playerState CallBack!)")
                 guard err == nil else {
                     if let err = err {
+                        print("(ERROR) err: ", err)
                         promise(.failure(err))
+                    } else {
+                        print("(ERROR) err: ", YTPlayerError.stateNotFound)
+                        promise(.failure(YTPlayerError.stateNotFound))
                     }
                     return
                 }
+                print("(DEBUG) state: ", state)
                 promise(.success(state))
             }
-        }.eraseToAnyPublisher()
+        }
         
     }
 }
@@ -76,14 +83,10 @@ class VideoTikTokCell: ConfigurableCollectionCell {
     private lazy var videolabel: UILabel = { .init() }()
     private lazy var videoDescription: UILabel = { .init() }()
     private lazy var channelLabel: UILabel = { .init() }()
-    private var playerState: CurrentValueSubject<PlayerState, Error> = .init(.idle)
+    private var playerState: CurrentValueSubject<PlayerState, Never> = .init(.idle)
     private var bag: Set<AnyCancellable> = .init()
     
-    private lazy var videoPlayer: YTPlayerView = {
-        let player: YTPlayerView = .init()
-        player.delegate = self
-        return player
-    }()
+    private lazy var videoPlayer: YTPlayerView = { .init() }()
     
     private lazy var playerStateIndicator: UIImageView = {
         let imageView = UIImageView(circleFrame: .init(origin: .zero, size: .init(squared: 48)), contentMode: .center)
@@ -92,15 +95,6 @@ class VideoTikTokCell: ConfigurableCollectionCell {
     }()
     
     private var tapCount: Int = 0
-
-//    private var seekDirection: SeekDirection = .none {
-//        didSet { seekTo() }
-//    }
-    
-//    private var videoPlayerState: YTPlayerState = .unknown {
-//        willSet { updateIndicator(old: videoPlayerState, new: newValue) }
-//        didSet { updateVideoPlayerWithState() }
-//    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -148,9 +142,9 @@ class VideoTikTokCell: ConfigurableCollectionCell {
         videoDescription.numberOfLines = 1
         playerState.send(.idle)
         UIImage.loadImage(url: model.imageUrl, at: imageView, path: \.image, resized: .init(width: .totalWidth, height: .totalHeight), resolveWithAspectRatio: true)
-        model.title.body1Medium().render(target: videolabel)
+        model.title.body1Medium(color: .white).render(target: videolabel)
         model.sourceName.body3Regular(color: .lightGray).render(target: channelLabel)
-        model.text.body3Regular().render(target: videoDescription)
+        model.text.body3Regular(color: .white).render(target: videoDescription)
         symbolView.configTickers(news: model)
         loadVideo(videoUrl: model.newsUrl)
         self.model = model
@@ -159,26 +153,55 @@ class VideoTikTokCell: ConfigurableCollectionCell {
     
     private func setObservers() {
         playerState
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: {
-                print("(ERROR) err:", $0.err?.localizedDescription)
-            }, receiveValue: { [weak self] (newPlayState) in
+        //            .combineLatest(videoPlayer.fetchPlayerState())
+        //            .map { state, playerState in
+        //                if state == .play && playerState == .playing {
+        //                    return PlayerState.pause
+        //                }
+        //                if state == .pause && playerState == .paused {
+        //                    return PlayerState.play
+        //                }
+        //
+        //                return state
+        //            }
+        //            .receive(on: DispatchQueue.main)
+//            .sink(receiveCompletion: {
+//                print("(ERROR) err:", $0.err?.localizedDescription)
+//            }, receiveValue: { [weak self] (newPlayState: PlayerState) in
+//                guard let `self` = self else { return }
+//                self.updatePlayerState(newPlayState)
+//            })
+            .sink() { [weak self] (newPlayState: PlayerState) in
                 guard let `self` = self else { return }
-                    switch newPlayState {
-                    case .idle:
-                        self.videoPlayer.isHidden = true
-                    case .play:
-                        self.updateIndicator(new: newPlayState)
-                        self.updateVideoPlayerWithState(state: newPlayState)
-                    case .pause:
-                        self.updateIndicator(new: newPlayState)
-                        self.updateVideoPlayerWithState(state: newPlayState)
-                    case .seekBackward, .seekForward:
-                        self.updateIndicator(new: newPlayState)
-                        self.seekTo()
-                }
-            })
+                self.updatePlayerState(newPlayState)
+            }
             .store(in: &bag)
+        
+        videoPlayer
+            .fetchPlayerState()
+            .sink { completion in
+                print("(ERR) err: ", completion.err?.localizedDescription)
+            } receiveValue: { state in
+                print("(DEBUG) playerState: ", state)
+            }
+            .store(in: &bag)
+        
+    }
+    
+    private func updatePlayerState(_ newPlayState: PlayerState) {
+        switch newPlayState {
+        case .idle:
+            self.videoPlayer.isHidden = true
+        case .play:
+            self.updateIndicator(new: newPlayState)
+            self.updateVideoPlayerWithState(state: newPlayState)
+        case .pause:
+            self.updateIndicator(new: newPlayState)
+            self.updateVideoPlayerWithState(state: newPlayState)
+        case .seekBackward, .seekForward:
+            self.updateIndicator(new: newPlayState)
+            self.seekTo()
+        }
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -187,7 +210,9 @@ class VideoTikTokCell: ConfigurableCollectionCell {
         let location = touch.location(in: self)
 
         guard  location.x <= .totalWidth * 0.3 || location.x >= .totalWidth * 0.66 else {
-            self.playerState.send(playerState.value == .play ? .pause : .play)
+            videoPlayer.playerState { [weak self] state, _ in
+                self?.playerState.send(state == .playing ? .pause : .play)
+            }
             return
         }
         
@@ -243,7 +268,7 @@ extension VideoTikTokCell {
             self.videoPlayer.isHidden = false
             self.videoPlayer.playVideo()
             DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
-                self.videoContentView.layer.animate(.fadeOut(to: 0.1))
+                self.videoContentView.animate(.fadeOut(to: 0.1))
             }
         default:
             break
@@ -265,9 +290,4 @@ extension VideoTikTokCell {
             self.tapCount = 0
         }
     }
-}
- 
-//MARK: - VideoTikTokCell - YTplayerDelegate
-extension VideoTikTokCell: YTPlayerViewDelegate {
-    func playerView(_ playerView: YTPlayerView, didChangeTo state: YTPlayerState) {}
 }

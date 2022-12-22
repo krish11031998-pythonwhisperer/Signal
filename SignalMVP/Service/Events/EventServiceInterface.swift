@@ -10,5 +10,5 @@ import Combine
 
 protocol EventServiceInterface {
 	
-    func fetchEvents(before: String?, after: String?, limit: Int) -> Future<EventResult,Error>
+    func fetchEvents(tickers: String?, before: String?, after: String?, limit: Int) -> Future<EventResult,Error>
 }

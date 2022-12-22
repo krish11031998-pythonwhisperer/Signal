@@ -12,7 +12,6 @@ import Combine
 class NewsFeed: SearchViewController {
 	
 	private lazy var tableView: UITableView = { .init(frame: .zero, style: .grouped) }()
-//    private var bag: Set<AnyCancellable> = .init()
     private let viewModel: NewsViewModel = .init()
     
 	//MARK: - Overriden Methods
@@ -28,7 +27,6 @@ class NewsFeed: SearchViewController {
 		super.viewDidLoad()
 		setupViews()
 		setupNavbar()
-//        setupSearchbarViewController()
 		bind()
 	}
 
@@ -46,23 +44,7 @@ class NewsFeed: SearchViewController {
 	private func setupNavbar() {
         standardNavBar(leftBarButton: .init(customView: "News".heading2().generateLabel))
 	}
-	
-//    private func setupSearchbarViewController() {
-//        navigationItem.searchController = searchController
-//        searchController.searchResultsUpdater = (searchController.searchResultsController as? NewsSearchResultController)
-//
-//        searchController.standardStyling()
-//    }
-//
-//    private func showDimmingView(addDimming: Bool) {
-//        if addDimming {
-//            view.addSubview(dimmingView)
-//            view.setFittingConstraints(childView: dimmingView, insets: .zero)
-//        } else {
-//            dimmingView.removeFromSuperview()
-//        }
-//    }
-//
+    
     private func bind () {
         viewModel.selectedNews
             .compactMap { $0 }

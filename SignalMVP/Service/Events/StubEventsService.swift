@@ -12,7 +12,7 @@ class StubEventService: EventServiceInterface {
 	
 	public static var shared: StubEventService = .init()
 	
-    func fetchEvents(before: String? = nil, after: String? = nil, limit: Int = 10) -> Future<EventResult, Error> {
+    func fetchEvents(tickers: String? = nil, before: String? = nil, after: String? = nil, limit: Int = 10) -> Future<EventResult, Error> {
         Bundle.main.loadDataFromBundle(name: "signalEvents", extensionStr: "json").future
     }
 	

@@ -13,7 +13,7 @@ struct EventCellModel: ActionProvider {
 	var action: Callback?
 }
 
-class EventsFeedViewController: UIViewController {
+class EventsFeedViewController: SearchViewController {
 	
 	private var yOff: CGFloat = .zero
 	
@@ -25,10 +25,18 @@ class EventsFeedViewController: UIViewController {
 	}()
 	
     private var viewModel: EventViewModel = .init()
-    private var bag: Set<AnyCancellable> = .init()
+//    private var bag: Set<AnyCancellable> = .init()
 	//MARK: - Overriden Methods
 	
-	override func viewDidLoad() {
+    init() {
+        super.init(resultController: NewsSearchResultController.self)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func viewDidLoad() {
 		super.viewDidLoad()
 		setupView()
 		setupNavBar()
@@ -69,10 +77,20 @@ class EventsFeedViewController: UIViewController {
             }
             .store(in: &bag)
         
-        viewModel.events
+        let output = viewModel.transform(input: .init(searchParam: searchText))
+        
+        output.tableSection
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] section in
-                self?.tableView.reloadData(.init(sections: [section]))
+            .sink(receiveCompletion: { completion in
+                print("(ERROR) err: ", completion.err?.localizedDescription)
+            }, receiveValue: { [weak self] section in
+                   self?.tableView.reloadData(.init(sections: [section]))
+            })
+            .store(in: &bag)
+
+        output.dismissSearch
+            .sink { [weak self] dismiss in
+                self?.dismissSearch()
             }
             .store(in: &bag)
 	}

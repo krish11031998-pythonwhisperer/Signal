@@ -19,7 +19,7 @@ class MainViewController: UITabBarController {
 			return tabBar
 		}()
 		self.setValue(tabBar, forKey: "tabBar")
-		tabBar.tintColor = .purple
+		tabBar.tintColor = .surfaceBackgroundInverse
 	}
 
 	

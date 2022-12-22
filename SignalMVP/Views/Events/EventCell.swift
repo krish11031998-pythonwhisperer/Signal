@@ -116,7 +116,7 @@ class EventView: UIView  {
 		UIImage.loadImage(url: model.imageUrl, at: imageView, path: \.image)
 		
         model.sourceName.body3Medium(color: .gray).render(target: authorTitle)
-		model.title.body1Bold().render(target: newsTitle)
+        model.title.body1Bold(color: .white).render(target: newsTitle)
 		
 		tickersView.isHidden = model.tickers.isEmpty
 		if let validNews = news, !model.tickers.isEmpty {

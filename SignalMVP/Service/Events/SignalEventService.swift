@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 enum SignalEventEndpoints {
-	case latestEvents(before: String?, after: String?, limit: Int)
+    case latestEvents(tickers: String?, before: String?, after: String?, limit: Int)
 }
 
 extension SignalEventEndpoints: EndPoint {
@@ -19,15 +19,16 @@ extension SignalEventEndpoints: EndPoint {
 	
 	var path: String {
 		switch self {
-		case .latestEvents(_, _, _):
+		case .latestEvents:
 			return "/events/latestEvents"
 		}
 	}
 	
 	var queryItems: [URLQueryItem] {
 		switch self {
-		case .latestEvents(let before, let after, let limit):
+		case .latestEvents(let tickers, let before, let after, let limit):
 			return [
+                .init(name: "tickers", value: tickers),
 				.init(name: "before", value: before),
 				.init(name: "after", value: after),
 				.init(name: "limit", value: "\(limit)")
@@ -57,9 +58,9 @@ class EventService: EventServiceInterface {
 	
 	public static var shared: EventService = .init()
 	
-    public func fetchEvents(before: String? = nil, after: String? = nil, limit: Int = 20) -> Future<EventResult, Error> {
+    public func fetchEvents(tickers: String? = nil, before: String? = nil, after: String? = nil, limit: Int = 20) -> Future<EventResult, Error> {
         SignalEventEndpoints
-            .latestEvents(before: before, after: after, limit: limit)
+            .latestEvents(tickers: tickers, before: before, after: after, limit: limit)
             .fetch()
     }
 	

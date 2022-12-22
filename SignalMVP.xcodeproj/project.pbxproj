@@ -25,7 +25,7 @@
 		EF1D7E5B2922CCFD0041ADEC /* CollectionViewFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1D7E552922CCFD0041ADEC /* CollectionViewFunctions.swift */; };
 		EF1D7E5C2922CCFD0041ADEC /* CustomCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1D7E572922CCFD0041ADEC /* CustomCollectionCell.swift */; };
 		EF1D7E5D2922CCFD0041ADEC /* CollectionColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1D7E582922CCFD0041ADEC /* CollectionColumn.swift */; };
-		EF2BB215292BF4E40006C00F /* VideoScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2BB214292BF4E40006C00F /* VideoScreen.swift */; };
+		EF2BB215292BF4E40006C00F /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2BB214292BF4E40006C00F /* VideoViewController.swift */; };
 		EF48D71328E4CFCF00BD2A1A /* MainTabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF48D71228E4CFCF00BD2A1A /* MainTabModel.swift */; };
 		EF48D71528E578A600BD2A1A /* SignalTwitterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF48D71428E578A600BD2A1A /* SignalTwitterService.swift */; };
 		EF48D71728E5918300BD2A1A /* SignalEventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF48D71628E5918300BD2A1A /* SignalEventService.swift */; };
@@ -257,7 +257,7 @@
 		EF1D7E552922CCFD0041ADEC /* CollectionViewFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewFunctions.swift; sourceTree = "<group>"; };
 		EF1D7E572922CCFD0041ADEC /* CustomCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCollectionCell.swift; sourceTree = "<group>"; };
 		EF1D7E582922CCFD0041ADEC /* CollectionColumn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionColumn.swift; sourceTree = "<group>"; };
-		EF2BB214292BF4E40006C00F /* VideoScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoScreen.swift; sourceTree = "<group>"; };
+		EF2BB214292BF4E40006C00F /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
 		EF48D71228E4CFCF00BD2A1A /* MainTabModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabModel.swift; sourceTree = "<group>"; };
 		EF48D71428E578A600BD2A1A /* SignalTwitterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalTwitterService.swift; sourceTree = "<group>"; };
 		EF48D71628E5918300BD2A1A /* SignalEventService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalEventService.swift; sourceTree = "<group>"; };
@@ -546,7 +546,7 @@
 		EF2BB213292BF4B60006C00F /* Videos */ = {
 			isa = PBXGroup;
 			children = (
-				EF2BB214292BF4E40006C00F /* VideoScreen.swift */,
+				EF2BB214292BF4E40006C00F /* VideoViewController.swift */,
 				EFFFE471294B97750045686E /* VideoTikTokCell.swift */,
 				EF04E346294F10F000E35815 /* VideoViewModel.swift */,
 			);
@@ -1644,7 +1644,7 @@
 				EF7CBFF7291641EA00F9D611 /* NetworkReqeust.swift in Sources */,
 				EF00758F28E5CBA000195433 /* SignalNewsService.swift in Sources */,
 				EF86383728DC648000EF520C /* NewsViewModel.swift in Sources */,
-				EF2BB215292BF4E40006C00F /* VideoScreen.swift in Sources */,
+				EF2BB215292BF4E40006C00F /* VideoViewController.swift in Sources */,
 				EF5C4EB22951943200669355 /* TickerService.swift in Sources */,
 				EF86384528DC9E5200EF520C /* StubEventsService.swift in Sources */,
 				EF59F10F292A9602002877DE /* CustomCollectionTableCell.swift in Sources */,
