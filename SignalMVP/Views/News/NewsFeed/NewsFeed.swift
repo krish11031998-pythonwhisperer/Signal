@@ -65,12 +65,6 @@ class NewsFeed: SearchViewController {
                 self?.tableView.reloadData(.init(sections: [section]))
             })
             .store(in: &bag)
-        
-        output.dismissSearch
-            .sink { [weak self] _ in
-                self?.dismissSearch()
-            }
-            .store(in: &bag)
     }
 
 }

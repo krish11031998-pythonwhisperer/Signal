@@ -33,46 +33,58 @@ extension AnyTableView {
     func reloadSection(_ section: TableSection, at sectionIdx: Int? = nil) {}
 }
 
+//MARK: - TweetFeedViewModel
 class TweetFeedViewModel {
 
 	var tweets: [TweetCellModel]?
-	var loading: Bool = false
+    var loading: CurrentValueSubject<Bool, Never> = .init(false)
 	var view: AnyTableView?
     private var bag: Set<AnyCancellable> = .init()
     @Published var selectedTweet: TweetCellModel?
     
-	public func fetchTweets(entity: String? = nil, before: String? = nil, after: String? = nil, limit: Int = 20) {
-		guard !loading else { return }
-		loading = true
-		TweetService
-			.shared
-            .fetchTweets(after: after)
-            .catch { err in
-                print("(ERROR) TweetService : ", err.localizedDescription)
+    private var after: CurrentValueSubject<String?, Never> = .init(nil)
+    
+    struct Input {
+        let searchParam: AnyPublisher<String?, Never>
+    }
+    
+    struct Output {
+        let sections: AnyPublisher<TableSection, Error>
+    }
+    
+    public func transform(input: Input) -> Output {
+        
+        let sections = loading
+            .filter { $0 }
+            .combineLatest(input.searchParam, after) { _, search, after in
+                (search, after)
+            }
+            .flatMap {
+                TweetService.shared.fetchTweets(entity: $0.0, after: $0.1)
+            }
+            .catch {
+                print("(ERROR) TweetService Error: ", $0.localizedDescription)
                 return StubTweetService.shared.fetchTweets()
             }
-            .sink { err in
-                switch err {
-                case .failure(let err):
-                    print("(DEBUG) err: ", err)
-                default: break
-                }
-            } receiveValue: { [weak self] tweets in
-                self?.decodeToTweetCellModel(tweets)
+            .compactMap {[weak self] in
+                self?.decodeToTweetCellModel($0)
             }
-            .store(in: &bag)
-
-	}
+            .eraseToAnyPublisher()
+        
+        return .init(sections: sections)
+    }
+    
 	
 	
 	public func fetchNextPage() {
-        guard let id = tweets?.lastID, !loading else { return }
+        guard let id = tweets?.lastID, !loading.value else { return }
+        after.send(id)
+        loading.send(true)
         print("(DEBUG) fetching next page! : ", id)
-		fetchTweets(after: id)
 	}
 	
-	private func decodeToTweetCellModel(_ data: TweetSearchResult) {
-		guard let tweets = data.data else { return }
+	private func decodeToTweetCellModel(_ data: TweetSearchResult) -> TableSection? {
+		guard let tweets = data.data else { return nil }
 		
         let fitleredTweet: [TweetCellModel] = tweets.compactMap { tweet in
 			var model:TweetCellModel = .init(model: tweet)
@@ -91,11 +103,8 @@ class TweetFeedViewModel {
 			self.tweets?.append(contentsOf: fitleredTweet)
 		}
 		
-		loading.toggle()
-		
-		DispatchQueue.main.async {
-			self.view?.reloadTableWithDataSource(self.buildDataSource())
-		}
+        loading.send(false)
+        return tweetSection
 		
 	}
 

@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import Combine
 
-class TweetFeedViewController: UIViewController {
+class TweetFeedViewController: SearchViewController {
 	
 //	private var observer: NSKeyValueObservation?
 	private var yOff: CGFloat = .leastNormalMagnitude
@@ -25,14 +25,13 @@ class TweetFeedViewController: UIViewController {
 		tableView.showsVerticalScrollIndicator = false
 		return tableView
 	}()
-    private var bag: Set<AnyCancellable> = .init()
     
 //MARK: - Overriden Methods
-	override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-		super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-	}
-	
-	required init?(coder: NSCoder) {
+    init() {
+        super.init(resultController: NewsSearchResultController.self)
+    }
+        
+    required init?(coder: NSCoder) {
 		super.init(coder: coder)
 	}
 	
@@ -41,9 +40,15 @@ class TweetFeedViewController: UIViewController {
 		super.viewDidLoad()
 		setupViews()
 		setupNavbar()
-		viewModel.fetchTweets()
+//		viewModel.fetchTweets()
+        bind()
         setupObservers()
 	}
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.loading.send(true)
+    }
 	
 	override func viewDidLayoutSubviews() {
 		super.viewDidLayoutSubviews()
@@ -85,11 +90,21 @@ class TweetFeedViewController: UIViewController {
 	private func setupNavbar() {
         standardNavBar(leftBarButton: .init(customView: "Tweets".heading2().generateLabel))
 	}
+    
+    private func bind() {
+        let output = viewModel.transform(input: .init(searchParam: searchText.eraseToAnyPublisher()))
+        
+        output.sections
+            .receive(on: RunLoop.main)
+            .sink {
+                if let err = $0.err {
+                    print("(ERROR) err: ", err)
+                }
+            } receiveValue: { [weak self] in
+                self?.tableView.reloadData(.init(sections: [$0]))
+            }
+            .store(in: &bag)
 
-    private func loadMoreTweets(_ scrollView: UIScrollView) {
-        if scrollView.contentOffset.y >= scrollView.contentSize.height - 200 - scrollView.frame.height && !viewModel.loading {
-            self.viewModel.fetchNextPage()
-        }
     }
 }
 

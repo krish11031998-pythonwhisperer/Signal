@@ -87,12 +87,6 @@ class EventsFeedViewController: SearchViewController {
                    self?.tableView.reloadData(.init(sections: [section]))
             })
             .store(in: &bag)
-
-        output.dismissSearch
-            .sink { [weak self] dismiss in
-                self?.dismissSearch()
-            }
-            .store(in: &bag)
 	}
 	
 	@objc

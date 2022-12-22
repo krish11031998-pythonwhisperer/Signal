@@ -70,6 +70,13 @@ class SearchViewController: UIViewController {
             }
             .store(in: &bag)
         
+        searchText
+            .compactMap { $0 == nil }
+            .sink { [weak self] _ in
+                self?.dismissSearch()
+            }
+            .store(in: &bag)
+        
     }
     @objc
     func dismissSearch() {
