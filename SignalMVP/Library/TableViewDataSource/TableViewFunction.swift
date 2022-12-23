@@ -61,17 +61,31 @@ extension UITableView {
 		}
 	}
 	
-    func reloadSection(_ section: TableSection, at sectionIdx: Int? = nil) {
+    func insertSection(_ section: TableSection, at sectionIdx: Int? = nil) {
         var sections = self.source?.sections ?? []
-        guard let idx = sectionIdx ?? sections.findIdx(section) else { return }
-        sections[idx] = section
+        let idx = sectionIdx ?? sections.count
+        sections.append(section)
         self.source = .init(sections: sections)
         self.dataSource = source
         self.delegate = source
         beginUpdates()
-        reloadSections([idx], with: .automatic)
-//        deleteSections([idx], with: .fade)
-//        insertSections([idx], with: .fade)
+//        let toUpdateIndexSet = IndexSet(integersIn: 1 ..< numberOfSections)
+//        reloadSections(toUpdateIndexSet, with: .automatic)
+        insertSections([idx], with: .fade)
+        endUpdates()
+    }
+    
+    func reloadSection(_ section: TableSection, at sectionIdx: Int? = nil) {
+        var sections = self.source?.sections ?? []
+        let idx = sectionIdx ?? sections.count
+        sections.append(section)
+        self.source = .init(sections: sections)
+        self.dataSource = source
+        self.delegate = source
+        beginUpdates()
+        let toUpdateIndexSet = IndexSet(integersIn: 1 ..< numberOfSections)
+        reloadSections(toUpdateIndexSet, with: .automatic)
+        insertSections([idx], with: .right)
         endUpdates()
     }
     

@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+import Combine
 
 extension Bundle {
 	
@@ -23,4 +23,14 @@ extension Bundle {
 		
 		return .success(decodedData)
 	}
+    
+    func loadDataFromBundle<T:Codable>(name: String, extensionStr: String) -> AnyPublisher<T,Error> {
+        Just((name, extensionStr))
+            .compactMap { url(forResource: $0.0, withExtension: $0.1) }
+            .tryMap {
+                try Data(contentsOf: $0)
+            }
+            .decode(type: T.self, decoder: JSONDecoder())
+            .eraseToAnyPublisher()
+    }
 }

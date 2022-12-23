@@ -37,16 +37,5 @@ extension TweetEndpoint: EndPoint {
 	
 	var header: [String : String]? {
 		["Authorization" : "Bearer AAAAAAAAAAAAAAAAAAAAAJHAagEAAAAAmFRvYKE8KtF%2BTvVxYsse0GC6faE%3DsuQdyHCBqKvhOjmoGGfUPNOCG41QZySz1BQWgJB5i0QIN7wbaE"]
-	}
-	
-	func fetch<CodableModel>(completion: @escaping (Result<CodableModel, Error>) -> Void) where CodableModel : Decodable, CodableModel : Encodable  {
-		guard let validRequest = request else {
-			completion(.failure(URLSessionError.invalidUrl))
-			return
-		}
-		
-		URLSession.urlSessionRequest(request: validRequest, completion: completion)
-	}
-
-	
+	}	
 }

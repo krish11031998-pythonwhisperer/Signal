@@ -59,10 +59,11 @@ class NewsService: NewsServiceInterface {
 				   source: String? = nil,
 				   after: String? = nil,
 				   before: String? = nil,
-				   limit: Int = 20) -> Future<NewsResult, Error> {
+				   limit: Int = 20) -> AnyPublisher<NewsResult, Error> {
 		SignalNewsEndpoints
             .tickerNews(tickers: tickers, items: items, source: source, after: after, before: before, limit: limit)
             .fetch()
+            .eraseToAnyPublisher()
 	}
 	
 }

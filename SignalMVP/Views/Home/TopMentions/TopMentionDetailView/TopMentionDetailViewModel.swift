@@ -9,6 +9,10 @@ import Foundation
 import UIKit
 import Combine
 
+enum ObjectError: String, Error {
+    case objectOutOfMemory
+}
+
 fileprivate extension MentionModel {
     
     var total: Int { positiveMentions + neutralMentions + negativeMentions }
@@ -39,12 +43,16 @@ fileprivate extension UIView {
 }
 
 class TopMentionDetailViewModel {
-    
-    public var tableView: AnyTableView?
+    //MARK: - SegmentSections
+    enum Sections: String, CaseIterable {
+        case twitter, news, events
+    }
+
     private var tweets:[TweetModel] = []
     private var news: [NewsModel] = []
     private var events: [EventModel] = []
-    private var selectedTab: String = "Twitter"
+//    private var selectedTab: String = "Twitter"
+    private var selectedTab: CurrentValueSubject<Sections, Never> = .init(.news)
     var group: DispatchGroup
     private var bag: Set<AnyCancellable> = .init()
     init() {
@@ -54,111 +62,96 @@ class TopMentionDetailViewModel {
     var ticker: String {
         MentionStorage.selectedMention?.ticker ?? ""
     }
-    
-    public func fetchData() {
-        fetchTweets()
-        tableView?.reloadTableWithDataSource(buildDataSource())
-    }
-    
-    private func fetchTweets(completion: Callback? = nil) {
-        StubTweetService.shared.fetchTweets(entity: nil, before: nil, after: nil, limit: 20)
-            .compactMap { $0.data }
-            .receive(on: DispatchQueue.main)
-            .sink { _ in
-                
-            } receiveValue: {[weak self] tweets in
-                self?.tweets = tweets
-                completion?()
-            }
-            .store(in: &bag)
 
+    struct Output {
+        let sections: AnyPublisher<[TableCellProvider], Error>
     }
     
-    private func fetchNews(completion: Callback?) {
-        StubNewsService.shared.fetchNews(tickers: ticker)
-            .receive(on: DispatchQueue.main)
-            .sink {
-                switch $0 {
-                case .failure(let err):
-                    print("(ERROR) err : ", err)
-                default: break
+    func transform() -> Output {
+        let section = selectedTab
+            .flatMap({ [weak self] in
+                guard let `self` = self else {
+                    return Fail<[TableCellProvider], Error>(error: ObjectError.objectOutOfMemory).eraseToAnyPublisher()
                 }
-            } receiveValue: { [weak self] result in
-                self?.news = result.data ?? []
-                completion?()
-            }
-            .store(in: &bag)
-
-    }
-    
-    private func fetchEvents(completion: Callback?) {
-        StubEventService.shared.fetchEvents()
-            .compactMap { $0.data }
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { _ in
-                
-            }, receiveValue: { [weak self] events in
-                self?.events = events
-                completion?()
+                return self.dataForSection($0)
             })
-            .store(in: &bag)
+            .eraseToAnyPublisher()
+        
+        return .init(sections: section)
     }
     
-    private func header(_ tab: String) {
-        
-        switch tab {
-        case "Twitter":
-            selectedTab = "Twitter"
-            guard let mediaSecion = mediaSecion else { return }
-            tableView?.reloadSection(mediaSecion, at: 1)
-        case "News":
-            selectedTab = "News"
-            fetchNews { [weak self] in
-                guard let mediaSecion = self?.mediaSecion else { return }
-                self?.tableView?.reloadSection(mediaSecion, at: 1)
-            }
-        case "Events":
-            selectedTab = "Events"
-            fetchEvents { [weak self] in
-                guard let mediaSecion = self?.mediaSecion else { return }
-                self?.tableView?.reloadSection(mediaSecion, at: 1)
-            }
-        default:
-            break
+    private func dataForSection(_ section: Sections) -> AnyPublisher<[TableCellProvider], Error> {
+        switch section {
+        case .twitter:
+            return self.fetchTweets()
+        case .events:
+            return self.fetchEvents()
+        case .news:
+            return self.fetchNews()
         }
     }
     
-    private var mediaHeaderView: UIView {
+    private func fetchTweets(after: String? = nil) -> AnyPublisher<[TableCellProvider], Error> {
+        TweetService
+            .shared
+            .fetchTweets(entity: ticker, after: after)
+            .catch { err in
+                print("(ERROR) err [From Service]:", err)
+                return StubTweetService.shared.fetchTweets()
+            }
+            .compactMap { result in
+                result.data?.compactMap { TableRow<TweetCell>(.init(model: $0)) }
+            }
+            .eraseToAnyPublisher()
+    }
+
+    
+    private func fetchNews(after: String? = nil) -> AnyPublisher<[TableCellProvider], Error> {
+        NewsService
+            .shared
+            .fetchNews(tickers: ticker, after: after)
+            .catch { err in
+                print("(ERROR) err [From Service]:", err)
+                return StubNewsService.shared.fetchNews()
+            }
+            .compactMap { result in
+                result.data?.compactMap { TableRow<NewsCell>(.init(model: $0)) }
+            }
+            .eraseToAnyPublisher()
+    }
+    
+    private func fetchEvents(after: String? = nil) -> AnyPublisher<[TableCellProvider], Error> {
+        EventService
+            .shared
+            .fetchEvents(tickers: ticker, after: after)
+            .catch { err in
+                print("(ERROR) err [From Service]:", err)
+                return StubEventService.shared.fetchEvents()
+            }
+            .compactMap { result in
+                result.data.compactMap { TableRow<EventSingleCell>(.init(model: $0)) }
+            }
+            .eraseToAnyPublisher()
+    }
+ 
+
+    var mediaHeaderView: UIView {
         let customHeader = "Media".heading2().generateLabel
-        let customSelector = ["Twitter", "News", "Events"].compactMap { tab in
-            let textColor: UIColor = selectedTab == tab ? .textColorInverse : .textColor
-            let blob = tab.body2Medium(color: textColor).generateLabel.segmentBlob(isSelected: selectedTab == tab)
-            return blob.buttonify { self.header(tab) }
+        let customSelector = Sections.allCases.compactMap { tabSection in
+            let tab = tabSection.rawValue
+            let isSelected = selectedTab.value.rawValue == tab
+            let textColor: UIColor = isSelected ? .textColorInverse : .textColor
+            let blob = tab.capitalized.body2Medium(color: textColor).generateLabel.segmentBlob(isSelected: isSelected)
+            return blob.buttonify { [weak self] in
+                self?.selectedTab.send(tabSection)
+            }
         }.embedInHStack(alignment: .center, spacing: 5)
         customSelector.addArrangedSubview(.spacer())
         let stack = UIStackView.VStack(subViews: [customHeader, customSelector], spacing: 10)
         return stack.embedInView(insets: .init(by: 10), priority: .needed)
     }
     
-    private var mediaSecion: TableSection? {
-        var rows: [TableCellProvider] = []
-
-        switch selectedTab {
-        case "Twitter":
-            rows = tweets.limitTo(to: 2).map { TableRow<TweetCell>(.init(model: $0)) }
-        case "News":
-            rows = news.limitTo(to: 2).map { TableRow<NewsCell>(.init(model: $0)) }
-        case "Events":
-            rows = events.limitTo(to: 2).map { TableRow<EventSingleCell>(.init(model: $0)) }
-        default:
-            break
-        }
-        
-        return .init(rows: rows, customHeader: mediaHeaderView)
-        
-    }
-    
-    private var sentimentSplitView: TableSection? {
+    var sentimentSplitView: TableSection? {
         guard let mention = MentionStorage.selectedMention else { return nil }
         
         let accountRatios:[MultipleStrokeModel] = [
@@ -180,9 +173,5 @@ class TopMentionDetailViewModel {
         
         return .init(rows: [TableRow<SentimentCell>(.init())], title: "Sentiment")
         
-    }
-    
-    private func buildDataSource() -> TableViewDataSource {
-        .init(sections: [sentimentSplitView, mediaSecion].compactMap { $0 })
     }
 }

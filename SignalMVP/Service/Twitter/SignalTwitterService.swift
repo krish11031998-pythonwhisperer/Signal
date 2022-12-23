@@ -37,14 +37,6 @@ extension SignalTwitterEndpoints: EndPoint {
 		}
 	}
 	
-	func fetch(completion: @escaping (Result<TweetSearchResult, Error>) -> Void) {
-		guard let validRequest = request else {
-			completion(.failure(URLSessionError.invalidUrl))
-			return
-		}
-		URLSession.urlSessionRequest(request: validRequest, completion: completion)
-	}
-	
     func fetch() -> Future<TweetSearchResult, Error> {
         guard let validRequest = request else {
             return Future { $0(.failure(URLSessionError.invalidUrl))}

@@ -16,18 +16,19 @@ class StubNewsService: NewsServiceInterface {
 						  source: String? = nil,
 						  after: String? = nil,
 						  before: String? = nil,
-						  limit: Int = 20) -> Future<NewsResult, Error> {
-        Future { promise in
-            let result: Result<NewsResult,Error> = Bundle.main.loadDataFromBundle(name: "signalNews", extensionStr: "json")
-            
-            switch result {
-            case .success(let newsResult):
-                promise(.success(newsResult))
-            case .failure(let err):
-                promise(.failure(err))
-            }
-        }
-		
+						  limit: Int = 20) -> AnyPublisher<NewsResult, Error> {
+//        Future { promise in
+//            let result: Result<NewsResult,Error> = Bundle.main.loadDataFromBundle(name: "signalNews", extensionStr: "json")
+//
+//            switch result {
+//            case .success(let newsResult):
+//                promise(.success(newsResult))
+//            case .failure(let err):
+//                promise(.failure(err))
+//            }
+//        }
+//
+        return Bundle.main.loadDataFromBundle(name: "signalNews", extensionStr: "json")
 	}
 	
 }

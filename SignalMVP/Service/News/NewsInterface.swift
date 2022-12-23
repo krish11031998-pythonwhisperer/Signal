@@ -13,5 +13,5 @@ protocol NewsServiceInterface {
 				   source: String?,
 				   after: String?,
 				   before: String?,
-				   limit: Int) -> Future<NewsResult,Error>
+				   limit: Int) -> AnyPublisher<NewsResult,Error>
 }

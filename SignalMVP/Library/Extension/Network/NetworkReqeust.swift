@@ -99,39 +99,7 @@ enum URLSessionError: String, Error {
 
 extension URLSession {
 
-	static func urlSessionRequest<T: Codable>(request: URLRequest, completion: @escaping (Result<T,Error>) -> Void) {
-		print("(REQUEST) Request: \(request.url?.absoluteString)")
-		if let cachedData = DataCache.shared[request] {
-			if let deceodedData = try? JSONDecoder().decode(T.self, from: cachedData) {
-				completion(.success(deceodedData))
-			} else {
-				completion(.failure(URLSessionError.decodeErr))
-			}
-		} else {
-			let session = URLSession.shared.dataTask(with: request) { data, resp , err in
-				guard let validData = data, let validResponse = resp else {
-					completion(.failure(err ?? URLSessionError.noData))
-					return
-				}
-				
-				guard let decodedData = try? JSONDecoder().decode(T.self, from: validData) else {
-					completion(.failure(URLSessionError.decodeErr))
-					return
-				}
-				
-				DataCache.shared[request] = validData
-				
-				completion(.success(decodedData))
-			}
-			session.resume()
-		}
-	}
 	
-//    static var standardDecoder: JSONDecoder {
-//        let decoder = JSONDecoder()
-//        decoder.keyDecodingStrategy = .convertFromSnakeCase
-//        return decoder
-//    }
     
     static func urlSessionRequest<T: Codable>(request: URLRequest) -> Future<T,Error> {
         Future { promise in

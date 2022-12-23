@@ -36,14 +36,6 @@ extension SignalEventEndpoints: EndPoint {
 		}
 	}
 	
-	func fetch(completion: @escaping (Result<EventResult, Error>) -> Void) {
-		guard let validRequest = request else {
-			completion(.failure(URLSessionError.invalidUrl))
-			return
-		}
-		URLSession.urlSessionRequest(request: validRequest, completion: completion)
-	}
-	
     func fetch() -> Future<EventResult, Error> {
         guard let validRequest = request else {
             return Future { $0(.failure(URLSessionError.invalidUrl))}
@@ -58,10 +50,11 @@ class EventService: EventServiceInterface {
 	
 	public static var shared: EventService = .init()
 	
-    public func fetchEvents(tickers: String? = nil, before: String? = nil, after: String? = nil, limit: Int = 20) -> Future<EventResult, Error> {
+    public func fetchEvents(tickers: String? = nil, before: String? = nil, after: String? = nil, limit: Int = 20) -> AnyPublisher<EventResult, Error> {
         SignalEventEndpoints
             .latestEvents(tickers: tickers, before: before, after: after, limit: limit)
             .fetch()
+            .eraseToAnyPublisher()
     }
 	
 }
