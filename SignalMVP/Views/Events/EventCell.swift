@@ -123,19 +123,10 @@ class EventView: UIView  {
             tickersView.configTickers(news: validNews)
         }
 		
-		if addTapGesture {
-			self.addTapGesture()
-		}
+//		if addTapGesture {
+//			self.addTapGesture()
+//		}
 	}
-	
-	private func addTapGesture() {
-		let tapGesture = UITapGestureRecognizer(target: self, action: #selector(addTapHandler))
-		addGestureRecognizer(tapGesture)
-	}
-	
-	@objc
-	private func addTapHandler() {
-		NewsStorage.selectedNews = news
-	}
+
 }
 

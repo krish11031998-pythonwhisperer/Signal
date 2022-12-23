@@ -38,7 +38,6 @@ class EventDetailView: UIViewController {
 	
 	override func viewWillDisappear(_ animated: Bool) {
 		super.viewWillDisappear(animated)
-		EventStorage.selectedEvent = nil
         setupTransparentNavBar(color: .surfaceBackground, scrollColor: .surfaceBackground)
 	}
 	
@@ -50,7 +49,6 @@ class EventDetailView: UIViewController {
 		view.backgroundColor = .surfaceBackground
 		view.setFittingConstraints(childView: tableView, insets: .zero)
 		tableView.reloadData(buildDataSource())
-		setupObserver()
         standardNavBar(color: .clear, scrollColor: .clear)
 	}
 	
@@ -71,21 +69,7 @@ class EventDetailView: UIViewController {
 	
 	private var section: TableSection? {
 		guard let validEvent = eventModel, validEvent.news.count > 3 else { return nil }
-		return .init(rows: (validEvent.news[3...]).compactMap {news in TableRow<NewsCell>(.init(model: news, action: {
-			NewsStorage.selectedNews = news
-		})) })
+		return .init(rows: (validEvent.news[3...]).compactMap {news in TableRow<NewsCell>(.init(model: news)) })
 	}
-	
-	
-	private func setupObserver() {
-		NotificationCenter.default.addObserver(self, selector: #selector(showNews), name: .showNews, object: nil)
-	}
-	
-	@objc
-	private func showNews() {
-        guard let news = NewsStorage.selectedNews else { return }
-		navigationController?.pushViewController(NewsDetailView(news: news), animated: true)
-	}
-	
 	
 }

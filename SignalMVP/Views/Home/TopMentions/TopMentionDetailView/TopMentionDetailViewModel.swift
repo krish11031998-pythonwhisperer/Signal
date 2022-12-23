@@ -52,15 +52,15 @@ class TopMentionDetailViewModel {
     private var news: [NewsModel] = []
     private var events: [EventModel] = []
 //    private var selectedTab: String = "Twitter"
+    private let mention: MentionModel
     private var selectedTab: CurrentValueSubject<Sections, Never> = .init(.news)
-    var group: DispatchGroup
     private var bag: Set<AnyCancellable> = .init()
-    init() {
-        group = .init()
+    init(mention: MentionModel) {
+        self.mention = mention
     }
     
     var ticker: String {
-        MentionStorage.selectedMention?.ticker ?? ""
+        mention.ticker
     }
 
     struct Output {
@@ -152,8 +152,6 @@ class TopMentionDetailViewModel {
     }
     
     var sentimentSplitView: TableSection? {
-        guard let mention = MentionStorage.selectedMention else { return nil }
-        
         let accountRatios:[MultipleStrokeModel] = [
             mention.chartModel(for: "Positive"),
             mention.chartModel(for: "Negative"),
@@ -171,7 +169,7 @@ class TopMentionDetailViewModel {
         legend.addArrangedSubview(.spacer())
         let mainStack: UIStackView = .VStack(subViews: [legend, chart] , spacing: 10)
         
-        return .init(rows: [TableRow<SentimentCell>(.init())], title: "Sentiment")
+        return .init(rows: [TableRow<SentimentCell>(mention)], title: "Sentiment")
         
     }
 }

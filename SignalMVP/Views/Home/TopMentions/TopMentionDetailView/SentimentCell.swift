@@ -49,23 +49,22 @@ class SentimentCell: ConfigurableCell {
         backgroundColor = .surfaceBackground
     }
     
-    func configure(with model: EmptyModel) {
-        guard let mention = MentionStorage.selectedMention else { return }
+    func configure(with model: MentionModel) {
         
         let accountRatios:[MultipleStrokeModel] = [
-            mention.chartModel(for: "Positive"),
-            mention.chartModel(for: "Negative"),
-            mention.chartModel(for: "Neutral")].compactMap { $0 }
+            model.chartModel(for: "Positive"),
+            model.chartModel(for: "Negative"),
+            model.chartModel(for: "Neutral")].compactMap { $0 }
         
     
         Sentiment.allCases.compactMap {
             switch $0 {
                 case .positve:
-                    return $0.sentimentIndicator(mention.positiveMentions)
+                    return $0.sentimentIndicator(model.positiveMentions)
                 case .negative:
-                    return $0.sentimentIndicator(mention.negativeMentions)
+                    return $0.sentimentIndicator(model.negativeMentions)
                 case .neutral:
-                    return $0.sentimentIndicator(mention.neutralMentions)
+                    return $0.sentimentIndicator(model.neutralMentions)
             }
         }.addToView(legend, removeChildren: true)
         

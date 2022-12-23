@@ -21,25 +21,35 @@ class HomeViewModel {
     @Published private var tweets: [TweetModel]?
     @Published private var events: [EventModel]?
     
-    public var view: AnyTableView?
     public var viewTransitioner: PresentDelegate?
     private var bag: Set<AnyCancellable> = .init()
     var selectedEvent: PassthroughSubject<EventModel?, Never> = .init()
+    var selectedMention: CurrentValueSubject<MentionModel?, Never> = .init(nil)
     
-    public func fetchHomePageData() {
+    struct Output {
+        let sections: AnyPublisher<[TableSection], Error>
+        let selectedMention: AnyPublisher<MentionModel, Never>
+        let selectedEvent: AnyPublisher<EventModel, Never>
+    }
+    
+    func transform() -> Output {
         let headlinesSection = fetchTrendingHeadlines()
         let mentionSection = fetchTopMentionedCoins()
         let eventSection = fetchEvents()
         let tweetSection = fetchTweets()
-        Publishers.Zip4(headlinesSection, mentionSection, eventSection, tweetSection)
-            .receive(on: DispatchQueue.main)
-            .sink { _ in
-
-            } receiveValue: { [weak self] (headlines, mentions, event, tweetSection) in
-                guard let `self` = self else { return }
-                self.view?.reloadTableWithDataSource(.init(sections: [event, headlines, mentions, tweetSection]))
+        
+        
+        let sections = Publishers.Zip4(headlinesSection, mentionSection, eventSection, tweetSection)
+            .map { (headline, mention, event, tweet) in
+               return [event, headline, mention, tweet]
             }
-            .store(in: &bag)
+            .eraseToAnyPublisher()
+        
+        let selectedMention = selectedMention.compactMap { $0 }.eraseToAnyPublisher()
+        
+        let selectedEvent = selectedEvent.compactMap { $0 }.eraseToAnyPublisher()
+        
+        return .init(sections: sections, selectedMention: selectedMention, selectedEvent: selectedEvent)
     }
     
     private func fetchTrendingHeadlines() -> AnyPublisher<TableSection, Error> {
@@ -54,12 +64,11 @@ class HomeViewModel {
     private func fetchTopMentionedCoins() -> AnyPublisher<TableSection, Error>{
         StubMentionService.shared.fetchMentions(period: .weekly)
             .compactMap { $0.data?.all }
-            .map { mentions in
+            .map {[weak self] mentions in
                 let topMentionedCoinsCellModel: [MentionCellModel] = mentions.compactMap { mention in
                         .init(model: mention) {
                             print("(DEBUG) Clicked : ", mention)
-                            MentionStorage.selectedMention = mention
-                            NotificationCenter.default.post(name: .showMention, object: nil)
+                            self?.selectedMention.send(mention)
                         }
                 }
                 return .init(rows: topMentionedCoinsCellModel.limitTo(to: 5).compactMap { TableRow<TopMentionCell>($0) }, title: "Top Mentioned Coins")

@@ -23,6 +23,7 @@ class TickerStoryView: UIViewController {
     private lazy var tickerInfo: UIStackView = { .HStack(spacing: 10, alignment: .center) }()
     private lazy var headerStack: UIStackView = { .VStack(subViews: [timerStack, tickerInfo], spacing: 32) }()
     private lazy var tickers: UIView = { .init() }()
+    private let mention: MentionModel
     private lazy var swipeUp: UIView = {
         let chevronImage = UIImage.Catalogue.arrowUp.image.withTintColor(.textColor, renderingMode: .alwaysOriginal).imageView(size: .init(squared: 16), cornerRadius: 0)
         chevronImage.animate(.slideUpDown(duration: 1))
@@ -70,6 +71,15 @@ class TickerStoryView: UIViewController {
     private var direction: CGPoint.Direction = .none
     
     //MARK: - Overriden Methods
+    init(mention: MentionModel) {
+        self.mention = mention
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -103,7 +113,7 @@ class TickerStoryView: UIViewController {
     }
     
     private func fetchNews() {
-        guard let ticker = MentionStorage.selectedMention?.ticker else { return }
+        let ticker = mention.ticker
         StubNewsService.shared
             .fetchNews(tickers: ticker)
             .compactMap { $0.data }
@@ -136,7 +146,6 @@ class TickerStoryView: UIViewController {
     }
     
     private func setupTickerInfo() {
-        guard let mention = MentionStorage.selectedMention else { return }
         let tickerImage = UIImageView()
         UIImage.loadImage(url: mention.ticker.logoURL, at: tickerImage, path: \.image)
         

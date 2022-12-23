@@ -21,7 +21,6 @@ class HomeFeed: UIViewController {
 
 	private lazy var viewModel: HomeViewModel = {
 		let model = HomeViewModel()
-		model.view = self
         model.viewTransitioner = self
 		return model
 	}()
@@ -33,9 +32,8 @@ class HomeFeed: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		setupViews()
-		viewModel.fetchHomePageData()
 		setupTransparentNavBar()
-        addObservers()
+        bind()
 	}
 	
 //MARK: - ProtectedMethods
@@ -46,22 +44,32 @@ class HomeFeed: UIViewController {
 		view.backgroundColor = .surfaceBackground
 		tableView.backgroundColor = .clear
 	}
-
-//MARK: - Notification
     
-    private func addObservers() {
-        NotificationCenter.default.addObserver(self, selector: #selector(showMention), name: .showMention, object: nil)
-        viewModel.selectedEvent
-            .compactMap { $0 }
+    private func bind() {
+        let output = viewModel.transform()
+        
+        output.sections
+            .map { TableViewDataSource(sections: $0) }
+            .receive(on: DispatchQueue.main)
+            .sink {
+                print("(ERROR) err: ", $0.err?.localizedDescription)
+            } receiveValue: { [weak self] in
+                self?.tableView.reloadData($0)
+            }
+            .store(in: &bag)
+
+        output.selectedMention
+            .sink { [weak self] in
+                self?.navigationController?.pushViewController(TopMentionDetailView(mention: $0), animated: true)
+            }
+            .store(in: &bag)
+        
+        output.selectedEvent
             .sink { [weak self] in
                 self?.navigationController?.pushViewController(EventDetailView(eventModel: $0), animated: true)
             }
             .store(in: &bag)
-    }
-    
-    @objc
-    private func showMention() {
-        navigationController?.pushViewController(TopMentionDetailView(), animated: true)
+        
     }
 	
 }
@@ -81,7 +89,8 @@ extension HomeFeed: AnyTableView {
 extension HomeFeed: PresentDelegate {
     
     func presentView(origin: CGRect) {
-        let view = TickerStoryView().withNavigationController()
+        guard let mention =  viewModel.selectedMention.value else { return }
+        let view = TickerStoryView(mention: mention).withNavigationController()
         let presenter = PresentationController(style: .circlar(frame: origin),presentedViewController: view, presentingViewController: self, onDismiss: nil)
         view.transitioningDelegate = presenter
         view.modalPresentationStyle = .custom

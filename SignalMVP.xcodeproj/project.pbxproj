@@ -27,7 +27,7 @@
 		EF1D7E5D2922CCFD0041ADEC /* CollectionColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1D7E582922CCFD0041ADEC /* CollectionColumn.swift */; };
 		EF2BB215292BF4E40006C00F /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2BB214292BF4E40006C00F /* VideoViewController.swift */; };
 		EF48D71328E4CFCF00BD2A1A /* MainTabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF48D71228E4CFCF00BD2A1A /* MainTabModel.swift */; };
-		EF48D71528E578A600BD2A1A /* SignalTwitterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF48D71428E578A600BD2A1A /* SignalTwitterService.swift */; };
+		EF48D71528E578A600BD2A1A /* TweetEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF48D71428E578A600BD2A1A /* TweetEndpoints.swift */; };
 		EF48D71728E5918300BD2A1A /* SignalEventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF48D71628E5918300BD2A1A /* SignalEventService.swift */; };
 		EF59F106292961BA002877DE /* RecentTweetCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF59F105292961BA002877DE /* RecentTweetCard.swift */; };
 		EF59F108292A0955002877DE /* SentimentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF59F107292A0955002877DE /* SentimentCell.swift */; };
@@ -53,8 +53,10 @@
 		EF5C4EB6295303C700669355 /* UITextField+Publishers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5C4EB5295303C700669355 /* UITextField+Publishers.swift */; };
 		EF5C4EBA2953073100669355 /* UISearchController+Styling.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5C4EB92953073000669355 /* UISearchController+Styling.swift */; };
 		EF5C4EBD29530C0700669355 /* SeachViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5C4EBC29530C0700669355 /* SeachViewController.swift */; };
+		EF5C4EBF29560DC200669355 /* VideoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5C4EBE29560DC200669355 /* VideoService.swift */; };
+		EF5C4EC129560E2B00669355 /* VideoEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5C4EC029560E2B00669355 /* VideoEndpoints.swift */; };
+		EF5C4EC32956106200669355 /* TweetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5C4EC22956106200669355 /* TweetService.swift */; };
 		EF7CBED22911BB8400F9D611 /* TopMentionDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CBED12911BB8400F9D611 /* TopMentionDetail.swift */; };
-		EF7CBEDA291577D500F9D611 /* CoinStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CBED9291577D500F9D611 /* CoinStorage.swift */; };
 		EF7CBFD8291641EA00F9D611 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CBF91291641E900F9D611 /* Array.swift */; };
 		EF7CBFD9291641EA00F9D611 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CBF92291641E900F9D611 /* UIColor.swift */; };
 		EF7CBFDA291641EA00F9D611 /* ShapeLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CBF94291641E900F9D611 /* ShapeLayer.swift */; };
@@ -113,8 +115,6 @@
 		EF7CC0132916640B00F9D611 /* RatingChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CC0122916640B00F9D611 /* RatingChart.swift */; };
 		EF7CC01629166E6F00F9D611 /* RatingChartCandle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CC01529166E6F00F9D611 /* RatingChartCandle.swift */; };
 		EF7CC02A29169FEE00F9D611 /* TopMentionDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CC02929169FEE00F9D611 /* TopMentionDetailViewModel.swift */; };
-		EF7D2F9428DED80B0003B8F3 /* NewsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7D2F9328DED80B0003B8F3 /* NewsStorage.swift */; };
-		EF7D2F9628DED9730003B8F3 /* NewsNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7D2F9528DED9730003B8F3 /* NewsNotification.swift */; };
 		EF7D2F9E28E02CFF0003B8F3 /* HomeFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7D2F9D28E02CFF0003B8F3 /* HomeFeed.swift */; };
 		EF7D2FA028E02DB80003B8F3 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7D2F9F28E02DB80003B8F3 /* HomeViewModel.swift */; };
 		EF7D2FA328E0314B0003B8F3 /* TrendingHeadlinesInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7D2FA228E0314B0003B8F3 /* TrendingHeadlinesInterface.swift */; };
@@ -135,7 +135,6 @@
 		EF7D2FCB28E0A1540003B8F3 /* videos.json in Resources */ = {isa = PBXBuildFile; fileRef = EF7D2FCA28E0A1540003B8F3 /* videos.json */; };
 		EF7D2FCE28E0F55A0003B8F3 /* EventDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7D2FCD28E0F55A0003B8F3 /* EventDetailView.swift */; };
 		EF7D2FD028E0F6540003B8F3 /* EventHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7D2FCF28E0F6540003B8F3 /* EventHeaderView.swift */; };
-		EF7D2FD228E0F7820003B8F3 /* EventStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7D2FD128E0F7820003B8F3 /* EventStorage.swift */; };
 		EF7D2FD428E0F7A00003B8F3 /* EventNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7D2FD328E0F7A00003B8F3 /* EventNotification.swift */; };
 		EF86381928DC1E9C00EF520C /* StubService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF86381828DC1E9C00EF520C /* StubService.swift */; };
 		EF86381B28DC1EBE00EF520C /* TweetServiceInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF86381A28DC1EBE00EF520C /* TweetServiceInterface.swift */; };
@@ -156,7 +155,6 @@
 		EF86384D28DCED0C00EF520C /* EventSingleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF86384C28DCED0C00EF520C /* EventSingleCell.swift */; };
 		EF92FD7F292832280004F547 /* NSAttributedString+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF92FD7E292832280004F547 /* NSAttributedString+Utils.swift */; };
 		EF92FD81292840850004F547 /* StackScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF92FD80292840850004F547 /* StackScrollView.swift */; };
-		EF96381828DD8C1E00178C37 /* TweetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF96381728DD8C1E00178C37 /* TweetService.swift */; };
 		EF96381B28DD8C6B00178C37 /* RedditServiceInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF96381A28DD8C6B00178C37 /* RedditServiceInterface.swift */; };
 		EF96381D28DD8C8D00178C37 /* RedditPostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF96381C28DD8C8D00178C37 /* RedditPostModel.swift */; };
 		EF96381F28DD8D1200178C37 /* StubRedditService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF96381E28DD8D1200178C37 /* StubRedditService.swift */; };
@@ -165,8 +163,6 @@
 		EF96382628DD90A400178C37 /* RedditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF96382528DD90A400178C37 /* RedditViewModel.swift */; };
 		EF96382828DD92E900178C37 /* RedditPostCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF96382728DD92E900178C37 /* RedditPostCard.swift */; };
 		EF96382A28DDD59F00178C37 /* TweetDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF96382928DDD59F00178C37 /* TweetDetailView.swift */; };
-		EF96382C28DDD72000178C37 /* TweetStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF96382B28DDD72000178C37 /* TweetStorage.swift */; };
-		EF96382E28DDD7DA00178C37 /* TweetNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF96382D28DDD7DA00178C37 /* TweetNotification.swift */; };
 		EF96383028DDE60700178C37 /* TweetMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF96382F28DDE60700178C37 /* TweetMetrics.swift */; };
 		EF96383328DDFEDF00178C37 /* TweetMetricsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF96383228DDFEDF00178C37 /* TweetMetricsView.swift */; };
 		EF987B6B2916A9930000E233 /* CircularProgressShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987B6A2916A9930000E233 /* CircularProgressShape.swift */; };
@@ -195,7 +191,6 @@
 		EFB1C26128DB3D3700DD40A4 /* TweetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB1C26028DB3D3700DD40A4 /* TweetCell.swift */; };
 		EFB1C2D128DB5E7D00DD40A4 /* TweetFeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB1C2D028DB5E7D00DD40A4 /* TweetFeedViewModel.swift */; };
 		EFB1C2D328DB616600DD40A4 /* TweetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB1C2D228DB616600DD40A4 /* TweetModel.swift */; };
-		EFB1C2D728DB69D400DD40A4 /* TweetEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB1C2D628DB69D300DD40A4 /* TweetEndpoints.swift */; };
 		EFB3181628E97B93008FC27E /* TweetURLView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB3181528E97B93008FC27E /* TweetURLView.swift */; };
 		EFDC741928E3373800042452 /* Sentiments.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFDC741828E3373800042452 /* Sentiments.swift */; };
 		EFFFE4702948357E0045686E /* Tickers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFFE46F2948357E0045686E /* Tickers.swift */; };
@@ -259,7 +254,7 @@
 		EF1D7E582922CCFD0041ADEC /* CollectionColumn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionColumn.swift; sourceTree = "<group>"; };
 		EF2BB214292BF4E40006C00F /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
 		EF48D71228E4CFCF00BD2A1A /* MainTabModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabModel.swift; sourceTree = "<group>"; };
-		EF48D71428E578A600BD2A1A /* SignalTwitterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalTwitterService.swift; sourceTree = "<group>"; };
+		EF48D71428E578A600BD2A1A /* TweetEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetEndpoints.swift; sourceTree = "<group>"; };
 		EF48D71628E5918300BD2A1A /* SignalEventService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalEventService.swift; sourceTree = "<group>"; };
 		EF59F105292961BA002877DE /* RecentTweetCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentTweetCard.swift; sourceTree = "<group>"; };
 		EF59F107292A0955002877DE /* SentimentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentimentCell.swift; sourceTree = "<group>"; };
@@ -285,8 +280,10 @@
 		EF5C4EB5295303C700669355 /* UITextField+Publishers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Publishers.swift"; sourceTree = "<group>"; };
 		EF5C4EB92953073000669355 /* UISearchController+Styling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISearchController+Styling.swift"; sourceTree = "<group>"; };
 		EF5C4EBC29530C0700669355 /* SeachViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeachViewController.swift; sourceTree = "<group>"; };
+		EF5C4EBE29560DC200669355 /* VideoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoService.swift; sourceTree = "<group>"; };
+		EF5C4EC029560E2B00669355 /* VideoEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoEndpoints.swift; sourceTree = "<group>"; };
+		EF5C4EC22956106200669355 /* TweetService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetService.swift; sourceTree = "<group>"; };
 		EF7CBED12911BB8400F9D611 /* TopMentionDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopMentionDetail.swift; sourceTree = "<group>"; };
-		EF7CBED9291577D500F9D611 /* CoinStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinStorage.swift; sourceTree = "<group>"; };
 		EF7CBF91291641E900F9D611 /* Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		EF7CBF92291641E900F9D611 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		EF7CBF94291641E900F9D611 /* ShapeLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShapeLayer.swift; sourceTree = "<group>"; };
@@ -345,8 +342,6 @@
 		EF7CC0122916640B00F9D611 /* RatingChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingChart.swift; sourceTree = "<group>"; };
 		EF7CC01529166E6F00F9D611 /* RatingChartCandle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingChartCandle.swift; sourceTree = "<group>"; };
 		EF7CC02929169FEE00F9D611 /* TopMentionDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopMentionDetailViewModel.swift; sourceTree = "<group>"; };
-		EF7D2F9328DED80B0003B8F3 /* NewsStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsStorage.swift; sourceTree = "<group>"; };
-		EF7D2F9528DED9730003B8F3 /* NewsNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsNotification.swift; sourceTree = "<group>"; };
 		EF7D2F9D28E02CFF0003B8F3 /* HomeFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeed.swift; sourceTree = "<group>"; };
 		EF7D2F9F28E02DB80003B8F3 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		EF7D2FA228E0314B0003B8F3 /* TrendingHeadlinesInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingHeadlinesInterface.swift; sourceTree = "<group>"; };
@@ -367,7 +362,6 @@
 		EF7D2FCA28E0A1540003B8F3 /* videos.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = videos.json; sourceTree = "<group>"; };
 		EF7D2FCD28E0F55A0003B8F3 /* EventDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailView.swift; sourceTree = "<group>"; };
 		EF7D2FCF28E0F6540003B8F3 /* EventHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventHeaderView.swift; sourceTree = "<group>"; };
-		EF7D2FD128E0F7820003B8F3 /* EventStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventStorage.swift; sourceTree = "<group>"; };
 		EF7D2FD328E0F7A00003B8F3 /* EventNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventNotification.swift; sourceTree = "<group>"; };
 		EF86381828DC1E9C00EF520C /* StubService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubService.swift; sourceTree = "<group>"; };
 		EF86381A28DC1EBE00EF520C /* TweetServiceInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetServiceInterface.swift; sourceTree = "<group>"; };
@@ -388,7 +382,6 @@
 		EF86384C28DCED0C00EF520C /* EventSingleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventSingleCell.swift; sourceTree = "<group>"; };
 		EF92FD7E292832280004F547 /* NSAttributedString+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Utils.swift"; sourceTree = "<group>"; };
 		EF92FD80292840850004F547 /* StackScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackScrollView.swift; sourceTree = "<group>"; };
-		EF96381728DD8C1E00178C37 /* TweetService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetService.swift; sourceTree = "<group>"; };
 		EF96381A28DD8C6B00178C37 /* RedditServiceInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditServiceInterface.swift; sourceTree = "<group>"; };
 		EF96381C28DD8C8D00178C37 /* RedditPostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditPostModel.swift; sourceTree = "<group>"; };
 		EF96381E28DD8D1200178C37 /* StubRedditService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubRedditService.swift; sourceTree = "<group>"; };
@@ -397,8 +390,6 @@
 		EF96382528DD90A400178C37 /* RedditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditViewModel.swift; sourceTree = "<group>"; };
 		EF96382728DD92E900178C37 /* RedditPostCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditPostCard.swift; sourceTree = "<group>"; };
 		EF96382928DDD59F00178C37 /* TweetDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetDetailView.swift; sourceTree = "<group>"; };
-		EF96382B28DDD72000178C37 /* TweetStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetStorage.swift; sourceTree = "<group>"; };
-		EF96382D28DDD7DA00178C37 /* TweetNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetNotification.swift; sourceTree = "<group>"; };
 		EF96382F28DDE60700178C37 /* TweetMetrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetMetrics.swift; sourceTree = "<group>"; };
 		EF96383228DDFEDF00178C37 /* TweetMetricsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetMetricsView.swift; sourceTree = "<group>"; };
 		EF987B6A2916A9930000E233 /* CircularProgressShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularProgressShape.swift; sourceTree = "<group>"; };
@@ -431,7 +422,6 @@
 		EFB1C26028DB3D3700DD40A4 /* TweetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetCell.swift; sourceTree = "<group>"; };
 		EFB1C2D028DB5E7D00DD40A4 /* TweetFeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetFeedViewModel.swift; sourceTree = "<group>"; };
 		EFB1C2D228DB616600DD40A4 /* TweetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetModel.swift; sourceTree = "<group>"; };
-		EFB1C2D628DB69D300DD40A4 /* TweetEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetEndpoints.swift; sourceTree = "<group>"; };
 		EFB3181528E97B93008FC27E /* TweetURLView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetURLView.swift; sourceTree = "<group>"; };
 		EFDC741828E3373800042452 /* Sentiments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sentiments.swift; sourceTree = "<group>"; };
 		EFFFE46F2948357E0045686E /* Tickers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tickers.swift; sourceTree = "<group>"; };
@@ -959,6 +949,8 @@
 				EF7D2FCA28E0A1540003B8F3 /* videos.json */,
 				EF7D2FC128E09DB30003B8F3 /* VideoServiceInterface.swift */,
 				EF7D2FC328E09E3D0003B8F3 /* StubVideoService.swift */,
+				EF5C4EBE29560DC200669355 /* VideoService.swift */,
+				EF5C4EC029560E2B00669355 /* VideoEndpoints.swift */,
 			);
 			path = Videos;
 			sourceTree = "<group>";
@@ -1000,12 +992,10 @@
 			isa = PBXGroup;
 			children = (
 				EF16449C29054FBB00E9D997 /* signalTweets.json */,
-				EF96382D28DDD7DA00178C37 /* TweetNotification.swift */,
-				EF96381728DD8C1E00178C37 /* TweetService.swift */,
-				EFB1C2D628DB69D300DD40A4 /* TweetEndpoints.swift */,
+				EF5C4EC22956106200669355 /* TweetService.swift */,
 				EF86381828DC1E9C00EF520C /* StubService.swift */,
 				EF86381A28DC1EBE00EF520C /* TweetServiceInterface.swift */,
-				EF48D71428E578A600BD2A1A /* SignalTwitterService.swift */,
+				EF48D71428E578A600BD2A1A /* TweetEndpoints.swift */,
 			);
 			path = Twitter;
 			sourceTree = "<group>";
@@ -1016,7 +1006,6 @@
 				EF1644A32905573600E9D997 /* signalNews.json */,
 				EF86382928DC519B00EF520C /* StubNewsService.swift */,
 				EF86382D28DC56D900EF520C /* NewsInterface.swift */,
-				EF7D2F9528DED9730003B8F3 /* NewsNotification.swift */,
 				EF00758E28E5CBA000195433 /* SignalNewsService.swift */,
 			);
 			path = News;
@@ -1239,44 +1228,17 @@
 		EFDC741A28E338AE00042452 /* Twitter */ = {
 			isa = PBXGroup;
 			children = (
-				EFDC741D28E338F000042452 /* Storage */,
 				EFB1C2D228DB616600DD40A4 /* TweetModel.swift */,
 			);
 			path = Twitter;
 			sourceTree = "<group>";
 		};
-		EFDC741C28E338D700042452 /* Storage */ = {
-			isa = PBXGroup;
-			children = (
-				EF7D2F9328DED80B0003B8F3 /* NewsStorage.swift */,
-				EF7CBED9291577D500F9D611 /* CoinStorage.swift */,
-			);
-			path = Storage;
-			sourceTree = "<group>";
-		};
-		EFDC741D28E338F000042452 /* Storage */ = {
-			isa = PBXGroup;
-			children = (
-				EF96382B28DDD72000178C37 /* TweetStorage.swift */,
-			);
-			path = Storage;
-			sourceTree = "<group>";
-		};
 		EFDC741E28E3390300042452 /* Events */ = {
 			isa = PBXGroup;
 			children = (
-				EFDC741F28E3391700042452 /* Storage */,
 				EF86384628DC9E6A00EF520C /* EventModel.swift */,
 			);
 			path = Events;
-			sourceTree = "<group>";
-		};
-		EFDC741F28E3391700042452 /* Storage */ = {
-			isa = PBXGroup;
-			children = (
-				EF7D2FD128E0F7820003B8F3 /* EventStorage.swift */,
-			);
-			path = Storage;
 			sourceTree = "<group>";
 		};
 		EFDC742028E3393400042452 /* Reddit */ = {
@@ -1290,7 +1252,6 @@
 		EFDC742128E3395400042452 /* SignalServiceModel */ = {
 			isa = PBXGroup;
 			children = (
-				EFDC741C28E338D700042452 /* Storage */,
 				EF86382728DC507E00EF520C /* NewsModel.swift */,
 				EF7D2FC528E09E7E0003B8F3 /* VideoModel.swift */,
 				EF7D2FB328E050DE0003B8F3 /* MentionModel.swift */,
@@ -1582,14 +1543,11 @@
 				EF7D2FD028E0F6540003B8F3 /* EventHeaderView.swift in Sources */,
 				EF7D2FBD28E056F40003B8F3 /* TopMentionCell.swift in Sources */,
 				EF7CBFF5291641EA00F9D611 /* UIEdgeInsets.swift in Sources */,
-				EF7D2FD228E0F7820003B8F3 /* EventStorage.swift in Sources */,
 				EF987B9D2921309C0000E233 /* TickerSymbolsVoew.swift in Sources */,
 				EFB1C2D328DB616600DD40A4 /* TweetModel.swift in Sources */,
-				EF96382E28DDD7DA00178C37 /* TweetNotification.swift in Sources */,
 				EF7CC003291641EA00F9D611 /* ImageHeaderSubHeaderView.swift in Sources */,
 				EF7CBFF4291641EA00F9D611 /* CGFloat.swift in Sources */,
 				EF86381B28DC1EBE00EF520C /* TweetServiceInterface.swift in Sources */,
-				EF7D2F9428DED80B0003B8F3 /* NewsStorage.swift in Sources */,
 				EF7CBED22911BB8400F9D611 /* TopMentionDetail.swift in Sources */,
 				EF59F118292A969A002877DE /* CircularProgressBar.swift in Sources */,
 				EF987B9B292122FA0000E233 /* NewsDetailView.swift in Sources */,
@@ -1598,7 +1556,6 @@
 				EF04E345294EFBE500E35815 /* Result+Future.swift in Sources */,
 				EF987B992920F1A80000E233 /* CGPoint.swift in Sources */,
 				EF1644A0290550B300E9D997 /* ServiceHelper.swift in Sources */,
-				EF7CBEDA291577D500F9D611 /* CoinStorage.swift in Sources */,
 				EF7D2FB628E051940003B8F3 /* StubMentionService.swift in Sources */,
 				EF7D2F9E28E02CFF0003B8F3 /* HomeFeed.swift in Sources */,
 				EF5C4E9A2950ADEB00669355 /* NewsSearchController.swift in Sources */,
@@ -1651,7 +1608,6 @@
 				EF7D2FCE28E0F55A0003B8F3 /* EventDetailView.swift in Sources */,
 				EF86381928DC1E9C00EF520C /* StubService.swift in Sources */,
 				EF7CBFD9291641EA00F9D611 /* UIColor.swift in Sources */,
-				EFB1C2D728DB69D400DD40A4 /* TweetEndpoints.swift in Sources */,
 				EFB1C26128DB3D3700DD40A4 /* TweetCell.swift in Sources */,
 				EF96381F28DD8D1200178C37 /* StubRedditService.swift in Sources */,
 				EF86383528DC61F700EF520C /* NewsCell.swift in Sources */,
@@ -1683,13 +1639,12 @@
 				EF7CBFFE291641EA00F9D611 /* SearchViewController.swift in Sources */,
 				EF59F11A292A969A002877DE /* MutlipleStrokeCircularProgressBar.swift in Sources */,
 				EF7CBFE2291641EA00F9D611 /* ViewStyling.swift in Sources */,
-				EF48D71528E578A600BD2A1A /* SignalTwitterService.swift in Sources */,
+				EF48D71528E578A600BD2A1A /* TweetEndpoints.swift in Sources */,
 				EF86384B28DCA1A400EF520C /* EventCell.swift in Sources */,
 				EF987B8C291F83620000E233 /* CGRect.swift in Sources */,
 				EF7CC0112916491A00F9D611 /* CALayer+Animation.swift in Sources */,
 				EFFFE472294B97750045686E /* VideoTikTokCell.swift in Sources */,
 				EF86383328DC5CAF00EF520C /* NewsFeed.swift in Sources */,
-				EF7D2F9628DED9730003B8F3 /* NewsNotification.swift in Sources */,
 				EF7D2FC928E0A0E10003B8F3 /* VideoCell.swift in Sources */,
 				EF1644A9290589B500E9D997 /* CustomCuratedEvents.swift in Sources */,
 				EF5C4EBD29530C0700669355 /* SeachViewController.swift in Sources */,
@@ -1710,11 +1665,13 @@
 				EF7CC000291641EA00F9D611 /* SentimentTextLabel.swift in Sources */,
 				EF987B90291FA3C50000E233 /* String+URL.swift in Sources */,
 				EF59F117292A969A002877DE /* MultipleStrokeProgressBar.swift in Sources */,
+				EF5C4EC129560E2B00669355 /* VideoEndpoints.swift in Sources */,
 				EF7CBFE1291641EA00F9D611 /* ViewHeirachy.swift in Sources */,
 				EFB1C2D128DB5E7D00DD40A4 /* TweetFeedViewModel.swift in Sources */,
 				EFDC741928E3373800042452 /* Sentiments.swift in Sources */,
 				EF86384728DC9E6A00EF520C /* EventModel.swift in Sources */,
 				EF1D7E592922CCFD0041ADEC /* CollectionDataSource.swift in Sources */,
+				EF5C4EC32956106200669355 /* TweetService.swift in Sources */,
 				EF7D2FD428E0F7A00003B8F3 /* EventNotification.swift in Sources */,
 				EF7CBFDD291641EA00F9D611 /* UIImageView.swift in Sources */,
 				EFB1C25F28DB3CC600DD40A4 /* TweetsFeed.swift in Sources */,
@@ -1728,9 +1685,8 @@
 				EF7CBFF3291641EA00F9D611 /* Int.swift in Sources */,
 				EF59F11B292A969A002877DE /* ProgressBars.swift in Sources */,
 				EF987B6E2916FC700000E233 /* PresentationController.swift in Sources */,
-				EF96382C28DDD72000178C37 /* TweetStorage.swift in Sources */,
 				EF7CBFFA291641EA00F9D611 /* TableRow.swift in Sources */,
-				EF96381828DD8C1E00178C37 /* TweetService.swift in Sources */,
+				EF5C4EBF29560DC200669355 /* VideoService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
