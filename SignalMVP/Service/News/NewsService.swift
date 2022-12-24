@@ -21,7 +21,7 @@ class NewsService: NewsServiceInterface {
 				   limit: Int = 20) -> AnyPublisher<NewsResult, Error> {
 		NewsEndpoints
             .tickerNews(tickers: tickers, items: items, source: source, after: after, before: before, limit: limit)
-            .fetch()
+            .execute()
             .eraseToAnyPublisher()
 	}
 	

@@ -15,7 +15,7 @@ class TickerService: TickerServiceInterface {
     func search(query: String) -> Future<TickerSearchResult, Error> {
         SignalTickerEndpoint
             .search(query: query)
-            .fetch()
+            .execute()
     }
     
 }

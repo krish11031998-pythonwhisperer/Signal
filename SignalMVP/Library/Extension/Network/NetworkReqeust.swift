@@ -11,29 +11,43 @@ protocol EndPoint {
 	var scheme: String { get }
 	var baseUrl: String { get }
 	var path: String { get }
+    var method: String { get }
 	var queryItems: [URLQueryItem] { get }
+    var body: Data? { get }
 	var request: URLRequest? { get }
 	var header: [String : String]? { get }
-    func fetch<CodableModel: Codable>() -> Future<CodableModel,Error>
+    func execute<CodableModel: Codable>() -> Future<CodableModel,Error>
 }
 
 
 extension EndPoint {
 	
+    var scheme: String {
+        return "https"
+    }
+    
     var baseUrl: String {
         return "signal.up.railway.app"
+    }
+    
+    var method: String {
+        return "GET"
     }
     
 	var header: [String : String]? {
 		return nil
 	}
+    
+    var body: Data? {
+        nil
+    }
 	
 	var request: URLRequest? {
 		var uC = URLComponents()
 		uC.scheme = scheme
 		uC.host = baseUrl
 		uC.path = path
-		uC.queryItems = queryItems
+        uC.queryItems = queryItems.emptyOrNil
 		
 		guard let url = uC.url  else {
 			return nil
@@ -41,10 +55,12 @@ extension EndPoint {
 		
 		var request: URLRequest = .init(url: url)
 		request.allHTTPHeaderFields = header
+        request.httpBody = body
+        request.httpMethod = method
 		return request
 	}
     
-    func fetch<CodableModel: Codable>() -> Future<CodableModel, Error> {
+    func execute<CodableModel: Codable>() -> Future<CodableModel, Error> {
         guard let validRequest = request else {
             return Future { $0(.failure(URLSessionError.invalidUrl))}
         }

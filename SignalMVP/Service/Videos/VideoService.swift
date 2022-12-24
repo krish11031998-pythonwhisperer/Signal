@@ -18,7 +18,7 @@ class VideoService: VideoServiceInterface {
                     limit: Int = 20) -> AnyPublisher<VideoResult, Error> {
         VideoEndpoints
             .fetchVideos(ticker: ticker, before: before, after: after, limit: limit)
-            .fetch()
+            .execute()
             .eraseToAnyPublisher()
     }
 }

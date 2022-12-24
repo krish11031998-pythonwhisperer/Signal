@@ -65,6 +65,13 @@
 		EF5C4ED8295714EC00669355 /* TextFieldType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5C4ED7295714EC00669355 /* TextFieldType.swift */; };
 		EF5C4EDA2957193700669355 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5C4ED92957193700669355 /* LoginViewController.swift */; };
 		EF5C4EDD295726C400669355 /* EmailValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5C4EDC295726C400669355 /* EmailValidator.swift */; };
+		EF5C4EE029577C3C00669355 /* UserEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5C4EDF29577C3C00669355 /* UserEndpoints.swift */; };
+		EF5C4EE429577C8600669355 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5C4EE329577C8600669355 /* Login.swift */; };
+		EF5C4EE629577CA100669355 /* Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5C4EE529577CA100669355 /* Register.swift */; };
+		EF624D0C295795DB00F006FF /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF624D0B295795DB00F006FF /* RegisterViewModel.swift */; };
+		EF624D0E2957987E00F006FF /* UserServiceInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF624D0D2957987E00F006FF /* UserServiceInterface.swift */; };
+		EF624D10295798C400F006FF /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF624D0F295798C400F006FF /* UserService.swift */; };
+		EF624D122957992600F006FF /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF624D112957992600F006FF /* UserModel.swift */; };
 		EF7CBED22911BB8400F9D611 /* TopMentionDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CBED12911BB8400F9D611 /* TopMentionDetail.swift */; };
 		EF7CBFD8291641EA00F9D611 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CBF91291641E900F9D611 /* Array.swift */; };
 		EF7CBFD9291641EA00F9D611 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CBF92291641E900F9D611 /* UIColor.swift */; };
@@ -300,6 +307,13 @@
 		EF5C4ED7295714EC00669355 /* TextFieldType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldType.swift; sourceTree = "<group>"; };
 		EF5C4ED92957193700669355 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		EF5C4EDC295726C400669355 /* EmailValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailValidator.swift; sourceTree = "<group>"; };
+		EF5C4EDF29577C3C00669355 /* UserEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserEndpoints.swift; sourceTree = "<group>"; };
+		EF5C4EE329577C8600669355 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
+		EF5C4EE529577CA100669355 /* Register.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Register.swift; sourceTree = "<group>"; };
+		EF624D0B295795DB00F006FF /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
+		EF624D0D2957987E00F006FF /* UserServiceInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserServiceInterface.swift; sourceTree = "<group>"; };
+		EF624D0F295798C400F006FF /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		EF624D112957992600F006FF /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		EF7CBED12911BB8400F9D611 /* TopMentionDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopMentionDetail.swift; sourceTree = "<group>"; };
 		EF7CBF91291641E900F9D611 /* Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		EF7CBF92291641E900F9D611 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
@@ -699,8 +713,8 @@
 		EF5C4ECD2956ED1900669355 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
+				EF624D0A295795CA00F006FF /* Register */,
 				EF5C4ECE2956ED2A00669355 /* OnboardingController.swift */,
-				EF5C4ED4295709E900669355 /* RegisterController.swift */,
 				EF5C4ED92957193700669355 /* LoginViewController.swift */,
 			);
 			path = Onboarding;
@@ -722,6 +736,43 @@
 				EF5C4EDC295726C400669355 /* EmailValidator.swift */,
 			);
 			path = TextFieldValidators;
+			sourceTree = "<group>";
+		};
+		EF5C4EDE29577C3100669355 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				EF5C4EDF29577C3C00669355 /* UserEndpoints.swift */,
+				EF624D0D2957987E00F006FF /* UserServiceInterface.swift */,
+				EF624D0F295798C400F006FF /* UserService.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		EF5C4EE129577C7600669355 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				EF5C4EE229577C7C00669355 /* Onboarding */,
+				EF624D112957992600F006FF /* UserModel.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		EF5C4EE229577C7C00669355 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				EF5C4EE329577C8600669355 /* Login.swift */,
+				EF5C4EE529577CA100669355 /* Register.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		EF624D0A295795CA00F006FF /* Register */ = {
+			isa = PBXGroup;
+			children = (
+				EF5C4ED4295709E900669355 /* RegisterController.swift */,
+				EF624D0B295795DB00F006FF /* RegisterViewModel.swift */,
+			);
+			path = Register;
 			sourceTree = "<group>";
 		};
 		EF7CBF8F291641E900F9D611 /* Library */ = {
@@ -1045,6 +1096,7 @@
 		EF86381428DC1E7D00EF520C /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				EF5C4EDE29577C3100669355 /* User */,
 				EF5C4EAA2951928F00669355 /* Ticker */,
 				EF16449E2905509400E9D997 /* ServiceHelpers */,
 				EF7D2FC028E09D9B0003B8F3 /* Videos */,
@@ -1278,6 +1330,7 @@
 		EFDC741628E3372400042452 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				EF5C4EE129577C7600669355 /* User */,
 				EF5C4EA7295191F600669355 /* Tickers */,
 				EFFFE46E294835650045686E /* DataProtocols */,
 				EFDC742128E3395400042452 /* SignalServiceModel */,
@@ -1623,6 +1676,7 @@
 				EF5C4ECF2956ED2A00669355 /* OnboardingController.swift in Sources */,
 				EF7CBED22911BB8400F9D611 /* TopMentionDetail.swift in Sources */,
 				EF59F118292A969A002877DE /* CircularProgressBar.swift in Sources */,
+				EF624D10295798C400F006FF /* UserService.swift in Sources */,
 				EF987B9B292122FA0000E233 /* NewsDetailView.swift in Sources */,
 				EF7D2FC228E09DB30003B8F3 /* VideoServiceInterface.swift in Sources */,
 				EF7D2FB228E050450003B8F3 /* MentionInterface.swift in Sources */,
@@ -1661,6 +1715,7 @@
 				EF987B6B2916A9930000E233 /* CircularProgressShape.swift in Sources */,
 				EF987B952920D7A00000E233 /* ImageView.swift in Sources */,
 				EF5C4EA42951905900669355 /* RoundedButtonCell.swift in Sources */,
+				EF624D0E2957987E00F006FF /* UserServiceInterface.swift in Sources */,
 				EF1D7E5A2922CCFD0041ADEC /* CollectionSection.swift in Sources */,
 				EF7CBFF8291641EA00F9D611 /* Animation.swift in Sources */,
 				EF5C4E9C2950AE0400669355 /* NewsFeedViewModel.swift in Sources */,
@@ -1676,6 +1731,7 @@
 				EF86383728DC648000EF520C /* NewsViewModel.swift in Sources */,
 				EF5C4ED8295714EC00669355 /* TextFieldType.swift in Sources */,
 				EF2BB215292BF4E40006C00F /* VideoViewController.swift in Sources */,
+				EF5C4EE429577C8600669355 /* Login.swift in Sources */,
 				EF5C4EB22951943200669355 /* TickerService.swift in Sources */,
 				EF86384528DC9E5200EF520C /* StubEventsService.swift in Sources */,
 				EF59F10F292A9602002877DE /* CustomCollectionTableCell.swift in Sources */,
@@ -1692,6 +1748,7 @@
 				EF7CBFE3291641EA00F9D611 /* UIViewController.swift in Sources */,
 				EF86384228DC9E0F00EF520C /* EventViewModel.swift in Sources */,
 				EF7D2FA728E0322A0003B8F3 /* TrendingHeadlinesService.swift in Sources */,
+				EF624D122957992600F006FF /* UserModel.swift in Sources */,
 				EF7CC02A29169FEE00F9D611 /* TopMentionDetailViewModel.swift in Sources */,
 				EF7CBFFC291641EA00F9D611 /* TableSection.swift in Sources */,
 				EF987B8E291F97AC0000E233 /* CuratedEventCell.swift in Sources */,
@@ -1724,10 +1781,12 @@
 				EF1644A9290589B500E9D997 /* CustomCuratedEvents.swift in Sources */,
 				EF5C4ECB2956E9A400669355 /* UserDefaultsStores.swift in Sources */,
 				EF5C4EBD29530C0700669355 /* SeachViewController.swift in Sources */,
+				EF5C4EE029577C3C00669355 /* UserEndpoints.swift in Sources */,
 				EF5C4EA92951920300669355 /* TickerSearch.swift in Sources */,
 				EF5C4EAD295192EC00669355 /* TickerEndpoint.swift in Sources */,
 				EF86382E28DC56D900EF520C /* NewsInterface.swift in Sources */,
 				EF7D2FA328E0314B0003B8F3 /* TrendingHeadlinesInterface.swift in Sources */,
+				EF5C4EE629577CA100669355 /* Register.swift in Sources */,
 				EFB1C23028DB3B1800DD40A4 /* SceneDelegate.swift in Sources */,
 				EF86383E28DC990500EF520C /* EventsFeed.swift in Sources */,
 				EF96382428DD8FDC00178C37 /* RedditFeed.swift in Sources */,
@@ -1743,6 +1802,7 @@
 				EF987B90291FA3C50000E233 /* String+URL.swift in Sources */,
 				EF5C4ED5295709E900669355 /* RegisterController.swift in Sources */,
 				EF59F117292A969A002877DE /* MultipleStrokeProgressBar.swift in Sources */,
+				EF624D0C295795DB00F006FF /* RegisterViewModel.swift in Sources */,
 				EF5C4EC129560E2B00669355 /* VideoEndpoints.swift in Sources */,
 				EF7CBFE1291641EA00F9D611 /* ViewHeirachy.swift in Sources */,
 				EF5C4ED3295708E200669355 /* TextField.swift in Sources */,

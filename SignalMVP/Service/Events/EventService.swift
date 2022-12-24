@@ -15,7 +15,7 @@ class EventService: EventServiceInterface {
     public func fetchEvents(tickers: String? = nil, before: String? = nil, after: String? = nil, limit: Int = 20) -> AnyPublisher<EventResult, Error> {
         EventEndpoints
             .latestEvents(tickers: tickers, before: before, after: after, limit: limit)
-            .fetch()
+            .execute()
             .eraseToAnyPublisher()
     }
 	
