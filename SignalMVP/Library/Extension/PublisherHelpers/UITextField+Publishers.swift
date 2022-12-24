@@ -32,4 +32,11 @@ extension UITextField {
             .eraseToAnyPublisher()
     }
     
+    
+    var isValidEmail: AnyPublisher<Bool, Never> {
+        NotificationCenter.default
+            .publisher(for: UITextField.textDidChangeNotification, object: self)
+            .compactMap { ($0.object as? UITextField)?.text?.regexChecker(pattern: .email) }
+            .eraseToAnyPublisher()
+    }
 }

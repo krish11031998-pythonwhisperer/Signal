@@ -64,6 +64,7 @@
 		EF5C4ED5295709E900669355 /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5C4ED4295709E900669355 /* RegisterController.swift */; };
 		EF5C4ED8295714EC00669355 /* TextFieldType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5C4ED7295714EC00669355 /* TextFieldType.swift */; };
 		EF5C4EDA2957193700669355 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5C4ED92957193700669355 /* LoginViewController.swift */; };
+		EF5C4EDD295726C400669355 /* EmailValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5C4EDC295726C400669355 /* EmailValidator.swift */; };
 		EF7CBED22911BB8400F9D611 /* TopMentionDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CBED12911BB8400F9D611 /* TopMentionDetail.swift */; };
 		EF7CBFD8291641EA00F9D611 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CBF91291641E900F9D611 /* Array.swift */; };
 		EF7CBFD9291641EA00F9D611 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CBF92291641E900F9D611 /* UIColor.swift */; };
@@ -298,6 +299,7 @@
 		EF5C4ED4295709E900669355 /* RegisterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterController.swift; sourceTree = "<group>"; };
 		EF5C4ED7295714EC00669355 /* TextFieldType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldType.swift; sourceTree = "<group>"; };
 		EF5C4ED92957193700669355 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		EF5C4EDC295726C400669355 /* EmailValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailValidator.swift; sourceTree = "<group>"; };
 		EF7CBED12911BB8400F9D611 /* TopMentionDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopMentionDetail.swift; sourceTree = "<group>"; };
 		EF7CBF91291641E900F9D611 /* Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		EF7CBF92291641E900F9D611 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
@@ -707,10 +709,19 @@
 		EF5C4ED6295714D900669355 /* TextField */ = {
 			isa = PBXGroup;
 			children = (
+				EF5C4EDB2957266C00669355 /* TextFieldValidators */,
 				EF5C4ED2295708E200669355 /* TextField.swift */,
 				EF5C4ED7295714EC00669355 /* TextFieldType.swift */,
 			);
 			path = TextField;
+			sourceTree = "<group>";
+		};
+		EF5C4EDB2957266C00669355 /* TextFieldValidators */ = {
+			isa = PBXGroup;
+			children = (
+				EF5C4EDC295726C400669355 /* EmailValidator.swift */,
+			);
+			path = TextFieldValidators;
 			sourceTree = "<group>";
 		};
 		EF7CBF8F291641E900F9D611 /* Library */ = {
@@ -1753,6 +1764,7 @@
 				EF7CBFF3291641EA00F9D611 /* Int.swift in Sources */,
 				EF59F11B292A969A002877DE /* ProgressBars.swift in Sources */,
 				EF987B6E2916FC700000E233 /* PresentationController.swift in Sources */,
+				EF5C4EDD295726C400669355 /* EmailValidator.swift in Sources */,
 				EF7CBFFA291641EA00F9D611 /* TableRow.swift in Sources */,
 				EF5C4EBF29560DC200669355 /* VideoService.swift in Sources */,
 			);

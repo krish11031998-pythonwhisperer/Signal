@@ -7,19 +7,21 @@
 
 import Foundation
 import UIKit
+import Combine
 
 class RegisterController: UIViewController {
     
     private lazy var emailField: TextField = { .init(placeHolder: Constants.email) }()
     private lazy var passwordField: TextField = { .init(placeHolder: Constants.password, type: .password) }()
     private lazy var confirmPasswordField: TextField = { .init(placeHolder: Constants.confirmPassword, type: .password) }()
+    private var bag: Set<AnyCancellable> = .init()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavbar()
         setupView()
+        bind()
     }
-    
     
     private func setupNavbar() {
         standardNavBar(title: "Register".heading3())
@@ -36,7 +38,7 @@ class RegisterController: UIViewController {
         stack.addArrangedSubview(.spacer())
         
         view.addSubview(stack)
-        view.setFittingConstraints(childView: stack, insets: .init(top: .safeAreaInsets.top + navBarHeight, left: 10, bottom: .safeAreaInsets.bottom, right: 10))
+        view.setFittingConstraints(childView: stack, insets: .init(top: .safeAreaInsets.top + navBarHeight + 32, left: 10, bottom: .safeAreaInsets.bottom, right: 10))
         
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard)))
     }
@@ -47,6 +49,15 @@ class RegisterController: UIViewController {
         [title, textField].addToView(stack)
         textField.setHeight(height: 50)
         return stack
+    }
+    
+    private func bind() {
+        emailField
+            .validator
+            .sink {
+                print("(DEBUG) isValidEmail: ", $0)
+            }
+            .store(in: &bag)
     }
     
     @objc

@@ -49,6 +49,7 @@ class TextField: UITextField {
         textColor = .textColor
         font = CustomFonts.medium.fontBuilder(size: 16)
         clearsOnBeginEditing = true
+        autocapitalizationType = .none
         border(color: .surfaceBackgroundInverse, borderWidth: 1.25, cornerRadius: Constants.height.half.half)
         setHeight(height: Constants.height)
         layer.masksToBounds = true
@@ -70,5 +71,9 @@ class TextField: UITextField {
     @objc
     private func rightSideGesture() {
         self.type.handleRightSideTap(self)
+    }
+    
+    var validator: AnyPublisher<Bool, Never> {
+        return type.validation(self)
     }
 }

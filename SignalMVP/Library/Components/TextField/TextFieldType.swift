@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Combine
 
 enum TextFieldType {
     case email
@@ -43,6 +44,15 @@ extension TextFieldType {
             return .always
         default:
             return .never
+        }
+    }
+    
+    func validation(_ textField: UITextField) -> AnyPublisher<Bool, Never> {
+        switch self {
+        case .email:
+            return textField.isValidEmail
+        case .password:
+            return textField.isValidEmail
         }
     }
     
