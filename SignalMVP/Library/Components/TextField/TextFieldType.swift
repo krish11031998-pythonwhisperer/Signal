@@ -29,7 +29,9 @@ extension TextFieldType {
     func rightSideView(_ textField: UITextField) ->  UIView? {
         switch self {
         case .password:
-            return UIImage(systemName: textField.isSecureTextEntry ? "eye" : "eye.slash")?.withTintColor(.surfaceBackgroundInverse).imageView(size: .init(width: 24, height: 16))
+            let imageName = textField.isSecureTextEntry ? "eye" : "eye.slash"
+            let image = UIImage(systemName: imageName)?.withTintColor(.surfaceBackgroundInverse)
+            return image?.imageView(size: .init(width: 24, height: 16))
         default:
             return nil
         }

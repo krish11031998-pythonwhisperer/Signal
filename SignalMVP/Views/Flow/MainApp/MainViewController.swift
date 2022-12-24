@@ -19,7 +19,7 @@ class MainViewController: UITabBarController {
         checkUserIsLoggedIn()
     }
     private func checkUserIsLoggedIn() {
-        let userloggedIn = (UserDefaultStoreKey.loggedIn.value as? Bool) ?? false
+        let userloggedIn: Bool = UserDefaultStoreKey.loggedIn.value() ?? false
         guard !userloggedIn  else { return }
         DispatchQueue.main.async {
             self.presentView(style: .sheet(),
