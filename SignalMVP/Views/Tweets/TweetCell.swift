@@ -62,17 +62,19 @@ class TweetCell: ConfigurableCell {
 		
 		let headerStack: UIStackView = .init(arrangedSubviews: [authorLabel, .spacer(), timestampLabel])
 		headerStack.spacing = 8
-		let divider = UIView.divider()
-		let bodyStack = UIView.VStack(subViews: [headerStack, bodyLabel, imgView, metricStack, divider], spacing: 8)
+		let bodyStack = UIView.VStack(subViews: [headerStack, bodyLabel, imgView, metricStack], spacing: 8)
 		bodyStack.setCustomSpacing(12, after: headerStack)
 		bodyStack.setCustomSpacing(12, after: bodyLabel)
-		bodyStack.setCustomSpacing(16, after: divider)
 
 		let mainStack = UIView.HStack(subViews: [authorImageView, bodyStack], spacing: 12, alignment: .top)
 		imageHeight.isActive = true
         imgView.clippedCornerRadius = 16
-		contentView.addSubview(mainStack)
-		contentView.setFittingConstraints(childView: mainStack, insets: .init(vertical: 10, horizontal: 16))
+        
+        let card = mainStack.blobify(backgroundColor: .surfaceBackground, edgeInset: .tweetCellInsets, borderColor: .clear, cornerRadius: 12)
+        card.addShadow()
+        
+		contentView.addSubview(card)
+		contentView.setFittingConstraints(childView: card, insets: .init(vertical: 10, horizontal: 16))
 	
 		gestureRecognizers?.forEach { gesture in
 			print("(DEBUG) gesture : ",gesture)

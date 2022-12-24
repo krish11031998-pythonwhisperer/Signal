@@ -18,3 +18,9 @@ extension UIEdgeInsets {
 		self.init(top: vertical, left: horizontal, bottom: vertical, right: horizontal)
 	}
 }
+
+//MARK: - UIEdgeInset Constants
+extension UIEdgeInsets {
+    
+    static let tweetCellInsets: UIEdgeInsets = .init(by: 15)
+}
