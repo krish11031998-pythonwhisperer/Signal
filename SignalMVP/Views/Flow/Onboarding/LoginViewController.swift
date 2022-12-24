@@ -35,7 +35,7 @@ class LoginController: UIViewController {
         stack.addArrangedSubview(.spacer())
         
         view.addSubview(stack)
-        view.setFittingConstraints(childView: stack, insets: .init(top: .safeAreaInsets.top + navBarHeight, left: 10, bottom: .safeAreaInsets.bottom, right: 10))
+        view.setFittingConstraints(childView: stack, insets: .init(top: .safeAreaInsets.top + navBarHeight + 32, left: 10, bottom: .safeAreaInsets.bottom, right: 10))
         
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard)))
     }

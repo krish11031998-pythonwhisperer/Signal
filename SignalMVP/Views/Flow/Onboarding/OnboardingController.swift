@@ -24,16 +24,24 @@ class OnboardingController: UIViewController {
     
     private func headerView() -> UIView {
         let view: UIStackView = .VStack(spacing: 8, alignment: .center)
+        
+        let backgroundHolder = UIView()
+        backgroundHolder.setFrame(Constants.imageViewSize)
+        backgroundHolder.cornerRadius = Constants.imageViewSize.smallDim.half
+        backgroundHolder.addShadow()
+        
         let imageView = UIImageView.standardImageView(frame: Constants.imageViewSize.frame,
                                                       dimmingForeground: false,
                                                       circleFrame: true)
+        imageView.backgroundColor = .white
         imageView.image = UIImage(named: "AppIcon")?.resized(size: Constants.imageViewSize.half)
         imageView.contentMode = .center
-        imageView.addShadow()
-        imageView.border(color: .surfaceBackgroundInverse, borderWidth: 1)
+        
+        backgroundHolder.addSubview(imageView)
+        backgroundHolder.setFittingConstraints(childView: imageView, insets: .zero)
         let headerView = "Signal".heading1().generateLabel
         
-        [imageView, headerView].addToView(view)
+        [backgroundHolder, headerView].addToView(view)
         return view
     }
     
