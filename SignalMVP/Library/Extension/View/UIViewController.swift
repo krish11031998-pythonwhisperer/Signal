@@ -38,7 +38,7 @@ extension UIViewController {
 	
 	static func backButton(_ target: UIViewController) -> UIBarButtonItem {
         let buttonImg = UIImage.Catalogue.chevronLeft.image.resized(size: .init(squared: 16))
-		let imgView = UIImageView(image: buttonImg)
+        let imgView = UIImageView(image: buttonImg.withTintColor(.surfaceBackground))
 		imgView.circleFrame = .init(origin: .zero, size: .init(squared: 32))
 		imgView.backgroundColor = .surfaceBackgroundInverse
 		imgView.contentMode = .center
@@ -50,7 +50,7 @@ extension UIViewController {
 	}
     
     static func closeButton(_ target: UIViewController) -> UIBarButtonItem {
-        let buttonImg = UIImage(systemName: "xmark")?.resized(size: .init(squared: 16))
+        let buttonImg = UIImage(systemName: "xmark")?.resized(size: .init(squared: 16)).withTintColor(.surfaceBackground)
         let imgView = UIImageView(image: buttonImg)
         imgView.circleFrame = .init(origin: .zero, size: .init(squared: 32))
         imgView.backgroundColor = .surfaceBackgroundInverse
@@ -63,7 +63,12 @@ extension UIViewController {
     }
 	
     var isPresented: Bool {
-        navigationController?.modalPresentationStyle == .custom || modalPresentationStyle == .custom
+        guard navigationController?.viewControllers.count == 1 else { return false }
+        let presentingIsModal = presentingViewController != nil
+        let presentingIsNavigation = navigationController?.presentingViewController?.presentedViewController == navigationController
+        let presentingIsTabBar = tabBarController?.presentingViewController is UITabBarController
+        
+        return presentingIsModal || presentingIsNavigation || presentingIsTabBar
     }
     
 	@objc

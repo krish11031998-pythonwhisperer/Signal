@@ -55,9 +55,6 @@ class NewsCell: ConfigurableCell {
 		tickersStack.isHidden = true
 		
 		mainStack.addArrangedSubview(cellStack)
-		
-		let divider = UIView.divider()
-//		mainStack.addArrangedSubview(divider.embedInView(insets: .init(top: 10, left: 0, bottom: 0, right: 0)))
         
         let card = mainStack.blobify(backgroundColor: .surfaceBackground,
                                      edgeInset: .init(by: 12),

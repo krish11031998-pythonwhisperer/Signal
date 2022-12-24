@@ -28,4 +28,7 @@ extension CGSize {
     
     func limitSizeTo(min: CGSize) -> CGSize { smallDim < min.smallDim ? min : self }
 	
+    static var totalScreenSize: CGSize {
+        .init(width: .totalWidth, height: .totalHeight)
+    }
 }

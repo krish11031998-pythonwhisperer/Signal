@@ -35,7 +35,7 @@ extension PresentationStyle {
     
     var frameOfPresentedView: CGRect {
         switch self {
-        case .circlar(_):
+        case .circlar:
             return .init(origin: .zero, size: .init(width: .totalWidth, height: .totalHeight))
         case .sheet(let size, let edge):
             return .init(origin: .init(x: .zero, y: .totalHeight - size.height), size: .init(width: size.width, height: size.height - edge.bottom))
@@ -44,34 +44,34 @@ extension PresentationStyle {
     
     var initScale: CGFloat {
         switch self {
-        case .circlar(_):
+        case .circlar:
             return 0.9
-        case .sheet(_, _):
+        case .sheet:
             return 1
         }
     }
     
     var transitionDuration: TimeInterval {
         switch self {
-        case .circlar(_):
+        case .circlar:
             return 0.2
-        case .sheet(_, _):
+        case .sheet:
             return 0.25
         }
     }
     
     var removeView: Bool {
         switch self {
-        case .circlar(_):
+        case .circlar:
             return true
-        case .sheet(_, _):
+        case .sheet:
             return false
         }
     }
     
     var addDimmingView: Bool {
         switch self {
-        case .circlar(_):
+        case .circlar:
             return false
         default:
             return true

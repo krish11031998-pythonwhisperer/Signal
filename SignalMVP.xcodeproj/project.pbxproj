@@ -58,6 +58,12 @@
 		EF5C4EC32956106200669355 /* TweetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5C4EC22956106200669355 /* TweetService.swift */; };
 		EF5C4EC529561C3800669355 /* EventEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5C4EC429561C3800669355 /* EventEndpoints.swift */; };
 		EF5C4EC729561C9100669355 /* NewsEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5C4EC629561C9100669355 /* NewsEndpoints.swift */; };
+		EF5C4ECB2956E9A400669355 /* UserDefaultsStores.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5C4ECA2956E9A400669355 /* UserDefaultsStores.swift */; };
+		EF5C4ECF2956ED2A00669355 /* OnboardingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5C4ECE2956ED2A00669355 /* OnboardingController.swift */; };
+		EF5C4ED3295708E200669355 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5C4ED2295708E200669355 /* TextField.swift */; };
+		EF5C4ED5295709E900669355 /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5C4ED4295709E900669355 /* RegisterController.swift */; };
+		EF5C4ED8295714EC00669355 /* TextFieldType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5C4ED7295714EC00669355 /* TextFieldType.swift */; };
+		EF5C4EDA2957193700669355 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5C4ED92957193700669355 /* LoginViewController.swift */; };
 		EF7CBED22911BB8400F9D611 /* TopMentionDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CBED12911BB8400F9D611 /* TopMentionDetail.swift */; };
 		EF7CBFD8291641EA00F9D611 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CBF91291641E900F9D611 /* Array.swift */; };
 		EF7CBFD9291641EA00F9D611 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CBF92291641E900F9D611 /* UIColor.swift */; };
@@ -286,6 +292,12 @@
 		EF5C4EC22956106200669355 /* TweetService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetService.swift; sourceTree = "<group>"; };
 		EF5C4EC429561C3800669355 /* EventEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventEndpoints.swift; sourceTree = "<group>"; };
 		EF5C4EC629561C9100669355 /* NewsEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsEndpoints.swift; sourceTree = "<group>"; };
+		EF5C4ECA2956E9A400669355 /* UserDefaultsStores.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsStores.swift; sourceTree = "<group>"; };
+		EF5C4ECE2956ED2A00669355 /* OnboardingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingController.swift; sourceTree = "<group>"; };
+		EF5C4ED2295708E200669355 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
+		EF5C4ED4295709E900669355 /* RegisterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterController.swift; sourceTree = "<group>"; };
+		EF5C4ED7295714EC00669355 /* TextFieldType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldType.swift; sourceTree = "<group>"; };
+		EF5C4ED92957193700669355 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		EF7CBED12911BB8400F9D611 /* TopMentionDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopMentionDetail.swift; sourceTree = "<group>"; };
 		EF7CBF91291641E900F9D611 /* Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		EF7CBF92291641E900F9D611 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
@@ -657,6 +669,50 @@
 			path = ViewController;
 			sourceTree = "<group>";
 		};
+		EF5C4EC82956E98700669355 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				EF5C4EC92956E98F00669355 /* UserDefaults */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
+		EF5C4EC92956E98F00669355 /* UserDefaults */ = {
+			isa = PBXGroup;
+			children = (
+				EF5C4ECA2956E9A400669355 /* UserDefaultsStores.swift */,
+			);
+			path = UserDefaults;
+			sourceTree = "<group>";
+		};
+		EF5C4ECC2956ED0800669355 /* Flow */ = {
+			isa = PBXGroup;
+			children = (
+				EF5C4ECD2956ED1900669355 /* Onboarding */,
+				EF86383928DC760B00EF520C /* MainApp */,
+			);
+			path = Flow;
+			sourceTree = "<group>";
+		};
+		EF5C4ECD2956ED1900669355 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				EF5C4ECE2956ED2A00669355 /* OnboardingController.swift */,
+				EF5C4ED4295709E900669355 /* RegisterController.swift */,
+				EF5C4ED92957193700669355 /* LoginViewController.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		EF5C4ED6295714D900669355 /* TextField */ = {
+			isa = PBXGroup;
+			children = (
+				EF5C4ED2295708E200669355 /* TextField.swift */,
+				EF5C4ED7295714EC00669355 /* TextFieldType.swift */,
+			);
+			path = TextField;
+			sourceTree = "<group>";
+		};
 		EF7CBF8F291641E900F9D611 /* Library */ = {
 			isa = PBXGroup;
 			children = (
@@ -809,6 +865,7 @@
 		EF7CBFC0291641EA00F9D611 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				EF5C4ED6295714D900669355 /* TextField */,
 				EF5C4EBB29530BFD00669355 /* ViewController */,
 				EF5C4E9D2951905900669355 /* RoundedCardView */,
 				EF59F111292A969A002877DE /* Bars */,
@@ -1027,26 +1084,26 @@
 		EF86383828DC75F200EF520C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				EF5C4ECC2956ED0800669355 /* Flow */,
 				EF2BB213292BF4B60006C00F /* Videos */,
 				EF987B91291FAAD70000E233 /* TickerStory */,
 				EF7D2F9C28E02CE50003B8F3 /* Home */,
 				EF96382228DD8FD000178C37 /* Reddit */,
 				EF86383C28DC98F700EF520C /* Events */,
-				EF86383928DC760B00EF520C /* MainTab */,
 				EF86383128DC5C9400EF520C /* News */,
 				EFB1C25D28DB3CB600DD40A4 /* Tweets */,
 			);
 			path = Views;
 			sourceTree = "<group>";
 		};
-		EF86383928DC760B00EF520C /* MainTab */ = {
+		EF86383928DC760B00EF520C /* MainApp */ = {
 			isa = PBXGroup;
 			children = (
 				EFB1C23128DB3B1800DD40A4 /* MainViewController.swift */,
 				EF86383A28DC761900EF520C /* MainTabView.swift */,
 				EF48D71228E4CFCF00BD2A1A /* MainTabModel.swift */,
 			);
-			path = MainTab;
+			path = MainApp;
 			sourceTree = "<group>";
 		};
 		EF86383C28DC98F700EF520C /* Events */ = {
@@ -1162,6 +1219,7 @@
 		EFB1C22C28DB3B1800DD40A4 /* SignalMVP */ = {
 			isa = PBXGroup;
 			children = (
+				EF5C4EC82956E98700669355 /* Storage */,
 				EF7CBF8F291641E900F9D611 /* Library */,
 				EFDC741628E3372400042452 /* Models */,
 				EF86383828DC75F200EF520C /* Views */,
@@ -1551,6 +1609,7 @@
 				EF7CC003291641EA00F9D611 /* ImageHeaderSubHeaderView.swift in Sources */,
 				EF7CBFF4291641EA00F9D611 /* CGFloat.swift in Sources */,
 				EF86381B28DC1EBE00EF520C /* TweetServiceInterface.swift in Sources */,
+				EF5C4ECF2956ED2A00669355 /* OnboardingController.swift in Sources */,
 				EF7CBED22911BB8400F9D611 /* TopMentionDetail.swift in Sources */,
 				EF59F118292A969A002877DE /* CircularProgressBar.swift in Sources */,
 				EF987B9B292122FA0000E233 /* NewsDetailView.swift in Sources */,
@@ -1604,6 +1663,7 @@
 				EF7CBFF7291641EA00F9D611 /* NetworkReqeust.swift in Sources */,
 				EF00758F28E5CBA000195433 /* NewsService.swift in Sources */,
 				EF86383728DC648000EF520C /* NewsViewModel.swift in Sources */,
+				EF5C4ED8295714EC00669355 /* TextFieldType.swift in Sources */,
 				EF2BB215292BF4E40006C00F /* VideoViewController.swift in Sources */,
 				EF5C4EB22951943200669355 /* TickerService.swift in Sources */,
 				EF86384528DC9E5200EF520C /* StubEventsService.swift in Sources */,
@@ -1614,6 +1674,7 @@
 				EFB1C26128DB3D3700DD40A4 /* TweetCell.swift in Sources */,
 				EF96381F28DD8D1200178C37 /* StubRedditService.swift in Sources */,
 				EF86383528DC61F700EF520C /* NewsCell.swift in Sources */,
+				EF5C4EDA2957193700669355 /* LoginViewController.swift in Sources */,
 				EF7CBFF2291641EA00F9D611 /* CGSize.swift in Sources */,
 				EF96381D28DD8C8D00178C37 /* RedditPostModel.swift in Sources */,
 				EF96381B28DD8C6B00178C37 /* RedditServiceInterface.swift in Sources */,
@@ -1650,6 +1711,7 @@
 				EF86383328DC5CAF00EF520C /* NewsFeed.swift in Sources */,
 				EF7D2FC928E0A0E10003B8F3 /* VideoCell.swift in Sources */,
 				EF1644A9290589B500E9D997 /* CustomCuratedEvents.swift in Sources */,
+				EF5C4ECB2956E9A400669355 /* UserDefaultsStores.swift in Sources */,
 				EF5C4EBD29530C0700669355 /* SeachViewController.swift in Sources */,
 				EF5C4EA92951920300669355 /* TickerSearch.swift in Sources */,
 				EF5C4EAD295192EC00669355 /* TickerEndpoint.swift in Sources */,
@@ -1668,9 +1730,11 @@
 				EF7D2FC428E09E3D0003B8F3 /* StubVideoService.swift in Sources */,
 				EF7CC000291641EA00F9D611 /* SentimentTextLabel.swift in Sources */,
 				EF987B90291FA3C50000E233 /* String+URL.swift in Sources */,
+				EF5C4ED5295709E900669355 /* RegisterController.swift in Sources */,
 				EF59F117292A969A002877DE /* MultipleStrokeProgressBar.swift in Sources */,
 				EF5C4EC129560E2B00669355 /* VideoEndpoints.swift in Sources */,
 				EF7CBFE1291641EA00F9D611 /* ViewHeirachy.swift in Sources */,
+				EF5C4ED3295708E200669355 /* TextField.swift in Sources */,
 				EFB1C2D128DB5E7D00DD40A4 /* TweetFeedViewModel.swift in Sources */,
 				EFDC741928E3373800042452 /* Sentiments.swift in Sources */,
 				EF86384728DC9E6A00EF520C /* EventModel.swift in Sources */,
@@ -1864,6 +1928,7 @@
 				DEVELOPMENT_TEAM = 8T963ZW2EJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SignalMVP/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Signal;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -1894,6 +1959,7 @@
 				DEVELOPMENT_TEAM = 8T963ZW2EJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SignalMVP/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Signal;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
