@@ -67,6 +67,6 @@ extension TableViewDataSource: UITableViewDelegate, UITableViewDataSource {
     }
 	
 	public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-		return nil
+        return sections[section].customFooter
 	}
 }

@@ -9,5 +9,5 @@ import Foundation
 import Combine
 
 protocol TrendingHeadlinesInterface {
-    func fetchHeadlines() -> Future<TrendingHeadlinesResult,Error>
+    func fetchHeadlines() -> AnyPublisher<TrendingHeadlinesResult,Error>
 }

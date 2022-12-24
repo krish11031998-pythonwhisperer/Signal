@@ -12,8 +12,8 @@ class StubMentionService: MentionsServiceInterface {
 	
 	public static let shared: StubMentionService = .init()
 
-    public func fetchMentions(period: MentionPeriod) -> Future<MentionsResult, Error> {
-        Bundle.main.loadDataFromBundle(name: period.rawValue, extensionStr: "json").future
+    public func fetchMentions(period: MentionPeriod) -> AnyPublisher<MentionsResult, Error> {
+        Bundle.main.loadDataFromBundle(name: period.rawValue, extensionStr: "json")
     }
 	
 }

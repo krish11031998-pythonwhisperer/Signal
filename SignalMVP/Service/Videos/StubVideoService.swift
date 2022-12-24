@@ -12,7 +12,10 @@ class StubVideoService: VideoServiceInterface {
 	
 	public static let shared: StubVideoService = .init()
 	
-	public func fetchVideo() -> Future<VideoResult,Error> {
-        Bundle.main.loadDataFromBundle(name: "videos", extensionStr: "json").future
+	public func fetchVideo(ticker: String? = nil,
+                           before: Int? = nil,
+                           after: Int? = nil,
+                           limit: Int = 20) -> AnyPublisher<VideoResult, Error> {
+        Bundle.main.loadDataFromBundle(name: "videos", extensionStr: "json")
 	}
 }

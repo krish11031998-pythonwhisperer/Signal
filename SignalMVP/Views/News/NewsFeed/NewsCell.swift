@@ -57,17 +57,23 @@ class NewsCell: ConfigurableCell {
 		mainStack.addArrangedSubview(cellStack)
 		
 		let divider = UIView.divider()
-		mainStack.addArrangedSubview(divider.embedInView(insets: .init(top: 10, left: 0, bottom: 0, right: 0)))
-
-		contentView.addSubview(mainStack)
-		contentView.setFittingConstraints(childView: mainStack, insets: .init(vertical: 10, horizontal: 16))
+//		mainStack.addArrangedSubview(divider.embedInView(insets: .init(top: 10, left: 0, bottom: 0, right: 0)))
+        
+        let card = mainStack.blobify(backgroundColor: .surfaceBackground,
+                                     edgeInset: .init(by: 12),
+                                     borderColor: .clear,
+                                     borderWidth: 0,
+                                     cornerRadius: 12)
+        card.addShadow()
+		contentView.addSubview(card)
+		contentView.setFittingConstraints(childView: card, insets: .init(by: 10))
 	}
 	
 //MARK: - Exposed Methods
 	
 	public func configure(with model: NewsCellModel) {
 		model.model.date.bodySmallRegular(color: .gray).render(target: timestamp)
-		model.model.title.heading3().render(target: title)
+		model.model.title.heading4().render(target: title)
 		title.numberOfLines = 0
 		model.model.sourceName.body2Regular(color: .gray).render(target: body)
 		body.numberOfLines = 1

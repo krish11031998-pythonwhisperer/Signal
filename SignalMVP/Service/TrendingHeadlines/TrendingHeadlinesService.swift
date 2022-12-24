@@ -12,8 +12,8 @@ class StubTrendingHeadlines: TrendingHeadlinesInterface {
 	
 	public static var shared: StubTrendingHeadlines = .init()
 	
-    public func fetchHeadlines() -> Future<TrendingHeadlinesResult,Error> {
-        Bundle.main.loadDataFromBundle(name: "trendingHeadlines", extensionStr: "json").future
+    public func fetchHeadlines() -> AnyPublisher<TrendingHeadlinesResult,Error> {
+        Bundle.main.loadDataFromBundle(name: "trendingHeadlines", extensionStr: "json")
     }
 
 }

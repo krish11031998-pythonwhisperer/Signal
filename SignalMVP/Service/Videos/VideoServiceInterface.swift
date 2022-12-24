@@ -9,5 +9,8 @@ import Foundation
 import Combine
 
 protocol VideoServiceInterface {
-    func fetchVideo() -> Future<VideoResult,Error>
+    func fetchVideo(ticker: String?,
+                    before: Int?,
+                    after: Int?,
+                    limit: Int) -> AnyPublisher<VideoResult, Error>
 }

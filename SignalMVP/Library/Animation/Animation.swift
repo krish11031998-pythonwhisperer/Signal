@@ -38,7 +38,7 @@ extension Animation {
 		
 		switch self {
         case .bouncy:
-            let animation = CAKeyframeAnimation(keyPath: "scale")
+            let animation = CAKeyframeAnimation(keyPath: "transform.scale")
             animation.keyTimes = [0, 0.33, 0.66, 1]
             animation.values = [1, 0.975, 0.975, 1]
             return animation
@@ -123,6 +123,29 @@ extension Animation {
         let group = CAAnimationGroup()
         group.animations = animation.compactMap { $0.animationData(at: layer)}
         return group
+    }
+    
+    var name: String {
+        switch self {
+        case .bouncy:
+            return "bouncy"
+        case .slideInFromTop:
+            return "slideInFromTop"
+        case .slide:
+            return "slide"
+        case .circularProgress:
+            return "circularProgress"
+        case .lineProgress:
+            return "lineProgress"
+        case .fadeIn:
+            return "fadeIn"
+        case .fadeOut:
+            return "fadeOut"
+        case .slideUpDown:
+            return "slideUpDown"
+        case .fadeInOut:
+            return "fadeInOut"
+        }
     }
 }
 

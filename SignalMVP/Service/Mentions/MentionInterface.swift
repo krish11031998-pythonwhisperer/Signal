@@ -9,6 +9,5 @@ import Foundation
 import Combine
 
 protocol MentionsServiceInterface {
-//	func fetchMentions(period: MentionPeriod, completion: @escaping (Result<MentionsResult, Error>) -> Void)
-    func fetchMentions(period: MentionPeriod) -> Future<MentionsResult, Error>
+    func fetchMentions(period: MentionPeriod) -> AnyPublisher<MentionsResult, Error>
 }

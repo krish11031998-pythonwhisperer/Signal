@@ -54,7 +54,9 @@ class HomeFeed: UIViewController {
             .sink {
                 print("(ERROR) err: ", $0.err?.localizedDescription)
             } receiveValue: { [weak self] in
-                self?.tableView.reloadData($0)
+                guard let self else { return }
+                
+                self.tableView.reloadData($0)
             }
             .store(in: &bag)
 

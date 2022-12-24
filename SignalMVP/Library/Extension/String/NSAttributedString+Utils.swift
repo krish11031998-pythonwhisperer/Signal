@@ -39,12 +39,14 @@ extension NSAttributedString {
         image.toText().appending(" ").appending(self)
     }
     
-    static func + (lhs: UIImage, rhs: NSAttributedString) -> NSAttributedString {
-        lhs.toText().appending(" ").appending(rhs)
+    static func + (lhs: UIImage?, rhs: NSAttributedString) -> NSAttributedString {
+        guard let validImage = lhs else { return rhs }
+        return validImage.toText().appending(" ").appending(rhs)
     }
     
-    static func + (lhs: NSAttributedString, rhs: UIImage) -> NSAttributedString {
-        lhs.appending(" ").appending(rhs.toText())
+    static func + (lhs: NSAttributedString, rhs: UIImage?) -> NSAttributedString {
+        guard let validImage = rhs else { return lhs }
+        return lhs.appending(" ").appending(validImage.toText())
     }
     
 }
