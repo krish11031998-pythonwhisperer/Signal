@@ -31,7 +31,7 @@ struct TweetModel:Codable {
 	enum CodingKeys: String, CodingKey {
 		case id
 		case text
-		case publicMetric = "public_metrics"
+		case publicMetric = "publicMetric"
 		case authorId = "author_id"
 		case attachments
 		case media, urls, user, cashTags, hashTags, opinions, reactions
@@ -59,10 +59,10 @@ struct TweetAttachment: Codable {
 //MARK: - TweetMetric
 struct TweetMetric: Codable {
 	
-	let retweetCount: Int
-	let replyCount: Int
-	let likeCount: Int
-	let qouteCount: Int
+	let retweetCount: Int?
+	let replyCount: Int?
+	let likeCount: Int?
+	let qouteCount: Int?
 	
 	enum CodingKeys: String, CodingKey {
 		case retweetCount = "retweet_count"

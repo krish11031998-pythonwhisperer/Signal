@@ -24,6 +24,15 @@ fileprivate extension TweetReaction {
 	}
 }
 
+fileprivate extension TweetMetric {
+    var metricModel: [TweetMetricModel] {
+        [.init(image: .like, value: likeCount ?? 0),
+         .init(image: .comments, value: replyCount ?? 0),
+         .init(image: .tweetShare, value: qouteCount ?? 0),
+         .init(image: .retweet, value: retweetCount ?? 0)]
+    }
+}
+
 
 fileprivate extension RoundedCardAppearance {
     
@@ -111,8 +120,7 @@ class TweetCell: ConfigurableCell {
 			imgView.isHidden = true
 		}
 		
-		let metrics = (model.model?.opinions?.metricModels ?? []) + (model.model?.reactions?.metricModels ?? [])
-		if !metrics.isEmpty {
+        if let metrics = model.model?.publicMetric?.metricModel {
 			metricStack.removeChildViews()
             metrics
                 .forEach { metricStack.addArrangedSubview($0.view) }
