@@ -35,18 +35,23 @@ extension NSAttributedString {
         return .init(attributedString: copy)
     }
     
+    var fontHeight: CGFloat {
+        let attributes = attributes(at: 0, effectiveRange: nil)
+        return (attributes[.font] as? UIFont)?.capHeight ?? 0
+    }
+    
     func addImage(_ image: UIImage) -> NSAttributedString {
         image.toText().appending(" ").appending(self)
     }
     
     static func + (lhs: UIImage?, rhs: NSAttributedString) -> NSAttributedString {
         guard let validImage = lhs else { return rhs }
-        return validImage.toText().appending(" ").appending(rhs)
+        return validImage.toText(fontHeight: rhs.fontHeight).appending(" ").appending(rhs)
     }
     
     static func + (lhs: NSAttributedString, rhs: UIImage?) -> NSAttributedString {
         guard let validImage = rhs else { return lhs }
-        return lhs.appending(" ").appending(validImage.toText())
+        return lhs.appending(" ").appending(validImage.toText(fontHeight: lhs.fontHeight))
     }
     
 }

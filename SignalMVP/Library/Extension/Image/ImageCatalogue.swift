@@ -59,6 +59,7 @@ extension UIImage {
 		case viewGridAdd = "view-grid-add"
 		case viewGrid = "view-grid"
 		case xMark = "x"
+        case like, tweetShare, comments, retweet
 	}
 }
 

@@ -9,43 +9,31 @@ import Foundation
 import UIKit
 
 struct TweetMetricModel {
-	let image: UIImage.SystemCatalogue
+	let image: UIImage.Catalogue
 	let value: Int
 }
 
+extension TweetMetricModel {
 
-class TweetMetricView: UIView {
-	
-	
-	private lazy var imgView: UIImageView = { .init(frame: .init(origin: .zero, size: .init(squared: 20))) }()
-	private lazy var metricValLabel: UILabel = { .init() }()
-	
-	override init(frame: CGRect) {
-		super.init(frame: frame)
-		setupView()
-	}
-	
-	required init?(coder: NSCoder) {
-		super.init(coder: coder)
-	}
-	
-	
-	private func setupView() {
-		let stack = UIView.HStack(subViews: [imgView, metricValLabel], spacing: 4)
-		stack.alignment = .center
-		addSubview(stack)
-		setFittingConstraints(childView: stack, insets: .init(vertical: 10, horizontal: 8))
-	}
-	
-	
-	public func configureView(model: TweetMetricModel) {
-		
-		if let img = model.image.image {
-			imgView.image = img.withTintColor(.gray, renderingMode: .alwaysOriginal)
-			imgView.setFrame(width: 20)
-		}
-		
-		"\(model.value)".styled(font: .systemFont(ofSize: 14, weight: .regular), color: .white).render(target: metricValLabel)
-	}
-	
+    var imageView: UIImageView {
+        let imageView = UIImageView.standardImageView()
+        imageView.image = image.image.resized(withAspect: .init(squared: 12))
+        imageView.backgroundColor = .clear
+        imageView.contentMode = .center
+        return imageView
+    }
+    
+    var label: UILabel {
+        let label = "\(value)".styled(font: .systemFont(ofSize: 12, weight: .medium), color: .textColorInverse).generateLabel
+        return label
+    }
+    
+    var view: UIView {
+        let stack: UIStackView = .HStack(subViews: [imageView, label], spacing: 8)
+        return stack.blobify(backgroundColor: .surfaceBackgroundInverse,
+                             edgeInset: .init(vertical: 5, horizontal: 10),
+                             borderColor: .clear,
+                             borderWidth: 0,
+                             cornerRadius: 12)
+    }
 }
