@@ -18,6 +18,7 @@ extension TweetMetricModel {
     var imageView: UIImageView {
         let imageView = UIImageView.standardImageView()
         imageView.image = image.image.resized(withAspect: .init(squared: 12))
+        imageView.image?.withTintColor(imageView.userInterface == .dark ? .surfaceBackgroundInverse : .surfaceBackground) 
         imageView.backgroundColor = .clear
         imageView.contentMode = .center
         return imageView
