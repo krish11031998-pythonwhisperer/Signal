@@ -775,6 +775,15 @@
 			path = Register;
 			sourceTree = "<group>";
 		};
+		EF624D14295870F600F006FF /* TweetFeed */ = {
+			isa = PBXGroup;
+			children = (
+				EFB1C25E28DB3CC600DD40A4 /* TweetsFeed.swift */,
+				EFB1C2D028DB5E7D00DD40A4 /* TweetFeedViewModel.swift */,
+			);
+			path = TweetFeed;
+			sourceTree = "<group>";
+		};
 		EF7CBF8F291641E900F9D611 /* Library */ = {
 			isa = PBXGroup;
 			children = (
@@ -1316,10 +1325,9 @@
 		EFB1C25D28DB3CB600DD40A4 /* Tweets */ = {
 			isa = PBXGroup;
 			children = (
+				EF624D14295870F600F006FF /* TweetFeed */,
 				EF96383128DDFEC200178C37 /* TweetDetail */,
-				EFB1C25E28DB3CC600DD40A4 /* TweetsFeed.swift */,
 				EFB1C26028DB3D3700DD40A4 /* TweetCell.swift */,
-				EFB1C2D028DB5E7D00DD40A4 /* TweetFeedViewModel.swift */,
 				EF86382228DC341400EF520C /* TweetMetricView.swift */,
 				EF96382F28DDE60700178C37 /* TweetMetrics.swift */,
 				EF59F105292961BA002877DE /* RecentTweetCard.swift */,
