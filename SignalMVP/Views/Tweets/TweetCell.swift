@@ -74,7 +74,7 @@ class TweetCell: ConfigurableCell {
         card.addShadow()
         
 		contentView.addSubview(card)
-		contentView.setFittingConstraints(childView: card, insets: .init(vertical: 10, horizontal: 16))
+		contentView.setFittingConstraints(childView: card, insets: .init(by: 10))
 	
 		gestureRecognizers?.forEach { gesture in
 			print("(DEBUG) gesture : ",gesture)
@@ -92,7 +92,8 @@ class TweetCell: ConfigurableCell {
 		authorLabel.setHeight(height: authorLabel.compressedSize.height, priority: .required)
 
 		if let authorImage = model.user?.profileImageUrl {
-			UIImage.loadImage(url: authorImage, at: authorImageView, path: \.image, resized: .init(squared: 48))
+            UIImage.loadImage(url: authorImage, at: authorImageView, path: \.image, resized: .init(squared: 48))
+            authorImageView.contentMode = .center
 		}
 
 		if let media = model.media?.first,

@@ -7,9 +7,9 @@
 
 import Foundation
 import UIKit
+import Combine
 
 fileprivate class TweetDetailImage: UIView {
-	
 	private lazy var img: UIImageView = {
 		let image = UIImageView()
 		image.contentMode = .scaleAspectFit
@@ -61,7 +61,7 @@ fileprivate class TweetDetailImage: UIView {
 class TweetDetailView: UIViewController {
     
     private let tweet: TweetCellModel
-    
+    private var bag: Set<AnyCancellable> = .init()
 	private lazy var profileHeader: ImageHeadSubHeaderView = { .init() }()
 	private lazy var bodyLabel: UILabel = { .init() }()
 	private lazy var imgView: TweetDetailImage = { .init() }()
@@ -99,6 +99,7 @@ class TweetDetailView: UIViewController {
 		observer = scrollView.observe(\.contentOffset, changeHandler: { [weak self] scrollView, _ in
 			self?.scrollObserver(scrollView)
 		})
+        bind()
 	}
 	
 	
@@ -156,4 +157,17 @@ class TweetDetailView: UIViewController {
 		super.viewWillAppear(true)
 		navigationController?.navigationBar.transform = .init(translationX: 0, y: 0)
 	}
+    
+    private func bind() {
+        tweetURLView.publisher(for: .touchUpInside)
+            .sink {[weak self] _ in
+                guard let self,
+                      let media = self.tweet.model?.urls?.first
+                else { return }
+                print("(DEBUG) media: ", media.url)
+                let webPage = WebPageView(url: media.url, title: media.title ?? "").withNavigationController()
+                self.presentView(style: .sheet(), target: webPage, onDimissal: nil)
+            }
+            .store(in: &bag)
+    }
 }

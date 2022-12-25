@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class TweetURLView: UIView {
+class TweetURLView: UIControl {
 
 //MARK: - Properties
 	private lazy var titleLabel: UILabel = { .init() }()
@@ -65,5 +65,9 @@ class TweetURLView: UIView {
 		model.description?.body3Regular(color: .gray).render(target: descriptionLabel)
 
 	}
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        sendActions(for: .touchUpInside)
+    }
 	
 }
