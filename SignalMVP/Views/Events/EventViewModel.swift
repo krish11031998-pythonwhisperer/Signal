@@ -32,13 +32,13 @@ class EventViewModel {
             .removeDuplicates()
             .filter { [weak self] in $0 && (self?.nextPageToken != nil) }
             .withLatestFrom(input.searchParam)
-            .flatMap { [weak self] in EventService.shared.fetchEvents(tickers: $0.1, after: self?.nextPageToken) }
+            .flatMap { [weak self] in EventService.shared.fetchEvents(entity: [$0.1].compactMap { $0 }, after: self?.nextPageToken) }
             .compactMap { $0.data }
             .compactMap { [weak self] in self?.setupSection($0, append: true)}
             .eraseToAnyPublisher()
         
         let searchResult = input.searchParam
-            .flatMap { EventService.shared.fetchEvents(tickers: $0) }
+            .flatMap { EventService.shared.fetchEvents(entity: [$0].compactMap { $0 }) }
             .compactMap { $0.data }
             .compactMap { [weak self] in self?.setupSection($0, append: false)}
             .eraseToAnyPublisher()

@@ -53,30 +53,19 @@ class TweetFeedViewModel {
     }
     
     public func transform(input: Input) -> Output {
-        
-//        let page = after
-//            .print("Fetching Next page!")
-//            .withLatestFrom(input.searchParam)
-//            .flatMap { TweetService.shared.fetchTweets(entity: $0.0, after: $0.1) }
-//            .catch { _ in StubTweetService.shared.fetchTweets() }
-//            .handleEvents(receiveOutput: { [weak self] in self?.getNextPageToken(result: $0) })
-//            .compactMap {[weak self] in  self?.decodeToTweetCellModel($0) }
-//            .eraseToAnyPublisher()
-        
+
         let searchResults = input.searchParam
             .flatMap { TweetService.shared.fetchTweets(entity: $0) }
             .catch { _ in StubTweetService.shared.fetchTweets() }
-            .handleEvents(receiveOutput: { [weak self] in self?.getNextPageToken(result: $0) })
             .compactMap { [weak self] in self?.decodeToTweetCellModel($0, append: false) }
             .eraseToAnyPublisher()
         
         let loadNextPage = input.loadNextPage
             .removeDuplicates()
-            .filter { $0 }
+            .filter {[weak self] in $0 && self?.nextPageId != nil }
             .withLatestFrom(input.searchParam)
             .flatMap {[weak self] in TweetService.shared.fetchTweets(entity: $0.1, after: self?.nextPageId) }
             .catch { _ in StubTweetService.shared.fetchTweets() }
-            .handleEvents(receiveOutput: { [weak self] in self?.getNextPageToken(result: $0) })
             .compactMap {[weak self] in  self?.decodeToTweetCellModel($0) }
             .eraseToAnyPublisher()
         
@@ -88,10 +77,15 @@ class TweetFeedViewModel {
     
     private func getNextPageToken(result: TweetSearchResult) {
         guard let lastId = result.data?.last?.id else { return }
-        nextPageId = lastId
+        if nextPageId != lastId {
+            nextPageId = lastId
+        } else {
+            nextPageId = nil
+        }
     }
     
     private func decodeToTweetCellModel(_ data: TweetSearchResult, append: Bool = true) -> TableSection? {
+        getNextPageToken(result: data)
 		guard let tweets = data.data else { return nil }
         let fitleredTweet: [TweetCellModel] = Set(tweets).compactMap { tweet in
 			var model:TweetCellModel = .init(model: tweet)

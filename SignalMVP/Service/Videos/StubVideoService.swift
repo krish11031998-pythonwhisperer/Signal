@@ -12,7 +12,7 @@ class StubVideoService: VideoServiceInterface {
 	
 	public static let shared: StubVideoService = .init()
 	
-	public func fetchVideo(ticker: String? = nil,
+	public func fetchVideo(entity: [String]? = nil,
                            before: Int? = nil,
                            after: Int? = nil,
                            limit: Int = 20) -> AnyPublisher<VideoResult, Error> {

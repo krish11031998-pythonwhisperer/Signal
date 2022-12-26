@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 protocol NewsServiceInterface {
-	func fetchNews(tickers: String?,
+	func fetchNews(entity: [String]?,
 				   items: String?,
 				   source: String?,
 				   after: String?,

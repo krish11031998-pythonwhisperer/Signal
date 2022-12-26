@@ -109,7 +109,7 @@ class TopMentionDetailViewModel {
     private func fetchNews(after: String? = nil) -> AnyPublisher<[TableCellProvider], Error> {
         NewsService
             .shared
-            .fetchNews(tickers: ticker, after: after)
+            .fetchNews(entity: [ticker], after: after)
             .catch { err in
                 print("(ERROR) err [From Service]:", err)
                 return StubNewsService.shared.fetchNews()
@@ -123,7 +123,7 @@ class TopMentionDetailViewModel {
     private func fetchEvents(after: String? = nil) -> AnyPublisher<[TableCellProvider], Error> {
         EventService
             .shared
-            .fetchEvents(tickers: ticker, after: after)
+            .fetchEvents(entity: [ticker], after: after)
             .catch { err in
                 print("(ERROR) err [From Service]:", err)
                 return StubEventService.shared.fetchEvents()

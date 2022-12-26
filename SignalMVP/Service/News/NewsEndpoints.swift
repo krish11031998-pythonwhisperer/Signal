@@ -8,7 +8,7 @@
 import Foundation
 
 enum NewsEndpoints {
-    case tickerNews(tickers: String? = nil,
+    case tickerNews(entity: [String]? = nil,
                     items: String? = nil,
                     source: String? = nil,
                     after: String? = nil,
@@ -30,20 +30,25 @@ extension NewsEndpoints: EndPoint {
     
     var queryItems: [URLQueryItem] {
         switch self {
-        case .tickerNews( let tickers,
+        case .tickerNews( let entity,
                           let items,
                           let source,
                           let after,
                           let before,
                           let limit):
-            return [
-                .init(name: "tickers", value: tickers),
+            var queries: [URLQueryItem] = [
                 .init(name: "items", value: items),
                 .init(name: "source", value: source),
                 .init(name: "before", value: before),
                 .init(name: "after", value: after),
                 .init(name: "limit", value: "\(limit)")
             ].filter { $0.value != nil }
+            
+            if let entity = entity {
+                queries.append(contentsOf: entity.map { .init(name: "entity", value: $0) } )
+            }
+            
+            return queries
         }
     }
 }

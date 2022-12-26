@@ -35,20 +35,18 @@ class NewsViewModel {
         
         let newPage = input.nextPage
             .removeDuplicates()
-            .filter { $0 }
+            .filter { [weak self] in $0 && self?.nextPage != nil }
             .withLatestFrom(input.searchParam)
-            .flatMap { [weak self] in NewsService.shared.fetchNews(tickers: $0.1, after: self?.nextPage) }
+            .flatMap { [weak self] in NewsService.shared.fetchNews(entity: [$0.1].compactMap { $0 }, after: self?.nextPage) }
             .catch { _ in StubNewsService.shared.fetchNews() }
             .compactMap { $0.data }
-            .handleEvents(receiveOutput: { [weak self] in self?.updateNextToken($0) })
             .compactMap { [weak self] in self?.setupSection($0, append: true) }
             .eraseToAnyPublisher()
         
         let searchResult = input.searchParam
-            .flatMap{ NewsService.shared.fetchNews(tickers: $0) }
+            .flatMap{ NewsService.shared.fetchNews(entity: [$0].compactMap { $0 }) }
             .catch { _ in StubNewsService.shared.fetchNews() }
             .compactMap { $0.data }
-            .handleEvents(receiveOutput: { [weak self] in self?.updateNextToken($0) })
             .compactMap { [weak self] in self?.setupSection($0, append: false) }
             .eraseToAnyPublisher()
         
@@ -62,12 +60,12 @@ class NewsViewModel {
         return .init(tableSection: news, dismissSearch: dismiss)
     }
     
-    private func updateNextToken(_ allNews: [NewsModel]) {
+    private func getNextPageToken(_ allNews: [NewsModel]) {
 //        guard let lastDocument = allNews.last?.
     }
     
     func setupSection(_ allNews: [NewsModel], append: Bool = true) -> TableSection {
-        
+        getNextPageToken(allNews)
         var selectedCurrency: [TableCellProvider] = []
         if let currency = searchParam.value, !currency.isEmpty {
             let image: RoundedCardViewSideView = .image(url: currency.logoURL,

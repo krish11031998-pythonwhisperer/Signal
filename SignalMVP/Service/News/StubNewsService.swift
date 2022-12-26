@@ -11,7 +11,7 @@ class StubNewsService: NewsServiceInterface {
 
 	public static var shared: StubNewsService = .init()
 	
-	public func fetchNews(tickers: String? = nil,
+	public func fetchNews(entity: [String]? = nil,
 						  items: String? = nil,
 						  source: String? = nil,
 						  after: String? = nil,

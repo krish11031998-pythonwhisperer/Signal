@@ -10,5 +10,9 @@ import Combine
 
 protocol EventServiceInterface {
 	
-    func fetchEvents(tickers: String?, before: String?, after: String?, limit: Int) -> AnyPublisher<EventResult,Error>
+    func fetchEvents(
+        entity: [String]?,
+        before: String?,
+        after: String?,
+        limit: Int) -> AnyPublisher<EventResult,Error>
 }

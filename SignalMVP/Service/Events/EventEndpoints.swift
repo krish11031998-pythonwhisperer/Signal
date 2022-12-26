@@ -8,7 +8,7 @@
 import Foundation
 
 enum EventEndpoints {
-    case latestEvents(tickers: String?, before: String?, after: String?, limit: Int)
+    case latestEvents(entity: [String]?, before: String?, after: String?, limit: Int)
 }
 
 extension EventEndpoints: EndPoint {
@@ -25,13 +25,18 @@ extension EventEndpoints: EndPoint {
     
     var queryItems: [URLQueryItem] {
         switch self {
-        case .latestEvents(let tickers, let before, let after, let limit):
-            return [
-                .init(name: "entity", value: tickers),
+        case .latestEvents(let entity, let before, let after, let limit):
+            var queries: [URLQueryItem] = [
                 .init(name: "before", value: before),
                 .init(name: "after", value: after),
                 .init(name: "limit", value: "\(limit)")
             ].filter { $0.value != nil }
+
+            if let entity = entity {
+                queries.append(contentsOf: entity.map { .init(name: "entity", value: $0) } )
+            }
+            
+            return queries
         }
     }
 }
