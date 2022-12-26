@@ -10,7 +10,7 @@ import Combine
 
 protocol VideoServiceInterface {
     func fetchVideo(entity: [String]?,
-                    before: Int?,
-                    after: Int?,
+                    before: String?,
+                    after: String?,
                     limit: Int) -> AnyPublisher<VideoResult, Error>
 }

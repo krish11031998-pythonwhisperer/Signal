@@ -40,7 +40,8 @@ class VideoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        loadVideos()
+        //loadVideos()
+        bind()
         standardNavBar(leftBarButton: .init(customView: "Video".heading2().generateLabel), color: .clear, scrollColor: .clear)
     }
     
@@ -60,12 +61,28 @@ class VideoViewController: UIViewController {
         collection.contentInsetAdjustmentBehavior = .never
     }
     
-    private func loadVideos() {
-        self.viewModel.videos
+//    private func loadVideos() {
+//        self.viewModel.videos
+//            .receive(on: DispatchQueue.main)
+//            .sink { [weak self] collectionSection in
+//                self?.collection.reloadData(.init(sections: [collectionSection]))
+//            }
+//            .store(in: &bag)
+//    }
+//
+    private func bind() {
+    
+        let output = viewModel.transform(input: .init(nextPage: collection.nextPage ))
+        
+        output.videos
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] collectionSection in
-                self?.collection.reloadData(.init(sections: [collectionSection]))
+            .sink {
+                print("(ERROR) err: ", $0.err?.localizedDescription)
+            } receiveValue: { [weak self] in
+                self?.collection.reloadData(.init(sections: [$0]))
+                
             }
             .store(in: &bag)
+        
     }
 }

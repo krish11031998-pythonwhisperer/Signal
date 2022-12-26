@@ -27,6 +27,7 @@
 		EF1D7E5D2922CCFD0041ADEC /* CollectionColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1D7E582922CCFD0041ADEC /* CollectionColumn.swift */; };
 		EF2BB215292BF4E40006C00F /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2BB214292BF4E40006C00F /* VideoViewController.swift */; };
 		EF3B698D2959D48200C9234B /* withLatestFrom.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3B698C2959D48200C9234B /* withLatestFrom.swift */; };
+		EF3B698F295A4A3600C9234B /* UIScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3B698E295A4A3600C9234B /* UIScrollView.swift */; };
 		EF48D71328E4CFCF00BD2A1A /* MainTabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF48D71228E4CFCF00BD2A1A /* MainTabModel.swift */; };
 		EF48D71528E578A600BD2A1A /* TweetEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF48D71428E578A600BD2A1A /* TweetEndpoints.swift */; };
 		EF48D71728E5918300BD2A1A /* EventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF48D71628E5918300BD2A1A /* EventService.swift */; };
@@ -270,6 +271,7 @@
 		EF1D7E582922CCFD0041ADEC /* CollectionColumn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionColumn.swift; sourceTree = "<group>"; };
 		EF2BB214292BF4E40006C00F /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
 		EF3B698C2959D48200C9234B /* withLatestFrom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = withLatestFrom.swift; sourceTree = "<group>"; };
+		EF3B698E295A4A3600C9234B /* UIScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScrollView.swift; sourceTree = "<group>"; };
 		EF48D71228E4CFCF00BD2A1A /* MainTabModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabModel.swift; sourceTree = "<group>"; };
 		EF48D71428E578A600BD2A1A /* TweetEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetEndpoints.swift; sourceTree = "<group>"; };
 		EF48D71628E5918300BD2A1A /* EventService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventService.swift; sourceTree = "<group>"; };
@@ -854,6 +856,7 @@
 				EF7CBF9F291641E900F9D611 /* UIViewController.swift */,
 				EF7CBFA0291641E900F9D611 /* Views.swift */,
 				EF7CBFA1291641E900F9D611 /* UILabel.swift */,
+				EF3B698E295A4A3600C9234B /* UIScrollView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1696,6 +1699,7 @@
 				EF987B992920F1A80000E233 /* CGPoint.swift in Sources */,
 				EF1644A0290550B300E9D997 /* ServiceHelper.swift in Sources */,
 				EF7D2FB628E051940003B8F3 /* StubMentionService.swift in Sources */,
+				EF3B698F295A4A3600C9234B /* UIScrollView.swift in Sources */,
 				EF7D2F9E28E02CFF0003B8F3 /* HomeFeed.swift in Sources */,
 				EF5C4E9A2950ADEB00669355 /* NewsSearchController.swift in Sources */,
 				EF7CBFDB291641EA00F9D611 /* ImageCatalogue.swift in Sources */,

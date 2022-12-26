@@ -47,15 +47,6 @@ class NewsFeed: SearchViewController {
     
     private func bind () {
         
-        let contentOffset = tableView.publisher(for: \.contentOffset)
-            .compactMap { [weak self] in
-                guard let self,
-                      self.tableView.contentSize.height > .totalHeight
-                else { return false }
-                return  $0.y >=  self.tableView.contentSize.height - self.tableView.frame.height
-            }
-            .eraseToAnyPublisher()
-        
         viewModel.selectedNews
             .compactMap { $0 }
             .sink { [weak self] in
@@ -64,7 +55,7 @@ class NewsFeed: SearchViewController {
             }
             .store(in: &bag)
         
-        let output = viewModel.transform(input: .init(searchParam: searchText, nextPage: contentOffset))
+        let output = viewModel.transform(input: .init(searchParam: searchText, nextPage: tableView.nextPage))
         
         output
             .tableSection

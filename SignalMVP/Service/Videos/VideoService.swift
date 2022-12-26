@@ -13,8 +13,8 @@ class VideoService: VideoServiceInterface {
     public static var shared: VideoService = .init()
     
     public func fetchVideo(entity: [String]? = nil,
-                    before: Int? = nil,
-                    after: Int? = nil,
+                    before: String? = nil,
+                    after: String? = nil,
                     limit: Int = 20) -> AnyPublisher<VideoResult, Error> {
         VideoEndpoints
             .fetchVideos(entity: entity, before: before, after: after, limit: limit)
