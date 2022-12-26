@@ -71,13 +71,22 @@ class EventsFeedViewController: SearchViewController {
 	
 	private func setupObservers() {
         
+        let contentOffset = tableView.publisher(for: \.contentOffset)
+            .compactMap { [weak self] in
+                guard let self,
+                      self.tableView.contentSize.height > .totalHeight
+                else { return false }
+                return  $0.y >=  self.tableView.contentSize.height - self.tableView.frame.height
+            }
+            .eraseToAnyPublisher()
+        
         viewModel.selectedEvent
             .sink { [weak self] in
                 self?.navigationController?.pushViewController(EventDetailView(eventModel: $0), animated: true)
             }
             .store(in: &bag)
         
-        let output = viewModel.transform(input: .init(searchParam: searchText))
+        let output = viewModel.transform(input: .init(searchParam: searchText, nextPage: contentOffset))
         
         output.tableSection
             .receive(on: DispatchQueue.main)

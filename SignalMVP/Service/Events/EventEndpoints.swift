@@ -27,7 +27,7 @@ extension EventEndpoints: EndPoint {
         switch self {
         case .latestEvents(let tickers, let before, let after, let limit):
             return [
-                .init(name: "tickers", value: tickers),
+                .init(name: "entity", value: tickers),
                 .init(name: "before", value: before),
                 .init(name: "after", value: after),
                 .init(name: "limit", value: "\(limit)")
