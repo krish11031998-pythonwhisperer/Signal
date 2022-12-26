@@ -18,9 +18,12 @@ class NewsViewModel {
     var selectedNews: CurrentValueSubject<NewsModel?, Never> = .init(nil)
     private var bag: Set<AnyCancellable> = .init()
     var searchParam: CurrentValueSubject<String?, Never> = .init(nil)
+    private var nextPage: String?
+    private var news: [NewsModel]?
     
     struct Input {
         let searchParam: CurrentValueSubject<String?, Never>
+        let nextPage: AnyPublisher<Bool, Never>
     }
     
     struct Output {
@@ -29,16 +32,28 @@ class NewsViewModel {
     }
     
     func transform(input: Input) -> Output {
-        let news = input.searchParam
-            .flatMap({
-                return NewsService.shared.fetchNews(tickers: $0)
-            })
-            .catch({ _ in
-                return StubNewsService.shared.fetchNews()
-            })
+        
+        let newPage = input.nextPage
+            .removeDuplicates()
+            .filter { $0 }
+            .withLatestFrom(input.searchParam)
+            .flatMap { [weak self] in NewsService.shared.fetchNews(tickers: $0.1, after: self?.nextPage) }
+            .catch { _ in StubNewsService.shared.fetchNews() }
             .compactMap { $0.data }
-            .map(setupSection)
+            .handleEvents(receiveOutput: { [weak self] in self?.updateNextToken($0) })
+            .compactMap { [weak self] in self?.setupSection($0, append: true) }
             .eraseToAnyPublisher()
+        
+        let searchResult = input.searchParam
+            .flatMap{ NewsService.shared.fetchNews(tickers: $0) }
+            .catch { _ in StubNewsService.shared.fetchNews() }
+            .compactMap { $0.data }
+            .handleEvents(receiveOutput: { [weak self] in self?.updateNextToken($0) })
+            .compactMap { [weak self] in self?.setupSection($0, append: false) }
+            .eraseToAnyPublisher()
+        
+        
+        let news = Publishers.Merge(newPage, searchResult).eraseToAnyPublisher()
         
         let dismiss = input.searchParam
             .compactMap { $0 == nil }
@@ -47,7 +62,11 @@ class NewsViewModel {
         return .init(tableSection: news, dismissSearch: dismiss)
     }
     
-    func setupSection(_ allNews: [NewsModel]) -> TableSection {
+    private func updateNextToken(_ allNews: [NewsModel]) {
+//        guard let lastDocument = allNews.last?.
+    }
+    
+    func setupSection(_ allNews: [NewsModel], append: Bool = true) -> TableSection {
         
         var selectedCurrency: [TableCellProvider] = []
         if let currency = searchParam.value, !currency.isEmpty {
@@ -60,7 +79,13 @@ class NewsViewModel {
                                                                              leadingView: image)))]
         }
         
-        let rows = allNews.compactMap { news in
+        if !append || self.news == nil {
+            self.news = allNews
+        } else if append {
+            self.news?.append(contentsOf: allNews)
+        }
+        
+        let rows = (self.news ?? []).compactMap { news in
             TableRow<NewsCell>(.init(model: news, action: { self.selectedNews.send(news) }))
         }
         return TableSection(rows: selectedCurrency + rows)

@@ -38,6 +38,18 @@ struct TweetModel:Codable {
 	}
 }
 
+extension TweetModel: Hashable {
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+}
+
+extension TweetModel: Equatable {
+    static func == (lhs: TweetModel, rhs: TweetModel) -> Bool {
+        lhs.id == rhs.id
+    }
+}
+
 extension TweetModel: Tickers {
     var tickers: [String] {
         get { hashTags?.compactMap { $0.tag} ?? [] }

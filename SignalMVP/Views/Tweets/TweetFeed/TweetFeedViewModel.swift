@@ -41,11 +41,11 @@ class TweetFeedViewModel {
 	var view: AnyTableView?
     private var bag: Set<AnyCancellable> = .init()
     @Published var selectedTweet: TweetCellModel?
-    
-    private var after: CurrentValueSubject<String?, Never> = .init(nil)
+    private var nextPageId: String?
     
     struct Input {
         let searchParam: AnyPublisher<String?, Never>
+        let loadNextPage: AnyPublisher<Bool, Never>
     }
     
     struct Output {
@@ -54,56 +54,60 @@ class TweetFeedViewModel {
     
     public func transform(input: Input) -> Output {
         
-        let sections = loading
-            .filter { $0 }
-            .combineLatest(input.searchParam, after) { _, search, after in
-                (search, after)
-            }
-            .flatMap {
-                TweetService.shared.fetchTweets(entity: $0.0, after: $0.1)
-            }
-            .catch {
-                print("(ERROR) TweetService Error: ", $0.localizedDescription)
-                return StubTweetService.shared.fetchTweets()
-            }
-            .compactMap {[weak self] in
-                self?.decodeToTweetCellModel($0)
-            }
+//        let page = after
+//            .print("Fetching Next page!")
+//            .withLatestFrom(input.searchParam)
+//            .flatMap { TweetService.shared.fetchTweets(entity: $0.0, after: $0.1) }
+//            .catch { _ in StubTweetService.shared.fetchTweets() }
+//            .handleEvents(receiveOutput: { [weak self] in self?.getNextPageToken(result: $0) })
+//            .compactMap {[weak self] in  self?.decodeToTweetCellModel($0) }
+//            .eraseToAnyPublisher()
+        
+        let searchResults = input.searchParam
+            .flatMap { TweetService.shared.fetchTweets(entity: $0) }
+            .catch { _ in StubTweetService.shared.fetchTweets() }
+            .handleEvents(receiveOutput: { [weak self] in self?.getNextPageToken(result: $0) })
+            .compactMap { [weak self] in self?.decodeToTweetCellModel($0, append: false) }
             .eraseToAnyPublisher()
+        
+        let loadNextPage = input.loadNextPage
+            .removeDuplicates()
+            .filter { $0 }
+            .withLatestFrom(input.searchParam)
+            .flatMap {[weak self] in TweetService.shared.fetchTweets(entity: $0.1, after: self?.nextPageId) }
+            .catch { _ in StubTweetService.shared.fetchTweets() }
+            .handleEvents(receiveOutput: { [weak self] in self?.getNextPageToken(result: $0) })
+            .compactMap {[weak self] in  self?.decodeToTweetCellModel($0) }
+            .eraseToAnyPublisher()
+        
+        let sections = Publishers.Merge(searchResults, loadNextPage).eraseToAnyPublisher()
+        
         
         return .init(sections: sections)
     }
     
-	
-	
-	public func fetchNextPage() {
-        guard let id = tweets?.lastID, !loading.value else { return }
-        after.send(id)
-        loading.send(true)
-        print("(DEBUG) fetching next page! : ", id)
-	}
-	
-	private func decodeToTweetCellModel(_ data: TweetSearchResult) -> TableSection? {
+    private func getNextPageToken(result: TweetSearchResult) {
+        guard let lastId = result.data?.last?.id else { return }
+        nextPageId = lastId
+    }
+    
+    private func decodeToTweetCellModel(_ data: TweetSearchResult, append: Bool = true) -> TableSection? {
 		guard let tweets = data.data else { return nil }
-		
-        let fitleredTweet: [TweetCellModel] = tweets.compactMap { tweet in
+        let fitleredTweet: [TweetCellModel] = Set(tweets).compactMap { tweet in
 			var model:TweetCellModel = .init(model: tweet)
-			
 			model.action = {
                 self.selectedTweet = model
 			}
-			
 			return model
 		}
 	
-		if self.tweets == nil {
+		if self.tweets == nil || !append {
 			self.tweets = fitleredTweet
-		} else {
+		} else if append {
 			print("(DEBUG) Adding newTweets")
 			self.tweets?.append(contentsOf: fitleredTweet)
 		}
-		
-        loading.send(false)
+    
         return tweetSection
 		
 	}
