@@ -69,8 +69,6 @@ extension UITableView {
         self.dataSource = source
         self.delegate = source
         beginUpdates()
-//        let toUpdateIndexSet = IndexSet(integersIn: 1 ..< numberOfSections)
-//        reloadSections(toUpdateIndexSet, with: .automatic)
         insertSections([idx], with: .fade)
         endUpdates()
     }

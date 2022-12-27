@@ -18,7 +18,7 @@ class NewsViewModel {
     var selectedNews: CurrentValueSubject<NewsModel?, Never> = .init(nil)
     private var bag: Set<AnyCancellable> = .init()
     var searchParam: CurrentValueSubject<String?, Never> = .init(nil)
-    private var nextPage: String?
+    private var nextPage: Int = 0
     private var news: [NewsModel]?
     
     struct Input {
@@ -37,7 +37,8 @@ class NewsViewModel {
             .removeDuplicates()
             .filter { [weak self] in $0 && self?.nextPage != nil }
             .withLatestFrom(input.searchParam)
-            .flatMap { [weak self] in NewsService.shared.fetchNews(entity: [$0.1].compactMap { $0 }, after: self?.nextPage) }
+            .flatMap { [weak self] in NewsService.shared.fetchNews(entity: [$0.1].compactMap { $0 },
+                                                                   page: self?.nextPage ?? 0) }
             .catch { _ in StubNewsService.shared.fetchNews() }
             .compactMap { $0.data }
             .compactMap { [weak self] in self?.setupSection($0, append: true) }
@@ -61,7 +62,8 @@ class NewsViewModel {
     }
     
     private func getNextPageToken(_ allNews: [NewsModel]) {
-//        guard let lastDocument = allNews.last?.
+        guard !allNews.isEmpty else { return }
+        nextPage += 1
     }
     
     func setupSection(_ allNews: [NewsModel], append: Bool = true) -> TableSection {

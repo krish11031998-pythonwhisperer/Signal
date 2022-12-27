@@ -24,7 +24,7 @@ class EventsFeedViewController: SearchViewController {
 		return table
 	}()
 	
-    private var viewModel: EventViewModel = .init()
+    private var viewModel: EventFeedViewModel = .init()
 //    private var bag: Set<AnyCancellable> = .init()
 	//MARK: - Overriden Methods
 	

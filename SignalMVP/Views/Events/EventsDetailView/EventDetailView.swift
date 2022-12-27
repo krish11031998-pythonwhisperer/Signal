@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Combine
 
 class EventDetailView: UIViewController {
 
@@ -18,6 +19,8 @@ class EventDetailView: UIViewController {
 		return table
 	}()
     private var eventModel: EventModel?
+    private var selectedNews: CurrentValueSubject<NewsModel?, Never> = .init(nil)
+    private var bag: Set<AnyCancellable> = .init()
     
     init(eventModel: EventModel? = nil) {
         self.eventModel = eventModel
@@ -34,6 +37,7 @@ class EventDetailView: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		setupView()
+        bind()
 	}
 	
 	override func viewWillDisappear(_ animated: Bool) {
@@ -64,12 +68,28 @@ class EventDetailView: UIViewController {
 	private var heroSection: TableSection? {
 		guard let validEvent = eventModel else { return nil }
 		let mainEvent = EventModel(date: validEvent.date, eventId: validEvent.eventId, eventName: validEvent.eventName, news: validEvent.news.limitTo(to: 3), tickers: [])
-		return .init(rows: [TableRow<EventCell>(mainEvent)])
+        let model = EventNewsModel(model: mainEvent, selectedNews: selectedNews)
+		return .init(rows: [TableRow<EventCell>(model)])
 	}
 	
 	private var section: TableSection? {
 		guard let validEvent = eventModel, validEvent.news.count > 3 else { return nil }
-		return .init(rows: (validEvent.news[3...]).compactMap {news in TableRow<NewsCell>(.init(model: news)) })
+		return .init(rows: (validEvent.news[3...]).compactMap { news in
+            let model: NewsCellModel = .init(model: news) {
+                self.selectedNews.send(news)
+            }
+            return TableRow<NewsCell>(model)
+        })
 	}
+    
+    private func bind() {
+        selectedNews
+            .compactMap { $0 }
+            .sink { [weak self] in
+                guard let self else { return }
+                self.navigationController?.pushViewController(NewsDetailView(news: $0), animated: true)
+            }
+            .store(in: &bag)
+    }
 	
 }

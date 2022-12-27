@@ -60,8 +60,8 @@ class NewsFeed: SearchViewController {
         output
             .tableSection
             .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { completion in
-                print("(ERROR) err: ", completion.err?.localizedDescription)
+            .sink(receiveCompletion: {
+                print("(ERROR) err: ", $0.err?.localizedDescription)
             }, receiveValue: { [weak self] section in
                 self?.tableView.reloadData(.init(sections: [section]))
             })

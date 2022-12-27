@@ -11,7 +11,8 @@ import Combine
 class VideoViewModel {
     
     private var bag: Set<AnyCancellable> = .init()
-    private var nextPage: String?
+    private var nextPage: Int = 0
+    private var videos: [VideoModel]?
     
     struct Input {
         let nextPage: AnyPublisher<Bool, Never>
@@ -27,9 +28,7 @@ class VideoViewModel {
             .prepend(true)
             .removeDuplicates()
             .filter { $0 == true }
-            .flatMap { [weak self] _ in
-                VideoService.shared.fetchVideo(after: self?.nextPage)
-            }
+            .flatMap { [weak self] _ in VideoService.shared.fetchVideo(page: self?.nextPage ?? 0, limit: 5) }
             .compactMap { [weak self] in self?.decodeVideos($0.data) }
             .eraseToAnyPublisher()
         
@@ -37,28 +36,26 @@ class VideoViewModel {
         
     }
     
-    private func decodeVideos(_ videos: [VideoModel]) -> CollectionSection {
-        let collectionCells: [CollectionCellProvider] = videos.map {
-            CollectionItem<VideoTikTokCell>($0)
-        }
-        return CollectionSection(cell: collectionCells)
+    private func getNextPageToken(videos: [VideoModel]){
+        guard !videos.isEmpty else { return }
+        nextPage += 1
     }
     
-    var videos: AnyPublisher<CollectionSection, Never> {
-        StubVideoService.shared
-            .fetchVideo()
-            .catch({ err in
-                print("(DEBUG) Err: ", err)
-                return Just(VideoResult(data: []))
-            })
-            .compactMap { $0.data }
-            .map {
-                let collectionCells: [CollectionCellProvider] = $0.map {
-                    CollectionItem<VideoTikTokCell>($0)
-                }
-                return CollectionSection(cell: collectionCells)
-            }
-            .eraseToAnyPublisher()
+    private func decodeVideos(_ videos: [VideoModel]) -> CollectionSection {
+        getNextPageToken(videos: videos)
+        print("(DEBUG) videos: ", videos.map { $0.newsId })
+        
+        if self.videos == nil {
+            self.videos = videos
+        } else {
+            self.videos?.append(contentsOf: videos)
+        }
+        
+        
+        let collectionCells: [CollectionCellProvider] = self.videos?.compactMap {
+            CollectionItem<VideoTikTokCell>($0)
+        } ?? []
+        return CollectionSection(cell: collectionCells)
     }
     
 }

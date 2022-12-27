@@ -11,8 +11,7 @@ enum NewsEndpoints {
     case tickerNews(entity: [String]? = nil,
                     items: String? = nil,
                     source: String? = nil,
-                    after: String? = nil,
-                    before: String? = nil,
+                    page: Int,
                     limit: Int = 20)
 }
 
@@ -33,14 +32,12 @@ extension NewsEndpoints: EndPoint {
         case .tickerNews( let entity,
                           let items,
                           let source,
-                          let after,
-                          let before,
+                          let page,
                           let limit):
             var queries: [URLQueryItem] = [
                 .init(name: "items", value: items),
                 .init(name: "source", value: source),
-                .init(name: "before", value: before),
-                .init(name: "after", value: after),
+                .init(name: "page", value: "\(page)"),
                 .init(name: "limit", value: "\(limit)")
             ].filter { $0.value != nil }
             

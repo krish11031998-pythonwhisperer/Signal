@@ -94,7 +94,7 @@ class TopMentionDetailViewModel {
     private func fetchTweets(after: String? = nil) -> AnyPublisher<[TableCellProvider], Error> {
         TweetService
             .shared
-            .fetchTweets(entity: ticker, after: after)
+            .fetchTweets(entity: ticker)
             .catch { err in
                 print("(ERROR) err [From Service]:", err)
                 return StubTweetService.shared.fetchTweets()
@@ -109,7 +109,7 @@ class TopMentionDetailViewModel {
     private func fetchNews(after: String? = nil) -> AnyPublisher<[TableCellProvider], Error> {
         NewsService
             .shared
-            .fetchNews(entity: [ticker], after: after)
+            .fetchNews(entity: [ticker])
             .catch { err in
                 print("(ERROR) err [From Service]:", err)
                 return StubNewsService.shared.fetchNews()
@@ -123,11 +123,7 @@ class TopMentionDetailViewModel {
     private func fetchEvents(after: String? = nil) -> AnyPublisher<[TableCellProvider], Error> {
         EventService
             .shared
-            .fetchEvents(entity: [ticker], after: after)
-            .catch { err in
-                print("(ERROR) err [From Service]:", err)
-                return StubEventService.shared.fetchEvents()
-            }
+            .fetchEvents(entity: [ticker])
             .compactMap { result in
                 result.data.compactMap { TableRow<EventSingleCell>(.init(model: $0)) }
             }

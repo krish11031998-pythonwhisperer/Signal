@@ -13,8 +13,8 @@ class TweetService: TweetServiceInterface {
 	
 	public static var shared: TweetService = .init()
 
-    public func fetchTweets(entity: String? = nil, before: String? = nil, after: String? = nil, limit: Int = 20) -> AnyPublisher<TweetSearchResult, Error> {
-        TweetEndpoints.tweets(entity: entity, before: before, after: after, limit: limit)
+    public func fetchTweets(entity: String? = nil, page: Int = 0, limit: Int = 20) -> AnyPublisher<TweetSearchResult, Error> {
+        TweetEndpoints.tweets(entity: entity, page: page, limit: limit)
             .fetch().eraseToAnyPublisher()
     }
 }

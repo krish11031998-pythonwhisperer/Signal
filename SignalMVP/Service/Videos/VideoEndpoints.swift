@@ -8,7 +8,7 @@
 import Foundation
 
 enum VideoEndpoints {
-    case fetchVideos(entity: [String]?, before: String?, after: String?, limit: Int)
+    case fetchVideos(entity: [String]?, page: Int, limit: Int)
 }
 
 extension VideoEndpoints: EndPoint {
@@ -25,10 +25,9 @@ extension VideoEndpoints: EndPoint {
     
     var queryItems: [URLQueryItem] {
         switch self {
-        case .fetchVideos(let entity, let before, let after, let limit):
+        case .fetchVideos(let entity, let page, let limit):
             var queries: [URLQueryItem] = [
-                .init(name: "before", value: before),
-                .init(name: "after", value: after),
+                .init(name: "page", value: "\(page)"),
                 .init(name: "limit", value: "\(limit)")
             ].filter { $0.value != nil }
             

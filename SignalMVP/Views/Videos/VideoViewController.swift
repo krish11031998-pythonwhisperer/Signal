@@ -61,15 +61,6 @@ class VideoViewController: UIViewController {
         collection.contentInsetAdjustmentBehavior = .never
     }
     
-//    private func loadVideos() {
-//        self.viewModel.videos
-//            .receive(on: DispatchQueue.main)
-//            .sink { [weak self] collectionSection in
-//                self?.collection.reloadData(.init(sections: [collectionSection]))
-//            }
-//            .store(in: &bag)
-//    }
-//
     private func bind() {
     
         let output = viewModel.transform(input: .init(nextPage: collection.nextPage ))
@@ -80,9 +71,7 @@ class VideoViewController: UIViewController {
                 print("(ERROR) err: ", $0.err?.localizedDescription)
             } receiveValue: { [weak self] in
                 self?.collection.reloadData(.init(sections: [$0]))
-                
             }
             .store(in: &bag)
-        
     }
 }

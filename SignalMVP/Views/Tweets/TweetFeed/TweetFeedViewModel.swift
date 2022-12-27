@@ -41,7 +41,7 @@ class TweetFeedViewModel {
 	var view: AnyTableView?
     private var bag: Set<AnyCancellable> = .init()
     @Published var selectedTweet: TweetCellModel?
-    private var nextPageId: String?
+    private var nextPageId: Int = 0
     
     struct Input {
         let searchParam: AnyPublisher<String?, Never>
@@ -64,7 +64,7 @@ class TweetFeedViewModel {
             .removeDuplicates()
             .filter {[weak self] in $0 && self?.nextPageId != nil }
             .withLatestFrom(input.searchParam)
-            .flatMap {[weak self] in TweetService.shared.fetchTweets(entity: $0.1, after: self?.nextPageId) }
+            .flatMap {[weak self] in TweetService.shared.fetchTweets(entity: $0.1, page: self?.nextPageId ?? 0) }
             .catch { _ in StubTweetService.shared.fetchTweets() }
             .compactMap {[weak self] in  self?.decodeToTweetCellModel($0) }
             .eraseToAnyPublisher()
@@ -76,12 +76,8 @@ class TweetFeedViewModel {
     }
     
     private func getNextPageToken(result: TweetSearchResult) {
-        guard let lastId = result.data?.last?.id else { return }
-        if nextPageId != lastId {
-            nextPageId = lastId
-        } else {
-            nextPageId = nil
-        }
+        guard let lastId = result.data?.count, lastId > 0 else { return }
+        nextPageId += 1
     }
     
     private func decodeToTweetCellModel(_ data: TweetSearchResult, append: Bool = true) -> TableSection? {

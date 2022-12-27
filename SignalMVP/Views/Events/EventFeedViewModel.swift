@@ -9,11 +9,11 @@ import Foundation
 import UIKit
 import Combine
 
-class EventViewModel {
+class EventFeedViewModel {
 	
     private var bag: Set<AnyCancellable> = .init()
     var selectedEvent: PassthroughSubject<EventModel?, Never> = .init()
-    private var nextPageToken: String?
+    private var nextPageToken: Int = 0
     private var allEvents: [EventCellModel]? = nil
     
     struct Input {
@@ -32,7 +32,7 @@ class EventViewModel {
             .removeDuplicates()
             .filter { [weak self] in $0 && (self?.nextPageToken != nil) }
             .withLatestFrom(input.searchParam)
-            .flatMap { [weak self] in EventService.shared.fetchEvents(entity: [$0.1].compactMap { $0 }, after: self?.nextPageToken) }
+            .flatMap { [weak self] in EventService.shared.fetchEvents(entity: [$0.1].compactMap { $0 }, page: self?.nextPageToken ?? 0) }
             .compactMap { $0.data }
             .compactMap { [weak self] in self?.setupSection($0, append: true)}
             .eraseToAnyPublisher()
@@ -53,13 +53,8 @@ class EventViewModel {
     }
     
     private func getNextPageToken(_ events: [EventModel]) {
-        guard let lastPage = events.last?.eventId else { return }
-        
-        if  lastPage != nextPageToken {
-            nextPageToken = lastPage
-        } else {
-            nextPageToken = nil
-        }
+        guard events.count > 0 else { return }
+        nextPageToken += 1
     }
     
     private func setupSection(_ events: [EventModel], append: Bool = false) -> TableSection {

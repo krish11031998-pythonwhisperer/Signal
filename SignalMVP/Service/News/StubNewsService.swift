@@ -14,20 +14,9 @@ class StubNewsService: NewsServiceInterface {
 	public func fetchNews(entity: [String]? = nil,
 						  items: String? = nil,
 						  source: String? = nil,
-						  after: String? = nil,
-						  before: String? = nil,
+                          page: Int = 0,
 						  limit: Int = 20) -> AnyPublisher<NewsResult, Error> {
-//        Future { promise in
-//            let result: Result<NewsResult,Error> = Bundle.main.loadDataFromBundle(name: "signalNews", extensionStr: "json")
-//
-//            switch result {
-//            case .success(let newsResult):
-//                promise(.success(newsResult))
-//            case .failure(let err):
-//                promise(.failure(err))
-//            }
-//        }
-//
+
         return Bundle.main.loadDataFromBundle(name: "signalNews", extensionStr: "json")
 	}
 	

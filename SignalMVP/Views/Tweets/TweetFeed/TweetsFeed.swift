@@ -87,7 +87,8 @@ class TweetFeedViewController: SearchViewController {
                     print("(ERROR) err: ", err)
                 }
             } receiveValue: { [weak self] in
-                self?.tableView.reloadData(.init(sections: [$0]))
+                self?.tableView.reloadData(.init(sections: [$0]), lazyLoad: true, animation: .bottom)
+//                self?.tableView.reloadRows(.init(sections: [$0]))
             }
             .store(in: &bag)
         

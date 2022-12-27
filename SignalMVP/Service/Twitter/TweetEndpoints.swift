@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 enum TweetEndpoints {
-	case tweets(entity: String?, before: String?, after: String?, limit: Int = 20)
+    case tweets(entity: String?, page: Int, limit: Int = 20)
 }
 
 
@@ -27,11 +27,10 @@ extension TweetEndpoints: EndPoint {
 	
 	var queryItems: [URLQueryItem] {
 		switch self {
-		case .tweets(let entity, let before, let after, let limit):
+		case .tweets(let entity, let page, let limit):
 			return [
 				.init(name: "entity", value: entity),
-				.init(name: "before", value: before),
-				.init(name: "after", value: after),
+				.init(name: "page", value: "\(page)"),
 				.init(name: "limit", value: "\(limit)")
 			].filter { $0.value != nil  }
 		}

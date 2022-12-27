@@ -11,7 +11,6 @@ protocol NewsServiceInterface {
 	func fetchNews(entity: [String]?,
 				   items: String?,
 				   source: String?,
-				   after: String?,
-				   before: String?,
+                   page: Int,
 				   limit: Int) -> AnyPublisher<NewsResult,Error>
 }

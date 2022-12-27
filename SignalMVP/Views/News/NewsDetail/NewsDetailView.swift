@@ -56,7 +56,7 @@ class NewsDetailView: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         showTabBarIfRequired()
-        setupTransparentNavBar(color: .surfaceBackground, scrollColor: .surfaceBackground)
+//        setupTransparentNavBar(color: .surfaceBackground, scrollColor: .surfaceBackground)
     }
     
     private func setupView() {

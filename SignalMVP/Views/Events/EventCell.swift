@@ -7,13 +7,19 @@
 
 import Foundation
 import UIKit
+import Combine
+
+struct EventNewsModel {
+    let model: EventModel
+    let selectedNews: CurrentValueSubject<NewsModel?, Never>
+}
 
 class EventCell: ConfigurableCell {
 
 //MARK: - Properties
-	private lazy var mainNews: EventView = { .init(largeCard: true) }()
+	private lazy var mainNews: NewsEventView = { .init(largeCard: true) }()
 	private lazy var otherNews: UIStackView = { .init() }()
-	
+    private var bag: Set<AnyCancellable> = .init()
 //MARK: - Constructors
 	override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
 		super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -41,20 +47,34 @@ class EventCell: ConfigurableCell {
 		selectionStyle = .none
 	}
 	
-	func configure(with model: EventModel) {
-		if let firstNews = model.news.first {
+	func configure(with model: EventNewsModel) {
+        let news = model.model.news
+		if let firstNews = news.first {
 			mainNews.configureView(model: firstNews)
+            mainNews.publisher(for: .touchUpInside)
+                .sink { [weak self] _ in
+                    guard let self else { return }
+                    self.mainNews.animate(.bouncy)
+                    //model.selectedNews.send(firstNews)
+                }
+                .store(in: &bag)
 			mainNews.isHidden = false
 		}
 		
-		if model.news.count >= 3 {
-			let otherViews: [UIView] = Array(model.news[1..<3]).compactMap {
-				let view = EventView()
-				view.configureView(model: $0)
+		if news.count >= 3 {
+			let otherViews: [UIView] = Array(news[1..<3]).compactMap { news in
+				let view = NewsEventView()
+				view.configureView(model: news)
+                view.publisher(for: .touchUpInside)
+                    .sink { _ in
+                        view.animate(.bouncy)
+                        model.selectedNews.send(news)
+                    }
+                    .store(in: &bag)
 				return view
 			}
-			otherNews.arrangedSubviews.forEach { $0.removeFromSuperview() }
-			otherViews.forEach(otherNews.addArrangedSubview(_:))
+            otherNews.removeChildViews()
+			otherViews.addToView(otherNews)
 			otherNews.spacing = 8
 			otherNews.distribution = .fillEqually
 			otherNews.isHidden = false
@@ -63,7 +83,7 @@ class EventCell: ConfigurableCell {
 }
 
 
-class EventView: UIView  {
+class NewsEventView: UIControl  {
 	
 	private var news: NewsModel?
 	private lazy var imageView: UIImageView = { .init() }()
@@ -122,11 +142,12 @@ class EventView: UIView  {
 		if let validNews = news, !model.tickers.isEmpty {
             tickersView.configTickers(news: validNews)
         }
-		
-//		if addTapGesture {
-//			self.addTapGesture()
-//		}
 	}
-
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        animate(.bouncy) {
+            self.sendActions(for: .touchUpInside)
+        }
+    }
 }
 

@@ -16,11 +16,10 @@ class NewsService: NewsServiceInterface {
 	public func fetchNews(entity: [String]? = nil,
 				   items: String? = nil,
 				   source: String? = nil,
-				   after: String? = nil,
-				   before: String? = nil,
+                          page: Int = 0,
 				   limit: Int = 20) -> AnyPublisher<NewsResult, Error> {
 		NewsEndpoints
-            .tickerNews(entity: entity, items: items, source: source, after: after, before: before, limit: limit)
+            .tickerNews(entity: entity, items: items, source: source, page: page, limit: limit)
             .execute()
             .eraseToAnyPublisher()
 	}
