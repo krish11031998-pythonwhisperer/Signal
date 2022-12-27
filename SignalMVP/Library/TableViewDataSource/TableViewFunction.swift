@@ -60,6 +60,25 @@ extension UITableView {
 			reloadData()
 		}
 	}
+    
+    func reloadRows(_ dataSource: TableViewDataSource, section: Int) {
+        self.source = dataSource
+        self.dataSource = dataSource
+        self.delegate = dataSource
+        
+        let currentRows = numberOfRows(inSection: section)
+        let newRows = dataSource.tableView(self, numberOfRowsInSection: section)
+    
+        let newIndexPath: [IndexPath] = (currentRows..<newRows).map { .init(row: $0, section: section) }
+        
+        let offset = self.contentOffset
+        UIView.performWithoutAnimation {
+            performBatchUpdates {
+                insertRows(at: newIndexPath, with: .automatic)
+            }
+            setContentOffset(offset, animated: false)
+        }
+    }
 	
     func insertSection(_ section: TableSection, at sectionIdx: Int? = nil) {
         var sections = self.source?.sections ?? []

@@ -55,7 +55,7 @@ class TweetFeedViewModel {
     public func transform(input: Input) -> Output {
 
         let searchResults = input.searchParam
-            .flatMap { TweetService.shared.fetchTweets(entity: $0) }
+            .flatMap { TweetService.shared.fetchTweets(entity: $0, limit: 10) }
             .catch { _ in StubTweetService.shared.fetchTweets() }
             .compactMap { [weak self] in self?.decodeToTweetCellModel($0, append: false) }
             .eraseToAnyPublisher()
