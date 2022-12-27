@@ -15,6 +15,7 @@
 		EF04E347294F10F000E35815 /* VideoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF04E346294F10F000E35815 /* VideoViewModel.swift */; };
 		EF04E34A294F203F00E35815 /* UIControl+Publishers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF04E349294F203F00E35815 /* UIControl+Publishers.swift */; };
 		EF04E34D29504E5600E35815 /* SubscriberHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF04E34C29504E5600E35815 /* SubscriberHelpers.swift */; };
+		EF06E455295B79A900820AFE /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF06E454295B79A900820AFE /* ImageCache.swift */; };
 		EF16449D29054FBB00E9D997 /* signalTweets.json in Resources */ = {isa = PBXBuildFile; fileRef = EF16449C29054FBB00E9D997 /* signalTweets.json */; };
 		EF1644A0290550B300E9D997 /* ServiceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF16449F290550B300E9D997 /* ServiceHelper.swift */; };
 		EF1644A42905573600E9D997 /* signalNews.json in Resources */ = {isa = PBXBuildFile; fileRef = EF1644A32905573600E9D997 /* signalNews.json */; };
@@ -259,6 +260,7 @@
 		EF04E346294F10F000E35815 /* VideoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewModel.swift; sourceTree = "<group>"; };
 		EF04E349294F203F00E35815 /* UIControl+Publishers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+Publishers.swift"; sourceTree = "<group>"; };
 		EF04E34C29504E5600E35815 /* SubscriberHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriberHelpers.swift; sourceTree = "<group>"; };
+		EF06E454295B79A900820AFE /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		EF16449C29054FBB00E9D997 /* signalTweets.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = signalTweets.json; sourceTree = "<group>"; };
 		EF16449F290550B300E9D997 /* ServiceHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceHelper.swift; sourceTree = "<group>"; };
 		EF1644A32905573600E9D997 /* signalNews.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = signalNews.json; sourceTree = "<group>"; };
@@ -842,6 +844,7 @@
 				EF7CBF97291641E900F9D611 /* UIImage.swift */,
 				EF7CBF98291641E900F9D611 /* UIImageView.swift */,
 				EF987B942920D7A00000E233 /* ImageView.swift */,
+				EF06E454295B79A900820AFE /* ImageCache.swift */,
 			);
 			path = Image;
 			sourceTree = "<group>";
@@ -1744,6 +1747,7 @@
 				EF1D7E5D2922CCFD0041ADEC /* CollectionColumn.swift in Sources */,
 				EF7CBFF7291641EA00F9D611 /* NetworkReqeust.swift in Sources */,
 				EF00758F28E5CBA000195433 /* NewsService.swift in Sources */,
+				EF06E455295B79A900820AFE /* ImageCache.swift in Sources */,
 				EF86383728DC648000EF520C /* NewsViewModel.swift in Sources */,
 				EF5C4ED8295714EC00669355 /* TextFieldType.swift in Sources */,
 				EF2BB215292BF4E40006C00F /* VideoViewController.swift in Sources */,

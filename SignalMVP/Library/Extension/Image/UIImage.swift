@@ -82,40 +82,7 @@ extension UIImage {
             return .init(width: newWidth, height: newWidth/ratio)
         }
     }
-	
-	static func download(urlStr: String? = nil, request: URLRequest? = nil, completion: @escaping (Result<UIImage,Error>) -> Void) {
 		
-		let request: URLRequest? =  urlStr?.request ?? request
-		
-		if let validRequest = request, let cachedData = URLCache.shared[validRequest] {
-			if let validImage = UIImage(data: cachedData) {
-				completion(.success(validImage))
-			} else {
-				completion(.failure(ImageError.noImagefromData))
-			}
-		} else {
-			guard let validRequest = request else {
-				completion(.failure(URLSessionError.invalidUrl))
-				return
-			}
-			let session = URLSession.shared.dataTask(with: validRequest) { data, resp, err in
-				guard let validData = data, let validResp = resp else {
-					completion(.failure(err ?? URLSessionError.noData))
-					return
-				}
-				
-				guard let validImage = UIImage(data: validData) else {
-					completion(.failure(ImageError.noImagefromData))
-					return
-				}
-				
-				URLCache.shared.storeCachedResponse(.init(response: validResp, data: validData), for: validRequest)
-				completion(.success(validImage))
-			}
-			session.resume()
-		}
-	}
-	
 	func imageView(size: CGSize? = nil, cornerRadius: CGFloat = .zero) -> UIImageView {
         let view = UIImageView(frame: (size ?? self.size).frame)
         if let size = size {
@@ -145,32 +112,70 @@ extension UIImage {
     }
     
 	
-    static func loadImage<T:AnyObject>(url urlString: String?, at object: T, path: ReferenceWritableKeyPath<T,UIImage?>, resized: CGSize? = nil, resolveWithAspectRatio: Bool = false, scaledAt: Bool = false) {
-        object[keyPath: path] = nil
-		download(urlStr: urlString) { result in
-			switch result {
-			case .success(let img):
-				DispatchQueue.main.async {
-					if let size = resized {
-                        if resolveWithAspectRatio {
-                            object[keyPath: path] = img.resized(withAspect: size)
-                        } else if scaledAt {
-                            object[keyPath: path] = img.scaleImageToNewSize(newSize: size)
-                        }else {
-                            object[keyPath: path] = img.resized(size: size)
-                        }
-						
-					} else {
-						object[keyPath: path] = img
-					}
-					
-				}
-			case .failure(let err):
-				print("(ERROR) err while loading Image : ",err.localizedDescription)
-			}
-		}
-	}
+    
 	
 }
 
+
+//MARK: - Downloading Images
+
+extension UIImage {
+    
+    static func download(urlStr: String? = nil,
+                         request: URLRequest? = nil,
+                         resize newSize: CGSize? = nil,
+                         completion: @escaping (Result<UIImage,Error>) -> Void) {
+        
+        let request: URLRequest? =  urlStr?.request ?? request
+        
+        if let validRequest = request, let cachedData = URLCache.shared[validRequest] {
+            if var validImage = UIImage(data: cachedData) {
+                if let newSize = newSize {
+                    validImage = validImage.resized(withAspect: newSize)
+                }
+                completion(.success(validImage))
+            } else {
+                completion(.failure(ImageError.noImagefromData))
+            }
+        } else {
+            guard let validRequest = request else {
+                completion(.failure(URLSessionError.invalidUrl))
+                return
+            }
+            let session = URLSession.shared.dataTask(with: validRequest) { data, resp, err in
+                guard let validData = data, let validResp = resp else {
+                    completion(.failure(err ?? URLSessionError.noData))
+                    return
+                }
+                
+                guard var validImage = UIImage(data: validData) else {
+                    completion(.failure(ImageError.noImagefromData))
+                    return
+                }
+                
+                if let newSize = newSize {
+                    validImage = validImage.resized(withAspect: newSize)
+                }
+                
+                ImageCache.shared[validRequest] = validImage
+                completion(.success(validImage))
+            }
+            session.resume()
+        }
+    }
+    
+    static func loadImage<T:AnyObject>(url urlString: String?, at object: T, path: ReferenceWritableKeyPath<T,UIImage?>, resized: CGSize? = nil, resolveWithAspectRatio: Bool = false, scaledAt: Bool = false) {
+        object[keyPath: path] = nil
+        download(urlStr: urlString, resize: resized) { result in
+            switch result {
+            case .success(let img):
+                DispatchQueue.main.async {
+                        object[keyPath: path] = img
+                }
+            case .failure(let err):
+                print("(ERROR) err while loading Image : ",err.localizedDescription)
+            }
+        }
+    }
+}
 

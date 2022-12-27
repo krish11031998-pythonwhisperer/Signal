@@ -72,12 +72,17 @@ extension UITableView {
         let newIndexPath: [IndexPath] = (currentRows..<newRows).map { .init(row: $0, section: section) }
         
         let offset = self.contentOffset
+        
+        //performBatchUpdates {
         UIView.performWithoutAnimation {
-            performBatchUpdates {
-                insertRows(at: newIndexPath, with: .automatic)
-            }
+            beginUpdates()
+            insertRows(at: newIndexPath, with: .automatic)
             setContentOffset(offset, animated: false)
+            endUpdates()
         }
+        //}
+        
+        
     }
 	
     func insertSection(_ section: TableSection, at sectionIdx: Int? = nil) {
