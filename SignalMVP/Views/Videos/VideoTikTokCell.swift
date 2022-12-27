@@ -20,7 +20,8 @@ fileprivate extension YTPlayerView {
                                                   "controls": 0,
                                                   "playsinline": 1,
                                                   "modestbranding": 1,
-                                                  "autoplay": 1, "loop": 1]
+                                                  //"autoplay": 1,
+                                                  "loop": 1]
     
     func fetchPlayerState() -> Future<YTPlayerState, Error> {
         Future { [weak self] promise in
@@ -109,6 +110,7 @@ class VideoTikTokCell: ConfigurableCollectionCell {
     private func setupView() {
         [videoPlayer, playerStateIndicator].addToView(contentView)
         videoPlayer.isHidden = true
+        videoPlayer.isUserInteractionEnabled = false
         contentView.setFittingConstraints(childView: videoPlayer, insets: .zero)
         contentView.setFittingConstraints(childView: playerStateIndicator, width: 48, height: 48, centerX: 0, centerY: 0)
         playerStateIndicator.alpha = 0
@@ -124,6 +126,7 @@ class VideoTikTokCell: ConfigurableCollectionCell {
         videolabel.numberOfLines = 0
         videoDescription.numberOfLines = 1
         videoDescription.contentMode = .top
+        contentView.clipsToBounds = true
     }
     
     private func updateView() {
@@ -153,24 +156,7 @@ class VideoTikTokCell: ConfigurableCollectionCell {
     
     private func setObservers() {
         playerState
-        //            .combineLatest(videoPlayer.fetchPlayerState())
-        //            .map { state, playerState in
-        //                if state == .play && playerState == .playing {
-        //                    return PlayerState.pause
-        //                }
-        //                if state == .pause && playerState == .paused {
-        //                    return PlayerState.play
-        //                }
-        //
-        //                return state
-        //            }
-        //            .receive(on: DispatchQueue.main)
-//            .sink(receiveCompletion: {
-//                print("(ERROR) err:", $0.err?.localizedDescription)
-//            }, receiveValue: { [weak self] (newPlayState: PlayerState) in
-//                guard let `self` = self else { return }
-//                self.updatePlayerState(newPlayState)
-//            })
+            .print("(DEBUG) playerState:")
             .sink() { [weak self] (newPlayState: PlayerState) in
                 guard let `self` = self else { return }
                 self.updatePlayerState(newPlayState)
@@ -179,6 +165,7 @@ class VideoTikTokCell: ConfigurableCollectionCell {
         
         videoPlayer
             .fetchPlayerState()
+            .print("(DEBUG) fetchPlayerState:")
             .sink { completion in
                 print("(ERR) err: ", completion.err?.localizedDescription)
             } receiveValue: { state in
