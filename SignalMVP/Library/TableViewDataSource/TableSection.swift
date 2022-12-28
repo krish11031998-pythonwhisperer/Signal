@@ -24,7 +24,7 @@ extension TableSection: Equatable {
 
 public class TableViewDataSource: NSObject {
 	
-	public let sections: [TableSection]
+	public var sections: [TableSection]
 	
 	public init(sections: [TableSection]) {
 		self.sections = sections

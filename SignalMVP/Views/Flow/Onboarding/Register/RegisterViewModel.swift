@@ -24,7 +24,7 @@ class RegisterViewModel {
     }
     
     struct Output {
-        let navigation: AnyPublisher<Routes, Never>
+        let navigation: AnyPublisher<Routes, Error>
     }
     
     public func transform(input: Input) -> Output {
@@ -32,17 +32,15 @@ class RegisterViewModel {
         let navigation = input.registerUser
             .combineLatest(input.username, input.email, input.password) { _, username, email, password in
                 return UserRegister(username: username, email: email, password: password)
-            }.flatMap {
-                UserService.shared.registerUser(model: $0)
             }
-            .catch {
-                Just(UserRegisterResponse(data: nil, err: $0.localizedDescription, success: false))
+            .flatMap {
+                FirebaseAuthService.shared.registerUser(email: $0.email, password: $0.password)
             }
             .compactMap {
-                if let err = $0.err {
-                    return Routes.errorMessage(err: err)
-                } else {
+                if let user = $0?.user {
                     return Routes.nextPage
+                } else {
+                    return Routes.errorMessage(err: "")
                 }
             }
             .eraseToAnyPublisher()

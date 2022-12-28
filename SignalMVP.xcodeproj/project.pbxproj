@@ -16,6 +16,11 @@
 		EF04E34A294F203F00E35815 /* UIControl+Publishers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF04E349294F203F00E35815 /* UIControl+Publishers.swift */; };
 		EF04E34D29504E5600E35815 /* SubscriberHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF04E34C29504E5600E35815 /* SubscriberHelpers.swift */; };
 		EF06E455295B79A900820AFE /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF06E454295B79A900820AFE /* ImageCache.swift */; };
+		EF06E459295BBDD200820AFE /* AuthInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF06E458295BBDD200820AFE /* AuthInterface.swift */; };
+		EF06E45B295BBE2200820AFE /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF06E45A295BBE2200820AFE /* AuthService.swift */; };
+		EF06E45D295BC3AF00820AFE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EF06E45C295BC3AF00820AFE /* GoogleService-Info.plist */; };
+		EF06E460295C39E500820AFE /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF06E45F295C39E500820AFE /* LoadingIndicator.swift */; };
+		EF06E463295C51AB00820AFE /* AuthPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF06E462295C51AB00820AFE /* AuthPublisher.swift */; };
 		EF16449D29054FBB00E9D997 /* signalTweets.json in Resources */ = {isa = PBXBuildFile; fileRef = EF16449C29054FBB00E9D997 /* signalTweets.json */; };
 		EF1644A0290550B300E9D997 /* ServiceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF16449F290550B300E9D997 /* ServiceHelper.swift */; };
 		EF1644A42905573600E9D997 /* signalNews.json in Resources */ = {isa = PBXBuildFile; fileRef = EF1644A32905573600E9D997 /* signalNews.json */; };
@@ -261,6 +266,11 @@
 		EF04E349294F203F00E35815 /* UIControl+Publishers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+Publishers.swift"; sourceTree = "<group>"; };
 		EF04E34C29504E5600E35815 /* SubscriberHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriberHelpers.swift; sourceTree = "<group>"; };
 		EF06E454295B79A900820AFE /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
+		EF06E458295BBDD200820AFE /* AuthInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthInterface.swift; sourceTree = "<group>"; };
+		EF06E45A295BBE2200820AFE /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		EF06E45C295BC3AF00820AFE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		EF06E45F295C39E500820AFE /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
+		EF06E462295C51AB00820AFE /* AuthPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthPublisher.swift; sourceTree = "<group>"; };
 		EF16449C29054FBB00E9D997 /* signalTweets.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = signalTweets.json; sourceTree = "<group>"; };
 		EF16449F290550B300E9D997 /* ServiceHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceHelper.swift; sourceTree = "<group>"; };
 		EF1644A32905573600E9D997 /* signalNews.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = signalNews.json; sourceTree = "<group>"; };
@@ -531,6 +541,32 @@
 				EF04E34C29504E5600E35815 /* SubscriberHelpers.swift */,
 			);
 			path = SubscriberHelpers;
+			sourceTree = "<group>";
+		};
+		EF06E457295BBD9D00820AFE /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				EF06E461295C519C00820AFE /* AuthPublishers */,
+				EF06E458295BBDD200820AFE /* AuthInterface.swift */,
+				EF06E45A295BBE2200820AFE /* AuthService.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		EF06E45E295C39D400820AFE /* LoadingIndicator */ = {
+			isa = PBXGroup;
+			children = (
+				EF06E45F295C39E500820AFE /* LoadingIndicator.swift */,
+			);
+			path = LoadingIndicator;
+			sourceTree = "<group>";
+		};
+		EF06E461295C519C00820AFE /* AuthPublishers */ = {
+			isa = PBXGroup;
+			children = (
+				EF06E462295C51AB00820AFE /* AuthPublisher.swift */,
+			);
+			path = AuthPublishers;
 			sourceTree = "<group>";
 		};
 		EF16449E2905509400E9D997 /* ServiceHelpers */ = {
@@ -945,6 +981,7 @@
 		EF7CBFC0291641EA00F9D611 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				EF06E45E295C39D400820AFE /* LoadingIndicator */,
 				EF5C4ED6295714D900669355 /* TextField */,
 				EF5C4EBB29530BFD00669355 /* ViewController */,
 				EF5C4E9D2951905900669355 /* RoundedCardView */,
@@ -1114,6 +1151,7 @@
 		EF86381428DC1E7D00EF520C /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				EF06E457295BBD9D00820AFE /* Auth */,
 				EF5C4EDE29577C3100669355 /* User */,
 				EF5C4EAA2951928F00669355 /* Ticker */,
 				EF16449E2905509400E9D997 /* ServiceHelpers */,
@@ -1310,6 +1348,7 @@
 				EFB1C23628DB3B1900DD40A4 /* Assets.xcassets */,
 				EFB1C23828DB3B1900DD40A4 /* LaunchScreen.storyboard */,
 				EFB1C23B28DB3B1900DD40A4 /* Info.plist */,
+				EF06E45C295BC3AF00820AFE /* GoogleService-Info.plist */,
 			);
 			path = SignalMVP;
 			sourceTree = "<group>";
@@ -1535,6 +1574,7 @@
 				EF7CBFEB291641EA00F9D611 /* Montserrat-LightItalic.ttf in Resources */,
 				EF7CC00F291641EA00F9D611 /* Satoshi-Variable.ttf in Resources */,
 				EF7CBFEA291641EA00F9D611 /* Code Pro LC.otf in Resources */,
+				EF06E45D295BC3AF00820AFE /* GoogleService-Info.plist in Resources */,
 				EF7D2FCB28E0A1540003B8F3 /* videos.json in Resources */,
 				EF1644A42905573600E9D997 /* signalNews.json in Resources */,
 				EF7CC007291641EA00F9D611 /* Satoshi-Black.otf in Resources */,
@@ -1687,11 +1727,13 @@
 				EF7CBFF5291641EA00F9D611 /* UIEdgeInsets.swift in Sources */,
 				EF987B9D2921309C0000E233 /* TickerSymbolsVoew.swift in Sources */,
 				EFB1C2D328DB616600DD40A4 /* TweetModel.swift in Sources */,
+				EF06E459295BBDD200820AFE /* AuthInterface.swift in Sources */,
 				EF7CC003291641EA00F9D611 /* ImageHeaderSubHeaderView.swift in Sources */,
 				EF7CBFF4291641EA00F9D611 /* CGFloat.swift in Sources */,
 				EF86381B28DC1EBE00EF520C /* TweetServiceInterface.swift in Sources */,
 				EF5C4ECF2956ED2A00669355 /* OnboardingController.swift in Sources */,
 				EF7CBED22911BB8400F9D611 /* TopMentionDetail.swift in Sources */,
+				EF06E463295C51AB00820AFE /* AuthPublisher.swift in Sources */,
 				EF59F118292A969A002877DE /* CircularProgressBar.swift in Sources */,
 				EF624D10295798C400F006FF /* UserService.swift in Sources */,
 				EF987B9B292122FA0000E233 /* NewsDetailView.swift in Sources */,
@@ -1776,6 +1818,7 @@
 				EF48D71728E5918300BD2A1A /* EventService.swift in Sources */,
 				EF1D7E5C2922CCFD0041ADEC /* CustomCollectionCell.swift in Sources */,
 				EF7CBFD8291641EA00F9D611 /* Array.swift in Sources */,
+				EF06E460295C39E500820AFE /* LoadingIndicator.swift in Sources */,
 				EF96383328DDFEDF00178C37 /* TweetMetricsView.swift in Sources */,
 				EF7D2FC628E09E7E0003B8F3 /* VideoModel.swift in Sources */,
 				EF7CBFE7291641EA00F9D611 /* StringFonts.swift in Sources */,
@@ -1815,6 +1858,7 @@
 				EF7CBFFF291641EA00F9D611 /* SearchBar.swift in Sources */,
 				EF96383028DDE60700178C37 /* TweetMetrics.swift in Sources */,
 				EF987B93291FAAEF0000E233 /* TickerStoryView.swift in Sources */,
+				EF06E45B295BBE2200820AFE /* AuthService.swift in Sources */,
 				EF5C4EC529561C3800669355 /* EventEndpoints.swift in Sources */,
 				EF96382A28DDD59F00178C37 /* TweetDetailView.swift in Sources */,
 				EF7D2FC428E09E3D0003B8F3 /* StubVideoService.swift in Sources */,

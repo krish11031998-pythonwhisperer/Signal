@@ -69,6 +69,7 @@ extension UITableView {
         let currentRows = numberOfRows(inSection: section)
         let newRows = dataSource.tableView(self, numberOfRowsInSection: section)
     
+        guard currentRows < newRows else { return }
         let newIndexPath: [IndexPath] = (currentRows..<newRows).map { .init(row: $0, section: section) }
         
         let offset = self.contentOffset
@@ -81,7 +82,30 @@ extension UITableView {
             endUpdates()
         }
         //}
+    }
+
+    func insertRows(rows: [TableCellProvider], section: Int) {
+        var newSource = self.source
+        newSource?.sections[section].rows.append(contentsOf: rows)
         
+        self.source = newSource
+        self.dataSource = newSource
+        self.delegate = newSource
+        
+        let currentRows = numberOfRows(inSection: section)
+        let newRows = currentRows + rows.count
+    
+        let newIndexPath: [IndexPath] = (currentRows..<newRows).map { .init(row: $0, section: section) }
+        
+        let offset = self.contentOffset
+        
+        //performBatchUpdates {
+        UIView.performWithoutAnimation {
+            beginUpdates()
+            insertRows(at: newIndexPath, with: .automatic)
+            setContentOffset(offset, animated: false)
+            endUpdates()
+        }
         
     }
 	

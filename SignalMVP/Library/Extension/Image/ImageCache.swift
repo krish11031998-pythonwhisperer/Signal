@@ -15,7 +15,10 @@ protocol ImageCacheSubscript {
 //MARK: - ImageCache
 class ImageCache {
     
-    lazy var dataCache: DataCache = .init()
+    let dataCache: NSCache<NSURLRequest, UIImage> = {
+        let cache = NSCache<NSURLRequest, UIImage>()
+        return cache
+    }()
     
     static var shared: ImageCache = .init()
     
@@ -25,11 +28,18 @@ extension ImageCache: ImageCacheSubscript {
     
     subscript(request: URLRequest) -> UIImage? {
         get {
-            guard let imgData = dataCache[request] else { return nil }
-            return UIImage(data: imgData)
+            guard let image = dataCache.object(forKey: request as NSURLRequest) else { return nil }
+            return image
         }
         set {
-            dataCache[request] = newValue?.pngData()
+            let nsReq = request as NSURLRequest
+            if let _ = dataCache.object(forKey: nsReq) {
+                dataCache.removeObject(forKey: nsReq)
+            }
+            
+            if let validImage = newValue {
+                dataCache.setObject(validImage, forKey: nsReq)
+            }
         }
     }
     

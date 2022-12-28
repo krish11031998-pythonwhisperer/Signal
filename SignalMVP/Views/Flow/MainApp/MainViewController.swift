@@ -6,12 +6,17 @@
 //
 
 import UIKit
+import Combine
 
 class MainViewController: UITabBarController {
 	
+    private let authPublisher: AuthPublisher = .init()
+    private var bag: Set<AnyCancellable> = .init()
+    
 	override func viewDidLoad() {
 		super.viewDidLoad()
         setupMainApp()
+        authPublisherListener()
 	}
 
     override func viewWillAppear(_ animated: Bool) {
@@ -29,6 +34,14 @@ class MainViewController: UITabBarController {
         }
     }
     
+    private func authPublisherListener() {
+        authPublisher
+            .sink { [weak self] user in
+                guard let self, let user = user else { return }
+                print("(DEBUG) user: ", user.email)
+            }
+            .store(in: &bag)
+    }
     
     private func setupMainApp() {
         view.backgroundColor = .clear

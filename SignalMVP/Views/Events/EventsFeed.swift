@@ -49,7 +49,7 @@ class EventsFeedViewController: SearchViewController {
 		view.addSubview(tableView)
 		tableView.backgroundColor = .surfaceBackground
 		view.backgroundColor = .surfaceBackground
-		view.setFittingConstraints(childView: tableView, insets: .zero)
+        view.setFittingConstraints(childView: tableView, insets: .init(top: 0, left: 0, bottom: .safeAreaInsets.bottom, right: 0))
 	}
 	
 	private func setupNavBar() {
@@ -77,15 +77,27 @@ class EventsFeedViewController: SearchViewController {
             }
             .store(in: &bag)
         
-        let output = viewModel.transform(input: .init(searchParam: searchText, nextPage: tableView.nextPage))
+        let searchParam = searchText.share()
+        
+        let output = viewModel.transform(input: .init(searchParam: searchText, nextPage: tableView.nextPage.share()))
         
         output.tableSection
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: {
                 print("(ERROR) err: ", $0.err?.localizedDescription)
             }, receiveValue: { [weak self] section in
-                   self?.tableView.reloadData(.init(sections: [section]))
+                   //self?.tableView.reloadRows(.init(sections: [section]), section: 0)
+                self?.tableView.reloadData(.init(sections: [section]), animation: .fade)
             })
+            .store(in: &bag)
+        
+        searchParam
+            .sink { [weak self] in
+                guard let self, let search = $0, !search.isEmpty else { return }
+                let headerView = self.accessoryDisplay(search: search)
+                self.tableView.headerView = headerView.embedInView(insets: .init(top: 16, left: 16, bottom: 0, right: 16))
+                self.tableView.contentSize.height += headerView.compressedSize.height
+            }
             .store(in: &bag)
 	}
 	

@@ -7,6 +7,8 @@ target 'SignalMVP' do
 
   # Pods for SignalMVP
   pod "youtube-ios-player-helper"
+  pod 'FirebaseAuth'
+  pod 'FirebaseFirestore'
 
   target 'SignalMVPTests' do
     inherit! :search_paths

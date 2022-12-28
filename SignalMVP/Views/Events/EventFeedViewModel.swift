@@ -18,12 +18,13 @@ class EventFeedViewModel {
     
     struct Input {
         let searchParam: CurrentValueSubject<String?, Never>
-        let nextPage: AnyPublisher<Bool, Never>
+        let nextPage: Publishers.Share<AnyPublisher<Bool, Never>>
     }
     
     struct Output {
         let tableSection: AnyPublisher<TableSection, Error>
         let dismissSearch: AnyPublisher<Bool, Never>
+        let loading: AnyPublisher<Bool, Never>
     }
         
     func transform(input: Input) -> Output {
@@ -43,13 +44,17 @@ class EventFeedViewModel {
             .compactMap { [weak self] in self?.setupSection($0, append: false)}
             .eraseToAnyPublisher()
         
+        let loading = input.nextPage
+            .removeDuplicates()
+            .eraseToAnyPublisher()
+        
         let events = Publishers.Merge(nextPage, searchResult).eraseToAnyPublisher()
         
         let dismiss = input.searchParam
             .compactMap { $0 == nil }
             .eraseToAnyPublisher()
     
-        return .init(tableSection: events, dismissSearch: dismiss)
+        return .init(tableSection: events, dismissSearch: dismiss, loading: loading)
     }
     
     private func getNextPageToken(_ events: [EventModel]) {

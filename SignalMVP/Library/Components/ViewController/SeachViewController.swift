@@ -85,4 +85,18 @@ class SearchViewController: UIViewController {
         showDimmingView(addDimming: searchController.searchBar.searchTextField.resignFirstResponder())
     }
     
+    public func accessoryDisplay(search: String) -> UIView {
+        let headerView = UIStackView.VStack(spacing: 10, alignment: .leading)
+        headerView.addArrangedSubview("Selected currency".body1Regular().generateLabel)
+        let xmark = UIImage(systemName: "xmark.circle.fill")?.withTintColor(.textColorInverse).resized(withAspect: .init(squared: 12))
+        let ticketText = search.styled(font: .bold, color: .textColorInverse, size: 14) + xmark
+        let tickerView = ticketText.generateLabel.blobify(backgroundColor: .surfaceBackgroundInverse,
+                                                          edgeInset: .init(top: 5, left: 12, bottom: 5, right: 6),
+                                                          borderColor: .clear,
+                                                          borderWidth: 0,
+                                                          cornerRadius: 12)
+        headerView.addArrangedSubview(tickerView)
+        return headerView
+    }
+    
 }

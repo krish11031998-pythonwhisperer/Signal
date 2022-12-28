@@ -76,9 +76,16 @@ class RegisterController: UIViewController {
         
         output.navigation
             .receive(on: RunLoop.main)
-            .sink { route in
-                print("(DEBUG) route: ", route)
-            }
+            .sink(receiveCompletion: {
+                print("(ERROR) err: ", $0.err?.localizedDescription)
+            }, receiveValue: { [weak self] in
+                switch $0 {
+                case .nextPage:
+                    print("(DEBUG) nextpage!")
+                case .errorMessage(let err):
+                    print("(ERROR) err: ", err)
+                }
+            })
             .store(in: &bag)
     }
     
