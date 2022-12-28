@@ -106,7 +106,30 @@ extension UITableView {
             setContentOffset(offset, animated: false)
             endUpdates()
         }
+    }
+    
+    func replaceRows(rows:[TableCellProvider], section: Int) {
+        var newSource = self.source
+        newSource?.sections[section].rows = rows
         
+        self.source = newSource
+        self.dataSource = newSource
+        self.delegate = newSource
+        
+        let currentRows = (0..<numberOfRows(inSection: section)).map { IndexPath(row: $0, section: section) }
+//        let newRows = (0..<(source?.tableView(self, numberOfRowsInSection: section) ?? 1).map { IndexPath(row: $0, section: section) }
+        let newRows = (0..<(source?.tableView(self, numberOfRowsInSection: section) ?? 1)).map { IndexPath(row: $0, section: section) }
+
+        let offset = self.contentOffset
+        
+        //performBatchUpdates {
+        UIView.performWithoutAnimation {
+            beginUpdates()
+            deleteRows(at: currentRows, with: .right)
+            insertRows(at: newRows, with: .left)
+            setContentOffset(offset, animated: false)
+            endUpdates()
+        }
     }
 	
     func insertSection(_ section: TableSection, at sectionIdx: Int? = nil) {

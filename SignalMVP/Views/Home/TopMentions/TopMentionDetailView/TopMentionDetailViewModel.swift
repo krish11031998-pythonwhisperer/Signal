@@ -42,16 +42,16 @@ fileprivate extension UIView {
     }
 }
 
-class TopMentionDetailViewModel {
-    //MARK: - SegmentSections
-    enum Sections: String, CaseIterable {
-        case twitter, news, events
-    }
+//MARK: - SegmentSections
+enum Sections: String, CaseIterable {
+    case twitter, news, events
+}
 
+class TopMentionDetailViewModel {
+    
     private var tweets:[TweetModel] = []
     private var news: [NewsModel] = []
     private var events: [EventModel] = []
-//    private var selectedTab: String = "Twitter"
     private let mention: MentionModel
     private var selectedTab: CurrentValueSubject<Sections, Never> = .init(.news)
     private var bag: Set<AnyCancellable> = .init()
@@ -102,6 +102,10 @@ class TopMentionDetailViewModel {
             .compactMap { result in
                 result.data?.compactMap { TableRow<TweetCell>(.init(model: $0)) }
             }
+            .map {[weak self] in
+                guard let self else { return [] }
+                return self.mediaHeaderView + $0
+            }
             .eraseToAnyPublisher()
     }
 
@@ -117,6 +121,10 @@ class TopMentionDetailViewModel {
             .compactMap { result in
                 result.data?.compactMap { TableRow<NewsCell>(.init(model: $0)) }
             }
+            .map {[weak self] in
+                guard let self else { return [] }
+                return self.mediaHeaderView + $0
+            }
             .eraseToAnyPublisher()
     }
     
@@ -127,24 +135,16 @@ class TopMentionDetailViewModel {
             .compactMap { result in
                 result.data.compactMap { TableRow<EventSingleCell>(.init(model: $0)) }
             }
+            .map {[weak self] in
+                guard let self else { return [] }
+                return self.mediaHeaderView + $0
+            }
             .eraseToAnyPublisher()
     }
  
 
-    var mediaHeaderView: UIView {
-        let customHeader = "Media".heading2().generateLabel
-        let customSelector = Sections.allCases.compactMap { tabSection in
-            let tab = tabSection.rawValue
-            let isSelected = selectedTab.value.rawValue == tab
-            let textColor: UIColor = isSelected ? .textColorInverse : .textColor
-            let blob = tab.capitalized.body2Medium(color: textColor).generateLabel.segmentBlob(isSelected: isSelected)
-            return blob.buttonify { [weak self] in
-                self?.selectedTab.send(tabSection)
-            }
-        }.embedInHStack(alignment: .center, spacing: 5)
-        customSelector.addArrangedSubview(.spacer())
-        let stack = UIStackView.VStack(subViews: [customHeader, customSelector], spacing: 10)
-        return stack.embedInView(insets: .init(by: 10), priority: .needed)
+    var mediaHeaderView: [TableCellProvider] {
+        return [TableRow<MediaSegmentCell>(.init(selectedTab: selectedTab))]
     }
     
     var sentimentSplitView: TableSection? {
@@ -167,5 +167,63 @@ class TopMentionDetailViewModel {
         
         return .init(rows: [TableRow<SentimentCell>(mention)], title: "Sentiment")
         
+    }
+}
+
+
+//MARK: - TopMentionMediaSegmentCell
+
+struct MediaSegmentModel {
+    let selectedTab: CurrentValueSubject<Sections, Never>
+}
+
+class MediaSegmentCell: ConfigurableCell {
+    
+    private var selectedTab:  CurrentValueSubject<Sections, Never>? = nil
+    private var bag: Set<AnyCancellable> = .init()
+    private lazy var stack: UIStackView = {
+        Sections.allCases.compactMap { tabSection in
+            let tab = tabSection.rawValue
+            let blob = tab.capitalized.body2Medium(color: .textColor).generateLabel.segmentBlob(isSelected: false)
+            
+            return blob.buttonify { [weak self] in
+                self?.selectedTab?.send(tabSection)
+            }
+        }.embedInHStack(alignment: .center, spacing: 5)
+        
+    }()
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setupView()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setupView() {
+        stack.addArrangedSubview(.spacer())
+        contentView.addSubview(stack)
+        contentView.setFittingConstraints(childView: stack, insets: .init(by: 10))
+        backgroundColor = .surfaceBackground
+        selectionStyle = .none
+    }
+    
+    private func setupSelectedTab() {
+        selectedTab?
+            .sink{ [weak self] section in
+                guard let self,
+                      let selectedTabIdx = Sections.allCases.firstIndex(of: section),
+                      selectedTabIdx < self.stack.arrangedSubviews.count && selectedTabIdx >= 0 else { return }
+                self.stack.arrangedSubviews.forEach { $0.subviews.first?.backgroundColor = .clear }
+                self.stack.arrangedSubviews[selectedTabIdx].subviews.first?.backgroundColor = .red
+            }
+            .store(in: &bag)
+    }
+    
+    func configure(with model: MediaSegmentModel) {
+        self.selectedTab = model.selectedTab
+        setupSelectedTab()
     }
 }

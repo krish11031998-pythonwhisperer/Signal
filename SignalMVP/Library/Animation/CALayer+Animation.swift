@@ -11,19 +11,15 @@ import UIKit
 extension CALayer {
     
     func animate(_ animation: Animation, removeAfterCompletion: Bool = false, completion: (() -> Void)? = nil) {
-        print("(DEBUG) calling Animate!")
         CATransaction.begin()
         
         let animationData = animation.animationData(at: self)
         CATransaction.setCompletionBlock {
             self.finalizePosition(animation: animation, remove: removeAfterCompletion)
-            print("(DEBUG) completion is Called!")
             completion?()
         }
         
         add(animationData, forKey: nil)
-//        animationData.isRemovedOnCompletion = removeAfterCompletion
-//        animationData.fillMode = .forwards
         CATransaction.commit()
     }
     

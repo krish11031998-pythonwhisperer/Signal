@@ -44,7 +44,7 @@ class TopMentionDetailView: UIViewController {
         setupTransparentNavBar()
         standardNavBar()
         setupView()
-        tableView.reloadData(.init(sections: [viewModel.sentimentSplitView].compactMap { $0 }))
+        tableView.reloadData(.init(sections: [viewModel.sentimentSplitView, .init(rows: [], title: "Media")].compactMap { $0 }))
         bind()
     }
     
@@ -74,13 +74,11 @@ class TopMentionDetailView: UIViewController {
         let output = viewModel.transform()
         
         output.sections
-            .receive(on: DispatchQueue.main)
+            .receive(on: DispatchQueue.main  )
             .sink {
                 print("(ERROR) err: ", $0.err?.localizedDescription)
             } receiveValue: { [weak self] in
-                if (self?.tableView.numberOfSections ?? 0) < 2 {
-                    self?.tableView.insertSection(.init(rows: $0, customHeader: self?.viewModel.mediaHeaderView))
-                }
+                self?.tableView.replaceRows(rows: $0, section: 1)
             }
             .store(in: &bag)
     }
