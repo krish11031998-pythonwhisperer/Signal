@@ -94,21 +94,12 @@ class EventsFeedViewController: SearchViewController {
             .removeDuplicates()
             .sink { [weak self] in
                 guard let self else {return}
-                
                 guard let search = $0, !search.isEmpty else {
-                    if let headerView = self.tableView.headerView {
-                        self.tableView.contentSize.height -= headerView.compressedSize.height
-                        self.tableView.headerView?.animate(.fadeOut()) {
-                            self.tableView.headerView = nil
-                        }
-                    }
+                    self.tableView.animateHeaderView = nil
                     return
                 }
                 let headerView = self.accessoryDisplay(search: search)
-                self.tableView.headerView = headerView
-                self.tableView.headerView?.alpha = 0
-                self.tableView.contentSize.height += headerView.compressedSize.height
-                headerView.animate(.fadeIn(duration: 1), removeAfterCompletion: false)
+                self.tableView.animateHeaderView = headerView
             }
             .store(in: &bag)
         

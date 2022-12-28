@@ -19,4 +19,23 @@ extension UITableView {
         }
     }
     
+    
+    var animateHeaderView: UIView? {
+        get { tableHeaderView }
+        set {
+            if let headerView = newValue {
+                tableHeaderView = headerView
+                tableHeaderView?.frame = .init(origin: .zero, size: .init(width: .totalWidth, height: headerView.compressedSize.height))
+                tableHeaderView?.alpha = 0
+                self.contentSize.height += tableHeaderView?.compressedSize.height ?? 0
+                tableHeaderView?.animate(.fadeIn(duration: 1), removeAfterCompletion: false)
+            } else {
+                contentSize.height -= tableHeaderView?.compressedSize.height ?? 0
+                tableHeaderView?.animate(.fadeOut()) {
+                    self.tableHeaderView = nil
+                }
+            }
+        }
+    }
+    
 }

@@ -71,10 +71,13 @@ class NewsFeed: SearchViewController {
         
         searchParam
             .sink {[weak self] in
-                guard let self, let search = $0 else { return }
+                guard let self else {return}
+                guard let search = $0, !search.isEmpty else {
+                    self.tableView.animateHeaderView = nil
+                    return
+                }
                 let headerView = self.accessoryDisplay(search: search)
-                self.tableView.headerView = headerView
-                self.tableView.contentSize.height += headerView.compressedSize.height
+                self.tableView.animateHeaderView = headerView
             }
             .store(in: &bag)
         

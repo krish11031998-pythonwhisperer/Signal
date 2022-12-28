@@ -44,7 +44,7 @@ class TweetFeedViewModel {
     private var nextPageId: Int = 0
     
     struct Input {
-        let searchParam: Publishers.Share<AnyPublisher<String?, Never>>
+        let searchParam: SharePublisher<String?, Never>
         let loadNextPage: AnyPublisher<Bool, Never>
     }
     
