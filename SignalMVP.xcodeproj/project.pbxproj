@@ -200,7 +200,7 @@
 		EF987B972920E9FA0000E233 /* CommonWrappers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987B962920E9FA0000E233 /* CommonWrappers.swift */; };
 		EF987B992920F1A80000E233 /* CGPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987B982920F1A80000E233 /* CGPoint.swift */; };
 		EF987B9B292122FA0000E233 /* NewsDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987B9A292122FA0000E233 /* NewsDetailView.swift */; };
-		EF987B9D2921309C0000E233 /* TickerSymbolsVoew.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987B9C2921309C0000E233 /* TickerSymbolsVoew.swift */; };
+		EF987B9D2921309C0000E233 /* TickerSymbolsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987B9C2921309C0000E233 /* TickerSymbolsView.swift */; };
 		EF987B9F29213CCA0000E233 /* PresentationStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987B9E29213CCA0000E233 /* PresentationStyle.swift */; };
 		EF987BA329217A330000E233 /* WebPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF987BA229217A330000E233 /* WebPage.swift */; };
 		EFB1C22E28DB3B1800DD40A4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB1C22D28DB3B1800DD40A4 /* AppDelegate.swift */; };
@@ -451,7 +451,7 @@
 		EF987B962920E9FA0000E233 /* CommonWrappers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonWrappers.swift; sourceTree = "<group>"; };
 		EF987B982920F1A80000E233 /* CGPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPoint.swift; sourceTree = "<group>"; };
 		EF987B9A292122FA0000E233 /* NewsDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetailView.swift; sourceTree = "<group>"; };
-		EF987B9C2921309C0000E233 /* TickerSymbolsVoew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerSymbolsVoew.swift; sourceTree = "<group>"; };
+		EF987B9C2921309C0000E233 /* TickerSymbolsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerSymbolsView.swift; sourceTree = "<group>"; };
 		EF987B9E29213CCA0000E233 /* PresentationStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationStyle.swift; sourceTree = "<group>"; };
 		EF987BA229217A330000E233 /* WebPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebPage.swift; sourceTree = "<group>"; };
 		EFB1C22A28DB3B1800DD40A4 /* SignalMVP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SignalMVP.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1303,7 +1303,7 @@
 			isa = PBXGroup;
 			children = (
 				EF987B92291FAAEF0000E233 /* TickerStoryView.swift */,
-				EF987B9C2921309C0000E233 /* TickerSymbolsVoew.swift */,
+				EF987B9C2921309C0000E233 /* TickerSymbolsView.swift */,
 			);
 			path = TickerStory;
 			sourceTree = "<group>";
@@ -1728,7 +1728,7 @@
 				EF7D2FD028E0F6540003B8F3 /* EventHeaderView.swift in Sources */,
 				EF7D2FBD28E056F40003B8F3 /* TopMentionCell.swift in Sources */,
 				EF7CBFF5291641EA00F9D611 /* UIEdgeInsets.swift in Sources */,
-				EF987B9D2921309C0000E233 /* TickerSymbolsVoew.swift in Sources */,
+				EF987B9D2921309C0000E233 /* TickerSymbolsView.swift in Sources */,
 				EFB1C2D328DB616600DD40A4 /* TweetModel.swift in Sources */,
 				EF06E459295BBDD200820AFE /* AuthInterface.swift in Sources */,
 				EF7CC003291641EA00F9D611 /* ImageHeaderSubHeaderView.swift in Sources */,

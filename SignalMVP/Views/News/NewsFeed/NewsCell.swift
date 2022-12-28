@@ -70,7 +70,7 @@ class NewsCell: ConfigurableCell {
 	
 	public func configure(with model: NewsCellModel) {
 		model.model.date.bodySmallRegular(color: .gray).render(target: timestamp)
-		model.model.title.heading4().render(target: title)
+		model.model.title.heading5().render(target: title)
 		title.numberOfLines = 0
 		model.model.sourceName.body2Regular(color: .gray).render(target: body)
 		body.numberOfLines = 1

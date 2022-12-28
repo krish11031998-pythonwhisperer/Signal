@@ -170,7 +170,7 @@ extension UIImage {
             switch result {
             case .success(let img):
                 DispatchQueue.main.async {
-                        object[keyPath: path] = img
+                    object[keyPath: path] = img
                 }
             case .failure(let err):
                 print("(ERROR) err while loading Image : ",err.localizedDescription)

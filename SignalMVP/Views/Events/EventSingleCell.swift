@@ -53,7 +53,7 @@ class EventSingleCell: ConfigurableCell {
 //MARK: - Exposed Methods
 	func configure(with model: EventCellModel) {
 
-		model.model.eventName.body1Bold().render(target: eventTitle)
+		model.model.eventName.heading5().render(target: eventTitle)
 		eventTitle.numberOfLines = 0
 
 		if let firstImgURL = model.model.news.first?.imageUrl {

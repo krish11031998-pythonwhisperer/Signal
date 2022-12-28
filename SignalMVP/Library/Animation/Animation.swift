@@ -32,6 +32,7 @@ enum Animation {
     case fadeInOut(duration: CGFloat = 0.75)
 }
 
+//MARK: - Animation Helpers
 extension Animation {
 	
 	func animationData(at layer: CALayer) -> CAAnimation {
@@ -83,7 +84,8 @@ extension Animation {
 			animation.fromValue = from
 			animation.toValue = to
 			animation.duration = duration
-			
+            animation.isRemovedOnCompletion = false
+            animation.fillMode = .forwards
 			return animation
         case .lineProgress(let frame, let duration):
             let animation = CABasicAnimation(keyPath: "path")
@@ -149,6 +151,7 @@ extension Animation {
     }
 }
 
+//MARK: - Array + Animation
 extension Array where Element == Animation {
     
     func combine(at layer: CALayer, removeAfterCompletion: Bool) -> CAAnimation {
@@ -156,3 +159,6 @@ extension Array where Element == Animation {
     }
     
 }
+
+//MARK: - Animation Names
+

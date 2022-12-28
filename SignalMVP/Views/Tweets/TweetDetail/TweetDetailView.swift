@@ -120,7 +120,7 @@ class TweetDetailView: UIViewController {
 	}
     
 	func configureViews() {
-        tweet.model?.text.styled(font: .light, color: .textColor, size: 25).render(target: bodyLabel)
+        tweet.model?.text?.styled(font: .light, color: .textColor, size: 25).render(target: bodyLabel)
 		bodyLabel.numberOfLines = 0
 		
 		profileHeader.configure(config: .init(title: tweet.user?.username,

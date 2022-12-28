@@ -27,10 +27,8 @@ extension UITableView {
                 tableHeaderView = headerView
                 tableHeaderView?.frame = .init(origin: .zero, size: .init(width: .totalWidth, height: headerView.compressedSize.height))
                 tableHeaderView?.alpha = 0
-                UIView.animate(withDuration: 0.3) {
-                    self.contentSize.height += self.tableHeaderView?.compressedSize.height ?? 0
-                }
-                tableHeaderView?.animate(.fadeIn(), removeAfterCompletion: false)
+                contentSize.height += self.tableHeaderView?.compressedSize.height ?? 0
+                tableHeaderView?.animate(.fadeIn())
             } else {
                 let height = tableHeaderView?.compressedSize.height ?? 0
                 tableHeaderView?.animate(.fadeOut()) {

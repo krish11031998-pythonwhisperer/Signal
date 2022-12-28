@@ -21,7 +21,7 @@ struct TweetCellModel: ActionProvider {
 
 extension TweetCellModel {
 	var media: [TweetMedia]? { model?.media }
-	var user: TweetUser? { model?.user }
+    var user: TweetUser? { model?.user }
 }
 
 protocol AnyTableView {
@@ -56,7 +56,6 @@ class TweetFeedViewModel {
 
         let searchResults = input.searchParam
             .flatMap { TweetService.shared.fetchTweets(entity: $0, limit: 10) }
-            .catch { _ in StubTweetService.shared.fetchTweets() }
             .compactMap { [weak self] in self?.decodeToTweetCellModel($0, append: false) }
             .eraseToAnyPublisher()
         
@@ -65,7 +64,6 @@ class TweetFeedViewModel {
             .filter {[weak self] in $0 && self?.nextPageId != nil }
             .withLatestFrom(input.searchParam)
             .flatMap {[weak self] in TweetService.shared.fetchTweets(entity: $0.1, page: self?.nextPageId ?? 0) }
-            .catch { _ in StubTweetService.shared.fetchTweets() }
             .compactMap {[weak self] in  self?.decodeToTweetCellModel($0) }
             .eraseToAnyPublisher()
         

@@ -22,7 +22,7 @@ class TickerSymbolView: UIView {
         }
         
         removeChildViews()
-        tickers.enumerated().forEach {
+        tickers.limitTo(to: 3).enumerated().forEach {
             let imgView = UIImageView(size: .init(squared: 32), cornerRadius: 16, contentMode: .scaleAspectFit)
             UIImage.loadImage(url: $0.element.logoURL, at: imgView, path: \.image)
             addSubview(imgView)
@@ -33,6 +33,13 @@ class TickerSymbolView: UIView {
             }
             
         }
+        
+        if tickers.count > 3 {
+            let label = "+\(tickers.count - 3) more".body3Regular().generateLabel
+            addSubview(label)
+            setFittingConstraints(childView: label, top: 0, leading: 85, trailing: 0, bottom: 0)
+        }
+        
         isHidden = false
     }
 

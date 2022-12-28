@@ -99,7 +99,7 @@ class TweetCell: ConfigurableCell {
 	}
 	
 	func configure(with model: TweetCellModel) {
-		model.model?.text.body2Regular(color: .gray).render(target: bodyLabel)
+		model.model?.text?.body2Regular(color: .gray).render(target: bodyLabel)
 		bodyLabel.numberOfLines = 0
 		bodyLabel.textAlignment = .left
 		

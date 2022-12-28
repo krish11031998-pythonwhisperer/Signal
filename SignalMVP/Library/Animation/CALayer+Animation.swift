@@ -21,9 +21,9 @@ extension CALayer {
             completion?()
         }
         
-        
         add(animationData, forKey: nil)
-        
+//        animationData.isRemovedOnCompletion = removeAfterCompletion
+//        animationData.fillMode = .forwards
         CATransaction.commit()
     }
     
@@ -42,7 +42,6 @@ extension CALayer {
         CATransaction.commit()
     }
     
-    
     func finalizePosition(animation: Animation, remove: Bool) {
         finalizePosition(animation: animation.animationData(at: self), remove: remove)
     }
@@ -51,8 +50,8 @@ extension CALayer {
         switch animation {
         case let basic as CABasicAnimation:
             guard let keyPath = basic.keyPath else { return }
-            UIView.performWithoutAnimation {
-                setValue(basic.toValue, forKeyPath: keyPath)
+            asyncMain {
+                self.setValue(basic.toValue, forKeyPath: keyPath)
             }
         case let group as CAAnimationGroup:
             group.animations?.forEach { finalizePosition(animation: $0, remove: remove)}

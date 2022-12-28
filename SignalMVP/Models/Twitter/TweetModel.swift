@@ -13,8 +13,8 @@ struct TweetSearchResult: Codable {
 }
 		
 struct TweetModel:Codable {
-	let id: String
-	let text: String
+	let id: String?
+	let text: String?
 	let publicMetric : TweetMetric?
 	let authorId : String?
 	let attachments: TweetAttachment?
@@ -23,10 +23,10 @@ struct TweetModel:Codable {
 	let media: [TweetMedia]?
 	let urls: [TweetURL]?
 	let user: TweetUser?
-	let cashTags: [TweetTags]?
-	let hashTags: [TweetTags]?
-	let opinions: TweetOpinion?
-	let reactions: TweetReaction?
+	//let cashTags: [TweetTags]?
+	//let hashTags: [TweetTags]?
+	//let opinions: TweetOpinion?
+	//let reactions: TweetReaction?
 
 	enum CodingKeys: String, CodingKey {
 		case id
@@ -34,7 +34,10 @@ struct TweetModel:Codable {
 		case publicMetric = "publicMetric"
 		case authorId = "author_id"
 		case attachments
-		case media, urls, user, cashTags, hashTags, opinions, reactions
+		case media
+        case urls
+        case user
+//             cashTags, hashTags, opinions, reactions
 	}
 }
 
@@ -52,7 +55,7 @@ extension TweetModel: Equatable {
 
 extension TweetModel: Tickers {
     var tickers: [String] {
-        get { hashTags?.compactMap { $0.tag} ?? [] }
+        get { [] } //hashTags?.compactMap { $0.tag} ?? [] }
         set {}
     }
     
@@ -140,8 +143,8 @@ struct TweetIncludeData: Codable {
 
 //MARK: - TweetUrl
 struct TweetURL: Codable {
-	let start: Int
-	let end: Int
+	let start: Int?
+	let end: Int?
 	let url: String
 	let expandedUrl: String?
 	let displayUrl: String?
