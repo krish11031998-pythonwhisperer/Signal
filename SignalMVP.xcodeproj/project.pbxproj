@@ -21,6 +21,7 @@
 		EF06E45D295BC3AF00820AFE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EF06E45C295BC3AF00820AFE /* GoogleService-Info.plist */; };
 		EF06E460295C39E500820AFE /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF06E45F295C39E500820AFE /* LoadingIndicator.swift */; };
 		EF06E463295C51AB00820AFE /* AuthPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF06E462295C51AB00820AFE /* AuthPublisher.swift */; };
+		EF06E465295C61F100820AFE /* PublishersExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF06E464295C61F100820AFE /* PublishersExtension.swift */; };
 		EF16449D29054FBB00E9D997 /* signalTweets.json in Resources */ = {isa = PBXBuildFile; fileRef = EF16449C29054FBB00E9D997 /* signalTweets.json */; };
 		EF1644A0290550B300E9D997 /* ServiceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF16449F290550B300E9D997 /* ServiceHelper.swift */; };
 		EF1644A42905573600E9D997 /* signalNews.json in Resources */ = {isa = PBXBuildFile; fileRef = EF1644A32905573600E9D997 /* signalNews.json */; };
@@ -271,6 +272,7 @@
 		EF06E45C295BC3AF00820AFE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EF06E45F295C39E500820AFE /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
 		EF06E462295C51AB00820AFE /* AuthPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthPublisher.swift; sourceTree = "<group>"; };
+		EF06E464295C61F100820AFE /* PublishersExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishersExtension.swift; sourceTree = "<group>"; };
 		EF16449C29054FBB00E9D997 /* signalTweets.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = signalTweets.json; sourceTree = "<group>"; };
 		EF16449F290550B300E9D997 /* ServiceHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceHelper.swift; sourceTree = "<group>"; };
 		EF1644A32905573600E9D997 /* signalNews.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = signalNews.json; sourceTree = "<group>"; };
@@ -531,6 +533,7 @@
 				EF04E349294F203F00E35815 /* UIControl+Publishers.swift */,
 				EF5C4EB5295303C700669355 /* UITextField+Publishers.swift */,
 				EF3B698C2959D48200C9234B /* withLatestFrom.swift */,
+				EF06E464295C61F100820AFE /* PublishersExtension.swift */,
 			);
 			path = PublisherHelpers;
 			sourceTree = "<group>";
@@ -1821,6 +1824,7 @@
 				EF06E460295C39E500820AFE /* LoadingIndicator.swift in Sources */,
 				EF96383328DDFEDF00178C37 /* TweetMetricsView.swift in Sources */,
 				EF7D2FC628E09E7E0003B8F3 /* VideoModel.swift in Sources */,
+				EF06E465295C61F100820AFE /* PublishersExtension.swift in Sources */,
 				EF7CBFE7291641EA00F9D611 /* StringFonts.swift in Sources */,
 				EF7CC002291641EA00F9D611 /* SymbolImage.swift in Sources */,
 				EF7CC01629166E6F00F9D611 /* RatingChartCandle.swift in Sources */,

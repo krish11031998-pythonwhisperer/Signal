@@ -85,6 +85,11 @@ class SearchViewController: UIViewController {
         showDimmingView(addDimming: searchController.searchBar.searchTextField.resignFirstResponder())
     }
     
+    @objc
+    func removeSearch() {
+        searchText.send(nil)
+    }
+    
     public func accessoryDisplay(search: String) -> UIView {
         let headerView = UIStackView.VStack(spacing: 10, alignment: .leading)
         headerView.addArrangedSubview("Selected currency".body1Regular().generateLabel)
@@ -95,8 +100,10 @@ class SearchViewController: UIViewController {
                                                           borderColor: .clear,
                                                           borderWidth: 0,
                                                           cornerRadius: 12)
+        tickerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(removeSearch)))
+        
         headerView.addArrangedSubview(tickerView)
-        return headerView
+        return headerView.embedInView(insets: .init(top: 16, left: 16, bottom: 0, right: 16))
     }
     
 }

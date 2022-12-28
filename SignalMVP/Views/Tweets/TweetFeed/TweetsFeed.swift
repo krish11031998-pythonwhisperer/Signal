@@ -77,7 +77,8 @@ class TweetFeedViewController: SearchViewController {
             }
             .eraseToAnyPublisher()
         
-        let output = viewModel.transform(input: .init(searchParam: searchText.eraseToAnyPublisher(),
+        let searchParam = searchText.eraseToAnyPublisher().share()
+        let output = viewModel.transform(input: .init(searchParam: searchParam,
                                                       loadNextPage: contentOffset))
         
         output.sections
@@ -87,7 +88,6 @@ class TweetFeedViewController: SearchViewController {
                     print("(ERROR) err: ", err)
                 }
             } receiveValue: { [weak self] in
-                //self?.tableView.reloadData(.init(sections: [$0]), lazyLoad: true, animation: .bottom)
                 self?.tableView.reloadRows(.init(sections: [$0]), section: 0)
             }
             .store(in: &bag)
@@ -97,6 +97,15 @@ class TweetFeedViewController: SearchViewController {
             .sink { [weak self] in
                 guard let `self` = self else { return }
                 self.navigationController?.pushViewController(TweetDetailView(tweet: $0), animated: true)
+            }
+            .store(in: &bag)
+        
+        searchParam
+            .sink { [weak self] in
+                guard let self, let search = $0 else { return }
+                let headerView = self.accessoryDisplay(search: search)
+                self.tableView.headerView = headerView
+                self.tableView.contentSize.height += headerView.compressedSize.height
             }
             .store(in: &bag)
     }

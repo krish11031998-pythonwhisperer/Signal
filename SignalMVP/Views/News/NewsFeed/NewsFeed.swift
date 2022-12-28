@@ -55,7 +55,9 @@ class NewsFeed: SearchViewController {
             }
             .store(in: &bag)
         
-        let output = viewModel.transform(input: .init(searchParam: searchText, nextPage: tableView.nextPage))
+        let searchParam = searchText.eraseToAnyPublisher().share().makeConnectable()
+        
+        let output = viewModel.transform(input: .init(searchParam: searchParam, nextPage: tableView.nextPage))
         
         output
             .tableSection
@@ -66,6 +68,18 @@ class NewsFeed: SearchViewController {
                 self?.tableView.reloadData(.init(sections: [section]))
             })
             .store(in: &bag)
+        
+        searchParam
+            .sink {[weak self] in
+                guard let self, let search = $0 else { return }
+                let headerView = self.accessoryDisplay(search: search)
+                self.tableView.headerView = headerView
+                self.tableView.contentSize.height += headerView.compressedSize.height
+            }
+            .store(in: &bag)
+        
+        searchParam.connect().store(in: &bag)
+        
     }
 
 }

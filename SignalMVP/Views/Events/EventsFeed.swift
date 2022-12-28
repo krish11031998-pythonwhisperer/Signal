@@ -77,28 +77,42 @@ class EventsFeedViewController: SearchViewController {
             }
             .store(in: &bag)
         
-        let searchParam = searchText.share()
+        let searchParam = searchText.eraseToAnyPublisher().share().makeConnectable()
         
-        let output = viewModel.transform(input: .init(searchParam: searchText, nextPage: tableView.nextPage.share()))
+        let output = viewModel.transform(input: .init(searchParam: searchParam, nextPage: tableView.nextPage.share()))
         
         output.tableSection
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: {
                 print("(ERROR) err: ", $0.err?.localizedDescription)
             }, receiveValue: { [weak self] section in
-                   //self?.tableView.reloadRows(.init(sections: [section]), section: 0)
                 self?.tableView.reloadData(.init(sections: [section]), animation: .fade)
             })
             .store(in: &bag)
         
         searchParam
+            .removeDuplicates()
             .sink { [weak self] in
-                guard let self, let search = $0, !search.isEmpty else { return }
+                guard let self else {return}
+                
+                guard let search = $0, !search.isEmpty else {
+                    if let headerView = self.tableView.headerView {
+                        self.tableView.contentSize.height -= headerView.compressedSize.height
+                        self.tableView.headerView?.animate(.fadeOut()) {
+                            self.tableView.headerView = nil
+                        }
+                    }
+                    return
+                }
                 let headerView = self.accessoryDisplay(search: search)
-                self.tableView.headerView = headerView.embedInView(insets: .init(top: 16, left: 16, bottom: 0, right: 16))
+                self.tableView.headerView = headerView
+                self.tableView.headerView?.alpha = 0
                 self.tableView.contentSize.height += headerView.compressedSize.height
+                headerView.animate(.fadeIn(duration: 1), removeAfterCompletion: false)
             }
             .store(in: &bag)
+        
+        searchParam.connect().store(in: &bag)
 	}
 	
 	@objc

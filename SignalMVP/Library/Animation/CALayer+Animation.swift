@@ -11,14 +11,17 @@ import UIKit
 extension CALayer {
     
     func animate(_ animation: Animation, removeAfterCompletion: Bool = false, completion: (() -> Void)? = nil) {
+        print("(DEBUG) calling Animate!")
         CATransaction.begin()
         
+        let animationData = animation.animationData(at: self)
         CATransaction.setCompletionBlock {
+            self.finalizePosition(animation: animation, remove: removeAfterCompletion)
+            print("(DEBUG) completion is Called!")
             completion?()
         }
         
-        let animationData = animation.animationData(at: self)
-        finalizePosition(animation: animationData, remove: removeAfterCompletion)
+        
         add(animationData, forKey: nil)
         
         CATransaction.commit()
@@ -40,21 +43,23 @@ extension CALayer {
     }
     
     
-    func finalizePosition(animation: Animation) {
-        finalizePosition(animation: animation.animationData(at: self))
+    func finalizePosition(animation: Animation, remove: Bool) {
+        finalizePosition(animation: animation.animationData(at: self), remove: remove)
     }
     
     func finalizePosition(animation: CAAnimation, remove: Bool = false) {
         switch animation {
         case let basic as CABasicAnimation:
-            basic.isRemovedOnCompletion = remove
-            basic.fillMode = .forwards
+            guard let keyPath = basic.keyPath else { return }
+            UIView.performWithoutAnimation {
+                setValue(basic.toValue, forKeyPath: keyPath)
+            }
         case let group as CAAnimationGroup:
-            group.isRemovedOnCompletion = remove
-            group.fillMode = .forwards
+            group.animations?.forEach { finalizePosition(animation: $0, remove: remove)}
         default: break
         }
     }
+    
 }
 
 extension UIView {
