@@ -15,12 +15,12 @@ extension UITabBar {
         set {
             
             if newValue {
-                animate(.slide(.down, state: .out, duration: 0.5)) {
+                animate(.slide(.down, state: .out, duration: 0.3)) {
                     self.isHidden = newValue
                 }
             } else {
                 self.isHidden = newValue
-                animate(.slide(.down, state: .in, duration: 0.5))
+                animate(.slide(.down, state: .in, duration: 0.3))
             }
         }
     }

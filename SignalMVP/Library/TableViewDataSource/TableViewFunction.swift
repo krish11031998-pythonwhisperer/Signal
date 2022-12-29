@@ -69,7 +69,10 @@ extension UITableView {
         let currentRows = numberOfRows(inSection: section)
         let newRows = dataSource.tableView(self, numberOfRowsInSection: section)
     
-        guard currentRows < newRows else { return }
+        guard currentRows < newRows else {
+            replaceRows(rows: dataSource.sections[section].rows, section: section)
+            return
+        }
         let newIndexPath: [IndexPath] = (currentRows..<newRows).map { .init(row: $0, section: section) }
         
         let offset = self.contentOffset

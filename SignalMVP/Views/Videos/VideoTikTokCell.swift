@@ -144,7 +144,7 @@ class VideoTikTokCell: ConfigurableCollectionCell {
     func configure(with model: VideoModel) {
         videoDescription.numberOfLines = 1
         playerState.send(.idle)
-        UIImage.loadImage(url: model.imageUrl, at: imageView, path: \.image, resized: .init(width: .totalWidth, height: .totalHeight), resolveWithAspectRatio: true)
+        UIImage.loadImage(url: model.imageUrl, at: imageView, path: \.image, resized: .init(width: .totalWidth, height: .totalHeight))
         model.title.body1Medium(color: .white).render(target: videolabel)
         model.sourceName.body3Regular(color: .lightGray).render(target: channelLabel)
         model.text.body3Regular(color: .white).render(target: videoDescription)

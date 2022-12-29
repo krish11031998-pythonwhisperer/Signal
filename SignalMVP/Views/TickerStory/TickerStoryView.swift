@@ -26,7 +26,7 @@ class TickerStoryView: UIViewController {
     private let mention: MentionModel
     private lazy var swipeUp: UIView = {
         let chevronImage = UIImage.Catalogue.arrowUp.image.withTintColor(.textColor, renderingMode: .alwaysOriginal).imageView(size: .init(squared: 16), cornerRadius: 0)
-        chevronImage.animate(.slideUpDown(duration: 1))
+        chevronImage.animate(.shakeUpDown(duration: 1))
         let viewMore = "View More".bodySmallRegular().generateLabel
         let view: UIStackView = .VStack(subViews: [chevronImage, viewMore], spacing: 5, alignment: .center)
         return view

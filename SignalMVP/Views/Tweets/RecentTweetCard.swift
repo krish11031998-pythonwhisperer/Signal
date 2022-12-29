@@ -53,7 +53,7 @@ class RecentTweetCard: ConfigurableCollectionCell {
     //MARK: - Exposed Methods
     
     func configure(with model: TweetCellModel) {
-        UIImage.loadImage(url: model.user?.profileImageUrl, at: userImage, path: \.image, resized: .init(squared: 24), resolveWithAspectRatio: true)
+        UIImage.loadImage(url: model.user?.profileImageUrl, at: userImage, path: \.image, resized: .init(squared: 24))
         model.user?.name.body3Medium(color: .textColorInverse).render(target: userName)
         model.model?.text?.body3Regular(color: .textColorInverse).render(target: tweet)
     }

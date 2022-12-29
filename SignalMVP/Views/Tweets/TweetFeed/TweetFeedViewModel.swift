@@ -78,9 +78,9 @@ class TweetFeedViewModel {
         nextPageId += 1
     }
     
-    private func decodeToTweetCellModel(_ data: TweetSearchResult, append: Bool = true) -> TableSection? {
+    private func decodeToTweetCellModel(_ data: TweetSearchResult, append: Bool = true) -> TableSection {
         getNextPageToken(result: data)
-		guard let tweets = data.data else { return nil }
+        guard let tweets = data.data else { return .init(rows: []) }
         let fitleredTweet: [TweetCellModel] = Set(tweets).compactMap { tweet in
 			var model:TweetCellModel = .init(model: tweet)
 			model.action = {
@@ -96,13 +96,8 @@ class TweetFeedViewModel {
 			self.tweets?.append(contentsOf: fitleredTweet)
 		}
     
-        return tweetSection
+        return tweetSection ?? .init(rows: [])
 		
-	}
-
-	
-	private func buildDataSource() -> TableViewDataSource {
-		.init(sections: [tweetSection].compactMap { $0 })
 	}
 	
 	private var tweetSection: TableSection? {

@@ -28,7 +28,7 @@ enum Animation {
     case lineProgress(frame: CGRect, duration: CFTimeInterval = 0.3)
     case fadeIn(duration: CFTimeInterval = 0.3)
     case fadeOut(to: CGFloat = 0, duration: CFTimeInterval = 0.3)
-    case slideUpDown(duration: CGFloat = 0.3)
+    case shakeUpDown(duration: CGFloat = 0.3)
     case fadeInOut(duration: CGFloat = 0.75)
 }
 
@@ -108,13 +108,12 @@ extension Animation {
             animation.values = [0, 0.75, 1, 0.75, 0]
             animation.duration = duration
             return animation
-        case .slideUpDown(let duration):
+        case .shakeUpDown(let duration):
             let animation = CAKeyframeAnimation(keyPath: "position.y")
             animation.keyTimes = [0, 0.3, 0.6, 1]
             animation.values = [-5, 0, 5, 0]
             animation.autoreverses = true
             animation.repeatCount = .infinity
-            //animation.isRemovedOnCompletion = false
             animation.duration = duration
             return animation
 		}
@@ -143,7 +142,7 @@ extension Animation {
             return "fadeIn"
         case .fadeOut:
             return "fadeOut"
-        case .slideUpDown:
+        case .shakeUpDown:
             return "slideUpDown"
         case .fadeInOut:
             return "fadeInOut"

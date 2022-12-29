@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Combine
 
 fileprivate extension TweetOpinion {
 	var metricModels: [TweetMetricModel] {
@@ -60,7 +61,7 @@ class TweetCell: ConfigurableCell {
 		metricStack.alignment = .leading
 		return metricStack
 	}()
-	
+    private var imgCancellable: Cancellable?
 	override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
 		super.init(style: style, reuseIdentifier: reuseIdentifier)
 		setupCell()
@@ -114,7 +115,7 @@ class TweetCell: ConfigurableCell {
 		   let photoUrl = media.url ?? media.previewImageUrl {
 			let height = (CGFloat.totalWidth - 32) * CGFloat(media.height)/CGFloat(media.width)
 			imageHeight.constant = height
-			UIImage.loadImage(url: photoUrl, at: imgView, path: \.image, resolveWithAspectRatio: true)
+			imgCancellable = UIImage.loadImage(url: photoUrl, at: imgView, path: \.image)
 			imgView.isHidden = false
 		} else {
 			imgView.isHidden = true
@@ -126,7 +127,10 @@ class TweetCell: ConfigurableCell {
                 .forEach { metricStack.addArrangedSubview($0.view) }
             metricStack.addArrangedSubview(.spacer())
 		}
-		
-		
 	}
+    
+    override func prepareForReuse() {
+        imgCancellable?.cancel()
+    }
 }
+

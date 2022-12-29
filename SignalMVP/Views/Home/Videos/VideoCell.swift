@@ -86,7 +86,7 @@ class VideoCell: ConfigurableCell {
 	
 	func configure(with model: VideoModel) {
 		UIImage.loadImage(url: model.imageUrl, at: img, path: \.image)
-        UIImage.loadImage(url: model.imageUrl, at: bgImg, path: \.image, resized: .init(width: .totalWidth - 32, height: 150), resolveWithAspectRatio: true)
+        UIImage.loadImage(url: model.imageUrl, at: bgImg, path: \.image, resized: .init(width: .totalWidth - 32, height: 150))
 		model.title.body1Medium().render(target: videoLabel)
 		model.sourceName.bodySmallRegular(color: .gray).render(target: authorLabel)
 		authorLabel.setFrame(height: authorLabel.compressedSize.height)

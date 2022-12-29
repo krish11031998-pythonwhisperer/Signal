@@ -89,6 +89,7 @@ class TweetFeedViewController: SearchViewController {
                 }
             } receiveValue: { [weak self] in
                 self?.tableView.reloadRows(.init(sections: [$0]), section: 0)
+//                self?.tableView.reloadData(.init(sections: [$0]))
             }
             .store(in: &bag)
         

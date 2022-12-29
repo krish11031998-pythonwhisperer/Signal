@@ -39,14 +39,12 @@ class NewsViewModel {
             .withLatestFrom(input.searchParam)
             .flatMap { [weak self] in NewsService.shared.fetchNews(entity: [$0.1].compactMap { $0 },
                                                                    page: self?.nextPage ?? 0) }
-            .catch { _ in StubNewsService.shared.fetchNews() }
             .compactMap { $0.data }
             .compactMap { [weak self] in self?.setupSection($0, append: true) }
             .eraseToAnyPublisher()
         
         let searchResult = input.searchParam
             .flatMap{ NewsService.shared.fetchNews(entity: [$0].compactMap { $0 }) }
-            .catch { _ in StubNewsService.shared.fetchNews() }
             .compactMap { $0.data }
             .compactMap { [weak self] in self?.setupSection($0, append: false) }
             .eraseToAnyPublisher()

@@ -14,8 +14,8 @@ extension CALayer {
         CATransaction.begin()
         
         let animationData = animation.animationData(at: self)
+        finalizePosition(animation: animation, remove: removeAfterCompletion)
         CATransaction.setCompletionBlock {
-            self.finalizePosition(animation: animation, remove: removeAfterCompletion)
             completion?()
         }
         
@@ -39,16 +39,20 @@ extension CALayer {
     }
     
     func finalizePosition(animation: Animation, remove: Bool) {
-        finalizePosition(animation: animation.animationData(at: self), remove: remove)
+        switch animation {
+        case .fadeOut, .fadeIn:
+            finalizePosition(animation: animation.animationData(at: self), remove: remove)
+        default:
+            break
+        }
+        
     }
     
     func finalizePosition(animation: CAAnimation, remove: Bool = false) {
         switch animation {
         case let basic as CABasicAnimation:
             guard let keyPath = basic.keyPath else { return }
-            asyncMain {
-                self.setValue(basic.toValue, forKeyPath: keyPath)
-            }
+            asyncMain { self.setValue(basic.toValue, forKeyPath: keyPath) }
         case let group as CAAnimationGroup:
             group.animations?.forEach { finalizePosition(animation: $0, remove: remove)}
         default: break

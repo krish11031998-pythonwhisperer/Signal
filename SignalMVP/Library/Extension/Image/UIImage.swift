@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Combine
 
 enum ImageError: Swift.Error {
 	case noImagefromData
@@ -116,66 +117,50 @@ extension UIImage {
 	
 }
 
-
-//MARK: - Downloading Images
-
+//MARK: - Downloading Image
 extension UIImage {
-    
     static func download(urlStr: String? = nil,
-                         request: URLRequest? = nil,
-                         resize newSize: CGSize? = nil,
-                         completion: @escaping (Result<UIImage,Error>) -> Void) {
+                         request: URLRequest? = nil) -> AnyPublisher<UIImage,URLError> {
         
-        let request: URLRequest? =  urlStr?.request ?? request
-        
-        if let validRequest = request, let cachedData = URLCache.shared[validRequest] {
-            if var validImage = UIImage(data: cachedData) {
-                if let newSize = newSize {
-                    validImage = validImage.resized(withAspect: newSize)
-                }
-                completion(.success(validImage))
+            let request: URLRequest? =  urlStr?.request ?? request
+            
+            if let validRequest = request, let validImage = ImageCache.shared[validRequest] {
+                return Just(validImage).setFailureType(to: URLError.self).eraseToAnyPublisher()
             } else {
-                completion(.failure(ImageError.noImagefromData))
-            }
-        } else {
-            guard let validRequest = request else {
-                completion(.failure(URLSessionError.invalidUrl))
-                return
-            }
-            let session = URLSession.shared.dataTask(with: validRequest) { data, resp, err in
-                guard let validData = data, let validResp = resp else {
-                    completion(.failure(err ?? URLSessionError.noData))
-                    return
+                guard let validRequest = request, let validURL = request?.url else {
+                    return Fail(outputType: UIImage.self, failure: URLError(.badURL)).eraseToAnyPublisher()
                 }
                 
-                guard var validImage = UIImage(data: validData) else {
-                    completion(.failure(ImageError.noImagefromData))
-                    return
-                }
-                
-                if let newSize = newSize {
-                    validImage = validImage.resized(withAspect: newSize)
-                }
-                
-                ImageCache.shared[validRequest] = validImage
-                completion(.success(validImage))
+                let session = URLSession.shared.dataTaskPublisher(for: validURL)
+                    .compactMap { UIImage(data: $0.data) }
+                    .handleEvents(receiveOutput: {
+                        ImageCache.shared[validRequest] = $0
+                    })
+                    .eraseToAnyPublisher()
+                return session
             }
-            session.resume()
-        }
     }
     
-    static func loadImage<T:AnyObject>(url urlString: String?, at object: T, path: ReferenceWritableKeyPath<T,UIImage?>, resized: CGSize? = nil, resolveWithAspectRatio: Bool = false, scaledAt: Bool = false) {
+    static func loadImage<T:AnyObject>(url urlString: String?, at object: T, path: ReferenceWritableKeyPath<T,UIImage?>, resized: CGSize? = nil) -> AnyCancellable {
         object[keyPath: path] = nil
-        download(urlStr: urlString, resize: resized) { result in
-            switch result {
-            case .success(let img):
-                DispatchQueue.main.async {
-                    object[keyPath: path] = img
+        return download(urlStr: urlString)
+            .subscribe(on: DispatchQueue.global(qos: .userInteractive))
+            .compactMap {
+                if let resized {
+                    return $0.resized(withAspect: resized)
+                } else {
+                    return $0
                 }
-            case .failure(let err):
-                print("(ERROR) err while loading Image : ",err.localizedDescription)
             }
-        }
+            .receive(on: DispatchQueue.main)
+            .sink {
+                guard let err = $0.err else { return }
+                print("(ERROR) image err: ", err.localizedDescription)
+            } receiveValue: { image in
+                object[keyPath: path] = image
+                
+            }
+
     }
 }
 

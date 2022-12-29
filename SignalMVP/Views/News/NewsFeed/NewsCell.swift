@@ -7,12 +7,12 @@
 
 import Foundation
 import UIKit
-
+import Combine
 class NewsCell: ConfigurableCell {
 
 //MARK: - Properties
     private lazy var newsImage: UIImageView = { .init(size: .init(squared: 84), cornerRadius: 10) }()
-	
+    private var imgCancellable: Cancellable?
 	private lazy var timestamp: UILabel = { .init() }()
 	private lazy var title: UILabel = { .init() }()
 	private lazy var body: UILabel = { .init() }()
@@ -68,6 +68,10 @@ class NewsCell: ConfigurableCell {
 	
 //MARK: - Exposed Methods
 	
+    override func prepareForReuse() {
+        imgCancellable?.cancel()
+    }
+    
 	public func configure(with model: NewsCellModel) {
 		model.model.date.bodySmallRegular(color: .gray).render(target: timestamp)
 		model.model.title.heading5().render(target: title)
@@ -81,7 +85,7 @@ class NewsCell: ConfigurableCell {
             model.model.sentiment.sentimentIndicatorText().render(target: sentimentView)
 		}
 		
-		UIImage.loadImage(url: model.model.imageUrl, at: newsImage, path: \.image)
+        imgCancellable = UIImage.loadImage(url: model.model.imageUrl, at: newsImage, path: \.image)
 		newsImage.contentMode = .scaleAspectFill
 	}
 	
