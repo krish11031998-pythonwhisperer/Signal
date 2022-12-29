@@ -25,13 +25,16 @@ class TweetFeedViewController: SearchViewController {
 		tableView.showsVerticalScrollIndicator = false
 		return tableView
 	}()
+    private let isChildPage: Bool
     
 //MARK: - Overriden Methods
-    init() {
+    init(isChildPage: Bool = false) {
+        self.isChildPage = isChildPage
         super.init(resultController: NewsSearchResultController.self)
     }
         
     required init?(coder: NSCoder) {
+        self.isChildPage = false
 		super.init(coder: coder)
 	}
 	
@@ -63,7 +66,11 @@ class TweetFeedViewController: SearchViewController {
 	}
 
 	private func setupNavbar() {
-        standardNavBar(leftBarButton: .init(customView: "Tweets".heading2().generateLabel))
+        if !isChildPage {
+            standardNavBar(leftBarButton: .init(customView: "Tweets".heading2().generateLabel))
+        } else {
+            standardNavBar(title: "Tweets".heading2())
+        }
 	}
     
     private func bind() {
@@ -121,6 +128,5 @@ extension TweetFeedViewController: AnyTableView {
 	
 	func reloadTableWithDataSource(_ dataSource: TableViewDataSource) {
 		tableView.reloadData(dataSource)
-//		tableView.reloadData()
 	}
 }

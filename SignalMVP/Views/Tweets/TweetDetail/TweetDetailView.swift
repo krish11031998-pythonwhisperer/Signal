@@ -101,9 +101,6 @@ class TweetDetailView: UIViewController {
 		super.viewDidLoad()
 		setupViews()
 		configureViews()
-		observer = scrollView.observe(\.contentOffset, changeHandler: { [weak self] scrollView, _ in
-			self?.scrollObserver(scrollView)
-		})
         bind()
 	}
 	
@@ -119,6 +116,7 @@ class TweetDetailView: UIViewController {
 		imgView.isHidden = true
 		tweetURLView.isHidden = true
 		scrollView.addSubview(stack)
+        stack.addArrangedSubview(metricView)
 		scrollView.setFittingConstraints(childView: stack, insets: .init(vertical: 10, horizontal: 16))
 		stack.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: -32).isActive = true
 		
@@ -153,11 +151,6 @@ class TweetDetailView: UIViewController {
 		
 	}
 	
-	private func scrollObserver(_ scrollView: UIScrollView) {
-		guard let leftNavbar = navigationItem.leftBarButtonItem else { return }
-		let factor: CGFloat = (0...20).percent(scrollView.contentOffset.y).boundTo()
-	}
-	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(true)
 		navigationController?.navigationBar.transform = .init(translationX: 0, y: 0)
@@ -175,4 +168,72 @@ class TweetDetailView: UIViewController {
             }
             .store(in: &bag)
     }
+}
+
+//MARK: - Metrics
+
+extension TweetDetailView {
+    
+    private var metricView: UIView {
+        let header = "Metrics".heading5().generateLabel
+        let stack = UIStackView.VStack(subViews: [header], spacing: 10)
+        ["Bullish", "Bearish", "LOL", "Like", "Dislike"].forEach {
+            stack.addArrangedSubview(MetricRow(type: $0))
+        }
+        let metric = stack.blobify(backgroundColor: .surfaceBackground,
+                                   edgeInset: .init(vertical: 10, horizontal: 12.5),
+                                   borderColor: .clear,
+                                   borderWidth: 0,
+                                   cornerRadius: 12)
+        metric.addShadow()
+        return metric
+    }
+    
+}
+
+//MARK: - MetricRow
+class MetricRow: UIView {
+    private lazy var miniLabel: UILabel = { .init() }()
+    private lazy var label: UILabel = { .init() }()
+    private lazy var emojiView: UIImageView = { .standardImageView(frame: .init(origin: .zero, size: .init(squared: 20)), circleFrame: true) }()
+    private let typeLabel: String
+    
+    init(type: String) {
+        self.typeLabel = type
+        super.init(frame: .zero)
+        setupView()
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(5)) {
+            self.animate(value: CGFloat.random(in: 10..<self.frame.maxX - 10))
+        }
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    private func setupView() {
+        let stack = UIStackView.HStack(subViews: [emojiView, label, .spacer()], spacing: 12, alignment: .center)
+        let mainStack = UIStackView.VStack(subViews: [miniLabel, stack], spacing: 8, alignment: .leading)
+
+        emojiView.backgroundColor = .red
+        miniLabel.alpha = 0
+        addSubview(mainStack)
+        setFittingConstraints(childView: mainStack, insets: .zero)
+        typeLabel.body3Medium().render(target: miniLabel)
+        typeLabel.body1Medium().render(target: label)
+    }
+    
+    private func animate(value to: CGFloat) {
+        label.animate(.fadeOut()) {
+            self.label.isHidden = false
+            self.emojiView.animate(.transformX(to: to))
+            self.miniLabel.animate(.fadeIn())
+        }
+    }
+    
 }

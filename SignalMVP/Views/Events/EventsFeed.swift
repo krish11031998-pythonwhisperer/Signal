@@ -16,7 +16,7 @@ struct EventCellModel: ActionProvider {
 class EventsFeedViewController: SearchViewController {
 	
 	private var yOff: CGFloat = .zero
-	
+    private let isChildPage: Bool
 	private lazy var tableView: UITableView = {
 		let table: UITableView = .init(frame: .zero, style: .grouped)
 		table.backgroundColor = .clear
@@ -28,11 +28,13 @@ class EventsFeedViewController: SearchViewController {
 //    private var bag: Set<AnyCancellable> = .init()
 	//MARK: - Overriden Methods
 	
-    init() {
+    init(isChildPage: Bool = false) {
+        self.isChildPage = isChildPage
         super.init(resultController: NewsSearchResultController.self)
     }
     
     required init?(coder: NSCoder) {
+        self.isChildPage = false
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -53,7 +55,11 @@ class EventsFeedViewController: SearchViewController {
 	}
 	
 	private func setupNavBar() {
-        standardNavBar(leftBarButton: .init(customView: "Events".heading2().generateLabel), color: .surfaceBackground)
+        if !self.isChildPage {
+            standardNavBar(leftBarButton: .init(customView: "Events".heading2().generateLabel), color: .surfaceBackground)
+        } else {
+            standardNavBar(title: "Events".heading2())
+        }
 	}
 	
 	private func scrollViewUpdate(_ scrollView: UIScrollView) {

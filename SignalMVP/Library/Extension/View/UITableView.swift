@@ -31,8 +31,10 @@ extension UITableView {
                 tableHeaderView?.animate(.fadeIn())
             } else {
                 tableHeaderView?.animate(.fadeOut()) {
-                    self.tableHeaderView = nil
-                    self.layoutIfNeeded()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(50)) {
+                        self.tableHeaderView = nil
+                        self.layoutIfNeeded()
+                    }
                 }
             }
         }

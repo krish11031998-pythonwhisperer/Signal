@@ -13,9 +13,10 @@ class NewsDetailView: UIViewController {
     
     private var imageView: UIImageView = { .standardImageView() }()
     private lazy var titleLabel: UILabel = { .init() }()
+    private lazy var authorLabel: UILabel = { .init() }()
     private lazy var descriptionLabel: UILabel = { .init() }()
     private lazy var viewNews: UIView = { .init() }()
-    private lazy var scrollView: ScrollView = { .init(ignoreSafeArea: true) }()
+    private lazy var scrollView: ScrollView = { .init(ignoreSafeArea: false) }()
     private var bag: Set<AnyCancellable> = .init()
     private lazy var viewMoreButton: UIButton = {
         let button = UIButton()
@@ -41,22 +42,21 @@ class NewsDetailView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupNav()
         setupView()
         tickersView.configTickers(news: news)
-        hideTabBarIfRequired()
         setupObservers()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        hideTabBarIfRequired()
         setupNav()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         showTabBarIfRequired()
-//        setupTransparentNavBar(color: .surfaceBackground, scrollColor: .surfaceBackground)
+        //setupTransparentNavBar(color: .surfaceBackground, scrollColor: .surfaceBackground)
     }
     
     private func setupView() {
@@ -68,6 +68,7 @@ class NewsDetailView: UIViewController {
         
         news.title.heading2().render(target: titleLabel)
         news.text.body2Medium().render(target: descriptionLabel)
+        news.sourceName.body3Regular(color: .gray).render(target: authorLabel)
         UIImage.loadImage(url: news.imageUrl, at: imageView, path: \.image)
         
         setupMainStack()
@@ -76,11 +77,10 @@ class NewsDetailView: UIViewController {
     private func setupNav() {
         if navigationController?.modalPresentationStyle == .custom {
             standardNavBar(rightBarButton: Self.closeButton(self),
-                           color: .clear,
-                           scrollColor: .clear)
+                           color: .clear)
             navigationItem.leftBarButtonItem = nil
         } else {
-            standardNavBar(color: .clear, scrollColor: .clear)
+            standardNavBar()
         }
     }
     
@@ -95,14 +95,21 @@ class NewsDetailView: UIViewController {
     }
     
     private func setupMainStack() {
-        let descriptionStack = setupDescriptionStack()
+        scrollView.addArrangedView(view: titleLabel.embedInView(insets: .init(top: 10, left: 0, bottom: 0, right: 0)))
+        scrollView.addArrangedView(view: authorLabel, additionalSpacing: 24)
         scrollView.addArrangedView(view: imageView, additionalSpacing: 24)
-        scrollView.addArrangedView(view: descriptionStack)
+        scrollView.addArrangedView(view: descriptionLabel, additionalSpacing: 16)
+        scrollView.showsVerticalScrollIndicator = false
+        scrollView.addArrangedView(view: UIStackView.HStack(subViews: [tickersView, .spacer()], spacing: 0, alignment: .center))
         scrollView.addArrangedView(view: .spacer(height: 75))
         view.addSubview(scrollView)
-        view.setFittingConstraints(childView: scrollView, insets: .zero)
+        view.setFittingConstraints(childView: scrollView, insets: .init(top: 0,
+                                                                        left: 16,
+                                                                        bottom: 0,
+                                                                        right: 16))
 
         imageView.setHeight(height: .totalHeight * 0.35, priority: .required)
+        imageView.clippedCornerRadius = 16
         view.addSubview(viewMoreButton)
         view.setFittingConstraints(childView: viewMoreButton, leading: 20, trailing: 20, bottom: .safeAreaInsets.bottom)
     }
@@ -124,21 +131,11 @@ class NewsDetailView: UIViewController {
         viewMoreButton.publisher(for: .touchUpInside)
             .sink(receiveValue: showWebpage(_:))
             .store(in: &bag)
-        
-        scrollView.contentOffset
-            .sink(receiveValue: didScroll(point:))
-            .store(in: &bag)
     }
     
     private func showWebpage(_ publisher: UIControl.EventPublisher.Output) {
         let webPage = WebPageView(url: news.newsUrl, title: news.title).withNavigationController()
         presentView(style: .sheet(), target: webPage, onDimissal: nil)
-    }
-    
-    private func didScroll(point: CGPoint) {
-        if point.y < 0 {
-            scrollView.scrollOffset.send(.zero)
-        }
     }
 }
 

@@ -9,23 +9,23 @@ import Foundation
 import UIKit
 import Combine
 
-class ScrollView: UIView {
+class ScrollView: UIScrollView {
     
-    private lazy var scroll: UIScrollView = {.init()}()
+    //private lazy var scroll: UIScrollView = {.init()}()
     private lazy var stackView: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
         return stack
     }()
-    public var scrollOffset: PassthroughSubject<CGPoint,Never> = .init()
-    private var bag: Set<AnyCancellable> = .init()
+//    public var scrollOffset: PassthroughSubject<CGPoint,Never> = .init()
+    //private var bag: Set<AnyCancellable> = .init()
     
     init(spacing: CGFloat = 8, ignoreSafeArea: Bool = false) {
         super.init(frame: .zero)
         stackView.spacing = spacing
-        scroll.contentInsetAdjustmentBehavior = ignoreSafeArea ? .never : .always
+        //scroll.contentInsetAdjustmentBehavior = ignoreSafeArea ? .never : .always
         setupView()
-        setupObservers()
+//        setupObservers()
     }
     
     required init?(coder: NSCoder) {
@@ -33,10 +33,10 @@ class ScrollView: UIView {
     }
     
     func setupView() {
-        addSubview(scroll)
-        setFittingConstraints(childView: scroll, insets: .zero)
-        scroll.addSubview(stackView)
-        scroll.setFittingConstraints(childView: stackView, top: 0, leading: 0, trailing: 0, bottom: 0, centerX: 0)
+//        addSubview(scroll)
+        //setFittingConstraints(childView: scroll, insets: .zero)
+        addSubview(stackView)
+        setFittingConstraints(childView: stackView, top: 0, leading: 0, trailing: 0, bottom: 0, centerX: 0)
     }
     
     func addArrangedView(view: UIView, additionalSpacing: CGFloat? = nil) {
@@ -46,20 +46,20 @@ class ScrollView: UIView {
         }
     }
     
-    func setupObservers() {
-        scrollOffset
-            .sink { [weak self] point in
-                self?.scroll.contentOffset = point
-            }
-            .store(in: &bag)
-    }
+//    func setupObservers() {
+//        scrollOffset
+//            .sink { [weak self] point in
+//                self?.scroll.contentOffset = point
+//            }
+//            .store(in: &bag)
+//    }
 }
 
 extension ScrollView {
     
-    var contentOffset: AnyPublisher<CGPoint,Never> {
-        scroll.publisher(for: \.contentOffset)
-            .eraseToAnyPublisher()
-    }
+//    var contentOffset: AnyPublisher<CGPoint,Never> {
+//        self.publisher(for: \.contentOffset)
+//            .eraseToAnyPublisher()
+//    }
     
 }

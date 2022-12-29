@@ -24,6 +24,7 @@ enum Animation {
     case bouncy
 	case slideInFromTop(from: CGFloat, to:CGFloat = 0, duration: CFTimeInterval = 0.3)
     case slide(_ direction: AnimationDirection, state: AnimationState = .in, duration: CFTimeInterval = 0.3)
+    case transformX(to: CGFloat, duration: CFTimeInterval = 0.3)
 	case circularProgress(from: CGFloat = 0, to: CGFloat, duration: CFTimeInterval = 0.3)
     case lineProgress(frame: CGRect, duration: CFTimeInterval = 0.3)
     case fadeIn(duration: CFTimeInterval = 0.3)
@@ -72,6 +73,11 @@ extension Animation {
             animation.duration = duration
             animation.isRemovedOnCompletion = false
             animation.fillMode = .forwards
+            return animation
+        case .transformX(let to, let duration):
+            let animation = CABasicAnimation(keyPath: "position.x")
+            animation.toValue = layer.frame.midX + to
+            animation.duration = duration
             return animation
 		case .circularProgress(let from, let to, let duration):
 			let animation = CABasicAnimation(keyPath: "strokeEnd")
@@ -130,6 +136,8 @@ extension Animation {
             return "slideInFromTop"
         case .slide:
             return "slide"
+        case .transformX:
+            return "transformX"
         case .circularProgress:
             return "circularProgress"
         case .lineProgress:

@@ -63,7 +63,7 @@ extension TableViewDataSource: UITableViewDelegate, UITableViewDataSource {
 	}
 	
 	public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        sections[section].customHeader ?? sections[section].title?.heading2().generateLabel.embedInView(insets: .init(by: 10))
+        sections[section].customHeader ?? sections[section].title?.heading2().generateLabel.embedInView(insets: .init(vertical: 0, horizontal: 10))
     }
 	
 	public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {

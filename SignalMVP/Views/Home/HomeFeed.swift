@@ -72,21 +72,19 @@ class HomeFeed: UIViewController {
                     self.navigationController?.pushViewController(TweetDetailView(tweet: tweet), animated: true)
                 case .toMention(_):
                     break
+                case .viewMoreNews:
+                    self.navigationController?.pushViewController(NewsFeed(isChildPage: true), animated: true)
+                case .viewMoreTweet:
+                    self.navigationController?.pushViewController(TweetFeedViewController(isChildPage: true), animated: true)
+                case .viewMoreEvent:
+                    self.navigationController?.pushViewController(EventsFeedViewController(isChildPage: true), animated: true)
+                    print("(DEBUG) Clicked on :", $0)
                 }
             }
             .store(in: &bag)
         
     }
 	
-}
-
-//MARK: - AnyTable
-
-extension HomeFeed: AnyTableView {
-	
-	func reloadTableWithDataSource(_ dataSource: TableViewDataSource) {
-		tableView.reloadData(dataSource)
-	}
 }
 
 

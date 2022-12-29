@@ -13,13 +13,16 @@ class NewsFeed: SearchViewController {
 	
 	private lazy var tableView: UITableView = { .init(frame: .zero, style: .grouped) }()
     private let viewModel: NewsViewModel = .init()
+    private let isChildPage: Bool
     
 	//MARK: - Overriden Methods
-    init() {
+    init(isChildPage: Bool = false) {
+        self.isChildPage = isChildPage
         super.init(resultController: NewsSearchResultController.self)
     }
 	
 	required init?(coder: NSCoder) {
+        self.isChildPage = false
 		super.init(coder: coder)
 	}
 	
@@ -42,12 +45,11 @@ class NewsFeed: SearchViewController {
 	}
 	
 	private func setupNavbar() {
-        let title = "News".heading2().generateLabel.blobify(backgroundColor: .surfaceBackground,
-                                                            edgeInset: .init(vertical: 5, horizontal: 10),
-                                                            borderColor: .clear,
-                                                            borderWidth: 0,
-                                                            cornerRadius: 15)
-        standardNavBar(leftBarButton: .init(customView: title), color: .clear)
+        if !isChildPage {
+            standardNavBar(leftBarButton: .init(customView: "News".heading2().generateLabel))
+        } else {
+            standardNavBar(title: "News".heading2())
+        }
 	}
     
     private func bind () {
