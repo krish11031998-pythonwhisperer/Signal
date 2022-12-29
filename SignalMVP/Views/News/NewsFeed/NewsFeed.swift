@@ -42,7 +42,12 @@ class NewsFeed: SearchViewController {
 	}
 	
 	private func setupNavbar() {
-        standardNavBar(leftBarButton: .init(customView: "News".heading2().generateLabel))
+        let title = "News".heading2().generateLabel.blobify(backgroundColor: .surfaceBackground,
+                                                            edgeInset: .init(vertical: 5, horizontal: 10),
+                                                            borderColor: .clear,
+                                                            borderWidth: 0,
+                                                            cornerRadius: 15)
+        standardNavBar(leftBarButton: .init(customView: title), color: .clear)
 	}
     
     private func bind () {

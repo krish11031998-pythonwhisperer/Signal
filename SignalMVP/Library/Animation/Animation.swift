@@ -69,16 +69,10 @@ extension Animation {
                 animation.toValue = .totalHeight + layer.frame.height.half * (state == .in ? -1 : 1)
                 default: break;
             }
-            
-            let opacity = CABasicAnimation(keyPath: "opacity")
-            opacity.fromValue = 1
-            opacity.toValue = 1
-            
-            let group = CAAnimationGroup()
-            group.animations = [animation, opacity]
-            group.duration = duration
-        
-            return group
+            animation.duration = duration
+            animation.isRemovedOnCompletion = false
+            animation.fillMode = .forwards
+            return animation
 		case .circularProgress(let from, let to, let duration):
 			let animation = CABasicAnimation(keyPath: "strokeEnd")
 			animation.fromValue = from

@@ -15,7 +15,7 @@ class RecentTweetCard: ConfigurableCollectionCell {
     private lazy var userImage: UIImageView = {
         let img: UIImageView = .init()
         img.circleFrame = .init(origin: .zero, size: .init(squared: 24))
-        img.border(color: .blue, borderWidth: 1, cornerRadius: 12)
+        img.border(color: .surfaceBackgroundInverse, borderWidth: 1, cornerRadius: 12)
         return img
     }()
     private lazy var userName: UILabel = { .init() }()
@@ -46,15 +46,16 @@ class RecentTweetCard: ConfigurableCollectionCell {
         
         contentView.addSubview(mainStack)
         contentView.setFittingConstraints(childView: mainStack, insets: .init(by: 7.5))
-        contentView.backgroundColor = .surfaceBackgroundInverse
-        contentView.clippedCornerRadius = 12
+        contentView.backgroundColor = .surfaceBackground
+        contentView.cornerRadius = 12
+        contentView.addShadow()
     }
     
     //MARK: - Exposed Methods
     
     func configure(with model: TweetCellModel) {
         UIImage.loadImage(url: model.user?.profileImageUrl, at: userImage, path: \.image, resized: .init(squared: 24))
-        model.user?.name.body3Medium(color: .textColorInverse).render(target: userName)
-        model.model?.text?.body3Regular(color: .textColorInverse).render(target: tweet)
+        model.user?.name.body3Medium(color: .textColor).render(target: userName)
+        model.model?.text?.body3Regular(color: .textColor).render(target: tweet)
     }
 }
