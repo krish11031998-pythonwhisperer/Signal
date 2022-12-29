@@ -61,7 +61,7 @@ class TweetCell: ConfigurableCell {
 		metricStack.alignment = .leading
 		return metricStack
 	}()
-    private var imgCancellable: Cancellable?
+    private var bag: Set<AnyCancellable> = .init()
 	override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
 		super.init(style: style, reuseIdentifier: reuseIdentifier)
 		setupCell()
@@ -104,18 +104,18 @@ class TweetCell: ConfigurableCell {
 		bodyLabel.numberOfLines = 0
 		bodyLabel.textAlignment = .left
 		
-        tweetAuthorView.configureView(with: .init(title: model.user?.name.body2Medium(),
+        let cancelable = tweetAuthorView.configureView(with: .init(title: model.user?.name.body2Medium(),
                                                   subTitle: model.user?.username.body3Medium(color: .gray),
                                                   leadingView: .image(url:  model.user?.profileImageUrl,
                                                                       size: .init(squared: 32),
                                                                       cornerRadius: 16)))
-        
+        cancelable?.forEach { bag.insert($0) }
 
 		if let media = model.media?.first,
 		   let photoUrl = media.url ?? media.previewImageUrl {
 			let height = (CGFloat.totalWidth - 32) * CGFloat(media.height)/CGFloat(media.width)
 			imageHeight.constant = height
-			imgCancellable = UIImage.loadImage(url: photoUrl, at: imgView, path: \.image)
+            UIImage.loadImage(url: photoUrl, at: imgView, path: \.image).store(in: &bag)
 			imgView.isHidden = false
 		} else {
 			imgView.isHidden = true
@@ -130,7 +130,7 @@ class TweetCell: ConfigurableCell {
 	}
     
     override func prepareForReuse() {
-        imgCancellable?.cancel()
+        bag.forEach { $0.cancel() }
     }
 }
 

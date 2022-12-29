@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Combine
 
 //MARK: - RoundedCardHeight
 enum RoundedCardHeight {
@@ -40,10 +41,11 @@ enum RoundedCardViewSideView {
 }
 
 extension RoundedCardViewSideView {
-    var view: UIView? {
+    var view: (UIView?, AnyCancellable?) {
         switch self {
         case .image(let url, let img, let size, let cornerRadius, let bordered, let borderColor, let borderWidth, let backgroundColor):
             let imgView = UIImageView(image: img)
+            var cancellable: AnyCancellable? = nil
             imgView.backgroundColor = backgroundColor
             imgView.contentMode = .center
             imgView.clippedCornerRadius = cornerRadius
@@ -52,17 +54,17 @@ extension RoundedCardViewSideView {
                 imgView.border(color: borderColor, borderWidth: borderWidth)
             }
             if let validUrl = url {
-                UIImage.loadImage(url: validUrl, at: imgView, path: \.image, resized: size)
+                cancellable = UIImage.loadImage(url: validUrl, at: imgView, path: \.image, resized: size)
             }
-            return imgView
+            return (imgView, cancellable)
         case .solidColor(let color, let size, let cornerRadius):
             let view = UIView()
             view.backgroundColor = color
             view.setFrame(size)
             view.clippedCornerRadius = cornerRadius
-            return view
+            return (view, nil)
         case .customView(let view):
-            return view
+            return (view, nil)
         }
     }
 }

@@ -14,12 +14,18 @@ extension CALayer {
         CATransaction.begin()
         
         let animationData = animation.animationData(at: self)
-        finalizePosition(animation: animation, remove: removeAfterCompletion)
+        
         CATransaction.setCompletionBlock {
             completion?()
         }
         
         add(animationData, forKey: nil)
+        switch animation {
+        case .fadeIn, .fadeInOut:
+            finalizePosition(animation: animationData, remove: removeAfterCompletion)
+        default:
+            break
+        }
         CATransaction.commit()
     }
     
@@ -41,7 +47,8 @@ extension CALayer {
     func finalizePosition(animation: Animation, remove: Bool) {
         switch animation {
         case .fadeOut, .fadeIn:
-            finalizePosition(animation: animation.animationData(at: self), remove: remove)
+            finalizePosition(animation: animation.animationData(at: self),
+                             remove: remove)
         default:
             break
         }

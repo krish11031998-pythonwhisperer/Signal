@@ -7,13 +7,14 @@
 
 import Foundation
 import UIKit
+import Combine
 
 class CustomCuratedCell: ConfigurableCollectionCell {
     
     private var imageView: UIImageView = { .standardImageView(dimmingForeground: true) }()
     private lazy var headlineLabel: UILabel = { .init() }()
     private lazy var tickers: UIView = { .init() }()
-    
+    private var bag: Set<AnyCancellable> = .init()
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -45,7 +46,7 @@ class CustomCuratedCell: ConfigurableCollectionCell {
         model.tickers.enumerated().forEach {
             
             @TickerImageView(size: .init(squared: 24)) var imgView;
-            UIImage.loadImage(url: $0.element.logoURL, at: imgView, path: \.image)
+            UIImage.loadImage(url: $0.element.logoURL, at: imgView, path: \.image).store(in: &bag)
             tickers.addSubview(imgView)
             tickers.setFittingConstraints(childView: imgView, top: 0, leading: CGFloat($0.offset * 16), bottom: 0)
         }
@@ -55,8 +56,12 @@ class CustomCuratedCell: ConfigurableCollectionCell {
     func configure(with model: EventCellModel) {
         let event = model.model
         imageView.image = nil
-        UIImage.loadImage(url: event.news.first?.imageUrl, at: imageView, path: \.image)
+        UIImage.loadImage(url: event.news.first?.imageUrl, at: imageView, path: \.image).store(in: &bag)
         event.eventName.body1Bold(color: .white).render(target: headlineLabel)
         configTickers(model: event)
+    }
+    
+    override func prepareForReuse() {
+        bag.forEach { $0.cancel() }
     }
 }

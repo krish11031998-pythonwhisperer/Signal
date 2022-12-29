@@ -91,6 +91,8 @@ extension Animation {
             let animation = CABasicAnimation(keyPath: "path")
             animation.toValue = UIBezierPath(roundedRect: frame, cornerRadius: frame.size.smallDim.half).cgPath
             animation.duration = duration
+            animation.isRemovedOnCompletion = false
+            animation.fillMode = .forwards
             return animation
         case .fadeIn(let duration):
             let animation = CABasicAnimation(keyPath: "opacity")

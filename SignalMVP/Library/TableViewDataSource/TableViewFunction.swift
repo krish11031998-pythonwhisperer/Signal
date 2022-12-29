@@ -77,14 +77,12 @@ extension UITableView {
         
         let offset = self.contentOffset
         
-        //performBatchUpdates {
         UIView.performWithoutAnimation {
             beginUpdates()
             insertRows(at: newIndexPath, with: .automatic)
             setContentOffset(offset, animated: false)
             endUpdates()
         }
-        //}
     }
 
     func insertRows(rows: [TableCellProvider], section: Int) {

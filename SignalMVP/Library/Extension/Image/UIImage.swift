@@ -160,7 +160,6 @@ extension UIImage {
                 object[keyPath: path] = image
                 
             }
-
     }
 }
 

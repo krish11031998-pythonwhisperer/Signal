@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Combine
 
 class EventSingleCell: ConfigurableCell {
 	
@@ -15,6 +16,7 @@ class EventSingleCell: ConfigurableCell {
     private lazy var imgView: UIImageView = { .init(size: .init(squared: 64), cornerRadius: 10) }()
 	private lazy var newsArticleCount: UILabel = { .init() }()
     private lazy var tickersView: TickerSymbolView = { .init() }()
+    private var cancellable: AnyCancellable?
 	
 //MARK: - Overriden
 	override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -57,10 +59,14 @@ class EventSingleCell: ConfigurableCell {
 		eventTitle.numberOfLines = 0
 
 		if let firstImgURL = model.model.news.first?.imageUrl {
-			UIImage.loadImage(url: firstImgURL, at: imgView, path: \.image)
+			cancellable = UIImage.loadImage(url: firstImgURL, at: imgView, path: \.image)
 		}
 
 		"\(model.model.news.count) News Articles".body2Regular(color: .gray).render(target: newsArticleCount)
         tickersView.configTickers(news: model.model)
 	}
+    
+    override func prepareForReuse() {
+        cancellable?.cancel()
+    }
 }

@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Combine
 
 fileprivate extension UILabel {
     func renderWithText(_ str: RenderableText?) {
@@ -121,9 +122,13 @@ class RoundedCardView: UIView {
         }
     }
     
-    public func configureView(with model: RoundedCardViewConfig) {
-        configureLeadingView(title: model.title, subTitle: model.subTitle, view: model.leadingView?.view)
-        configureTrailingingView(caption: model.caption, subCaption: model.subCaption, view: model.trailingView?.view)
+    @discardableResult
+    public func configureView(with model: RoundedCardViewConfig) -> [AnyCancellable]? {
+        let leadingView = model.leadingView?.view
+        let trailingView = model.trailingView?.view
+        configureLeadingView(title: model.title, subTitle: model.subTitle, view: leadingView?.0)
+        configureTrailingingView(caption: model.caption, subCaption: model.subCaption, view: trailingView?.0)
+        return [leadingView?.1, trailingView?.1].compactMap { $0 }
     }
     
 }
@@ -166,7 +171,7 @@ extension RoundedCardView: RoundedCardViewConfigurable {
         
         trailingStack.isHidden = hideTrailingStack
         
-        guard let newSideView = newView.view else { return }
+        guard let newSideView = newView.view.0 else { return }
         
         guard animated else {
             self.trailingView?.removeFromSuperview()
@@ -189,7 +194,7 @@ extension RoundedCardView: RoundedCardViewConfigurable {
         
         trailingStack.isHidden = hideTrailingStack
         
-        guard let newSideView = newView.view else { return }
+        guard let newSideView = newView.view.0 else { return }
         
         guard let animation = insertAnimation else {
             self.trailingView?.removeFromSuperview()

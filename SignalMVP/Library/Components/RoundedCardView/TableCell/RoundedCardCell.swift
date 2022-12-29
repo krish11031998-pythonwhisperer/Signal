@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Combine
 
 struct RoundedCardCellModel: ActionProvider {
     var model: RoundedCardViewConfig
@@ -16,6 +17,7 @@ struct RoundedCardCellModel: ActionProvider {
 class RoundedCardCell: ConfigurableCell {
     
     private lazy var card: RoundedCardView = { .init() }()
+    private var bag: Set<AnyCancellable> = .init()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -35,6 +37,11 @@ class RoundedCardCell: ConfigurableCell {
     }
     
     func configure(with model: RoundedCardCellModel) {
-        card.configureView(with: model.model)
+        let cancellables = card.configureView(with: model.model)
+        cancellables?.compactMap { $0 }.forEach { bag.insert($0) }
+    }
+    
+    override func prepareForReuse() {
+        bag.forEach { $0.cancel() }
     }
 }

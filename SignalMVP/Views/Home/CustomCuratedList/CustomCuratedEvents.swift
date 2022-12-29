@@ -19,7 +19,6 @@ struct CuratedEventModel {
 class CustomCuratedEvents: ConfigurableCell {
     
     private let itemSize: CGSize = { .init(width: 250, height: 300) }()
-    private let numberOfItems: Int = 10
     private lazy var layout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -63,7 +62,7 @@ class CustomCuratedEvents: ConfigurableCell {
     }
     
     private var headlineSection: CollectionSection? {
-        guard let events = eventsModel?.events else { return nil }
+        guard let events = eventsModel?.events.limitTo(to: 5) else { return nil }
         return .init(cell: Set(events).compactMap { event in
             var model = EventCellModel(model: event)
             model.action = { [weak self] in
@@ -80,7 +79,8 @@ class CustomCuratedEvents: ConfigurableCell {
     private func scrollUpdate(scrollView: UIScrollView) {
         guard scrollView.contentOffset != .zero else { return }
         let cellIdx = (scrollView.contentOffset.x/itemSize.width).rounded(.up)
-        guard cellIdx > 0 , Int(cellIdx) < numberOfItems - 1 else { return }
+        guard let count = eventsModel?.events.count, cellIdx > 0 ,
+              Int(cellIdx) < count - 1 else { return }
         UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut) {
             scrollView.contentOffset.x = (cellIdx - 1) * self.itemSize.width + (cellIdx - 1) * self.layout.minimumInteritemSpacing
         }
