@@ -27,6 +27,11 @@
 		EF1644A42905573600E9D997 /* signalNews.json in Resources */ = {isa = PBXBuildFile; fileRef = EF1644A32905573600E9D997 /* signalNews.json */; };
 		EF1644A62905691A00E9D997 /* signalEvents.json in Resources */ = {isa = PBXBuildFile; fileRef = EF1644A52905691A00E9D997 /* signalEvents.json */; };
 		EF1644A9290589B500E9D997 /* CustomCuratedEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1644A8290589B500E9D997 /* CustomCuratedEvents.swift */; };
+		EF187CA7295DBB130031CE78 /* SocialHighlightInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF187CA6295DBB130031CE78 /* SocialHighlightInterface.swift */; };
+		EF187CAA295DBB580031CE78 /* SocialHighlightsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF187CA9295DBB580031CE78 /* SocialHighlightsModel.swift */; };
+		EF187CAD295DBBDC0031CE78 /* GenericResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF187CAC295DBBDC0031CE78 /* GenericResult.swift */; };
+		EF187CAF295DBCE90031CE78 /* SocailHighlightService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF187CAE295DBCE90031CE78 /* SocailHighlightService.swift */; };
+		EF187CB1295DBD170031CE78 /* SocialHighlightsEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF187CB0295DBD170031CE78 /* SocialHighlightsEndpoint.swift */; };
 		EF1D7E592922CCFD0041ADEC /* CollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1D7E532922CCFD0041ADEC /* CollectionDataSource.swift */; };
 		EF1D7E5A2922CCFD0041ADEC /* CollectionSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1D7E542922CCFD0041ADEC /* CollectionSection.swift */; };
 		EF1D7E5B2922CCFD0041ADEC /* CollectionViewFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1D7E552922CCFD0041ADEC /* CollectionViewFunctions.swift */; };
@@ -278,6 +283,11 @@
 		EF1644A32905573600E9D997 /* signalNews.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = signalNews.json; sourceTree = "<group>"; };
 		EF1644A52905691A00E9D997 /* signalEvents.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = signalEvents.json; sourceTree = "<group>"; };
 		EF1644A8290589B500E9D997 /* CustomCuratedEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCuratedEvents.swift; sourceTree = "<group>"; };
+		EF187CA6295DBB130031CE78 /* SocialHighlightInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialHighlightInterface.swift; sourceTree = "<group>"; };
+		EF187CA9295DBB580031CE78 /* SocialHighlightsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialHighlightsModel.swift; sourceTree = "<group>"; };
+		EF187CAC295DBBDC0031CE78 /* GenericResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericResult.swift; sourceTree = "<group>"; };
+		EF187CAE295DBCE90031CE78 /* SocailHighlightService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocailHighlightService.swift; sourceTree = "<group>"; };
+		EF187CB0295DBD170031CE78 /* SocialHighlightsEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialHighlightsEndpoint.swift; sourceTree = "<group>"; };
 		EF1D7E532922CCFD0041ADEC /* CollectionDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionDataSource.swift; sourceTree = "<group>"; };
 		EF1D7E542922CCFD0041ADEC /* CollectionSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionSection.swift; sourceTree = "<group>"; };
 		EF1D7E552922CCFD0041ADEC /* CollectionViewFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewFunctions.swift; sourceTree = "<group>"; };
@@ -587,6 +597,32 @@
 				EF987B8D291F97AC0000E233 /* CuratedEventCell.swift */,
 			);
 			path = CustomCuratedList;
+			sourceTree = "<group>";
+		};
+		EF187CA5295DBAFC0031CE78 /* SocialHighlights */ = {
+			isa = PBXGroup;
+			children = (
+				EF187CA6295DBB130031CE78 /* SocialHighlightInterface.swift */,
+				EF187CAE295DBCE90031CE78 /* SocailHighlightService.swift */,
+				EF187CB0295DBD170031CE78 /* SocialHighlightsEndpoint.swift */,
+			);
+			path = SocialHighlights;
+			sourceTree = "<group>";
+		};
+		EF187CA8295DBB4B0031CE78 /* SocialHighlights */ = {
+			isa = PBXGroup;
+			children = (
+				EF187CA9295DBB580031CE78 /* SocialHighlightsModel.swift */,
+			);
+			path = SocialHighlights;
+			sourceTree = "<group>";
+		};
+		EF187CAB295DBBC30031CE78 /* GenericModels */ = {
+			isa = PBXGroup;
+			children = (
+				EF187CAC295DBBDC0031CE78 /* GenericResult.swift */,
+			);
+			path = GenericModels;
 			sourceTree = "<group>";
 		};
 		EF1D7E522922CCFD0041ADEC /* CollectionViewDataSource */ = {
@@ -1154,6 +1190,7 @@
 		EF86381428DC1E7D00EF520C /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				EF187CA5295DBAFC0031CE78 /* SocialHighlights */,
 				EF06E457295BBD9D00820AFE /* Auth */,
 				EF5C4EDE29577C3100669355 /* User */,
 				EF5C4EAA2951928F00669355 /* Ticker */,
@@ -1389,6 +1426,8 @@
 		EFDC741628E3372400042452 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				EF187CAB295DBBC30031CE78 /* GenericModels */,
+				EF187CA8295DBB4B0031CE78 /* SocialHighlights */,
 				EF5C4EE129577C7600669355 /* User */,
 				EF5C4EA7295191F600669355 /* Tickers */,
 				EFFFE46E294835650045686E /* DataProtocols */,
@@ -1744,6 +1783,7 @@
 				EF7D2FB228E050450003B8F3 /* MentionInterface.swift in Sources */,
 				EF3B698D2959D48200C9234B /* withLatestFrom.swift in Sources */,
 				EF04E345294EFBE500E35815 /* Result+Future.swift in Sources */,
+				EF187CB1295DBD170031CE78 /* SocialHighlightsEndpoint.swift in Sources */,
 				EF987B992920F1A80000E233 /* CGPoint.swift in Sources */,
 				EF1644A0290550B300E9D997 /* ServiceHelper.swift in Sources */,
 				EF7D2FB628E051940003B8F3 /* StubMentionService.swift in Sources */,
@@ -1791,6 +1831,7 @@
 				EF5C4EBA2953073100669355 /* UISearchController+Styling.swift in Sources */,
 				EF1D7E5D2922CCFD0041ADEC /* CollectionColumn.swift in Sources */,
 				EF7CBFF7291641EA00F9D611 /* NetworkReqeust.swift in Sources */,
+				EF187CAA295DBB580031CE78 /* SocialHighlightsModel.swift in Sources */,
 				EF00758F28E5CBA000195433 /* NewsService.swift in Sources */,
 				EF06E455295B79A900820AFE /* ImageCache.swift in Sources */,
 				EF86383728DC648000EF520C /* NewsViewModel.swift in Sources */,
@@ -1829,6 +1870,7 @@
 				EF7CC002291641EA00F9D611 /* SymbolImage.swift in Sources */,
 				EF7CC01629166E6F00F9D611 /* RatingChartCandle.swift in Sources */,
 				EF987B9F29213CCA0000E233 /* PresentationStyle.swift in Sources */,
+				EF187CAD295DBBDC0031CE78 /* GenericResult.swift in Sources */,
 				EF92FD7F292832280004F547 /* NSAttributedString+Utils.swift in Sources */,
 				EF96382828DD92E900178C37 /* RedditPostCard.swift in Sources */,
 				EF59F110292A9602002877DE /* CustomTableCell.swift in Sources */,
@@ -1845,6 +1887,7 @@
 				EFFFE472294B97750045686E /* VideoTikTokCell.swift in Sources */,
 				EF86383328DC5CAF00EF520C /* NewsFeed.swift in Sources */,
 				EF7D2FC928E0A0E10003B8F3 /* VideoCell.swift in Sources */,
+				EF187CA7295DBB130031CE78 /* SocialHighlightInterface.swift in Sources */,
 				EF1644A9290589B500E9D997 /* CustomCuratedEvents.swift in Sources */,
 				EF5C4ECB2956E9A400669355 /* UserDefaultsStores.swift in Sources */,
 				EF5C4EBD29530C0700669355 /* SeachViewController.swift in Sources */,
@@ -1888,6 +1931,7 @@
 				EF7CBFE4291641EA00F9D611 /* Views.swift in Sources */,
 				EF7CBFE6291641EA00F9D611 /* FontCatalogue.swift in Sources */,
 				EF59F10B292A331A002877DE /* UITabbar.swift in Sources */,
+				EF187CAF295DBCE90031CE78 /* SocailHighlightService.swift in Sources */,
 				EF7CBFE0291641EA00F9D611 /* UITableView.swift in Sources */,
 				EF7CBFF3291641EA00F9D611 /* Int.swift in Sources */,
 				EF59F11B292A969A002877DE /* ProgressBars.swift in Sources */,

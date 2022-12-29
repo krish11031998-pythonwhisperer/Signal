@@ -60,15 +60,19 @@ class HomeFeed: UIViewController {
             }
             .store(in: &bag)
 
-        output.selectedMention
+        output.navigation
             .sink { [weak self] in
-                self?.navigationController?.pushViewController(TopMentionDetailView(mention: $0), animated: true)
-            }
-            .store(in: &bag)
-        
-        output.selectedEvent
-            .sink { [weak self] in
-                self?.navigationController?.pushViewController(EventDetailView(eventModel: $0), animated: true)
+                guard let self else { return }
+                switch $0 {
+                case .toEvent(let event):
+                    self.navigationController?.pushViewController(EventDetailView(eventModel: event), animated: true)
+                case .toNews(let news):
+                    self.navigationController?.pushViewController(NewsDetailView(news: news), animated: true)
+                case .toTweet(let tweet):
+                    self.navigationController?.pushViewController(TweetDetailView(tweet: tweet), animated: true)
+                case .toMention(_):
+                    break
+                }
             }
             .store(in: &bag)
         

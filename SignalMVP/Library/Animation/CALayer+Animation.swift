@@ -21,7 +21,7 @@ extension CALayer {
         
         add(animationData, forKey: nil)
         switch animation {
-        case .fadeIn, .fadeInOut:
+        case .fadeIn, .fadeOut:
             finalizePosition(animation: animationData, remove: removeAfterCompletion)
         default:
             break

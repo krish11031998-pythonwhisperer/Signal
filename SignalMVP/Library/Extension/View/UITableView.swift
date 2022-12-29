@@ -27,12 +27,12 @@ extension UITableView {
                 tableHeaderView = headerView
                 tableHeaderView?.frame = .init(origin: .zero, size: .init(width: .totalWidth, height: headerView.compressedSize.height))
                 tableHeaderView?.alpha = 0
-                setNeedsLayout()
+                layoutIfNeeded()
                 tableHeaderView?.animate(.fadeIn())
             } else {
                 tableHeaderView?.animate(.fadeOut()) {
                     self.tableHeaderView = nil
-                    self.setNeedsLayout()
+                    self.layoutIfNeeded()
                 }
             }
         }
