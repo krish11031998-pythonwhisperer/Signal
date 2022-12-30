@@ -15,7 +15,7 @@ class TweetDetailView: UIViewController {
     
     private let tweet: TweetModel?
     private var bag: Set<AnyCancellable> = .init()
-	private lazy var profileHeader: ImageHeadSubHeaderView = { .init() }()
+    private lazy var profileHeader: RoundedCardView = { .init(appearance: .init(backgroundColor: .surfaceBackground, cornerRadius: 0, insets: .zero, iterSpacing: 12, lineSpacing: 8)) }()
 	private lazy var bodyLabel: UILabel = { .init() }()
 	private lazy var imgView: TweetDetailImage = { .init() }()
 	private lazy var scrollView: UIScrollView = {
@@ -76,19 +76,16 @@ class TweetDetailView: UIViewController {
 	}
     
 	func configureViews() {
-        tweet?.text?.styled(font: .light, color: .textColor, size: 25).render(target: bodyLabel)
+        tweet?.text?.styled(font: .regular, color: .textColor, size: 20).render(target: bodyLabel)
 		bodyLabel.numberOfLines = 0
 		
-		profileHeader.configure(config: .init(title: tweet?.user?.username,
-                                              imgUrl: tweet?.user?.profileImageUrl,
-                                              imgSize: .init(squared: 48)), radius: 24)
+        profileHeader.configureView(with: .init(title: tweet?.user?.name.body2Medium(),
+                                                subTitle: tweet?.user?.username.body3Medium(color: .gray),
+                                                leadingView: .image(url: tweet?.user?.profileImageUrl,
+                                                                    size: .init(squared: 48),
+                                                                    cornerRadius: 24,
+                                                                    bordered: false)))?.forEach{  bag.insert($0) }
 
-		if let url = tweet?.media?.first?.url ?? tweet?.media?.first?.previewImageUrl {
-			imgView.configureView(url: url , cornerRadius: 10)
-			imgView.setHeight(height: 350, priority: .required)
-			imgView.isHidden = false
-		}
-        
         if let tags = tweet?.tickers {
             print("(DEBUG) tags :", tags)
             mentionedTickers.isHidden = tags.isEmpty
@@ -96,11 +93,14 @@ class TweetDetailView: UIViewController {
         }
         
 		
-		if let url = tweet?.urls?.first {
-			print("(DEBUG) tweetId: ", tweet?.id)
+        if let url = tweet?.urls?.first, url.images != nil {
 			tweetURLView.configureView(url)
 			tweetURLView.isHidden = false
-		}
+        } else if let imageUrl = tweet?.media?.first?.previewImageUrl {
+            imgView.configureView(url: imageUrl , cornerRadius: 10)
+            imgView.setHeight(height: 350, priority: .required)
+            imgView.isHidden = false
+        }
 		
 	}
 	

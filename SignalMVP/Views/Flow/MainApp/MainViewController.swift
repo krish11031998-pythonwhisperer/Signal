@@ -16,7 +16,7 @@ class MainViewController: UITabBarController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
         setupMainApp()
-        authPublisherListener()
+        //authPublisherListener()
 	}
 
     override func viewWillAppear(_ animated: Bool) {
@@ -33,15 +33,15 @@ class MainViewController: UITabBarController {
                         onDimissal: nil)
         }
     }
-    
-    private func authPublisherListener() {
-        authPublisher
-            .sink { [weak self] user in
-                guard let self, let user = user else { return }
-                print("(DEBUG) user: ", user.email)
-            }
-            .store(in: &bag)
-    }
+//
+//    private func authPublisherListener() {
+//        authPublisher
+//            .sink { [weak self] user in
+//                guard let self, let user = user else { return }
+//                print("(DEBUG) user: ", user.email)
+//            }
+//            .store(in: &bag)
+//    }
     
     private func setupMainApp() {
         view.backgroundColor = .clear

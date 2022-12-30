@@ -68,9 +68,9 @@ class WebPageView: UIViewController {
     
     private func loadWebPage() {
         guard let url = URL(string: urlStr) else { return }
-        asyncMain {
+        //DispatchQueue.main.async {
             self.webPage.load(.init(url: url))
-        }
+        //}
     }
     
     private func navigateWebPage(button: UIImage.Catalogue) {

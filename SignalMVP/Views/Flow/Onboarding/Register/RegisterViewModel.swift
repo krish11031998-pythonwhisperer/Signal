@@ -28,20 +28,21 @@ class RegisterViewModel {
     }
     
     public func transform(input: Input) -> Output {
-        
-        let navigation = input.registerUser
-            .combineLatest(input.username, input.email, input.password) { _, username, email, password in
-                return UserRegister(username: username, email: email, password: password)
-            }
-            .flatMap {
-                FirebaseAuthService.shared.registerUser(email: $0.email, password: $0.password)
-            }
+        //TODO: Password Validation Rule!
+  
+        let navigation =
+        input.registerUser
+            .combineLatest(input.username, input.email, input.password) { UserRegister(username: $1, email: $2, password: $3)}
+            .flatMap { UserService.shared.registerUser(model: $0) }
             .compactMap {
-                if let user = $0?.user {
+                print("(DEBUG) Success: ",$0.success)
+                if let user = $0.data {
+                    print("(DEBUG) user: ", user.uid)
                     return Routes.nextPage
                 } else {
-                    return Routes.errorMessage(err: "")
+                    print("(ERROR) err from registration: ", $0.err)
                 }
+                return nil
             }
             .eraseToAnyPublisher()
         

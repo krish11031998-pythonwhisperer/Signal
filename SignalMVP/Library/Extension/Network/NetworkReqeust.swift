@@ -26,6 +26,9 @@ extension EndPoint {
         return "https"
     }
     
+    var debugBaseUrl: String  {
+        return ""
+    }
     var baseUrl: String {
         return "signal.up.railway.app"
     }
@@ -56,6 +59,8 @@ extension EndPoint {
 		var request: URLRequest = .init(url: url)
 		request.allHTTPHeaderFields = header
         request.httpBody = body
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.httpMethod = method
 		return request
 	}

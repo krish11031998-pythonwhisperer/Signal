@@ -20,7 +20,7 @@ extension UserEndpoint: EndPoint {
         case .register:
             return "/user/createUser"
         case .login:
-            return "/user/createUser"
+            return "/user/loginUser"
         }
     }
     

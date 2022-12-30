@@ -18,7 +18,6 @@
 		EF06E455295B79A900820AFE /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF06E454295B79A900820AFE /* ImageCache.swift */; };
 		EF06E459295BBDD200820AFE /* AuthInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF06E458295BBDD200820AFE /* AuthInterface.swift */; };
 		EF06E45B295BBE2200820AFE /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF06E45A295BBE2200820AFE /* AuthService.swift */; };
-		EF06E45D295BC3AF00820AFE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EF06E45C295BC3AF00820AFE /* GoogleService-Info.plist */; };
 		EF06E460295C39E500820AFE /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF06E45F295C39E500820AFE /* LoadingIndicator.swift */; };
 		EF06E463295C51AB00820AFE /* AuthPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF06E462295C51AB00820AFE /* AuthPublisher.swift */; };
 		EF06E465295C61F100820AFE /* PublishersExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF06E464295C61F100820AFE /* PublishersExtension.swift */; };
@@ -40,6 +39,7 @@
 		EF1D7E5C2922CCFD0041ADEC /* CustomCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1D7E572922CCFD0041ADEC /* CustomCollectionCell.swift */; };
 		EF1D7E5D2922CCFD0041ADEC /* CollectionColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1D7E582922CCFD0041ADEC /* CollectionColumn.swift */; };
 		EF2BB215292BF4E40006C00F /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2BB214292BF4E40006C00F /* VideoViewController.swift */; };
+		EF2F6C2A295EC3610066D9D3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EF2F6C29295EC3600066D9D3 /* GoogleService-Info.plist */; };
 		EF3B698D2959D48200C9234B /* withLatestFrom.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3B698C2959D48200C9234B /* withLatestFrom.swift */; };
 		EF3B698F295A4A3600C9234B /* UIScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3B698E295A4A3600C9234B /* UIScrollView.swift */; };
 		EF48D71328E4CFCF00BD2A1A /* MainTabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF48D71228E4CFCF00BD2A1A /* MainTabModel.swift */; };
@@ -276,7 +276,6 @@
 		EF06E454295B79A900820AFE /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		EF06E458295BBDD200820AFE /* AuthInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthInterface.swift; sourceTree = "<group>"; };
 		EF06E45A295BBE2200820AFE /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
-		EF06E45C295BC3AF00820AFE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EF06E45F295C39E500820AFE /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
 		EF06E462295C51AB00820AFE /* AuthPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthPublisher.swift; sourceTree = "<group>"; };
 		EF06E464295C61F100820AFE /* PublishersExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishersExtension.swift; sourceTree = "<group>"; };
@@ -298,6 +297,7 @@
 		EF1D7E572922CCFD0041ADEC /* CustomCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCollectionCell.swift; sourceTree = "<group>"; };
 		EF1D7E582922CCFD0041ADEC /* CollectionColumn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionColumn.swift; sourceTree = "<group>"; };
 		EF2BB214292BF4E40006C00F /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
+		EF2F6C29295EC3600066D9D3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EF3B698C2959D48200C9234B /* withLatestFrom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = withLatestFrom.swift; sourceTree = "<group>"; };
 		EF3B698E295A4A3600C9234B /* UIScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScrollView.swift; sourceTree = "<group>"; };
 		EF48D71228E4CFCF00BD2A1A /* MainTabModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabModel.swift; sourceTree = "<group>"; };
@@ -1394,7 +1394,7 @@
 				EFB1C23628DB3B1900DD40A4 /* Assets.xcassets */,
 				EFB1C23828DB3B1900DD40A4 /* LaunchScreen.storyboard */,
 				EFB1C23B28DB3B1900DD40A4 /* Info.plist */,
-				EF06E45C295BC3AF00820AFE /* GoogleService-Info.plist */,
+				EF2F6C29295EC3600066D9D3 /* GoogleService-Info.plist */,
 			);
 			path = SignalMVP;
 			sourceTree = "<group>";
@@ -1622,7 +1622,7 @@
 				EF7CBFEB291641EA00F9D611 /* Montserrat-LightItalic.ttf in Resources */,
 				EF7CC00F291641EA00F9D611 /* Satoshi-Variable.ttf in Resources */,
 				EF7CBFEA291641EA00F9D611 /* Code Pro LC.otf in Resources */,
-				EF06E45D295BC3AF00820AFE /* GoogleService-Info.plist in Resources */,
+				EF2F6C2A295EC3610066D9D3 /* GoogleService-Info.plist in Resources */,
 				EF7D2FCB28E0A1540003B8F3 /* videos.json in Resources */,
 				EF1644A42905573600E9D997 /* signalNews.json in Resources */,
 				EF7CC007291641EA00F9D611 /* Satoshi-Black.otf in Resources */,
@@ -2121,10 +2121,10 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SignalMVP/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Signal;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.magazines-and-newspapers";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2152,10 +2152,10 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SignalMVP/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Signal;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.magazines-and-newspapers";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
