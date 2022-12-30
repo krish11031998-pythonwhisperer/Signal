@@ -32,6 +32,8 @@
 		EF187CAD295DBBDC0031CE78 /* GenericResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF187CAC295DBBDC0031CE78 /* GenericResult.swift */; };
 		EF187CAF295DBCE90031CE78 /* SocailHighlightService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF187CAE295DBCE90031CE78 /* SocailHighlightService.swift */; };
 		EF187CB1295DBD170031CE78 /* SocialHighlightsEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF187CB0295DBD170031CE78 /* SocialHighlightsEndpoint.swift */; };
+		EF187CB3295E2F2A0031CE78 /* TweetDetailImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF187CB2295E2F2A0031CE78 /* TweetDetailImage.swift */; };
+		EF187CB5295E304B0031CE78 /* NewTweetMetricView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF187CB4295E304B0031CE78 /* NewTweetMetricView.swift */; };
 		EF1D7E592922CCFD0041ADEC /* CollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1D7E532922CCFD0041ADEC /* CollectionDataSource.swift */; };
 		EF1D7E5A2922CCFD0041ADEC /* CollectionSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1D7E542922CCFD0041ADEC /* CollectionSection.swift */; };
 		EF1D7E5B2922CCFD0041ADEC /* CollectionViewFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1D7E552922CCFD0041ADEC /* CollectionViewFunctions.swift */; };
@@ -288,6 +290,8 @@
 		EF187CAC295DBBDC0031CE78 /* GenericResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericResult.swift; sourceTree = "<group>"; };
 		EF187CAE295DBCE90031CE78 /* SocailHighlightService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocailHighlightService.swift; sourceTree = "<group>"; };
 		EF187CB0295DBD170031CE78 /* SocialHighlightsEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialHighlightsEndpoint.swift; sourceTree = "<group>"; };
+		EF187CB2295E2F2A0031CE78 /* TweetDetailImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetDetailImage.swift; sourceTree = "<group>"; };
+		EF187CB4295E304B0031CE78 /* NewTweetMetricView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTweetMetricView.swift; sourceTree = "<group>"; };
 		EF1D7E532922CCFD0041ADEC /* CollectionDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionDataSource.swift; sourceTree = "<group>"; };
 		EF1D7E542922CCFD0041ADEC /* CollectionSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionSection.swift; sourceTree = "<group>"; };
 		EF1D7E552922CCFD0041ADEC /* CollectionViewFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewFunctions.swift; sourceTree = "<group>"; };
@@ -1315,6 +1319,8 @@
 				EF96382928DDD59F00178C37 /* TweetDetailView.swift */,
 				EF96383228DDFEDF00178C37 /* TweetMetricsView.swift */,
 				EFB3181528E97B93008FC27E /* TweetURLView.swift */,
+				EF187CB2295E2F2A0031CE78 /* TweetDetailImage.swift */,
+				EF187CB4295E304B0031CE78 /* NewTweetMetricView.swift */,
 			);
 			path = TweetDetail;
 			sourceTree = "<group>";
@@ -1825,6 +1831,7 @@
 				EF5C4E9C2950AE0400669355 /* NewsSearchViewModel.swift in Sources */,
 				EFB1C22E28DB3B1800DD40A4 /* AppDelegate.swift in Sources */,
 				EF04E347294F10F000E35815 /* VideoViewModel.swift in Sources */,
+				EF187CB3295E2F2A0031CE78 /* TweetDetailImage.swift in Sources */,
 				EF96382628DD90A400178C37 /* RedditViewModel.swift in Sources */,
 				EF987B972920E9FA0000E233 /* CommonWrappers.swift in Sources */,
 				EF7CBFDE291641EA00F9D611 /* Fundamentals.swift in Sources */,
@@ -1901,6 +1908,7 @@
 				EF86383E28DC990500EF520C /* EventsFeed.swift in Sources */,
 				EF96382428DD8FDC00178C37 /* RedditFeed.swift in Sources */,
 				EF7CBFDA291641EA00F9D611 /* ShapeLayer.swift in Sources */,
+				EF187CB5295E304B0031CE78 /* NewTweetMetricView.swift in Sources */,
 				EF987B712917A1F80000E233 /* TopMentionStoryCell.swift in Sources */,
 				EF7CBFFF291641EA00F9D611 /* SearchBar.swift in Sources */,
 				EF96383028DDE60700178C37 /* TweetMetrics.swift in Sources */,

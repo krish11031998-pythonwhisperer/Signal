@@ -23,10 +23,10 @@ struct TweetModel:Codable {
 	let media: [TweetMedia]?
 	let urls: [TweetURL]?
 	let user: TweetUser?
-	//let cashTags: [TweetTags]?
-	//let hashTags: [TweetTags]?
-	//let opinions: TweetOpinion?
-	//let reactions: TweetReaction?
+	let cashTags: [TweetTags]?
+	let hashTags: [TweetTags]?
+	let opinions: TweetOpinion?
+	let reactions: TweetReaction?
 
 	enum CodingKeys: String, CodingKey {
 		case id
@@ -36,8 +36,7 @@ struct TweetModel:Codable {
 		case attachments
 		case media
         case urls
-        case user
-//             cashTags, hashTags, opinions, reactions
+        case user, cashTags, hashTags, opinions, reactions
 	}
 }
 

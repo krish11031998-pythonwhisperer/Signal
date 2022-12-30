@@ -118,7 +118,7 @@ extension UITableView {
         self.delegate = newSource
         
         let currentRows = (0..<numberOfRows(inSection: section)).map { IndexPath(row: $0, section: section) }
-//        let newRows = (0..<(source?.tableView(self, numberOfRowsInSection: section) ?? 1).map { IndexPath(row: $0, section: section) }
+        
         let newRows = (0..<(source?.tableView(self, numberOfRowsInSection: section) ?? 1)).map { IndexPath(row: $0, section: section) }
 
         let offset = self.contentOffset

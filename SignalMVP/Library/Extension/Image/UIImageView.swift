@@ -21,7 +21,7 @@ extension UIImageView {
     convenience init(circleFrame: CGRect, contentMode: UIView.ContentMode = .scaleAspectFill) {
         self.init()
         backgroundColor = .gray.withAlphaComponent(0.25)
-        clippedCornerRadius = circleFrame.size.smallDim.half
+        cornerRadius = circleFrame.size.smallDim.half
         setFrame(circleFrame.size)
         self.contentMode = contentMode
     }

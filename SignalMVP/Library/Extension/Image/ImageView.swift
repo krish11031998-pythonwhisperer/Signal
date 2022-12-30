@@ -18,7 +18,7 @@ extension UIImageView {
         } else {
             imageView = .init(frame: frame)
         }
-        imageView.clipsToBounds = true
+        //imageView.clipsToBounds = true
         imageView.contentMode = .scaleAspectFill
         imageView.backgroundColor = .gray.withAlphaComponent(0.25)
         if dimmingForeground {
