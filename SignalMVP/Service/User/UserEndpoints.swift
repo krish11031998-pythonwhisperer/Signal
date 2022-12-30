@@ -8,7 +8,7 @@
 import Foundation
 
 enum UserEndpoint {
-    case login(_ params: UserLogin)
+    case login(_ params: UserLoginModel)
     case register(_ params: UserRegister)
 }
 

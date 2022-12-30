@@ -16,11 +16,11 @@ class RegisterViewModel {
     }
     
     struct Input {
-        let username: AnyPublisher<String, Never>
-        let email: AnyPublisher<String, Never>
-        let password: AnyPublisher<String, Never>
-        let confirmPassword: AnyPublisher<String, Never>
-        let registerUser: AnyPublisher<Void, Never>
+        let username: StringPublisher<Never>
+        let email: StringPublisher<Never>
+        let password: StringPublisher<Never>
+        let confirmPassword: StringPublisher<Never>
+        let registerUser: VoidPublisher
     }
     
     struct Output {
@@ -34,13 +34,16 @@ class RegisterViewModel {
         input.registerUser
             .combineLatest(input.username, input.email, input.password) { UserRegister(username: $1, email: $2, password: $3)}
             .flatMap { UserService.shared.registerUser(model: $0) }
-            .compactMap {
-                print("(DEBUG) Success: ",$0.success)
-                if let user = $0.data {
+            .combineLatest(input.password.setFailureType(to: Error.self)) { ($0, $1)}
+            .flatMap({ (userResponse, password) in
+                FirebaseAuthService.shared.loginUser(email: userResponse.data?.email ?? "", password: password)
+            })
+            .compactMap { resp in
+                if let user = resp?.user {
                     print("(DEBUG) user: ", user.uid)
                     return Routes.nextPage
                 } else {
-                    print("(ERROR) err from registration: ", $0.err)
+                    print("(ERROR) err from registration: ")
                 }
                 return nil
             }

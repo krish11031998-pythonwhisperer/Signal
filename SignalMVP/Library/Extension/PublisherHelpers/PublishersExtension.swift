@@ -9,3 +9,7 @@ import Foundation
 import Combine
 
 typealias SharePublisher<T,E: Error> = Publishers.MakeConnectable<Publishers.Share<AnyPublisher<T,E>>>
+typealias StringPublisher<E: Error> = AnyPublisher<String, E>
+typealias BoolPublisher<E: Error> = AnyPublisher<Bool, E>
+typealias IntPublisher<E: Error> = AnyPublisher<Int, E>
+typealias VoidPublisher = AnyPublisher<Void, Never>

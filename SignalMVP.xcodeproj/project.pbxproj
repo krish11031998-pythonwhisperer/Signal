@@ -40,6 +40,8 @@
 		EF1D7E5D2922CCFD0041ADEC /* CollectionColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1D7E582922CCFD0041ADEC /* CollectionColumn.swift */; };
 		EF2BB215292BF4E40006C00F /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2BB214292BF4E40006C00F /* VideoViewController.swift */; };
 		EF2F6C2A295EC3610066D9D3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EF2F6C29295EC3600066D9D3 /* GoogleService-Info.plist */; };
+		EF2F6C2C295EF5D30066D9D3 /* UserUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2F6C2B295EF5D30066D9D3 /* UserUpdateViewController.swift */; };
+		EF2F6C2F295EFDD00066D9D3 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2F6C2E295EFDD00066D9D3 /* LoginViewModel.swift */; };
 		EF3B698D2959D48200C9234B /* withLatestFrom.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3B698C2959D48200C9234B /* withLatestFrom.swift */; };
 		EF3B698F295A4A3600C9234B /* UIScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3B698E295A4A3600C9234B /* UIScrollView.swift */; };
 		EF48D71328E4CFCF00BD2A1A /* MainTabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF48D71228E4CFCF00BD2A1A /* MainTabModel.swift */; };
@@ -298,6 +300,8 @@
 		EF1D7E582922CCFD0041ADEC /* CollectionColumn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionColumn.swift; sourceTree = "<group>"; };
 		EF2BB214292BF4E40006C00F /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
 		EF2F6C29295EC3600066D9D3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		EF2F6C2B295EF5D30066D9D3 /* UserUpdateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserUpdateViewController.swift; sourceTree = "<group>"; };
+		EF2F6C2E295EFDD00066D9D3 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		EF3B698C2959D48200C9234B /* withLatestFrom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = withLatestFrom.swift; sourceTree = "<group>"; };
 		EF3B698E295A4A3600C9234B /* UIScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScrollView.swift; sourceTree = "<group>"; };
 		EF48D71228E4CFCF00BD2A1A /* MainTabModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabModel.swift; sourceTree = "<group>"; };
@@ -659,6 +663,15 @@
 			path = Videos;
 			sourceTree = "<group>";
 		};
+		EF2F6C2D295EFDB50066D9D3 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				EF5C4ED92957193700669355 /* LoginViewController.swift */,
+				EF2F6C2E295EFDD00066D9D3 /* LoginViewModel.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
 		EF59F109292A3308002877DE /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -799,9 +812,9 @@
 		EF5C4ECD2956ED1900669355 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
+				EF2F6C2D295EFDB50066D9D3 /* Login */,
 				EF624D0A295795CA00F006FF /* Register */,
 				EF5C4ECE2956ED2A00669355 /* OnboardingController.swift */,
-				EF5C4ED92957193700669355 /* LoginViewController.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -857,6 +870,7 @@
 			children = (
 				EF5C4ED4295709E900669355 /* RegisterController.swift */,
 				EF624D0B295795DB00F006FF /* RegisterViewModel.swift */,
+				EF2F6C2B295EF5D30066D9D3 /* UserUpdateViewController.swift */,
 			);
 			path = Register;
 			sourceTree = "<group>";
@@ -1776,6 +1790,7 @@
 				EF987B9D2921309C0000E233 /* TickerSymbolsView.swift in Sources */,
 				EFB1C2D328DB616600DD40A4 /* TweetModel.swift in Sources */,
 				EF06E459295BBDD200820AFE /* AuthInterface.swift in Sources */,
+				EF2F6C2C295EF5D30066D9D3 /* UserUpdateViewController.swift in Sources */,
 				EF7CC003291641EA00F9D611 /* ImageHeaderSubHeaderView.swift in Sources */,
 				EF7CBFF4291641EA00F9D611 /* CGFloat.swift in Sources */,
 				EF86381B28DC1EBE00EF520C /* TweetServiceInterface.swift in Sources */,
@@ -1856,6 +1871,7 @@
 				EF86383528DC61F700EF520C /* NewsCell.swift in Sources */,
 				EF5C4EDA2957193700669355 /* LoginViewController.swift in Sources */,
 				EF7CBFF2291641EA00F9D611 /* CGSize.swift in Sources */,
+				EF2F6C2F295EFDD00066D9D3 /* LoginViewModel.swift in Sources */,
 				EF96381D28DD8C8D00178C37 /* RedditPostModel.swift in Sources */,
 				EF96381B28DD8C6B00178C37 /* RedditServiceInterface.swift in Sources */,
 				EF7CBFE3291641EA00F9D611 /* UIViewController.swift in Sources */,
