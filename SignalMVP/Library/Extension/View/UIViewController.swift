@@ -7,9 +7,16 @@
 
 import Foundation
 import UIKit
+import Combine
 
 extension UIViewController {
 	
+    var compressedSize : CGSize {
+        let height = view.compressedSize.height.boundTo(lower: 200, higher: .totalHeight) - (view.safeAreaInsets.top + view.safeAreaInsets.bottom)
+        let size: CGSize = .init(width: .totalWidth, height: height)
+        return size
+    }
+    
 	func setupTransparentNavBar(color: UIColor = .clear, scrollColor: UIColor = .clear) {
 		let navbarAppear: UINavigationBarAppearance = .init()
 		navbarAppear.configureWithTransparentBackground()
@@ -97,7 +104,8 @@ extension UIViewController {
     }
     
     var navBarHeight: CGFloat {
-        (navigationController?.navigationBar.frame.height ?? 0) + (navigationController?.additionalSafeAreaInsets.top ?? 0)
+        (navigationController?.navigationBar.frame.height ?? 0) + (navigationController?.additionalSafeAreaInsets.top ?? 0) +
+        (navigationController?.additionalSafeAreaInsets.bottom ?? 0)
     }
 }
 
@@ -128,4 +136,30 @@ extension UINavigationController {
         tabBarItem = model.tabBarItem
         return self
     }
+}
+
+//MARK: - Animate UINavigation
+
+extension UIViewController {
+    
+    func addScrollObserver() -> AnyCancellable? {
+        guard let scroll = view.subviews.first as? UIScrollView,
+              let _ = navigationController?.navigationBar
+        else { return nil }
+        return scroll.publisher(for: \.contentOffset)
+            .compactMap {
+                (0...20).percent($0.y).boundTo(lower: 0, higher: 1)  == 1
+            }
+            .removeDuplicates()
+            .sink { [weak self] hide in
+                if hide {
+                    self?.navigationController?.navigationBar.animate(.slide(.up, state: .out, additionalOff: self?.navBarHeight ?? 0))
+                } else {
+                    self?.navigationController?.navigationBar.animate(.slide(.up, state: .in, additionalOff: self?.navBarHeight ?? 0))
+                }
+            }
+    }
+    
+    
+    
 }

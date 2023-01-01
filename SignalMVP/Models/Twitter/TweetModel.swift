@@ -18,6 +18,7 @@ struct TweetModel:Codable {
 	let publicMetric : TweetMetric?
 	let authorId : String?
 	let attachments: TweetAttachment?
+    let dateStr: String?
 	
 	//media
 	let media: [TweetMedia]?
@@ -37,6 +38,7 @@ struct TweetModel:Codable {
 		case media
         case urls
         case user, cashTags, hashTags, opinions, reactions
+        case dateStr = "date"
 	}
 }
 
@@ -57,8 +59,28 @@ extension TweetModel: Tickers {
         get { [] } //hashTags?.compactMap { $0.tag} ?? [] }
         set {}
     }
-    
-    
+}
+
+extension TweetModel {
+    var date: Date? {
+        guard let dateStr = dateStr else { return nil }
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        let date = dateFormatter.date(from: dateStr)
+        return date
+    }
+}
+
+extension Date {
+    var timestamp: String? {
+        let format = "d MMM YY, hh:mm a"
+        let formatter = DateFormatter()
+        formatter.amSymbol = "AM"
+        formatter.pmSymbol = "PM"
+        formatter.dateFormat = format
+        return formatter.string(from: self)
+    }
 }
 
 //MARK: - TweetAttachment

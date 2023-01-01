@@ -12,7 +12,6 @@ extension CALayer {
     
     func animate(_ animation: Animation, removeAfterCompletion: Bool = false, completion: (() -> Void)? = nil) {
         CATransaction.begin()
-        
         let animationData = animation.animationData(at: self)
         
         CATransaction.setCompletionBlock {
@@ -20,6 +19,8 @@ extension CALayer {
             completion?()
         }
         
+        animationData.isRemovedOnCompletion = false
+        animationData.fillMode = .forwards
         add(animationData, forKey: animation.name)
         
         CATransaction.commit()
@@ -45,6 +46,7 @@ extension CALayer {
         case .fadeOut, .fadeIn, .transformX:
             finalizePosition(animation: data,
                              remove: remove)
+            self.removeAllAnimations()
         default:
             break
         }
@@ -55,12 +57,10 @@ extension CALayer {
         switch animation {
         case let basic as CABasicAnimation:
             guard let keyPath = basic.keyPath else { return }
-            //DispatchQueue.main.asyncAfter(deadline: .now() + animation.duration) {
             asyncMain {
                 self.setValue(basic.toValue, forKeyPath: keyPath)
             }
-                
-            //}
+            //self.removeAllAnimations()
         case let group as CAAnimationGroup:
             group.animations?.forEach { finalizePosition(animation: $0, remove: remove)}
         default: break

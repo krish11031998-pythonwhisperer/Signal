@@ -10,8 +10,15 @@ import UIKit
 import Combine
 
 struct RoundedCardCellModel: ActionProvider {
-    var model: RoundedCardViewConfig
-    var action: Callback?
+    let cardAppearance: RoundedCardAppearance?
+    let model: RoundedCardViewConfig
+    let action: Callback?
+    
+    init(cardAppearance: RoundedCardAppearance? = nil, model: RoundedCardViewConfig, action: Callback? = nil) {
+        self.cardAppearance = cardAppearance
+        self.model = model
+        self.action = action
+    }
 }
 
 class RoundedCardCell: ConfigurableCell {
@@ -30,13 +37,17 @@ class RoundedCardCell: ConfigurableCell {
     }
     
     private func setupView() {
+        card.addShadow()
         contentView.addSubview(card)
-        contentView.setFittingConstraints(childView: card, insets: .init(vertical: 5, horizontal: 5))
+        contentView.setFittingConstraints(childView: card, insets: .init(vertical: 5, horizontal: 10))
         backgroundColor = .clear
         selectionStyle = .none
     }
     
     func configure(with model: RoundedCardCellModel) {
+        if let appearance = model.cardAppearance {
+            card.appearance = appearance
+        }
         let cancellables = card.configureView(with: model.model)
         cancellables?.compactMap { $0 }.forEach { bag.insert($0) }
     }

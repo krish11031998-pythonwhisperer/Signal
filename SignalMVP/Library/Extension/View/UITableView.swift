@@ -24,15 +24,21 @@ extension UITableView {
         get { tableHeaderView }
         set {
             if let headerView = newValue {
-                tableHeaderView = headerView
-                tableHeaderView?.frame = .init(origin: .zero, size: .init(width: .totalWidth, height: headerView.compressedSize.height))
-                tableHeaderView?.alpha = 0
-                layoutIfNeeded()
-                tableHeaderView?.animate(.fadeIn())
+                asyncMain {
+                    self.beginUpdates()
+                    self.tableHeaderView = headerView
+                    self.endUpdates()
+                    self.tableHeaderView?.frame = .init(origin: .zero, size: .init(width: .totalWidth, height: headerView.compressedSize.height))
+                    self.tableHeaderView?.alpha = 0
+                    self.layoutIfNeeded()
+                    self.tableHeaderView?.animate(.fadeIn())
+                }
             } else {
                 tableHeaderView?.animate(.fadeOut()) {
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(50)) {
+                        self.beginUpdates()
                         self.tableHeaderView = nil
+                        self.endUpdates()
                         self.layoutIfNeeded()
                     }
                 }

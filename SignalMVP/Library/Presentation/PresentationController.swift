@@ -31,7 +31,7 @@ class PresentationController: UIPresentationController {
     }
     
     
-    override var frameOfPresentedViewInContainerView: CGRect { style.frameOfPresentedView }
+    override var frameOfPresentedViewInContainerView: CGRect { style.frameOfPresentedView(view: presentedViewController) }
     
     
     override func containerViewWillLayoutSubviews() {
@@ -100,7 +100,7 @@ extension PresentationController: UIViewControllerAnimatedTransitioning {
         }
         
         let presentedFrame = transitionContext.finalFrame(for: vc)
-        let dismissedFrame = style.originalFrame
+        let dismissedFrame = style.originalFrame(view: presentedViewController)
         
         let initialFrame = isPresented ? dismissedFrame : presentedFrame
         let finalFrame = isPresented ? presentedFrame : dismissedFrame

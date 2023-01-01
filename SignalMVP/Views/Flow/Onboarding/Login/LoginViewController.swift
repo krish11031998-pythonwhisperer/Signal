@@ -82,9 +82,13 @@ class LoginController: UIViewController {
                 switch routes {
                 case .nextPage:
                     self.dismiss(animated: true)
-                case .error:
-                    print("(ERROR) err: ")
                 }
+            }
+            .store(in: &bag)
+        
+        output.errMsg
+            .sink {
+                print("(ERROR) ErrMsg: ", $0.errMsg)
             }
             .store(in: &bag)
 

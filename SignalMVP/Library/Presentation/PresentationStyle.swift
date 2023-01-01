@@ -12,15 +12,18 @@ import UIKit
 enum PresentationStyle {
     case circlar(frame: CGRect)
     case sheet(size: CGSize = .init(width: .totalWidth, height: .totalHeight), edge: UIEdgeInsets = .zero)
+    case dynamic
 }
 
 extension PresentationStyle {
-    var originalFrame: CGRect {
+    func originalFrame(view: UIViewController) -> CGRect {
         switch self {
         case .circlar(let size):
             return size
         case .sheet(let size, _):
             return .init(origin: .init(x: .zero, y: .totalHeight), size: size)
+        case .dynamic:
+            return .init(origin: .init(x: .zero, y: .totalHeight), size: .init(width: .totalWidth, height: view.compressedSize.height))
         }
     }
     
@@ -28,17 +31,20 @@ extension PresentationStyle {
         switch self {
         case .circlar(let frame):
             return frame.size.smallDim.half
-        case .sheet:
+        case .sheet, .dynamic:
             return 0
         }
     }
     
-    var frameOfPresentedView: CGRect {
+    func frameOfPresentedView(view: UIViewController) -> CGRect {
         switch self {
         case .circlar:
             return .init(origin: .zero, size: .init(width: .totalWidth, height: .totalHeight))
         case .sheet(let size, let edge):
             return .init(origin: .init(x: .zero, y: .totalHeight - size.height), size: .init(width: size.width, height: size.height - edge.bottom))
+        case .dynamic:
+            let y: CGFloat = .totalHeight - view.compressedSize.height
+            return .init(origin: .init(x: .zero, y: y), size: .init(width: .totalWidth, height: view.compressedSize.height))
         }
     }
     
@@ -46,8 +52,9 @@ extension PresentationStyle {
         switch self {
         case .circlar:
             return 0.9
-        case .sheet:
+        case .sheet, .dynamic:
             return 1
+        
         }
     }
     
@@ -55,7 +62,7 @@ extension PresentationStyle {
         switch self {
         case .circlar:
             return 0.2
-        case .sheet:
+        case .sheet, .dynamic:
             return 0.25
         }
     }
@@ -64,7 +71,7 @@ extension PresentationStyle {
         switch self {
         case .circlar:
             return true
-        case .sheet:
+        case .sheet, .dynamic:
             return false
         }
     }

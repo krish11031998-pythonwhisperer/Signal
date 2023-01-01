@@ -44,6 +44,11 @@ class EventsFeedViewController: SearchViewController {
 		setupNavBar()
 		setupObservers()
 	}
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupTransparentNavBar(color: .surfaceBackground, scrollColor: .surfaceBackground)
+    }
 	
 	//MARK: - Protected Methods
 

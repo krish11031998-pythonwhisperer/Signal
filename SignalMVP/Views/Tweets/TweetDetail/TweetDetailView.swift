@@ -27,7 +27,6 @@ class TweetDetailView: UIViewController {
 	}()
 	private var selectedMetric: TweetSentimentMetric?
 	private lazy var tweetURLView: TweetURLView = { .init() }()
-	private lazy var metricStack: TweetMetricsView = { .init() }()
     private lazy var mentionTickers: TickerSymbolView = { .init() }()
     private lazy var mentionedTickers: UIView = {
         return .VStack(subViews: ["Mentions".body2Medium(color: .gray).generateLabel,
@@ -69,7 +68,9 @@ class TweetDetailView: UIViewController {
 		imgView.isHidden = true
 		tweetURLView.isHidden = true
 		scrollView.addSubview(stack)
-        //stack.addArrangedSubview(metricView)
+        if UserDefaultStoreKey.loggedIn.value() == true  {
+            stack.addArrangedSubview(NewTweetMetricView(reaction: tweet?.reactions))
+        }
 		scrollView.setFittingConstraints(childView: stack, insets: .init(vertical: 10, horizontal: 16))
 		stack.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: -32).isActive = true
 		
@@ -128,18 +129,6 @@ class TweetDetailView: UIViewController {
 extension TweetDetailView {
     
     private var metricView: UIView {
-//        let header = "Metrics".heading2().generateLabel
-//        let stack = UIStackView.VStack(subViews: [header], spacing: 20)
-//        ["Bullish", "Bearish", "LOL", "Like", "Dislike"].forEach {
-//            stack.addArrangedSubview(MetricRow(type: $0))
-//        }
-//        let metric = stack.blobify(backgroundColor: .surfaceBackground,
-//                                   edgeInset: .init(vertical: 10, horizontal: 12.5),
-//                                   borderColor: .clear,
-//                                   borderWidth: 0,
-//                                   cornerRadius: 12)
-//        metric.addShadow()
-//        return metric
         return NewTweetMetricView(reaction: tweet?.reactions)
     }
     
@@ -149,12 +138,13 @@ extension TweetDetailView {
 class MetricRow: UIView {
     private lazy var miniLabel: UILabel = { .init() }()
     private lazy var label: UILabel = { .init() }()
-    private lazy var emojiView: UIImageView = { .standardImageView(frame: .init(origin: .zero, size: .init(squared: 24)), circleFrame: true) }()
-    private let typeLabel: String
+    private lazy var emojiView: UILabel = { .init() }()
+    private lazy var progressBar: ProgressBar = { .init(bgColor: .clear, fillColor: .surfaceBackgroundInverse, borderWidth: 1) }()
+    private let type: MetricType
     private let selectedMetric: PassthroughSubject<String, Never>
     
-    init(type: String, selectedMetric: PassthroughSubject<String, Never>) {
-        self.typeLabel = type
+    init(type: MetricType, selectedMetric: PassthroughSubject<String, Never>) {
+        self.type = type
         self.selectedMetric = selectedMetric
         super.init(frame: .zero)
         setupView()
@@ -165,31 +155,48 @@ class MetricRow: UIView {
     }
 
     private func setupView() {
-        emojiView.backgroundColor = .surfaceBackground
+        emojiView.setFrame(.init(squared: 25))
+        emojiView.backgroundColor = .surfaceBackgroundInverse
+        emojiView.clippedCornerRadius = 12.5
         emojiView.addShadow()
+        emojiView.textAlignment = .center
+        
         miniLabel.alpha = 0
+  
         let emojiButton = emojiView.buttonify { [weak self] in
             guard let self else { return }
-            self.selectedMetric.send(self.typeLabel)
+            self.selectedMetric.send(self.type.rawValue)
         }
         
-        let stack = UIStackView.HStack(subViews: [emojiButton, label, .spacer()], spacing: 12, alignment: .center)
-        let mainStack = UIStackView.VStack(subViews: [miniLabel, stack], spacing: 12, alignment: .leading)
+        let stackWithProgressView: UIView = .init()
+        let stack = UIStackView.HStack(subViews: [emojiButton, label], spacing: 12, alignment: .center)
+        [progressBar,stack].addToView(stackWithProgressView)
+        [progressBar,stack].forEach { stackWithProgressView.setFittingConstraints(childView: $0, insets: .zero) }
+        let mainStack = UIStackView.VStack(subViews: [miniLabel, stackWithProgressView], spacing: 12, alignment: .leading)
 
+        mainStack.setFittingConstraints(childView: stackWithProgressView, leading: 0, trailing: 0, height: 25)
         
         addSubview(mainStack)
         setFittingConstraints(childView: mainStack, insets: .zero)
-        typeLabel.body3Medium().render(target: miniLabel)
-        typeLabel.body1Medium().render(target: label)
-        backgroundColor = .blue
+        type.rawValue.body3Medium().render(target: miniLabel)
+        type.rawValue.body1Medium().render(target: label)
+        
+        type.imgStr.styled(font: .medium, color: .textColor, size: 10).render(target: emojiView)
+        progressBar.alpha = 0
+        
     }
     
     func animate(value to: CGFloat) {
-        label.animate(.fadeOut()) {
+        label.animate(.fadeOut())
+        progressBar.animate(.fadeIn()) {
             self.label.isHidden = false
-            self.emojiView.animate(.transformX(to: self.emojiView.frame.midX + to * (self.frame.width - self.emojiView.frame.width * 1.5)))
             self.miniLabel.animate(.fadeIn())
+            guard to > 0.1 else { return }
+            self.emojiView.animate(.transformX(to: to * self.frame.width - self.emojiView.frame.width, duration: 0.5))
+            self.progressBar.setProgress(progress: to)
         }
     }
     
 }
+
+

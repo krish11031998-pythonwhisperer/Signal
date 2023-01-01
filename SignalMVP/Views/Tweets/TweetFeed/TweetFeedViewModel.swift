@@ -81,7 +81,7 @@ class TweetFeedViewModel {
     private func decodeToTweetCellModel(_ data: TweetSearchResult, append: Bool = true) -> TableSection {
         getNextPageToken(result: data)
         guard let tweets = data.data else { return .init(rows: []) }
-        let fitleredTweet: [TweetCellModel] = Set(tweets).compactMap { tweet in
+        let fitleredTweet: [TweetCellModel] = tweets.compactMap { tweet in
 			var model:TweetCellModel = .init(model: tweet)
 			model.action = {
                 self.selectedTweet = model

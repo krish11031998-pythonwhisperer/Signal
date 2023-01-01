@@ -38,7 +38,7 @@ class MainViewController: UITabBarController {
         authPublisher
             .sink { [weak self] user in
                 guard let self, let user = user else { return }
-                print("(DEBUG) user: ", user.email)
+                UserDefaultStoreKey.loggedIn.setValue(true)
             }
             .store(in: &bag)
     }

@@ -10,7 +10,7 @@ import UIKit
 
 //MARK: - UIView
 extension UIView {
-	
+
 	static func HStack(subViews: [UIView] = [], spacing: CGFloat, alignment: UIStackView.Alignment = .fill) -> UIStackView {
 		let stack = UIStackView(arrangedSubviews: subViews)
 		stack.spacing = spacing
@@ -27,11 +27,11 @@ extension UIView {
 	}
 	
 	static func flexibleStack(subViews: [UIView], width: CGFloat = .totalWidth) -> UIView {
-		let mainStack: UIStackView = .VStack(spacing: 8)
+        let mainStack: UIStackView = .VStack(spacing: 8, alignment: .leading)
 		
 		subViews.sizeFittingStack(for: width, with: 8).forEach { row in
 			let rowStack = UIView.HStack(subViews: row, spacing: 8)
-			rowStack.addArrangedSubview(.spacer())
+			//rowStack.addArrangedSubview(.spacer())
 			mainStack.addArrangedSubview(rowStack)
 		}
 		
@@ -70,8 +70,7 @@ extension Array where Element : UIView {
 		
 		forEach {
 
-			let size = $0.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
-			let itemSize = remainingSpace
+			let size = $0.compressedSize
 			
 			if size.width == width {
 				result.append([$0])

@@ -39,11 +39,11 @@ class EventDetailView: UIViewController {
 		setupView()
         bind()
 	}
-	
-	override func viewWillDisappear(_ animated: Bool) {
-		super.viewWillDisappear(animated)
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         setupTransparentNavBar(color: .surfaceBackground, scrollColor: .surfaceBackground)
-	}
+    }
 	
 //MARK: - Protected Methods
 	

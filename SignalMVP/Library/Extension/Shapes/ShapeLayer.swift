@@ -10,7 +10,10 @@ import UIKit
 
 //MARK: - Shapes
 enum Shapes {
-    case circle(color: UIColor, width: CGFloat, start: CGFloat = -90.toRadians(), end: CGFloat = 270.toRadians(), clockwise: Bool = true)
+    case circle(color: UIColor, width: CGFloat,
+                start: CGFloat = -90.toRadians(),
+                end: CGFloat = 270.toRadians(),
+                clockwise: Bool = true)
 }
 
 extension Shapes {

@@ -103,12 +103,13 @@ class TweetCell: ConfigurableCell {
 		model.model?.text?.body2Regular(color: .gray).render(target: bodyLabel)
 		bodyLabel.numberOfLines = 0
 		bodyLabel.textAlignment = .left
-		
+        
         let cancelable = tweetAuthorView.configureView(with: .init(title: model.user?.name.body2Medium(),
-                                                  subTitle: model.user?.username.body3Medium(color: .gray),
-                                                  leadingView: .image(url:  model.user?.profileImageUrl,
-                                                                      size: .init(squared: 32),
-                                                                      cornerRadius: 16)))
+                                                                   subTitle: model.user?.username.body3Medium(color: .gray),
+                                                                   caption: model.model?.date?.timestamp?.bodySmallRegular(color: .gray),
+                                                                   leadingView: .image(url:  model.user?.profileImageUrl,
+                                                                                       size: .init(squared: 32),
+                                                                                       cornerRadius: 16)))
         cancelable?.forEach { bag.insert($0) }
 
 		if let media = model.media?.first,

@@ -26,6 +26,7 @@ class HomeViewModel {
     private var selectedEvent: PassthroughSubject<EventModel?, Never> = .init()
     var selectedMention: CurrentValueSubject<MentionModel?, Never> = .init(nil)
     private var selectedNavigation: PassthroughSubject<Navigation, Never> = .init()
+    private let authPublisher: AuthPublisher = .init()
     
     enum Navigation {
         case toEvent(_ model: EventModel)
@@ -38,6 +39,7 @@ class HomeViewModel {
     struct Output {
         let sections: AnyPublisher<[TableSection], Error>
         let navigation: AnyPublisher<Navigation, Never>
+        let user: AnyPublisher<UserModel, Error>
     }
     
     func transform() -> Output {
@@ -50,8 +52,19 @@ class HomeViewModel {
             }
             .store(in: &bag)
         
+        let selectedNavigation = selectedNavigation.eraseToAnyPublisher()
+        
+        let showProfile = authPublisher
+            .compactMap { $0?.uid }
+            .flatMap {
+                UserService.shared.getUser(userId: $0)
+            }
+            .compactMap { $0.data }
+            .eraseToAnyPublisher()
+        
         return .init(sections: sections,
-                     navigation: selectedNavigation.eraseToAnyPublisher())
+                     navigation: selectedNavigation,
+                     user: showProfile)
     }
     
     private func fetchSections() -> AnyPublisher<[TableSection], Error> {

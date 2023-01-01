@@ -17,10 +17,11 @@ struct UserModel: Codable {
     let name: String
     let uid: String
     let userName: String
+    let watching: [String]
 }
 
 
-struct UserRegisterResponse: Codable {
+struct UserModelResponse: Codable {
     let data: UserModel?
     let err: String?
     let success: Bool

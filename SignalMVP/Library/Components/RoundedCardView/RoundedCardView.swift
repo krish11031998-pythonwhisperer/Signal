@@ -63,7 +63,6 @@ class RoundedCardView: UIView {
     private func setupView() {
         mainStack.hideChildViews()
         addSubview(mainStack)
-        setFittingConstraints(childView: mainStack, insets: appearance.insets)
         spacer.isHidden = true
         setupAppearance()
     }
@@ -78,6 +77,7 @@ class RoundedCardView: UIView {
         if let validHeight = appearance.cardHeight.height {
             setHeight(height: validHeight)
         }
+        setFittingConstraints(childView: mainStack, insets: appearance.insets)
     }
     
 

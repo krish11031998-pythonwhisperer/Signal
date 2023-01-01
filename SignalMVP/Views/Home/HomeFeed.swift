@@ -12,7 +12,7 @@ import Combine
 class HomeFeed: UIViewController {
 	
 //MARK: - Properties
-	
+    private let user: CurrentValueSubject<UserModel?, Never> = .init(nil)
 	private lazy var tableView: UITableView = {
 		let table: UITableView = .init(frame: .zero, style: .grouped)
 		table.separatorStyle = .none
@@ -32,12 +32,18 @@ class HomeFeed: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		setupViews()
-		setupTransparentNavBar()
         bind()
 	}
 	
 //MARK: - ProtectedMethods
 	
+    private func setupNavbar() {
+        setupTransparentNavBar()
+        let customView = (UIImage.Catalogue.user.image.resized(size: .init(squared: 20)).withTintColor(.surfaceBackground) + "Profile".styled(font: .regular, color: .textColorInverse, size: 12)).generateLabel.blobify(backgroundColor: .surfaceBackgroundInverse, edgeInset: .init(vertical: 5, horizontal: 10), borderColor: .clear, borderWidth: 0, cornerRadius: 16)
+        customView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showProfile)))
+        navigationItem.rightBarButtonItem = .init(customView: customView)
+    }
+    
 	private func setupViews() {
 		view.addSubview(tableView)
 		view.setFittingConstraints(childView: tableView, insets: .zero)
@@ -78,11 +84,32 @@ class HomeFeed: UIViewController {
                     self.navigationController?.pushViewController(TweetFeedViewController(isChildPage: true), animated: true)
                 case .viewMoreEvent:
                     self.navigationController?.pushViewController(EventsFeedViewController(isChildPage: true), animated: true)
-                    print("(DEBUG) Clicked on :", $0)
                 }
             }
             .store(in: &bag)
         
+        output
+            .user
+            .receive(on: RunLoop.main)
+            .sink(receiveCompletion: {
+                if let err = $0.err?.localizedDescription {
+                    print("(ERROR) err: ", err)
+                }
+            }, receiveValue: { [weak self] in
+                guard let self else { return }
+                self.user.send($0)
+                self.setupNavbar()
+            })
+            .store(in: &bag)
+    }
+    
+    @objc
+    private func showProfile() {
+        if let user = user.value {
+            presentView(style: .sheet(size: .totalScreenSize),
+                        target: ProfileViewController(user: user).withNavigationController(),
+                        onDimissal: nil)
+        }
     }
 	
 }

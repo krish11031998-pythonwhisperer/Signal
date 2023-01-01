@@ -8,6 +8,7 @@
 import Foundation
 
 enum UserEndpoint {
+    case getUser(uid: String)
     case login(_ params: UserLoginModel)
     case register(_ params: UserRegister)
 }
@@ -21,6 +22,8 @@ extension UserEndpoint: EndPoint {
             return "/user/createUser"
         case .login:
             return "/user/loginUser"
+        case .getUser:
+            return "/user/get"
         }
     }
     
@@ -34,7 +37,15 @@ extension UserEndpoint: EndPoint {
     }
     
     var queryItems: [URLQueryItem] {
-        return []
+        switch self {
+        case .getUser(let uid):
+            let params: [URLQueryItem] = [
+                .init(name: "uid", value: uid)
+            ]
+            return params
+        default:
+            return []
+        }
     }
     
     var body: Data? {
@@ -45,6 +56,8 @@ extension UserEndpoint: EndPoint {
         case .register(let registerParams):
             let data = try? JSONEncoder().encode(registerParams)
             return data
+        default:
+             return nil
         }
     }
 

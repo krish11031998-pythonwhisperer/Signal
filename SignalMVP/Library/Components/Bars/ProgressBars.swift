@@ -68,6 +68,7 @@ class ProgressBar: UIView {
 	}
 	
 	func animateProgress() {
+        print("(DEBUG) pathWidth: ", bounds.width * ratio)
 		let newSize: CGSize = .init(width: bounds.width * ratio, height: bounds.height)
 		let newPath = UIBezierPath(roundedRect: .init(origin: .zero, size: newSize),
 								   cornerRadius: 12).cgPath

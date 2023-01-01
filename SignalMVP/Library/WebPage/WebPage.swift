@@ -67,6 +67,7 @@ class WebPageView: UIViewController {
     }
     
     private func loadWebPage() {
+        print("(DEBUG) loading WebPage!")
         guard let url = URL(string: urlStr) else { return }
         //DispatchQueue.main.async {
             self.webPage.load(.init(url: url))

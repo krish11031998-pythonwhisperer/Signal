@@ -94,11 +94,11 @@ extension UIView {
 	}
 	
 	func removeSimilarConstraints(_ list: [NSLayoutConstraint]) {
-		constraints.forEach {
-			guard let const = list.filter($0.isSame(constraint:)).first else { return }
-			removeConstraint(const)
-		}
-	}
+        constraints.forEach { item in
+            guard list.filter(item.isSame).first != nil else { return }
+            removeConstraint(item)
+        }
+    }
 	
     func embedInView(insets: UIEdgeInsets, priority: UILayoutPriority = .required) -> UIView {
 		let view = UIView()
@@ -134,12 +134,12 @@ extension UIView {
 
 extension NSLayoutConstraint {
 	
-	func isSame(constraint: NSLayoutConstraint) -> Bool {
-		firstAnchor === constraint.firstAnchor &&
-		secondAnchor === constraint.secondAnchor &&
-		firstItem === constraint.firstItem &&
-		secondItem === constraint.secondItem
-	}
+    func isSame(as other: NSLayoutConstraint) -> Bool {
+        return firstItem === other.firstItem &&
+            secondItem === other.secondItem &&
+            firstAnchor === other.firstAnchor &&
+            secondAnchor === other.secondAnchor
+    }
 }
 
 extension UILayoutPriority {

@@ -30,10 +30,10 @@ class NewTweetMetricView: UIControl {
     
     private func setupView() {
         let mainStack = UIStackView.VStack(spacing: 10)
-        mainStack.addArrangedSubview("Metrics".heading2().generateLabel)
+        mainStack.addArrangedSubview("Metrics".heading4().generateLabel.embedInView(insets: .init(vertical: 10, horizontal: 0)))
         
         let stack = UIStackView.VStack(spacing: 20)
-        ["Fake News", "Trusted News", "Quality Analysis", "Bad Analysis", "Over reaction"].forEach {
+        MetricType.allCases.forEach {
             stack.addArrangedSubview(MetricRow(type: $0,
                                                selectedMetric: self.selectedMetric))
         }
@@ -49,7 +49,7 @@ class NewTweetMetricView: UIControl {
         selectedMetric
             .sink { [weak self] _ in
                 guard let self else { return }
-                self.metricRows?.forEach { $0.animate(value: 1)}//.random(in: 0.2..<1)) }
+                self.metricRows?.forEach { $0.animate(value: CGFloat.random(in: 0...1)) }
             }
             .store(in: &bag)
     }

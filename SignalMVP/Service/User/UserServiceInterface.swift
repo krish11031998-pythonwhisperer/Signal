@@ -9,5 +9,6 @@ import Foundation
 import Combine
 
 protocol UserServiceInterface {
-    func registerUser(model: UserRegister) -> AnyPublisher<UserRegisterResponse, Error>
+    func getUser(userId: String) -> AnyPublisher<UserModelResponse, Error>
+    func registerUser(model: UserRegister) -> AnyPublisher<UserModelResponse, Error>
 }

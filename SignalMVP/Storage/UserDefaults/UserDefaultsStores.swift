@@ -17,4 +17,8 @@ extension UserDefaultStoreKey {
         UserDefaults.standard.object(forKey: self.rawValue) as? T
     }
     
+    func setValue<T>(_ value: T) {
+        UserDefaults.standard.set(value, forKey: self.rawValue)
+    }
+    
 }
