@@ -80,48 +80,54 @@ class HomeViewModel {
     }
     
     private func buildSection(_ socialData: SocialHighlightModel) -> [TableSection] {
-        var section: [TableSection] = []
-        
-        if let events = socialData.events {
-            let footer = [TableRow<ViewMoreFooter>(.init(destination: .viewMoreEvent,
-                                                         selectedViewMoreNavigation: self.selectedNavigation))]
-            let eventSection = TableSection(rows: [TableRow<CustomCuratedEvents>(.init(events: events, selectedEvent: self.selectedEvent))] + footer, title: "Events")
-            
-            section.append(eventSection)
-        }
-
-        if let news = socialData.news?.limitTo(to: 5) {
-            let newsRow = news.compactMap { news in
-                TableRow<NewsCell>(.init(model: news, action: {
-                    self.selectedNavigation.send(.toNews(news))
-                }))
-            }
-            let footer = [TableRow<ViewMoreFooter>(.init(destination: .viewMoreNews,
-                                                         selectedViewMoreNavigation: self.selectedNavigation))]
-            section.append(.init(rows: newsRow + footer,
-                                 title: "News"))
-        }
-
-        if let tweets = socialData.tweets {
-            let collectionCells = tweets.limitTo(to: 5).compactMap { tweet in
-                CollectionItem<RecentTweetCard>(.init(model: tweet, action: {
-                    self.selectedNavigation.send(.toTweet(tweet))
-                }))
-            }
-            let footer = [TableRow<ViewMoreFooter>(.init(destination: .viewMoreTweet,
-                                                           selectedViewMoreNavigation: self.selectedNavigation))]
-            let tweetSection = TableSection(rows: [TableRow<CollectionTableCell>(.init(cells: collectionCells,
-                                                                                       size: .init(width: .totalWidth, height: 300),
-                                                                                       inset: .init(vertical: 0, horizontal: 10),
-                                                                                       cellSize: .init(width: 225, height: 275),
-                                                                                       interspacing: 8))] + footer,
-                                            title: "Top Tweets")
-            section.append(tweetSection)
-        }
-        
+        var section: [TableSection] = [setupEventSection(socialData: socialData),
+                                       setupNewsSection(socialData: socialData),
+                                       setupTweetsSection(socialData: socialData)].compactMap { $0 }
         return section
     }
     
+    //MARK: - Sections
+    private func setupEventSection(socialData: SocialHighlightModel) -> TableSection? {
+        guard let events = socialData.events else  { return nil }
+        let footer = [TableRow<ViewMoreFooter>(.init(destination: .viewMoreEvent,
+                                                     selectedViewMoreNavigation: self.selectedNavigation))]
+        let eventSection = TableSection(rows: [TableRow<CustomCuratedEvents>(.init(events: events, selectedEvent: self.selectedEvent))] + footer, title: "Events")
+        return eventSection
+    }
+    
+    private func setupNewsSection(socialData: SocialHighlightModel) -> TableSection? {
+        guard let news = socialData.news?.limitTo(to: 5) else { return nil }
+        let newsRow = news.compactMap { news in
+            let cellModel: NewsCellModel = .init(model: news) {
+                self.selectedNavigation.send(.toNews(news))
+            }
+            return TableRow<NewsCell>(cellModel)
+        }
+        let footer = [TableRow<ViewMoreFooter>(.init(destination: .viewMoreNews,
+                                                     selectedViewMoreNavigation: self.selectedNavigation))]
+        return .init(rows: newsRow + footer, title: "News")
+    }
+    
+    private func setupTweetsSection(socialData: SocialHighlightModel) -> TableSection? {
+        guard let tweets = socialData.tweets else { return nil }
+        
+        let collectionCells = tweets.limitTo(to: 5).compactMap { tweet in
+            let cellModel: TweetCellModel = .init(model: tweet) {
+                self.selectedNavigation.send(.toTweet(tweet))
+            }
+            return CollectionItem<RecentTweetCard>(cellModel)
+        }
+        
+        let footer = [TableRow<ViewMoreFooter>(.init(destination: .viewMoreTweet,
+                                                       selectedViewMoreNavigation: self.selectedNavigation))]
+        let tweetSection = TableSection(rows: [TableRow<CollectionTableCell>(.init(cells: collectionCells,
+                                                                                   size: .init(width: .totalWidth, height: 300),
+                                                                                   inset: .init(vertical: 0, horizontal: 10),
+                                                                                   cellSize: .init(width: 225, height: 275),
+                                                                                   interspacing: 8))] + footer,
+                                        title: "Top Tweets")
+        return tweetSection
+    }
 }
 
 

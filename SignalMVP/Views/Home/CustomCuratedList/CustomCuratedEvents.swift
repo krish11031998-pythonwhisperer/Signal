@@ -63,7 +63,7 @@ class CustomCuratedEvents: ConfigurableCell {
     
     private var headlineSection: CollectionSection? {
         guard let events = eventsModel?.events.limitTo(to: 5) else { return nil }
-        return .init(cell: Set(events).compactMap { event in
+        return .init(cell: events.compactMap { event in
             var model = EventCellModel(model: event)
             model.action = { [weak self] in
                 self?.eventsModel?.selectedEvent.send(event)
