@@ -20,7 +20,7 @@ class TickerSymbolView: UIView {
             }
             return
         }
-        
+        setHeight(height: 32)
         removeChildViews()
         tickers.limitTo(to: 3).enumerated().forEach {
             let imgView = UIImageView(size: .init(squared: 32), cornerRadius: 16, contentMode: .scaleAspectFit)
