@@ -44,7 +44,8 @@ extension UIViewController {
 	}
 	
 	static func backButton(_ target: UIViewController) -> UIBarButtonItem {
-        let buttonImg = UIImage.Catalogue.chevronLeft.image.resized(size: .init(squared: 16))
+        let image: UIImage.Catalogue = target.isPresented ? .xMark : .chevronLeft
+        let buttonImg = image.image.resized(size: .init(squared: 16))
         let imgView = UIImageView(image: buttonImg.withTintColor(.surfaceBackground))
 		imgView.circleFrame = .init(origin: .zero, size: .init(squared: 32))
 		imgView.backgroundColor = .surfaceBackgroundInverse
@@ -112,7 +113,7 @@ extension UIViewController {
 //MARK: - UIViewController Presentation
 extension UIViewController {
     
-    func presentView(style: PresentationStyle, addDimmingView: Bool = true, target: UIViewController, onDimissal: Callback?) {
+    func presentView(style: PresentationStyle, addDimmingView: Bool = false, target: UIViewController, onDimissal: Callback?) {
         let presenter = PresentationController(style: style, addDimmingView: addDimmingView, presentedViewController: target, presentingViewController: self, onDismiss: onDimissal)
         target.transitioningDelegate = presenter
         target.modalPresentationStyle = .custom

@@ -13,7 +13,7 @@ class PresentationController: UIPresentationController {
     
     private var onDismiss: Callback?
     public var style: PresentationStyle
-    private let addDimmingView: Bool
+    private let addDimmingView: Bool?
 
     private lazy var dimmingView: UIView =  {
         let view = UIView()
@@ -22,7 +22,7 @@ class PresentationController: UIPresentationController {
         return view
     }()
     
-    init(style: PresentationStyle, addDimmingView: Bool = true, presentedViewController: UIViewController, presentingViewController: UIViewController?, onDismiss: Callback?) {
+    init(style: PresentationStyle, addDimmingView: Bool? = nil, presentedViewController: UIViewController, presentingViewController: UIViewController?, onDismiss: Callback?) {
         self.addDimmingView = addDimmingView
         self.style = style
         self.onDismiss = onDismiss
@@ -39,7 +39,7 @@ class PresentationController: UIPresentationController {
     }
     
     override func presentationTransitionWillBegin() {
-        guard addDimmingView && style.addDimmingView else { return }
+        guard addDimmingView ?? style.addDimmingView else { return }
         containerView?.insertSubview(dimmingView, at: 0)
         containerView?.setFittingConstraints(childView: dimmingView, insets: .zero)
         dimmingView.layer.opacity = 0
@@ -48,7 +48,7 @@ class PresentationController: UIPresentationController {
     
     
     override func dismissalTransitionWillBegin() {
-        guard addDimmingView else { return }
+        guard addDimmingView ?? style.addDimmingView else { return }
         dimmingView.animate(.fadeOut(to: 0)) {
             self.dimmingView.removeFromSuperview()
         }

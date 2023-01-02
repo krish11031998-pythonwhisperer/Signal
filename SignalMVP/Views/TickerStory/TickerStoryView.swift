@@ -110,6 +110,7 @@ class TickerStoryView: UIViewController {
         mainDescriptionLabel.numberOfLines = 2
         
         setupTickerInfo()
+        stack.alpha = 0
     }
     
     private func fetchNews() {
@@ -128,6 +129,7 @@ class TickerStoryView: UIViewController {
             } receiveValue: {[weak self] in
                 self?.newsForTicker = $0
                 self?.idx = $0.isEmpty ? -1 : 0
+                self?.stack.animate(.fadeIn())
             }
             .store(in: &bag)
 

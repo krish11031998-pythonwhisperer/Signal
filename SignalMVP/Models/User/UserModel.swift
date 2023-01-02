@@ -17,7 +17,7 @@ struct UserModel: Codable {
     let name: String
     let uid: String
     let userName: String
-    let watching: [String]
+    let watching: [String]?
 }
 
 

@@ -62,6 +62,9 @@ extension EndPoint {
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.httpMethod = method
+        if let body {
+            print("(DEBUG) body: ", String(data: body, encoding: .utf8))
+        }
 		return request
 	}
     
@@ -127,6 +130,7 @@ extension URLSession {
             print("(REQUEST w Future) Request: \(request.url?.absoluteString)")
             if let cachedData = DataCache.shared[request] {
                 if let deceodedData = try? JSONDecoder().decode(T.self, from: cachedData) {
+                    print("(DEBUG) returning Cached Response!")
                     promise(.success(deceodedData))
                 } else {
                     promise(.failure(URLSessionError.decodeErr))

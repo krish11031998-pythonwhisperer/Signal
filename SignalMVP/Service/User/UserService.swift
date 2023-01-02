@@ -13,7 +13,7 @@ class UserService: UserServiceInterface {
     static var shared: UserService = .init()
     
     
-    func registerUser(model: UserRegister) -> AnyPublisher<UserModelResponse, Error> {
+    func registerUser(model: RegisterModel) -> AnyPublisher<UserModelResponse, Error> {
         UserEndpoint
             .register(model)
             .execute()

@@ -15,6 +15,7 @@ class RegisterController: UIViewController {
     private lazy var emailField: TextField = { .init(placeHolder: Constants.email) }()
     private lazy var passwordField: TextField = { .init(placeHolder: Constants.password, type: .password) }()
     private lazy var confirmPasswordField: TextField = { .init(placeHolder: Constants.confirmPassword, type: .password) }()
+    private let registerModel: PassthroughSubject<RegisterModel, Never> = .init()
     private lazy var registerButton: UIButton = {
         let button = UIButton()
         Constants.registerButton.body2Medium(color: .surfaceBackground).render(target: button)
@@ -66,24 +67,31 @@ class RegisterController: UIViewController {
     
     private func bind() {
         
-        let registerButtonAction =  registerButton.publisher(for: .touchUpInside).map{ _ in ()}.eraseToAnyPublisher()
+        let registerButtonAction =  registerButton.publisher(for: .touchUpInside).map { [weak self] _ in
+            self?.registerModel.send(.init(username: self?.usernameField.text, email: self?.emailField.text, password: self?.passwordField.text))
+            return ()
+        }.eraseToAnyPublisher()
         
-        let output = viewModel.transform(input: .init(username: usernameField.textPublisher,
-                                                      email: emailField.textPublisher,
-                                                      password: passwordField.textPublisher,
-                                                      confirmPassword: confirmPasswordField.textPublisher,
+        let output = viewModel.transform(input: .init(registerModel: registerModel.eraseToAnyPublisher(),
                                                       registerUser: registerButtonAction))
         
         output.navigation
             .receive(on: RunLoop.main)
-            .sink(receiveCompletion: {
-                print("(ERROR) err from nav!: ", $0.err?.localizedDescription)
+            .sink(receiveCompletion: { [weak self] in
+                if let err = $0.err?.localizedDescription{
+                    print("(ERROR) err from nav!: ", err)
+                    self?.showAlert(title: "Error", body: err)
+                }
             }, receiveValue: { [weak self] in
                 switch $0 {
                 case .nextPage:
                     print("(DEBUG) nextpage!")
+                    self?.dismiss(animated: true)
                 case .errorMessage(let err):
                     print("(ERROR) err: ", err)
+                    self?.showAlert(title: "Error", body: err)
+                default:
+                    break
                 }
             })
             .store(in: &bag)

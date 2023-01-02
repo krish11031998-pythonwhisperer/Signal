@@ -10,7 +10,7 @@ import Foundation
 enum UserEndpoint {
     case getUser(uid: String)
     case login(_ params: UserLoginModel)
-    case register(_ params: UserRegister)
+    case register(_ params: RegisterModel)
 }
 
 extension UserEndpoint: EndPoint {

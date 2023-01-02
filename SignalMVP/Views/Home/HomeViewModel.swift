@@ -150,8 +150,8 @@ class HomeViewModel {
     }
     
     private func setupStorySection(user: UserModel) -> TableSection? {
-        guard !user.watching.isEmpty else { return nil }
-        let collectionCells = user.watching.map { ticker in
+        guard let watchList = user.watching, !watchList.isEmpty else { return nil }
+        let collectionCells = watchList.map { ticker in
             let mentionModel = MentionModel(totalMentions: 0, positiveMentions: 0, negativeMentions: 0, neutralMentions: 0, ticker: ticker, name: ticker, sentimentScore: 0)
             let model: MentionCellModel = .init(model: mentionModel, action: nil) { frame in
                 self.selectedNavigation.send(.toTickerStory(mentionModel, frame: frame))

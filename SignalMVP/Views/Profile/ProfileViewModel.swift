@@ -34,7 +34,7 @@ class ProfileViewModel {
     }
     
     func transform() -> Output {
-        let sections = Just([userInfo(), watchList(), signOut()]).eraseToAnyPublisher()
+        let sections = Just([userInfo(), watchList(), signOut()].compactMap { $0 }).eraseToAnyPublisher()
         let showTickerPage = addTicker.eraseToAnyPublisher()
         let signOutUser = signOutUser
             .flatMap { _ in FirebaseAuthService.shared.signOutUser() }
@@ -51,8 +51,9 @@ class ProfileViewModel {
         return .init(rows: [emailRow], title: "Info")
     }
     
-    private func watchList() -> TableSection {
-        let tickers = user.watching.map {
+    private func watchList() -> TableSection? {
+        guard let watching = user.watching else { return nil }
+        let tickers = watching.map {
             var appearance = RoundedCardAppearance.default
             appearance.insets = .init(vertical: 5, horizontal: 10)
             appearance.cornerRadius = 10
