@@ -41,7 +41,6 @@ class ProfileViewController: UIViewController {
     private func profileHeaderView() {
         let imgView: UIImageView = .standardImageView(frame: CGSize(squared: 96).frame, circleFrame: true)
         imgView.image = .Catalogue.profileImage.image.resized(size: .init(squared: 96))
-        //UIImage.loadImage(url: viewModel.user.img, at: imgView, path: \.image).store(in: &bag)
         imgView.clipsToBounds = true
         let dualLabel = DualLabel(spacing: 8, alignment: .center)
         dualLabel.configure(title: viewModel.user.name.body1Bold(),
@@ -66,13 +65,21 @@ class ProfileViewController: UIViewController {
         output.showTickersPage
             .sink { [weak self] _ in
                 guard let self else { return }
-//                self.showAlert(title: "Ticker Search",
-//                               body: "You can serach you tickers you would like to add! You can serach you tickers you would like to add! You can serach you tickers you would like to add! You can serach you tickers you would like to add!",
-//                               buttonText: "Close",
-//                               handle: self.closeButton)
                 let target = ProfileSearchViewController().withNavigationController()
                 self.presentView(style: .sheet(size: .totalScreenSize), target: target, onDimissal: nil)
             }
             .store(in: &bag)
+        
+        output.signOutUser
+            .sink {
+                if let err = $0.err {
+                    print("(ERROR) err:", err.localizedDescription)
+                }
+            } receiveValue: { [weak self] _ in
+                guard let self else { return }
+                self.dismiss(animated: true)
+            }
+            .store(in: &bag)
+
     }
 }

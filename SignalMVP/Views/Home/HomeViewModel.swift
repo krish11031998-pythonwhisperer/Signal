@@ -9,6 +9,10 @@ import Foundation
 import UIKit
 import Combine
 
+enum UserError: String, Error {
+    case nilOrinvalidUID
+}
+
 protocol PresentDelegate {
     func presentView(origin: CGRect)
 }
@@ -38,15 +42,22 @@ class HomeViewModel {
     struct Output {
         let sections: AnyPublisher<[TableSection], Error>
         let navigation: AnyPublisher<Navigation, Never>
-        let user: AnyPublisher<UserModel, Error>
+        let user: AnyPublisher<UserModel?, Error>
     }
     
     func transform() -> Output {
         
         let user = authPublisher
-            .print("👩‍💻 user")
-            .compactMap { $0?.uid }
-            .flatMap { UserService.shared.getUser(userId: $0) }
+            .map { $0?.uid }
+            .flatMap {
+                if let uid = $0 {
+                    return UserService.shared.getUser(userId: uid)
+                } else {
+                    return Just(UserModelResponse(data: nil, err: nil, success: true))
+                        .setFailureType(to: Error.self)
+                        .eraseToAnyPublisher()
+                }
+            }
             .eraseToAnyPublisher()
             .share()
         
@@ -62,7 +73,7 @@ class HomeViewModel {
         let selectedNavigation = selectedNavigation.eraseToAnyPublisher()
         
         let showProfile = user
-            .compactMap { $0.data }
+            .map { $0.data }
             .eraseToAnyPublisher()
         
         return .init(sections: sections,
@@ -74,8 +85,8 @@ class HomeViewModel {
         SocialHighlightService
             .shared
             .fetchSocialHighlight()
-            .combineLatest(user, { ($0, $1) })
-            .compactMap { [weak self] (highlights, user) in
+            .combineLatest(user)
+            .compactMap { [weak self] highlights, user in
                 guard let self, let data = highlights.data else { return [] }
                 return self.buildSection(data, user: user.data)
             }
@@ -175,8 +186,8 @@ class ViewMoreFooter: ConfigurableCell {
     
     private func setupView() {
         
-        let buttonBlob = "View More".styled(font: .regular, color: .textColorInverse, size: 12).generateLabel
-            .blobify(backgroundColor: .surfaceBackgroundInverse, edgeInset: .init(vertical: 10, horizontal: 12.5), borderColor: .clear, borderWidth: 0, cornerRadius: 12)
+        let buttonBlob = "View More".styled(font: .medium, color: .textColorInverse, size: 12).generateLabel
+            .blobify(backgroundColor: .surfaceBackgroundInverse, edgeInset: .init(vertical: 5, horizontal: 10), borderColor: .clear, borderWidth: 0, cornerRadius: 12)
             .buttonify { [weak self] in
                 guard let self else { return }
                 self.selectedDestination.send(())
@@ -190,7 +201,7 @@ class ViewMoreFooter: ConfigurableCell {
         backgroundColor = .surfaceBackground
         selectionStyle = .none
         contentView.addSubview(stack)
-        contentView.setFittingConstraints(childView: stack, insets: .init(vertical: 0, horizontal: 10))
+        contentView.setFittingConstraints(childView: stack, insets: .init(vertical: 5, horizontal: 10))
         
     }
     

@@ -9,6 +9,10 @@ import Foundation
 import FirebaseAuth
 import Combine
 
+enum UserState: String, Error {
+    case userSignOutFailure
+}
+
 class FirebaseAuthService: AuthInterface {
     
     static var shared: FirebaseAuthService = .init()
@@ -43,6 +47,16 @@ class FirebaseAuthService: AuthInterface {
                 print("(DEBUG) auth: ", validAuthRes)
                 promise(.success(authRes))
             }
+        }.eraseToAnyPublisher()
+    }
+    
+    func signOutUser() -> AnyPublisher<(), Error> {
+        Future { promise in
+            guard let _ = try? Auth.auth().signOut() else {
+                promise(.failure(UserState.userSignOutFailure))
+                return
+            }
+            promise(.success(()))
         }.eraseToAnyPublisher()
     }
     

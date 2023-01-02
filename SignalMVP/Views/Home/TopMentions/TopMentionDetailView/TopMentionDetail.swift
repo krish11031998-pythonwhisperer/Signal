@@ -14,7 +14,7 @@ extension UITableView {
         let table = UITableView(frame: .zero, style: .grouped)
         table.backgroundColor = .surfaceBackground
         table.separatorStyle = .none
-        table.showsVerticalScrollIndicator = true
+        table.showsVerticalScrollIndicator = false
         return table
     }
     

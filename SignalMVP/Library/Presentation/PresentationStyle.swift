@@ -78,7 +78,7 @@ extension PresentationStyle {
     
     var addDimmingView: Bool {
         switch self {
-        case .circlar:
+        case .circlar, .sheet:
             return false
         default:
             return true

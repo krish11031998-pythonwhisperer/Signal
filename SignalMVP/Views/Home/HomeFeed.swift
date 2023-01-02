@@ -31,8 +31,15 @@ class HomeFeed: UIViewController {
 	
     private func setupNavbar() {
         setupTransparentNavBar(color: .surfaceBackground, scrollColor: .surfaceBackground)
-        let customView = (UIImage.Catalogue.user.image.resized(size: .init(squared: 20)).withTintColor(.surfaceBackground) + "Profile".styled(font: .regular, color: .textColorInverse, size: 12)).generateLabel.blobify(backgroundColor: .surfaceBackgroundInverse, edgeInset: .init(vertical: 5, horizontal: 10), borderColor: .clear, borderWidth: 0, cornerRadius: 16)
+        let customView = (UIImage.Catalogue.user.image.resized(size: .init(squared: 20)).withTintColor(.surfaceBackground) + "Profile".styled(font: .medium , color: .textColorInverse, size: 12)).generateLabel.blobify(backgroundColor: .surfaceBackgroundInverse, edgeInset: .init(vertical: 5, horizontal: 10), borderColor: .clear, borderWidth: 0, cornerRadius: 16)
         customView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showProfile)))
+        navigationItem.rightBarButtonItem = .init(customView: customView)
+    }
+    
+    private func setupLoginBar() {
+        setupTransparentNavBar(color: .surfaceBackground, scrollColor: .surfaceBackground)
+        let customView = "Login".styled(font: .medium, color: .textColorInverse, size: 12).generateLabel.blobify(backgroundColor: .surfaceBackgroundInverse, edgeInset: .init(vertical: 5, horizontal: 10), borderColor: .clear, borderWidth: 0, cornerRadius: 10)
+        customView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showLogin)))
         navigationItem.rightBarButtonItem = .init(customView: customView)
     }
     
@@ -50,10 +57,12 @@ class HomeFeed: UIViewController {
             .map { TableViewDataSource(sections: $0) }
             .receive(on: DispatchQueue.main)
             .sink {
-                print("(ERROR) err: ", $0.err?.localizedDescription)
+                if let err = $0.err?.localizedDescription {
+                    print("(ERROR) err: ", err)
+                }
             } receiveValue: { [weak self] in
                 guard let self else { return }
-                
+                print("(DEBUG) relaoding with data")
                 self.tableView.reloadData($0)
             }
             .store(in: &bag)
@@ -90,10 +99,14 @@ class HomeFeed: UIViewController {
                 if let err = $0.err?.localizedDescription {
                     print("(ERROR) err: ", err)
                 }
-            }, receiveValue: { [weak self] in
+            }, receiveValue: { [weak self] user in
                 guard let self else { return }
-                self.user.send($0)
-                self.setupNavbar()
+                self.user.send(user)
+                if user != nil {
+                    self.setupNavbar()
+                } else {
+                    self.setupLoginBar()
+                }
             })
             .store(in: &bag)
     }
@@ -107,4 +120,12 @@ class HomeFeed: UIViewController {
         }
     }
 	
+    
+    @objc
+    private func showLogin() {
+        let onboarding = OnboardingController().withNavigationController()
+        presentView(style: .sheet(), target: onboarding) {
+            print("(DEBUG) closed Onboarding!")
+        }
+    }
 }

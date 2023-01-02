@@ -20,6 +20,7 @@ class ProfileViewModel {
                                                       height: .constant(48))
     private let addTicker: PassthroughSubject<Void, Never>
     private var bag: Set<AnyCancellable> = .init()
+    private let signOutUser: PassthroughSubject<Void, Never> = .init()
     
     init(user: UserModel) {
         self.user = user
@@ -29,11 +30,17 @@ class ProfileViewModel {
     struct Output {
         let sections: AnyPublisher<[TableSection], Never>
         let showTickersPage: VoidPublisher
+        let signOutUser: AnyPublisher<(), Error>
     }
     
     func transform() -> Output {
-        let sections = Just([userInfo(), watchList()]).eraseToAnyPublisher()
-        return .init(sections: sections, showTickersPage: addTicker.eraseToAnyPublisher())
+        let sections = Just([userInfo(), watchList(), signOut()]).eraseToAnyPublisher()
+        let showTickerPage = addTicker.eraseToAnyPublisher()
+        let signOutUser = signOutUser
+            .flatMap { _ in FirebaseAuthService.shared.signOutUser() }
+            .eraseToAnyPublisher()
+        
+        return .init(sections: sections, showTickersPage: showTickerPage, signOutUser: signOutUser)
     }
     
     private func userInfo() -> TableSection {
@@ -78,6 +85,14 @@ class ProfileViewModel {
                                                             inset: .init(vertical: 5, horizontal: 10),
                                                             name: "tickersCell"))],
                      customHeader: view)
+    }
+    
+    private func signOut() -> TableSection {
+        let buttonModel: RoundedCardCellModel = .init(cardAppearance: cardAppearance, model: .init(title: "Sign Out".body3Medium(color: .red))){
+            self.signOutUser.send(())
+        }
+        let signOutButton = TableRow<RoundedCardCell>(buttonModel)
+        return .init(rows: [signOutButton])
     }
     
 }
