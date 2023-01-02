@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Combine
 
 //MARK: - Defination
 fileprivate extension MentionModel {
@@ -24,7 +25,8 @@ class TopMentionStoryCell: ConfigurableCollectionCell {
     static var visitedCells: Set<MentionModel> = []
 
     private lazy var imageView: UIImageView =  { .init(size: .init(squared: 62), cornerRadius: 31, contentMode: .center) }()
-
+    private var bag: Set<AnyCancellable> = .init()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -41,7 +43,7 @@ class TopMentionStoryCell: ConfigurableCollectionCell {
     
     func configure(with model: MentionCellModel) {
         imageView.image = nil
-        UIImage.loadImage(url: model.model.tickerImage, at: imageView, path: \.image, resized: .init(squared: 50))
+        UIImage.loadImage(url: model.model.tickerImage, at: imageView, path: \.image, resized: .init(squared: 50)).store(in: &bag)
         let border = Shapes.circle(color: model.model.color, width: 2).shapeLayer(at: imageView.layer)
         border?.animate(.circularProgress(to: 1))
     }

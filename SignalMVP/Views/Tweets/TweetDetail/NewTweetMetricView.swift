@@ -50,6 +50,9 @@ class NewTweetMetricView: UIControl {
             .sink { [weak self] _ in
                 guard let self else { return }
                 self.metricRows?.forEach { $0.animate(value: CGFloat.random(in: 0...1)) }
+                UIView.animate(withDuration: 0.15) {
+                    self.layoutIfNeeded()
+                }
             }
             .store(in: &bag)
     }

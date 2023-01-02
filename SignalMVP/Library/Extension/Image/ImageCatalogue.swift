@@ -58,7 +58,7 @@ extension UIImage {
 		case user = "user"
 		case viewGridAdd = "view-grid-add"
 		case viewGrid = "view-grid"
-		case xMark = "x"
+		case xMark
         case like, tweetShare, comments, retweet, profileImage
 	}
 }
@@ -66,6 +66,15 @@ extension UIImage {
 extension UIImage.Catalogue {
 	
 	var image: UIImage { .init(named: self.rawValue) ?? .solid(color: .black.withAlphaComponent(0.125), frame: .smallestSquare) }
+    
+    var buttonView: UIImageView {
+        let imgView = UIImageView(image: image.resized(size: .init(squared: 16)))
+        imgView.circleFrame = .init(origin: .zero, size: .init(squared: 32))
+        imgView.backgroundColor = .surfaceBackgroundInverse
+        imgView.contentMode = .center
+        imgView.setFrame(.init(squared: 32))
+        return imgView
+    }
 	
 	func generateView(size: CGSize = .smallestSquare) -> UIView { image.imageView(size: size) }
 	

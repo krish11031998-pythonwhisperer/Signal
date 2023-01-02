@@ -118,8 +118,8 @@ extension Array where Element : UIView {
 
 //MARK: - UIView Modifiers
 extension UIView {
-    func buttonify(handler: Callback?) -> UIView {
-        return GenericButtonWrapper(innerView: self, handler: handler)
+    func buttonify(bouncyEffect: Bool = true, handler: Callback?) -> UIView {
+        return GenericButtonWrapper(innerView: self, bouncyEffect: bouncyEffect, handler: handler)
     }
     
     func hideChildViews() {

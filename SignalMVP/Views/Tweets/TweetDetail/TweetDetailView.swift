@@ -181,6 +181,7 @@ class MetricRow: UIView {
         type.rawValue.body3Medium().render(target: miniLabel)
         type.rawValue.body1Medium().render(target: label)
         
+        miniLabel.isHidden = true
         type.imgStr.styled(font: .medium, color: .textColor, size: 10).render(target: emojiView)
         progressBar.alpha = 0
         
@@ -189,11 +190,15 @@ class MetricRow: UIView {
     func animate(value to: CGFloat) {
         label.animate(.fadeOut())
         progressBar.animate(.fadeIn()) {
+            self.miniLabel.isHidden = false
             self.label.isHidden = false
             self.miniLabel.animate(.fadeIn())
             guard to > 0.1 else { return }
             self.emojiView.animate(.transformX(to: to * self.frame.width - self.emojiView.frame.width, duration: 0.5))
             self.progressBar.setProgress(progress: to)
+            UIView.animate(withDuration: 0.15) {
+                self.layoutIfNeeded()
+            }
         }
     }
     

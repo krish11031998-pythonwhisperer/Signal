@@ -13,8 +13,10 @@ class GenericButtonWrapper: UIView {
 	
 	private var innerView: UIView?
 	private var handler: Callback?
+    private let addBouncyEffect: Bool
 	
-	init(innerView: UIView, handler: Callback? = nil) {
+    init(innerView: UIView, bouncyEffect: Bool, handler: Callback? = nil) {
+        self.addBouncyEffect = bouncyEffect
 		super.init(frame: .zero)
 		self.innerView = innerView
 		self.handler = handler
@@ -23,6 +25,7 @@ class GenericButtonWrapper: UIView {
 	}
 	
 	required init?(coder: NSCoder) {
+        self.addBouncyEffect = true
 		super.init(coder: coder)
 	}
 	
@@ -40,7 +43,11 @@ class GenericButtonWrapper: UIView {
 	
 	@objc
 	private func handleTap() {
-        animate(.bouncy) {
+        if addBouncyEffect {
+            animate(.bouncy) {
+                self.handler?()
+            }
+        } else {
             self.handler?()
         }
 	}

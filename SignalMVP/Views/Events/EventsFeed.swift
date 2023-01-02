@@ -17,12 +17,7 @@ class EventsFeedViewController: SearchViewController {
 	
 	private var yOff: CGFloat = .zero
     private let isChildPage: Bool
-	private lazy var tableView: UITableView = {
-		let table: UITableView = .init(frame: .zero, style: .grouped)
-		table.backgroundColor = .clear
-		table.separatorStyle = .none
-		return table
-	}()
+    private lazy var tableView: UITableView = { .standardTableView() }()
 	
     private var viewModel: EventFeedViewModel = .init()
 //    private var bag: Set<AnyCancellable> = .init()

@@ -170,7 +170,6 @@
 		EF7D2FC228E09DB30003B8F3 /* VideoServiceInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7D2FC128E09DB30003B8F3 /* VideoServiceInterface.swift */; };
 		EF7D2FC428E09E3D0003B8F3 /* StubVideoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7D2FC328E09E3D0003B8F3 /* StubVideoService.swift */; };
 		EF7D2FC628E09E7E0003B8F3 /* VideoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7D2FC528E09E7E0003B8F3 /* VideoModel.swift */; };
-		EF7D2FC928E0A0E10003B8F3 /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7D2FC828E0A0E10003B8F3 /* VideoCell.swift */; };
 		EF7D2FCB28E0A1540003B8F3 /* videos.json in Resources */ = {isa = PBXBuildFile; fileRef = EF7D2FCA28E0A1540003B8F3 /* videos.json */; };
 		EF7D2FCE28E0F55A0003B8F3 /* EventDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7D2FCD28E0F55A0003B8F3 /* EventDetailView.swift */; };
 		EF7D2FD028E0F6540003B8F3 /* EventHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7D2FCF28E0F6540003B8F3 /* EventHeaderView.swift */; };
@@ -434,7 +433,6 @@
 		EF7D2FC128E09DB30003B8F3 /* VideoServiceInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoServiceInterface.swift; sourceTree = "<group>"; };
 		EF7D2FC328E09E3D0003B8F3 /* StubVideoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubVideoService.swift; sourceTree = "<group>"; };
 		EF7D2FC528E09E7E0003B8F3 /* VideoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoModel.swift; sourceTree = "<group>"; };
-		EF7D2FC828E0A0E10003B8F3 /* VideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
 		EF7D2FCA28E0A1540003B8F3 /* videos.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = videos.json; sourceTree = "<group>"; };
 		EF7D2FCD28E0F55A0003B8F3 /* EventDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailView.swift; sourceTree = "<group>"; };
 		EF7D2FCF28E0F6540003B8F3 /* EventHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventHeaderView.swift; sourceTree = "<group>"; };
@@ -1137,7 +1135,6 @@
 			isa = PBXGroup;
 			children = (
 				EF1644A72905899500E9D997 /* CustomCuratedList */,
-				EF7D2FC728E0A0D40003B8F3 /* Videos */,
 				EF7D2FBB28E056E60003B8F3 /* TopMentions */,
 				EF7D2FA828E033D40003B8F3 /* TrendingHeadline */,
 				EF7D2F9D28E02CFF0003B8F3 /* HomeFeed.swift */,
@@ -1193,14 +1190,6 @@
 				EF7D2FC328E09E3D0003B8F3 /* StubVideoService.swift */,
 				EF5C4EBE29560DC200669355 /* VideoService.swift */,
 				EF5C4EC029560E2B00669355 /* VideoEndpoints.swift */,
-			);
-			path = Videos;
-			sourceTree = "<group>";
-		};
-		EF7D2FC728E0A0D40003B8F3 /* Videos */ = {
-			isa = PBXGroup;
-			children = (
-				EF7D2FC828E0A0E10003B8F3 /* VideoCell.swift */,
 			);
 			path = Videos;
 			sourceTree = "<group>";
@@ -1923,7 +1912,6 @@
 				EF7CC0112916491A00F9D611 /* CALayer+Animation.swift in Sources */,
 				EFFFE472294B97750045686E /* VideoTikTokCell.swift in Sources */,
 				EF86383328DC5CAF00EF520C /* NewsFeed.swift in Sources */,
-				EF7D2FC928E0A0E10003B8F3 /* VideoCell.swift in Sources */,
 				EF187CA7295DBB130031CE78 /* SocialHighlightInterface.swift in Sources */,
 				EF1644A9290589B500E9D997 /* CustomCuratedEvents.swift in Sources */,
 				EF2F6C3C29604B4F0066D9D3 /* UIViewController+Alert.swift in Sources */,

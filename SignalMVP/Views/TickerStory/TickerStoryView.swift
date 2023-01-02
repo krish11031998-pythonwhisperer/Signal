@@ -115,9 +115,9 @@ class TickerStoryView: UIViewController {
     private func fetchNews() {
         let ticker = mention.ticker
         StubNewsService.shared
-            .fetchNews(entity: [ticker])
+            .fetchNews()
             .compactMap { $0.data }
-            .receive(on: DispatchQueue.main)
+//            .receive(on: DispatchQueue.main)
             .sink {
                 switch $0 {
                 case .failure(let err):
@@ -147,19 +147,13 @@ class TickerStoryView: UIViewController {
     
     private func setupTickerInfo() {
         let tickerImage = UIImageView()
-        UIImage.loadImage(url: mention.ticker.logoURL, at: tickerImage, path: \.image)
+        UIImage.loadImage(url: mention.ticker.logoURL, at: tickerImage, path: \.image).store(in: &bag)
         
         tickerImage.setFrame(.init(squared: 32))
         
         let tickerName = mention.ticker.body1Bold().generateLabel
-        
-        let buttonImg = UIImage(systemName: "xmark")?.resized(size: .init(squared: 16))
-        let imgView = UIImageView(image: buttonImg)
-        imgView.circleFrame = .init(origin: .zero, size: .init(squared: 32))
-        imgView.backgroundColor = .surfaceBackgroundInverse
-        imgView.contentMode = .center
-        imgView.setFrame(.init(squared: 32))
-        let closeButton = imgView.buttonify {
+
+        let closeButton = UIImage.Catalogue.xMark.buttonView.buttonify(bouncyEffect: false) {
             self.popViewController()
         }
         
@@ -176,7 +170,7 @@ class TickerStoryView: UIViewController {
         tickers.removeChildViews()
         model.tickers.enumerated().forEach {
             let imgView = UIImageView(size: .init(squared: 32), cornerRadius: 16, contentMode: .scaleAspectFit)
-            UIImage.loadImage(url: $0.element.logoURL, at: imgView, path: \.image)
+            UIImage.loadImage(url: $0.element.logoURL, at: imgView, path: \.image).store(in: &bag)
             tickers.addSubview(imgView)
             tickers.setFittingConstraints(childView: imgView, top: 0, leading: CGFloat($0.offset * 24), bottom: 0,width: 32, height: 32)
         }
@@ -187,7 +181,7 @@ class TickerStoryView: UIViewController {
     private func loadWithNews() {
         guard idx >= 0, idx < newsForTicker.count else { return }
         let news = newsForTicker[idx]
-        UIImage.loadImage(url: news.imageUrl, at: mainImageView, path: \.image)
+        UIImage.loadImage(url: news.imageUrl, at: mainImageView, path: \.image).store(in: &bag)
         mainImageView.contentMode = .scaleAspectFill
         setupTimer()
         timerStack.arrangedSubviews.enumerated().forEach { $0.element.backgroundColor = $0.offset <= idx ? .white : .black.withAlphaComponent(0.5) }

@@ -13,17 +13,9 @@ class HomeFeed: UIViewController {
 	
 //MARK: - Properties
     private let user: CurrentValueSubject<UserModel?, Never> = .init(nil)
-	private lazy var tableView: UITableView = {
-		let table: UITableView = .init(frame: .zero, style: .grouped)
-		table.separatorStyle = .none
-		return table
-	}()
+    private lazy var tableView: UITableView = { .standardTableView() }()
 
-	private lazy var viewModel: HomeViewModel = {
-		let model = HomeViewModel()
-        model.viewTransitioner = self
-		return model
-	}()
+    private lazy var viewModel: HomeViewModel = { .init() }()
     
     private var bag: Set<AnyCancellable> = .init()
 	
@@ -38,7 +30,7 @@ class HomeFeed: UIViewController {
 //MARK: - ProtectedMethods
 	
     private func setupNavbar() {
-        setupTransparentNavBar()
+        setupTransparentNavBar(color: .surfaceBackground, scrollColor: .surfaceBackground)
         let customView = (UIImage.Catalogue.user.image.resized(size: .init(squared: 20)).withTintColor(.surfaceBackground) + "Profile".styled(font: .regular, color: .textColorInverse, size: 12)).generateLabel.blobify(backgroundColor: .surfaceBackgroundInverse, edgeInset: .init(vertical: 5, horizontal: 10), borderColor: .clear, borderWidth: 0, cornerRadius: 16)
         customView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showProfile)))
         navigationItem.rightBarButtonItem = .init(customView: customView)
@@ -78,6 +70,9 @@ class HomeFeed: UIViewController {
                     self.navigationController?.pushViewController(TweetDetailView(tweet: tweet), animated: true)
                 case .toMention(_):
                     break
+                case .toTickerStory(let model, let frame):
+                    let view = TickerStoryView(mention: model).withNavigationController()
+                    self.presentView(style: .circlar(frame: frame), target: view, onDimissal: nil)
                 case .viewMoreNews:
                     self.navigationController?.pushViewController(NewsFeed(isChildPage: true), animated: true)
                 case .viewMoreTweet:
@@ -112,20 +107,4 @@ class HomeFeed: UIViewController {
         }
     }
 	
-}
-
-
-//MARK: - Present Delegate
-
-extension HomeFeed: PresentDelegate {
-    
-    func presentView(origin: CGRect) {
-        guard let mention =  viewModel.selectedMention.value else { return }
-        let view = TickerStoryView(mention: mention).withNavigationController()
-        let presenter = PresentationController(style: .circlar(frame: origin),presentedViewController: view, presentingViewController: self, onDismiss: nil)
-        view.transitioningDelegate = presenter
-        view.modalPresentationStyle = .custom
-        present(view, animated: true)
-    }
-    
 }

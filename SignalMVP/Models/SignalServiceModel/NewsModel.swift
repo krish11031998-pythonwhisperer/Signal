@@ -14,7 +14,7 @@ struct NewsResult: Codable {
 
 struct NewsModel: Tickers, Codable  {
    
-    let newsId: Int
+    let newsId: Int?
 	let date: String
 	let imageUrl: String
 	let newsUrl: String

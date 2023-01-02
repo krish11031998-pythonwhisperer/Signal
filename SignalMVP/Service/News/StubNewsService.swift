@@ -17,7 +17,7 @@ class StubNewsService: NewsServiceInterface {
                           page: Int = 0,
 						  limit: Int = 20) -> AnyPublisher<NewsResult, Error> {
 
-        return Bundle.main.loadDataFromBundle(name: "signalNews", extensionStr: "json")
+        Bundle.main.loadDataFromBundle(name: "signalNews", extensionStr: "json")
 	}
 	
 }

@@ -11,7 +11,7 @@ import Combine
 
 class NewsFeed: SearchViewController {
 	
-	private lazy var tableView: UITableView = { .init(frame: .zero, style: .grouped) }()
+	private lazy var tableView: UITableView = { .standardTableView() }()
     private let viewModel: NewsViewModel = .init()
     private let isChildPage: Bool
     

@@ -21,10 +21,8 @@ class HomeViewModel {
     @Published private var tweets: [TweetModel]?
     @Published private var events: [EventModel]?
     
-    public var viewTransitioner: PresentDelegate?
     private var bag: Set<AnyCancellable> = .init()
     private var selectedEvent: PassthroughSubject<EventModel?, Never> = .init()
-    var selectedMention: CurrentValueSubject<MentionModel?, Never> = .init(nil)
     private var selectedNavigation: PassthroughSubject<Navigation, Never> = .init()
     private let authPublisher: AuthPublisher = .init()
     
@@ -33,6 +31,7 @@ class HomeViewModel {
         case toNews(_ model: NewsModel)
         case toTweet(_ model: TweetModel)
         case toMention(_ model: MentionModel)
+        case toTickerStory(_ model: MentionModel, frame: CGRect)
         case viewMoreEvent, viewMoreNews, viewMoreTweet
     }
     
@@ -43,7 +42,15 @@ class HomeViewModel {
     }
     
     func transform() -> Output {
-        let sections = fetchSections()
+        
+        let user = authPublisher
+            .print("👩‍💻 user")
+            .compactMap { $0?.uid }
+            .flatMap { UserService.shared.getUser(userId: $0) }
+            .eraseToAnyPublisher()
+            .share()
+        
+        let sections = fetchSections(user: user)
         
         selectedEvent
             .sink { [weak self] in
@@ -54,11 +61,7 @@ class HomeViewModel {
         
         let selectedNavigation = selectedNavigation.eraseToAnyPublisher()
         
-        let showProfile = authPublisher
-            .compactMap { $0?.uid }
-            .flatMap {
-                UserService.shared.getUser(userId: $0)
-            }
+        let showProfile = user
             .compactMap { $0.data }
             .eraseToAnyPublisher()
         
@@ -67,22 +70,28 @@ class HomeViewModel {
                      user: showProfile)
     }
     
-    private func fetchSections() -> AnyPublisher<[TableSection], Error> {
+    private func fetchSections(user: Publishers.Share<AnyPublisher<UserModelResponse, Error>>) -> AnyPublisher<[TableSection], Error> {
         SocialHighlightService
             .shared
             .fetchSocialHighlight()
-            .compactMap { [weak self] in
-                guard let self, let data = $0.data else { return nil }
-                return self.buildSection(data)
+            .combineLatest(user, { ($0, $1) })
+            .compactMap { [weak self] (highlights, user) in
+                guard let self, let data = highlights.data else { return [] }
+                return self.buildSection(data, user: user.data)
             }
             .eraseToAnyPublisher()
         
     }
     
-    private func buildSection(_ socialData: SocialHighlightModel) -> [TableSection] {
+    private func buildSection(_ socialData: SocialHighlightModel, user: UserModel? = nil) -> [TableSection] {
         var section: [TableSection] = [setupEventSection(socialData: socialData),
                                        setupNewsSection(socialData: socialData),
                                        setupTweetsSection(socialData: socialData)].compactMap { $0 }
+        
+        if let user = user, let tickerStorySection = setupStorySection(user: user) {
+            section.insert(tickerStorySection, at: 0)
+        }
+        
         return section
     }
     
@@ -127,6 +136,18 @@ class HomeViewModel {
                                                                                    interspacing: 8))] + footer,
                                         title: "Top Tweets")
         return tweetSection
+    }
+    
+    private func setupStorySection(user: UserModel) -> TableSection? {
+        guard !user.watching.isEmpty else { return nil }
+        let collectionCells = user.watching.map { ticker in
+            let mentionModel = MentionModel(totalMentions: 0, positiveMentions: 0, negativeMentions: 0, neutralMentions: 0, ticker: ticker, name: ticker, sentimentScore: 0)
+            let model: MentionCellModel = .init(model: mentionModel, action: nil) { frame in
+                self.selectedNavigation.send(.toTickerStory(mentionModel, frame: frame))
+            }
+            return CollectionItem<TopMentionStoryCell>(model)
+        }
+        return .init(rows: [TableRow<CollectionTableCell>(.init(cells: collectionCells, inset: .init(vertical: 0, horizontal: 10), cellSize: .init(squared: 64)))])
     }
 }
 
