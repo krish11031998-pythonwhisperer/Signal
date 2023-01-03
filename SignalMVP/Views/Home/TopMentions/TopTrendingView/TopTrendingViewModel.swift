@@ -11,6 +11,11 @@ import Combine
 class TopTrendingViewModel {
     
     let tickers: [MentionTickerModel]
+    private let navigation: PassthroughSubject<Navigation, Never> = .init()
+    
+    enum Navigation {
+        case toTickerDetail(_ mention: MentionTickerModel)
+    }
     
     init(tickers: [MentionTickerModel]) {
         self.tickers = tickers
@@ -18,20 +23,23 @@ class TopTrendingViewModel {
     
     struct Output {
         let section: AnyPublisher<[TableSection], Never>
+        let navigation: AnyPublisher<Navigation, Never>
     }
     
     func transform() -> Output {
         let sections = Just(tickers)
-            .compactMap {
+            .compactMap { [weak self] in
                 $0.compactMap { ticker in
-                    let model: MentionCellModel = .init(model: ticker)
+                    let model: MentionCellModel = .init(model: ticker) {
+                        self?.navigation.send(.toTickerDetail(ticker))
+                    }
                     return TableRow<TopMentionCell>(model)
                 }
             }
             .compactMap { [TableSection(rows: $0)] }
             .eraseToAnyPublisher()
         
-        return .init(section: sections)
+        return .init(section: sections, navigation: navigation.eraseToAnyPublisher())
     }
     
 }

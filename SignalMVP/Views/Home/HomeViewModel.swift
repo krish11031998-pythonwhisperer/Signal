@@ -36,6 +36,7 @@ class HomeViewModel {
         case toTweet(_ model: TweetModel)
         case toMention(_ model: MentionTickerModel)
         case toTickerStory(_ model: MentionTickerModel, frame: CGRect)
+        case toTickerDetail(_ model: MentionTickerModel)
         case viewMoreEvent, viewMoreNews, viewMoreTweet, viewMoreTrendingTickers(tickers: [MentionTickerModel])
     }
     
@@ -164,8 +165,10 @@ class HomeViewModel {
     
     private func setupTrendingTickers(socialData: SocialHighlightModel) -> TableSection? {
         guard let trending = socialData.topMention?.first?.tickers else { return nil }
-        let rows = trending.limitTo(to: 5).compactMap {
-            let model = MentionCellModel(model: $0, action: nil)
+        let rows = trending.limitTo(to: 5).compactMap { mention in
+            let model = MentionCellModel(model: mention) {
+                self.selectedNavigation.send(.toTickerDetail(mention))
+            }
             return TableRow<TopMentionCell>(model)
         }
         let footer = [TableRow<ViewMoreFooter>(.init(destination: .viewMoreTrendingTickers(tickers: trending),

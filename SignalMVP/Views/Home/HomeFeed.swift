@@ -81,6 +81,8 @@ class HomeFeed: UIViewController {
                 case .toTickerStory(let model, let frame):
                     let view = TickerStoryView(mention: model).withNavigationController()
                     self.presentView(style: .circlar(frame: frame), target: view, onDimissal: nil)
+                case .toTickerDetail(let model):
+                    self.pushTo(target: TopMentionDetailView(mention: model))
                 case .viewMoreNews:
                     self.pushTo(target: NewsFeed(isChildPage: true))
                 case .viewMoreTweet:

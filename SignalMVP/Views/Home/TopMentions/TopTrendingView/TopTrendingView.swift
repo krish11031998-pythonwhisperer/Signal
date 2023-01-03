@@ -48,6 +48,15 @@ class TopTrendingViewController: UIViewController {
                 self?.tableView.reloadData($0)
             }
             .store(in: &bag)
+        
+        output.navigation
+            .sink { [weak self] in
+                switch $0 {
+                case .toTickerDetail(let mention):
+                    self?.pushTo(target: TopMentionDetailView(mention: mention))
+                }
+            }
+            .store(in: &bag)
     }
     
     
