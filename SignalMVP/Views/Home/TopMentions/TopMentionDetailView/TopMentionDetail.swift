@@ -29,9 +29,9 @@ class TopMentionDetailView: UIViewController {
     private lazy var tableView: UITableView = { .standardTableView() }()
     private lazy var viewModel: TopMentionDetailViewModel = { .init(mention: mention) }()
     private var bag: Set<AnyCancellable> = .init()
-    private let mention: MentionModel
+    private let mention: MentionTickerModel
     
-    init(mention: MentionModel) {
+    init(mention: MentionTickerModel) {
         self.mention = mention
         super.init(nibName: nil, bundle: nil)
     }

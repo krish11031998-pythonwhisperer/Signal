@@ -62,7 +62,6 @@ class HomeFeed: UIViewController {
                 }
             } receiveValue: { [weak self] in
                 guard let self else { return }
-                print("(DEBUG) relaoding with data")
                 self.tableView.reloadData($0)
             }
             .store(in: &bag)
@@ -72,22 +71,24 @@ class HomeFeed: UIViewController {
                 guard let self else { return }
                 switch $0 {
                 case .toEvent(let event):
-                    self.navigationController?.pushViewController(EventDetailView(eventModel: event), animated: true)
+                    self.pushTo(target: EventDetailView(eventModel: event))
                 case .toNews(let news):
-                    self.navigationController?.pushViewController(NewsDetailView(news: news), animated: true)
+                    self.pushTo(target: NewsDetailView(news: news))
                 case .toTweet(let tweet):
-                    self.navigationController?.pushViewController(TweetDetailView(tweet: tweet), animated: true)
+                    self.pushTo(target: TweetDetailView(tweet: tweet))
                 case .toMention(_):
                     break
                 case .toTickerStory(let model, let frame):
                     let view = TickerStoryView(mention: model).withNavigationController()
                     self.presentView(style: .circlar(frame: frame), target: view, onDimissal: nil)
                 case .viewMoreNews:
-                    self.navigationController?.pushViewController(NewsFeed(isChildPage: true), animated: true)
+                    self.pushTo(target: NewsFeed(isChildPage: true))
                 case .viewMoreTweet:
-                    self.navigationController?.pushViewController(TweetFeedViewController(isChildPage: true), animated: true)
+                    self.pushTo(target: TweetFeedViewController(isChildPage: true))
                 case .viewMoreEvent:
-                    self.navigationController?.pushViewController(EventsFeedViewController(isChildPage: true), animated: true)
+                    self.pushTo(target: EventsFeedViewController(isChildPage: true))
+                case .viewMoreTrendingTickers(let tickers):
+                    self.pushTo(target: TopTrendingViewController(trendingTicker: tickers))
                 }
             }
             .store(in: &bag)

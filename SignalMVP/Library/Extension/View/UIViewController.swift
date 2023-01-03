@@ -108,6 +108,14 @@ extension UIViewController {
         (navigationController?.navigationBar.frame.height ?? 0) + (navigationController?.additionalSafeAreaInsets.top ?? 0) +
         (navigationController?.additionalSafeAreaInsets.bottom ?? 0)
     }
+    
+    func pushTo(target: UIViewController) {
+        if let nav = navigationController {
+            nav.pushViewController(target, animated: true)
+        } else {
+            self.presentView(style: .sheet(), target: target.withNavigationController(), onDimissal: nil)
+        }
+    }
 }
 
 //MARK: - UIViewController Presentation

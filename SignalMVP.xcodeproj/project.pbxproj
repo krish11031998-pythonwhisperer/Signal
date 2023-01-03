@@ -49,6 +49,11 @@
 		EF2F6C3A296049880066D9D3 /* PresentAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2F6C39296049880066D9D3 /* PresentAlert.swift */; };
 		EF2F6C3C29604B4F0066D9D3 /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2F6C3B29604B4F0066D9D3 /* UIViewController+Alert.swift */; };
 		EF2F6C3E296198D80066D9D3 /* TweetMetricType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2F6C3D296198D80066D9D3 /* TweetMetricType.swift */; };
+		EF2F6C41296448390066D9D3 /* TopMentionServiceInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2F6C40296448390066D9D3 /* TopMentionServiceInterface.swift */; };
+		EF2F6C43296448410066D9D3 /* TopMentionEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2F6C42296448410066D9D3 /* TopMentionEndpoint.swift */; };
+		EF2F6C45296449390066D9D3 /* TopMentionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2F6C44296449390066D9D3 /* TopMentionService.swift */; };
+		EF2F6C4B2964520C0066D9D3 /* TopTrendingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2F6C4A2964520C0066D9D3 /* TopTrendingView.swift */; };
+		EF2F6C4D296452900066D9D3 /* TopTrendingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2F6C4C296452900066D9D3 /* TopTrendingViewModel.swift */; };
 		EF3B698D2959D48200C9234B /* withLatestFrom.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3B698C2959D48200C9234B /* withLatestFrom.swift */; };
 		EF3B698F295A4A3600C9234B /* UIScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3B698E295A4A3600C9234B /* UIScrollView.swift */; };
 		EF48D71328E4CFCF00BD2A1A /* MainTabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF48D71228E4CFCF00BD2A1A /* MainTabModel.swift */; };
@@ -162,7 +167,7 @@
 		EF7D2FAA28E033E90003B8F3 /* TrendingHeadlineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7D2FA928E033E90003B8F3 /* TrendingHeadlineCell.swift */; };
 		EF7D2FAC28E037530003B8F3 /* trendingHeadlines.json in Resources */ = {isa = PBXBuildFile; fileRef = EF7D2FAB28E037530003B8F3 /* trendingHeadlines.json */; };
 		EF7D2FB228E050450003B8F3 /* MentionInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7D2FB128E050450003B8F3 /* MentionInterface.swift */; };
-		EF7D2FB428E050DE0003B8F3 /* MentionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7D2FB328E050DE0003B8F3 /* MentionModel.swift */; };
+		EF7D2FB428E050DE0003B8F3 /* MentionTickerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7D2FB328E050DE0003B8F3 /* MentionTickerModel.swift */; };
 		EF7D2FB628E051940003B8F3 /* StubMentionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7D2FB528E051940003B8F3 /* StubMentionService.swift */; };
 		EF7D2FB828E052690003B8F3 /* topMentionsWeek.json in Resources */ = {isa = PBXBuildFile; fileRef = EF7D2FB728E052690003B8F3 /* topMentionsWeek.json */; };
 		EF7D2FBA28E052740003B8F3 /* topMentionsMonth.json in Resources */ = {isa = PBXBuildFile; fileRef = EF7D2FB928E052740003B8F3 /* topMentionsMonth.json */; };
@@ -312,6 +317,11 @@
 		EF2F6C39296049880066D9D3 /* PresentAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentAlert.swift; sourceTree = "<group>"; };
 		EF2F6C3B29604B4F0066D9D3 /* UIViewController+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
 		EF2F6C3D296198D80066D9D3 /* TweetMetricType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetMetricType.swift; sourceTree = "<group>"; };
+		EF2F6C40296448390066D9D3 /* TopMentionServiceInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopMentionServiceInterface.swift; sourceTree = "<group>"; };
+		EF2F6C42296448410066D9D3 /* TopMentionEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopMentionEndpoint.swift; sourceTree = "<group>"; };
+		EF2F6C44296449390066D9D3 /* TopMentionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopMentionService.swift; sourceTree = "<group>"; };
+		EF2F6C4A2964520C0066D9D3 /* TopTrendingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopTrendingView.swift; sourceTree = "<group>"; };
+		EF2F6C4C296452900066D9D3 /* TopTrendingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopTrendingViewModel.swift; sourceTree = "<group>"; };
 		EF3B698C2959D48200C9234B /* withLatestFrom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = withLatestFrom.swift; sourceTree = "<group>"; };
 		EF3B698E295A4A3600C9234B /* UIScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScrollView.swift; sourceTree = "<group>"; };
 		EF48D71228E4CFCF00BD2A1A /* MainTabModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabModel.swift; sourceTree = "<group>"; };
@@ -425,7 +435,7 @@
 		EF7D2FA928E033E90003B8F3 /* TrendingHeadlineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingHeadlineCell.swift; sourceTree = "<group>"; };
 		EF7D2FAB28E037530003B8F3 /* trendingHeadlines.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = trendingHeadlines.json; sourceTree = "<group>"; };
 		EF7D2FB128E050450003B8F3 /* MentionInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentionInterface.swift; sourceTree = "<group>"; };
-		EF7D2FB328E050DE0003B8F3 /* MentionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentionModel.swift; sourceTree = "<group>"; };
+		EF7D2FB328E050DE0003B8F3 /* MentionTickerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentionTickerModel.swift; sourceTree = "<group>"; };
 		EF7D2FB528E051940003B8F3 /* StubMentionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubMentionService.swift; sourceTree = "<group>"; };
 		EF7D2FB728E052690003B8F3 /* topMentionsWeek.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = topMentionsWeek.json; sourceTree = "<group>"; };
 		EF7D2FB928E052740003B8F3 /* topMentionsMonth.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = topMentionsMonth.json; sourceTree = "<group>"; };
@@ -686,6 +696,25 @@
 				EF2F6C37296045F30066D9D3 /* ProfileTickerSearch.swift */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		EF2F6C3F296448220066D9D3 /* TopMentionTickers */ = {
+			isa = PBXGroup;
+			children = (
+				EF2F6C40296448390066D9D3 /* TopMentionServiceInterface.swift */,
+				EF2F6C42296448410066D9D3 /* TopMentionEndpoint.swift */,
+				EF2F6C44296449390066D9D3 /* TopMentionService.swift */,
+			);
+			path = TopMentionTickers;
+			sourceTree = "<group>";
+		};
+		EF2F6C49296451FB0066D9D3 /* TopTrendingView */ = {
+			isa = PBXGroup;
+			children = (
+				EF2F6C4A2964520C0066D9D3 /* TopTrendingView.swift */,
+				EF2F6C4C296452900066D9D3 /* TopTrendingViewModel.swift */,
+			);
+			path = TopTrendingView;
 			sourceTree = "<group>";
 		};
 		EF59F109292A3308002877DE /* TabBar */ = {
@@ -1175,6 +1204,7 @@
 		EF7D2FBB28E056E60003B8F3 /* TopMentions */ = {
 			isa = PBXGroup;
 			children = (
+				EF2F6C49296451FB0066D9D3 /* TopTrendingView */,
 				EF987B6F2917A1D50000E233 /* TopMentionMisc */,
 				EF7CC02829169FD700F9D611 /* TopMentionDetailView */,
 				EF7D2FBC28E056F40003B8F3 /* TopMentionCell.swift */,
@@ -1206,6 +1236,7 @@
 		EF86381428DC1E7D00EF520C /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				EF2F6C3F296448220066D9D3 /* TopMentionTickers */,
 				EF187CA5295DBAFC0031CE78 /* SocialHighlights */,
 				EF06E457295BBD9D00820AFE /* Auth */,
 				EF5C4EDE29577C3100669355 /* User */,
@@ -1498,7 +1529,7 @@
 			children = (
 				EF86382728DC507E00EF520C /* NewsModel.swift */,
 				EF7D2FC528E09E7E0003B8F3 /* VideoModel.swift */,
-				EF7D2FB328E050DE0003B8F3 /* MentionModel.swift */,
+				EF7D2FB328E050DE0003B8F3 /* MentionTickerModel.swift */,
 				EF7D2FA428E031920003B8F3 /* TrendingHeadlinesModel.swift */,
 			);
 			path = SignalServiceModel;
@@ -1784,6 +1815,7 @@
 				EF7CBFE5291641EA00F9D611 /* UILabel.swift in Sources */,
 				EF48D71328E4CFCF00BD2A1A /* MainTabModel.swift in Sources */,
 				EF7D2FA028E02DB80003B8F3 /* HomeViewModel.swift in Sources */,
+				EF2F6C41296448390066D9D3 /* TopMentionServiceInterface.swift in Sources */,
 				EF7CBFF6291641EA00F9D611 /* Bundle.swift in Sources */,
 				EF7D2FD028E0F6540003B8F3 /* EventHeaderView.swift in Sources */,
 				EF7D2FBD28E056F40003B8F3 /* TopMentionCell.swift in Sources */,
@@ -1817,14 +1849,16 @@
 				EF7CBFDB291641EA00F9D611 /* ImageCatalogue.swift in Sources */,
 				EF1D7E5B2922CCFD0041ADEC /* CollectionViewFunctions.swift in Sources */,
 				EF7CBFDF291641EA00F9D611 /* UIStackView.swift in Sources */,
+				EF2F6C43296448410066D9D3 /* TopMentionEndpoint.swift in Sources */,
 				EF5C4EB42951B26F00669355 /* RoundedCardCell.swift in Sources */,
 				EF86384928DC9F4600EF520C /* EventServiceInterface.swift in Sources */,
 				EF59F119292A969A002877DE /* SphericalProgressBars.swift in Sources */,
-				EF7D2FB428E050DE0003B8F3 /* MentionModel.swift in Sources */,
+				EF7D2FB428E050DE0003B8F3 /* MentionTickerModel.swift in Sources */,
 				EF86384D28DCED0C00EF520C /* EventSingleCell.swift in Sources */,
 				EF86382328DC341400EF520C /* TweetMetricView.swift in Sources */,
 				EF7CBFF9291641EA00F9D611 /* TableViewFunction.swift in Sources */,
 				EF5C4EA52951905900669355 /* RoundedCardViewConfig.swift in Sources */,
+				EF2F6C4D296452900066D9D3 /* TopTrendingViewModel.swift in Sources */,
 				EFB1C23228DB3B1800DD40A4 /* MainViewController.swift in Sources */,
 				EF59F106292961BA002877DE /* RecentTweetCard.swift in Sources */,
 				EF92FD81292840850004F547 /* StackScrollView.swift in Sources */,
@@ -1925,6 +1959,7 @@
 				EF5C4EE629577CA100669355 /* Register.swift in Sources */,
 				EFB1C23028DB3B1800DD40A4 /* SceneDelegate.swift in Sources */,
 				EF86383E28DC990500EF520C /* EventsFeed.swift in Sources */,
+				EF2F6C4B2964520C0066D9D3 /* TopTrendingView.swift in Sources */,
 				EF96382428DD8FDC00178C37 /* RedditFeed.swift in Sources */,
 				EF7CBFDA291641EA00F9D611 /* ShapeLayer.swift in Sources */,
 				EF187CB5295E304B0031CE78 /* NewTweetMetricView.swift in Sources */,
@@ -1934,6 +1969,7 @@
 				EF06E45B295BBE2200820AFE /* AuthService.swift in Sources */,
 				EF2F6C38296045F30066D9D3 /* ProfileTickerSearch.swift in Sources */,
 				EF5C4EC529561C3800669355 /* EventEndpoints.swift in Sources */,
+				EF2F6C45296449390066D9D3 /* TopMentionService.swift in Sources */,
 				EF96382A28DDD59F00178C37 /* TweetDetailView.swift in Sources */,
 				EF7D2FC428E09E3D0003B8F3 /* StubVideoService.swift in Sources */,
 				EF7CC000291641EA00F9D611 /* SentimentTextLabel.swift in Sources */,

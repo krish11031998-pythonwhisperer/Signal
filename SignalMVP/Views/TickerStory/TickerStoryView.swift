@@ -23,7 +23,7 @@ class TickerStoryView: UIViewController {
     private lazy var tickerInfo: UIStackView = { .HStack(spacing: 10, alignment: .center) }()
     private lazy var headerStack: UIStackView = { .VStack(subViews: [timerStack, tickerInfo], spacing: 32) }()
     private lazy var tickers: UIView = { .init() }()
-    private let mention: MentionModel
+    private let mention: MentionTickerModel
     private lazy var swipeUp: UIView = {
         let chevronImage = UIImage.Catalogue.arrowUp.image.withTintColor(.textColor, renderingMode: .alwaysOriginal).imageView(size: .init(squared: 16), cornerRadius: 0)
         chevronImage.animate(.shakeUpDown(duration: 1))
@@ -71,7 +71,7 @@ class TickerStoryView: UIViewController {
     private var direction: CGPoint.Direction = .none
     
     //MARK: - Overriden Methods
-    init(mention: MentionModel) {
+    init(mention: MentionTickerModel) {
         self.mention = mention
         super.init(nibName: nil, bundle: nil)
     }

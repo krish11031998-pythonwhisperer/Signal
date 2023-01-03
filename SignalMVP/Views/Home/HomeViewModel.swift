@@ -20,7 +20,7 @@ protocol PresentDelegate {
 class HomeViewModel {
     
     @Published private var trendingHeadlines: [TrendingHeadlinesModel]?
-    @Published private var mentions: [MentionModel]?
+    @Published private var mentions: [MentionTickerModel]?
     @Published private var videos: [VideoModel]?
     @Published private var tweets: [TweetModel]?
     @Published private var events: [EventModel]?
@@ -34,9 +34,9 @@ class HomeViewModel {
         case toEvent(_ model: EventModel)
         case toNews(_ model: NewsModel)
         case toTweet(_ model: TweetModel)
-        case toMention(_ model: MentionModel)
-        case toTickerStory(_ model: MentionModel, frame: CGRect)
-        case viewMoreEvent, viewMoreNews, viewMoreTweet
+        case toMention(_ model: MentionTickerModel)
+        case toTickerStory(_ model: MentionTickerModel, frame: CGRect)
+        case viewMoreEvent, viewMoreNews, viewMoreTweet, viewMoreTrendingTickers(tickers: [MentionTickerModel])
     }
     
     struct Output {
@@ -97,7 +97,8 @@ class HomeViewModel {
     private func buildSection(_ socialData: SocialHighlightModel, user: UserModel? = nil) -> [TableSection] {
         var section: [TableSection] = [setupEventSection(socialData: socialData),
                                        setupNewsSection(socialData: socialData),
-                                       setupTweetsSection(socialData: socialData)].compactMap { $0 }
+                                       setupTweetsSection(socialData: socialData),
+                                       setupTrendingTickers(socialData: socialData)].compactMap { $0 }
         
         if let user = user, let tickerStorySection = setupStorySection(user: user) {
             section.insert(tickerStorySection, at: 0)
@@ -141,10 +142,10 @@ class HomeViewModel {
         let footer = [TableRow<ViewMoreFooter>(.init(destination: .viewMoreTweet,
                                                        selectedViewMoreNavigation: self.selectedNavigation))]
         let tweetSection = TableSection(rows: [TableRow<CollectionTableCell>(.init(cells: collectionCells,
-                                                                                   size: .init(width: .totalWidth, height: 300),
-                                                                                   inset: .init(vertical: 0, horizontal: 10),
-                                                                                   cellSize: .init(width: 225, height: 275),
-                                                                                   interspacing: 8))] + footer,
+                                                                                   size: Constants.size,
+                                                                                   inset: Constants.inset,
+                                                                                   cellSize: Constants.cellSize,
+                                                                                   interspacing: Constants.interspacing))] + footer,
                                         title: "Top Tweets")
         return tweetSection
     }
@@ -152,13 +153,24 @@ class HomeViewModel {
     private func setupStorySection(user: UserModel) -> TableSection? {
         guard let watchList = user.watching, !watchList.isEmpty else { return nil }
         let collectionCells = watchList.map { ticker in
-            let mentionModel = MentionModel(totalMentions: 0, positiveMentions: 0, negativeMentions: 0, neutralMentions: 0, ticker: ticker, name: ticker, sentimentScore: 0)
+            let mentionModel = MentionTickerModel(totalMentions: 0, positiveMentions: 0, negativeMentions: 0, neutralMentions: 0, ticker: ticker, name: ticker, sentimentScore: 0)
             let model: MentionCellModel = .init(model: mentionModel, action: nil) { frame in
                 self.selectedNavigation.send(.toTickerStory(mentionModel, frame: frame))
             }
             return CollectionItem<TopMentionStoryCell>(model)
         }
         return .init(rows: [TableRow<CollectionTableCell>(.init(cells: collectionCells, inset: .init(vertical: 0, horizontal: 10), cellSize: .init(squared: 64)))])
+    }
+    
+    private func setupTrendingTickers(socialData: SocialHighlightModel) -> TableSection? {
+        guard let trending = socialData.topMention?.first?.tickers else { return nil }
+        let rows = trending.limitTo(to: 5).compactMap {
+            let model = MentionCellModel(model: $0, action: nil)
+            return TableRow<TopMentionCell>(model)
+        }
+        let footer = [TableRow<ViewMoreFooter>(.init(destination: .viewMoreTrendingTickers(tickers: trending),
+                                                       selectedViewMoreNavigation: self.selectedNavigation))]
+        return .init(rows: rows + footer, title: "Top Trending Tickers")
     }
 }
 
@@ -218,3 +230,12 @@ class ViewMoreFooter: ConfigurableCell {
     
 }
 
+//MARK: - HomeViewModel Constant
+extension HomeViewModel {
+    enum Constants {
+        static let size: CGSize = .init(width: .totalWidth, height: 300)
+        static let inset: UIEdgeInsets = .init(vertical: 0, horizontal: 10)
+        static let cellSize: CGSize = .init(width: 225, height: 275)
+        static let interspacing: CGFloat = 8
+    }
+}

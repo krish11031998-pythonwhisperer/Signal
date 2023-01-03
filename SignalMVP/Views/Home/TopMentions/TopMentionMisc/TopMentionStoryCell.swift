@@ -10,7 +10,7 @@ import UIKit
 import Combine
 
 //MARK: - Defination
-fileprivate extension MentionModel {
+fileprivate extension MentionTickerModel {
     
     var tickerImage: String {
         let url = "https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@1a63530be6e374711a8554f31b17e4cb92c25fa5/128/color/\(ticker.lowercased()).png"
@@ -22,7 +22,7 @@ fileprivate extension MentionModel {
 
 class TopMentionStoryCell: ConfigurableCollectionCell {
 
-    static var visitedCells: Set<MentionModel> = []
+    static var visitedCells: Set<MentionTickerModel> = []
 
     private lazy var imageView: UIImageView =  { .init(size: .init(squared: 62), cornerRadius: 31, contentMode: .center) }()
     private var bag: Set<AnyCancellable> = .init()

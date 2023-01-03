@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-fileprivate extension MentionModel {
+fileprivate extension MentionTickerModel {
     
     var total: Int { positiveMentions + neutralMentions + negativeMentions }
     
@@ -49,7 +49,7 @@ class SentimentCell: ConfigurableCell {
         backgroundColor = .surfaceBackground
     }
     
-    func configure(with model: MentionModel) {
+    func configure(with model: MentionTickerModel) {
         
         let accountRatios:[MultipleStrokeModel] = [
             model.chartModel(for: "Positive"),

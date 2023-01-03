@@ -62,9 +62,6 @@ extension EndPoint {
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.httpMethod = method
-        if let body {
-            print("(DEBUG) body: ", String(data: body, encoding: .utf8))
-        }
 		return request
 	}
     

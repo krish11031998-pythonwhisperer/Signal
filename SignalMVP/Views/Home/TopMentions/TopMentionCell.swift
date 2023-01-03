@@ -18,7 +18,7 @@ fileprivate extension UIView {
 	
 }
 
-fileprivate extension MentionModel {
+fileprivate extension MentionTickerModel {
 	
 	func count(_ sentiment: Sentiment) -> Int {
 		switch sentiment {

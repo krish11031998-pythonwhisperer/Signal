@@ -13,4 +13,5 @@ struct SocialHighlightModel:Codable {
     let tweets: [TweetModel]?
     let news: [NewsModel]?
     let events: [EventModel]?
+    let topMention: [DailyMentions]?
 }

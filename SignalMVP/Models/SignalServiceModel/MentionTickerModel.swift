@@ -11,15 +11,14 @@ public extension Notification.Name {
     static let showMention: Notification.Name = .init("showMention")
 }
 
-struct MentionsResult: Codable {
-	let data: MentionResultSection?
+ typealias MentionsResult = GenericResult<DailyMentions>
+
+ struct DailyMentions: Codable{
+    let date: String?
+	let tickers: [MentionTickerModel]?
 }
 
-struct MentionResultSection: Codable{
-	let all: [MentionModel]?
-}
-
-struct MentionModel: Codable {
+ struct MentionTickerModel: Codable {
 	let totalMentions: Int
 	let positiveMentions: Int
 	let negativeMentions: Int
@@ -39,7 +38,7 @@ struct MentionModel: Codable {
 }
 
 //MARK: - Hashable
-extension MentionModel: Hashable {
+ extension MentionTickerModel: Hashable {
     func hash(into hasher: inout Hasher) {
         hasher.combine(ticker)
     }
@@ -47,7 +46,7 @@ extension MentionModel: Hashable {
 
 //MARK: - MentionModel
 
-extension MentionModel {
+ extension MentionTickerModel {
     
     var ratio: CGFloat {
         CGFloat(positiveMentions) / CGFloat(positiveMentions + neutralMentions + negativeMentions)
@@ -67,8 +66,8 @@ extension MentionModel {
     }
 }
 
-struct MentionCellModel: ActionProvider {
-    let model: MentionModel
+ struct MentionCellModel: ActionProvider {
+    let model: MentionTickerModel
     var action: Callback?
     var actionWithFrame: ((CGRect) -> Void)?
 }

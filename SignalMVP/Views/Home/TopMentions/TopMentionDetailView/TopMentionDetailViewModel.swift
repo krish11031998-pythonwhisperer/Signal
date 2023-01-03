@@ -13,7 +13,7 @@ enum ObjectError: String, Error {
     case objectOutOfMemory
 }
 
-fileprivate extension MentionModel {
+fileprivate extension MentionTickerModel {
     
     var total: Int { positiveMentions + neutralMentions + negativeMentions }
     
@@ -52,10 +52,10 @@ class TopMentionDetailViewModel {
     private var tweets:[TweetModel] = []
     private var news: [NewsModel] = []
     private var events: [EventModel] = []
-    private let mention: MentionModel
+    private let mention: MentionTickerModel
     private var selectedTab: CurrentValueSubject<Sections, Never> = .init(.news)
     private var bag: Set<AnyCancellable> = .init()
-    init(mention: MentionModel) {
+    init(mention: MentionTickerModel) {
         self.mention = mention
     }
     
