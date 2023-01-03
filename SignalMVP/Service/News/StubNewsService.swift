@@ -11,13 +11,14 @@ class StubNewsService: NewsServiceInterface {
 
 	public static var shared: StubNewsService = .init()
 	
-	public func fetchNews(entity: [String]? = nil,
-						  items: String? = nil,
-						  source: String? = nil,
+    public func fetchNews(entity: [String]? = nil,
+                          items: String? = nil,
+                          source: String? = nil,
                           page: Int = 0,
-						  limit: Int = 20) -> AnyPublisher<NewsResult, Error> {
-
+                          limit: Int = 20,
+                          refresh: Bool = false) -> AnyPublisher<NewsResult, Error> {
+        
         Bundle.main.loadDataFromBundle(name: "signalNews", extensionStr: "json")
-	}
-	
+    }
+    
 }

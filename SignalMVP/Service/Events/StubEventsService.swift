@@ -12,7 +12,7 @@ class StubEventService: EventServiceInterface {
 	
 	public static var shared: StubEventService = .init()
 	
-    func fetchEvents(entity: [String]? = nil, page: Int = 0, limit: Int = 10) -> AnyPublisher<EventResult, Error> {
+    func fetchEvents(entity: [String]? = nil, page: Int = 0, limit: Int = 10, refresh: Bool = false) -> AnyPublisher<EventResult, Error> {
         Bundle.main.loadDataFromBundle(name: "signalEvents", extensionStr: "json")
     }
 	

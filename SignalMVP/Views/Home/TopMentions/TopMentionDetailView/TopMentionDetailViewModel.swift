@@ -131,7 +131,7 @@ class TopMentionDetailViewModel {
     private func fetchEvents(after: String? = nil) -> AnyPublisher<[TableCellProvider], Error> {
         EventService
             .shared
-            .fetchEvents(entity: [ticker])
+            .fetchEvents(entity: [ticker], refresh: false)
             .compactMap { result in
                 result.data.compactMap { TableRow<EventSingleCell>(.init(model: $0)) }
             }

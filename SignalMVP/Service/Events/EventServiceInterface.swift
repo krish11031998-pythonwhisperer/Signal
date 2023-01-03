@@ -13,5 +13,5 @@ protocol EventServiceInterface {
     func fetchEvents(
         entity: [String]?,
         page: Int,
-        limit: Int) -> AnyPublisher<EventResult,Error>
+        limit: Int, refresh: Bool) -> AnyPublisher<EventResult,Error>
 }

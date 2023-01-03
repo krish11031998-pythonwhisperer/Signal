@@ -18,7 +18,7 @@ class EventsFeedViewController: SearchViewController {
 	private var yOff: CGFloat = .zero
     private let isChildPage: Bool
     private lazy var tableView: UITableView = { .standardTableView() }()
-	
+    private let refreshControl: UIRefreshControl = { .init() }()
     private var viewModel: EventFeedViewModel = .init()
 //    private var bag: Set<AnyCancellable> = .init()
 	//MARK: - Overriden Methods
@@ -48,6 +48,7 @@ class EventsFeedViewController: SearchViewController {
 	//MARK: - Protected Methods
 
 	private func setupView() {
+        tableView.refreshControl = refreshControl
 		view.addSubview(tableView)
 		tableView.backgroundColor = .surfaceBackground
 		view.backgroundColor = .surfaceBackground
@@ -85,10 +86,21 @@ class EventsFeedViewController: SearchViewController {
         
         let searchParam = searchText.eraseToAnyPublisher().share().makeConnectable()
         
-        let output = viewModel.transform(input: .init(searchParam: searchParam, nextPage: tableView.nextPage.share()))
+        let refreshControl = refreshControl
+            .publisher(for: .valueChanged)
+            .withLatestFrom(searchParam)
+            .map { _, search in search }
+            .eraseToAnyPublisher()
+        
+        let output = viewModel.transform(input: .init(searchParam: searchParam,
+                                                      refresh: refreshControl,
+                                                      nextPage: tableView.nextPage.share()))
         
         output.tableSection
             .receive(on: DispatchQueue.main)
+            .handleEvents(receiveOutput: { [weak self]  _ in
+                self?.refreshControl.endRefreshing()
+            })
             .sink(receiveCompletion: {
                 print("(ERROR) err: ", $0.err?.localizedDescription)
             }, receiveValue: { [weak self] section in

@@ -13,14 +13,15 @@ class NewsService: NewsServiceInterface {
 	public static var shared: NewsService = .init()
 	
 	
-	public func fetchNews(entity: [String]? = nil,
-				   items: String? = nil,
-				   source: String? = nil,
+    public func fetchNews(entity: [String]? = nil,
+                          items: String? = nil,
+                          source: String? = nil,
                           page: Int = 0,
-				   limit: Int = 20) -> AnyPublisher<NewsResult, Error> {
+                          limit: Int = 20,
+                          refresh: Bool = false) -> AnyPublisher<NewsResult, Error> {
 		NewsEndpoints
             .tickerNews(entity: entity, items: items, source: source, page: page, limit: limit)
-            .execute()
+            .execute(refresh: refresh)
             .eraseToAnyPublisher()
 	}
 	

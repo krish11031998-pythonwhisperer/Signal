@@ -23,6 +23,7 @@ class NewsViewModel {
     
     struct Input {
         let searchParam: SharePublisher<String?, Never>
+        let refresh: AnyPublisher<String?, Never>
         let nextPage: AnyPublisher<Bool, Never>
     }
     
@@ -38,19 +39,29 @@ class NewsViewModel {
             .filter { [weak self] in $0 && self?.nextPage != nil }
             .withLatestFrom(input.searchParam)
             .flatMap { [weak self] in NewsService.shared.fetchNews(entity: [$0.1].compactMap { $0 },
-                                                                   page: self?.nextPage ?? 0) }
+                                                                   page: self?.nextPage ?? 0,
+                                                                   refresh: false) }
             .compactMap { $0.data }
             .compactMap { [weak self] in self?.setupSection($0, append: true) }
             .eraseToAnyPublisher()
         
+        let refresh = input.refresh
+            .flatMap{ NewsService.shared.fetchNews(entity: [$0].compactMap { $0 }, refresh: true) }
+            .compactMap { $0.data }
+            .compactMap { [weak self] in self?.setupSection($0, append: false) }
+            .eraseToAnyPublisher()
+        
         let searchResult = input.searchParam
-            .flatMap{ NewsService.shared.fetchNews(entity: [$0].compactMap { $0 }) }
+            .flatMap{
+                let search = $0 ?? ""
+                return  NewsService.shared.fetchNews(entity: [$0].compactMap { $0 }, refresh: !search.isEmpty)
+            }
             .compactMap { $0.data }
             .compactMap { [weak self] in self?.setupSection($0, append: false) }
             .eraseToAnyPublisher()
         
         
-        let news = Publishers.Merge(newPage, searchResult).eraseToAnyPublisher()
+        let news = Publishers.Merge3(newPage, refresh, searchResult).eraseToAnyPublisher()
         
         let dismiss = input.searchParam
             .compactMap { $0 == nil }

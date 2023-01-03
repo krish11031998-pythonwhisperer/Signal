@@ -12,10 +12,10 @@ class EventService: EventServiceInterface {
 	
 	public static var shared: EventService = .init()
 	
-    public func fetchEvents(entity: [String]? = nil, page: Int = 0, limit: Int = 20) -> AnyPublisher<EventResult, Error> {
+    public func fetchEvents(entity: [String]? = nil, page: Int = 0, limit: Int = 20, refresh: Bool) -> AnyPublisher<EventResult, Error> {
         EventEndpoints
             .latestEvents(entity: entity, page: page, limit: limit)
-            .execute()
+            .execute(refresh: refresh)
             .eraseToAnyPublisher()
     }
 	

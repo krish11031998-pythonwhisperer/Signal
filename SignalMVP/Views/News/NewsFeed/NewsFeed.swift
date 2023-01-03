@@ -13,6 +13,7 @@ class NewsFeed: SearchViewController {
 	
 	private lazy var tableView: UITableView = { .standardTableView() }()
     private let viewModel: NewsViewModel = .init()
+    private lazy var refreshControl: UIRefreshControl = { .init() }()
     private let isChildPage: Bool
     
 	//MARK: - Overriden Methods
@@ -36,6 +37,7 @@ class NewsFeed: SearchViewController {
 	//MARK: - ProtectedMethods
 	
 	private func setupViews(){
+        tableView.refreshControl = refreshControl
 		view.backgroundColor = .surfaceBackground
 		view.addSubview(tableView)
 		tableView.backgroundColor = .surfaceBackground
@@ -64,13 +66,27 @@ class NewsFeed: SearchViewController {
         
         let searchParam = searchText.eraseToAnyPublisher().share().makeConnectable()
         
-        let output = viewModel.transform(input: .init(searchParam: searchParam, nextPage: tableView.nextPage))
+        let refreshControl = refreshControl
+            .publisher(for: .valueChanged)
+
+            .withLatestFrom(searchParam)
+            .map { _, search in search }
+            .eraseToAnyPublisher()
+        
+        let output = viewModel.transform(input: .init(searchParam: searchParam,
+                                                      refresh: refreshControl,
+                                                      nextPage: tableView.nextPage))
         
         output
             .tableSection
             .receive(on: DispatchQueue.main)
+            .handleEvents(receiveOutput: { [weak self] _ in
+                self?.refreshControl.endRefreshing()
+            })
             .sink(receiveCompletion: {
-                print("(ERROR) err: ", $0.err?.localizedDescription)
+                if let err = $0.err?.localizedDescription {
+                    print("(ERROR) err: ", err)
+                }
             }, receiveValue: { [weak self] section in
                 self?.tableView.reloadData(.init(sections: [section]))
             })

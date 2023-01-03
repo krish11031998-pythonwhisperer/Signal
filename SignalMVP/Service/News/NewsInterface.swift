@@ -12,5 +12,6 @@ protocol NewsServiceInterface {
 				   items: String?,
 				   source: String?,
                    page: Int,
-				   limit: Int) -> AnyPublisher<NewsResult,Error>
+                   limit: Int,
+                   refresh: Bool) -> AnyPublisher<NewsResult,Error>
 }

@@ -89,9 +89,7 @@ class TweetFeedViewController: SearchViewController {
         
         let refreshControl = refreshControl
             .publisher(for: .valueChanged)
-            .handleEvents(receiveOutput: { _ in
-                print("(DEBUG) refreshing!")
-            })
+
             .withLatestFrom(searchParam)
             .map { _, search in search }
             .eraseToAnyPublisher()

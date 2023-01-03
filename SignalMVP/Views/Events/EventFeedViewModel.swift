@@ -17,7 +17,8 @@ class EventFeedViewModel {
     private var allEvents: [EventCellModel]? = nil
     
     struct Input {
-        let searchParam: SharePublisher<String?, Never> //Publishers.Share<AnyPublisher<String?, Never>>
+        let searchParam: SharePublisher<String?, Never>
+        let refresh: AnyPublisher<String?, Never>
         let nextPage: Publishers.Share<AnyPublisher<Bool, Never>>
     }
     
@@ -33,22 +34,32 @@ class EventFeedViewModel {
             .removeDuplicates()
             .filter { [weak self] in $0 && (self?.nextPageToken != nil) }
             .withLatestFrom(input.searchParam)
-            .flatMap { [weak self] in EventService.shared.fetchEvents(entity: [$0.1].compactMap { $0 }, page: self?.nextPageToken ?? 0) }
+            .flatMap { [weak self] in EventService.shared.fetchEvents(entity: [$0.1].compactMap { $0 }, page: self?.nextPageToken ?? 0, refresh: false) }
             .compactMap { $0.data }
             .compactMap { [weak self] in self?.setupSection($0, append: true)}
             .eraseToAnyPublisher()
         
         let searchResult = input.searchParam
-            .flatMap { EventService.shared.fetchEvents(entity: [$0].compactMap { $0 }) }
+            .flatMap {
+                let search = $0 ?? ""
+                return EventService.shared.fetchEvents(entity: [$0].compactMap { $0 }, refresh: !search.isEmpty)
+            }
             .compactMap { $0.data }
             .compactMap { [weak self] in self?.setupSection($0, append: false)}
             .eraseToAnyPublisher()
+        
+        let refresh = input.refresh
+            .flatMap { EventService.shared.fetchEvents(entity: [$0].compactMap { $0 }, refresh: true) }
+            .compactMap { $0.data }
+            .compactMap { [weak self] in self?.setupSection($0, append: false)}
+            .eraseToAnyPublisher()
+        
         
         let loading = input.nextPage
             .removeDuplicates()
             .eraseToAnyPublisher()
         
-        let events = Publishers.Merge(nextPage, searchResult).eraseToAnyPublisher()
+        let events = Publishers.Merge3(nextPage, refresh, searchResult).eraseToAnyPublisher()
         
         let dismiss = input.searchParam
             .compactMap { $0 == nil }
