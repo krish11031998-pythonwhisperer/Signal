@@ -16,7 +16,7 @@ protocol EndPoint {
     var body: Data? { get }
 	var request: URLRequest? { get }
 	var header: [String : String]? { get }
-    func execute<CodableModel: Codable>() -> Future<CodableModel,Error>
+    func execute<CodableModel: Codable>(refresh: Bool) -> Future<CodableModel,Error>
 }
 
 
@@ -68,11 +68,11 @@ extension EndPoint {
 		return request
 	}
     
-    func execute<CodableModel: Codable>() -> Future<CodableModel, Error> {
+    func execute<CodableModel: Codable>(refresh: Bool = false) -> Future<CodableModel, Error> {
         guard let validRequest = request else {
             return Future { $0(.failure(URLSessionError.invalidUrl))}
         }
-        return URLSession.urlSessionRequest(request: validRequest)
+        return URLSession.urlSessionRequest(request: validRequest, refresh: refresh)
     }
 	
 }
@@ -125,12 +125,12 @@ extension URLSession {
 
 	
     
-    static func urlSessionRequest<T: Codable>(request: URLRequest) -> Future<T,Error> {
+    static func urlSessionRequest<T: Codable>(request: URLRequest, refresh: Bool) -> Future<T,Error> {
         Future { promise in
-            print("(REQUEST w Future) Request: \(request.url?.absoluteString)")
-            if let cachedData = DataCache.shared[request] {
+            print("(REQUEST🚀) Request: \(request.url?.absoluteString ?? "")")
+            if let cachedData = DataCache.shared[request], !refresh {
                 if let deceodedData = try? JSONDecoder().decode(T.self, from: cachedData) {
-                    print("(DEBUG) returning Cached Response!")
+                    print("(REQUEST📩) returning Cached Response for : \(request.url?.absoluteString ?? "")")
                     promise(.success(deceodedData))
                 } else {
                     promise(.failure(URLSessionError.decodeErr))
@@ -148,7 +148,7 @@ extension URLSession {
                     }
                     
                     DataCache.shared[request] = validData
-                    
+                    print("(REQUEST📩) returning Received Response for : \(request.url?.absoluteString ?? "")")
                     promise(.success(decodedData))
                 }
                 session.resume()

@@ -19,7 +19,7 @@ class TweetFeedViewController: SearchViewController {
 		model.view = self
 		return model
 	}()
-	
+    private let refreshControl: UIRefreshControl = { .init() }()
 	private lazy var tableView: UITableView = {
 		let tableView: UITableView = .init(frame: .zero, style: .grouped)
 		tableView.showsVerticalScrollIndicator = false
@@ -58,6 +58,7 @@ class TweetFeedViewController: SearchViewController {
 //MARK: - Protected Methods
 
 	private func setupViews() {
+        tableView.refreshControl = refreshControl
 		view.addSubview(tableView)
 		view.backgroundColor = .surfaceBackground
 		tableView.backgroundColor = .clear
@@ -85,11 +86,25 @@ class TweetFeedViewController: SearchViewController {
             .eraseToAnyPublisher()
         
         let searchParam = searchText.eraseToAnyPublisher().share().makeConnectable()
-        let output = viewModel.transform(input: .init(searchParam: searchParam,
+        
+        let refreshControl = refreshControl
+            .publisher(for: .valueChanged)
+            .handleEvents(receiveOutput: { _ in
+                print("(DEBUG) refreshing!")
+            })
+            .withLatestFrom(searchParam)
+            .map { _, search in search }
+            .eraseToAnyPublisher()
+        
+        let output = viewModel.transform(input: .init(refresh: refreshControl,
+                                                      searchParam: searchParam,
                                                       loadNextPage: contentOffset))
         
         output.sections
             .receive(on: RunLoop.main)
+            .handleEvents(receiveOutput: { [weak self] _ in
+                self?.refreshControl.endRefreshing()
+            })
             .sink {
                 if let err = $0.err {
                     print("(ERROR) err: ", err)

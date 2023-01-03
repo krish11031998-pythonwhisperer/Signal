@@ -14,6 +14,7 @@ enum TweetEndpoints {
 
 
 extension TweetEndpoints: EndPoint {
+    
 	var scheme: String {
 		return "https"
 	}
@@ -35,12 +36,5 @@ extension TweetEndpoints: EndPoint {
 			].filter { $0.value != nil  }
 		}
 	}
-	
-    func fetch() -> Future<TweetSearchResult, Error> {
-        guard let validRequest = request else {
-            return Future { $0(.failure(URLSessionError.invalidUrl))}
-        }
-        return URLSession.urlSessionRequest(request: validRequest)
-    }
 	
 }

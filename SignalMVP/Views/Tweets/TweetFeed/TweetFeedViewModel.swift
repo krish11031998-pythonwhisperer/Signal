@@ -44,6 +44,7 @@ class TweetFeedViewModel {
     private var nextPageId: Int = 0
     
     struct Input {
+        let refresh: AnyPublisher<String?, Never>
         let searchParam: SharePublisher<String?, Never>
         let loadNextPage: AnyPublisher<Bool, Never>
     }
@@ -55,7 +56,7 @@ class TweetFeedViewModel {
     public func transform(input: Input) -> Output {
 
         let searchResults = input.searchParam
-            .flatMap { TweetService.shared.fetchTweets(entity: $0) }
+            .flatMap { TweetService.shared.fetchTweets(entity: $0, refresh: false) }
             .compactMap { [weak self] in self?.decodeToTweetCellModel($0, append: false) }
             .eraseToAnyPublisher()
         
@@ -63,11 +64,17 @@ class TweetFeedViewModel {
             .removeDuplicates()
             .filter {[weak self] in $0 && self?.nextPageId != nil }
             .withLatestFrom(input.searchParam)
-            .flatMap {[weak self] in TweetService.shared.fetchTweets(entity: $0.1, page: self?.nextPageId ?? 0) }
+            .flatMap {[weak self] in TweetService.shared.fetchTweets(entity: $0.1, page: self?.nextPageId ?? 0, refresh: true) }
             .compactMap {[weak self] in  self?.decodeToTweetCellModel($0) }
             .eraseToAnyPublisher()
         
-        let sections = Publishers.Merge(searchResults, loadNextPage).eraseToAnyPublisher()
+        let refresh = input.refresh
+            .flatMap { TweetService.shared.fetchTweets(entity: $0, refresh: true) }
+            .compactMap { [weak self] in self?.decodeToTweetCellModel($0, append: false) }
+            .eraseToAnyPublisher()
+        
+        
+        let sections = Publishers.Merge3(searchResults, refresh, loadNextPage).eraseToAnyPublisher()
         
         
         return .init(sections: sections)

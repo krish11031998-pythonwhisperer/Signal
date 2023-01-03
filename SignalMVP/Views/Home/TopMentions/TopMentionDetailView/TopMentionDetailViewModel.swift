@@ -94,7 +94,7 @@ class TopMentionDetailViewModel {
     private func fetchTweets(after: String? = nil) -> AnyPublisher<[TableCellProvider], Error> {
         TweetService
             .shared
-            .fetchTweets(entity: ticker)
+            .fetchTweets(entity: ticker, refresh: false)
             .catch { err in
                 print("(ERROR) err [From Service]:", err)
                 return StubTweetService.shared.fetchTweets()

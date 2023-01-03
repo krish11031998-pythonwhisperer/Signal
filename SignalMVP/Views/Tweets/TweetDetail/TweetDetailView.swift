@@ -169,7 +169,7 @@ class MetricRow: UIView {
         }
         
         let stackWithProgressView: UIView = .init()
-        let stack = UIStackView.HStack(subViews: [emojiButton, label], spacing: 12, alignment: .center)
+        let stack = UIStackView.HStack(subViews: [emojiButton, label, .spacer()], spacing: 12, alignment: .center)
         [progressBar,stack].addToView(stackWithProgressView)
         [progressBar,stack].forEach { stackWithProgressView.setFittingConstraints(childView: $0, insets: .zero) }
         let mainStack = UIStackView.VStack(subViews: [miniLabel, stackWithProgressView], spacing: 12, alignment: .leading)
@@ -192,6 +192,7 @@ class MetricRow: UIView {
         progressBar.animate(.fadeIn()) {
             UIView.animate(withDuration: 0.4) {
                 self.miniLabel.isHidden = false
+                self.label.isHidden = true
                 self.setNeedsLayout()
                 self.layoutIfNeeded()
             } completion: { _ in
