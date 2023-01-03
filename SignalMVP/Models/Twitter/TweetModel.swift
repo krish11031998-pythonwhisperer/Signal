@@ -73,6 +73,15 @@ extension TweetModel {
 }
 
 extension Date {
+    
+    static func convertStringToDate(_ dateStr: String) -> Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        let date = dateFormatter.date(from: dateStr)
+        return date
+    }
+    
     var timestamp: String? {
         let format = "d MMM YY, hh:mm a"
         let formatter = DateFormatter()

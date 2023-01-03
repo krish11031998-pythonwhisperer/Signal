@@ -29,16 +29,27 @@ extension CALayer {
     func multipleAnimation(animation: [Animation], removeAfterCompletion: Bool = false, completion: (() -> Void)? = nil) {
         CATransaction.begin()
         
+        let animationData = animation.combine(at: self, removeAfterCompletion: removeAfterCompletion)
+        
         CATransaction.setCompletionBlock {
+            self.finalizePosition(animations: animation,
+                                  data: animationData,
+                                  remove: removeAfterCompletion)
             completion?()
         }
         
-        let animationData = animation.combine(at: self, removeAfterCompletion: removeAfterCompletion)
+        
         animationData.isRemovedOnCompletion = removeAfterCompletion
         animationData.fillMode = .forwards
         add(animationData, forKey: nil)
         
         CATransaction.commit()
+    }
+    
+    func finalizePosition(animations: [Animation], data: CAAnimation, remove: Bool) {
+        animations.forEach { anim in
+            finalizePosition(animation: anim, data: data, remove: remove)
+        }
     }
     
     func finalizePosition(animation: Animation, data: CAAnimation, remove: Bool) {
@@ -60,7 +71,6 @@ extension CALayer {
             asyncMain {
                 self.setValue(basic.toValue, forKeyPath: keyPath)
             }
-            //self.removeAllAnimations()
         case let group as CAAnimationGroup:
             group.animations?.forEach { finalizePosition(animation: $0, remove: remove)}
         default: break

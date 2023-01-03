@@ -45,6 +45,7 @@ class EventSingleCell: ConfigurableCell {
         imgView.clippedCornerRadius = 16
         eventTitle.overrideUserInterfaceStyle = .dark
         let bottomStack: UIStackView = .HStack(subViews: [newsArticleCount, .spacer(), tickersView], spacing: 10, alignment: .center)
+        bottomStack.setHeight(height: 32)
         let infoStack: UIStackView = .VStack(subViews: [.spacer(), eventTitle, bottomStack],spacing: 10)
         contentView.addSubview(infoStack)
         contentView.setFittingConstraints(childView: infoStack, insets: .init(by: 20))

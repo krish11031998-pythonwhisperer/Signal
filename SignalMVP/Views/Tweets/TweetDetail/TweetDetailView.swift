@@ -190,14 +190,15 @@ class MetricRow: UIView {
     func animate(value to: CGFloat) {
         label.animate(.fadeOut())
         progressBar.animate(.fadeIn()) {
-            self.miniLabel.isHidden = false
-            self.label.isHidden = false
-            self.miniLabel.animate(.fadeIn())
-            guard to > 0.1 else { return }
-            self.emojiView.animate(.transformX(to: to * self.frame.width - self.emojiView.frame.width, duration: 0.5))
-            self.progressBar.setProgress(progress: to)
-            UIView.animate(withDuration: 0.15) {
+            UIView.animate(withDuration: 0.4) {
+                self.miniLabel.isHidden = false
+                self.setNeedsLayout()
                 self.layoutIfNeeded()
+            } completion: { _ in
+                self.miniLabel.animate(.fadeIn())
+                guard to > 0.1 else { return }
+                self.emojiView.animate(.transformX(to: to * self.frame.width - self.emojiView.frame.width, duration: 0.3))
+                self.progressBar.setProgress(progress: to, duration: 0.3)
             }
         }
     }
