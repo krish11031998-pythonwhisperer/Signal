@@ -24,6 +24,7 @@ class HomeFeed: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		setupViews()
+        startLoadingAnimation()
         bind()
 	}
 	
@@ -56,6 +57,9 @@ class HomeFeed: UIViewController {
         output.sections
             .map { TableViewDataSource(sections: $0) }
             .receive(on: DispatchQueue.main)
+            .handleEvents(receiveOutput: { [weak self] _ in
+                self?.endLoadingAnimation()
+            })
             .sink {
                 if let err = $0.err?.localizedDescription {
                     print("(ERROR) err: ", err)

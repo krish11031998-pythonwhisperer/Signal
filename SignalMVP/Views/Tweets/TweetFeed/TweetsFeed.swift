@@ -42,6 +42,7 @@ class TweetFeedViewController: SearchViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		setupViews()
+        startLoadingAnimation()
 		setupNavbar()
         bind()
 	}
@@ -102,6 +103,7 @@ class TweetFeedViewController: SearchViewController {
             .receive(on: RunLoop.main)
             .handleEvents(receiveOutput: { [weak self] _ in
                 self?.refreshControl.endRefreshing()
+                self?.endLoadingAnimation()
             })
             .sink {
                 if let err = $0.err {
@@ -109,7 +111,6 @@ class TweetFeedViewController: SearchViewController {
                 }
             } receiveValue: { [weak self] in
                 self?.tableView.reloadRows(.init(sections: [$0]), section: 0)
-//                self?.tableView.reloadData(.init(sections: [$0]))
             }
             .store(in: &bag)
         

@@ -36,6 +36,7 @@ class EventsFeedViewController: SearchViewController {
     override func viewDidLoad() {
 		super.viewDidLoad()
 		setupView()
+        startLoadingAnimation()
 		setupNavBar()
 		setupObservers()
 	}
@@ -100,6 +101,7 @@ class EventsFeedViewController: SearchViewController {
             .receive(on: DispatchQueue.main)
             .handleEvents(receiveOutput: { [weak self]  _ in
                 self?.refreshControl.endRefreshing()
+                self?.endLoadingAnimation()
             })
             .sink(receiveCompletion: {
                 print("(ERROR) err: ", $0.err?.localizedDescription)

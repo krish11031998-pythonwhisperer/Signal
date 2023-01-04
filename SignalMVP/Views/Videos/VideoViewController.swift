@@ -41,6 +41,7 @@ class VideoViewController: UIViewController {
         super.viewDidLoad()
         setupView()
         //loadVideos()
+        startLoadingAnimation()
         bind()
         standardNavBar(leftBarButton: .init(customView: "Video".heading2().generateLabel), color: .clear, scrollColor: .clear)
     }
@@ -67,6 +68,9 @@ class VideoViewController: UIViewController {
         
         output.videos
             .receive(on: DispatchQueue.main)
+            .handleEvents(receiveOutput: { [weak self] _ in
+                self?.endLoadingAnimation()
+            })
             .sink {
                 print("(ERROR) err: ", $0.err?.localizedDescription)
             } receiveValue: { [weak self] in

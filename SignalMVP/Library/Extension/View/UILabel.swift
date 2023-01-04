@@ -21,12 +21,12 @@ extension UIView {
 		return view
 	}
     
-    func embedViewInCard() -> UIView {
+    func embedViewInCard(borderColor: UIColor = .clear, borderWidth: CGFloat = 0, cornerRadius: CGFloat = 12) -> UIView {
         let view = blobify(backgroundColor: .surfaceBackground,
                             edgeInset: .init(vertical: 10, horizontal: 12.5),
-                            borderColor: .clear,
-                            borderWidth: 0,
-                            cornerRadius: 12)
+                            borderColor: borderColor,
+                            borderWidth: borderWidth,
+                            cornerRadius: cornerRadius)
         return view
     }
 }

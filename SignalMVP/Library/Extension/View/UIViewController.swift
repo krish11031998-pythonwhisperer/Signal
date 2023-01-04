@@ -8,9 +8,18 @@
 import Foundation
 import UIKit
 import Combine
+import Lottie
 
 extension UIViewController {
 	
+    private static var animatingPropertyKey: UInt8 = 1
+    
+    private var loadingView: AnimationView? {
+        get { return objc_getAssociatedObject(self, &Self.animatingPropertyKey) as? AnimationView }
+        set { objc_setAssociatedObject(self, &Self.animatingPropertyKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
+    }
+
+    
     var compressedSize : CGSize {
         let height = view.compressedSize.height.boundTo(lower: 200, higher: .totalHeight) - (view.safeAreaInsets.top + view.safeAreaInsets.bottom)
         let size: CGSize = .init(width: .totalWidth, height: height)
@@ -114,6 +123,26 @@ extension UIViewController {
             nav.pushViewController(target, animated: true)
         } else {
             self.presentView(style: .sheet(), target: target.withNavigationController(), onDimissal: nil)
+        }
+    }
+    
+    func startLoadingAnimation() {
+        if loadingView == nil {
+            let loadingAnimation = AnimationView(name: "loading")
+            loadingAnimation.frame = .init(origin: .zero, size: .init(squared: 100))
+            loadingAnimation.loopMode = .loop
+            loadingView = loadingAnimation
+        }
+        
+        view.addSubview(loadingView ?? .init())
+        loadingView?.center = view.center
+        loadingView?.play()
+    }
+    
+    func endLoadingAnimation() {
+        loadingView?.stop()
+        loadingView?.animate(.fadeOut()) {
+            self.loadingView?.removeFromSuperview()
         }
     }
 }

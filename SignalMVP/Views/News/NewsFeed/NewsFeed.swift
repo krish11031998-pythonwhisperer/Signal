@@ -30,6 +30,7 @@ class NewsFeed: SearchViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		setupViews()
+        startLoadingAnimation()
 		setupNavbar()
 		bind()
 	}
@@ -82,6 +83,7 @@ class NewsFeed: SearchViewController {
             .receive(on: DispatchQueue.main)
             .handleEvents(receiveOutput: { [weak self] _ in
                 self?.refreshControl.endRefreshing()
+                self?.endLoadingAnimation()
             })
             .sink(receiveCompletion: {
                 if let err = $0.err?.localizedDescription {
