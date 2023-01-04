@@ -58,7 +58,6 @@ class CustomCuratedEvents: ConfigurableCell {
     
     private func reloadCollection() {
         collection.reloadData(buildDataSource())
-        collection.delegate = self
     }
     
     private var headlineSection: CollectionSection? {
@@ -76,30 +75,8 @@ class CustomCuratedEvents: ConfigurableCell {
         .init(sections: [headlineSection].compactMap { $0 })
     }
     
-    private func scrollUpdate(scrollView: UIScrollView) {
-        guard scrollView.contentOffset != .zero else { return }
-        let cellIdx = (scrollView.contentOffset.x/itemSize.width).rounded(.up)
-        guard let count = eventsModel?.events.count, cellIdx > 0 ,
-              Int(cellIdx) < count - 1 else { return }
-        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut) {
-            scrollView.contentOffset.x = (cellIdx - 1) * self.itemSize.width + (cellIdx - 1) * self.layout.minimumInteritemSpacing
-        }
-    }
-    
     func configure(with model: CuratedEventModel) {
         eventsModel = model
         reloadCollection()
     }
-}
-
-//MARK: - CustomCuratedEvents: UICollectionDelegate
-
-extension CustomCuratedEvents: UICollectionViewDelegate {
-
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) { scrollUpdate(scrollView: scrollView) }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        collectionView.source?.collectionView(collectionView, didSelectItemAt: indexPath)
-    }
-
 }
