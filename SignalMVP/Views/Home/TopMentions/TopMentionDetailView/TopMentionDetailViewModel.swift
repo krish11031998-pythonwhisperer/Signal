@@ -47,6 +47,7 @@ enum Sections: String, CaseIterable {
     case twitter, news, events
 }
 
+
 class TopMentionDetailViewModel {
     
     private var tweets:[TweetModel] = []
@@ -179,23 +180,23 @@ struct MediaSegmentModel {
 
 class MediaSegmentCell: ConfigurableCell {
     
-    private var selectedTab:  CurrentValueSubject<Sections, Never>? = nil
+    private var selectedTab:  CurrentValueSubject<Sections, Never>?
     private var bag: Set<AnyCancellable> = .init()
     private lazy var stack: UIStackView = {
         Sections.allCases.compactMap { tabSection in
-            let tab = tabSection.rawValue
-            let blob = tab.capitalized.body2Medium(color: .textColor).generateLabel.segmentBlob(isSelected: false)
-            
-            return blob.buttonify { [weak self] in
-                self?.selectedTab?.send(tabSection)
-            }
+//            let tab = tabSection.rawValue
+//            let blob = tab.capitalized.body2Medium(color: .textColor).generateLabel.segmentBlob(isSelected: false)
+//
+//            return blob.buttonify { [weak self] in
+//                self?.selectedTab?.send(tabSection)
+//            }
+            return SegmentTabCell(value: tabSection, subject: selectedTab ?? .init(.news))
         }.embedInHStack(alignment: .center, spacing: 5)
         
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setupView()
     }
     
     required init?(coder: NSCoder) {
@@ -213,17 +214,17 @@ class MediaSegmentCell: ConfigurableCell {
     private func setupSelectedTab() {
         selectedTab?
             .sink{ [weak self] section in
-                guard let self,
-                      let selectedTabIdx = Sections.allCases.firstIndex(of: section),
-                      selectedTabIdx < self.stack.arrangedSubviews.count && selectedTabIdx >= 0 else { return }
-                self.stack.arrangedSubviews.forEach { $0.subviews.first?.backgroundColor = .clear }
-                self.stack.arrangedSubviews[selectedTabIdx].subviews.first?.backgroundColor = .red
+                self?.stack.arrangedSubviews.forEach {
+                    ($0 as? SegmentTabCell<Sections>)?.updateBlob()
+                }
             }
             .store(in: &bag)
     }
     
     func configure(with model: MediaSegmentModel) {
         self.selectedTab = model.selectedTab
+        setupView()
         setupSelectedTab()
     }
 }
+

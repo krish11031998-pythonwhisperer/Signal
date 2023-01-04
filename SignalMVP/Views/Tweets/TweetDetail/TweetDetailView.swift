@@ -15,14 +15,18 @@ class TweetDetailView: UIViewController {
     
     private let tweet: TweetModel?
     private var bag: Set<AnyCancellable> = .init()
-    private lazy var profileHeader: RoundedCardView = { .init(appearance: .init(backgroundColor: .surfaceBackground, cornerRadius: 0, insets: .zero, iterSpacing: 12, lineSpacing: 8)) }()
+    private lazy var profileHeader: RoundedCardView = { .init(appearance: .init(backgroundColor: .surfaceBackground,
+                                                                                cornerRadius: 0,
+                                                                                insets: .zero,
+                                                                                iterSpacing: 12,
+                                                                                lineSpacing: 8)) }()
 	private lazy var bodyLabel: UILabel = { .init() }()
 	private lazy var imgView: TweetDetailImage = { .init() }()
 	private lazy var scrollView: UIScrollView = {
 		let scrollView = UIScrollView()
-		scrollView.backgroundColor = .clear
+		scrollView.backgroundColor = .surfaceBackground
 		scrollView.clipsToBounds = true
-		scrollView.showsVerticalScrollIndicator = true
+		scrollView.showsVerticalScrollIndicator = false
 		return scrollView
 	}()
 	private var selectedMetric: TweetSentimentMetric?
@@ -82,13 +86,13 @@ class TweetDetailView: UIViewController {
 		
         profileHeader.configureView(with: .init(title: tweet?.user?.name.body2Medium(),
                                                 subTitle: tweet?.user?.username.body3Medium(color: .gray),
+                                                caption: tweet?.date?.timestamp?.body3Medium(color: .gray),
                                                 leadingView: .image(url: tweet?.user?.profileImageUrl,
                                                                     size: .init(squared: 48),
                                                                     cornerRadius: 24,
                                                                     bordered: false)))?.forEach{  bag.insert($0) }
 
         if let tags = tweet?.tickers {
-            print("(DEBUG) tags :", tags)
             mentionedTickers.isHidden = tags.isEmpty
             mentionTickers.configTickers(tickers: tags)
         }
@@ -97,7 +101,7 @@ class TweetDetailView: UIViewController {
         if let url = tweet?.urls?.first, url.images != nil {
 			tweetURLView.configureView(url)
 			tweetURLView.isHidden = false
-        } else if let imageUrl = tweet?.media?.first?.previewImageUrl {
+        } else if let media = tweet?.media?.first, let imageUrl = media.previewImageUrl ?? media.url {
             imgView.configureView(url: imageUrl , cornerRadius: 10)
             imgView.setHeight(height: 350, priority: .required)
             imgView.isHidden = false

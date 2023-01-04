@@ -102,6 +102,7 @@
 		EF624D0E2957987E00F006FF /* UserServiceInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF624D0D2957987E00F006FF /* UserServiceInterface.swift */; };
 		EF624D10295798C400F006FF /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF624D0F295798C400F006FF /* UserService.swift */; };
 		EF624D122957992600F006FF /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF624D112957992600F006FF /* UserModel.swift */; };
+		EF6FE92629655571005B17B2 /* SegmentTabCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6FE92529655571005B17B2 /* SegmentTabCell.swift */; };
 		EF7CBED22911BB8400F9D611 /* TopMentionDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CBED12911BB8400F9D611 /* TopMentionDetail.swift */; };
 		EF7CBFD8291641EA00F9D611 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CBF91291641E900F9D611 /* Array.swift */; };
 		EF7CBFD9291641EA00F9D611 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CBF92291641E900F9D611 /* UIColor.swift */; };
@@ -370,6 +371,7 @@
 		EF624D0D2957987E00F006FF /* UserServiceInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserServiceInterface.swift; sourceTree = "<group>"; };
 		EF624D0F295798C400F006FF /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		EF624D112957992600F006FF /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		EF6FE92529655571005B17B2 /* SegmentTabCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentTabCell.swift; sourceTree = "<group>"; };
 		EF7CBED12911BB8400F9D611 /* TopMentionDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopMentionDetail.swift; sourceTree = "<group>"; };
 		EF7CBF91291641E900F9D611 /* Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		EF7CBF92291641E900F9D611 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
@@ -1148,6 +1150,7 @@
 				EF7CBED12911BB8400F9D611 /* TopMentionDetail.swift */,
 				EF7CC02929169FEE00F9D611 /* TopMentionDetailViewModel.swift */,
 				EF59F107292A0955002877DE /* SentimentCell.swift */,
+				EF6FE92529655571005B17B2 /* SegmentTabCell.swift */,
 			);
 			path = TopMentionDetailView;
 			sourceTree = "<group>";
@@ -1888,6 +1891,7 @@
 				EF96382628DD90A400178C37 /* RedditViewModel.swift in Sources */,
 				EF987B972920E9FA0000E233 /* CommonWrappers.swift in Sources */,
 				EF7CBFDE291641EA00F9D611 /* Fundamentals.swift in Sources */,
+				EF6FE92629655571005B17B2 /* SegmentTabCell.swift in Sources */,
 				EF5C4EBA2953073100669355 /* UISearchController+Styling.swift in Sources */,
 				EF1D7E5D2922CCFD0041ADEC /* CollectionColumn.swift in Sources */,
 				EF7CBFF7291641EA00F9D611 /* NetworkReqeust.swift in Sources */,

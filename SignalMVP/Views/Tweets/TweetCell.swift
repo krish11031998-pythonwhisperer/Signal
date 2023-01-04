@@ -79,9 +79,7 @@ class TweetCell: ConfigurableCell {
 	
 	private func setupCell() {
 
-		let bodyStack = UIView.VStack(subViews: [tweetAuthorView, bodyLabel, imgView, metricStack], spacing: 8)
-		bodyStack.setCustomSpacing(12, after: tweetAuthorView)
-		bodyStack.setCustomSpacing(12, after: bodyLabel)
+		let bodyStack = UIView.VStack(subViews: [tweetAuthorView, bodyLabel, imgView, metricStack], spacing: 12)
 
 		imageHeight.isActive = true
         imgView.clippedCornerRadius = 16

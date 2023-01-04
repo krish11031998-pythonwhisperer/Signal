@@ -26,7 +26,7 @@ extension UIViewController {
 		self.navigationController?.navigationBar.standardAppearance = navbarAppear
 		self.navigationController?.navigationBar.compactAppearance = navbarAppear
 		self.navigationController?.navigationBar.scrollEdgeAppearance = navbarAppear
-		self.navigationController?.navigationBar.scrollEdgeAppearance?.backgroundColor = scrollColor
+		//self.navigationController?.navigationBar.scrollEdgeAppearance?.backgroundColor = scrollColor
 	}
 	
 	func showNavbar() {
