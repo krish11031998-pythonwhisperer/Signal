@@ -53,6 +53,7 @@ class MainViewController: UITabBarController {
         }()
         self.setValue(tabBar, forKey: "tabBar")
         tabBar.tintColor = .surfaceBackgroundInverse
+        selectedViewController = viewControllers?.first
     }
 	
 	private func tabBarViewController() -> [UINavigationController] {

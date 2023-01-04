@@ -129,13 +129,14 @@ extension UIViewController {
     func startLoadingAnimation() {
         if loadingView == nil {
             let loadingAnimation = AnimationView(name: "loading")
-            loadingAnimation.frame = .init(origin: .zero, size: .init(squared: 100))
+            loadingAnimation.frame = .init(origin: .zero, size: .init(squared: 40))
             loadingAnimation.loopMode = .loop
             loadingView = loadingAnimation
         }
         
-        view.addSubview(loadingView ?? .init())
-        loadingView?.center = view.center
+        let loadinViewCard = loadingView ?? .init()
+        view.addSubview(loadinViewCard)
+        loadinViewCard.center = view.center
         loadingView?.play()
     }
     

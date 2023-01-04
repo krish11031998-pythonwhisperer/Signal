@@ -34,7 +34,7 @@ class MainTab: UITabBar {
 	}
 	
 	private func drawShape(_ rect: CGRect) -> CGPath {
-		let path = UIBezierPath(roundedRect: rect, cornerRadius: 16)
+        let path = UIBezierPath(roundedRect: rect, byRoundingCorners: [.topLeft,  .topRight], cornerRadii: .init(squared: 24))
 		return path.cgPath
 		
 	}

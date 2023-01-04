@@ -18,7 +18,7 @@ struct CuratedEventModel {
 
 class CustomCuratedEvents: ConfigurableCell {
     
-    private let itemSize: CGSize = { .init(width: 250, height: 300) }()
+    private let itemSize: CGSize = { .init(width: .totalWidth * 0.6, height: 300) }()
     private lazy var layout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -55,11 +55,7 @@ class CustomCuratedEvents: ConfigurableCell {
         collection.backgroundColor = .surfaceBackground
         collection.showsHorizontalScrollIndicator = false
     }
-    
-    private func reloadCollection() {
-        collection.reloadData(buildDataSource())
-    }
-    
+
     private var headlineSection: CollectionSection? {
         guard let events = eventsModel?.events.limitTo(to: 5) else { return nil }
         return .init(cell: events.compactMap { event in
@@ -77,6 +73,6 @@ class CustomCuratedEvents: ConfigurableCell {
     
     func configure(with model: CuratedEventModel) {
         eventsModel = model
-        reloadCollection()
+        collection.reloadData(buildDataSource())
     }
 }
