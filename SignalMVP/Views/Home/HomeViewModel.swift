@@ -83,13 +83,19 @@ class HomeViewModel {
     }
     
     private func fetchSections(user: Publishers.Share<AnyPublisher<UserModelResponse, Error>>) -> AnyPublisher<[TableSection], Error> {
-        SocialHighlightService
+        let trendingHeadlines = StubTrendingHeadlines.shared.fetchHeadlines().eraseToAnyPublisher()
+        return SocialHighlightService
             .shared
             .fetchSocialHighlight()
             .combineLatest(user)
-            .compactMap { [weak self] highlights, user in
+            .withLatestFrom(setupHeadlineSection())
+            .compactMap { [weak self] result, headlineSection in
+                let highlights = result.0
+                let user = result.1
                 guard let self, let data = highlights.data else { return [] }
-                return self.buildSection(data, user: user.data)
+                var sections = self.buildSection(data, user: user.data)
+                sections.insert(headlineSection, at: 1)
+                return sections
             }
             .eraseToAnyPublisher()
         
@@ -174,6 +180,17 @@ class HomeViewModel {
         let footer = [TableRow<ViewMoreFooter>(.init(destination: .viewMoreTrendingTickers(tickers: trending),
                                                        selectedViewMoreNavigation: self.selectedNavigation))]
         return .init(rows: rows + footer, title: "Top Trending Tickers")
+    }
+    
+    private func setupHeadlineSection(socialData: SocialHighlightModel? = nil) -> AnyPublisher<TableSection, Error> {
+        StubTrendingHeadlines
+            .shared
+            .fetchHeadlines()
+            .compactMap(\.data)
+            .compactMap { headlines in
+                TableSection(rows: [TableRow<TrendingHeadlinesCarousel>(headlines)], title: "Headlines")
+            }
+            .eraseToAnyPublisher()
     }
 }
 

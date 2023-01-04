@@ -235,6 +235,7 @@
 		EFB1C2D128DB5E7D00DD40A4 /* TweetFeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB1C2D028DB5E7D00DD40A4 /* TweetFeedViewModel.swift */; };
 		EFB1C2D328DB616600DD40A4 /* TweetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB1C2D228DB616600DD40A4 /* TweetModel.swift */; };
 		EFB3181628E97B93008FC27E /* TweetURLView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB3181528E97B93008FC27E /* TweetURLView.swift */; };
+		EFB9741A2965CDC100DA3718 /* TrendingHeadlineCarousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB974192965CDC000DA3718 /* TrendingHeadlineCarousel.swift */; };
 		EFDC741928E3373800042452 /* Sentiments.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFDC741828E3373800042452 /* Sentiments.swift */; };
 		EFFFE4702948357E0045686E /* Tickers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFFE46F2948357E0045686E /* Tickers.swift */; };
 		EFFFE472294B97750045686E /* VideoTikTokCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFFE471294B97750045686E /* VideoTikTokCell.swift */; };
@@ -509,6 +510,7 @@
 		EFB1C2D028DB5E7D00DD40A4 /* TweetFeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetFeedViewModel.swift; sourceTree = "<group>"; };
 		EFB1C2D228DB616600DD40A4 /* TweetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetModel.swift; sourceTree = "<group>"; };
 		EFB3181528E97B93008FC27E /* TweetURLView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetURLView.swift; sourceTree = "<group>"; };
+		EFB974192965CDC000DA3718 /* TrendingHeadlineCarousel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingHeadlineCarousel.swift; sourceTree = "<group>"; };
 		EFDC741828E3373800042452 /* Sentiments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sentiments.swift; sourceTree = "<group>"; };
 		EFFFE46F2948357E0045686E /* Tickers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tickers.swift; sourceTree = "<group>"; };
 		EFFFE471294B97750045686E /* VideoTikTokCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTikTokCell.swift; sourceTree = "<group>"; };
@@ -1200,6 +1202,7 @@
 			isa = PBXGroup;
 			children = (
 				EF7D2FA928E033E90003B8F3 /* TrendingHeadlineCell.swift */,
+				EFB974192965CDC000DA3718 /* TrendingHeadlineCarousel.swift */,
 			);
 			path = TrendingHeadline;
 			sourceTree = "<group>";
@@ -1866,6 +1869,7 @@
 				EF7CBFDF291641EA00F9D611 /* UIStackView.swift in Sources */,
 				EF2F6C43296448410066D9D3 /* TopMentionEndpoint.swift in Sources */,
 				EF5C4EB42951B26F00669355 /* RoundedCardCell.swift in Sources */,
+				EFB9741A2965CDC100DA3718 /* TrendingHeadlineCarousel.swift in Sources */,
 				EF86384928DC9F4600EF520C /* EventServiceInterface.swift in Sources */,
 				EF59F119292A969A002877DE /* SphericalProgressBars.swift in Sources */,
 				EF7D2FB428E050DE0003B8F3 /* MentionTickerModel.swift in Sources */,
