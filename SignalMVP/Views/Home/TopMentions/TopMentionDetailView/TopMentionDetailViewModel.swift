@@ -180,16 +180,10 @@ struct MediaSegmentModel {
 
 class MediaSegmentCell: ConfigurableCell {
     
-    private var selectedTab:  CurrentValueSubject<Sections, Never>?
+    weak private var selectedTab:  CurrentValueSubject<Sections, Never>?
     private var bag: Set<AnyCancellable> = .init()
     private lazy var stack: UIStackView = {
         Sections.allCases.compactMap { tabSection in
-//            let tab = tabSection.rawValue
-//            let blob = tab.capitalized.body2Medium(color: .textColor).generateLabel.segmentBlob(isSelected: false)
-//
-//            return blob.buttonify { [weak self] in
-//                self?.selectedTab?.send(tabSection)
-//            }
             return SegmentTabCell(value: tabSection, subject: selectedTab ?? .init(.news))
         }.embedInHStack(alignment: .center, spacing: 5)
         
