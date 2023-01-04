@@ -90,7 +90,7 @@ class NewsEventView: UIControl  {
 	private lazy var authorTitle: UILabel = { .init() }()
 	private lazy var newsTitle: UILabel = { .init() }()
     private var tickersView: TickerSymbolView = { .init() }()
-    
+    private var bag: Set<AnyCancellable> = .init()
 	private let largeCard: Bool
 	
 	init(largeCard: Bool = false) {
@@ -111,7 +111,7 @@ class NewsEventView: UIControl  {
         let blobLabel = authorTitle.blobify(backgroundColor: .surfaceBackground, edgeInset: .init(vertical: 8, horizontal: 12), borderColor: .clear, borderWidth: 0)
         let infoStack = UIView.VStack(subViews: [newsTitle, .spacer(), blobLabel, tickersView],spacing: 8, alignment: .leading)
         let bgView = UIView()
-        bgView.backgroundColor = .black.withAlphaComponent(0.3)
+        bgView.backgroundColor = .black.withAlphaComponent(0.5)
         
 		imageView.clipsToBounds = true
 		imageView.contentMode = .scaleAspectFill
@@ -134,6 +134,7 @@ class NewsEventView: UIControl  {
 		news = model
 		
 		UIImage.loadImage(url: model.imageUrl, at: imageView, path: \.image)
+            .store(in: &bag)
 		
         model.sourceName.body3Medium(color: .gray).render(target: authorTitle)
         model.title.body1Bold(color: .white).render(target: newsTitle)

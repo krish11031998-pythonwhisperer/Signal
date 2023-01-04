@@ -90,4 +90,3 @@ class CollectionTableCell: ConfigurableCell {
 		return "CollectionTableCell.\(name)"
 	}
 }
-
