@@ -41,7 +41,7 @@ class EventDetailViewHeader: ConfigurableCell {
 	
 	public func configure(with model: EventModel) {
 		model.eventName.heading1().render(target: eventHeader)
-		"\(model.news.count) News Articles".body3Regular().render(target: newArticleCountLabel)
+		"\(model.news?.count ?? 0) News Articles".body3Regular().render(target: newArticleCountLabel)
 
         tickerViews.isHidden = model.tickers.isEmpty
         tickerViews.configTickers(news: model)

@@ -9,14 +9,20 @@ import Foundation
 import Combine
 
 class EventService: EventServiceInterface {
-	
 	public static var shared: EventService = .init()
 	
-    public func fetchEvents(entity: [String]? = nil, page: Int = 0, limit: Int = 20, refresh: Bool) -> AnyPublisher<EventResult, Error> {
+    public func fetchEventsForAllTickers(entity: [String]? = nil, page: Int = 0, limit: Int = 20, refresh: Bool) -> AnyPublisher<EventResult, Error> {
         EventEndpoints
-            .latestEvents(entity: entity, page: page, limit: limit)
+            .eventsForAllTickers(entity: entity, page: page, limit: limit)
             .execute(refresh: refresh)
             .eraseToAnyPublisher()
     }
 	
+    func fetchEventForTicker(entity: String, page: Int = 0, limit: Int = 20, refresh: Bool) -> AnyPublisher<EventResult, Error> {
+        EventEndpoints
+            .eventsForTicker(entity: entity, page: page, limit: limit)
+            .execute(refresh: refresh)
+            .eraseToAnyPublisher()
+    }
+    
 }

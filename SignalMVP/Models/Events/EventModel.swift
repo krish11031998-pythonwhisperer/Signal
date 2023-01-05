@@ -17,7 +17,8 @@ struct EventModel: Tickers, Codable {
 	let date: String
 	let eventId: String
 	let eventName: String
-	let news: [NewsModel]
+	let news: [NewsModel]?
+    let newsItem: Int?
 	var tickers: [String]
 	
 	enum CodingKeys: String, CodingKey {
@@ -25,6 +26,7 @@ struct EventModel: Tickers, Codable {
 		case eventId = "event_id"
 		case eventName = "event_name"
 		case tickers
+        case newsItem = "news_items"
 		
 	}
 }

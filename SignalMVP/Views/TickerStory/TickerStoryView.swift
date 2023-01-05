@@ -117,7 +117,7 @@ class TickerStoryView: UIViewController {
         let ticker = mention.ticker
         NewsService
             .shared
-            .fetchNews(entity: [ticker])
+            .fetchNewsForAllTickers(entity: [ticker])
             .compactMap { $0.data }
             .receive(on: DispatchQueue.main)
             .sink {

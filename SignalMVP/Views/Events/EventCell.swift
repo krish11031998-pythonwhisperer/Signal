@@ -48,7 +48,7 @@ class EventCell: ConfigurableCell {
 	}
 	
 	func configure(with model: EventNewsModel) {
-        let news = model.model.news
+        guard let news = model.model.news else { return }
 		if let firstNews = news.first {
 			mainNews.configureView(model: firstNews)
             mainNews.publisher(for: .touchUpInside)

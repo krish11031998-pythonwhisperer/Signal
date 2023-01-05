@@ -7,11 +7,14 @@
 
 import Foundation
 
-struct TweetSearchResult: Codable {
-	let data: [TweetModel]?
-	let includes: TweetIncludeData?
+typealias TweetResult = GenericResult<[TweetModel]>
+typealias TweetSearchResult = GenericResult<TweetSearch>
+
+struct TweetSearch: Codable {
+    let tweets: [TweetModel]?
+    let nextToken: String?
 }
-		
+
 struct TweetModel:Codable {
 	let id: String?
 	let text: String?
@@ -19,6 +22,7 @@ struct TweetModel:Codable {
 	let authorId : String?
 	let attachments: TweetAttachment?
     let dateStr: String?
+    let createdAt: String?
 	
 	//media
 	let media: [TweetMedia]?
@@ -39,6 +43,7 @@ struct TweetModel:Codable {
         case urls
         case user, cashTags, hashTags, opinions, reactions
         case dateStr = "date"
+        case createdAt = "created_at"
 	}
 }
 
@@ -63,7 +68,7 @@ extension TweetModel: Tickers {
 
 extension TweetModel {
     var date: Date? {
-        guard let dateStr = dateStr else { return nil }
+        guard let dateStr = createdAt ?? dateStr else { return nil }
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"

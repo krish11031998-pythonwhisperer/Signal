@@ -9,9 +9,6 @@ import Foundation
 import Combine
 
 protocol EventServiceInterface {
-	
-    func fetchEvents(
-        entity: [String]?,
-        page: Int,
-        limit: Int, refresh: Bool) -> AnyPublisher<EventResult,Error>
+    func fetchEventsForAllTickers(entity: [String]?, page: Int, limit: Int, refresh: Bool) -> AnyPublisher<EventResult,Error>
+    func fetchEventForTicker(entity: String, page: Int, limit: Int, refresh: Bool) -> AnyPublisher<EventResult, Error>
 }

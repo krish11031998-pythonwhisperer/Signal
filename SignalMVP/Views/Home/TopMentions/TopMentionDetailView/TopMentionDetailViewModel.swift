@@ -55,6 +55,7 @@ class TopMentionDetailViewModel {
     private var events: [EventModel] = []
     private let mention: MentionTickerModel
     private var selectedTab: CurrentValueSubject<Sections, Never> = .init(.news)
+    private var navigateTo: PassthroughSubject<Navigation, Never> = .init()
     private var bag: Set<AnyCancellable> = .init()
     init(mention: MentionTickerModel) {
         self.mention = mention
@@ -64,8 +65,15 @@ class TopMentionDetailViewModel {
         mention.ticker
     }
 
+    enum Navigation {
+        case tweet(model: TweetModel)
+        case news(model: NewsModel)
+        case event(model: EventModel)
+    }
+    
     struct Output {
         let sections: AnyPublisher<[TableCellProvider], Error>
+        let navigation: AnyPublisher<Navigation, Never>
     }
     
     func transform() -> Output {
@@ -78,7 +86,7 @@ class TopMentionDetailViewModel {
             })
             .eraseToAnyPublisher()
         
-        return .init(sections: section)
+        return .init(sections: section, navigation: navigateTo.eraseToAnyPublisher())
     }
     
     private func dataForSection(_ section: Sections) -> AnyPublisher<[TableCellProvider], Error> {
@@ -95,13 +103,18 @@ class TopMentionDetailViewModel {
     private func fetchTweets(after: String? = nil) -> AnyPublisher<[TableCellProvider], Error> {
         TweetService
             .shared
-            .fetchTweets(entity: ticker, refresh: false)
+            .fetchTweetsForTicker(entity: ticker, refresh: false)
             .catch { err in
                 print("(ERROR) err [From Service]:", err)
-                return StubTweetService.shared.fetchTweets()
+                return StubTweetService.shared.fetchTweetsForTicker()
             }
-            .compactMap { result in
-                result.data?.compactMap { TableRow<TweetCell>(.init(model: $0)) }
+            .compactMap { [weak self] result in
+                result.data?.tweets?.compactMap {tweet in
+                    let model: TweetCellModel = .init(model: tweet) {
+                        self?.navigateTo.send(.tweet(model: tweet))
+                    }
+                    return TableRow<TweetCell>(model)
+                }
             }
             .map {[weak self] in
                 guard let self else { return [] }
@@ -114,13 +127,18 @@ class TopMentionDetailViewModel {
     private func fetchNews(after: String? = nil) -> AnyPublisher<[TableCellProvider], Error> {
         NewsService
             .shared
-            .fetchNews(entity: [ticker])
+            .fetchNewsForTicker(ticker: ticker, refresh: true)
             .catch { err in
                 print("(ERROR) err [From Service]:", err)
-                return StubNewsService.shared.fetchNews()
+                return StubNewsService.shared.fetchNewsForAllTickers()
             }
-            .compactMap { result in
-                result.data?.compactMap { TableRow<NewsCell>(.init(model: $0)) }
+            .compactMap { [weak self]  result in
+                result.data?.compactMap { news in
+                    let model: NewsCellModel = .init(model: news) {
+                        self?.navigateTo.send(.news(model: news))
+                    }
+                    return TableRow<NewsCell>(model)
+                }
             }
             .map {[weak self] in
                 guard let self else { return [] }
@@ -132,9 +150,14 @@ class TopMentionDetailViewModel {
     private func fetchEvents(after: String? = nil) -> AnyPublisher<[TableCellProvider], Error> {
         EventService
             .shared
-            .fetchEvents(entity: [ticker], refresh: false)
-            .compactMap { result in
-                result.data.compactMap { TableRow<EventSingleCell>(.init(model: $0)) }
+            .fetchEventForTicker(entity: ticker, refresh: true)
+            .compactMap {[weak self] result in
+                result.data.compactMap { event in
+                    let model: EventCellModel = .init(model: event) {
+                        self?.navigateTo.send(.event(model: event))
+                    }
+                    return TableRow<EventSmallCell>(model)
+                }
             }
             .map {[weak self] in
                 guard let self else { return [] }

@@ -79,7 +79,7 @@ class TrendingHeadlineCollectionCell: ConfigurableCollectionCell {
     private lazy var desciptionLabel: UILabel = { .init() }()
     private lazy var sentimentStack: UIStackView = { .HStack(spacing: 8) }()
     private lazy var sentimentLabel: UILabel = { .init() }()
-    private lazy var mainStack: UIStackView = { .VStack(spacing: 8, alignment: .leading) }()
+    private lazy var mainStack: UIStackView = { .VStack(spacing: 8) }()
     private lazy var tickers: TickerSymbolView = { .init() }()
 
 //MARK: - Constructors
@@ -96,7 +96,8 @@ class TrendingHeadlineCollectionCell: ConfigurableCollectionCell {
 //MARK: - Protected Methods
     
     private func setupView() {
-        [headlineLabel, desciptionLabel, sentimentLabel, .spacer(), tickers].forEach(mainStack.addArrangedSubview(_:))
+        let bottomStack: UIStackView = .HStack(subViews: [tickers, .spacer(), sentimentLabel], spacing: 10)
+        [headlineLabel, desciptionLabel, .spacer(), bottomStack].forEach(mainStack.addArrangedSubview(_:))
         mainStack.setCustomSpacing(12, after: sentimentStack)
         
         tickers.isHidden = true

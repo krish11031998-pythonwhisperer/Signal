@@ -8,11 +8,12 @@
 import Foundation
 
 enum NewsEndpoints {
-    case tickerNews(entity: [String]? = nil,
+    case newsForAllTickers(entity: [String]? = nil,
                     items: String? = nil,
                     source: String? = nil,
                     page: Int,
                     limit: Int = 20)
+    case newsForTicker(ticker: String, page: Int, limit: Int)
 }
 
 extension NewsEndpoints: EndPoint {
@@ -22,14 +23,16 @@ extension NewsEndpoints: EndPoint {
     
     var path: String {
         switch self {
-        case .tickerNews:
+        case .newsForAllTickers:
             return "/news/tickerNews"
+        case .newsForTicker:
+            return "/tickers/news"
         }
     }
     
     var queryItems: [URLQueryItem] {
         switch self {
-        case .tickerNews( let entity,
+        case .newsForAllTickers( let entity,
                           let items,
                           let source,
                           let page,
@@ -46,6 +49,12 @@ extension NewsEndpoints: EndPoint {
             }
             
             return queries
+        case .newsForTicker(let ticker, let page, let limit):
+            return [
+                .init(name: "ticker", value: ticker),
+                .init(name: "page", value: "\(page)"),
+                .init(name: "limit", value: "\(limit)")
+            ]
         }
     }
 }

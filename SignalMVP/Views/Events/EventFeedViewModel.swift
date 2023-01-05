@@ -34,7 +34,7 @@ class EventFeedViewModel {
             .removeDuplicates()
             .filter { [weak self] in $0 && (self?.nextPageToken != nil) }
             .withLatestFrom(input.searchParam)
-            .flatMap { [weak self] in EventService.shared.fetchEvents(entity: [$0.1].compactMap { $0 }, page: self?.nextPageToken ?? 0, refresh: false) }
+            .flatMap { [weak self] in EventService.shared.fetchEventsForAllTickers(entity: [$0.1].compactMap { $0 }, page: self?.nextPageToken ?? 0, refresh: false) }
             .compactMap { $0.data }
             .compactMap { [weak self] in self?.setupSection($0, append: true)}
             .eraseToAnyPublisher()
@@ -42,14 +42,14 @@ class EventFeedViewModel {
         let searchResult = input.searchParam
             .flatMap {
                 let search = $0 ?? ""
-                return EventService.shared.fetchEvents(entity: [$0].compactMap { $0 }, refresh: !search.isEmpty)
+                return EventService.shared.fetchEventsForAllTickers(entity: [$0].compactMap { $0 }, refresh: !search.isEmpty)
             }
             .compactMap { $0.data }
             .compactMap { [weak self] in self?.setupSection($0, append: false)}
             .eraseToAnyPublisher()
         
         let refresh = input.refresh
-            .flatMap { EventService.shared.fetchEvents(entity: [$0].compactMap { $0 }, refresh: true) }
+            .flatMap { EventService.shared.fetchEventsForAllTickers(entity: [$0].compactMap { $0 }, refresh: true) }
             .compactMap { $0.data }
             .compactMap { [weak self] in self?.setupSection($0, append: false)}
             .eraseToAnyPublisher()
@@ -90,7 +90,7 @@ class EventFeedViewModel {
         }
         
         let rows = (allEvents ?? []).compactMap {
-            TableRow<EventSingleCell>($0)
+            TableRow<EventLargeCell>($0)
         }
         
         return .init(rows: rows)

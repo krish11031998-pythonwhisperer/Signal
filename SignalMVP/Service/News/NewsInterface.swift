@@ -8,10 +8,6 @@
 import Foundation
 import Combine
 protocol NewsServiceInterface {
-	func fetchNews(entity: [String]?,
-				   items: String?,
-				   source: String?,
-                   page: Int,
-                   limit: Int,
-                   refresh: Bool) -> AnyPublisher<NewsResult,Error>
+	func fetchNewsForAllTickers(entity: [String]?, items: String?, source: String?, page: Int, limit: Int, refresh: Bool) -> AnyPublisher<NewsResult,Error>
+    func fetchNewsForTicker(ticker: String, page: Int, limit: Int, refresh: Bool) -> AnyPublisher<NewsResult,Error>
 }

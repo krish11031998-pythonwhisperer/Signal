@@ -52,8 +52,7 @@ class TrendingHeadlinesCarousel: ConfigurableCell {
     }
     
     func configure(with model: [TrendingHeadlinesModel]) {
-        reloadCollection(headlines: model)
-
+        reloadCollection(headlines: model.limitTo(to: 4))
     }
     
     private func setupView() {
@@ -71,7 +70,6 @@ class TrendingHeadlinesCarousel: ConfigurableCell {
         if animateScroll == nil {
             animateScroll = .init(target: self, selector: #selector(handleAutoScrollAnimation))
         }
-        //collection.reloadData()
     }
     
     private func bind() {
@@ -97,9 +95,7 @@ class TrendingHeadlinesCarousel: ConfigurableCell {
         let offset = collection.contentOffset.x
         
         if offset < size.width - .totalWidth {
-            //UIView.animate(withDuration: 0.1, delay: 0, options: [.curveEaseInOut]) {
-                self.collection.contentOffset.x += 1
-           // }
+            self.collection.contentOffset.x += 0.25
         } else {
             let last = headlines.last
             var recurringHeadlines = [last].compactMap { $0 }

@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import Combine
 
-class EventSingleCell: ConfigurableCell {
+class EventLargeCell: ConfigurableCell {
 	
 //MARK: - Properties
 	private lazy var eventTitle: UILabel = { .init() }()
@@ -76,11 +76,11 @@ class EventSingleCell: ConfigurableCell {
 		model.model.eventName.heading5().render(target: eventTitle)
 		eventTitle.numberOfLines = 0
 
-		if let firstImgURL = model.model.news.first?.imageUrl {
+		if let firstImgURL = model.model.news?.first?.imageUrl {
 			cancellable = UIImage.loadImage(url: firstImgURL, at: imgView, path: \.image)
 		}
 
-		"\(model.model.news.count) News Articles".body2Regular(color: .gray).render(target: newsArticleCount)
+		"\(model.model.news?.count ?? 0) News Articles".body2Regular(color: .gray).render(target: newsArticleCount)
         
         tickersView.configTickers(news: model.model)
 	}

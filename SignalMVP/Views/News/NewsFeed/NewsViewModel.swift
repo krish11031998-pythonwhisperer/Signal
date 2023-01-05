@@ -38,7 +38,7 @@ class NewsViewModel {
             .removeDuplicates()
             .filter { [weak self] in $0 && self?.nextPage != nil }
             .withLatestFrom(input.searchParam)
-            .flatMap { [weak self] in NewsService.shared.fetchNews(entity: [$0.1].compactMap { $0 },
+            .flatMap { [weak self] in NewsService.shared.fetchNewsForAllTickers(entity: [$0.1].compactMap { $0 },
                                                                    page: self?.nextPage ?? 0,
                                                                    refresh: false) }
             .compactMap { $0.data }
@@ -46,7 +46,7 @@ class NewsViewModel {
             .eraseToAnyPublisher()
         
         let refresh = input.refresh
-            .flatMap{ NewsService.shared.fetchNews(entity: [$0].compactMap { $0 }, refresh: true) }
+            .flatMap{ NewsService.shared.fetchNewsForAllTickers(entity: [$0].compactMap { $0 }, refresh: true) }
             .compactMap { $0.data }
             .compactMap { [weak self] in self?.setupSection($0, append: false) }
             .eraseToAnyPublisher()
@@ -54,7 +54,7 @@ class NewsViewModel {
         let searchResult = input.searchParam
             .flatMap{
                 let search = $0 ?? ""
-                return  NewsService.shared.fetchNews(entity: [$0].compactMap { $0 }, refresh: !search.isEmpty)
+                return  NewsService.shared.fetchNewsForAllTickers(entity: [$0].compactMap { $0 }, refresh: !search.isEmpty)
             }
             .compactMap { $0.data }
             .compactMap { [weak self] in self?.setupSection($0, append: false) }

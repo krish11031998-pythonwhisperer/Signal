@@ -58,7 +58,7 @@ class TweetFeedViewModel {
         let searchResults = input.searchParam
             .flatMap {
                 let search = $0 ?? ""
-                return TweetService.shared.fetchTweets(entity: $0, refresh: !search.isEmpty)
+                return TweetService.shared.fetchTweetsForAllTickers(entity: $0, refresh: !search.isEmpty)
             }
             .compactMap { [weak self] in self?.decodeToTweetCellModel($0, append: false) }
             .eraseToAnyPublisher()
@@ -67,12 +67,12 @@ class TweetFeedViewModel {
             .removeDuplicates()
             .filter {[weak self] in $0 && self?.nextPageId != nil }
             .withLatestFrom(input.searchParam)
-            .flatMap {[weak self] in TweetService.shared.fetchTweets(entity: $0.1, page: self?.nextPageId ?? 0, refresh: true) }
+            .flatMap {[weak self] in TweetService.shared.fetchTweetsForAllTickers(entity: $0.1, page: self?.nextPageId ?? 0, refresh: true) }
             .compactMap {[weak self] in  self?.decodeToTweetCellModel($0) }
             .eraseToAnyPublisher()
         
         let refresh = input.refresh
-            .flatMap { TweetService.shared.fetchTweets(entity: $0, refresh: true) }
+            .flatMap { TweetService.shared.fetchTweetsForAllTickers(entity: $0, refresh: true) }
             .compactMap { [weak self] in self?.decodeToTweetCellModel($0, append: false) }
             .eraseToAnyPublisher()
         
@@ -83,12 +83,12 @@ class TweetFeedViewModel {
         return .init(sections: sections)
     }
     
-    private func getNextPageToken(result: TweetSearchResult) {
+    private func getNextPageToken(result: TweetResult) {
         guard let lastId = result.data?.count, lastId > 0 else { return }
         nextPageId += 1
     }
     
-    private func decodeToTweetCellModel(_ data: TweetSearchResult, append: Bool = true) -> TableSection {
+    private func decodeToTweetCellModel(_ data: TweetResult, append: Bool = true) -> TableSection {
         getNextPageToken(result: data)
         guard let tweets = data.data else { return .init(rows: []) }
         let fitleredTweet: [TweetCellModel] = tweets.compactMap { tweet in

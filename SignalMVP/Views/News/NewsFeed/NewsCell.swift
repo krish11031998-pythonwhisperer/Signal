@@ -21,7 +21,7 @@ class NewsCell: ConfigurableCell {
     private lazy var tickersStack: UIStackView = { .HStack(subViews: [tickersView, .spacer(), sentimentView], spacing: 8) }()
     
 	private lazy var newsInfoStack: UIStackView = {
-		let stack: UIStackView = .VStack(subViews: [timestamp, title, body, tickersStack],spacing: 8)
+        let stack: UIStackView = .VStack(subViews: [timestamp, title, .spacer(), body, tickersStack],spacing: 8)
 		stack.setCustomSpacing(12, after: body)
 		return stack
 	}()

@@ -9,7 +9,8 @@ import Foundation
 import Combine
 
 enum TweetEndpoints {
-    case tweets(entity: String?, page: Int, limit: Int = 20)
+    case tweetsForAllTickers(entity: String?, page: Int, limit: Int = 20)
+    case tweetsForTicker(entity: String, limit: Int = 20, nextPageToken: String?)
 }
 
 
@@ -21,19 +22,27 @@ extension TweetEndpoints: EndPoint {
     
 	var path: String {
 		switch self {
-		case .tweets:
+		case .tweetsForAllTickers:
 			return "/twitter/tweets"
+        case .tweetsForTicker:
+            return "/tickers/tweets"
 		}
 	}
 	
 	var queryItems: [URLQueryItem] {
 		switch self {
-		case .tweets(let entity, let page, let limit):
+		case .tweetsForAllTickers(let entity, let page, let limit):
 			return [
 				.init(name: "entity", value: entity),
 				.init(name: "page", value: "\(page)"),
 				.init(name: "limit", value: "\(limit)")
 			].filter { $0.value != nil  }
+        case .tweetsForTicker(let entity, let limit, let nextPageToken):
+            return [
+                .init(name: "entity", value: entity),
+                .init(name: "limit", value: "\(limit)"),
+                .init(name: "token", value: nextPageToken)
+            ].filter { $0.value != nil  }
 		}
 	}
 	

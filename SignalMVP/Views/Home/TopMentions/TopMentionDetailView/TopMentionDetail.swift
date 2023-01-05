@@ -64,7 +64,7 @@ class TopMentionDetailView: UIViewController {
         let chart = RatingChart(timeFrame: 50, frame: .zero).embedInView(insets: .init(by: 10))
         chart.setFrame(width: .totalWidth, height: 175)
         
-        UIImage.loadImage(url: (mention.ticker).logoURL, at: headerView, path: \.image)
+        UIImage.loadImage(url: (mention.ticker).logoURL, at: headerView, path: \.image).store(in: &bag)
         
         let headerView: UIView = .VStack(subViews: [infoStack, chart], spacing: 10)
         headerView.setFrame(width: .totalWidth, height: headerView.compressedSize.height)
@@ -80,6 +80,21 @@ class TopMentionDetailView: UIViewController {
                 print("(ERROR) err: ", $0.err?.localizedDescription)
             } receiveValue: { [weak self] in
                 self?.tableView.replaceRows(rows: $0, section: 1)
+            }
+            .store(in: &bag)
+        
+        output
+            .navigation
+            .sink { [weak self] nav in
+                guard let self else { return }
+                switch nav {
+                case .event(let model):
+                    self.pushTo(target: EventDetailView(eventModel: model))
+                case .news(let model):
+                    self.pushTo(target: NewsDetailView(news: model))
+                case .tweet(let model):
+                    self.pushTo(target: TweetDetailView(tweet: model))
+                }
             }
             .store(in: &bag)
     }

@@ -8,7 +8,8 @@
 import Foundation
 
 enum EventEndpoints {
-    case latestEvents(entity: [String]?, page: Int, limit: Int)
+    case eventsForAllTickers(entity: [String]?, page: Int, limit: Int)
+    case eventsForTicker(entity: String, page: Int, limit: Int)
 }
 
 extension EventEndpoints: EndPoint {
@@ -18,14 +19,16 @@ extension EventEndpoints: EndPoint {
     
     var path: String {
         switch self {
-        case .latestEvents:
+        case .eventsForAllTickers:
             return "/events/latestEvents"
+        case .eventsForTicker:
+            return "/tickers/events"
         }
     }
     
     var queryItems: [URLQueryItem] {
         switch self {
-        case .latestEvents(let entity, let page, let limit):
+        case .eventsForAllTickers(let entity, let page, let limit):
             var queries: [URLQueryItem] = [
                 .init(name: "page", value: "\(page)"),
                 .init(name: "limit", value: "\(limit)")
@@ -36,6 +39,12 @@ extension EventEndpoints: EndPoint {
             }
             
             return queries
+        case .eventsForTicker(let entity, let page, let limit):
+            return [
+                .init(name: "entity", value: entity),
+                .init(name: "page", value: "\(page)"),
+                .init(name: "limit", value: "\(limit)")
+            ].filter { $0.value != nil }
         }
     }
 }

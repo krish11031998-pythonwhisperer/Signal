@@ -11,7 +11,7 @@ class StubNewsService: NewsServiceInterface {
 
 	public static var shared: StubNewsService = .init()
 	
-    public func fetchNews(entity: [String]? = nil,
+    public func fetchNewsForAllTickers(entity: [String]? = nil,
                           items: String? = nil,
                           source: String? = nil,
                           page: Int = 0,
@@ -21,4 +21,7 @@ class StubNewsService: NewsServiceInterface {
         Bundle.main.loadDataFromBundle(name: "signalNews", extensionStr: "json")
     }
     
+    func fetchNewsForTicker(ticker: String = "", page: Int = 0, limit: Int = 0, refresh: Bool) -> AnyPublisher<NewsResult,Error> {
+        Bundle.main.loadDataFromBundle(name: "signalNews", extensionStr: "json")
+    }
 }
