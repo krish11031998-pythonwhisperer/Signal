@@ -34,7 +34,7 @@ class ProfileViewModel {
     }
     
     func transform() -> Output {
-        let sections = Just([userInfo(), watchList(), signOut()].compactMap { $0 }).eraseToAnyPublisher()
+        let sections = Just([watchList(), signOut()].compactMap { $0 }).eraseToAnyPublisher()
         let showTickerPage = addTicker.eraseToAnyPublisher()
         let signOutUser = signOutUser
             .flatMap { _ in FirebaseAuthService.shared.signOutUser() }

@@ -101,7 +101,7 @@ class TrendingHeadlineCollectionCell: ConfigurableCollectionCell {
         
         tickers.isHidden = true
         headlineLabel.numberOfLines = 0
-        desciptionLabel.numberOfLines = 2
+        desciptionLabel.numberOfLines = 0
         
         contentView.addSubview(mainStack)
         contentView.setFittingConstraints(childView: mainStack, insets: .init(vertical: 10, horizontal: 16))

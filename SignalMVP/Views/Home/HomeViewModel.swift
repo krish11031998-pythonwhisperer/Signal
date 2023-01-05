@@ -88,13 +88,9 @@ class HomeViewModel {
             .shared
             .fetchSocialHighlight()
             .combineLatest(user)
-            .withLatestFrom(setupHeadlineSection())
-            .compactMap { [weak self] result, headlineSection in
-                let highlights = result.0
-                let user = result.1
+            .compactMap { [weak self] (highlights, user) in
                 guard let self, let data = highlights.data else { return [] }
-                var sections = self.buildSection(data, user: user.data)
-                sections.insert(headlineSection, at: 1)
+                let sections = self.buildSection(data, user: user.data)
                 return sections
             }
             .eraseToAnyPublisher()
@@ -102,7 +98,8 @@ class HomeViewModel {
     }
     
     private func buildSection(_ socialData: SocialHighlightModel, user: UserModel? = nil) -> [TableSection] {
-        var section: [TableSection] = [setupEventSection(socialData: socialData),
+        var section: [TableSection] = [setupHeadlineSection(socialData: socialData),
+                                       setupEventSection(socialData: socialData),
                                        setupNewsSection(socialData: socialData),
                                        setupTweetsSection(socialData: socialData),
                                        setupTrendingTickers(socialData: socialData)].compactMap { $0 }
@@ -182,15 +179,9 @@ class HomeViewModel {
         return .init(rows: rows + footer, title: "Top Trending Tickers")
     }
     
-    private func setupHeadlineSection(socialData: SocialHighlightModel? = nil) -> AnyPublisher<TableSection, Error> {
-        StubTrendingHeadlines
-            .shared
-            .fetchHeadlines()
-            .compactMap(\.data)
-            .compactMap { headlines in
-                TableSection(rows: [TableRow<TrendingHeadlinesCarousel>(headlines)], title: "Headlines")
-            }
-            .eraseToAnyPublisher()
+    private func setupHeadlineSection(socialData: SocialHighlightModel? = nil) -> TableSection? {
+        guard let headlines = socialData?.headlines else { return nil }
+        return TableSection(rows: [TableRow<TrendingHeadlinesCarousel>(headlines)], title: "Headlines")
     }
 }
 

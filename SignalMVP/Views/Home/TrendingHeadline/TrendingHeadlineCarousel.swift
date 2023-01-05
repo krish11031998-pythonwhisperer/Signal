@@ -14,7 +14,7 @@ class TrendingHeadlinesCarousel: ConfigurableCell {
     private let collection: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.itemSize = .init(width: .totalWidth, height: 180)
+        layout.itemSize = .init(width: .totalWidth, height: 200)
         layout.minimumInteritemSpacing = 0
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collection.showsHorizontalScrollIndicator = false
@@ -59,7 +59,7 @@ class TrendingHeadlinesCarousel: ConfigurableCell {
     private func setupView() {
         contentView.addSubview(collection)
         contentView.setFittingConstraints(childView: collection, insets: .zero)
-        collection.setFrame(width: .totalWidth, height: 200)
+        collection.setFrame(width: .totalWidth, height: 220)
     }
     
     private func reloadCollection(headlines: [TrendingHeadlinesModel]) {
