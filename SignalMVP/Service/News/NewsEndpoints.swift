@@ -13,7 +13,6 @@ enum NewsEndpoints {
                     source: String? = nil,
                     page: Int,
                     limit: Int = 20)
-    case newsForTicker(ticker: String, page: Int, limit: Int)
     case newsForEvent(eventId: String)
 }
 
@@ -26,8 +25,6 @@ extension NewsEndpoints: EndPoint {
         switch self {
         case .newsForAllTickers:
             return "/news/tickerNews"
-        case .newsForTicker:
-            return "/tickers/news"
         case .newsForEvent:
             return "/events/news"
         }
@@ -52,12 +49,6 @@ extension NewsEndpoints: EndPoint {
             }
             
             return queries
-        case .newsForTicker(let ticker, let page, let limit):
-            return [
-                .init(name: "ticker", value: ticker),
-                .init(name: "page", value: "\(page)"),
-                .init(name: "limit", value: "\(limit)")
-            ]
         case .newsForEvent(let eventId):
             return [
                 .init(name: "eventId", value: eventId)

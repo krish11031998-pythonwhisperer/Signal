@@ -18,12 +18,5 @@ class TweetService: TweetServiceInterface {
             .execute(refresh: refresh)
             .eraseToAnyPublisher()
     }
-    
-    public func fetchTweetsForTicker(ticker: String, limit: Int = 20, nextPageToken: String? = nil, refresh: Bool) -> AnyPublisher<TweetSearchResult, Error> {
-        TweetEndpoints
-            .tweetsForTicker(ticker: ticker, limit: limit, nextPageToken: nextPageToken)
-            .execute(refresh: refresh)
-            .eraseToAnyPublisher()
-    }
 }
 

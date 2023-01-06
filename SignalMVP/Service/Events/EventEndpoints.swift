@@ -9,7 +9,6 @@ import Foundation
 
 enum EventEndpoints {
     case eventsForAllTickers(entity: [String]?, page: Int, limit: Int)
-    case eventsForTicker(ticker: String, page: Int, limit: Int)
 }
 
 extension EventEndpoints: EndPoint {
@@ -21,8 +20,6 @@ extension EventEndpoints: EndPoint {
         switch self {
         case .eventsForAllTickers:
             return "/events/latestEvents"
-        case .eventsForTicker:
-            return "/tickers/events"
         }
     }
     
@@ -39,12 +36,6 @@ extension EventEndpoints: EndPoint {
             }
             
             return queries
-        case .eventsForTicker(let ticker, let page, let limit):
-            return [
-                .init(name: "ticker", value: ticker),
-                .init(name: "page", value: "\(page)"),
-                .init(name: "limit", value: "\(limit)")
-            ].filter { $0.value != nil }
         }
     }
 }

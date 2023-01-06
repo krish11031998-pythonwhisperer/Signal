@@ -29,6 +29,7 @@ class TopMentionDetailView: UIViewController {
     private lazy var tableView: UITableView = { .standardTableView() }()
     private lazy var viewModel: TopMentionDetailViewModel = { .init(mention: mention) }()
     private var bag: Set<AnyCancellable> = .init()
+    private lazy var chart: RatingChart = { .init() }()
     private let mention: MentionTickerModel
     
     init(mention: MentionTickerModel) {
@@ -61,12 +62,11 @@ class TopMentionDetailView: UIViewController {
         mention.name.heading3().render(target: headerLabel)
         mention.ticker.body1Regular(color: .gray).render(target: symbolLabel)
         
-        let chart = RatingChart(timeFrame: 50, frame: .zero).embedInView(insets: .init(by: 10))
-        chart.setFrame(width: .totalWidth, height: 175)
+        chart.setFrame(width: .totalWidth - 20, height: 200)
         
         UIImage.loadImage(url: (mention.ticker).logoURL, at: headerView, path: \.image).store(in: &bag)
         
-        let headerView: UIView = .VStack(subViews: [infoStack, chart], spacing: 10)
+        let headerView: UIView = .VStack(subViews: [infoStack, chart.embedInView(insets: .init(by: 10))], spacing: 20)
         headerView.setFrame(width: .totalWidth, height: headerView.compressedSize.height)
         tableView.headerView = headerView
     }
@@ -80,6 +80,16 @@ class TopMentionDetailView: UIViewController {
                 print("(ERROR) err: ", $0.err?.localizedDescription)
             } receiveValue: { [weak self] in
                 self?.tableView.replaceRows(rows: $0, section: 1)
+            }
+            .store(in: &bag)
+        
+        output
+            .sentiment
+            .receive(on: RunLoop.main)
+            .sink {
+                print("(ERROR) err: ", $0.err?.localizedDescription)
+            } receiveValue: { [weak self] in
+                self?.chart.configureChart(model: $0)
             }
             .store(in: &bag)
         

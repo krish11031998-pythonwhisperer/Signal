@@ -9,5 +9,4 @@ import Foundation
 import Combine
 protocol TweetServiceInterface {
     func fetchTweetsForAllTickers(entity: String?, page: Int, limit: Int, refresh: Bool) -> AnyPublisher<TweetResult, Error>
-    func fetchTweetsForTicker(ticker: String, limit: Int, nextPageToken: String?, refresh: Bool) -> AnyPublisher<TweetSearchResult, Error>
 }

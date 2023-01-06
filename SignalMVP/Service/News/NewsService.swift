@@ -25,13 +25,6 @@ class NewsService: NewsServiceInterface {
             .eraseToAnyPublisher()
 	}
     
-    func fetchNewsForTicker(ticker: String, page: Int = 0, limit: Int = 20, refresh: Bool) -> AnyPublisher<NewsResult,Error> {
-        NewsEndpoints
-            .newsForTicker(ticker: ticker, page: page, limit: limit)
-            .execute(refresh: refresh)
-            .eraseToAnyPublisher()
-    }
-    
     func fetchNewsForEvent(eventId: String, refresh: Bool) -> AnyPublisher<NewsResult, Error> {
         NewsEndpoints
             .newsForEvent(eventId: eventId)

@@ -21,10 +21,6 @@ class StubNewsService: NewsServiceInterface {
         Bundle.main.loadDataFromBundle(name: "signalNews", extensionStr: "json")
     }
     
-    func fetchNewsForTicker(ticker: String = "", page: Int = 0, limit: Int = 0, refresh: Bool) -> AnyPublisher<NewsResult,Error> {
-        Bundle.main.loadDataFromBundle(name: "signalNews", extensionStr: "json")
-    }
-    
     func fetchNewsForEvent(eventId: String, refresh: Bool) -> AnyPublisher<NewsResult, Error> {
         Bundle.main.loadDataFromBundle(name: "signalNews", extensionStr: "json")
     }

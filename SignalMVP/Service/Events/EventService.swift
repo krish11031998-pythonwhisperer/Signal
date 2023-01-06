@@ -17,12 +17,4 @@ class EventService: EventServiceInterface {
             .execute(refresh: refresh)
             .eraseToAnyPublisher()
     }
-	
-    func fetchEventForTicker(ticker: String, page: Int = 0, limit: Int = 20, refresh: Bool) -> AnyPublisher<EventResult, Error> {
-        EventEndpoints
-            .eventsForTicker(ticker: ticker, page: page, limit: limit)
-            .execute(refresh: refresh)
-            .eraseToAnyPublisher()
-    }
-    
 }

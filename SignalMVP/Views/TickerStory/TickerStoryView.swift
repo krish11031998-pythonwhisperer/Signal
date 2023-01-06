@@ -119,9 +119,9 @@ class TickerStoryView: UIViewController {
     
     private func fetchStory() {
         let ticker = mention.ticker
-        StoryService
+        TickerService
             .shared
-            .fetchStory(ticker: ticker)
+            .fetchStory(ticker: ticker, refresh: false)
             .compactMap { $0.data }
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: {

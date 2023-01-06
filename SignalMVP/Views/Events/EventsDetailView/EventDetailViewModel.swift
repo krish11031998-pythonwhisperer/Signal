@@ -41,7 +41,6 @@ class EventDetailViewModel {
                 return [headerView, headerSection, newsSection].compactMap { $0 }
             }
             .eraseToAnyPublisher()
-        
         return .init(section: section, selectedNews: selectedNews.eraseToAnyPublisher())
     }
     
@@ -49,7 +48,7 @@ class EventDetailViewModel {
         guard let id = eventModel?.eventId else { return }
         NewsService
             .shared
-            .fetchNewsForEvent(eventId: id, refresh: true)
+            .fetchNewsForEvent(eventId: id, refresh: false)
             .compactMap { $0.data }
             .sink {
                 if let err = $0.err?.localizedDescription {

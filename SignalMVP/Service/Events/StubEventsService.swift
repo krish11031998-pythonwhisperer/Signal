@@ -15,9 +15,4 @@ class StubEventService: EventServiceInterface {
     func fetchEventsForAllTickers(entity: [String]? = nil, page: Int = 0, limit: Int = 10, refresh: Bool = false) -> AnyPublisher<EventResult, Error> {
         Bundle.main.loadDataFromBundle(name: "signalEvents", extensionStr: "json")
     }
-    
-    func fetchEventForTicker(ticker: String, page: Int, limit: Int, refresh: Bool) -> AnyPublisher<EventResult, Error> {
-        Bundle.main.loadDataFromBundle(name: "signalEvents", extensionStr: "json")
-    }
-	
 }

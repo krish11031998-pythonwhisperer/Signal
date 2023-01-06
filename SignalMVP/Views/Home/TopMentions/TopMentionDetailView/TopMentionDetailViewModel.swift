@@ -73,6 +73,7 @@ class TopMentionDetailViewModel {
     
     struct Output {
         let sections: AnyPublisher<[TableCellProvider], Error>
+        let sentiment: AnyPublisher<[ChartCandleModel], Error>
         let navigation: AnyPublisher<Navigation, Never>
     }
     
@@ -86,7 +87,7 @@ class TopMentionDetailViewModel {
             })
             .eraseToAnyPublisher()
         
-        return .init(sections: section, navigation: navigateTo.eraseToAnyPublisher())
+        return .init(sections: section, sentiment: fetchSentiment(), navigation: navigateTo.eraseToAnyPublisher())
     }
     
     private func dataForSection(_ section: Sections) -> AnyPublisher<[TableCellProvider], Error> {
@@ -101,13 +102,9 @@ class TopMentionDetailViewModel {
     }
     
     private func fetchTweets(after: String? = nil) -> AnyPublisher<[TableCellProvider], Error> {
-        TweetService
+        TickerService
             .shared
-            .fetchTweetsForTicker(ticker: ticker, refresh: false)
-            .catch { err in
-                print("(ERROR) err [From Service]:", err)
-                return StubTweetService.shared.fetchTweetsForTicker()
-            }
+            .fetchTweets(ticker: ticker, refresh: false)
             .compactMap { [weak self] result in
                 result.data?.tweets?.compactMap {tweet in
                     let model: TweetCellModel = .init(model: tweet) {
@@ -125,9 +122,9 @@ class TopMentionDetailViewModel {
 
     
     private func fetchNews(after: String? = nil) -> AnyPublisher<[TableCellProvider], Error> {
-        NewsService
+        TickerService
             .shared
-            .fetchNewsForTicker(ticker: ticker, refresh: true)
+            .fetchNews(ticker: ticker, refresh: true)
             .catch { err in
                 print("(ERROR) err [From Service]:", err)
                 return StubNewsService.shared.fetchNewsForAllTickers()
@@ -148,9 +145,9 @@ class TopMentionDetailViewModel {
     }
     
     private func fetchEvents(after: String? = nil) -> AnyPublisher<[TableCellProvider], Error> {
-        EventService
+        TickerService
             .shared
-            .fetchEventForTicker(ticker: ticker, refresh: true)
+            .fetchEvent(ticker: ticker, refresh: true)
             .compactMap {[weak self] result in
                 result.data.compactMap { event in
                     let model: EventCellModel = .init(model: event) {
@@ -166,7 +163,24 @@ class TopMentionDetailViewModel {
             .eraseToAnyPublisher()
     }
  
-
+    private func fetchSentiment() -> AnyPublisher<[ChartCandleModel], Error> {
+        TickerService
+            .shared
+            .fetchSentiment(ticker: ticker, refresh: false)
+            .compactMap(\.data)
+            .map {
+                guard let time = $0.timeline?.values else { return [] }
+                return time.map { sentiment in
+                    ChartCandleModel(positive: sentiment.positive ?? 0, neutral: sentiment.neutral ?? 0, negative: sentiment.negative ?? 0)
+                }
+            }
+            .eraseToAnyPublisher()
+    }
+    
+//    private func fetchHeadlines(after: String? = nil) -> AnyPublisher<[TableCellProvider], Error> {
+//        TrendingHeadlinesModel
+//    }
+//
     var mediaHeaderView: [TableCellProvider] {
         return [TableRow<MediaSegmentCell>(.init(selectedTab: selectedTab))]
     }
@@ -190,7 +204,6 @@ class TopMentionDetailViewModel {
         let mainStack: UIStackView = .VStack(subViews: [legend, chart] , spacing: 10)
         
         return .init(rows: [TableRow<SentimentCell>(mention)], title: "Sentiment")
-        
     }
 }
 
