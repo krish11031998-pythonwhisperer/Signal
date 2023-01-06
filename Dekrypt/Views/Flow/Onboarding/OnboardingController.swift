@@ -39,7 +39,7 @@ class OnboardingController: UIViewController {
         
         backgroundHolder.addSubview(imageView)
         backgroundHolder.setFittingConstraints(childView: imageView, insets: .zero)
-        let headerView = "Signal".heading1().generateLabel
+        let headerView = "Dekrypt".heading1().generateLabel
         
         [backgroundHolder, headerView].addToView(view)
         return view
