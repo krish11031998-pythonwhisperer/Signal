@@ -21,6 +21,8 @@
 		EF06E460295C39E500820AFE /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF06E45F295C39E500820AFE /* LoadingIndicator.swift */; };
 		EF06E463295C51AB00820AFE /* AuthPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF06E462295C51AB00820AFE /* AuthPublisher.swift */; };
 		EF06E465295C61F100820AFE /* PublishersExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF06E464295C61F100820AFE /* PublishersExtension.swift */; };
+		EF0D7F27296826160075E9C4 /* UIColor+Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0D7F26296826160075E9C4 /* UIColor+Gradient.swift */; };
+		EF0D7F29296832A30075E9C4 /* UIImage+vImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0D7F28296832A30075E9C4 /* UIImage+vImage.swift */; };
 		EF1644A0290550B300E9D997 /* ServiceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF16449F290550B300E9D997 /* ServiceHelper.swift */; };
 		EF1644A42905573600E9D997 /* signalNews.json in Resources */ = {isa = PBXBuildFile; fileRef = EF1644A32905573600E9D997 /* signalNews.json */; };
 		EF1644A62905691A00E9D997 /* signalEvents.json in Resources */ = {isa = PBXBuildFile; fileRef = EF1644A52905691A00E9D997 /* signalEvents.json */; };
@@ -105,7 +107,7 @@
 		EF6FE92929656C95005B17B2 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = EF6FE92829656C95005B17B2 /* loading.json */; };
 		EF7CBED22911BB8400F9D611 /* TopMentionDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CBED12911BB8400F9D611 /* TopMentionDetail.swift */; };
 		EF7CBFD8291641EA00F9D611 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CBF91291641E900F9D611 /* Array.swift */; };
-		EF7CBFD9291641EA00F9D611 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CBF92291641E900F9D611 /* UIColor.swift */; };
+		EF7CBFD9291641EA00F9D611 /* UIColor+ColorPalete.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CBF92291641E900F9D611 /* UIColor+ColorPalete.swift */; };
 		EF7CBFDA291641EA00F9D611 /* ShapeLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CBF94291641E900F9D611 /* ShapeLayer.swift */; };
 		EF7CBFDB291641EA00F9D611 /* ImageCatalogue.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CBF96291641E900F9D611 /* ImageCatalogue.swift */; };
 		EF7CBFDC291641EA00F9D611 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CBF97291641E900F9D611 /* UIImage.swift */; };
@@ -116,7 +118,7 @@
 		EF7CBFE1291641EA00F9D611 /* ViewHeirachy.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CBF9D291641E900F9D611 /* ViewHeirachy.swift */; };
 		EF7CBFE2291641EA00F9D611 /* ViewStyling.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CBF9E291641E900F9D611 /* ViewStyling.swift */; };
 		EF7CBFE3291641EA00F9D611 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CBF9F291641E900F9D611 /* UIViewController.swift */; };
-		EF7CBFE4291641EA00F9D611 /* Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CBFA0291641E900F9D611 /* Views.swift */; };
+		EF7CBFE4291641EA00F9D611 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CBFA0291641E900F9D611 /* UIView.swift */; };
 		EF7CBFE5291641EA00F9D611 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CBFA1291641E900F9D611 /* UILabel.swift */; };
 		EF7CBFE6291641EA00F9D611 /* FontCatalogue.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CBFA3291641E900F9D611 /* FontCatalogue.swift */; };
 		EF7CBFE7291641EA00F9D611 /* StringFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CBFA4291641E900F9D611 /* StringFonts.swift */; };
@@ -238,6 +240,10 @@
 		EFB9741C29670AE300DA3718 /* tweetSearch.json in Resources */ = {isa = PBXBuildFile; fileRef = EFB9741B29670AE300DA3718 /* tweetSearch.json */; };
 		EFB9741E29670E6D00DA3718 /* tweetsProd.json in Resources */ = {isa = PBXBuildFile; fileRef = EFB9741D29670E6D00DA3718 /* tweetsProd.json */; };
 		EFB9742029675CD900DA3718 /* EventSmallCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB9741F29675CD900DA3718 /* EventSmallCell.swift */; };
+		EFB974232968053C00DA3718 /* StoryServiceInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB974222968053C00DA3718 /* StoryServiceInterface.swift */; };
+		EFB974262968060E00DA3718 /* StoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB974252968060E00DA3718 /* StoryModel.swift */; };
+		EFB97428296807D400DA3718 /* StoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB97427296807D400DA3718 /* StoryService.swift */; };
+		EFB9742A296807F800DA3718 /* StoryEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB97429296807F800DA3718 /* StoryEndpoint.swift */; };
 		EFDC741928E3373800042452 /* Sentiments.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFDC741828E3373800042452 /* Sentiments.swift */; };
 		EFFFE4702948357E0045686E /* Tickers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFFE46F2948357E0045686E /* Tickers.swift */; };
 		EFFFE472294B97750045686E /* VideoTikTokCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFFE471294B97750045686E /* VideoTikTokCell.swift */; };
@@ -294,6 +300,8 @@
 		EF06E45F295C39E500820AFE /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
 		EF06E462295C51AB00820AFE /* AuthPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthPublisher.swift; sourceTree = "<group>"; };
 		EF06E464295C61F100820AFE /* PublishersExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishersExtension.swift; sourceTree = "<group>"; };
+		EF0D7F26296826160075E9C4 /* UIColor+Gradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Gradient.swift"; sourceTree = "<group>"; };
+		EF0D7F28296832A30075E9C4 /* UIImage+vImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+vImage.swift"; sourceTree = "<group>"; };
 		EF16449F290550B300E9D997 /* ServiceHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceHelper.swift; sourceTree = "<group>"; };
 		EF1644A32905573600E9D997 /* signalNews.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = signalNews.json; sourceTree = "<group>"; };
 		EF1644A52905691A00E9D997 /* signalEvents.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = signalEvents.json; sourceTree = "<group>"; };
@@ -378,7 +386,7 @@
 		EF6FE92829656C95005B17B2 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		EF7CBED12911BB8400F9D611 /* TopMentionDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopMentionDetail.swift; sourceTree = "<group>"; };
 		EF7CBF91291641E900F9D611 /* Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
-		EF7CBF92291641E900F9D611 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		EF7CBF92291641E900F9D611 /* UIColor+ColorPalete.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+ColorPalete.swift"; sourceTree = "<group>"; };
 		EF7CBF94291641E900F9D611 /* ShapeLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShapeLayer.swift; sourceTree = "<group>"; };
 		EF7CBF96291641E900F9D611 /* ImageCatalogue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCatalogue.swift; sourceTree = "<group>"; };
 		EF7CBF97291641E900F9D611 /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
@@ -389,7 +397,7 @@
 		EF7CBF9D291641E900F9D611 /* ViewHeirachy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewHeirachy.swift; sourceTree = "<group>"; };
 		EF7CBF9E291641E900F9D611 /* ViewStyling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewStyling.swift; sourceTree = "<group>"; };
 		EF7CBF9F291641E900F9D611 /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
-		EF7CBFA0291641E900F9D611 /* Views.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Views.swift; sourceTree = "<group>"; };
+		EF7CBFA0291641E900F9D611 /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		EF7CBFA1291641E900F9D611 /* UILabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
 		EF7CBFA3291641E900F9D611 /* FontCatalogue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontCatalogue.swift; sourceTree = "<group>"; };
 		EF7CBFA4291641E900F9D611 /* StringFonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringFonts.swift; sourceTree = "<group>"; };
@@ -515,6 +523,10 @@
 		EFB9741B29670AE300DA3718 /* tweetSearch.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tweetSearch.json; sourceTree = "<group>"; };
 		EFB9741D29670E6D00DA3718 /* tweetsProd.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tweetsProd.json; sourceTree = "<group>"; };
 		EFB9741F29675CD900DA3718 /* EventSmallCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventSmallCell.swift; sourceTree = "<group>"; };
+		EFB974222968053C00DA3718 /* StoryServiceInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryServiceInterface.swift; sourceTree = "<group>"; };
+		EFB974252968060E00DA3718 /* StoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryModel.swift; sourceTree = "<group>"; };
+		EFB97427296807D400DA3718 /* StoryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryService.swift; sourceTree = "<group>"; };
+		EFB97429296807F800DA3718 /* StoryEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryEndpoint.swift; sourceTree = "<group>"; };
 		EFDC741828E3373800042452 /* Sentiments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sentiments.swift; sourceTree = "<group>"; };
 		EFFFE46F2948357E0045686E /* Tickers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tickers.swift; sourceTree = "<group>"; };
 		EFFFE471294B97750045686E /* VideoTikTokCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTikTokCell.swift; sourceTree = "<group>"; };
@@ -614,6 +626,15 @@
 				EF06E462295C51AB00820AFE /* AuthPublisher.swift */,
 			);
 			path = AuthPublishers;
+			sourceTree = "<group>";
+		};
+		EF0D7F25296825F00075E9C4 /* UIColor */ = {
+			isa = PBXGroup;
+			children = (
+				EF7CBF92291641E900F9D611 /* UIColor+ColorPalete.swift */,
+				EF0D7F26296826160075E9C4 /* UIColor+Gradient.swift */,
+			);
+			path = UIColor;
 			sourceTree = "<group>";
 		};
 		EF16449E2905509400E9D997 /* ServiceHelpers */ = {
@@ -966,13 +987,13 @@
 		EF7CBF90291641E900F9D611 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				EF0D7F25296825F00075E9C4 /* UIColor */,
 				EF5C4EB82953072000669355 /* UISearchViewController */,
 				EF5C4EB72953070200669355 /* Network */,
 				EF04E34B29504E4800E35815 /* SubscriberHelpers */,
 				EF04E348294F202E00E35815 /* PublisherHelpers */,
 				EF59F109292A3308002877DE /* TabBar */,
 				EF7CBF91291641E900F9D611 /* Array.swift */,
-				EF7CBF92291641E900F9D611 /* UIColor.swift */,
 				EF7CBF93291641E900F9D611 /* Shapes */,
 				EF7CBF95291641E900F9D611 /* Image */,
 				EF7CBF99291641E900F9D611 /* Fundamentals.swift */,
@@ -1002,6 +1023,7 @@
 				EF7CBF98291641E900F9D611 /* UIImageView.swift */,
 				EF987B942920D7A00000E233 /* ImageView.swift */,
 				EF06E454295B79A900820AFE /* ImageCache.swift */,
+				EF0D7F28296832A30075E9C4 /* UIImage+vImage.swift */,
 			);
 			path = Image;
 			sourceTree = "<group>";
@@ -1014,7 +1036,7 @@
 				EF7CBF9D291641E900F9D611 /* ViewHeirachy.swift */,
 				EF7CBF9E291641E900F9D611 /* ViewStyling.swift */,
 				EF7CBF9F291641E900F9D611 /* UIViewController.swift */,
-				EF7CBFA0291641E900F9D611 /* Views.swift */,
+				EF7CBFA0291641E900F9D611 /* UIView.swift */,
 				EF7CBFA1291641E900F9D611 /* UILabel.swift */,
 				EF3B698E295A4A3600C9234B /* UIScrollView.swift */,
 			);
@@ -1257,6 +1279,7 @@
 		EF86381428DC1E7D00EF520C /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				EFB974212968052100DA3718 /* Story */,
 				EF2F6C3F296448220066D9D3 /* TopMentionTickers */,
 				EF187CA5295DBAFC0031CE78 /* SocialHighlights */,
 				EF06E457295BBD9D00820AFE /* Auth */,
@@ -1498,9 +1521,28 @@
 			path = Tweets;
 			sourceTree = "<group>";
 		};
+		EFB974212968052100DA3718 /* Story */ = {
+			isa = PBXGroup;
+			children = (
+				EFB974222968053C00DA3718 /* StoryServiceInterface.swift */,
+				EFB97427296807D400DA3718 /* StoryService.swift */,
+				EFB97429296807F800DA3718 /* StoryEndpoint.swift */,
+			);
+			path = Story;
+			sourceTree = "<group>";
+		};
+		EFB97424296805FB00DA3718 /* StoryModel */ = {
+			isa = PBXGroup;
+			children = (
+				EFB974252968060E00DA3718 /* StoryModel.swift */,
+			);
+			path = StoryModel;
+			sourceTree = "<group>";
+		};
 		EFDC741628E3372400042452 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				EFB97424296805FB00DA3718 /* StoryModel */,
 				EF187CAB295DBBC30031CE78 /* GenericModels */,
 				EF187CA8295DBB4B0031CE78 /* SocialHighlights */,
 				EF5C4EE129577C7600669355 /* User */,
@@ -1843,8 +1885,10 @@
 				EF7D2FA028E02DB80003B8F3 /* HomeViewModel.swift in Sources */,
 				EF2F6C41296448390066D9D3 /* TopMentionServiceInterface.swift in Sources */,
 				EF7CBFF6291641EA00F9D611 /* Bundle.swift in Sources */,
+				EF0D7F27296826160075E9C4 /* UIColor+Gradient.swift in Sources */,
 				EF7D2FD028E0F6540003B8F3 /* EventHeaderView.swift in Sources */,
 				EF7D2FBD28E056F40003B8F3 /* TopMentionCell.swift in Sources */,
+				EFB974232968053C00DA3718 /* StoryServiceInterface.swift in Sources */,
 				EF7CBFF5291641EA00F9D611 /* UIEdgeInsets.swift in Sources */,
 				EF987B9D2921309C0000E233 /* TickerSymbolsView.swift in Sources */,
 				EFB1C2D328DB616600DD40A4 /* TweetModel.swift in Sources */,
@@ -1854,6 +1898,7 @@
 				EF7CC003291641EA00F9D611 /* ImageHeaderSubHeaderView.swift in Sources */,
 				EF7CBFF4291641EA00F9D611 /* CGFloat.swift in Sources */,
 				EF86381B28DC1EBE00EF520C /* TweetServiceInterface.swift in Sources */,
+				EFB97428296807D400DA3718 /* StoryService.swift in Sources */,
 				EF5C4ECF2956ED2A00669355 /* OnboardingController.swift in Sources */,
 				EF7CBED22911BB8400F9D611 /* TopMentionDetail.swift in Sources */,
 				EF06E463295C51AB00820AFE /* AuthPublisher.swift in Sources */,
@@ -1874,6 +1919,7 @@
 				EF5C4E9A2950ADEB00669355 /* NewsSearchController.swift in Sources */,
 				EF7CBFDB291641EA00F9D611 /* ImageCatalogue.swift in Sources */,
 				EF1D7E5B2922CCFD0041ADEC /* CollectionViewFunctions.swift in Sources */,
+				EFB9742A296807F800DA3718 /* StoryEndpoint.swift in Sources */,
 				EF7CBFDF291641EA00F9D611 /* UIStackView.swift in Sources */,
 				EF2F6C43296448410066D9D3 /* TopMentionEndpoint.swift in Sources */,
 				EF5C4EB42951B26F00669355 /* RoundedCardCell.swift in Sources */,
@@ -1932,7 +1978,7 @@
 				EF59F10F292A9602002877DE /* CustomCollectionTableCell.swift in Sources */,
 				EF7D2FCE28E0F55A0003B8F3 /* EventDetailView.swift in Sources */,
 				EF86381928DC1E9C00EF520C /* StubService.swift in Sources */,
-				EF7CBFD9291641EA00F9D611 /* UIColor.swift in Sources */,
+				EF7CBFD9291641EA00F9D611 /* UIColor+ColorPalete.swift in Sources */,
 				EFB1C26128DB3D3700DD40A4 /* TweetCell.swift in Sources */,
 				EF96381F28DD8D1200178C37 /* StubRedditService.swift in Sources */,
 				EF86383528DC61F700EF520C /* NewsCell.swift in Sources */,
@@ -2000,6 +2046,7 @@
 				EF2F6C45296449390066D9D3 /* TopMentionService.swift in Sources */,
 				EF96382A28DDD59F00178C37 /* TweetDetailView.swift in Sources */,
 				EF7D2FC428E09E3D0003B8F3 /* StubVideoService.swift in Sources */,
+				EF0D7F29296832A30075E9C4 /* UIImage+vImage.swift in Sources */,
 				EF7CC000291641EA00F9D611 /* SentimentTextLabel.swift in Sources */,
 				EF987B90291FA3C50000E233 /* String+URL.swift in Sources */,
 				EF5C4ED5295709E900669355 /* RegisterController.swift in Sources */,
@@ -2011,6 +2058,7 @@
 				EFB1C2D128DB5E7D00DD40A4 /* TweetFeedViewModel.swift in Sources */,
 				EFDC741928E3373800042452 /* Sentiments.swift in Sources */,
 				EF86384728DC9E6A00EF520C /* EventModel.swift in Sources */,
+				EFB974262968060E00DA3718 /* StoryModel.swift in Sources */,
 				EF1D7E592922CCFD0041ADEC /* CollectionDataSource.swift in Sources */,
 				EF5C4EC32956106200669355 /* TweetService.swift in Sources */,
 				EF7CBFDD291641EA00F9D611 /* UIImageView.swift in Sources */,
@@ -2019,7 +2067,7 @@
 				EF7CBFDC291641EA00F9D611 /* UIImage.swift in Sources */,
 				EF5C4EC729561C9100669355 /* NewsEndpoints.swift in Sources */,
 				EF04E34A294F203F00E35815 /* UIControl+Publishers.swift in Sources */,
-				EF7CBFE4291641EA00F9D611 /* Views.swift in Sources */,
+				EF7CBFE4291641EA00F9D611 /* UIView.swift in Sources */,
 				EF7CBFE6291641EA00F9D611 /* FontCatalogue.swift in Sources */,
 				EF59F10B292A331A002877DE /* UITabbar.swift in Sources */,
 				EF187CAF295DBCE90031CE78 /* SocailHighlightService.swift in Sources */,

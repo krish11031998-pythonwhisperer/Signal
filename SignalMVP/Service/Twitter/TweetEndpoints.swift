@@ -10,7 +10,7 @@ import Combine
 
 enum TweetEndpoints {
     case tweetsForAllTickers(entity: String?, page: Int, limit: Int = 20)
-    case tweetsForTicker(entity: String, limit: Int = 20, nextPageToken: String?)
+    case tweetsForTicker(ticker: String, limit: Int = 20, nextPageToken: String?)
 }
 
 
@@ -37,9 +37,9 @@ extension TweetEndpoints: EndPoint {
 				.init(name: "page", value: "\(page)"),
 				.init(name: "limit", value: "\(limit)")
 			].filter { $0.value != nil  }
-        case .tweetsForTicker(let entity, let limit, let nextPageToken):
+        case .tweetsForTicker(let ticker, let limit, let nextPageToken):
             return [
-                .init(name: "entity", value: entity),
+                .init(name: "ticker", value: ticker),
                 .init(name: "limit", value: "\(limit)"),
                 .init(name: "token", value: nextPageToken)
             ].filter { $0.value != nil  }

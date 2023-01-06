@@ -16,13 +16,14 @@ class TickerStoryView: UIViewController {
     private var newsForTicker: [NewsModel] = []
     private var idx: Int = -1 { didSet { loadWithNews() } }
     private var bag: Set<AnyCancellable> = .init()
-    private lazy var mainImageView: UIImageView = { .init() }()
+    private lazy var mainImageView: UIImageView = { .standardImageView() }()
     private lazy var mainLabel: UILabel = { .init() }()
     private lazy var mainDescriptionLabel: UILabel = { .init() }()
     private lazy var timerStack: UIStackView = { .HStack(spacing: 6) }()
     private lazy var tickerInfo: UIStackView = { .HStack(spacing: 10, alignment: .center) }()
     private lazy var headerStack: UIStackView = { .VStack(subViews: [timerStack, tickerInfo], spacing: 32) }()
-    private lazy var tickers: UIView = { .init() }()
+    private lazy var tickers: TickerSymbolView = { .init() }()
+    private var imgCancellable: AnyCancellable?
     private let mention: MentionTickerModel
     private lazy var swipeUp: UIView = {
         let chevronImage = UIImage.Catalogue.arrowUp.image.withTintColor(.textColor, renderingMode: .alwaysOriginal).imageView(size: .init(squared: 16), cornerRadius: 0)
@@ -32,39 +33,17 @@ class TickerStoryView: UIViewController {
         return view
     }()
     private lazy var stack: UIStackView = {
-        let stack: UIStackView = .VStack(subViews:[headerStack, .spacer(), mainLabel, mainDescriptionLabel, tickers, swipeUp],spacing: 10)
+        let stack: UIStackView = .VStack(subViews:[headerStack, .spacer(), mainLabel, mainDescriptionLabel, .HStack(subViews: [tickers, .spacer()], spacing: 10, alignment: .center), swipeUp],spacing: 10)
         stack.isLayoutMarginsRelativeArrangement = true
         stack.layoutMargins = .init(vertical: 24, horizontal: 20)
         return stack
     }()
     
-    private lazy var dimmingLayer: CALayer = {
-        let gradient: CAGradientLayer = .init()
-        gradient.colors = [UIColor.clear, UIColor.black.withAlphaComponent(0.75), UIColor.black].compactMap { $0.cgColor }
-        view.layer.addSublayer(gradient)
-        gradient.frame = self.view.bounds
-        return gradient
-    }()
+    private lazy var dimmingLayer: CALayer = { self.view.gradient(color: .gradientColor, direction: .down) }()
     
-    private lazy var leftTapDimmingView: CALayer = {
-        let bounds = self.view.bounds
-        let gradient: CAGradientLayer = .init()
-        gradient.colors = [UIColor.black.withAlphaComponent(0.5), UIColor.clear].compactMap { $0.cgColor }
-        gradient.frame = self.view.bounds
-        gradient.startPoint = .zero
-        gradient.endPoint = .init(x: 1, y: 0)
-        return gradient
-    }()
+    private lazy var leftTapDimmingView: CALayer = { self.view.gradient(color: .lightGradientColor, direction: .left) }()
     
-    private lazy var rightTapDimmingView: CALayer = {
-        let bounds = self.view.bounds
-        let gradient: CAGradientLayer = .init()
-        gradient.colors = [UIColor.black.withAlphaComponent(0.5), UIColor.clear].compactMap { $0.cgColor }
-        gradient.frame = bounds
-        gradient.endPoint = .zero
-        gradient.startPoint = .init(x: 1, y: 0)
-        return gradient
-    }()
+    private lazy var rightTapDimmingView: CALayer = { self.view.gradient(color: .lightGradientColor, direction: .right) }()
     
     private var panVerticalPoint: CGPoint = .zero
     private var onDismiss: Bool = false
@@ -83,7 +62,7 @@ class TickerStoryView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        fetchNews()
+        fetchStory()
         hideNavbar()
     }
     
@@ -113,28 +92,6 @@ class TickerStoryView: UIViewController {
         stack.alpha = 0
     }
     
-    private func fetchNews() {
-        let ticker = mention.ticker
-        NewsService
-            .shared
-            .fetchNewsForAllTickers(entity: [ticker])
-            .compactMap { $0.data }
-            .receive(on: DispatchQueue.main)
-            .sink {
-                switch $0 {
-                case .failure(let err):
-                    print("(DEBUG) err:", err)
-                default: break
-                }
-            } receiveValue: {[weak self] in
-                self?.newsForTicker = $0
-                self?.idx = $0.isEmpty ? -1 : 0
-                self?.stack.animate(.fadeIn())
-            }
-            .store(in: &bag)
-
-    }
-    
     private func setupTimer() {
         let count = newsForTicker.count
         timerStack.distribution = .fillEqually
@@ -150,47 +107,69 @@ class TickerStoryView: UIViewController {
     
     private func setupTickerInfo() {
         let tickerImage = UIImageView()
-        UIImage.loadImage(url: mention.ticker.logoURL, at: tickerImage, path: \.image).store(in: &bag)
-        
+        imgCancellable = UIImage.loadImage(url: mention.ticker.logoURL, at: tickerImage, path: \.image)
         tickerImage.setFrame(.init(squared: 32))
-        
         let tickerName = mention.ticker.body1Bold().generateLabel
-
         let closeButton = UIImage.Catalogue.xMark.buttonView.buttonify(bouncyEffect: false) {
             self.popViewController()
         }
-        
         [tickerImage, tickerName, .spacer(), closeButton].addToView(tickerInfo)
     }
     
-    private func configTickers(model: NewsModel) {
-        guard !model.tickers.isEmpty else {
-            if !tickers.isHidden {
-                tickers.isHidden = true
-            }
-            return
-        }
-        tickers.removeChildViews()
-        model.tickers.enumerated().forEach {
-            let imgView = UIImageView(size: .init(squared: 32), cornerRadius: 16, contentMode: .scaleAspectFit)
-            UIImage.loadImage(url: $0.element.logoURL, at: imgView, path: \.image).store(in: &bag)
-            tickers.addSubview(imgView)
-            tickers.setFittingConstraints(childView: imgView, top: 0, leading: CGFloat($0.offset * 24), bottom: 0,width: 32, height: 32)
-        }
-        tickers.isHidden = false
-    }
+    
+    private func fetchStory() {
+        let ticker = mention.ticker
+        StoryService
+            .shared
+            .fetchStory(ticker: ticker)
+            .compactMap { $0.data }
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: {
+                if let err = $0.err?.localizedDescription {
+                    print("(ERROR) err: ", err)
+                }
+            }, receiveValue: { [weak self] model in
+                guard let self else { return }
+                self.updateView(model)
+            })
+            .store(in: &bag)
 
+    }
+    
+    private func updateView(_ model: StoryModel) {
+        if let news = model.news {
+            newsForTicker.append(contentsOf: news)
+        }
+        
+        if let video = model.video {
+            newsForTicker.append(contentsOf: video)
+        }
+        
+        if !newsForTicker.isEmpty {
+            newsForTicker = newsForTicker.sorted(by: {(Date.convertStringToDate($0.date) ?? .init()) < (Date.convertStringToDate($1.date) ?? .init())})
+            idx = 0
+            stack.animate(.fadeIn())
+        }
+    }
+    
     
     private func loadWithNews() {
         guard idx >= 0, idx < newsForTicker.count else { return }
         let news = newsForTicker[idx]
-        UIImage.loadImage(url: news.imageUrl, at: mainImageView, path: \.image).store(in: &bag)
-        mainImageView.contentMode = .scaleAspectFill
+        if imgCancellable != nil {
+            imgCancellable?.cancel()
+        }
+        imgCancellable = UIImage.loadImage(url: news.imageUrl, at: mainImageView, path: \.image)
         setupTimer()
         timerStack.arrangedSubviews.enumerated().forEach { $0.element.backgroundColor = $0.offset <= idx ? .white : .black.withAlphaComponent(0.5) }
         news.title.heading2().render(target: mainLabel)
         news.text.body2Regular().render(target: mainDescriptionLabel)
-        configTickers(model: news)
+        tickers.configTickers(news: news)
+        if news.type == "Video" {
+            mainImageView.contentMode = .scaleAspectFit
+        } else {
+            mainImageView.contentMode = .scaleAspectFill
+        }
     }
     
     private func showNews() {
@@ -220,15 +199,13 @@ extension TickerStoryView {
         guard let latestTouch = touches.first else { return }
         let point = latestTouch.location(in: view)
         if point.x < .totalWidth * 0.45 {
-            leftTapDimmingView.animate(.fadeIn(duration: 0.1)) {
-                self.leftTapDimmingView.animate(.fadeOut(to: 0, duration: 0.05))
+            leftTapDimmingView.animate(.fadeIn(duration: 0.1), removeAfterCompletion: true) {
+                self.idx -= 1
             }
-            idx -= 1
         } else if point.x > .totalWidth * 0.55 {
-            rightTapDimmingView.animate(.fadeIn(duration: 0.05)) {
-                self.rightTapDimmingView.animate(.fadeOut(to: 0, duration: 0.05))
+            rightTapDimmingView.animate(.fadeIn(duration: 0.1), removeAfterCompletion: true) {
+                self.idx += 1
             }
-            idx += 1
         }
     }
     

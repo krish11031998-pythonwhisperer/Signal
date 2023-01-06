@@ -83,7 +83,6 @@ class HomeViewModel {
     }
     
     private func fetchSections(user: Publishers.Share<AnyPublisher<UserModelResponse, Error>>) -> AnyPublisher<[TableSection], Error> {
-        let trendingHeadlines = StubTrendingHeadlines.shared.fetchHeadlines().eraseToAnyPublisher()
         return SocialHighlightService
             .shared
             .fetchSocialHighlight()

@@ -83,7 +83,7 @@ extension UIImage {
             return .init(width: newWidth, height: newWidth/ratio)
         }
     }
-		
+    
 	func imageView(size: CGSize? = nil, cornerRadius: CGFloat = .zero) -> UIImageView {
         let view = UIImageView(frame: (size ?? self.size).frame)
         if let size = size {
@@ -111,10 +111,7 @@ extension UIImage {
         view.backgroundColor = color
         return view.snapshot
     }
-    
-	
-    
-	
+    	
 }
 
 //MARK: - Downloading Image
@@ -147,7 +144,9 @@ extension UIImage {
             .subscribe(on: DispatchQueue.global(qos: .userInteractive))
             .compactMap {
                 if let resized {
-                    return $0.resized(withAspect: resized)
+                    //return $0.resized(withAspect: resized)
+                    let newSize = $0.resolveWithAspectRatio(newSize: resized)
+                    return $0.resizeVI(size: newSize)
                 } else {
                     return $0
                 }

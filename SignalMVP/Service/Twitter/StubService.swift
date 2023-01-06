@@ -16,7 +16,7 @@ class StubTweetService: TweetServiceInterface {
         Bundle.main.loadDataFromBundle(name: "tweetsProd", extensionStr: "json")
     }
     
-    public func fetchTweetsForTicker(entity: String = "", limit: Int = 0, nextPageToken: String? = nil, refresh: Bool = false) -> AnyPublisher<TweetSearchResult, Error> {
+    public func fetchTweetsForTicker(ticker: String = "", limit: Int = 0, nextPageToken: String? = nil, refresh: Bool = false) -> AnyPublisher<TweetSearchResult, Error> {
         Bundle.main.loadDataFromBundle(name: "tweetSearch", extensionStr: "json")
     }
 }

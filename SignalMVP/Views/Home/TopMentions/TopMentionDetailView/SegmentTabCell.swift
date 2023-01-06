@@ -53,8 +53,9 @@ class SegmentTabCell<T>: UIView where T : RawRepresentable, T: Equatable {
     
     @objc
     private func handleTap() {
-        animate(.bouncy)
-        subject.send(value)
+        animate(.bouncy) {
+            self.subject.send(self.value)
+        }
     }
     
 }

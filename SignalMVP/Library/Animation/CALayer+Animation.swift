@@ -19,7 +19,7 @@ extension CALayer {
             completion?()
         }
         
-        animationData.isRemovedOnCompletion = false
+        animationData.isRemovedOnCompletion = removeAfterCompletion
         animationData.fillMode = .forwards
         add(animationData, forKey: animation.name)
         
@@ -53,10 +53,10 @@ extension CALayer {
     }
     
     func finalizePosition(animation: Animation, data: CAAnimation, remove: Bool) {
+        guard !remove else { return }
         switch animation {
         case .fadeOut, .fadeIn, .transformX:
-            finalizePosition(animation: data,
-                             remove: remove)
+            finalizePosition(animation: data)
             self.removeAllAnimations()
         default:
             break
@@ -64,7 +64,7 @@ extension CALayer {
         
     }
     
-    func finalizePosition(animation: CAAnimation, remove: Bool = false) {
+    func finalizePosition(animation: CAAnimation) {
         switch animation {
         case let basic as CABasicAnimation:
             guard let keyPath = basic.keyPath else { return }
@@ -72,7 +72,7 @@ extension CALayer {
                 self.setValue(basic.toValue, forKeyPath: keyPath)
             }
         case let group as CAAnimationGroup:
-            group.animations?.forEach { finalizePosition(animation: $0, remove: remove)}
+            group.animations?.forEach { finalizePosition(animation: $0)}
         default: break
         }
     }

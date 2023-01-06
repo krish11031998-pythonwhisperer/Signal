@@ -38,3 +38,20 @@ extension Sentiment {
     }
 	
 }
+
+struct SentimentModel: Codable {
+    let neutral: Int?
+    let positive: Int?
+    let negative: Int?
+    let sentimentScore: Float?
+    
+    enum CodingKeys: String, CodingKey {
+        case neutral, positive, negative
+        case sentimentScore = "sentiment_score"
+    }
+}
+
+struct SentimentForTicker: Codable {
+    let total: SentimentModel?
+    let timeline: [String: SentimentModel]?
+}
