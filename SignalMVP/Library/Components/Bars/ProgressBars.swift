@@ -69,7 +69,7 @@ class ProgressBar: UIView {
 	
     func animateProgress(duration: CFTimeInterval = 0.5) {
         let newSize: CGSize = .init(width: bounds.width * ratio, height: bounds.height)
-        progressShape.animate(.lineProgress(frame: newSize.frame, duration: duration), removeAfterCompletion: true)
+        progressShape.animate(.lineProgress(frame: newSize.frame, duration: duration))
 	}
 	
     func setProgress(progress: CGFloat, duration: CFTimeInterval = 0.5, color: UIColor? = nil) {

@@ -51,11 +51,11 @@ class WebPageView: UIViewController {
     private func setupView() {
         webPage = .init()
         webPage.navigationDelegate = self
-        webPage.allowsLinkPreview = true
+        //webPage.allowsLinkPreview = true
         view.addSubview(webPage)
         view.setFittingConstraints(childView: webPage, insets: .init(top: 0, left: 0, bottom: bottomNavBar.compressedSize.height, right: 0))
         
-        
+        view.backgroundColor = .surfaceBackground
         view.addSubview(bottomNavBar)
         view.setFittingConstraints(childView: bottomNavBar, leading: 0, trailing: 0, bottom: 0)
         
@@ -69,9 +69,9 @@ class WebPageView: UIViewController {
     private func loadWebPage() {
         print("(DEBUG) loading WebPage!")
         guard let url = URL(string: urlStr) else { return }
-        //DispatchQueue.main.async {
-            self.webPage.load(.init(url: url))
-        //}
+        webPage.isHidden = true
+        startLoadingAnimation()
+        webPage.load(.init(url: url))
     }
     
     private func navigateWebPage(button: UIImage.Catalogue) {
@@ -84,7 +84,8 @@ class WebPageView: UIViewController {
         case .chevronRight:
             webPage.goForward()
         case .share:
-            print("(DEBUG) clicked on Shared!")
+            let vc = UIActivityViewController(activityItems: [self.urlStr], applicationActivities: nil)
+            present(vc, animated: true)
         default:
             break
         }
@@ -95,5 +96,9 @@ class WebPageView: UIViewController {
 //MARK: - WKNavigationDelegate
 extension WebPageView: WKNavigationDelegate {
     
-    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        endLoadingAnimation {
+            webView.isHidden = false
+        }
+    }
 }

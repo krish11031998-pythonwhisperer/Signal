@@ -75,12 +75,9 @@ extension UITableView {
         }
         let newIndexPath: [IndexPath] = (currentRows..<newRows).map { .init(row: $0, section: section) }
         
-        let offset = self.contentOffset
-        
         UIView.performWithoutAnimation {
             beginUpdates()
-            insertRows(at: newIndexPath, with: .automatic)
-            setContentOffset(offset, animated: false)
+            insertRows(at: newIndexPath, with: .left)
             endUpdates()
         }
     }

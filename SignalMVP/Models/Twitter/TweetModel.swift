@@ -68,7 +68,7 @@ extension TweetModel: Tickers {
 
 extension TweetModel {
     var date: Date? {
-        guard let dateStr = createdAt ?? dateStr else { return nil }
+        guard let dateStr = dateStr else { return nil }
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"

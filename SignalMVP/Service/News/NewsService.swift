@@ -31,5 +31,12 @@ class NewsService: NewsServiceInterface {
             .execute(refresh: refresh)
             .eraseToAnyPublisher()
     }
+    
+    func fetchNewsForEvent(eventId: String, refresh: Bool) -> AnyPublisher<NewsResult, Error> {
+        NewsEndpoints
+            .newsForEvent(eventId: eventId)
+            .execute(refresh: refresh)
+            .eraseToAnyPublisher()
+    }
 	
 }

@@ -102,9 +102,10 @@ class TweetCell: ConfigurableCell {
 		bodyLabel.numberOfLines = 0
 		bodyLabel.textAlignment = .left
         
+        let timestamp = model.model?.date?.timestamp
         let cancelable = tweetAuthorView.configureView(with: .init(title: model.user?.name.body2Medium(),
                                                                    subTitle: model.user?.username.body3Medium(color: .gray),
-                                                                   caption: model.model?.date?.timestamp?.bodySmallRegular(color: .gray),
+                                                                   caption: timestamp?.bodySmallRegular(color: .gray),
                                                                    leadingView: .image(url:  model.user?.profileImageUrl,
                                                                                        size: .init(squared: 32),
                                                                                        cornerRadius: 16)))

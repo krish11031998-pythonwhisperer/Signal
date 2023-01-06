@@ -10,4 +10,5 @@ import Combine
 protocol NewsServiceInterface {
 	func fetchNewsForAllTickers(entity: [String]?, items: String?, source: String?, page: Int, limit: Int, refresh: Bool) -> AnyPublisher<NewsResult,Error>
     func fetchNewsForTicker(ticker: String, page: Int, limit: Int, refresh: Bool) -> AnyPublisher<NewsResult,Error>
+    func fetchNewsForEvent(eventId: String, refresh: Bool) -> AnyPublisher<NewsResult, Error>
 }

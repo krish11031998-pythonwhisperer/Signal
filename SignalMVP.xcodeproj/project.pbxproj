@@ -23,6 +23,7 @@
 		EF06E465295C61F100820AFE /* PublishersExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF06E464295C61F100820AFE /* PublishersExtension.swift */; };
 		EF0D7F27296826160075E9C4 /* UIColor+Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0D7F26296826160075E9C4 /* UIColor+Gradient.swift */; };
 		EF0D7F29296832A30075E9C4 /* UIImage+vImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0D7F28296832A30075E9C4 /* UIImage+vImage.swift */; };
+		EF0D7F2C29686B000075E9C4 /* EventDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0D7F2B29686B000075E9C4 /* EventDetailViewModel.swift */; };
 		EF1644A0290550B300E9D997 /* ServiceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF16449F290550B300E9D997 /* ServiceHelper.swift */; };
 		EF1644A42905573600E9D997 /* signalNews.json in Resources */ = {isa = PBXBuildFile; fileRef = EF1644A32905573600E9D997 /* signalNews.json */; };
 		EF1644A62905691A00E9D997 /* signalEvents.json in Resources */ = {isa = PBXBuildFile; fileRef = EF1644A52905691A00E9D997 /* signalEvents.json */; };
@@ -302,6 +303,7 @@
 		EF06E464295C61F100820AFE /* PublishersExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishersExtension.swift; sourceTree = "<group>"; };
 		EF0D7F26296826160075E9C4 /* UIColor+Gradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Gradient.swift"; sourceTree = "<group>"; };
 		EF0D7F28296832A30075E9C4 /* UIImage+vImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+vImage.swift"; sourceTree = "<group>"; };
+		EF0D7F2B29686B000075E9C4 /* EventDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailViewModel.swift; sourceTree = "<group>"; };
 		EF16449F290550B300E9D997 /* ServiceHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceHelper.swift; sourceTree = "<group>"; };
 		EF1644A32905573600E9D997 /* signalNews.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = signalNews.json; sourceTree = "<group>"; };
 		EF1644A52905691A00E9D997 /* signalEvents.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = signalEvents.json; sourceTree = "<group>"; };
@@ -1272,6 +1274,7 @@
 			children = (
 				EF7D2FCD28E0F55A0003B8F3 /* EventDetailView.swift */,
 				EF7D2FCF28E0F6540003B8F3 /* EventHeaderView.swift */,
+				EF0D7F2B29686B000075E9C4 /* EventDetailViewModel.swift */,
 			);
 			path = EventsDetailView;
 			sourceTree = "<group>";
@@ -1950,6 +1953,7 @@
 				EF987B6B2916A9930000E233 /* CircularProgressShape.swift in Sources */,
 				EF987B952920D7A00000E233 /* ImageView.swift in Sources */,
 				EF5C4EA42951905900669355 /* RoundedButtonCell.swift in Sources */,
+				EF0D7F2C29686B000075E9C4 /* EventDetailViewModel.swift in Sources */,
 				EF624D0E2957987E00F006FF /* UserServiceInterface.swift in Sources */,
 				EF2F6C3A296049880066D9D3 /* PresentAlert.swift in Sources */,
 				EF1D7E5A2922CCFD0041ADEC /* CollectionSection.swift in Sources */,

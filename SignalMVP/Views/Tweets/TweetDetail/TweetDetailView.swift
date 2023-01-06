@@ -72,9 +72,9 @@ class TweetDetailView: UIViewController {
 		imgView.isHidden = true
 		tweetURLView.isHidden = true
 		scrollView.addSubview(stack)
-        if UserDefaultStoreKey.loggedIn.value() == true  {
-            stack.addArrangedSubview(NewTweetMetricView(reaction: tweet?.reactions))
-        }
+//        if UserDefaultStoreKey.loggedIn.value() == true  {
+//            stack.addArrangedSubview(NewTweetMetricView(reaction: tweet?.reactions))
+//        }
 		scrollView.setFittingConstraints(childView: stack, insets: .init(vertical: 10, horizontal: 16))
 		stack.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: -32).isActive = true
 		
@@ -96,8 +96,7 @@ class TweetDetailView: UIViewController {
             mentionedTickers.isHidden = tags.isEmpty
             mentionTickers.configTickers(tickers: tags)
         }
-        
-		
+    	
         if let url = tweet?.urls?.first, url.images != nil {
 			tweetURLView.configureView(url)
 			tweetURLView.isHidden = false
@@ -126,16 +125,6 @@ class TweetDetailView: UIViewController {
             }
             .store(in: &bag)
     }
-}
-
-//MARK: - Metrics
-
-extension TweetDetailView {
-    
-    private var metricView: UIView {
-        return NewTweetMetricView(reaction: tweet?.reactions)
-    }
-    
 }
 
 //MARK: - MetricRow

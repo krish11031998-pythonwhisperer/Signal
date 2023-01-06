@@ -11,7 +11,7 @@ import Combine
 
 struct EventNewsModel {
     let model: EventModel
-    let selectedNews: CurrentValueSubject<NewsModel?, Never>
+    let selectedNews: PassthroughSubject<NewsModel?, Never>
 }
 
 class EventCell: ConfigurableCell {

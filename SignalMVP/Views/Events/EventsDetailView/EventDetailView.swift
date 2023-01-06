@@ -18,17 +18,15 @@ class EventDetailView: UIViewController {
 		table.separatorStyle = .none
 		return table
 	}()
-    private var eventModel: EventModel?
-    private var selectedNews: CurrentValueSubject<NewsModel?, Never> = .init(nil)
+    private var viewModel: EventDetailViewModel
     private var bag: Set<AnyCancellable> = .init()
     
     init(eventModel: EventModel? = nil) {
-        self.eventModel = eventModel
+        self.viewModel = .init(eventModel: eventModel)
         super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
-        self.eventModel = nil
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -38,56 +36,51 @@ class EventDetailView: UIViewController {
 		super.viewDidLoad()
 		setupView()
         bind()
+        loadNewsForEvent()
 	}
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupTransparentNavBar(color: .surfaceBackground, scrollColor: .surfaceBackground)
+        startLoadingAnimation()
     }
 	
 //MARK: - Protected Methods
 	
+    private func loadNewsForEvent() {
+        if viewModel.needToLoadNews {
+            viewModel.loadNewsForEvent()
+        }
+    }
+    
 	private func setupView() {
 		view.addSubview(tableView)
 		tableView.backgroundColor = .surfaceBackground
 		view.backgroundColor = .surfaceBackground
 		view.setFittingConstraints(childView: tableView, insets: .zero)
-		tableView.reloadData(buildDataSource())
         standardNavBar(color: .clear, scrollColor: .clear)
 	}
 	
-	private func buildDataSource() -> TableViewDataSource {
-		.init(sections: [headerView, heroSection, section].compactMap { $0 })
-	}
-	
-	private var headerView: TableSection? {
-		guard let validEvent = eventModel else { return nil }
-		return .init(rows: [TableRow<EventDetailViewHeader>(validEvent)])
-	}
-	
-	private var heroSection: TableSection? {
-        guard let validEvent = eventModel, let news = validEvent.news else { return nil }
-		let mainEvent = EventModel(date: validEvent.date, eventId: validEvent.eventId, eventName: validEvent.eventName, news: news.limitTo(to: 3), newsItem: 3, tickers: [])
-        let model = EventNewsModel(model: mainEvent, selectedNews: selectedNews)
-		return .init(rows: [TableRow<EventCell>(model)])
-	}
-	
-	private var section: TableSection? {
-        guard let validEvent = eventModel, let news = validEvent.news, news.count > 3 else { return nil }
-		return .init(rows: (news[3...]).compactMap { news in
-            let model: NewsCellModel = .init(model: news) {
-                self.selectedNews.send(news)
-            }
-            return TableRow<NewsCell>(model)
-        })
-	}
-    
     private func bind() {
-        selectedNews
-            .compactMap { $0 }
+        let output = viewModel.transform()
+        
+        output
+            .section
+            .receive(on: RunLoop.main)
+            .handleEvents(receiveOutput: { [weak self] _ in
+                self?.endLoadingAnimation()
+            })
+            .sink { [weak self] sections in
+                self?.tableView.reloadData(.init(sections: sections))
+            }
+            .store(in: &bag)
+        
+        output
+            .selectedNews
+            .receive(on: RunLoop.main)
             .sink { [weak self] in
-                guard let self else { return }
-                self.navigationController?.pushViewController(NewsDetailView(news: $0), animated: true)
+                guard let self, let news = $0 else { return }
+                self.navigationController?.pushViewController(NewsDetailView(news: news), animated: true)
             }
             .store(in: &bag)
     }

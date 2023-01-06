@@ -140,10 +140,11 @@ extension UIViewController {
         loadingView?.play()
     }
     
-    func endLoadingAnimation() {
+    func endLoadingAnimation(completion: Callback? = nil) {
         loadingView?.stop()
         loadingView?.animate(.fadeOut()) {
             self.loadingView?.removeFromSuperview()
+            completion?()
         }
     }
 }
