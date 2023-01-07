@@ -73,27 +73,10 @@ class HomeFeed: UIViewController {
             .sink { [weak self] in
                 guard let self else { return }
                 switch $0 {
-                case .toEvent(let event):
-                    self.pushTo(target: EventDetailView(eventModel: event))
-                case .toNews(let news):
-                    self.pushTo(target: NewsDetailView(news: news))
-                case .toTweet(let tweet):
-                    self.pushTo(target: TweetDetailView(tweet: tweet))
-                case .toMention(_):
-                    break
-                case .toTickerStory(let model, let frame):
-                    let view = TickerStoryView(mention: model).withNavigationController()
-                    self.presentView(style: .circlar(frame: frame), target: view, onDimissal: nil)
-                case .toTickerDetail(let model):
-                    self.pushTo(target: TopMentionDetailView(mention: model))
-                case .viewMoreNews:
-                    self.pushTo(target: NewsFeed(isChildPage: true))
-                case .viewMoreTweet:
-                    self.pushTo(target: TweetFeedViewController(isChildPage: true))
-                case .viewMoreEvent:
-                    self.pushTo(target: EventsFeedViewController(isChildPage: true))
-                case .viewMoreTrendingTickers(let tickers):
-                    self.pushTo(target: TopTrendingViewController(trendingTicker: tickers))
+                case .toTickerStory(_, let frame):
+                    self.presentView(style: .circlar(frame: frame), target: $0.destination, onDimissal: nil)
+                default:
+                    self.pushTo(target: $0.destination)
                 }
             }
             .store(in: &bag)

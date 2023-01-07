@@ -250,6 +250,37 @@ class ViewMoreFooter: ConfigurableCell {
     
 }
 
+//MARK: - HomeViewModel Navigation
+extension HomeViewModel.Navigation {
+    
+    var destination: UIViewController {
+        switch self {
+        case .toEvent(let event):
+            return EventDetailView(eventModel: event)
+        case .toNews(let news):
+            return NewsDetailView(news: news)
+        case .toTweet(let tweet):
+            return TweetDetailView(tweet: tweet)
+        case .toMention(_):
+            return .init()
+        case .toTickerStory(let model, _):
+            return TickerStoryView(mention: model).withNavigationController()
+            //self.presentView(style: .circlar(frame: frame), target: view, onDimissal: nil)
+        case .toTickerDetail(let model):
+            return TopMentionDetailView(mention: model)
+        case .viewMoreNews:
+            return NewsFeed(isChildPage: true)
+        case .viewMoreTweet:
+            return TweetFeedViewController(isChildPage: true)
+        case .viewMoreEvent:
+            return  EventsFeedViewController(isChildPage: true)
+        case .viewMoreTrendingTickers(let tickers):
+            return TopTrendingViewController(trendingTicker: tickers)
+        }
+    }
+    
+}
+
 //MARK: - HomeViewModel Constant
 extension HomeViewModel {
     enum Constants {
