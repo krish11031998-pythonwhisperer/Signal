@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Combine
 
 class ProfileSearchViewController: SearchViewController {
     
@@ -24,6 +25,7 @@ class ProfileSearchViewController: SearchViewController {
         super.viewDidLoad()
         setupView()
         setupNavBar()
+        bind()
     }
     
     private func setupNavBar() {
@@ -36,4 +38,12 @@ class ProfileSearchViewController: SearchViewController {
         view.setFittingConstraints(childView: tableView, insets: .zero)
     }
     
+    
+    private func bind() {
+        search
+            .sink {
+                print("Selected Ticker:", $0)
+            }
+            .store(in: &bag)
+    }
 }

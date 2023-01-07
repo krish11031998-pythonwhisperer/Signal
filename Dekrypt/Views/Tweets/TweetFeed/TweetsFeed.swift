@@ -86,7 +86,7 @@ class TweetFeedViewController: SearchViewController {
             }
             .eraseToAnyPublisher()
         
-        let searchParam = searchText.eraseToAnyPublisher().share().makeConnectable()
+        let searchParam = search.makeConnectable()
         
         let refreshControl = refreshControl
             .publisher(for: .valueChanged)

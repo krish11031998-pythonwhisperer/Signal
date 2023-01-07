@@ -170,8 +170,12 @@ class TopMentionDetailViewModel {
             .compactMap(\.data)
             .map {
                 guard let time = $0.timeline?.values else { return [] }
-                return time.map { sentiment in
-                    ChartCandleModel(positive: sentiment.positive ?? 1, neutral: sentiment.neutral ?? 1, negative: sentiment.negative ?? 1)
+                return time.compactMap { sentiment in
+                    guard let positive = sentiment.positive,
+                          let negative = sentiment.negative,
+                          let neutral = sentiment.neutral
+                    else { return nil }
+                    return ChartCandleModel(positive: positive, neutral: neutral, negative: negative)
                 }
             }
             .eraseToAnyPublisher()

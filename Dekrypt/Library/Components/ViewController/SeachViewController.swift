@@ -26,7 +26,7 @@ class SearchViewController: UIViewController {
     
     private var searchPlaceholder: String
     var searchController: UISearchController?
-    var searchText: CurrentValueSubject<String?, Never> = .init(nil)
+    fileprivate var searchText: CurrentValueSubject<String?, Never> = .init(nil)
     var bag: Set<AnyCancellable> = .init()
     
     init<T:SearchResultViewController>(placeHolder: String = "Explore", resultController: T.Type) {
@@ -106,4 +106,9 @@ class SearchViewController: UIViewController {
         return headerView.embedInView(insets: .init(top: 16, left: 16, bottom: 0, right: 16))
     }
     
+    var search: AnyPublisher<String?, Never> {
+        searchText
+            .share()
+            .eraseToAnyPublisher()
+    }
 }

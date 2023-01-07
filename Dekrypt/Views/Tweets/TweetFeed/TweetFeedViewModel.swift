@@ -45,7 +45,7 @@ class TweetFeedViewModel {
     
     struct Input {
         let refresh: AnyPublisher<String?, Never>
-        let searchParam: SharePublisher<String?, Never>
+        let searchParam: ConnectablePublisher<String?, Never>
         let loadNextPage: AnyPublisher<Bool, Never>
     }
     

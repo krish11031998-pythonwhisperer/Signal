@@ -17,7 +17,7 @@ class EventFeedViewModel {
     private var allEvents: [EventCellModel]? = nil
     
     struct Input {
-        let searchParam: SharePublisher<String?, Never>
+        let searchParam: ConnectablePublisher<String?, Never>
         let refresh: AnyPublisher<String?, Never>
         let nextPage: Publishers.Share<AnyPublisher<Bool, Never>>
     }

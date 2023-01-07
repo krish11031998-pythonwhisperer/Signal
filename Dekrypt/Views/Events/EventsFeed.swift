@@ -20,7 +20,6 @@ class EventsFeedViewController: SearchViewController {
     private lazy var tableView: UITableView = { .standardTableView() }()
     private let refreshControl: UIRefreshControl = { .init() }()
     private var viewModel: EventFeedViewModel = .init()
-//    private var bag: Set<AnyCancellable> = .init()
 	//MARK: - Overriden Methods
 	
     init(isChildPage: Bool = false) {
@@ -85,7 +84,7 @@ class EventsFeedViewController: SearchViewController {
             }
             .store(in: &bag)
         
-        let searchParam = searchText.eraseToAnyPublisher().share().makeConnectable()
+        let searchParam = search.makeConnectable()
         
         let refreshControl = refreshControl
             .publisher(for: .valueChanged)

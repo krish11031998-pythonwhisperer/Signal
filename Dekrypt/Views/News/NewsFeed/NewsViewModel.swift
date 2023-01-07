@@ -22,7 +22,7 @@ class NewsViewModel {
     private var news: [NewsModel]?
     
     struct Input {
-        let searchParam: SharePublisher<String?, Never>
+        let searchParam: ConnectablePublisher<String?, Never>
         let refresh: AnyPublisher<String?, Never>
         let nextPage: AnyPublisher<Bool, Never>
     }
