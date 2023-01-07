@@ -12,8 +12,9 @@ import Combine
 class ProfileSearchViewController: SearchViewController {
     
     private lazy var tableView: UITableView = { .standardTableView() }()
-    
-    init() {
+    private let selectedTicker: PassthroughSubject<String?, Never>
+    init(selectedTicker: PassthroughSubject<String?, Never>) {
+        self.selectedTicker = selectedTicker
         super.init(placeHolder: "Search Tickers", resultController: NewsSearchResultController.self)
     }
     
@@ -41,8 +42,11 @@ class ProfileSearchViewController: SearchViewController {
     
     private func bind() {
         search
-            .sink {
+            .sink { [weak self] in
                 print("Selected Ticker:", $0)
+                guard let self, let ticker = $0 else { return }
+                self.selectedTicker.send(ticker)
+                self.dismiss(animated: true)
             }
             .store(in: &bag)
     }

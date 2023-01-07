@@ -13,6 +13,7 @@ class ProfileViewController: UIViewController {
     
     private let viewModel: ProfileViewModel
     private lazy var tableView: UITableView = { .standardTableView() }()
+    private var ticker: PassthroughSubject<String?, Never> = .init()
     private var bag: Set<AnyCancellable> = .init()
     private let closeButton: PassthroughSubject<(), Never> = .init()
     
@@ -53,7 +54,7 @@ class ProfileViewController: UIViewController {
     }
     
     private func bind() {
-        let output = viewModel.transform()
+        let output = viewModel.transform(input: .init(ticker: ticker.eraseToAnyPublisher()))
         
         output.sections
             .sink { [weak self] sections in
@@ -65,7 +66,7 @@ class ProfileViewController: UIViewController {
         output.showTickersPage
             .sink { [weak self] _ in
                 guard let self else { return }
-                let target = ProfileSearchViewController().withNavigationController()
+                let target = ProfileSearchViewController(selectedTicker: self.ticker).withNavigationController()
                 self.presentView(style: .sheet(size: .totalScreenSize), target: target, onDimissal: nil)
             }
             .store(in: &bag)
@@ -80,6 +81,5 @@ class ProfileViewController: UIViewController {
                 self.dismiss(animated: true)
             }
             .store(in: &bag)
-
     }
 }

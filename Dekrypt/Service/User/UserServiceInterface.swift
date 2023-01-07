@@ -11,4 +11,5 @@ import Combine
 protocol UserServiceInterface {
     func getUser(userId: String) -> AnyPublisher<UserModelResponse, Error>
     func registerUser(model: RegisterModel) -> AnyPublisher<UserModelResponse, Error>
+    func updateWatchlist(ticker: String) -> AnyPublisher<GenericMessageResult, Error>
 }

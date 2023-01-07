@@ -12,3 +12,6 @@ struct GenericResult<T:Codable>: Codable {
     let err: String?
     let success: Bool
 }
+
+
+typealias GenericMessageResult = GenericResult<String>

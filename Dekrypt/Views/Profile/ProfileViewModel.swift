@@ -27,14 +27,31 @@ class ProfileViewModel {
         self.addTicker = .init()
     }
     
+    struct Input {
+        let ticker: AnyPublisher<String?, Never>
+    }
+    
     struct Output {
         let sections: AnyPublisher<[TableSection], Never>
         let showTickersPage: VoidPublisher
         let signOutUser: AnyPublisher<(), Error>
     }
     
-    func transform() -> Output {
-        let sections = Just([watchList(), signOut()].compactMap { $0 }).eraseToAnyPublisher()
+    func transform(input: Input) -> Output {
+        
+        let sections = input
+            .ticker
+            .prepend(nil)
+            .handleEvents (receiveOutput:{ [weak self] in
+                guard let self, let ticker = $0 else { return }
+                self.updateUserWatchlist(ticker: ticker)
+            })
+            .compactMap { [weak self] newTicker in
+                guard let self else { return Array<TableSection>()}
+                return [self.watchList(), self.signOut()].compactMap { $0 }
+            }
+            .eraseToAnyPublisher()
+        
         let showTickerPage = addTicker.eraseToAnyPublisher()
         let signOutUser = signOutUser
             .flatMap { _ in FirebaseAuthService.shared.signOutUser() }
@@ -51,8 +68,11 @@ class ProfileViewModel {
         return .init(rows: [emailRow], title: "Info")
     }
     
-    private func watchList() -> TableSection? {
-        guard let watching = user.watching else { return nil }
+    private func watchList(newTicker: String? = nil) -> TableSection? {
+        guard var watching = user.watching else { return nil }
+        if let newTicker {
+            watching.append(newTicker)
+        }
         let tickers = watching.map {
             var appearance = RoundedCardAppearance.default
             appearance.insets = .init(vertical: 5, horizontal: 10)
@@ -96,4 +116,8 @@ class ProfileViewModel {
         return .init(rows: [signOutButton])
     }
     
+    
+    private func updateUserWatchlist(ticker: String?) {
+        
+    }
 }

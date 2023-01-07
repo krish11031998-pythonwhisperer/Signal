@@ -16,15 +16,22 @@ class UserService: UserServiceInterface {
     func registerUser(model: RegisterModel) -> AnyPublisher<UserModelResponse, Error> {
         UserEndpoint
             .register(model)
-            .execute()
+            .execute(refresh: false)
             .eraseToAnyPublisher()
     }
     
     func getUser(userId: String) -> AnyPublisher<UserModelResponse, Error> {
         UserEndpoint
             .getUser(uid: userId)
-            .execute()
+            .execute(refresh: false)
             .eraseToAnyPublisher()
     }
     
+    
+    func updateWatchlist(ticker: String) -> AnyPublisher<GenericMessageResult, Error> {
+        UserEndpoint
+            .updateWatchList(ticker)
+            .execute(refresh: false)
+            .eraseToAnyPublisher()
+    }
 }
