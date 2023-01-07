@@ -11,7 +11,6 @@ import Combine
 
 class ProfileViewModel {
     
-    let user: UserModel
     let cardAppearance: RoundedCardAppearance = .init(backgroundColor: .surfaceBackground,
                                                       cornerRadius: 16,
                                                       insets: .init(vertical: 10, horizontal: 15),
@@ -21,91 +20,62 @@ class ProfileViewModel {
     private let addTicker: PassthroughSubject<Void, Never>
     private var bag: Set<AnyCancellable> = .init()
     private let signOutUser: PassthroughSubject<Void, Never> = .init()
-    
-    init(user: UserModel) {
-        self.user = user
+    var user: UserModel? { AppStorage.shared.user }
+    init() {
         self.addTicker = .init()
     }
     
     struct Input {
-        let ticker: AnyPublisher<String?, Never>
+        let ticker: CurrentValueSubject<String?, Never>
     }
     
     struct Output {
         let sections: AnyPublisher<[TableSection], Never>
         let showTickersPage: VoidPublisher
+        let updateWatchList: AnyPublisher<TableSection, Error>
         let signOutUser: AnyPublisher<(), Error>
     }
     
     func transform(input: Input) -> Output {
         
-        let sections = input
-            .ticker
-            .prepend(nil)
-            .handleEvents (receiveOutput:{ [weak self] in
-                guard let self, let ticker = $0 else { return }
-                self.updateUserWatchlist(ticker: ticker)
-            })
-            .compactMap { [weak self] newTicker in
-                guard let self else { return Array<TableSection>()}
-                return [self.watchList(), self.signOut()].compactMap { $0 }
-            }
-            .eraseToAnyPublisher()
+        let sections = Just([self.watchList(), self.signOut()].compactMap { $0 }).eraseToAnyPublisher()
         
         let showTickerPage = addTicker.eraseToAnyPublisher()
+        
+        let updateWatchlist: AnyPublisher<TableSection, Error> = input.ticker
+            .compactMap { $0 }
+            .withLatestFrom(AppStorage.shared.userPublisher)
+            .flatMap { (ticker, user) in UserService.shared.updateWatchlist(uid: user.uid, asset: ticker) }
+            .compactMap { [weak self] in
+                guard let newUser = $0.data else { return nil }
+                AppStorage.shared.user = newUser
+                return self?.watchList()
+            }
+            .eraseToAnyPublisher()
+
+        
         let signOutUser = signOutUser
             .flatMap { _ in FirebaseAuthService.shared.signOutUser() }
             .eraseToAnyPublisher()
         
-        return .init(sections: sections, showTickersPage: showTickerPage, signOutUser: signOutUser)
+        return .init(sections: sections,
+                     showTickersPage: showTickerPage,
+                     updateWatchList: updateWatchlist,
+                     signOutUser: signOutUser)
     }
     
     private func userInfo() -> TableSection {
         let emailRow = TableRow<RoundedCardCell>(.init( cardAppearance: cardAppearance,
                                                         model: .init(title: "Name".body3Regular(color: .gray),
-                                                                     caption: user.name.body3Medium())))
+                                                                     caption: user?.name.body3Medium())))
 
         return .init(rows: [emailRow], title: "Info")
     }
     
     private func watchList(newTicker: String? = nil) -> TableSection? {
-        guard var watching = user.watching else { return nil }
-        if let newTicker {
-            watching.append(newTicker)
-        }
-        let tickers = watching.map {
-            var appearance = RoundedCardAppearance.default
-            appearance.insets = .init(vertical: 5, horizontal: 10)
-            appearance.cornerRadius = 10
-            let card = RoundedCardView(appearance: appearance)
-            let cancellables = card.configureView(with: .init(title: $0.body3Medium(),
-                                                              leadingView: .image(url: $0.logoURL,
-                                                                                  size: .init(squared: 28),
-                                                                                  cornerRadius: 14)))
-            card.addShadow()
-            cancellables?.forEach { bag.insert($0) }
-            return card
-        }
-        
-        let stack: UIView = .flexibleStack(subViews: tickers, width: .totalWidth - 20)
-        
-        let buttonLabel = "Add+".bodySmallRegular(color: .textColorInverse).generateLabel
-        let button = buttonLabel.blobify(backgroundColor: .surfaceBackgroundInverse,
-                                         edgeInset: .init(vertical: 5, horizontal: 7.5),
-                                         cornerRadius: 12)
-            .buttonify {
-                self.addTicker.send(())
-            }
-        
-        let header = "Tickers Watchlist".heading2()
-                        .generateLabel
-        
-        let view = UIStackView.HStack(subViews: [header, .spacer(), button], spacing: 10, alignment: .center).embedInView(insets: .init(by: 10))
-        
-        return .init(rows: [TableRow<CustomTableCell>(.init(view: stack,
-                                                            inset: .init(vertical: 5, horizontal: 10),
-                                                            name: "tickersCell"))],
-                     customHeader: view)
+        let watching = user?.watching ?? []
+        return .init(rows: [TableRow<ProfileWatchListCell>(.init(ticker: watching, addTicker: addTicker))],
+                     title: "Watchlist")
     }
     
     private func signOut() -> TableSection {

@@ -117,18 +117,19 @@ extension UITableView {
         endUpdates()
     }
     
-    func reloadSection(_ section: TableSection, at sectionIdx: Int? = nil) {
+    func reloadSection(_ section: TableSection, at sectionIdx: Int) {
         var sections = self.source?.sections ?? []
-        let idx = sectionIdx ?? sections.count
-        sections.append(section)
+        if sectionIdx > sections.count - 1 {
+            sections.append(section)
+        } else {
+            sections[sectionIdx] = section
+        }
         self.source = .init(sections: sections)
         self.dataSource = source
         self.delegate = source
-        beginUpdates()
-        let toUpdateIndexSet = IndexSet(integersIn: 1 ..< numberOfSections)
-        reloadSections(toUpdateIndexSet, with: .automatic)
-        insertSections([idx], with: .right)
-        endUpdates()
+        self.beginUpdates()
+        self.reloadSections([sectionIdx], with: .none)
+        self.endUpdates()
     }
     
 }

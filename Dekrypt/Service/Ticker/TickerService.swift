@@ -20,6 +20,13 @@ class TickerService: TickerServiceInterface {
             .eraseToAnyPublisher()
     }
     
+    //MARK: - Trending
+    func trending() -> AnyPublisher<TickerSearchTrendingResult, Error> {
+        SignalTickerEndpoint
+            .searchTrending
+            .execute(refresh: false)
+            .eraseToAnyPublisher()
+    }
     
     //MARK: - Story
     func fetchStory(ticker: String, refresh: Bool) -> AnyPublisher<StoryDataResult, Error> {

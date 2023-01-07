@@ -11,7 +11,7 @@ enum UserEndpoint {
     case getUser(uid: String)
     case login(_ params: UserLoginModel)
     case register(_ params: RegisterModel)
-    case updateWatchList(_ ticker: String)
+    case updateWatchList(uid: String, asset: String)
 }
 
 extension UserEndpoint: EndPoint {
@@ -48,9 +48,10 @@ extension UserEndpoint: EndPoint {
                 .init(name: "uid", value: uid)
             ]
             return params
-        case .updateWatchList(let ticker):
+        case .updateWatchList(let uid, let asset):
             return [
-                .init(name: "ticker", value: ticker)
+                .init(name: "uid", value: uid),
+                .init(name: "asset", value: asset)
             ]
         default:
             return []

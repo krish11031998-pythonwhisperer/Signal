@@ -12,7 +12,6 @@ import Combine
 class HomeFeed: UIViewController {
 	
 //MARK: - Properties
-    private let user: CurrentValueSubject<UserModel?, Never> = .init(nil)
     private lazy var tableView: UITableView = { .standardTableView() }()
 
     private lazy var viewModel: HomeViewModel = { .init() }()
@@ -108,7 +107,7 @@ class HomeFeed: UIViewController {
                 }
             }, receiveValue: { [weak self] user in
                 guard let self else { return }
-                self.user.send(user)
+                AppStorage.shared.user = user
                 if user != nil {
                     self.setupNavbar()
                 } else {
@@ -116,15 +115,21 @@ class HomeFeed: UIViewController {
                 }
             })
             .store(in: &bag)
+        
+        output.storyViewUpdate
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] in
+                guard let self else { return }
+                self.tableView.reloadSection($0, at: 0)
+            }
+            .store(in: &bag)
     }
     
     @objc
     private func showProfile() {
-        if let user = user.value {
-            presentView(style: .sheet(size: .totalScreenSize),
-                        target: ProfileViewController(user: user).withNavigationController(),
-                        onDimissal: nil)
-        }
+        presentView(style: .sheet(size: .totalScreenSize),
+                    target: ProfileViewController().withNavigationController(),
+                    onDimissal: nil)
     }
 	
     

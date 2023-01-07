@@ -28,9 +28,9 @@ class UserService: UserServiceInterface {
     }
     
     
-    func updateWatchlist(ticker: String) -> AnyPublisher<GenericMessageResult, Error> {
+    func updateWatchlist(uid: String, asset: String) -> AnyPublisher<UserModelResponse, Error> {
         UserEndpoint
-            .updateWatchList(ticker)
+            .updateWatchList(uid: uid, asset: asset)
             .execute(refresh: false)
             .eraseToAnyPublisher()
     }

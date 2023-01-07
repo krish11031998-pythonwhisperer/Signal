@@ -21,8 +21,4 @@ struct UserModel: Codable {
 }
 
 
-struct UserModelResponse: Codable {
-    let data: UserModel?
-    let err: String?
-    let success: Bool
-}
+typealias UserModelResponse = GenericResult<UserModel>

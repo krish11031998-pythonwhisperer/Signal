@@ -242,6 +242,8 @@
 		EFB9741E29670E6D00DA3718 /* tweetsProd.json in Resources */ = {isa = PBXBuildFile; fileRef = EFB9741D29670E6D00DA3718 /* tweetsProd.json */; };
 		EFB9742029675CD900DA3718 /* EventSmallCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB9741F29675CD900DA3718 /* EventSmallCell.swift */; };
 		EFB974262968060E00DA3718 /* StoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB974252968060E00DA3718 /* StoryModel.swift */; };
+		EFBC58DE29699F0D00C85C7F /* ProfileWatchListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBC58DD29699F0D00C85C7F /* ProfileWatchListCell.swift */; };
+		EFBC58E12969BE9800C85C7F /* AppStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBC58E02969BE9800C85C7F /* AppStorage.swift */; };
 		EFDC741928E3373800042452 /* Sentiments.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFDC741828E3373800042452 /* Sentiments.swift */; };
 		EFFFE4702948357E0045686E /* Tickers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFFE46F2948357E0045686E /* Tickers.swift */; };
 		EFFFE472294B97750045686E /* VideoTikTokCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFFE471294B97750045686E /* VideoTikTokCell.swift */; };
@@ -523,6 +525,8 @@
 		EFB9741D29670E6D00DA3718 /* tweetsProd.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tweetsProd.json; sourceTree = "<group>"; };
 		EFB9741F29675CD900DA3718 /* EventSmallCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventSmallCell.swift; sourceTree = "<group>"; };
 		EFB974252968060E00DA3718 /* StoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryModel.swift; sourceTree = "<group>"; };
+		EFBC58DD29699F0D00C85C7F /* ProfileWatchListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileWatchListCell.swift; sourceTree = "<group>"; };
+		EFBC58E02969BE9800C85C7F /* AppStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStorage.swift; sourceTree = "<group>"; };
 		EFDC741828E3373800042452 /* Sentiments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sentiments.swift; sourceTree = "<group>"; };
 		EFFFE46F2948357E0045686E /* Tickers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tickers.swift; sourceTree = "<group>"; };
 		EFFFE471294B97750045686E /* VideoTikTokCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTikTokCell.swift; sourceTree = "<group>"; };
@@ -721,6 +725,7 @@
 				EF2F6C31295F4B840066D9D3 /* ProfileViewController.swift */,
 				EF2F6C33295F4C0C0066D9D3 /* ProfileViewModel.swift */,
 				EF2F6C37296045F30066D9D3 /* ProfileTickerSearch.swift */,
+				EFBC58DD29699F0D00C85C7F /* ProfileWatchListCell.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -859,6 +864,7 @@
 		EF5C4EC82956E98700669355 /* Storage */ = {
 			isa = PBXGroup;
 			children = (
+				EFBC58DF2969BE8B00C85C7F /* AppStorage */,
 				EF5C4EC92956E98F00669355 /* UserDefaults */,
 			);
 			path = Storage;
@@ -1525,6 +1531,14 @@
 			path = StoryModel;
 			sourceTree = "<group>";
 		};
+		EFBC58DF2969BE8B00C85C7F /* AppStorage */ = {
+			isa = PBXGroup;
+			children = (
+				EFBC58E02969BE9800C85C7F /* AppStorage.swift */,
+			);
+			path = AppStorage;
+			sourceTree = "<group>";
+		};
 		EFDC741628E3372400042452 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -2009,6 +2023,7 @@
 				EF2F6C3C29604B4F0066D9D3 /* UIViewController+Alert.swift in Sources */,
 				EF5C4ECB2956E9A400669355 /* UserDefaultsStores.swift in Sources */,
 				EF5C4EBD29530C0700669355 /* SeachViewController.swift in Sources */,
+				EFBC58DE29699F0D00C85C7F /* ProfileWatchListCell.swift in Sources */,
 				EF5C4EE029577C3C00669355 /* UserEndpoints.swift in Sources */,
 				EF5C4EA92951920300669355 /* TickerSearch.swift in Sources */,
 				EF5C4EAD295192EC00669355 /* TickerEndpoint.swift in Sources */,
@@ -2037,6 +2052,7 @@
 				EF59F117292A969A002877DE /* MultipleStrokeProgressBar.swift in Sources */,
 				EF624D0C295795DB00F006FF /* RegisterViewModel.swift in Sources */,
 				EF5C4EC129560E2B00669355 /* VideoEndpoints.swift in Sources */,
+				EFBC58E12969BE9800C85C7F /* AppStorage.swift in Sources */,
 				EF7CBFE1291641EA00F9D611 /* ViewHeirachy.swift in Sources */,
 				EF5C4ED3295708E200669355 /* TextField.swift in Sources */,
 				EFB1C2D128DB5E7D00DD40A4 /* TweetFeedViewModel.swift in Sources */,

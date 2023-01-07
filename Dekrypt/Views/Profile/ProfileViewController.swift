@@ -13,12 +13,12 @@ class ProfileViewController: UIViewController {
     
     private let viewModel: ProfileViewModel
     private lazy var tableView: UITableView = { .standardTableView() }()
-    private var ticker: PassthroughSubject<String?, Never> = .init()
+    private var ticker: CurrentValueSubject<String?, Never> = .init(nil)
     private var bag: Set<AnyCancellable> = .init()
     private let closeButton: PassthroughSubject<(), Never> = .init()
-    
-    init(user: UserModel) {
-        self.viewModel = .init(user: user)
+    var user: UserModel? { AppStorage.shared.user }
+    init() {
+        self.viewModel = .init()
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -44,8 +44,8 @@ class ProfileViewController: UIViewController {
         imgView.image = .Catalogue.profileImage.image.resized(size: .init(squared: 96))
         imgView.clipsToBounds = true
         let dualLabel = DualLabel(spacing: 8, alignment: .center)
-        dualLabel.configure(title: viewModel.user.name.body1Bold(),
-                            subtitle: viewModel.user.userName.body2Medium())
+        dualLabel.configure(title: user?.name.body1Bold(),
+                            subtitle: user?.userName.body2Medium())
         
         let stack = UIStackView.VStack(subViews: [imgView, dualLabel],
                                        spacing: 12,
@@ -54,7 +54,7 @@ class ProfileViewController: UIViewController {
     }
     
     private func bind() {
-        let output = viewModel.transform(input: .init(ticker: ticker.eraseToAnyPublisher()))
+        let output = viewModel.transform(input: .init(ticker: ticker))
         
         output.sections
             .sink { [weak self] sections in
@@ -81,5 +81,18 @@ class ProfileViewController: UIViewController {
                 self.dismiss(animated: true)
             }
             .store(in: &bag)
+        
+        output.updateWatchList
+            .receive(on: DispatchQueue.main)
+            .sink {
+                if let err = $0.err {
+                    print("(ERROR) err: ", err.localizedDescription)
+                }
+            } receiveValue: { [weak self] section in
+                guard let self else { return }
+                self.tableView.reloadSection(section, at: 0)
+            }
+            .store(in: &bag)
+
     }
 }

@@ -28,3 +28,11 @@ public struct TickerInfo: Codable {
 public struct TickerSearchResult: Codable {
     let coins: [TickerInfo]?
 }
+
+struct TickerInfoItem: Codable {
+    let item: TickerInfo
+}
+
+public struct TickerSearchTrendingResult: Codable {
+    let coins: [TickerInfoItem]?
+}

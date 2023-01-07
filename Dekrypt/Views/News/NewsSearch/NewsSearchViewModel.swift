@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-fileprivate extension RoundedCardViewConfig {
+extension RoundedCardViewConfig {
     
     init(_ data: TickerInfo) {
         self.init(title: data.symbol?.body1Bold(),
@@ -18,7 +18,7 @@ fileprivate extension RoundedCardViewConfig {
                   leadingView: .image(url: data.large,
                                       size: .init(squared: 48),
                                       cornerRadius: 24,
-                                      bordered: true)
+                                      bordered: false)
         )
     }
     

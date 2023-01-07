@@ -32,9 +32,9 @@ class DualLabel: UIView {
         setFittingConstraints(childView: stack, insets: .zero)
     }
     
-    func configure(title: RenderableText, subtitle: RenderableText) {
-        title.render(target: self.title)
-        subtitle.render(target: self.subTitle)
+    func configure(title: RenderableText?, subtitle: RenderableText?) {
+        title?.render(target: self.title)
+        subtitle?.render(target: self.subTitle)
     }
     
 }

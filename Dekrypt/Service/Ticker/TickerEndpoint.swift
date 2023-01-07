@@ -9,6 +9,7 @@ import Foundation
 
 enum SignalTickerEndpoint {
     case search(query: String)
+    case searchTrending
     case tweets(ticker: String, limit: Int = 20, nextPageToken: String? = nil)
     case news(ticker: String, page: Int, limit: Int)
     case events(ticker: String, page: Int, limit: Int)
@@ -23,7 +24,7 @@ extension SignalTickerEndpoint: EndPoint {
     
     var baseUrl: String {
         switch self {
-        case .search:
+        case .search, .searchTrending:
             return "api.coingecko.com"
         default:
             return "signal.up.railway.app"
@@ -35,6 +36,8 @@ extension SignalTickerEndpoint: EndPoint {
         switch self {
         case .search:
             return "/api/v3/search"
+        case .searchTrending:
+            return "/api/v3/search/trending"
         case .tweets:
             return "/tickers/tweets"
         case .news:
@@ -70,7 +73,8 @@ extension SignalTickerEndpoint: EndPoint {
             return [
                 .init(name: "ticker", value: ticker)
             ].filter { $0.value != nil }
-            
+        default:
+            return []
         }
         
     }

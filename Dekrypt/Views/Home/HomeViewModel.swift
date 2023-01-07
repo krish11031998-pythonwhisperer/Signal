@@ -44,6 +44,7 @@ class HomeViewModel {
         let sections: AnyPublisher<[TableSection], Error>
         let navigation: AnyPublisher<Navigation, Never>
         let user: AnyPublisher<UserModel?, Error>
+        let storyViewUpdate: AnyPublisher<TableSection, Never>
     }
     
     func transform() -> Output {
@@ -64,6 +65,14 @@ class HomeViewModel {
         
         let sections = fetchSections(user: user)
         
+        let storyUpdate: AnyPublisher<TableSection, Never> = AppStorage.shared.userPublisher
+            .dropFirst(1)
+            .compactMap { [weak self] user in
+                guard let self else { return nil }
+                return self.setupStorySection(user: user)
+            }
+            .eraseToAnyPublisher()
+                                        
         selectedEvent
             .sink { [weak self] in
                 guard let self, let validEvent = $0 else { return }
@@ -79,7 +88,8 @@ class HomeViewModel {
         
         return .init(sections: sections,
                      navigation: selectedNavigation,
-                     user: showProfile)
+                     user: showProfile,
+                     storyViewUpdate: storyUpdate)
     }
     
     private func fetchSections(user: Publishers.Share<AnyPublisher<UserModelResponse, Error>>) -> AnyPublisher<[TableSection], Error> {
