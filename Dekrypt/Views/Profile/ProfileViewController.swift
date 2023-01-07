@@ -50,7 +50,7 @@ class ProfileViewController: UIViewController {
         let stack = UIStackView.VStack(subViews: [imgView, dualLabel],
                                        spacing: 12,
                                        alignment: .center)
-        tableView.animateHeaderView = stack
+        tableView.animateHeaderView = stack.embedInView(insets: .init(top: 0, left: 0, bottom: 10, right: 0))
     }
     
     private func bind() {

@@ -74,7 +74,7 @@ class ProfileWatchListCell: ConfigurableCell {
     
         let rows = tickers.sizeFittingStack(for: .totalWidth - 20, with: 8)
         rows.forEach { row in
-            let rowStack = UIView.HStack(subViews: row + [.spacer()], spacing: 8)
+            let rowStack = UIView.HStack(subViews: row + [.spacer()], spacing: 8, alignment: .center)
             mainStack.addArrangedSubview(rowStack)
         }
 

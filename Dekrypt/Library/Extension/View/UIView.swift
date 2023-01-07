@@ -26,12 +26,11 @@ extension UIView {
 		return stack
 	}
 	
-	static func flexibleStack(subViews: [UIView], width: CGFloat = .totalWidth) -> UIView {
+	static func flexibleStack(subViews: [UIView], width: CGFloat = .totalWidth) -> UIStackView {
         let mainStack: UIStackView = .VStack(spacing: 8, alignment: .leading)
 		
 		subViews.sizeFittingStack(for: width, with: 8).forEach { row in
 			let rowStack = UIView.HStack(subViews: row, spacing: 8)
-			//rowStack.addArrangedSubview(.spacer())
 			mainStack.addArrangedSubview(rowStack)
 		}
 		

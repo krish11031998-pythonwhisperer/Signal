@@ -127,9 +127,9 @@ extension UITableView {
         self.source = .init(sections: sections)
         self.dataSource = source
         self.delegate = source
-        self.beginUpdates()
-        self.reloadSections([sectionIdx], with: .none)
-        self.endUpdates()
+        performBatchUpdates {
+            self.reloadSections([sectionIdx], with: .none)
+        }
     }
     
 }
