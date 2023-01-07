@@ -88,8 +88,8 @@ class TopMentionDetailView: UIViewController {
             .receive(on: RunLoop.main)
             .sink {
                 print("(ERROR) err: ", $0.err?.localizedDescription)
-            } receiveValue: { [weak self] in
-                self?.chart.configureChart(model: $0)
+            } receiveValue: { [weak self] model in
+                self?.chart.configureChart(model: model)
             }
             .store(in: &bag)
         

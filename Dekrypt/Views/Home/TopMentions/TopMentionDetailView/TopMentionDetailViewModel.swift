@@ -171,7 +171,7 @@ class TopMentionDetailViewModel {
             .map {
                 guard let time = $0.timeline?.values else { return [] }
                 return time.map { sentiment in
-                    ChartCandleModel(positive: sentiment.positive ?? 0, neutral: sentiment.neutral ?? 0, negative: sentiment.negative ?? 0)
+                    ChartCandleModel(positive: sentiment.positive ?? 1, neutral: sentiment.neutral ?? 1, negative: sentiment.negative ?? 1)
                 }
             }
             .eraseToAnyPublisher()

@@ -14,6 +14,26 @@ struct ChartCandleModel {
     let negative: Int
 }
 
+extension ChartCandleModel {
+    
+    var positiveFactor: CGFloat {
+        CGFloat(positive)/CGFloat(positive + neutral + negative)
+    }
+    
+    var negativeFactor: CGFloat {
+        CGFloat(negative)/CGFloat(positive + neutral + negative)
+    }
+    
+    var nonNeutralFactor: CGFloat {
+        CGFloat(positive + neutral)/CGFloat(positive + neutral + negative)
+    }
+    
+}
+
+enum CandleType {
+    case positive, negative
+}
+
 //MARK: - RatingChart
 
 class RatingChart: UIView {
@@ -23,7 +43,16 @@ class RatingChart: UIView {
     private lazy var negativeStack: UIStackView = { .HStack(spacing: iterSpacing, alignment: .top) }()
     private let iterSpacing: CGFloat = 3
     
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     override func layoutSubviews() {
+        print("(DEBUG) laying out views!")
         setupView()
     }
     
@@ -40,25 +69,23 @@ class RatingChart: UIView {
         negativeStack.removeChildViews()
         let itemWidth = itemWidth(count: model.count)
         model.forEach {
-            let positive = CGFloat($0.positive)
-            let negative = CGFloat($0.negative)
-            let neutral = CGFloat($0.neutral)
-            let total = positive + neutral + negative
+            let positiveFrame = CGSize(width: itemWidth, height: itemHeight * $0.nonNeutralFactor)
+            addCandle(type: .positive, factor: $0.positiveFactor, size: positiveFrame)
             
-            let positiveFactor: CGFloat = positive/total
-            let nonNegativeFactor: CGFloat = (positive + neutral)/total
-            let negativeFactor: CGFloat = negative/total
-            
-            let positiveFrame = CGSize(width: itemWidth, height: itemHeight * nonNegativeFactor)
-            let positiveCandle = RatingChartCandle(factor: positiveFactor/nonNegativeFactor, color: .appGreen, size: positiveFrame, fillMode: .bottomTop)
-            positiveCandle.setFrame(positiveFrame)
+            let negativeFrame = CGSize(width: itemWidth, height: itemHeight * $0.negativeFactor)
+            addCandle(type: .negative, factor: 1, size: negativeFrame)
+        }
+    }
+    
+    private func addCandle(type: CandleType, factor: CGFloat, size: CGSize) {
+        if type == .positive {
+            let positiveCandle = RatingChartCandle(factor: factor, color: .appGreen, size: size, fillMode: .bottomTop)
+            positiveCandle.setFrame(size)
             positiveStack.addArrangedSubview(positiveCandle)
-            
-            let negativeFrame = CGSize(width: itemWidth, height: itemHeight * negativeFactor)
-            let negativeCandle = RatingChartCandle(factor: 1, color: .appRed, size: negativeFrame, fillMode: .bottomTop)
-            negativeCandle.setFrame(negativeFrame)
+        } else if type == .negative {
+            let negativeCandle = RatingChartCandle(factor: 1, color: .appRed, size: size, fillMode: .bottomTop)
+            negativeCandle.setFrame(size)
             negativeStack.addArrangedSubview(negativeCandle)
-        
         }
     }
 }
