@@ -18,23 +18,20 @@ extension TweetMetricModel {
     var imageView: UIImageView {
         let imageView = UIImageView.standardImageView()
         imageView.image = image.image.resized(withAspect: .init(squared: 12))
-        imageView.image?.withTintColor(imageView.userInterface == .dark ? .surfaceBackgroundInverse : .surfaceBackground) 
+        imageView.image?.withTintColor(.appBlack)
         imageView.backgroundColor = .clear
         imageView.contentMode = .center
         return imageView
     }
     
     var label: UILabel {
-        let label = "\(value)".styled(font: .systemFont(ofSize: 12, weight: .medium), color: .textColorInverse).generateLabel
+        let label = "\(value)".styled(font: .systemFont(ofSize: 12, weight: .medium), color: .appBlack).generateLabel
         return label
     }
     
     var view: UIView {
-        let stack: UIStackView = .HStack(subViews: [imageView, label], spacing: 8)
-        return stack.blobify(backgroundColor: .surfaceBackgroundInverse,
-                             edgeInset: .init(vertical: 5, horizontal: 10),
-                             borderColor: .clear,
-                             borderWidth: 0,
-                             cornerRadius: 12)
+        let stack: UIView = .HStack(subViews: [imageView, label], spacing: 8).blobify(backgroundColor: .appWhite, edgeInset: .init(vertical: 7.5, horizontal: 10))
+        stack.addShadow()
+        return stack
     }
 }

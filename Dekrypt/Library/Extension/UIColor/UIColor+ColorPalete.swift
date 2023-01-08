@@ -34,6 +34,8 @@ extension UIColor {
 		case appGreen
 		case appRed
 		case appOrange
+        case appBlack
+        case appWhite
 		case surfaceBackground
 		case surfaceBackgroundInverse
 		case subtitleColor
@@ -72,6 +74,8 @@ extension UIColor {
 	static var appGreen : UIColor { Catalogue.appGreen.color }
 	static var appRed : UIColor { Catalogue.appRed.color }
 	static var appOrange : UIColor { Catalogue.appOrange.color }
+    static var appWhite : UIColor { Catalogue.appWhite.color }
+    static var appBlack : UIColor { Catalogue.appBlack.color }
 	static var surfaceBackground : UIColor { Catalogue.surfaceBackground.color }
 	static var surfaceBackgroundInverse : UIColor { Catalogue.surfaceBackgroundInverse.color }
 	static var subtitleColor : UIColor { Catalogue.subtitleColor.color }

@@ -198,7 +198,6 @@
 		EF86384728DC9E6A00EF520C /* EventModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF86384628DC9E6A00EF520C /* EventModel.swift */; };
 		EF86384928DC9F4600EF520C /* EventServiceInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF86384828DC9F4600EF520C /* EventServiceInterface.swift */; };
 		EF86384B28DCA1A400EF520C /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF86384A28DCA1A400EF520C /* EventCell.swift */; };
-		EF86384D28DCED0C00EF520C /* EventLargeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF86384C28DCED0C00EF520C /* EventLargeCell.swift */; };
 		EF92FD7F292832280004F547 /* NSAttributedString+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF92FD7E292832280004F547 /* NSAttributedString+Utils.swift */; };
 		EF92FD81292840850004F547 /* StackScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF92FD80292840850004F547 /* StackScrollView.swift */; };
 		EF96381B28DD8C6B00178C37 /* RedditServiceInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF96381A28DD8C6B00178C37 /* RedditServiceInterface.swift */; };
@@ -244,6 +243,9 @@
 		EFB974262968060E00DA3718 /* StoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB974252968060E00DA3718 /* StoryModel.swift */; };
 		EFBC58DE29699F0D00C85C7F /* ProfileWatchListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBC58DD29699F0D00C85C7F /* ProfileWatchListCell.swift */; };
 		EFBC58E12969BE9800C85C7F /* AppStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBC58E02969BE9800C85C7F /* AppStorage.swift */; };
+		EFBC58E3296AB71B00C85C7F /* EventSpaceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBC58E2296AB71B00C85C7F /* EventSpaceCell.swift */; };
+		EFBC58E5296ABE5400C85C7F /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBC58E4296ABE5400C85C7F /* UIColorExtension.swift */; };
+		EFBC58E7296AC68E00C85C7F /* String+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBC58E6296AC68E00C85C7F /* String+Date.swift */; };
 		EFDC741928E3373800042452 /* Sentiments.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFDC741828E3373800042452 /* Sentiments.swift */; };
 		EFFFE4702948357E0045686E /* Tickers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFFE46F2948357E0045686E /* Tickers.swift */; };
 		EFFFE472294B97750045686E /* VideoTikTokCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFFE471294B97750045686E /* VideoTikTokCell.swift */; };
@@ -477,7 +479,6 @@
 		EF86384628DC9E6A00EF520C /* EventModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventModel.swift; sourceTree = "<group>"; };
 		EF86384828DC9F4600EF520C /* EventServiceInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventServiceInterface.swift; sourceTree = "<group>"; };
 		EF86384A28DCA1A400EF520C /* EventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
-		EF86384C28DCED0C00EF520C /* EventLargeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventLargeCell.swift; sourceTree = "<group>"; };
 		EF92FD7E292832280004F547 /* NSAttributedString+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Utils.swift"; sourceTree = "<group>"; };
 		EF92FD80292840850004F547 /* StackScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackScrollView.swift; sourceTree = "<group>"; };
 		EF96381A28DD8C6B00178C37 /* RedditServiceInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditServiceInterface.swift; sourceTree = "<group>"; };
@@ -527,6 +528,9 @@
 		EFB974252968060E00DA3718 /* StoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryModel.swift; sourceTree = "<group>"; };
 		EFBC58DD29699F0D00C85C7F /* ProfileWatchListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileWatchListCell.swift; sourceTree = "<group>"; };
 		EFBC58E02969BE9800C85C7F /* AppStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStorage.swift; sourceTree = "<group>"; };
+		EFBC58E2296AB71B00C85C7F /* EventSpaceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventSpaceCell.swift; sourceTree = "<group>"; };
+		EFBC58E4296ABE5400C85C7F /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
+		EFBC58E6296AC68E00C85C7F /* String+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Date.swift"; sourceTree = "<group>"; };
 		EFDC741828E3373800042452 /* Sentiments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sentiments.swift; sourceTree = "<group>"; };
 		EFFFE46F2948357E0045686E /* Tickers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tickers.swift; sourceTree = "<group>"; };
 		EFFFE471294B97750045686E /* VideoTikTokCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTikTokCell.swift; sourceTree = "<group>"; };
@@ -633,6 +637,7 @@
 			children = (
 				EF7CBF92291641E900F9D611 /* UIColor+ColorPalete.swift */,
 				EF0D7F26296826160075E9C4 /* UIColor+Gradient.swift */,
+				EFBC58E4296ABE5400C85C7F /* UIColorExtension.swift */,
 			);
 			path = UIColor;
 			sourceTree = "<group>";
@@ -1054,6 +1059,7 @@
 				EF7CBFA4291641E900F9D611 /* StringFonts.swift */,
 				EF7CBFA5291641E900F9D611 /* RenderableText.swift */,
 				EF987B8F291FA3C50000E233 /* String+URL.swift */,
+				EFBC58E6296AC68E00C85C7F /* String+Date.swift */,
 			);
 			path = String;
 			sourceTree = "<group>";
@@ -1367,8 +1373,8 @@
 				EF86384128DC9E0F00EF520C /* EventFeedViewModel.swift */,
 				EF86383D28DC990500EF520C /* EventsFeed.swift */,
 				EF86384A28DCA1A400EF520C /* EventCell.swift */,
-				EF86384C28DCED0C00EF520C /* EventLargeCell.swift */,
 				EFB9741F29675CD900DA3718 /* EventSmallCell.swift */,
+				EFBC58E2296AB71B00C85C7F /* EventSpaceCell.swift */,
 			);
 			path = Events;
 			sourceTree = "<group>";
@@ -1900,11 +1906,13 @@
 				EF5C4ECF2956ED2A00669355 /* OnboardingController.swift in Sources */,
 				EF7CBED22911BB8400F9D611 /* TopMentionDetail.swift in Sources */,
 				EF06E463295C51AB00820AFE /* AuthPublisher.swift in Sources */,
+				EFBC58E5296ABE5400C85C7F /* UIColorExtension.swift in Sources */,
 				EF59F118292A969A002877DE /* CircularProgressBar.swift in Sources */,
 				EF624D10295798C400F006FF /* UserService.swift in Sources */,
 				EF987B9B292122FA0000E233 /* NewsDetailView.swift in Sources */,
 				EF7D2FC228E09DB30003B8F3 /* VideoServiceInterface.swift in Sources */,
 				EF7D2FB228E050450003B8F3 /* MentionInterface.swift in Sources */,
+				EFBC58E7296AC68E00C85C7F /* String+Date.swift in Sources */,
 				EF3B698D2959D48200C9234B /* withLatestFrom.swift in Sources */,
 				EF04E345294EFBE500E35815 /* Result+Future.swift in Sources */,
 				EF187CB1295DBD170031CE78 /* SocialHighlightsEndpoint.swift in Sources */,
@@ -1924,7 +1932,7 @@
 				EF86384928DC9F4600EF520C /* EventServiceInterface.swift in Sources */,
 				EF59F119292A969A002877DE /* SphericalProgressBars.swift in Sources */,
 				EF7D2FB428E050DE0003B8F3 /* MentionTickerModel.swift in Sources */,
-				EF86384D28DCED0C00EF520C /* EventLargeCell.swift in Sources */,
+				EFBC58E3296AB71B00C85C7F /* EventSpaceCell.swift in Sources */,
 				EF86382328DC341400EF520C /* TweetMetricView.swift in Sources */,
 				EF7CBFF9291641EA00F9D611 /* TableViewFunction.swift in Sources */,
 				EF5C4EA52951905900669355 /* RoundedCardViewConfig.swift in Sources */,

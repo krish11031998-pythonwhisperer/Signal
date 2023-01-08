@@ -90,7 +90,7 @@ class EventFeedViewModel {
         }
         
         let rows = (allEvents ?? []).compactMap {
-            TableRow<EventLargeCell>($0)
+            TableRow<EventSpaceTableCell>($0)
         }
         
         return .init(rows: rows)

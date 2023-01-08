@@ -70,7 +70,7 @@ class EventDetailViewModel {
     
     private func headerSection(news: [NewsModel]) -> TableSection? {
         guard let validEvent = eventModel else { return nil }
-        let mainEvent = EventModel(date: validEvent.date, eventId: validEvent.eventId, eventName: validEvent.eventName, news: news.limitTo(to: 3), newsItem: 3, tickers: [])
+        let mainEvent = EventModel(date: validEvent.date, eventId: validEvent.eventId, eventName: validEvent.eventName, eventText: nil, news: news.limitTo(to: 3), newsItem: 3, tickers: [])
         let model = EventNewsModel(model: mainEvent, selectedNews: selectedNews)
         return .init(rows: [TableRow<EventCell>(model)])
     }

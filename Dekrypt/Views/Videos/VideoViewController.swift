@@ -40,23 +40,24 @@ class VideoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        //loadVideos()
         startLoadingAnimation()
         bind()
-        standardNavBar(leftBarButton: .init(customView: "Video".heading2().generateLabel), color: .clear, scrollColor: .clear)
+        
+        standardNavBar(leftBarButton: .init(customView: "Video".heading2(color: view.userInterface == .dark ? .textColor : .textColorInverse).generateLabel), color: .clear, scrollColor: .clear)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        let image = UIImage.Catalogue.chartSquareBarOutline.image
-        let imageView = UIImageView(image: image)
-        imageView.frame = .init(origin: .zero, size: .init(squared: 50))
-
-        navigationController?.navigationItem.titleView = imageView
+        navigationController?.tabBarController?.view.overrideUserInterfaceStyle = .dark
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.tabBarController?.view.overrideUserInterfaceStyle = view.userInterface
     }
     
     private func setupView() {
+        view.backgroundColor = view.userInterface == .dark ? .surfaceBackground : .surfaceBackgroundInverse
         view.addSubview(collection)
         view.setFittingConstraints(childView: collection, insets: .zero)
         collection.contentInsetAdjustmentBehavior = .never

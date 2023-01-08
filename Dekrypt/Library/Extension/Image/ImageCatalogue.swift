@@ -60,12 +60,16 @@ extension UIImage {
 		case viewGrid = "view-grid"
 		case xMark
         case like, tweetShare, comments, retweet, profileImage
+        case video = "play.rectangle.fill"
+        case news = "newspaper.circle"
+        case homePage = "house.circle"
+        case event = "arrow.left.arrow.right.circle"
 	}
 }
 
 extension UIImage.Catalogue {
 	
-	var image: UIImage { .init(named: self.rawValue) ?? .solid(color: .black.withAlphaComponent(0.125), frame: .smallestSquare) }
+    var image: UIImage { .init(named: self.rawValue) ?? .init(systemName: self.rawValue) ?? .solid(color: .black.withAlphaComponent(0.125), frame: .smallestSquare) }
     
     var buttonView: UIImageView {
         let imgView = UIImageView(image: image.resized(size: .init(squared: 16)))

@@ -59,8 +59,12 @@ extension UIView {
 }
 
 //MARK: - UIView+Gradients
+
+enum GradientDirection {
+    case up, down, left, right, acrossLeftToRight, acrossRightToLeft
+}
 extension UIView {
-    func gradient(color: [UIColor], direction: AnimationDirection) -> CALayer {
+    func gradient(color: [UIColor], direction: GradientDirection) -> CALayer {
         let gradient: CAGradientLayer = .init()
         gradient.colors = color.compactMap { $0.cgColor }
         gradient.frame = bounds
@@ -78,6 +82,12 @@ extension UIView {
         case .right:
             gradient.startPoint = .init(x: 1, y: 0)
             gradient.endPoint = .init(x: 0, y: 0)
+        case .acrossLeftToRight:
+            gradient.startPoint = .zero
+            gradient.endPoint = .init(x: 1, y: 1)
+        case .acrossRightToLeft:
+            gradient.startPoint = .init(x: 1, y: 1)
+            gradient.endPoint = .zero
         }
         return gradient
     }

@@ -16,11 +16,11 @@ struct MainTabModel: Equatable {
 		lhs.name == rhs.name
 	}
 	
-	static let home: MainTabModel = .init(name: "Home", iconName: .home)
+	static let home: MainTabModel = .init(name: "Home", iconName: .homePage)
 	static let tweets: MainTabModel = .init(name: "Tweets", iconName: .twitter)
-	static let news: MainTabModel = .init(name: "News", iconName: .mail)
-	static let events: MainTabModel = .init(name: "Events", iconName: .switchHorizontal)
-    static let videos: MainTabModel = .init(name: "Video", iconName: .chartBar)
+	static let news: MainTabModel = .init(name: "News", iconName: .news)
+	static let events: MainTabModel = .init(name: "Events", iconName: .event)
+    static let videos: MainTabModel = .init(name: "Video", iconName: .video)
 }
 
 

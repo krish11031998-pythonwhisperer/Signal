@@ -219,7 +219,7 @@ class ViewMoreFooter: ConfigurableCell {
     private func setupView() {
         
         let buttonBlob = "View More".styled(font: .medium, color: .textColorInverse, size: 12).generateLabel
-            .blobify(backgroundColor: .surfaceBackgroundInverse, edgeInset: .init(vertical: 5, horizontal: 10), borderColor: .clear, borderWidth: 0, cornerRadius: 12)
+            .blobify(backgroundColor: .surfaceBackgroundInverse, edgeInset: .init(vertical: 8, horizontal: 10), borderColor: .clear, borderWidth: 0, cornerRadius: 12)
             .buttonify { [weak self] in
                 guard let self else { return }
                 self.selectedDestination.send(())

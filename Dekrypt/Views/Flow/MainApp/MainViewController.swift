@@ -63,8 +63,7 @@ class MainViewController: UITabBarController {
         let eventNavView = EventsFeedViewController().withNavigationController().tabBarItem(.events)
         let redditNavView = RedditFeedViewController().withNavigationController().tabBarItem(.init(name: "Reddit", iconName: .moon))
         let videoNavView = VideoViewController().withNavigationController().tabBarItem(.videos)
-//		return [homeNavView, videoNavView, newsNavView, eventNavView, tweetNavView]
-        return [homeNavView, newsNavView, eventNavView, tweetNavView]
+		return [homeNavView, videoNavView, newsNavView, eventNavView, tweetNavView]
 	}
 
 }
