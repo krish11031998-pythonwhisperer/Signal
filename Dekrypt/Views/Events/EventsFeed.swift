@@ -48,7 +48,7 @@ class EventsFeedViewController: SearchViewController {
 	//MARK: - Protected Methods
 
 	private func setupView() {
-        tableView.rowHeight = (.totalHeight * 0.3).rounded(.down)
+        //tableView.rowHeight = (.totalHeight * 0.3).rounded(.down)
         tableView.refreshControl = refreshControl
 		view.addSubview(tableView)
 		tableView.backgroundColor = .surfaceBackground

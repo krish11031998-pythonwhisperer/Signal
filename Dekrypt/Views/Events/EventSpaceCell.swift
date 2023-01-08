@@ -43,7 +43,7 @@ class EventSpaceView: UIView {
         eventDescription.setContentHuggingPriority(.init(248), for: .vertical)
         eventDescription.setContentCompressionResistancePriority(.init(748), for: .vertical)
         cornerRadius = 12
-        backgroundColor = .appIndigo
+        backgroundColor = .surfaceBackground
         addShadow()
         eventDescription.isHidden = true
         mainStack.setCustomSpacing(12, after: articleNumber)
@@ -54,9 +54,9 @@ class EventSpaceView: UIView {
         if let count = event.newsItem {
             "\(count) articles".body3Regular(color: .gray).render(target: articleNumber)
         }
-        event.eventName.heading4(color: .white).render(target: eventTitle)
+        event.eventName.heading4(color: .textColor).render(target: eventTitle)
         if let description = event.eventText {
-            description.body2Medium(color: .white.withAlphaComponent(0.85))
+            description.body2Medium(color: .textColor.withAlphaComponent(0.85))
                 .render(target: eventDescription)
             eventDescription.isHidden = false
         }
