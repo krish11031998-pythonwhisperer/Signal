@@ -106,33 +106,3 @@ class TrendingHeadlinesCarousel: ConfigurableCell {
     }
     
 }
-//
-////MARK: - UIColllectionViewDelegate
-//extension TrendingHeadlinesCarousel: UICollectionViewDelegate {
-//
-//    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-//        print("(DEBUG) scrollViewWillBeginDragging")
-//        animateScroll = nil
-//    }
-//
-//    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-//        print("(DEBUG) scrollViewDidEndDecelerating")
-//        animateScroll = .init(target: self, selector: #selector(handleAutoScrollAnimation))
-//    }
-//
-//}
-//
-//
-////MARK: - UICollectionViewDataSource
-//extension TrendingHeadlinesCarousel: UICollectionViewDataSource {
-//
-//    func numberOfSections(in collectionView: UICollectionView) -> Int { 1 }
-//
-//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int { headlines.count }
-//
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        let cell: TrendingHeadlineCollectionCell = collection.dequeueCell(indexPath: indexPath)
-//        cell.configure(with: headlines[indexPath.item])
-//        return cell
-//    }
-//}
