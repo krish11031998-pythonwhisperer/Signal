@@ -73,8 +73,7 @@ class NewsCell: ConfigurableCell {
     }
     
 	public func configure(with model: NewsCellModel) {
-        let date = Date.convertStringToDate(model.model.date)?.timestamp
-		date?.bodySmallRegular(color: .gray).render(target: timestamp)
+        model.model.date.timestamp.bodySmallRegular(color: .gray).render(target: timestamp)
 		model.model.title.heading5().render(target: title)
 		title.numberOfLines = 0
 		model.model.sourceName.body2Regular(color: .gray).render(target: body)

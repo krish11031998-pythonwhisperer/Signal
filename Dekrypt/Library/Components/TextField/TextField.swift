@@ -77,3 +77,17 @@ class TextField: UITextField {
         return type.validation(self)
     }
 }
+
+
+//MARK: - TextField
+extension TextField {
+    
+    func embedWithHeader(title: String, height: CGFloat = 50) -> UIView {
+        let stack = UIStackView.VStack(spacing: 8)
+        let title = title.body3Regular().generateLabel
+        [title, self].addToView(stack)
+        self.setHeight(height: height)
+        return stack
+    }
+    
+}

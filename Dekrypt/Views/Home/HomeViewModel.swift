@@ -267,7 +267,7 @@ extension HomeViewModel.Navigation {
             return TickerStoryView(mention: model).withNavigationController()
             //self.presentView(style: .circlar(frame: frame), target: view, onDimissal: nil)
         case .toTickerDetail(let model):
-            return TopMentionDetailView(mention: model)
+            return TickerDetailView(mention: model)
         case .viewMoreNews:
             return NewsFeed(isChildPage: true)
         case .viewMoreTweet:

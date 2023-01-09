@@ -16,7 +16,7 @@ class UserService: UserServiceInterface {
     func registerUser(model: RegisterModel) -> AnyPublisher<UserModelResponse, Error> {
         UserEndpoint
             .register(model)
-            .execute(refresh: false)
+            .execute(refresh: true)
             .eraseToAnyPublisher()
     }
     

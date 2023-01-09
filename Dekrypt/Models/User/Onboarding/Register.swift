@@ -8,7 +8,7 @@
 import Foundation
 
 struct RegisterModel: Codable {
-    let username: String?
+//    let username: String?
     let email: String?
     let password: String?
 }

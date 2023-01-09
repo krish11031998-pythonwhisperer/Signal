@@ -53,7 +53,7 @@ class TopTrendingViewController: UIViewController {
             .sink { [weak self] in
                 switch $0 {
                 case .toTickerDetail(let mention):
-                    self?.pushTo(target: TopMentionDetailView(mention: mention))
+                    self?.pushTo(target: TickerDetailView(mention: mention))
                 }
             }
             .store(in: &bag)

@@ -82,8 +82,12 @@ extension UITableView {
         }
     }
     
-    func replaceRows(rows:[TableCellProvider], section: Int) {
-        var newSource = self.source
+    func replaceRows(rows:[TableCellProvider],
+                     section: Int,
+                     insertAnimation: UITableView.RowAnimation = .fade,
+                     deleteRowAnimation:UITableView.RowAnimation = .fade)
+    {
+        let newSource = self.source
         newSource?.sections[section].rows = rows
         
         self.source = newSource
@@ -91,18 +95,14 @@ extension UITableView {
         self.delegate = newSource
         
         let currentRows = (0..<numberOfRows(inSection: section)).map { IndexPath(row: $0, section: section) }
-        
         let newRows = (0..<(source?.tableView(self, numberOfRowsInSection: section) ?? 1)).map { IndexPath(row: $0, section: section) }
-
         let offset = self.contentOffset
         
-        UIView.performWithoutAnimation {
-            beginUpdates()
-            deleteRows(at: currentRows, with: .right)
-            insertRows(at: newRows, with: .left)
-            setContentOffset(offset, animated: false)
-            endUpdates()
-        }
+        beginUpdates()
+        deleteRows(at: currentRows, with: deleteRowAnimation)
+        insertRows(at: newRows, with: insertAnimation)
+        setContentOffset(offset, animated: false)
+        endUpdates()
     }
 	
     func insertSection(_ section: TableSection, at sectionIdx: Int? = nil) {
@@ -132,4 +132,19 @@ extension UITableView {
         }
     }
     
+    func showTableSection(section: Int) {
+        (0..<numberOfRows(inSection: section))
+            .forEach {
+                let cell = self.cellForRow(at: IndexPath(row: $0, section: section))
+                cell?.alpha = 1
+            }
+    }
+    
+    func hideTableSection(section: Int) {
+        (0..<numberOfRows(inSection: section))
+            .forEach {
+                let cell = self.cellForRow(at: IndexPath(row: $0, section: section))
+                cell?.alpha = 0
+            }
+    }
 }

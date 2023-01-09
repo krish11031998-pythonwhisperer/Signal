@@ -10,8 +10,7 @@ import UIKit
 import Combine
 
 class RegisterController: UIViewController {
-    
-    private lazy var usernameField: TextField = { .init(placeHolder: Constants.username) }()
+
     private lazy var emailField: TextField = { .init(placeHolder: Constants.email) }()
     private lazy var passwordField: TextField = { .init(placeHolder: Constants.password, type: .password) }()
     private lazy var confirmPasswordField: TextField = { .init(placeHolder: Constants.confirmPassword, type: .password) }()
@@ -25,34 +24,37 @@ class RegisterController: UIViewController {
         return button
     }()
     
-    private var viewModel: RegisterViewModel = .init()
+    private var viewModel: RegisterViewModel
     private var bag: Set<AnyCancellable> = .init()
+    
+    init(user: CurrentValueSubject<UserModel?, Never>, nextPage: PassthroughSubject<Void, Never>) {
+        self.viewModel = .init(currentUser: user, nextPage: nextPage)
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupNavbar()
         setupView()
         bind()
     }
-    
-    private func setupNavbar() {
-        standardNavBar(title: "Register".heading3())
-    }
-    
+
     private func setupView() {
         view.backgroundColor = .surfaceBackground
-        
-        let stack = UIStackView.VStack(subViews: [textFieldWithLabel(title: Constants.username, textField: usernameField),
-                                                  textFieldWithLabel(title: Constants.email, textField: emailField),
-                                                  textFieldWithLabel(title: Constants.password, textField: passwordField),
-                                                  textFieldWithLabel(title: Constants.confirmPassword, textField: confirmPasswordField)],
+
+        let stack = UIStackView.VStack(subViews: [emailField.embedWithHeader(title: Constants.email),
+                                                  passwordField.embedWithHeader(title: Constants.password),
+                                                  confirmPasswordField.embedWithHeader(title: Constants.confirmPassword)],
                                        spacing: 12)
     
         stack.addArrangedSubview(.spacer())
         stack.addArrangedSubview(UIStackView.init(arrangedSubviews: [.spacer(), registerButton]))
-        
+         
         view.addSubview(stack)
-        view.setFittingConstraints(childView: stack, insets: .init(top: .safeAreaInsets.top + navBarHeight + 32, left: 10, bottom: .safeAreaInsets.bottom, right: 10))
+        view.setFittingConstraints(childView: stack, insets: .zero)
         
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard)))
     }
@@ -67,13 +69,13 @@ class RegisterController: UIViewController {
     
     private func bind() {
         
-        let registerButtonAction =  registerButton.publisher(for: .touchUpInside).map { [weak self] _ in
-            self?.registerModel.send(.init(username: self?.usernameField.text, email: self?.emailField.text, password: self?.passwordField.text))
-            return ()
-        }.eraseToAnyPublisher()
+        let registerButtonAction: AnyPublisher<RegisterModel, Never> =
+        registerButton.publisher(for: .touchUpInside)
+            .map { [weak self] _ in
+                return .init(email: self?.emailField.text, password: self?.passwordField.text)
+            }.eraseToAnyPublisher()
         
-        let output = viewModel.transform(input: .init(registerModel: registerModel.eraseToAnyPublisher(),
-                                                      registerUser: registerButtonAction))
+        let output = viewModel.transform(input: .init(registerUser: registerButtonAction))
         
         output.navigation
             .receive(on: RunLoop.main)
@@ -86,7 +88,7 @@ class RegisterController: UIViewController {
                 switch $0 {
                 case .nextPage:
                     print("(DEBUG) nextpage!")
-                    self?.dismiss(animated: true)
+                    self?.viewModel.nextPage.send(())
                 case .errorMessage(let err):
                     print("(ERROR) err: ", err)
                     self?.showAlert(title: "Error", body: err)

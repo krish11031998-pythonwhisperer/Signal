@@ -97,7 +97,7 @@ class OnboardingController: UIViewController {
         case .login:
             self.navigationController?.pushViewController(LoginController(), animated: true)
         case .register:
-            self.navigationController?.pushViewController(RegisterController(), animated: true)
+            self.navigationController?.pushViewController(RegisterViewController(), animated: true)
         }
     }
     

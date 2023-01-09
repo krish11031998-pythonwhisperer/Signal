@@ -42,7 +42,6 @@
 		EF1D7E5D2922CCFD0041ADEC /* CollectionColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1D7E582922CCFD0041ADEC /* CollectionColumn.swift */; };
 		EF2BB215292BF4E40006C00F /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2BB214292BF4E40006C00F /* VideoViewController.swift */; };
 		EF2F6C2A295EC3610066D9D3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EF2F6C29295EC3600066D9D3 /* GoogleService-Info.plist */; };
-		EF2F6C2C295EF5D30066D9D3 /* UserUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2F6C2B295EF5D30066D9D3 /* UserUpdateViewController.swift */; };
 		EF2F6C2F295EFDD00066D9D3 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2F6C2E295EFDD00066D9D3 /* LoginViewModel.swift */; };
 		EF2F6C32295F4B840066D9D3 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2F6C31295F4B840066D9D3 /* ProfileViewController.swift */; };
 		EF2F6C34295F4C0C0066D9D3 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2F6C33295F4C0C0066D9D3 /* ProfileViewModel.swift */; };
@@ -106,7 +105,6 @@
 		EF624D122957992600F006FF /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF624D112957992600F006FF /* UserModel.swift */; };
 		EF6FE92629655571005B17B2 /* SegmentTabCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6FE92529655571005B17B2 /* SegmentTabCell.swift */; };
 		EF6FE92929656C95005B17B2 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = EF6FE92829656C95005B17B2 /* loading.json */; };
-		EF7CBED22911BB8400F9D611 /* TopMentionDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CBED12911BB8400F9D611 /* TopMentionDetail.swift */; };
 		EF7CBFD8291641EA00F9D611 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CBF91291641E900F9D611 /* Array.swift */; };
 		EF7CBFD9291641EA00F9D611 /* UIColor+ColorPalete.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CBF92291641E900F9D611 /* UIColor+ColorPalete.swift */; };
 		EF7CBFDA291641EA00F9D611 /* ShapeLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CBF94291641E900F9D611 /* ShapeLayer.swift */; };
@@ -162,7 +160,6 @@
 		EF7CC0112916491A00F9D611 /* CALayer+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CC0102916491A00F9D611 /* CALayer+Animation.swift */; };
 		EF7CC0132916640B00F9D611 /* RatingChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CC0122916640B00F9D611 /* RatingChart.swift */; };
 		EF7CC01629166E6F00F9D611 /* RatingChartCandle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CC01529166E6F00F9D611 /* RatingChartCandle.swift */; };
-		EF7CC02A29169FEE00F9D611 /* TopMentionDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7CC02929169FEE00F9D611 /* TopMentionDetailViewModel.swift */; };
 		EF7D2F9E28E02CFF0003B8F3 /* HomeFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7D2F9D28E02CFF0003B8F3 /* HomeFeed.swift */; };
 		EF7D2FA028E02DB80003B8F3 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7D2F9F28E02DB80003B8F3 /* HomeViewModel.swift */; };
 		EF7D2FA328E0314B0003B8F3 /* TrendingHeadlinesInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7D2FA228E0314B0003B8F3 /* TrendingHeadlinesInterface.swift */; };
@@ -246,6 +243,14 @@
 		EFBC58E3296AB71B00C85C7F /* EventSpaceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBC58E2296AB71B00C85C7F /* EventSpaceCell.swift */; };
 		EFBC58E5296ABE5400C85C7F /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBC58E4296ABE5400C85C7F /* UIColorExtension.swift */; };
 		EFBC58E7296AC68E00C85C7F /* String+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBC58E6296AC68E00C85C7F /* String+Date.swift */; };
+		EFBC58E9296AE0C800C85C7F /* RegisterPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBC58E8296AE0C800C85C7F /* RegisterPage.swift */; };
+		EFBC58EC296AE69800C85C7F /* UIPageViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBC58EB296AE69800C85C7F /* UIPageViewController+Extension.swift */; };
+		EFBC58EE296AEC1800C85C7F /* UpdateUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBC58ED296AEC1800C85C7F /* UpdateUser.swift */; };
+		EFBC58F1296AEDAE00C85C7F /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBC58F0296AEDAE00C85C7F /* RegisterViewController.swift */; };
+		EFBC58F3296B4C9800C85C7F /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBC58F2296B4C9800C85C7F /* ProfileHeaderView.swift */; };
+		EFBC58F6296B8B8200C85C7F /* TickerDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBC58F4296B8B8200C85C7F /* TickerDetail.swift */; };
+		EFBC58F7296B8B8200C85C7F /* TickerDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBC58F5296B8B8200C85C7F /* TickerDetailViewModel.swift */; };
+		EFBC58F9296B8DEC00C85C7F /* MediaSegmentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBC58F8296B8DEC00C85C7F /* MediaSegmentControl.swift */; };
 		EFDC741928E3373800042452 /* Sentiments.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFDC741828E3373800042452 /* Sentiments.swift */; };
 		EFFFE4702948357E0045686E /* Tickers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFFE46F2948357E0045686E /* Tickers.swift */; };
 		EFFFE472294B97750045686E /* VideoTikTokCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFFE471294B97750045686E /* VideoTikTokCell.swift */; };
@@ -323,7 +328,6 @@
 		EF1D7E582922CCFD0041ADEC /* CollectionColumn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionColumn.swift; sourceTree = "<group>"; };
 		EF2BB214292BF4E40006C00F /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
 		EF2F6C29295EC3600066D9D3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		EF2F6C2B295EF5D30066D9D3 /* UserUpdateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserUpdateViewController.swift; sourceTree = "<group>"; };
 		EF2F6C2E295EFDD00066D9D3 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		EF2F6C31295F4B840066D9D3 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		EF2F6C33295F4C0C0066D9D3 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
@@ -387,7 +391,6 @@
 		EF624D112957992600F006FF /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		EF6FE92529655571005B17B2 /* SegmentTabCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentTabCell.swift; sourceTree = "<group>"; };
 		EF6FE92829656C95005B17B2 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
-		EF7CBED12911BB8400F9D611 /* TopMentionDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopMentionDetail.swift; sourceTree = "<group>"; };
 		EF7CBF91291641E900F9D611 /* Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		EF7CBF92291641E900F9D611 /* UIColor+ColorPalete.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+ColorPalete.swift"; sourceTree = "<group>"; };
 		EF7CBF94291641E900F9D611 /* ShapeLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShapeLayer.swift; sourceTree = "<group>"; };
@@ -443,7 +446,6 @@
 		EF7CC0102916491A00F9D611 /* CALayer+Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Animation.swift"; sourceTree = "<group>"; };
 		EF7CC0122916640B00F9D611 /* RatingChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingChart.swift; sourceTree = "<group>"; };
 		EF7CC01529166E6F00F9D611 /* RatingChartCandle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingChartCandle.swift; sourceTree = "<group>"; };
-		EF7CC02929169FEE00F9D611 /* TopMentionDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopMentionDetailViewModel.swift; sourceTree = "<group>"; };
 		EF7D2F9D28E02CFF0003B8F3 /* HomeFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeed.swift; sourceTree = "<group>"; };
 		EF7D2F9F28E02DB80003B8F3 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		EF7D2FA228E0314B0003B8F3 /* TrendingHeadlinesInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingHeadlinesInterface.swift; sourceTree = "<group>"; };
@@ -531,6 +533,14 @@
 		EFBC58E2296AB71B00C85C7F /* EventSpaceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventSpaceCell.swift; sourceTree = "<group>"; };
 		EFBC58E4296ABE5400C85C7F /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		EFBC58E6296AC68E00C85C7F /* String+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Date.swift"; sourceTree = "<group>"; };
+		EFBC58E8296AE0C800C85C7F /* RegisterPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterPage.swift; sourceTree = "<group>"; };
+		EFBC58EB296AE69800C85C7F /* UIPageViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIPageViewController+Extension.swift"; sourceTree = "<group>"; };
+		EFBC58ED296AEC1800C85C7F /* UpdateUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateUser.swift; sourceTree = "<group>"; };
+		EFBC58F0296AEDAE00C85C7F /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		EFBC58F2296B4C9800C85C7F /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
+		EFBC58F4296B8B8200C85C7F /* TickerDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TickerDetail.swift; sourceTree = "<group>"; };
+		EFBC58F5296B8B8200C85C7F /* TickerDetailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TickerDetailViewModel.swift; sourceTree = "<group>"; };
+		EFBC58F8296B8DEC00C85C7F /* MediaSegmentControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaSegmentControl.swift; sourceTree = "<group>"; };
 		EFDC741828E3373800042452 /* Sentiments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sentiments.swift; sourceTree = "<group>"; };
 		EFFFE46F2948357E0045686E /* Tickers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tickers.swift; sourceTree = "<group>"; };
 		EFFFE471294B97750045686E /* VideoTikTokCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTikTokCell.swift; sourceTree = "<group>"; };
@@ -731,6 +741,7 @@
 				EF2F6C33295F4C0C0066D9D3 /* ProfileViewModel.swift */,
 				EF2F6C37296045F30066D9D3 /* ProfileTickerSearch.swift */,
 				EFBC58DD29699F0D00C85C7F /* ProfileWatchListCell.swift */,
+				EFBC58F2296B4C9800C85C7F /* ProfileHeaderView.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -951,9 +962,10 @@
 		EF624D0A295795CA00F006FF /* Register */ = {
 			isa = PBXGroup;
 			children = (
-				EF5C4ED4295709E900669355 /* RegisterController.swift */,
+				EFBC58EF296AED8000C85C7F /* RegisterFlow */,
 				EF624D0B295795DB00F006FF /* RegisterViewModel.swift */,
-				EF2F6C2B295EF5D30066D9D3 /* UserUpdateViewController.swift */,
+				EFBC58E8296AE0C800C85C7F /* RegisterPage.swift */,
+				EFBC58F0296AEDAE00C85C7F /* RegisterViewController.swift */,
 			);
 			path = Register;
 			sourceTree = "<group>";
@@ -994,6 +1006,7 @@
 		EF7CBF90291641E900F9D611 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				EFBC58EA296AE68100C85C7F /* UIPageViewController */,
 				EF16449E2905509400E9D997 /* ServiceHelpers */,
 				EF0D7F25296825F00075E9C4 /* UIColor */,
 				EF5C4EB82953072000669355 /* UISearchViewController */,
@@ -1192,15 +1205,16 @@
 			path = RatingChart;
 			sourceTree = "<group>";
 		};
-		EF7CC02829169FD700F9D611 /* TopMentionDetailView */ = {
+		EF7CC02829169FD700F9D611 /* TickerDetail */ = {
 			isa = PBXGroup;
 			children = (
-				EF7CBED12911BB8400F9D611 /* TopMentionDetail.swift */,
-				EF7CC02929169FEE00F9D611 /* TopMentionDetailViewModel.swift */,
+				EFBC58F5296B8B8200C85C7F /* TickerDetailViewModel.swift */,
+				EFBC58F4296B8B8200C85C7F /* TickerDetail.swift */,
 				EF59F107292A0955002877DE /* SentimentCell.swift */,
 				EF6FE92529655571005B17B2 /* SegmentTabCell.swift */,
+				EFBC58F8296B8DEC00C85C7F /* MediaSegmentControl.swift */,
 			);
-			path = TopMentionDetailView;
+			path = TickerDetail;
 			sourceTree = "<group>";
 		};
 		EF7D2F9728DED9D00003B8F3 /* NewsDetail */ = {
@@ -1258,7 +1272,7 @@
 			children = (
 				EF2F6C49296451FB0066D9D3 /* TopTrendingView */,
 				EF987B6F2917A1D50000E233 /* TopMentionMisc */,
-				EF7CC02829169FD700F9D611 /* TopMentionDetailView */,
+				EF7CC02829169FD700F9D611 /* TickerDetail */,
 				EF7D2FBC28E056F40003B8F3 /* TopMentionCell.swift */,
 			);
 			path = TopMentions;
@@ -1543,6 +1557,23 @@
 				EFBC58E02969BE9800C85C7F /* AppStorage.swift */,
 			);
 			path = AppStorage;
+			sourceTree = "<group>";
+		};
+		EFBC58EA296AE68100C85C7F /* UIPageViewController */ = {
+			isa = PBXGroup;
+			children = (
+				EFBC58EB296AE69800C85C7F /* UIPageViewController+Extension.swift */,
+			);
+			path = UIPageViewController;
+			sourceTree = "<group>";
+		};
+		EFBC58EF296AED8000C85C7F /* RegisterFlow */ = {
+			isa = PBXGroup;
+			children = (
+				EF5C4ED4295709E900669355 /* RegisterController.swift */,
+				EFBC58ED296AEC1800C85C7F /* UpdateUser.swift */,
+			);
+			path = RegisterFlow;
 			sourceTree = "<group>";
 		};
 		EFDC741628E3372400042452 /* Models */ = {
@@ -1898,13 +1929,11 @@
 				EF987B9D2921309C0000E233 /* TickerSymbolsView.swift in Sources */,
 				EFB1C2D328DB616600DD40A4 /* TweetModel.swift in Sources */,
 				EF06E459295BBDD200820AFE /* AuthInterface.swift in Sources */,
-				EF2F6C2C295EF5D30066D9D3 /* UserUpdateViewController.swift in Sources */,
 				EF2F6C34295F4C0C0066D9D3 /* ProfileViewModel.swift in Sources */,
 				EF7CC003291641EA00F9D611 /* ImageHeaderSubHeaderView.swift in Sources */,
 				EF7CBFF4291641EA00F9D611 /* CGFloat.swift in Sources */,
 				EF86381B28DC1EBE00EF520C /* TweetServiceInterface.swift in Sources */,
 				EF5C4ECF2956ED2A00669355 /* OnboardingController.swift in Sources */,
-				EF7CBED22911BB8400F9D611 /* TopMentionDetail.swift in Sources */,
 				EF06E463295C51AB00820AFE /* AuthPublisher.swift in Sources */,
 				EFBC58E5296ABE5400C85C7F /* UIColorExtension.swift in Sources */,
 				EF59F118292A969A002877DE /* CircularProgressBar.swift in Sources */,
@@ -1932,6 +1961,7 @@
 				EF86384928DC9F4600EF520C /* EventServiceInterface.swift in Sources */,
 				EF59F119292A969A002877DE /* SphericalProgressBars.swift in Sources */,
 				EF7D2FB428E050DE0003B8F3 /* MentionTickerModel.swift in Sources */,
+				EFBC58EC296AE69800C85C7F /* UIPageViewController+Extension.swift in Sources */,
 				EFBC58E3296AB71B00C85C7F /* EventSpaceCell.swift in Sources */,
 				EF86382328DC341400EF520C /* TweetMetricView.swift in Sources */,
 				EF7CBFF9291641EA00F9D611 /* TableViewFunction.swift in Sources */,
@@ -1960,6 +1990,7 @@
 				EF2F6C3A296049880066D9D3 /* PresentAlert.swift in Sources */,
 				EF1D7E5A2922CCFD0041ADEC /* CollectionSection.swift in Sources */,
 				EF7CBFF8291641EA00F9D611 /* Animation.swift in Sources */,
+				EFBC58F6296B8B8200C85C7F /* TickerDetail.swift in Sources */,
 				EF5C4E9C2950AE0400669355 /* NewsSearchViewModel.swift in Sources */,
 				EFB1C22E28DB3B1800DD40A4 /* AppDelegate.swift in Sources */,
 				EF04E347294F10F000E35815 /* VideoViewModel.swift in Sources */,
@@ -1980,12 +2011,14 @@
 				EF2BB215292BF4E40006C00F /* VideoViewController.swift in Sources */,
 				EF5C4EE429577C8600669355 /* Login.swift in Sources */,
 				EF5C4EB22951943200669355 /* TickerService.swift in Sources */,
+				EFBC58EE296AEC1800C85C7F /* UpdateUser.swift in Sources */,
 				EF86384528DC9E5200EF520C /* StubEventsService.swift in Sources */,
 				EF59F10F292A9602002877DE /* CustomCollectionTableCell.swift in Sources */,
 				EF7D2FCE28E0F55A0003B8F3 /* EventDetailView.swift in Sources */,
 				EF86381928DC1E9C00EF520C /* StubService.swift in Sources */,
 				EF7CBFD9291641EA00F9D611 /* UIColor+ColorPalete.swift in Sources */,
 				EFB1C26128DB3D3700DD40A4 /* TweetCell.swift in Sources */,
+				EFBC58F3296B4C9800C85C7F /* ProfileHeaderView.swift in Sources */,
 				EF96381F28DD8D1200178C37 /* StubRedditService.swift in Sources */,
 				EF86383528DC61F700EF520C /* NewsCell.swift in Sources */,
 				EF5C4EDA2957193700669355 /* LoginViewController.swift in Sources */,
@@ -1997,11 +2030,11 @@
 				EF86384228DC9E0F00EF520C /* EventFeedViewModel.swift in Sources */,
 				EF7D2FA728E0322A0003B8F3 /* StubTrendingHeadlinesService.swift in Sources */,
 				EF624D122957992600F006FF /* UserModel.swift in Sources */,
-				EF7CC02A29169FEE00F9D611 /* TopMentionDetailViewModel.swift in Sources */,
 				EF7CBFFC291641EA00F9D611 /* TableSection.swift in Sources */,
 				EF987B8E291F97AC0000E233 /* CuratedEventCell.swift in Sources */,
 				EF86382828DC507E00EF520C /* NewsModel.swift in Sources */,
 				EF48D71728E5918300BD2A1A /* EventService.swift in Sources */,
+				EFBC58F9296B8DEC00C85C7F /* MediaSegmentControl.swift in Sources */,
 				EF1D7E5C2922CCFD0041ADEC /* CustomCollectionCell.swift in Sources */,
 				EF7CBFD8291641EA00F9D611 /* Array.swift in Sources */,
 				EF06E460295C39E500820AFE /* LoadingIndicator.swift in Sources */,
@@ -2054,7 +2087,9 @@
 				EF96382A28DDD59F00178C37 /* TweetDetailView.swift in Sources */,
 				EF7D2FC428E09E3D0003B8F3 /* StubVideoService.swift in Sources */,
 				EF0D7F29296832A30075E9C4 /* UIImage+vImage.swift in Sources */,
+				EFBC58F1296AEDAE00C85C7F /* RegisterViewController.swift in Sources */,
 				EF7CC000291641EA00F9D611 /* SentimentTextLabel.swift in Sources */,
+				EFBC58E9296AE0C800C85C7F /* RegisterPage.swift in Sources */,
 				EF987B90291FA3C50000E233 /* String+URL.swift in Sources */,
 				EF5C4ED5295709E900669355 /* RegisterController.swift in Sources */,
 				EF59F117292A969A002877DE /* MultipleStrokeProgressBar.swift in Sources */,
@@ -2073,6 +2108,7 @@
 				EFB1C25F28DB3CC600DD40A4 /* TweetsFeed.swift in Sources */,
 				EF5C4EA32951905900669355 /* RoundedCardView.swift in Sources */,
 				EF7CBFDC291641EA00F9D611 /* UIImage.swift in Sources */,
+				EFBC58F7296B8B8200C85C7F /* TickerDetailViewModel.swift in Sources */,
 				EF5C4EC729561C9100669355 /* NewsEndpoints.swift in Sources */,
 				EF04E34A294F203F00E35815 /* UIControl+Publishers.swift in Sources */,
 				EF7CBFE4291641EA00F9D611 /* UIView.swift in Sources */,

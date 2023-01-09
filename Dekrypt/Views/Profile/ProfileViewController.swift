@@ -40,17 +40,7 @@ class ProfileViewController: UIViewController {
     }
     
     private func profileHeaderView() {
-        let imgView: UIImageView = .standardImageView(frame: CGSize(squared: 96).frame, circleFrame: true)
-        imgView.image = .Catalogue.profileImage.image.resized(size: .init(squared: 96))
-        imgView.clipsToBounds = true
-        let dualLabel = DualLabel(spacing: 8, alignment: .center)
-        dualLabel.configure(title: user?.name.body1Bold(),
-                            subtitle: user?.userName.body2Medium())
-        
-        let stack = UIStackView.VStack(subViews: [imgView, dualLabel],
-                                       spacing: 12,
-                                       alignment: .center)
-        tableView.animateHeaderView = stack.embedInView(insets: .init(top: 0, left: 0, bottom: 10, right: 0))
+        tableView.headerView = ProfileHeaderView()
     }
     
     private func bind() {

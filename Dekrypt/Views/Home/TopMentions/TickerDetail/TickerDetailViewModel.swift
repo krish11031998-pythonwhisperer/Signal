@@ -32,29 +32,34 @@ fileprivate extension MentionTickerModel {
     
 }
 
-fileprivate extension UIView {
-    func segmentBlob(isSelected: Bool) -> UIView {
-        let bg: UIColor = isSelected ? .surfaceBackgroundInverse : .clear
-        let inset: UIEdgeInsets = .init(by: 10)
-        let container = blobify(backgroundColor: bg, edgeInset: inset, borderColor: .textColor, borderWidth: 1, cornerRadius: 0)
-        container.cornerRadius = container.compressedSize.height.half
-        return container
-    }
-}
 
 //MARK: - SegmentSections
-enum Sections: String, CaseIterable {
+enum TickerMediaSections: String, CaseIterable {
     case twitter, news, events
 }
 
 
-class TopMentionDetailViewModel {
+class TickerDetailViewModel {
     
     private var tweets:[TweetModel] = []
     private var news: [NewsModel] = []
     private var events: [EventModel] = []
     private let mention: MentionTickerModel
-    private var selectedTab: CurrentValueSubject<Sections, Never> = .init(.news)
+    var tableUpdateAnimation: (UITableView.RowAnimation, UITableView.RowAnimation) = (.fade, .fade)
+    var selectedTab: CurrentValueSubject<TickerMediaSections, Never> = .init(.news) {
+        willSet {
+            let idx = TickerMediaSections.allCases.firstIndex(of: selectedTab.value) ?? 0
+            let newIdx = TickerMediaSections.allCases.firstIndex(of: newValue.value) ?? 0
+            if idx > newIdx {
+                tableUpdateAnimation = (.left, .left)
+            } else if idx < newIdx {
+                tableUpdateAnimation = (.right, .right)
+            } else {
+                tableUpdateAnimation = (.fade, .fade)
+            }
+        }
+    }
+    let loading: PassthroughSubject<Bool, Never> = .init()
     private var navigateTo: PassthroughSubject<Navigation, Never> = .init()
     private var bag: Set<AnyCancellable> = .init()
     init(mention: MentionTickerModel) {
@@ -79,6 +84,7 @@ class TopMentionDetailViewModel {
     
     func transform() -> Output {
         let section = selectedTab
+            .handleEvents(receiveOutput: { [weak self] _ in self?.loading.send(true) })
             .flatMap({ [weak self] in
                 guard let `self` = self else {
                     return Fail<[TableCellProvider], Error>(error: ObjectError.objectOutOfMemory).eraseToAnyPublisher()
@@ -90,7 +96,7 @@ class TopMentionDetailViewModel {
         return .init(sections: section, sentiment: fetchSentiment(), navigation: navigateTo.eraseToAnyPublisher())
     }
     
-    private func dataForSection(_ section: Sections) -> AnyPublisher<[TableCellProvider], Error> {
+    private func dataForSection(_ section: TickerMediaSections) -> AnyPublisher<[TableCellProvider], Error> {
         switch section {
         case .twitter:
             return self.fetchTweets()
@@ -113,10 +119,6 @@ class TopMentionDetailViewModel {
                     return TableRow<TweetCell>(model)
                 }
             }
-            .map {[weak self] in
-                guard let self else { return [] }
-                return self.mediaHeaderView + $0
-            }
             .eraseToAnyPublisher()
     }
 
@@ -137,10 +139,6 @@ class TopMentionDetailViewModel {
                     return TableRow<NewsCell>(model)
                 }
             }
-            .map {[weak self] in
-                guard let self else { return [] }
-                return self.mediaHeaderView + $0
-            }
             .eraseToAnyPublisher()
     }
     
@@ -155,10 +153,6 @@ class TopMentionDetailViewModel {
                     }
                     return TableRow<EventSmallCell>(model)
                 }
-            }
-            .map {[weak self] in
-                guard let self else { return [] }
-                return self.mediaHeaderView + $0
             }
             .eraseToAnyPublisher()
     }
@@ -181,10 +175,6 @@ class TopMentionDetailViewModel {
             .eraseToAnyPublisher()
     }
     
-//    private func fetchHeadlines(after: String? = nil) -> AnyPublisher<[TableCellProvider], Error> {
-//        TrendingHeadlinesModel
-//    }
-//
     var mediaHeaderView: [TableCellProvider] {
         return [TableRow<MediaSegmentCell>(.init(selectedTab: selectedTab))]
     }
@@ -215,15 +205,15 @@ class TopMentionDetailViewModel {
 //MARK: - TopMentionMediaSegmentCell
 
 struct MediaSegmentModel {
-    let selectedTab: CurrentValueSubject<Sections, Never>
+    let selectedTab: CurrentValueSubject<TickerMediaSections, Never>
 }
 
 class MediaSegmentCell: ConfigurableCell {
     
-    weak private var selectedTab:  CurrentValueSubject<Sections, Never>?
+    weak private var selectedTab:  CurrentValueSubject<TickerMediaSections, Never>?
     private var bag: Set<AnyCancellable> = .init()
     private lazy var stack: UIStackView = {
-        Sections.allCases.compactMap { tabSection in
+        TickerMediaSections.allCases.compactMap { tabSection in
             return SegmentTabCell(value: tabSection, subject: selectedTab ?? .init(.news))
         }.embedInHStack(alignment: .center, spacing: 5)
         
@@ -249,7 +239,7 @@ class MediaSegmentCell: ConfigurableCell {
         selectedTab?
             .sink{ [weak self] section in
                 self?.stack.arrangedSubviews.forEach {
-                    ($0 as? SegmentTabCell<Sections>)?.updateBlob()
+                    ($0 as? SegmentTabCell<TickerMediaSections>)?.updateBlob()
                 }
             }
             .store(in: &bag)

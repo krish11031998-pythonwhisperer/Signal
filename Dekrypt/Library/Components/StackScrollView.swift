@@ -11,21 +11,16 @@ import Combine
 
 class ScrollView: UIScrollView {
     
-    //private lazy var scroll: UIScrollView = {.init()}()
     private lazy var stackView: UIStackView = {
         let stack = UIStackView()
-        stack.axis = .vertical
         return stack
     }()
-//    public var scrollOffset: PassthroughSubject<CGPoint,Never> = .init()
-    //private var bag: Set<AnyCancellable> = .init()
-    
-    init(spacing: CGFloat = 8, ignoreSafeArea: Bool = false) {
+    private let axis: NSLayoutConstraint.Axis
+    init(spacing: CGFloat = 8, ignoreSafeArea: Bool = false, axis: NSLayoutConstraint.Axis = .vertical) {
+        self.axis = axis
         super.init(frame: .zero)
         stackView.spacing = spacing
-        //scroll.contentInsetAdjustmentBehavior = ignoreSafeArea ? .never : .always
         setupView()
-//        setupObservers()
     }
     
     required init?(coder: NSCoder) {
@@ -33,10 +28,15 @@ class ScrollView: UIScrollView {
     }
     
     func setupView() {
-//        addSubview(scroll)
-        //setFittingConstraints(childView: scroll, insets: .zero)
         addSubview(stackView)
-        setFittingConstraints(childView: stackView, top: 0, leading: 0, trailing: 0, bottom: 0, centerX: 0)
+        stackView.axis = axis
+        switch axis {
+        case .horizontal:
+            setFittingConstraints(childView: stackView, top: 0, leading: 0, trailing: 0, bottom: 0, centerY: 0)
+        case .vertical:
+            setFittingConstraints(childView: stackView, top: 0, leading: 0, trailing: 0, bottom: 0, centerX: 0)
+        }
+        
     }
     
     func addArrangedView(view: UIView, additionalSpacing: CGFloat? = nil) {
@@ -45,21 +45,4 @@ class ScrollView: UIScrollView {
             stackView.setCustomSpacing(spacing, after: view)
         }
     }
-    
-//    func setupObservers() {
-//        scrollOffset
-//            .sink { [weak self] point in
-//                self?.scroll.contentOffset = point
-//            }
-//            .store(in: &bag)
-//    }
-}
-
-extension ScrollView {
-    
-//    var contentOffset: AnyPublisher<CGPoint,Never> {
-//        self.publisher(for: \.contentOffset)
-//            .eraseToAnyPublisher()
-//    }
-    
 }

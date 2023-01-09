@@ -14,12 +14,14 @@ class SegmentTabCell<T>: UIView where T : RawRepresentable, T: Equatable {
     private lazy var text: UILabel = { .init() }()
     let value: T
     let subject: CurrentValueSubject<T, Never>
+    private var bag: Set<AnyCancellable> = .init()
     
     init(value: T, subject: CurrentValueSubject<T, Never>) {
         self.value = value
         self.subject = subject
         super.init(frame: .zero)
         setupView()
+        bind()
     }
     
     required init?(coder: NSCoder) {
@@ -50,6 +52,12 @@ class SegmentTabCell<T>: UIView where T : RawRepresentable, T: Equatable {
         }
     }
     
+    
+    private func bind() {
+        subject
+            .sink {[weak self] _ in self?.updateBlob()}
+            .store(in: &bag)
+    }
     
     @objc
     private func handleTap() {

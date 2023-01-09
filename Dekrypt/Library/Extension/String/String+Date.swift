@@ -13,9 +13,19 @@ extension String  {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
         dateFormatter.dateFormat = "E, d MMM yyyy HH:mm:ss Z"
-        let date = dateFormatter.date(from: self)
-        return date?.timestamp ?? self
-
+        var date = dateFormatter.date(from: self)
+        
+        if let timestamp = date?.timestamp {
+            return timestamp
+        }
+        
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        date = dateFormatter.date(from: self)
+        
+        if let timestamp = date?.timestamp {
+            return timestamp
+        }
+        
+        return self
     }
-    
 }

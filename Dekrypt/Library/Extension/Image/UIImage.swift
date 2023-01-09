@@ -93,8 +93,7 @@ extension UIImage {
         }
 		
 		view.contentMode = .scaleAspectFit
-		view.clipsToBounds = true
-		view.cornerRadius = cornerRadius
+		view.clippedCornerRadius = cornerRadius
 		return view
 	}
 	
@@ -119,23 +118,23 @@ extension UIImage {
     static func download(urlStr: String? = nil,
                          request: URLRequest? = nil) -> AnyPublisher<UIImage,URLError> {
         
-            let request: URLRequest? =  urlStr?.request ?? request
-            
-            if let validRequest = request, let validImage = ImageCache.shared[validRequest] {
-                return Just(validImage).setFailureType(to: URLError.self).eraseToAnyPublisher()
-            } else {
-                guard let validRequest = request, let validURL = request?.url else {
-                    return Fail(outputType: UIImage.self, failure: URLError(.badURL)).eraseToAnyPublisher()
-                }
-                
-                let session = URLSession.shared.dataTaskPublisher(for: validURL)
-                    .compactMap { UIImage(data: $0.data) }
-                    .handleEvents(receiveOutput: {
-                        ImageCache.shared[validRequest] = $0
-                    })
-                    .eraseToAnyPublisher()
-                return session
+        let request: URLRequest? =  urlStr?.request ?? request
+        guard let validRequest = request else { return Fail(outputType: UIImage.self, failure: URLError(.badURL)).eraseToAnyPublisher()}
+        if let validImage = ImageCache.shared[validRequest] {
+            return Just(validImage).setFailureType(to: URLError.self).eraseToAnyPublisher()
+        } else {
+            guard let validURL = validRequest.url else {
+                return Fail(outputType: UIImage.self, failure: URLError(.badURL)).eraseToAnyPublisher()
             }
+            
+            let session = URLSession.shared.dataTaskPublisher(for: validURL)
+                .compactMap { UIImage(data: $0.data) }
+                .handleEvents(receiveOutput: {
+                    ImageCache.shared[validRequest] = $0
+                })
+                .eraseToAnyPublisher()
+            return session
+        }
     }
     
     static func loadImage<T:AnyObject>(url urlString: String?, at object: T, path: ReferenceWritableKeyPath<T,UIImage?>, resized: CGSize? = nil) -> AnyCancellable {
@@ -144,9 +143,7 @@ extension UIImage {
             .subscribe(on: DispatchQueue.global(qos: .userInteractive))
             .compactMap {
                 if let resized {
-                    //return $0.resized(withAspect: resized)
-                    let newSize = $0.resolveWithAspectRatio(newSize: resized)
-                    return $0.resizeVI(size: newSize)
+                    return $0.resized(withAspect: resized)
                 } else {
                     return $0
                 }
@@ -155,9 +152,8 @@ extension UIImage {
             .sink {
                 guard let err = $0.err else { return }
                 print("(ERROR) image err: ", err.localizedDescription)
-            } receiveValue: { image in
+            } receiveValue: { (image: UIImage) in
                 object[keyPath: path] = image
-                
             }
     }
 }

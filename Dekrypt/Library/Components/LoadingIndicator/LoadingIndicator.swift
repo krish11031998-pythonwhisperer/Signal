@@ -7,13 +7,16 @@
 
 import Foundation
 import UIKit
+import Lottie
 
-class LoadingIndicator: ConfigurableCell {
-
-    private lazy var spinner: UIActivityIndicatorView = { .init(style: .medium) }()
+class LoadingIndicator: UIView {
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    static let indicator = LoadingIndicator(frame: .init(origin: .zero, size: .init(squared: 40)))
+    
+    private lazy var loading: AnimationView = { .init(name: "loading") }()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         setupView()
     }
     
@@ -22,11 +25,19 @@ class LoadingIndicator: ConfigurableCell {
     }
     
     private func setupView() {
-        contentView.addSubview(spinner)
-        contentView.setFittingConstraints(childView: spinner, top: 20, bottom: 20, width: 50, height: 50, centerX: 0)
+        addSubview(loading)
+        loading.frame = bounds
+        loading.center = center
+        loading.loopMode = .loop
     }
     
-    func configure(with model: EmptyModel) {
-        spinner.startAnimating()
+    func start(origin: CGPoint = .zero) {
+        frame.origin = origin
+        loading.play()
+    }
+    
+    func stop() {
+        loading.stop()
+        removeFromSuperview()
     }
 }

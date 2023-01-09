@@ -13,7 +13,7 @@ class EventFeedViewModel {
 	
     private var bag: Set<AnyCancellable> = .init()
     var selectedEvent: PassthroughSubject<EventModel?, Never> = .init()
-    private var nextPageToken: Int = 0
+    private var nextPageToken: Int = 1
     private var allEvents: [EventCellModel]? = nil
     
     struct Input {

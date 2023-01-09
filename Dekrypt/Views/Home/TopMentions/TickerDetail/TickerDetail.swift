@@ -20,14 +20,14 @@ extension UITableView {
     
 }
 
-class TopMentionDetailView: UIViewController {
+class TickerDetailView: UIViewController {
 
     private lazy var headerView: UIImageView = { .standardImageView(frame: CGSize(squared: 48).frame, circleFrame: true)
     }()
     private lazy var headerLabel = { UILabel() }()
     private lazy var symbolLabel: UILabel = { .init() }()
     private lazy var tableView: UITableView = { .standardTableView() }()
-    private lazy var viewModel: TopMentionDetailViewModel = { .init(mention: mention) }()
+    private lazy var viewModel: TickerDetailViewModel = { .init(mention: mention) }()
     private var bag: Set<AnyCancellable> = .init()
     private lazy var chart: RatingChart = { .init() }()
     private let mention: MentionTickerModel
@@ -46,7 +46,7 @@ class TopMentionDetailView: UIViewController {
         setupTransparentNavBar()
         standardNavBar()
         setupView()
-        tableView.reloadData(.init(sections: [viewModel.sentimentSplitView, .init(rows: [], title: "Media")].compactMap { $0 }))
+        tableView.reloadData(.init(sections: [viewModel.sentimentSplitView, .init(rows: [], customHeader: MediaSegmentControl(selectedTab: viewModel.selectedTab))].compactMap { $0 }))
         bind()
     }
     
@@ -74,12 +74,32 @@ class TopMentionDetailView: UIViewController {
     private func bind() {
         let output = viewModel.transform()
         
+        viewModel.loading
+            .dropFirst(1)
+            .sink { [weak self] loading in
+                guard let self else { return }
+                if loading {
+                    self.tableView.addSubview(LoadingIndicator.indicator)
+                    let frame = self.tableView.cellForRow(at: .init(row: 0, section: 1))?.frame ?? .zero
+                    self.tableView.hideTableSection(section: 1)
+                    LoadingIndicator.indicator.start(origin: .init(x: frame.midX, y: frame.minY + 16))
+                } else {
+                    LoadingIndicator.indicator.stop()
+                    self.tableView.showTableSection(section: 1)
+                }
+            }
+            .store(in: &bag)
+        
         output.sections
             .receive(on: DispatchQueue.main  )
+            .handleEvents(receiveOutput: { [weak self] _ in self?.viewModel.loading.send(false) })
             .sink {
-                print("(ERROR) err: ", $0.err?.localizedDescription)
+                if let err = $0.err?.localizedDescription {
+                    print("(ERROR) err: ", err)
+                }
             } receiveValue: { [weak self] in
-                self?.tableView.replaceRows(rows: $0, section: 1)
+                guard let self else { return }
+                self.tableView.replaceRows(rows: $0, section: 1)
             }
             .store(in: &bag)
         
@@ -87,7 +107,9 @@ class TopMentionDetailView: UIViewController {
             .sentiment
             .receive(on: RunLoop.main)
             .sink {
-                print("(ERROR) err: ", $0.err?.localizedDescription)
+                if let err = $0.err?.localizedDescription {
+                    print("(ERROR) err: ", err)
+                }
             } receiveValue: { [weak self] model in
                 self?.chart.configureChart(model: model)
             }

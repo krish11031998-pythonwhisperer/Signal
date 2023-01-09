@@ -85,10 +85,10 @@ extension UIView {
 	func setFrame(width: CGFloat? = nil, height: CGFloat? = nil) {
         translatesAutoresizingMaskIntoConstraints = false
         if let validWidth = width {
-            setWidth(width: validWidth, priority: .required)
+            setWidth(width: validWidth, priority: .needed)
         }
         if let validHeight = height {
-            setHeight(height: validHeight, priority: .required)
+            setHeight(height: validHeight, priority: .needed)
         }
         
 	}
