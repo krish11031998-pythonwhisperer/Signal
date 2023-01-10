@@ -55,7 +55,7 @@ class EventCell: ConfigurableCell {
                 .sink { [weak self] _ in
                     guard let self else { return }
                     self.mainNews.animate(.bouncy)
-                    //model.selectedNews.send(firstNews)
+                    model.selectedNews.send(firstNews)
                 }
                 .store(in: &bag)
 			mainNews.isHidden = false
@@ -92,7 +92,7 @@ class NewsEventView: UIControl  {
     private var tickersView: TickerSymbolView = { .init() }()
     private var bag: Set<AnyCancellable> = .init()
 	private let largeCard: Bool
-	
+    private var tapped: Bool = false
 	init(largeCard: Bool = false) {
 		self.largeCard = largeCard
 		super.init(frame: .zero)
@@ -139,15 +139,24 @@ class NewsEventView: UIControl  {
         model.sourceName.body3Medium(color: .gray).render(target: authorTitle)
         model.title.body1Bold(color: .white).render(target: newsTitle)
 		
-		tickersView.isHidden = model.tickers.isEmpty
-		if let validNews = news, !model.tickers.isEmpty {
+        guard let tickers = model.tickers else { return }
+        tickersView.isHidden = tickers.isEmpty
+		if let validNews = news, !tickers.isEmpty {
             tickersView.configTickers(news: validNews)
         }
 	}
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        //super.touchesMoved(touches, with: event)
+        print(#function)
+        tapped = true
+    }
+    
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        animate(.bouncy) {
+        print(#function)
+        if tapped {
             self.sendActions(for: .touchUpInside)
+            self.tapped = false
         }
     }
 }

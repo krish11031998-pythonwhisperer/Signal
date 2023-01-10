@@ -18,7 +18,7 @@ struct TrendingHeadlinesModel: Tickers, Codable {
 	let newsId: Int
 	let sentiment: Sentiment
 	let date: String
-    var tickers: [String]
+    var tickers: [String]?
 	
 	enum CodingKeys: String, CodingKey {
 		case id, headline, text

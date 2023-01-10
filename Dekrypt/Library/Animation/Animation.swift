@@ -21,16 +21,23 @@ enum AnimationState {
 }
 
 enum Animation {
-    case bouncy
+    //MARK: Slide
 	case slideInFromTop(from: CGFloat, to:CGFloat = 0, duration: CFTimeInterval = 0.3)
     case slide(_ direction: AnimationDirection, state: AnimationState = .in, additionalOff: CGFloat = 0, duration: CFTimeInterval = 0.3)
     case transformX(to: CGFloat, duration: CFTimeInterval = 0.3)
-	case circularProgress(from: CGFloat = 0, to: CGFloat, duration: CFTimeInterval = 0.3)
-    case lineProgress(frame: CGRect, duration: CFTimeInterval = 0.3)
+
+    //MARK: Fade
     case fadeIn(duration: CFTimeInterval = 0.3)
     case fadeOut(to: CGFloat = 0, duration: CFTimeInterval = 0.3)
-    case shakeUpDown(duration: CGFloat = 0.3)
     case fadeInOut(duration: CGFloat = 0.75)
+    
+    //MARK: Progress
+    case lineProgress(frame: CGRect, duration: CFTimeInterval = 0.3)
+    case circularProgress(from: CGFloat = 0, to: CGFloat, duration: CFTimeInterval = 0.33, delay: CFTimeInterval = 0)
+    
+    //MARK: Misc
+    case shakeUpDown(duration: CGFloat = 0.3)
+    case bouncy
 }
 
 //MARK: - Animation Helpers
@@ -79,11 +86,12 @@ extension Animation {
             animation.toValue = layer.frame.midX + to
             animation.duration = duration
             return animation
-		case .circularProgress(let from, let to, let duration):
+		case .circularProgress(let from, let to, let duration, let delay):
 			let animation = CABasicAnimation(keyPath: "strokeEnd")
 			animation.fromValue = from
 			animation.toValue = to
 			animation.duration = duration
+            animation.beginTime = CACurrentMediaTime() + delay
             animation.isRemovedOnCompletion = false
             animation.fillMode = .forwards
 			return animation

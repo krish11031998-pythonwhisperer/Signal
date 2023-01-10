@@ -27,7 +27,7 @@ extension CALayer {
 							 isSemiCircle: Bool = false,
 							 animateStrokeEnd: Bool) -> CAShapeLayer {
 		let rect = bounds
-		let radius = (isSemiCircle ? rect.width : rect.minDim).half + radiusOffset
+		let radius = (isSemiCircle ? rect.width : rect.minDim).half + radiusOffset - lineWidth
 		let path = UIBezierPath()
 		let center: CGPoint = isSemiCircle ? .init(x: rect.midX, y: rect.maxY) : rect.center
 		path.addArc(withCenter: center, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: clockwise)
@@ -36,7 +36,7 @@ extension CALayer {
 			let trackShape = CAShapeLayer()
 			trackShape.path = path.cgPath
 			trackShape.fillColor = UIColor.clear.cgColor
-			trackShape.strokeColor = UIColor.black.withAlphaComponent(0.1).cgColor
+            trackShape.strokeColor = UIColor.gray.withAlphaComponent(0.15).cgColor
 			trackShape.lineWidth = lineWidth
 			trackShape.strokeStart = 0
 			trackShape.strokeEnd = 1

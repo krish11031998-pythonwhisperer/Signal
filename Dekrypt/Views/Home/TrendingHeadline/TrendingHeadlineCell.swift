@@ -120,8 +120,8 @@ class TrendingHeadlineCollectionCell: ConfigurableCollectionCell {
         
         sentimentText.render(target: sentimentLabel)
 
-        if !model.tickers.isEmpty {
-            tickers.configTickers(news: model)
+        if let tickers = model.tickers, !tickers.isEmpty {
+            self.tickers.configTickers(news: model)
         }
     }
     

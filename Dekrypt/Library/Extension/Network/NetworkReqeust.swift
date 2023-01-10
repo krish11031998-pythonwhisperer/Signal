@@ -139,14 +139,14 @@ extension URLSession {
                         return
                     }
                     
-                    guard let decodedData = try? JSONDecoder().decode(T.self, from: validData) else {
-                        promise(.failure(URLSessionError.decodeErr))
-                        return
+                    do {
+                        let decodedData = try JSONDecoder().decode(T.self, from: validData)
+                        DataCache.shared[request] = validData
+                        print("(REQUEST📩) returning Received Response for : \(request.url?.absoluteString ?? "")")
+                        promise(.success(decodedData))
+                    } catch {
+                        promise(.failure(err ?? URLSessionError.decodeErr))
                     }
-                    
-                    DataCache.shared[request] = validData
-                    print("(REQUEST📩) returning Received Response for : \(request.url?.absoluteString ?? "")")
-                    promise(.success(decodedData))
                 }
                 session.resume()
             }

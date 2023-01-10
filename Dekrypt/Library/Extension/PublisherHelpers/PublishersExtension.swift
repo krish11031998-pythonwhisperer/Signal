@@ -14,3 +14,19 @@ typealias StringPublisher<E: Error> = AnyPublisher<String, E>
 typealias BoolPublisher<E: Error> = AnyPublisher<Bool, E>
 typealias IntPublisher<E: Error> = AnyPublisher<Int, E>
 typealias VoidPublisher = AnyPublisher<Void, Never>
+
+
+extension Publisher {
+    
+    func sinkReceive(_ receiveCompletion: @escaping (Self.Output) -> Void) -> AnyCancellable {
+        self
+            .receive(on: DispatchQueue.main)
+            .sink {
+                if let err = $0.err?.localizedDescription {
+                    Swift.print("(ERROR) err: ", err)
+                }
+            } receiveValue: { receiveCompletion($0) }
+
+    }
+    
+}

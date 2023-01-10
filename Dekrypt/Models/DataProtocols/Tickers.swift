@@ -8,5 +8,5 @@
 import Foundation
 
 protocol Tickers: Codable {
-    var tickers: [String] { get set }
+    var tickers: [String]? { get set }
 }

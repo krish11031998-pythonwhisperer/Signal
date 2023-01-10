@@ -79,7 +79,7 @@ class NewsCell: ConfigurableCell {
 		model.model.sourceName.body2Regular(color: .gray).render(target: body)
 		body.numberOfLines = 1
 		
-		if !model.model.tickers.isEmpty {
+        if let tickers = model.model.tickers, tickers.isEmpty {
 			tickersStack.isHidden = false
             tickersView.configTickers(news: model.model)
             model.model.sentiment.sentimentIndicatorText().render(target: sentimentView)

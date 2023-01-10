@@ -51,16 +51,16 @@ class CustomCuratedCell: ConfigurableCollectionCell {
     }
     
     private func configTickers(model: EventModel) {
-        guard !model.tickers.isEmpty else { return }
-        tickers.removeChildViews()
-        model.tickers.enumerated().forEach {
+        guard let tickers = model.tickers, tickers.isEmpty else { return }
+        self.tickers.removeChildViews()
+        tickers.enumerated().forEach {
             
             @TickerImageView(size: .init(squared: 24)) var imgView;
             UIImage.loadImage(url: $0.element.logoURL, at: imgView, path: \.image).store(in: &bag)
-            tickers.addSubview(imgView)
-            tickers.setFittingConstraints(childView: imgView, top: 0, leading: CGFloat($0.offset * 16), bottom: 0)
+            self.tickers.addSubview(imgView)
+            self.tickers.setFittingConstraints(childView: imgView, top: 0, leading: CGFloat($0.offset * 16), bottom: 0)
         }
-        tickers.isHidden = false
+        self.tickers.isHidden = false
     }
     
     func configure(with model: EventCellModel) {

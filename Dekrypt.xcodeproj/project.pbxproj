@@ -251,6 +251,9 @@
 		EFBC58F6296B8B8200C85C7F /* TickerDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBC58F4296B8B8200C85C7F /* TickerDetail.swift */; };
 		EFBC58F7296B8B8200C85C7F /* TickerDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBC58F5296B8B8200C85C7F /* TickerDetailViewModel.swift */; };
 		EFBC58F9296B8DEC00C85C7F /* MediaSegmentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBC58F8296B8DEC00C85C7F /* MediaSegmentControl.swift */; };
+		EFBC58FC296C67FB00C85C7F /* RadialChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBC58FB296C67FB00C85C7F /* RadialChart.swift */; };
+		EFBC58FE296CC1AB00C85C7F /* SentimentRatingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBC58FD296CC1AB00C85C7F /* SentimentRatingCell.swift */; };
+		EFBC5900296D4F8400C85C7F /* SentimentTotalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBC58FF296D4F8400C85C7F /* SentimentTotalCell.swift */; };
 		EFDC741928E3373800042452 /* Sentiments.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFDC741828E3373800042452 /* Sentiments.swift */; };
 		EFFFE4702948357E0045686E /* Tickers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFFE46F2948357E0045686E /* Tickers.swift */; };
 		EFFFE472294B97750045686E /* VideoTikTokCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFFE471294B97750045686E /* VideoTikTokCell.swift */; };
@@ -541,6 +544,9 @@
 		EFBC58F4296B8B8200C85C7F /* TickerDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TickerDetail.swift; sourceTree = "<group>"; };
 		EFBC58F5296B8B8200C85C7F /* TickerDetailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TickerDetailViewModel.swift; sourceTree = "<group>"; };
 		EFBC58F8296B8DEC00C85C7F /* MediaSegmentControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaSegmentControl.swift; sourceTree = "<group>"; };
+		EFBC58FB296C67FB00C85C7F /* RadialChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadialChart.swift; sourceTree = "<group>"; };
+		EFBC58FD296CC1AB00C85C7F /* SentimentRatingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentimentRatingCell.swift; sourceTree = "<group>"; };
+		EFBC58FF296D4F8400C85C7F /* SentimentTotalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentimentTotalCell.swift; sourceTree = "<group>"; };
 		EFDC741828E3373800042452 /* Sentiments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sentiments.swift; sourceTree = "<group>"; };
 		EFFFE46F2948357E0045686E /* Tickers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tickers.swift; sourceTree = "<group>"; };
 		EFFFE471294B97750045686E /* VideoTikTokCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTikTokCell.swift; sourceTree = "<group>"; };
@@ -990,6 +996,7 @@
 		EF7CBF8F291641E900F9D611 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				EFBC58FA296C67EF00C85C7F /* Charts */,
 				EF6FE92729656C80005B17B2 /* LottieAnimations */,
 				EF1D7E522922CCFD0041ADEC /* CollectionViewDataSource */,
 				EF987BA129217A0D0000E233 /* WebPage */,
@@ -1213,6 +1220,8 @@
 				EF59F107292A0955002877DE /* SentimentCell.swift */,
 				EF6FE92529655571005B17B2 /* SegmentTabCell.swift */,
 				EFBC58F8296B8DEC00C85C7F /* MediaSegmentControl.swift */,
+				EFBC58FD296CC1AB00C85C7F /* SentimentRatingCell.swift */,
+				EFBC58FF296D4F8400C85C7F /* SentimentTotalCell.swift */,
 			);
 			path = TickerDetail;
 			sourceTree = "<group>";
@@ -1576,6 +1585,14 @@
 			path = RegisterFlow;
 			sourceTree = "<group>";
 		};
+		EFBC58FA296C67EF00C85C7F /* Charts */ = {
+			isa = PBXGroup;
+			children = (
+				EFBC58FB296C67FB00C85C7F /* RadialChart.swift */,
+			);
+			path = Charts;
+			sourceTree = "<group>";
+		};
 		EFDC741628E3372400042452 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -1924,6 +1941,7 @@
 				EF7CBFF6291641EA00F9D611 /* Bundle.swift in Sources */,
 				EF0D7F27296826160075E9C4 /* UIColor+Gradient.swift in Sources */,
 				EF7D2FD028E0F6540003B8F3 /* EventHeaderView.swift in Sources */,
+				EFBC5900296D4F8400C85C7F /* SentimentTotalCell.swift in Sources */,
 				EF7D2FBD28E056F40003B8F3 /* TopMentionCell.swift in Sources */,
 				EF7CBFF5291641EA00F9D611 /* UIEdgeInsets.swift in Sources */,
 				EF987B9D2921309C0000E233 /* TickerSymbolsView.swift in Sources */,
@@ -1943,6 +1961,7 @@
 				EF7D2FB228E050450003B8F3 /* MentionInterface.swift in Sources */,
 				EFBC58E7296AC68E00C85C7F /* String+Date.swift in Sources */,
 				EF3B698D2959D48200C9234B /* withLatestFrom.swift in Sources */,
+				EFBC58FC296C67FB00C85C7F /* RadialChart.swift in Sources */,
 				EF04E345294EFBE500E35815 /* Result+Future.swift in Sources */,
 				EF187CB1295DBD170031CE78 /* SocialHighlightsEndpoint.swift in Sources */,
 				EF987B992920F1A80000E233 /* CGPoint.swift in Sources */,
@@ -1990,6 +2009,7 @@
 				EF2F6C3A296049880066D9D3 /* PresentAlert.swift in Sources */,
 				EF1D7E5A2922CCFD0041ADEC /* CollectionSection.swift in Sources */,
 				EF7CBFF8291641EA00F9D611 /* Animation.swift in Sources */,
+				EFBC58FE296CC1AB00C85C7F /* SentimentRatingCell.swift in Sources */,
 				EFBC58F6296B8B8200C85C7F /* TickerDetail.swift in Sources */,
 				EF5C4E9C2950AE0400669355 /* NewsSearchViewModel.swift in Sources */,
 				EFB1C22E28DB3B1800DD40A4 /* AppDelegate.swift in Sources */,

@@ -70,7 +70,8 @@ extension UIView {
 		
 		childView.translatesAutoresizingMaskIntoConstraints = false
 		removeSimilarConstraints(items)
-		addConstraints(items)
+		//addConstraints(items)
+        NSLayoutConstraint.activate(items)
 	}
     
     func fillSuperview(inset: UIEdgeInsets = .zero) {

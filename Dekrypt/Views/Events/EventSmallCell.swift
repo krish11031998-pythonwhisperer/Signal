@@ -42,8 +42,9 @@ class EventSmallCell: ConfigurableCell {
         model.model.eventName.body2Medium().render(target: eventTitle)
         "\(model.model.news?.count ?? model.model.newsItem ?? 0) News Articles".body3Regular(color: .gray).render(target: numberOfArticles)
         
-        tickerView.isHidden = model.model.tickers.isEmpty
-        tickerView.configTickers(news: model.model)
+        guard let tickers = model.model.tickers else { return }
+        tickerView.isHidden = tickers.isEmpty
+        tickerView.configTickers(news: model.model)        
     }
     
 }

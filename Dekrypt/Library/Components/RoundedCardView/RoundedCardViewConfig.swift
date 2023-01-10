@@ -32,7 +32,7 @@ enum RoundedCardViewSideView {
                img: UIImage? = nil,
                size: CGSize? = nil,
                cornerRadius: CGFloat = 0,
-               bordered: Bool = true,
+               bordered: Bool = false,
                borderColor: UIColor = .gray,
                borderWidth: CGFloat = 0.5,
                backgroundColor: UIColor = .clear)
@@ -143,4 +143,6 @@ extension RoundedCardAppearance{
     static var `default`: RoundedCardAppearance = .init(backgroundColor: .surfaceBackground, cornerRadius: 8, insets: .init(vertical: 12, horizontal: 16), iterSpacing: 8, lineSpacing: 4, height: .autoDimension)
     
     static var defaultTicker: RoundedCardAppearance = .init(backgroundColor: .surfaceBackground, cornerRadius: 16, insets: .init(vertical: 8, horizontal: 12), iterSpacing: 8, lineSpacing: 4, height: .constant(33))
+    
+    static var plain: RoundedCardAppearance =  .init(backgroundColor: .surfaceBackground, cornerRadius: 0, insets: .zero, iterSpacing: 10, lineSpacing: 10)
 }

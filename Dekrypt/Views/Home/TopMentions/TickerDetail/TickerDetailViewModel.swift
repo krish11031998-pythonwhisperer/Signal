@@ -13,23 +13,10 @@ enum ObjectError: String, Error {
     case objectOutOfMemory
 }
 
-fileprivate extension MentionTickerModel {
-    
-    var total: Int { positiveMentions + neutralMentions + negativeMentions }
-    
-    func chartModel(for sentiment: String) -> MultipleStrokeModel? {
-        switch sentiment {
-        case "Positive":
-            return .init(color: .appGreen, nameText: sentiment, val: Float(positiveMentions)/Float(total))
-        case "Negative":
-            return .init(color: .appRed, nameText: sentiment, val: Float(negativeMentions)/Float(total))
-        case "Neutral":
-            return .init(color: .appOrange, nameText: sentiment, val: Float(neutralMentions)/Float(total))
-        default:
-            return nil
-        }
+extension ChartCandleModel {
+    init(_ data: SentimentModel) {
+        self.init(positive: data.positive ?? 1, neutral: data.neutral ?? 1, negative: data.negative ?? 1)
     }
-    
 }
 
 
@@ -77,13 +64,38 @@ class TickerDetailViewModel {
     }
     
     struct Output {
-        let sections: AnyPublisher<[TableCellProvider], Error>
-        let sentiment: AnyPublisher<[ChartCandleModel], Error>
+        let section: AnyPublisher<[TableSection], Error>
+        let mediaSection: AnyPublisher<[TableCellProvider], Error>
+        let sentiment: AnyPublisher<SentimentForTicker, Error>
         let navigation: AnyPublisher<Navigation, Never>
     }
     
     func transform() -> Output {
-        let section = selectedTab
+        
+        let sentiment = fetchSentiment().share().eraseToAnyPublisher()
+        
+        let newsSection: AnyPublisher<TableSection, Error> = dataForSection(.news)
+            .receive(on: RunLoop.main)
+            .compactMap {
+                return TableSection(rows: $0, title: "Media", customHeader: MediaSegmentControl(selectedTab: self.selectedTab))
+            }
+            .eraseToAnyPublisher()
+        
+        let sentimentSection: AnyPublisher<[TableSection], Error> = sentiment.eraseToAnyPublisher()
+            .compactMap { sentiment in
+                guard let candles = sentiment.timeline?.values else { return nil }
+                let candleModel = candles.map { ChartCandleModel($0)}
+            
+                let monthlySentiment = TableSection(rows: [TableRow<SentimentRatingCell>(candleModel)], title: "Month Sentiment")
+                let totalSentiment = TableSection(rows: [TableRow<SentimentTotalCell>(sentiment)])
+                return [totalSentiment, monthlySentiment]
+            }.eraseToAnyPublisher()
+        
+        let section = Publishers.Zip(sentimentSection, newsSection)
+            .compactMap { $0 + [$1] }.eraseToAnyPublisher()
+        
+        let mediaSection = selectedTab
+            .dropFirst(1)
             .handleEvents(receiveOutput: { [weak self] _ in self?.loading.send(true) })
             .flatMap({ [weak self] in
                 guard let `self` = self else {
@@ -93,7 +105,11 @@ class TickerDetailViewModel {
             })
             .eraseToAnyPublisher()
         
-        return .init(sections: section, sentiment: fetchSentiment(), navigation: navigateTo.eraseToAnyPublisher())
+        //sentiment.connect()
+        return .init(section: section,
+                     mediaSection: mediaSection,
+                     sentiment: sentiment,
+                     navigation: navigateTo.eraseToAnyPublisher())
     }
     
     private func dataForSection(_ section: TickerMediaSections) -> AnyPublisher<[TableCellProvider], Error> {
@@ -157,21 +173,11 @@ class TickerDetailViewModel {
             .eraseToAnyPublisher()
     }
  
-    private func fetchSentiment() -> AnyPublisher<[ChartCandleModel], Error> {
+    private func fetchSentiment() -> AnyPublisher<SentimentForTicker, Error> {
         TickerService
             .shared
             .fetchSentiment(ticker: ticker, refresh: false)
             .compactMap(\.data)
-            .map {
-                guard let time = $0.timeline?.values else { return [] }
-                return time.compactMap { sentiment in
-                    guard let positive = sentiment.positive,
-                          let negative = sentiment.negative,
-                          let neutral = sentiment.neutral
-                    else { return nil }
-                    return ChartCandleModel(positive: positive, neutral: neutral, negative: negative)
-                }
-            }
             .eraseToAnyPublisher()
     }
     
@@ -179,26 +185,6 @@ class TickerDetailViewModel {
         return [TableRow<MediaSegmentCell>(.init(selectedTab: selectedTab))]
     }
     
-    var sentimentSplitView: TableSection? {
-        let accountRatios:[MultipleStrokeModel] = [
-            mention.chartModel(for: "Positive"),
-            mention.chartModel(for: "Negative"),
-            mention.chartModel(for: "Neutral")].compactMap { $0 }
-        
-        let chart = MultipleStrokeProgressBarAlt(frame: .init(origin: .zero, size: .init(width: .totalWidth - 20, height: 16)))
-        chart.configureProgressBar(ratios: accountRatios)
-        
-        let legend: UIStackView = .HStack(subViews: accountRatios.compactMap {
-            let indicator: UIView = .init(circular: .init(origin: .zero, size: .init(squared: 8)), background: $0.color)
-            indicator.setFrame(.init(squared: 8))
-            let stack: UIStackView = .HStack(subViews: [indicator, $0.name.generateLabel], spacing: 5, alignment: .center)
-            return stack
-        }, spacing: 10)
-        legend.addArrangedSubview(.spacer())
-        let mainStack: UIStackView = .VStack(subViews: [legend, chart] , spacing: 10)
-        
-        return .init(rows: [TableRow<SentimentCell>(mention)], title: "Sentiment")
-    }
 }
 
 

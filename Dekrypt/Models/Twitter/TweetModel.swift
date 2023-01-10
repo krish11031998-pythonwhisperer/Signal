@@ -60,7 +60,7 @@ extension TweetModel: Equatable {
 }
 
 extension TweetModel: Tickers {
-    var tickers: [String] {
+    var tickers: [String]? {
         get { [] } //hashTags?.compactMap { $0.tag} ?? [] }
         set {}
     }

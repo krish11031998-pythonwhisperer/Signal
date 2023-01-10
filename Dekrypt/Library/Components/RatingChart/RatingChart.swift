@@ -41,6 +41,7 @@ class RatingChart: UIView {
     private lazy var stack: UIStackView = { .VStack(subViews: [positiveStack, negativeStack], spacing: 5) }()
     private lazy var positiveStack: UIStackView = { .HStack(spacing: iterSpacing, alignment: .bottom) }()
     private lazy var negativeStack: UIStackView = { .HStack(spacing: iterSpacing, alignment: .top) }()
+    private var viewLayout: Bool = false
     private let iterSpacing: CGFloat = 3
     
     override init(frame: CGRect) {
@@ -57,9 +58,12 @@ class RatingChart: UIView {
     }
     
     private func setupView() {
+        guard subviews.isEmpty else { return }
+        print("(DEBUG) setup views!")
         removeChildViews()
         addSubview(stack)
         setFittingConstraints(childView: stack, insets: .zero)
+        stack.distribution = .fillEqually
         positiveStack.setFrame(width: frame.width, height: itemHeight)
         negativeStack.setFrame(width: frame.width, height: itemHeight)
     }

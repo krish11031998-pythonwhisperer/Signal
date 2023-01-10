@@ -13,7 +13,7 @@ class EventDetailViewHeader: ConfigurableCell {
 //MARK: - Properties
 
 	private lazy var eventHeader: UILabel = { .init() }()
-	private lazy var newArticleCountLabel: UILabel = { .init() }()
+    private lazy var eventDescription: UILabel = { .init() }()
     private lazy var tickerViews: TickerSymbolView = { .init() }()
 //MARK: - Constructors
 	override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -28,8 +28,9 @@ class EventDetailViewHeader: ConfigurableCell {
 //MARK: - Protected Methods
 	
 	private func setupView() {
-		let mainStack: UIStackView = .VStack(subViews: [eventHeader, newArticleCountLabel, tickerViews], spacing: 12, alignment: .leading)
+		let mainStack: UIStackView = .VStack(subViews: [eventHeader, eventDescription, tickerViews], spacing: 12, alignment: .leading)
 		eventHeader.numberOfLines = 0
+        eventDescription.numberOfLines = 0
 		addSubview(mainStack)
 		setFittingConstraints(childView: mainStack, insets: .init(vertical: 10, horizontal: 16))
 		selectionStyle = .none
@@ -41,9 +42,10 @@ class EventDetailViewHeader: ConfigurableCell {
 	
 	public func configure(with model: EventModel) {
 		model.eventName.heading1().render(target: eventHeader)
-		"\(model.news?.count ?? 0) News Articles".body3Regular().render(target: newArticleCountLabel)
-
-        tickerViews.isHidden = model.tickers.isEmpty
-        tickerViews.configTickers(news: model)
+        model.eventText?.body2Medium().render(target: eventDescription)
+        if let ticker = model.tickers {
+            tickerViews.isHidden = ticker.isEmpty
+            tickerViews.configTickers(news: model)
+        }
 	}
 }

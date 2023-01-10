@@ -20,7 +20,7 @@ struct EventModel: Tickers, Codable {
     let eventText: String?
 	let news: [NewsModel]?
     let newsItem: Int?
-	var tickers: [String]
+	var tickers: [String]?
 	
 	enum CodingKeys: String, CodingKey {
 		case date, news

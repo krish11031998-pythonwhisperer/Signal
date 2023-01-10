@@ -10,7 +10,7 @@ import UIKit
 
 class TickerSymbolView: UIView {
     public func configTickers(news: Tickers) {
-        configTickers(tickers: news.tickers)
+        configTickers(tickers: news.tickers ?? [])
     }
     
     public func configTickers(tickers: [String]) {
