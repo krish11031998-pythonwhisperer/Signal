@@ -66,7 +66,6 @@ class TickerDetailViewModel {
     struct Output {
         let section: AnyPublisher<[TableSection], Error>
         let mediaSection: AnyPublisher<[TableCellProvider], Error>
-        let sentiment: AnyPublisher<SentimentForTicker, Error>
         let navigation: AnyPublisher<Navigation, Never>
     }
     
@@ -108,7 +107,6 @@ class TickerDetailViewModel {
         //sentiment.connect()
         return .init(section: section,
                      mediaSection: mediaSection,
-                     sentiment: sentiment,
                      navigation: navigateTo.eraseToAnyPublisher())
     }
     

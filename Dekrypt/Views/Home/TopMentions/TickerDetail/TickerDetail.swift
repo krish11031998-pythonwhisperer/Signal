@@ -78,7 +78,6 @@ class TickerDetailView: UIViewController {
         let output = viewModel.transform()
         
         viewModel.loading
-            .dropFirst(1)
             .sinkReceive { [weak self] loading in
                 self?.mediaSectionLoad(loading: loading)
             }
