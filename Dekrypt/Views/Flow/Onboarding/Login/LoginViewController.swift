@@ -24,7 +24,7 @@ class LoginController: UIViewController {
     private var bag: Set<AnyCancellable> = .init()
     private let viewModel: LoginViewModel = { .init() }()
     private let loginModel: PassthroughSubject<UserLoginModel, Never> = .init()
-    
+    private let onAlertClose: PassthroughSubject<(), Never> = .init()
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavbar()
@@ -87,8 +87,14 @@ class LoginController: UIViewController {
             .store(in: &bag)
         
         output.errMsg
-            .sink {
-                print("(ERROR) ErrMsg: ", $0.errMsg)
+            .sink { [weak self] in
+                self?.showAlert(title: "Error", body: $0.errMsg, buttonText: "Ok", handle: self?.onAlertClose)
+            }
+            .store(in: &bag)
+        
+        onAlertClose
+            .sink { [weak self] _ in
+                print("(DEBUG) alert handler fired!")
             }
             .store(in: &bag)
 

@@ -18,7 +18,7 @@ struct CuratedEventModel {
 
 class CustomCuratedEvents: ConfigurableCell {
     
-    private let itemSize: CGSize = { .init(width: .totalWidth * 0.6, height: 300) }()
+    private let itemSize: CGSize = { .init(width: .totalWidth * 0.5, height: 225) }()
     private lazy var layout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -45,13 +45,14 @@ class CustomCuratedEvents: ConfigurableCell {
     private func setupView() {
         setupCollection()
         contentView.addSubview(collection)
-        contentView.setFittingConstraints(childView: collection, insets: .init(vertical: 5, horizontal: 10))
+        contentView.setFittingConstraints(childView: collection, insets: .zero)
         contentView.backgroundColor = .surfaceBackground
     }
     
     private func setupCollection() {
+        collection.contentInset = .init(vertical: 5, horizontal: 10)
         collection.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
-        collection.setHeight(height: layout.itemSize.height, priority: .required)
+        collection.setHeight(height: layout.itemSize.height + 10, priority: .required)
         collection.backgroundColor = .surfaceBackground
         collection.showsHorizontalScrollIndicator = false
     }

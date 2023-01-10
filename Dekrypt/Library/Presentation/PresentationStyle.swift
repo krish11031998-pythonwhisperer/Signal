@@ -23,7 +23,7 @@ extension PresentationStyle {
         case .sheet(let size, _):
             return .init(origin: .init(x: .zero, y: .totalHeight), size: size)
         case .dynamic:
-            return .init(origin: .init(x: .zero, y: .totalHeight), size: .init(width: .totalWidth, height: view.compressedSize.height))
+            return .init(origin: .init(x: .zero, y: .totalHeight), size: .init(width: .totalWidth, height: view.compressedSize.height + .safeAreaInsets.bottom))
         }
     }
     

@@ -265,7 +265,6 @@ extension HomeViewModel.Navigation {
             return .init()
         case .toTickerStory(let model, _):
             return TickerStoryView(mention: model).withNavigationController()
-            //self.presentView(style: .circlar(frame: frame), target: view, onDimissal: nil)
         case .toTickerDetail(let model):
             return TickerDetailView(mention: model)
         case .viewMoreNews:

@@ -52,7 +52,7 @@ class NewsCell: ConfigurableCell {
 	private func setupCell() {
 		let mainStack = UIView.VStack(spacing: 10)
 		let cellStack = UIView.HStack(subViews: [newsInfoStack, newsImage], spacing: 16, alignment: .top)
-		tickersStack.isHidden = true
+		tickersView.isHidden = true
 		
 		mainStack.addArrangedSubview(cellStack)
         
@@ -79,11 +79,13 @@ class NewsCell: ConfigurableCell {
 		model.model.sourceName.body2Regular(color: .gray).render(target: body)
 		body.numberOfLines = 1
 		
-        if let tickers = model.model.tickers, tickers.isEmpty {
-			tickersStack.isHidden = false
+        if let tickers = model.model.tickers, !tickers.isEmpty {
+			tickersView.isHidden = false
             tickersView.configTickers(news: model.model)
-            model.model.sentiment.sentimentIndicatorText().render(target: sentimentView)
-		}
+        } else {
+            tickersStack.insertAndReplaceArrangedSubview("General News".body3Regular(color: .textColor).generateLabel, at: 0)
+        }
+        model.model.sentiment.sentimentIndicatorText().render(target: sentimentView)
 		
         imgCancellable = UIImage.loadImage(url: model.model.imageUrl, at: newsImage, path: \.image)
 		newsImage.contentMode = .scaleAspectFill

@@ -19,10 +19,10 @@ extension UIViewController {
                                      bodyText: body,
                                      buttonText: buttonText,
                                      handle: handle).withNavigationController()
-        presentView(style: .sheet(size: .init(width: .totalWidth, height: 300), edge: .zero),
+        presentView(style: .sheet(size: .init(width: .totalWidth, height: 250), edge: .zero),
                     addDimmingView: true,
                     target: target,
                     onDimissal: nil)
+
     }
-    
 }

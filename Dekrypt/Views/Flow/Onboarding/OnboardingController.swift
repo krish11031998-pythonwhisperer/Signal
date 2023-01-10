@@ -12,6 +12,7 @@ class OnboardingController: UIViewController {
 
     private lazy var loginButton: UIButton = { .init() }()
     private lazy var registerButton: UIButton = { .init() }()
+    private lazy var dekryptButton: UIButton = { .init() }()
     private var bag: Set<AnyCancellable> = .init()
     
     override func viewDidLoad() {
@@ -49,24 +50,34 @@ class OnboardingController: UIViewController {
         
         let headerView = headerView()
         let stack = UIStackView.VStack(spacing: 10, alignment: .center)
-        [headerView, .spacer(height: 100), loginButton, registerButton].addToView(stack)
+        
+        let onboardingStack = [loginButton, registerButton].embedInHStack(alignment: .center, spacing: 8, distribution: .fillEqually)
+        let buttonStack = [onboardingStack, dekryptButton].embedInVStack(spacing: 20)
+        
+        [headerView, .spacer(height: 100), buttonStack].addToView(stack)
         
         loginButton.backgroundColor = .surfaceBackgroundInverse
-        loginButton.clippedCornerRadius = 12
+        loginButton.clippedCornerRadius = 20
+        loginButton.setHeight(height: 50)
         Constants.loginButtonTitle.body1Regular(color: .textColorInverse).render(target: loginButton)
         
         registerButton.backgroundColor = .surfaceBackgroundInverse
-        registerButton.clippedCornerRadius = 12
+        registerButton.clippedCornerRadius = 20
+        registerButton.setHeight(height: 50)
         Constants.registerButtonTitle.body1Regular(color: .textColorInverse).render(target: registerButton)
+        
+        dekryptButton.backgroundColor = .appIndigo
+        dekryptButton.clippedCornerRadius = 20
+        dekryptButton.setHeight(height: 50)
+        dekryptButton.isHidden = true 
+        Constants.dekryptButtonTitle.body1Regular(color: .appWhite).render(target: dekryptButton)
         
         let infoLabel = Constants.info.body2Medium().generateLabel
         infoLabel.textAlignment = .center
         stack.insertArrangedSubview(infoLabel, at: 1)
         
-        stack.setFittingConstraints(childView: loginButton, leading: 10, trailing: 10, height: 50, centerX: 0)
-        stack.setFittingConstraints(childView: registerButton, leading: 10, trailing: 10, height: 50, centerX: 0)
-        
-        
+        stack.setFittingConstraints(childView: buttonStack, leading: 10, trailing: 10, centerX: 0)
+
         view.addSubview(stack)
         view.setFittingConstraints(childView: stack, centerX: 0, centerY: 0)
     }
@@ -90,6 +101,16 @@ class OnboardingController: UIViewController {
                 }
             }
             .store(in: &bag)
+        
+        dekryptButton
+            .publisher(for: .touchUpInside)
+            .sink { [weak self] _ in
+                guard let self else { return }
+                self.dekryptButton.animate(.bouncy) {
+                    self.routeTo(destination: .login)
+                }
+            }
+            .store(in: &bag)
     }
     
     private func routeTo(destination: Destination) {
@@ -108,6 +129,7 @@ extension OnboardingController {
     enum Constants {
         static var loginButtonTitle: String = "Login"
         static var registerButtonTitle: String = "Register"
+        static var dekryptButtonTitle: String = "What is Dekrypt?"
         static var info: String = "A One Stop Platform for all your cryptocurrency news"
         static var imageViewSize: CGSize = .init(squared: CGSize.totalScreenSize.smallDim.half)
     }

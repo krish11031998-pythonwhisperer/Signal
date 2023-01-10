@@ -41,8 +41,8 @@ class TopMentionCell: ConfigurableCell {
 	}()
 	private lazy var detailStack: UIStackView = { .HStack(spacing: 12, alignment: .center) }()
 	private lazy var mainStack: UIStackView = { .VStack(spacing: 8) }()
-	private lazy var mentionDistribution: UIStackView = { .HStack(spacing: 8) }()
-	private lazy var circularChart: CircularProgressbar = { .init(frame: .init(origin: .zero, size: .init(squared: 48))) }()
+	private lazy var mentionDistribution: UIStackView = { .HStack(spacing: 12) }()
+    private lazy var sentimentScore: DualLabel = { .init(spacing: 4, alignment: .center) }()
 	
 	override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
 		super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -56,34 +56,28 @@ class TopMentionCell: ConfigurableCell {
 
 	private func setupView() {
 		
-		[symbolView, .spacer(),circularChart].forEach(detailStack.addArrangedSubview(_:))
-		circularChart.setFrame(.init(squared: 48))
+		[symbolView, .spacer(),sentimentScore].forEach(detailStack.addArrangedSubview(_:))
         [detailStack, "Sentiments".bodySmallRegular(color: .gray).generateLabel, mentionDistribution].forEach(mainStack.addArrangedSubview(_:))
 		mainStack.setCustomSpacing(16, after: detailStack)
 		mentionDistribution.isHidden = true
 		contentView.addSubview(mainStack)
 		contentView.setFittingConstraints(childView: mainStack, insets: .init(vertical: 10, horizontal: 16))
+        
+        selectionStyle = .none
+        backgroundColor = .surfaceBackground
 	}
 	
 	func configure(with model: MentionCellModel) {
-		selectionStyle = .none
-		backgroundColor = .clear
-		
         let model = model.model
         
 		symbolView.configureView(symbol: model.ticker, imgSize: .init(squared: 32), label: model.ticker.body1Medium())
-		
-		let percent: CGFloat = CGFloat(model.positiveMentions)/CGFloat(model.totalMentions - model.neutralMentions)
+	
+        let percent = (model.sentimentScore + 1.5)/3
         let color: UIColor = percent > 0.7 ? .appGreen : percent <= 0.4 ? .appRed : .appOrange
-        let label: String = percent > 0.7 ? "🚀" : percent <= 0.4 ? "🚨" : "😐"
-		let visited = isCellVisited(ticker: model.ticker)
-        circularChart.configureChart(label: label.body3Regular(),
-									 color: color,
-									 percent,
-									 visited: visited)
-		if !visited {
-			circularChart.animateValue(color: color, percent)
-		}
+        
+        let label: String = percent > 0.7 ? "Positive" : percent <= 0.4 ? "Negative" : "Neutral"
+
+        sentimentScore.configure(title: "Sentiment".bodySmallRegular(color: .gray), subtitle: label.body1Bold(color: color))
 	
 		mentionDistribution.removeChildViews()
 		Sentiment.allCases.forEach { mentionDistribution.addArrangedSubview($0.sentimentIndicator(model.count($0))) }
