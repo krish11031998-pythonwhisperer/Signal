@@ -15,6 +15,7 @@ class RadialChart: UIView {
     private var viewLayout: Bool = false
 
     override func layoutSubviews() {
+        super.layoutSubviews()
         setupView()
     }
     
@@ -37,17 +38,16 @@ class RadialChart: UIView {
     }
     
     func configureView(val: CGFloat, total: CGFloat = 1) {
-        print("(DEBUG) config Radial Chart!")
         var val: CGFloat = (val/total) * 3
-        if chartSectionLayers.isEmpty {
-            setupView()
+        DispatchQueue.main.async {
+            self.chartSectionLayers.enumerated().forEach { layer in
+                let toVal = val > 1 ? 1 : val
+                guard toVal >= 0 else { return }
+                layer.element.animate(.circularProgress(from: 0, to: toVal, duration: 1, delay: CFTimeInterval(layer.offset) * 1))
+                val -= 1
+            }
         }
-        chartSectionLayers.enumerated().forEach { layer in
-            let toVal = val > 1 ? 1 : val
-            guard toVal >= 0 else { return }
-            layer.element.animate(.circularProgress(from: 0, to: toVal, duration: 1, delay: CFTimeInterval(layer.offset) * 1))
-            val -= 1
-        }
+        
     }
     
     

@@ -45,6 +45,7 @@ class RatingChart: UIView {
     private let iterSpacing: CGFloat = 3
 
     override func layoutSubviews() {
+        super.layoutSubviews()
         setupView()
     }
     

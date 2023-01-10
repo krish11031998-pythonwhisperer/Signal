@@ -26,6 +26,7 @@ class SentimentTotalCell: ConfigurableCell {
     private func setupView() {
         let width = .totalWidth - 20
         chart.setFrame(width: width, height: width.half)
+        chart.bounds = .init(origin: .zero, size: .init(width: width, height: width.half))
         contentView.addSubview(chart)
         contentView.setFittingConstraints(childView: chart, insets: .init(vertical: 0, horizontal: 10))
         
