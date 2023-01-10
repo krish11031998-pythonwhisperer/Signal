@@ -14,7 +14,7 @@ class SentimentRatingCell: ConfigurableCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        //setupView()
+        setupView()
     }
     
     required init?(coder: NSCoder) {
@@ -22,16 +22,14 @@ class SentimentRatingCell: ConfigurableCell {
     }
     
     private func setupView() {
+        ratingChart.setFrame(width: .totalWidth - 20, height: 125)
         contentView.addSubview(ratingChart)
         contentView.setFittingConstraints(childView: ratingChart, insets: .init(vertical: 0, horizontal: 10))
-        ratingChart.setFrame(width: .totalWidth - 20, height: 125)
         selectionStyle = .none
         backgroundColor = .surfaceBackground
     }
     
     func configure(with model: [ChartCandleModel]) {
-        contentView.removeChildViews()
-        setupView()
         ratingChart.configureChart(model: model)
     }
 }

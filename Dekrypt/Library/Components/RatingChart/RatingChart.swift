@@ -43,17 +43,8 @@ class RatingChart: UIView {
     private lazy var negativeStack: UIStackView = { .HStack(spacing: iterSpacing, alignment: .top) }()
     private var viewLayout: Bool = false
     private let iterSpacing: CGFloat = 3
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
 
     override func layoutSubviews() {
-        print("(DEBUG) laying out views!")
         setupView()
     }
     

@@ -13,18 +13,9 @@ class RadialChart: UIView {
     private var chartSectionLayers: [CAShapeLayer] = []
     private let colors: [UIColor] = [.appRed, .appOrange, .appGreen]
     private var viewLayout: Bool = false
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
-    
+
     override func layoutSubviews() {
-        super.layoutSubviews()
-        //DispatchQueue.main.async {
-        self.setupView()
+        setupView()
     }
     
     private func setupView() {
@@ -48,6 +39,9 @@ class RadialChart: UIView {
     func configureView(val: CGFloat, total: CGFloat = 1) {
         print("(DEBUG) config Radial Chart!")
         var val: CGFloat = (val/total) * 3
+        if chartSectionLayers.isEmpty {
+            setupView()
+        }
         chartSectionLayers.enumerated().forEach { layer in
             let toVal = val > 1 ? 1 : val
             guard toVal >= 0 else { return }
