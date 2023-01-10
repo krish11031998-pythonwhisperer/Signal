@@ -13,7 +13,7 @@ class RadialChart: UIView {
     private var chartSectionLayers: [CAShapeLayer] = []
     private let colors: [UIColor] = [.appRed, .appOrange, .appGreen]
     private var viewLayout: Bool = false
-
+    private var visited: Bool = false
     override func layoutSubviews() {
         super.layoutSubviews()
         setupView()
@@ -43,7 +43,14 @@ class RadialChart: UIView {
             self.chartSectionLayers.enumerated().forEach { layer in
                 let toVal = val > 1 ? 1 : val
                 guard toVal >= 0 else { return }
-                layer.element.animate(.circularProgress(from: 0, to: toVal, duration: 1, delay: CFTimeInterval(layer.offset) * 1))
+                if !self.visited {
+                    layer.element.animate(.circularProgress(from: 0, to: toVal, duration: 1, delay: CFTimeInterval(layer.offset) * 1)) {
+                        self.visited = true
+                    }
+                } else {
+                    layer.element.strokeEnd = toVal
+                }
+                
                 val -= 1
             }
         }

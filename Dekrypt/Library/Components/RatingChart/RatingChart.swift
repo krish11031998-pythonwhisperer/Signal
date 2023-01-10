@@ -51,7 +51,6 @@ class RatingChart: UIView {
     
     private func setupView() {
         guard subviews.isEmpty else { return }
-        print("(DEBUG) setup views!")
         removeChildViews()
         addSubview(stack)
         setFittingConstraints(childView: stack, insets: .zero)

@@ -19,7 +19,7 @@ class RatingChartCandle: UIView {
     private let color: UIColor
     private let factor: CGFloat
     private let fillMode: RatingChartCandleFillMode
-    
+    private var visited: Bool = false
     init(factor: CGFloat, color: UIColor, size: CGSize, fillMode: RatingChartCandleFillMode) {
         self.factor = factor
         self.color = color
@@ -40,7 +40,9 @@ class RatingChartCandle: UIView {
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500)) {
             self.setupShape()
         }
-        layer.opacity = 0
+        if !visited {
+            layer.opacity = 0
+        }
     }
     
     private func setupShape() {
@@ -62,7 +64,13 @@ class RatingChartCandle: UIView {
         
         factorView.layer.addSublayer(shape)
         
-        shape.animate(.lineProgress(frame: .init(origin: .zero, size: size)))
-        layer.animate(.fadeIn())
+        if !visited {
+            shape.animate(.lineProgress(frame: .init(origin: .zero, size: size)))
+            layer.animate(.fadeIn())
+            visited = true
+        } else {
+            shape.frame = .init(origin: .zero, size: size)
+        }
+        
     }
 }
